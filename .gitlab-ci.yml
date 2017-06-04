@@ -1,0 +1,26 @@
+stages:
+  - build
+  - dev_build
+  - notify_failure
+
+production_build:
+  stage: build
+  only:
+    - master
+  script:
+    - npm install
+    - ng build --prod
+  tags:
+    - DFS
+
+developer_build:
+  stage: dev_build
+  only:
+    - development
+  script:
+    - npm install
+    - ng build --prod
+#    - cd /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/DFSGods
+#    - cp -R /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/DFSGods/dist /var/www/html/dfs/
+  tags:
+    - DFS
