@@ -1,4 +1,4 @@
-[![build status](https://gitlab.com/anonymous-coder/RotoProsWeb/badges/master/build.svg)](https://gitlab.com/anonymous-coder/RotoProsWeb/commits/master)0
+[![build status](https://gitlab.com/anonymous-coder/RotoProsWeb/badges/master/build.svg)](https://gitlab.com/anonymous-coder/RotoProsWeb/commits/master)
 
 # RotoProsWeb
 
