@@ -10,17 +10,7 @@ production_build:
   script:
     - npm install
     - ng build --prod
-  tags:
-    - DFS
-
-developer_build:
-  stage: dev_build
-  only:
-    - development
-  script:
-    - npm install
-    - ng build --prod
-#    - cd /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/DFSGods
-#    - cp -R /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/DFSGods/dist /var/www/html/dfs/
+    - cd /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/RotoProsWeb
+    - cp -R /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
   tags:
     - DFS
