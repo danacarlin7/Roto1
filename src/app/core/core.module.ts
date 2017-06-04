@@ -4,6 +4,9 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { PasswordValidator } from './directives/password-validator';
+import { DFSAmountPipe } from "./ng-pipes/dfs-amount.pipe";
+import { SafePipe } from "./ng-pipes/safe-pipe";
 
 @NgModule({
 	imports: [
@@ -12,7 +15,11 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 		AuthService,
 		UserService
 	],
-	declarations: [],
+	declarations: [
+		PasswordValidator,
+		DFSAmountPipe,
+		SafePipe
+	],
 	exports: []
 })
 export class CoreModule {
