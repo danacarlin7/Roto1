@@ -1,3 +1,5 @@
+[![build status](https://gitlab.com/anonymous-coder/RotoProsWeb/badges/master/build.svg)](https://gitlab.com/anonymous-coder/RotoProsWeb/commits/master)
+
 # RotoProsWeb
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.2.
