@@ -1,10 +1,19 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule, Route, Data} from '@angular/router';
+import {AppComponent} from "./app.component";
 
-const routes: Routes = [
-  {
+const routes:Routes = [
+  <Route>{
     path: '',
-    children: []
+    loadChildren: 'app/front/front.module#FrontModule'
+  },
+  <Route>{
+    path: 'user',
+    loadChildren: 'app/user/user.module#UserModule'
+  },
+  <Route>{
+    path: 'admin',
+    loadChildren: 'app/admin/admin.module#AdminModule'
   }
 ];
 
@@ -12,4 +21,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
