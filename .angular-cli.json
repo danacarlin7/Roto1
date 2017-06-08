@@ -19,9 +19,19 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "assets/css/bootstrap.min.css",
+        "assets/css/owl.carousel.min.css",
+        "assets/css/jquery.mCustomScrollbar.css",
+        "assets/css/stylesheet.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "assets/js/jquery.js",
+        "assets/js/bootstrap.min.js",
+        "assets/js/owl.carousel.min.js",
+        "assets/js/jquery.mCustomScrollbar.concat.min.js",
+        "assets/js/function.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
