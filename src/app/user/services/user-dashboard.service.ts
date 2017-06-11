@@ -38,63 +38,11 @@ export class UserDashboardServices {
       });
   }
 
-  getQueryParamStringFromFilters(filters:FilterCriteria[] = null):string {
-    let queryStr = '';
-    filters.forEach((currFilter, index) => {
-      if (index == 0) {
-        queryStr = queryStr + this.getFilterKey(currFilter) + "=" + this.getFilterValue(currFilter);
-      } else {
-        queryStr = queryStr + "&" + this.getFilterKey(currFilter) + "=" + this.getFilterValue(currFilter);
-      }
-
-    });
-    console.log("queryStr => ", queryStr);
-    return queryStr;
-  }
-
-  getFilterKey(filter:FilterCriteria):string {
-    let key:string;
-    switch (filter.key) {
-      case FilterKeyConstants.FREE_ROLL:
-        key = FilterKeyConstants.FEE;
-        break;
-      default:
-        key = filter.key;
-        break;
+  retrieveCohortData(tabName: string, filters:FilterCriteria[] = null):Observable<any> {
+    let queryParams:string = tabName;
+    if (filters && filters.length){
+      queryParams = queryParams + "?" + this.filterService.getQueryParamStringFromFilters(filters)
     }
-    return key;
-  }
-
-  getFilterValue(filter:FilterCriteria):string {
-    let value:string;
-    switch (filter.key) {
-      case FilterKeyConstants.DATE_FROM:
-      case FilterKeyConstants.DATE_TO:
-      case FilterKeyConstants.DATE_EXACT:
-        value = moment(filter.value).format('YYYY-MM-DD');
-        break;
-      case FilterKeyConstants.FEE:
-        let minValue = filter.value.min ? filter.value.min : '';
-        let maxValue = filter.value.max ? filter.value.max : '';
-        value = minValue + "-" + maxValue;
-        break;
-      case FilterKeyConstants.NO_OF_CONTEST_ENTRIES:
-        let minContestValue = filter.value.min_contest ? filter.value.min_contest : '';
-        let maxContestValue = filter.value.max_contest ? filter.value.max_contest : '';
-        value = minContestValue + "-" + maxContestValue;
-        break;
-      default:
-        value = filter.value;
-        break;
-    }
-    return value;
-  }
-
-  retrieveCohortData(filters: FilterCriteria[] = null): Observable<any> {
-    let queryParams: string = 'site';
-    // if (filters && filters.length) {
-      queryParams = queryParams ;
-    // }
     return this.http.get(environment.api_end_point + 'api/report/' + queryParams, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
