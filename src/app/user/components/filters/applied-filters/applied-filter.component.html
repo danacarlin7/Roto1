@@ -1,10 +1,11 @@
+<div class="filterTopHedin">
+  <h1>Current Filters</h1>
+  <span (click)="clearAllFilters()" class="clrAll">Clear all</span>
+</div>
 <div class="curntFilters">
-  <div class="curntFilter1 curntFilter">
-    <p>Contest Type: 10x Up</p>
-    <div class="clseBtn">&times;</div>
-  </div>
-  <div class="curntFilter2 curntFilter">
-    <p>Exact day: 05/06/2017</p>
-    <div class="clseBtn">&times;</div>
+  <div class="curntFilter1 curntFilter"
+       *ngFor="let filter of filters">
+    <p>{{getKeyName(filter.key)}} : {{ getFilterDisplayValue(filter)}}</p>
+    <div class="clseBtn" (click)="removeFilter(filter)">&times;</div>
   </div>
 </div>

@@ -9,12 +9,13 @@
         <div class="dashboardContainerWrapper">
           <div class="dashMainWrapper">
             <div class="leftFilter">
-              <div class="filterTopHedin">
-                <h1>Current Filters</h1>
-                <a href="javascript:void(0)" class="clrAll">Clear all</a>
-              </div>
-              <rp-applied-filters></rp-applied-filters>
-              <rp-filters></rp-filters>
+              <rp-applied-filters *ngIf="filters && filters.length"
+                                  [filters]="filters"
+                                  [filterSettings]="filterSettings"
+                                  (removeFilterEvent)="onRemoveFilterEvent($event)"
+                                  (remoceAllFiltersEvent)="onRemoveAllFiltersEvent($event)"></rp-applied-filters>
+              <rp-filters [filterSettings]="filterSettings"
+                          (addFilterEvent)="onAddFilterEventHandler($event)"></rp-filters>
             </div>
             <div class="dashboardMain">
               <!--<div class="subscriptionNotification">
