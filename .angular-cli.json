@@ -20,12 +20,14 @@
       "prefix": "app",
       "styles": [
         "assets/css/bootstrap.min.css",
+        "assets/css/stylesheet.css",
+        "assets/css/responsive.css",
         "assets/css/owl.carousel.min.css",
         "assets/css/jquery.mCustomScrollbar.css",
-        "assets/css/stylesheet.css",
         "styles.css"
       ],
       "scripts": [
+        "../node_modules/moment/min/moment.min.js",
         "assets/js/jquery.js",
         "assets/js/bootstrap.min.js",
         "assets/js/owl.carousel.min.js",

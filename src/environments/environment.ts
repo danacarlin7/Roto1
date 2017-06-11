@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  api_end_point:'https://api.dfsportgod.com'
+  api_end_point:'https://api.dfsportgod.com/'
 };

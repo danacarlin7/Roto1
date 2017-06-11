@@ -12,7 +12,7 @@ import {AuthService} from "../shared/services/auth.service";
 export class AdminMainComponent {
 
   constructor(private authService:AuthService) {
-    console.log("Admin Component => ", this.authService.counter)
+
   }
 
 }

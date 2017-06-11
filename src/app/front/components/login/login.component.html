@@ -5,39 +5,51 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="loginDetailsWrapper">
           <div class="loginLftWrapper">
-            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive" />
+            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive"/>
           </div>
           <div class="loginRghtWrapper">
             <div class="formWrapper">
-              <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt="" class="img-responsive" /></span><span>Login</span></h3>
+              <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt=""
+                                                 class="img-responsive"/></span><span>Login</span></h3>
               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-              <form>
+              <form [formGroup]="loginForm">
                 <div class="form-group">
                   <label class="srOnly">Email</label>
-                  <input type="text" name="eId" placeholder="Email">
+                  <input type="email"
+                         name="eId"
+                         placeholder="Email"
+                         formControlName="email">
                 </div>
                 <div class="form-group">
                   <label class="srOnly">Password</label>
-                  <input type="password" name="cPassword" placeholder="**********">
+                  <input type="password"
+                         name="cPassword"
+                         placeholder="**********"
+                         formControlName="password">
                 </div>
                 <div class="form-group rmbrFrgtPswd">
                   <div class="rmembrPswd">
-                    <input type="checkbox" >
+                    <input type="checkbox">
                     <label class="rmbrMe">Remember Me</label>
                   </div>
 
                   <a href="forgot_password.html" class="frgtPsswd">Forgot my Password?</a>
                 </div>
 
-                <input type="button" value="Login" class="formBtn">
+                <input type="button" value="Login" (click)="onSignInBtnClick()" class="formBtn" [disabled]="!loginForm.valid">
               </form>
-              <p class="otherSigninPara">You can also <a href="javascript:void(0)" class="lred">sign up here or</a> sign in by:</p>
+              <p class="otherSigninPara">You can also <a href="javascript:void(0)" class="lred">sign up here or</a> sign
+                in by:</p>
               <div class="loginSocialIcns">
-                <a href="javascript:void(0)"><img src="../../../../assets/images/login_twitter_icn.png" alt="" class="img-responsive" /></a>
-                <a href="javascript:void(0)"><img src="../../../../assets/images/login_google+_icn.png" alt="" class="img-responsive" /></a>
-                <a href="javascript:void(0)"><img src="../../../../assets/images/login_insta_icn.png" alt="" class="img-responsive" /></a>
+                <a href="javascript:void(0)"><img src="../../../../assets/images/login_twitter_icn.png" alt=""
+                                                  class="img-responsive"/></a>
+                <a href="javascript:void(0)"><img src="../../../../assets/images/login_google+_icn.png" alt=""
+                                                  class="img-responsive"/></a>
+                <a href="javascript:void(0)"><img src="../../../../assets/images/login_insta_icn.png" alt=""
+                                                  class="img-responsive"/></a>
               </div>
-              <p class="regstrNmPara">Don’t you have an account? <a href="javascript:void(0)" class="lred">Register Now!</a> it’s really simple and you can start enjoing all the benefits!</p>
+              <p class="regstrNmPara">Don’t you have an account? <a href="javascript:void(0)" class="lred">Register
+                Now!</a> it’s really simple and you can start enjoing all the benefits!</p>
             </div>
           </div>
         </div>

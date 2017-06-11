@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class FrontMainComponent {
 
   constructor(private authService:AuthService, private router:Router) {
-    console.log("Front Component => ", this.authService.counter)
+
   }
 
   onUserModuleClick() {

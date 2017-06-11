@@ -5,6 +5,7 @@ import {HttpModule} from "@angular/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthService} from "./services/auth.service";
 import {CommonModule} from "@angular/common";
+import {SharedMaterialComponents} from "./material-components";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -15,12 +16,14 @@ import {CommonModule} from "@angular/common";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    SharedMaterialComponents
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    SharedMaterialComponents
   ]
 })
 export class SharedModule {

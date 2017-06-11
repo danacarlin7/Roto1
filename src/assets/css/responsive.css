@@ -2,11 +2,14 @@
 {
 	.articleDetails .articleLftPtrn {left: -225px;}
 	.articleDetails .articleLftPtrn > img {left: 38%;}
-	header .bottomHeader .bottomHeaderNav .mainMenu ul li {margin-left: 20px;}
-	header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 15px;}
+	header .bottomHeader .bottomHeaderNav .mainMenu ul li {margin-left: 15px;}
+	header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 14px;}
 	.dashboardHeader .bottomHeader .rightNav #profileDrpdwn{font-size: 15px;}
 	.dashboardHeader .bottomHeader .rightNav img {max-width: 45px;}
-	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li a{width: 110px;}
+	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li a{width: 100px;}
+	.dashboardHeader .bottomHeader .logoWrapper, header .logoWrapper{max-width: 200px;}
+	header .bottomHeader .rightNav > ul > li > a{width: 90px;}
+	header .bottomHeader .bottomHeaderNav .mainMenu {	padding-right: 260px;}
 }
 @media (max-width:1199px)
 {
@@ -42,17 +45,19 @@
 	.dashboardHome .profitCategory .profitCategoryRght table tr td{font-size: 13px;padding: 15px 10px;}
 	.dashboardHome .profitCategory table tr th{padding: 15px 10px;}
 	.dashboardHome .profitCategory .profitCategoryRght table tr th:first-child {font-size: 17px;}
-	.fixedDash{max-width: 940px;}
 	
 	.dashboardContainer .fixedDash .topFilter {width: 84% !important;}
 	.dashboardContainer .topFiltrWrapper .dashboardName h1{font-size: 25px;}
-	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child {margin-left: 0px;width: 130px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {font-size: 13px;}
 	
-	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{max-width: 115px; font-size: 13px;}
-	.dashboardContainer .topFiltrWrapper .topFilter .form-group label {font-size: 14px;	margin-right: 4px;}
-	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control{padding-top: 9px; padding-bottom: 9px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{max-width: 112px; font-size: 13px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group label {font-size: 13px;	margin-right: 4px;}
+	
+	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {	background-size: 14px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child .form-control {padding-left: 32px !important;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child {width: 19% !important;margin-left: 0px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child .form-control {background-size: 14px !important;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{padding: 9px;}
 	.dashboardContainer .topFiltrWrapper{padding: 25px 30px;}
 	
 	.dUpldBtnWrapper {flex-direction: column;}
@@ -62,7 +67,16 @@
 	
 	.dTabs .nav-tabs > li > a{padding: 10px 12px;}
 	
+	.dashboardHeader .bottomHeader .logoWrapper, header .logoWrapper{max-width: 170px;}
+	header .bottomHeader .rightNav > ul > li > a {width: 75px;font-size: 14px;}
+	header .bottomHeader .bottomHeaderNav .mainMenu {padding-right: 230px;}
+	
 }
+@media (max-width:1100px)
+{
+	.dashboardHeader .bottomHeader .logoWrapper {max-width: 140px;}
+}
+
 @media (max-width:1023px)
 {
 	.icnWrapperD{margin-right: 10px;}
@@ -87,15 +101,16 @@
 	.articleDetails .articleDetailsWrapper .articleWrapper .articleWrapperBx{width: 3270px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 6.5px 12px !important;}
 	
-	.dashboardHeader .bottomHeader .logoWrapper {position: relative;left: 0px;transform: translate(0,0);}
+	.dashboardHeader .bottomHeader .logoWrapper {position: relative;left: 0px;transform: translate(0,0);max-width: 160px;}
+	.dashboardHeader .bottomHeader .rightNav img {max-width: 32px;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav {justify-content: space-between;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li a {	width: 100%;padding: 10px 0px;flex-flow: row wrap;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul .active a, .dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul .active > a:focus, .dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul .active > a:hover {	box-shadow: 0px 0px 10px #9a9090;background: #000;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li > a:focus, .dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li > a:hover {box-shadow: 0px 0px 10px #9a9090;background: #000;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu {padding: 38px 0px;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li{border-right: 0px;}
-	.dashboardHeader .bottomHeader {padding: 10px 0px;}
-	
+	.dashboardHeader .bottomHeader {padding: 24px 0px;}
+	header .bottomHeader{padding: 20px 0px;}
 	.dashboardHome .profitCategory .profitCategoryLft {width: 100%;margin-bottom: 30px;}
 	.dashboardHome .profitCategory .profitCategoryLft table{min-width: 100%;}
 	.dashboardHome .profitCategory .profitCategoryRght {width: 100%;}
@@ -121,7 +136,7 @@
 	section {padding: 45px 0px;}
 	
 	header .topHeader .topNavbar > ul > li > a {font-size: 12px;padding: 10px 12px;}
-	header .bottomHeader{padding: 10px 0px;}
+	
 	
 	
 	
@@ -172,7 +187,7 @@
 	footer .bottomFooter p {font-size: 13px;}
 	
 
-	header .bottomHeader .rightNav {top: 28px;}
+	header .bottomHeader .rightNav {top: 12px;}
 	header .bottomHeader .bottomHeaderNav .mainMenu ul li:last-child a{border-bottom: 0px;}
 	
 	.loginDetails .loginDetailsWrapper .loginRghtWrapper {width: 420px;}
@@ -195,7 +210,7 @@
 	.signupRghtWrapper .mainTab .tab ul li a {font-size: 15px;padding: 18px 0px;}
 	
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group { margin: 7px 0px;display: flex;align-items: center;margin-left: 0px;width: 32% !important;}
-	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{width: 100%;max-width: initial;padding: 6px 10px !important; font-size: 15px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{width: 100%;max-width: initial;padding: 6px 10px !important; font-size: 14px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper{display: flex; justify-content: space-between;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control{width: 79%;}
 	.dashboardContainer .topFiltrWrapper {padding: 25px 20px;}
@@ -203,14 +218,15 @@
 	.dashboardContainer > .dashboardContainerWrapper .topStats .topStatsBx{width: 48%; margin: 10px 0px;}
 	.dashboardContainer > .dashboardContainerWrapper > div {padding: 15px 0px;}
 	.dashboardContainer .topFiltrWrapper .topFilter{width: 100%;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child {width: 32% !important;margin-left: 0px;}
 	
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-heading .panel-title a{padding: 15px 10px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body{padding: 15px;}
 	
 	.dashboardContainer > .dashboardContainerWrapper .dashMainWrapper .leftFilter {width: 34%;}
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain {width: 62%;}
-	.tFormat table .dHedin th {padding: 15px 10px;font-size: 14px;}
-	.tFormat table tr td {padding: 15px;}
+	.tFormat table .dHedin th {padding: 15px 10px !important;font-size: 14px;}
+	.tFormat table tr td {padding: 15px !important;}
 	
 	.dashboardContainerWrapper{padding: 0px 20px !important;}
 	
@@ -231,16 +247,18 @@
 	header .bottomHeader .bottomHeaderNav .menuToggle img{max-width: 30px;}
 	
 	header .bottomHeader .navbar-default .navbar-collapse{float: none !important; margin-top: 12px;}
-	header .bottomHeader .bottomHeaderNav .logoWrapper img{max-width: 76px;}
+	.dashboardHeader .bottomHeader .logoWrapper , header .logoWrapper{max-width: 145px;}
 	header .bottomHeader .rightNav > ul > li > a{font-size: 13px;color: #FFF;line-height: 19px;width: 80px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 6.5px 10px !important;}
 	header .bottomHeader .rightNav{width: 216px;}
+	
+	
 	
 	.articleDetails .articleLftPtrn{display: none;}
 	
 	header .topHeader .topNavbar > ul > li > a {font-size: 11px;padding: 8px 8px;}
 	header .topHeader .topNavbar > ul > .active > a, header .topHeader .topNavbar > ul > .active > a:focus, header .topHeader .topNavbar > ul > .active > a:hover{background: transparent;}
-	header .bottomHeader{padding: 10px 0px;}
+	header .bottomHeader{padding: 16px 0px !important;}
 	header .bottomHeader .rightNav > ul > .searchBtn .srchBar button{padding: 6px 10px;top: 0px; height: 100%;}
 	header .topHeader .topNavbar > ul > li > a:hover, header .topHeader .topNavbar > ul > li > a:focus{background: transparent;}
 	header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 13px;}
@@ -322,7 +340,7 @@
 	footer .bottomFooter{padding: 5px 0px;}
 	.mCSB_horizontal.mCSB_inside > .mCSB_container {margin-bottom: 40px;}
 	
-	header .bottomHeader .rightNav {top: 23px;}
+	header .bottomHeader .rightNav {top: 10px;}
 	.socialDetailsSlider .owl-nav{display: none;}
 	footer .topFooter .footerHdin::after{content: none;}
 	
@@ -363,7 +381,7 @@
 	
 	.dHedin h3 {font-size: 15px;line-height: 20px;}
 	.dHedin {padding: 12px 20px;}
-	.sortByMonth .form-group select{padding: 6px 10px;font-size: 13px;}
+	.sortByMonth .form-group .dropdownSelectClick{padding: 6px 10px;font-size: 13px;}
 	.sortByMonth .form-group label{font-size: 13px;}
 	.dashboardHome .profitCategory table tr th {padding: 10px 19px;font-size: 16px !important;}
 	.dashboardHome .profitCategory table tr td {padding: 10px 19px;    font-size: 13px;line-height: 18px;}
@@ -387,7 +405,7 @@
 	.dashboardContainer > .dashboardContainerWrapper .topStats .bxTop h4 {font-size: 18px;}
 	.dashboardContainer > .dashboardContainerWrapper .topStats .bxTop p{font-size: 13px;}
 	
-	.dashboardContainer .topFiltrWrapper .topFilter .form-group label{font-size: 14px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group label{font-size: 13px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {width: 77%;font-style: normal;}
 	.dashboardHome {padding: 30px 0px 35px;}
 	
@@ -402,12 +420,12 @@
 	
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain .subscriptionNotification{padding: 6px 15px; margin-bottom: 20px;}
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain .subscriptionNotification p{font-size: 13px;line-height: 16px;}
-	.tFormat table .dHedin th {padding: 10px;font-size: 14px;}
-	.tFormat table tr td {padding: 10px;font-size: 13px;}
+	.tFormat table .dHedin th {padding: 10px !important;font-size: 14px;}
+	.tFormat table tr td {padding: 10px !important;font-size: 13px;}
 	
 	.dashboardContainerWrapper .leftFilter .addFilter h2, .dashboardContainerWrapper .leftFilter .filterTopHedin h1 {font-size: 17px; line-height: 24px;}
 	
-	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {background-size: 14px;padding: 3px 10px !important;}
+	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {background-size: 14px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child .form-control {background-size: 13px !important;padding-left: 28px !important;}
 	.dashboardHeader .bottomHeader .rightNav .dropdown .dropdown-menu li a {line-height: 18px;	font-size: 13px;}
 	
@@ -432,7 +450,7 @@
 
 @media(max-width:679px)
 {
-	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {width: 68%;font-size: 12px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {width: 72%;font-size: 12px;}
 }
 
 @media(max-width:479px)
@@ -440,12 +458,16 @@
 	section {padding: 25px 0px;}
 	.newsletterDetails form .form-group {width: 70%;}
 	.newsletterDetails form input[type="button"], .newsletterDetails form input[type="submit"] {padding: 7px 16px;}
-	header .bottomHeader .bottomHeaderNav .logoWrapper img {max-width: 60px;}
+	header .bottomHeader .bottomHeaderNav .logoWrapper{max-width: 110px;}
+	.dashboardHeader .bottomHeader .bottomHeaderNav .logoWrapper{max-width: 120px;}
 	header .topHeader .topNavbar > ul > li > a {font-size: 10px;}
 	.matchDetails .tabWrapper .nav-tabs > li > a {font-size: 13px;padding: 5px 8px;}
-	header .bottomHeader .rightNav > ul > li > a {font-size: 11px;color: #FFF;line-height: 13px;width: 55px;}
+	header .bottomHeader .rightNav > ul > li > a {font-size: 11px;color: #FFF;line-height: 13px;width: 52px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 4px 8px !important;}
-	header .bottomHeader .rightNav {width: 162px;right: 52px;top: 19px;}
+	header .bottomHeader .rightNav {width: 146px;right: 43px;top: 9px;}
+	header .bottomHeader .rightNav > ul > li {margin-left: 3px;	position: relative;}
+	.dashboardHeader .bottomHeader .rightNav #profileDrpdwn {font-size: 12px;}
+	.dashboardHeader .bottomHeader .rightNav img {max-width: 26px;}
 	.boPrt1 .bannerTopTxt{width: 230px;}
 	.boPrt1 .bannerTopTxt h1 {font-size: 32px;line-height: 36px;letter-spacing: -1px;}
 	.boPrt1 {height: 225px;}
@@ -489,11 +511,9 @@
 	.loginDetails .formWrapper form input[type="text"]:focus, .loginDetails .formWrapper form input[type="password"]:focus, .loginDetails .formWrapper form input[type="email"]:focus, .loginDetails .formWrapper form input[type="text"]:hover, .loginDetails .formWrapper form input[type="password"]:hover, .loginDetails .formWrapper form input[type="email"]:hover {box-shadow: 0px 0px 10px rgba(248,197,52,0.5);}
 	.signupRghtWrapper .mainTab .tabcontent .signUpPakges li.pkgeactive, .signupRghtWrapper .mainTab .tabcontent .signUpPakges li:hover {background: #FFF;box-shadow: 0px 0px 8px rgba(0,0,0,0.28);}
 	
-	.dashboardHeader .bottomHeader .rightNav {right: 50px;}
-	
 	.dHedin h3 {font-size: 13px;}
 	.dHedin {padding: 8px 10px;}
-	.sortByMonth .form-group select {padding: 0px 5px;font-size: 12px;width: 80px;}
+	.sortByMonth .form-group .dropdownSelectClick{padding: 0px 5px;font-size: 12px;width: 80px;}
 	.sortByMonth .form-group label {font-size: 12px;}
 	.sortByMonth {padding: 10px 0px;margin-bottom: 20px;}
 	.dashboardHome .profitCategory table tr th {padding: 7px 10px;font-size: 13px !important;line-height: 20px !important;}
@@ -507,6 +527,7 @@
 	.dashboardContainer > div {padding: 8px 0px;}
 	
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group {margin: 2px 0px;width: 100% !important;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child {width: 100% !important;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper{width: 48% !important;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group label {font-size: 12px;}
 	.dashboardContainer .topFiltrWrapper .dashboardName h1 {font-size: 19px;line-height: 19px;}
@@ -526,7 +547,7 @@
 	.dashboardContainerWrapper .leftFilter .addFilter h2 {font-size: 16px; line-height: 24px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body .form-group {margin-bottom: 10px;}
 	.dashboardContainerWrapper .leftFilter .curntFilters .curntFilter p{font-size: 13px;}
-	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control {	font-size: 12px;}
+	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control {	font-size: 12px;padding: 4px 10px !important;}
 	.dashboardContainer .topFiltrWrapper .dashboardName {margin-bottom: 8px;}
 	
 	.ui-datepicker{left: 40% !important;}
@@ -555,7 +576,11 @@
 	.container {width: 1200px;}
 
 }
+@media screen and (min-width: 1200px)
+{
+	.fixedDash{max-width: 1170px !important;}
+}
 @media screen and (min-width: 992px)
 {
-	.fixedDash{position: fixed;top:0; left:0;width: 100%;z-index: 99999;max-width: 1170px;right: 0;margin: 0 auto;padding: 15px 30px !important;}
+	.fixedDash{position: fixed;top:0; left:0;width: 100%;z-index: 99999;max-width: 940px;right: 0;margin: 0 auto;padding: 15px 30px !important;}
 }
