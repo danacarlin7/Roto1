@@ -36,7 +36,7 @@ export class OverviewComponent {
   }
 
   ngOnInit() {
-    this.getData();
+    this.getData(this.filters);
   }
 
   getData(filters:FilterCriteria[] = null) {

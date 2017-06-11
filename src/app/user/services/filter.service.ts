@@ -6,6 +6,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import {Observable} from "rxjs/Rx";
 import {FilterKeyConstants} from "../constants/filter.constant";
 import * as moment from 'moment';
+import {environment} from "../../../environments/environment";
 
 /**
  * Created by Hiren on 11-06-2017.
@@ -41,7 +42,7 @@ export class FilterService {
         observer.next(this.filterSettings);
       }
       else {
-        this.http.get(this.endpoint + 'api/settings', {headers: this.getHeaders()})
+        this.http.get(environment.api_end_point + 'api/settings', {headers: this.getHeaders()})
           .map(response => response.json())
           .subscribe(
             response => {
