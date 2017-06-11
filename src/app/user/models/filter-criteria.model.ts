@@ -3,6 +3,6 @@
  */
 
 export interface FilterCriteria {
-  key:string;
-  value:any;
+  key: string;
+  value: any;
 }

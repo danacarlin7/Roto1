@@ -3,6 +3,7 @@ import {RouterModule, Routes, Route} from "@angular/router";
 import {UserMainComponent} from "./user-main.component";
 import {UserDashboardComponent} from "./components/dashboard/user-dashboard.component";
 import {OverviewComponent} from "./components/overview/overview.component";
+import {CohortComponent} from "./components/cohort/cohort.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -20,6 +21,10 @@ const routes:Routes = [
       <Route>{
         path: 'overview',
         component: OverviewComponent
+      },
+      <Route>{
+        path: 'cohort',
+        component: CohortComponent
       },
     ]
   }

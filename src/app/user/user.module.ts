@@ -12,6 +12,8 @@ import {UserDashboardServices} from "./services/user-dashboard.service";
 import {FilterService} from "./services/filter.service";
 import {OverviewlistComponent} from "./components/overview/overview-list/overview-list.component";
 import {AuthService} from "../shared/services/auth.service";
+import { CohortComponent } from './components/cohort/cohort.component';
+import { CohortListComponent } from './components/cohort/cohort-list/cohort-list.component';
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -29,7 +31,9 @@ import {AuthService} from "../shared/services/auth.service";
     OverviewComponent,
     FilterComponent,
     AppliedFiltersComponent,
-    OverviewlistComponent
+    OverviewlistComponent,
+    CohortComponent,
+    CohortListComponent
   ],
   exports: [
     UserMainComponent

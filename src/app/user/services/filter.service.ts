@@ -13,7 +13,10 @@ import {environment} from "../../../environments/environment";
  */
 @Injectable()
 export class FilterService {
-
+  endpoint:string = "https://api.dfsportgod.com/";
+  activeCohortTab:string = CohortTabConstants.SITE;
+  activeContestTab:string = ContestTabConstants.CONTESTS;
+  activeGraphTab:string = GraphTabConstants.PROFIT;
   filterSettings:any;
 
   filters:FilterCriteria[];
