@@ -18,24 +18,18 @@
                           (addFilterEvent)="onAddFilterEventHandler($event)"></rp-filters>
             </div>
             <div class="dashboardMain">
-              <!--  <div class="subscriptionNotification">
-                  <p>To view unrestricted reports, upgrade your subscription plan today!</p>
-                  <div class="clseBtn">&times;</div>
-                </div>-->
-
-              <div class="dTabs">
-                <!-- Nav tabs -->
-                <rp-tab-view [tabs]="contestTabs"
-                             [activeTab]="activeTab"
-                             (tabChanged)="onContestTabChanged($event)"></rp-tab-view>
-
-                <!-- Tab panes -->
-                <rf-contest-list [records]="records"></rf-contest-list>
-              </div>
-
+              <!--<div class="subscriptionNotification">
+                <p>To view unrestricted reports, upgrade your subscription plan today!</p>
+                <div class="clseBtn">
+                  x
+                </div>
+              </div>-->
+              <!--<div class="listingOpponents">
+                <p>Showing all 2 opponents.</p>
+              </div>-->
+              <rp-opponents-list [records]="records"></rp-opponents-list>
             </div>
           </div>
-
         </div>
       </div>
     </div>

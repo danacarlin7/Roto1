@@ -5,6 +5,7 @@ import {UserDashboardComponent} from "./components/dashboard/user-dashboard.comp
 import {OverviewComponent} from "./components/overview/overview.component";
 import {CohortComponent} from "./components/cohort/cohort.component";
 import {ContestComponent} from "./components/contest/contest.component";
+import {OpponentComponent} from "./components/opponent/opponent.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -30,6 +31,10 @@ const routes:Routes = [
       <Route>{
         path: 'contests',
         component: ContestComponent
+      },
+      <Route>{
+        path: 'opponent',
+        component: OpponentComponent
       },
     ]
   }

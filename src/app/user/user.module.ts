@@ -13,10 +13,12 @@ import {FilterService} from "./services/filter.service";
 import {OverviewlistComponent} from "./components/overview/overview-list/overview-list.component";
 import {AuthService} from "../shared/services/auth.service";
 import {TabViewComponent} from "./components/common/tab-view/tab-view.component";
-import { CohortComponent } from './components/cohort/cohort.component';
-import { CohortListComponent } from './components/cohort/cohort-list/cohort-list.component';
+import {CohortComponent} from './components/cohort/cohort.component';
+import {CohortListComponent} from './components/cohort/cohort-list/cohort-list.component';
 import {ContestComponent} from "./components/contest/contest.component";
 import {ContestListComponent} from "./components/contest/contest-list/contest-list.component";
+import {OpponentComponent} from "./components/opponent/opponent.component";
+import {OpponentListComponent} from "./components/opponent/opponents-list/opponents-list.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -40,7 +42,9 @@ import {ContestListComponent} from "./components/contest/contest-list/contest-li
     CohortComponent,
     CohortListComponent,
     ContestComponent,
-    ContestListComponent
+    ContestListComponent,
+    OpponentComponent,
+    OpponentListComponent
   ],
   exports: [
     UserMainComponent

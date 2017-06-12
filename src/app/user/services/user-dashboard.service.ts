@@ -51,7 +51,19 @@ export class UserDashboardServices {
       });
   }
 
-
+  retrieveOpponentsData(filters:FilterCriteria[] = null):Observable<any> {
+    let queryParams:string = '';
+    if (filters && filters.length) {
+      queryParams = queryParams + "?" + this.filterService.getQueryParamStringFromFilters(filters)
+    }
+    console.log("opponent data in service");
+    return this.http.get(environment.api_end_point + 'api/opponents/profit' + queryParams, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
 
   retrieveContestData(tabName:string, filters:FilterCriteria[] = null):Observable<any> {
     let queryParams:string = tabName;
