@@ -167,14 +167,14 @@
                 Entry Fee
               </label>
               <div class="filterBtnWrapper" [formGroup]="filterForm.get(filterKeyConstants.FEE)">
-                <select class="form-control" [formControlName]="'min'">
+                <select class="form-control threeItms" [formControlName]="'min'">
                   <option value="-" [disabled]="true" [attr.selected]="true">min</option>
                   <option *ngFor="let feeData of entryFeeData"
                           [value]="feeData.value">
                     {{feeData.label}}
                   </option>
                 </select>
-                <select class="form-control" [formControlName]="'max'">
+                <select class="form-control threeItms" [formControlName]="'max'">
                   <option value="-" [disabled]="true" [attr.selected]="true">max</option>
                   <option *ngFor="let feeData of entryFeeData"
                           [value]="feeData.value">
@@ -213,13 +213,6 @@
         </div>
         <div id="filterFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
           <div class="panel-body">
-            <div class="form-group">
-              <label class="">Contest title search</label>
-              <div class="filterBtnWrapper">
-                <input type="text" class="form-control" name="" placeholder="">
-                <button type="button" class="addFltrBtn">Add</button>
-              </div>
-            </div>
             <!--Number of contest entries-->
             <div class="form-group">
               <label>
@@ -227,14 +220,14 @@
               </label>
               <div class="filterBtnWrapper"
                    [formGroup]="filterForm.get(filterKeyConstants.NO_OF_CONTEST_ENTRIES)">
-                <select class="form-control" [formControlName]="'min_contest'">
+                <select class="form-control threeItms" [formControlName]="'min_contest'">
                   <option value="-" [disabled]="true" [attr.selected]="true">min</option>
                   <option *ngFor="let entryData of contestEntriesData"
                           [value]="entryData.value">
                     {{entryData.label}}
                   </option>
                 </select>
-                <select class="form-control" [formControlName]="'max_contest'">
+                <select class="form-control threeItms" [formControlName]="'max_contest'">
                   <option value="-" [disabled]="true" [attr.selected]="true">max</option>
                   <option *ngFor="let entryData of contestEntriesData"
                           [value]="entryData.value">

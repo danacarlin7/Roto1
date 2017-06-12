@@ -12,8 +12,11 @@ import {UserDashboardServices} from "./services/user-dashboard.service";
 import {FilterService} from "./services/filter.service";
 import {OverviewlistComponent} from "./components/overview/overview-list/overview-list.component";
 import {AuthService} from "../shared/services/auth.service";
+import {TabViewComponent} from "./components/common/tab-view/tab-view.component";
 import { CohortComponent } from './components/cohort/cohort.component';
 import { CohortListComponent } from './components/cohort/cohort-list/cohort-list.component';
+import {ContestComponent} from "./components/contest/contest.component";
+import {ContestListComponent} from "./components/contest/contest-list/contest-list.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -32,8 +35,12 @@ import { CohortListComponent } from './components/cohort/cohort-list/cohort-list
     FilterComponent,
     AppliedFiltersComponent,
     OverviewlistComponent,
+    TabViewComponent,
+    OverviewlistComponent,
     CohortComponent,
-    CohortListComponent
+    CohortListComponent,
+    ContestComponent,
+    ContestListComponent
   ],
   exports: [
     UserMainComponent

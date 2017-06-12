@@ -1,0 +1,120 @@
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="Contests">
+
+    <div class="tFormat">
+      <div class="table-responsive">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr class="dHedin">
+            <th width="15%">Date</th>
+            <th width="50%" class="icnContanerTd">Contests</th>
+            <th width="10%">PP</th>
+            <th width="15%">Entry Details</th>
+            <th width="10%">Fee</th>
+            <th width="10%">Profit</th>
+          </tr>
+          <tr *ngFor="let record of records">
+            <td>{{getContestDate(record['date'])}}</td>
+            <td class="icnContanerTd">
+              <!--<span class="icnWrapperS"><img src="images/contests_icn1.png" alt="" class="img-responsive"></span>
+              <span class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span>-->
+              <span>{{record['title']}}</span>
+            </td>
+            <td>{{record['prize_pool']}}</td>
+            <td>{{record['total_entries']}}</td>
+            <td>${{record['fee']}}</td>
+            <td>
+              <label *ngIf="record['net'] >= 0" [ngStyle]="{color: '#4caf50'}">${{record['net'] | number}} </label>
+              <label *ngIf="record['net'] <  0" [ngStyle]="{color: 'red'}">(${{record['net'] * -1 | number}})</label>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+  <div role="tabpanel" class="tab-pane" id="Entries">
+    <div class="tFormat">
+      <div class="table-responsive">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tr class="dHedin">
+            <th width="15%">Date</th>
+            <th width="40%" class="icnContanerTd">Contests</th>
+            <th width="10%">PP</th>
+            <th width="15%">Entry Details</th>
+            <th width="10%">Fee</th>
+            <th width="10%">Profit</th>
+          </tr>
+          <tr>
+            <td>5 Apr 17</td>
+            <td class="icnContanerTd"><span class="icnWrapperS"><img src="images/contests_icn1.png" alt=""
+                                                                     class="img-responsive"></span><span
+              class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span><span>Casual MLB $2 3-Player (All Day)</span>
+            </td>
+            <td>$30K</td>
+            <td>1 (31122)</td>
+            <td>$88.00</td>
+            <td class="tred">($56.50)</td>
+          </tr>
+          <tr>
+            <td>3 Apr 17</td>
+            <td class="icnContanerTd"><span class="icnWrapperS"><img src="images/contests_icn1.png" alt=""
+                                                                     class="img-responsive"></span><span
+              class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span><span>MLB $7K Moonshot (All Day)</span>
+            </td>
+            <td>$22K</td>
+            <td>1 (856)</td>
+            <td>$33.00</td>
+            <td class="tred">($56.50)</td>
+          </tr>
+          <tr>
+            <td>4 Apr 17</td>
+            <td class="icnContanerTd"><span class="icnWrapperS"><img src="images/contests_icn1.png" alt=""
+                                                                     class="img-responsive"></span><span
+              class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span><span>MLB $7K Moonshot (All Day)</span>
+            </td>
+            <td>$7K</td>
+            <td>1 (2156)</td>
+            <td>$33.00</td>
+            <td class="tred">($56.50)</td>
+          </tr>
+          <tr>
+            <td>5 Apr 17</td>
+            <td class="icnContanerTd"><span class="icnWrapperS"><img src="images/contests_icn1.png" alt=""
+                                                                     class="img-responsive"></span><span
+              class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span><span>MLB $625 Slider (Night)</span>
+            </td>
+            <td>$7K</td>
+            <td>1 (2156)</td>
+            <td>$33.00</td>
+            <td class="tred">($56.50)</td>
+          </tr>
+          <tr>
+            <td>2 Apr 17</td>
+            <td class="icnContanerTd"><span class="icnWrapperS"><img src="images/contests_icn1.png" alt=""
+                                                                     class="img-responsive"></span><span
+              class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span><span>MLB $7K Moonshot (All Day)</span>
+            </td>
+            <td>$7K</td>
+            <td>1 (2156)</td>
+            <td>$33.00</td>
+            <td class="tred">($56.50)</td>
+          </tr>
+          <tr>
+            <td>4 Apr 17</td>
+            <td class="icnContanerTd"><span class="icnWrapperS"><img src="images/contests_icn1.png" alt=""
+                                                                     class="img-responsive"></span><span
+              class="icnWrapperS"><img src="images/contests_icn2.png" alt="" class="img-responsive"></span><span>MLB $7K Moonshot (All Day)</span>
+            </td>
+            <td>$7K</td>
+            <td>1 (2156)</td>
+            <td>$33.00</td>
+            <td class="tred">($56.50)</td>
+          </tr>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -286,7 +286,7 @@
 	footer .topFooter{padding: 25px 0px;}
 	footer .topFooter .footerHdin {font-size: 16px;margin-bottom: 10px;}
 	footer .topFooter .logoWrapper {margin-bottom: 10px;}
-	footer .topFooter .logoWrapper img {max-width: 70px;}
+	footer .topFooter .logoWrapper img {max-width: 110px;}
 	footer .topFooter .footerPara {font-size: 13px;line-height: 21px;}
 	.topFooterWrapper{margin-bottom: 20px;}
 	footer .topFooter .footerLinks > li {font-size: 13px;line-height: 24px;}
@@ -442,10 +442,14 @@
 	
 	.dUpldBtnWrapper .dUpldBtnBx p {font-size: 13px;}
 	.dUpldBtnWrapper .dUpldBtnBx .dUpldBtn a {width: 85px;padding: 0px 10px;}
-	.dUpldBtnWrapper > p {font-size: 13px;}
-	.dUpldBtnWrapper > p{margin-top: 5px;}
+	.dUpldBtnWrapper > p {font-size: 12px;margin-top: 8px;text-align: center;line-height: 18px;}
 	.dTabs .nav-tabs > li > a {padding: 6px 5px;}
 	
+	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body .form-group .filterBtnWrapper .datepicker {background-size: 14px;}
+	
+	.pagination {margin: 10px 0px 10px 0px;width: 100%;display: flex;justify-content: center;}
+	.pagination ul li > a{font-size: 12px;padding: 5px 10px;}
+	.dUpldBxLft .dUpldBx p{font-size: 18px;}
 }
 
 @media(max-width:679px)

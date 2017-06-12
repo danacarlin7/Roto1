@@ -18,7 +18,6 @@ export class FilterService {
   activeContestTab:string = ContestTabConstants.CONTESTS;
   activeGraphTab:string = GraphTabConstants.PROFIT;
   filterSettings:any;
-
   filters:FilterCriteria[];
 
   filtersChangedEvent:EventEmitter<FilterCriteria[]> = new EventEmitter<FilterCriteria[]>();
