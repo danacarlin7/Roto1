@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {AuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 11-06-2017.
  */
@@ -11,8 +12,12 @@ import {Component} from "@angular/core";
 })
 export class UserHeaderComponent {
 
-  constructor() {
+  constructor(private authService:AuthService) {
 
+  }
+
+  logoutUser() {
+    this.authService.logout();
   }
 
 }

@@ -19,6 +19,9 @@ import {ContestComponent} from "./components/contest/contest.component";
 import {ContestListComponent} from "./components/contest/contest-list/contest-list.component";
 import {OpponentComponent} from "./components/opponent/opponent.component";
 import {OpponentListComponent} from "./components/opponent/opponents-list/opponents-list.component";
+import {DashboardFilterComponent} from "./components/dashboard/filter/dashboard-filter.component";
+import {DashboardStaticsComponent} from "./components/dashboard/dashboard-statics/dashboard-statics.component";
+import {DashboardTopWinsComponent} from "./components/dashboard/dashboard-top-wins/dashboard-top-wins.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -44,7 +47,10 @@ import {OpponentListComponent} from "./components/opponent/opponents-list/oppone
     ContestComponent,
     ContestListComponent,
     OpponentComponent,
-    OpponentListComponent
+    OpponentListComponent,
+    DashboardFilterComponent,
+    DashboardStaticsComponent,
+    DashboardTopWinsComponent
   ],
   exports: [
     UserMainComponent

@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {AuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -9,5 +10,11 @@ import {Component} from "@angular/core";
   styleUrls: ['./front-header.component.css']
 })
 export class FrontHeaderComponent {
+
+  isLoggedIn:boolean;
+
+  constructor(private authService:AuthService) {
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
 
 }

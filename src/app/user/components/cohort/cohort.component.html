@@ -9,19 +9,25 @@
         <div class="dashboardContainerWrapper">
           <div class="dashMainWrapper">
             <div class="leftFilter">
-              <div class="filterTopHedin">
-                <h1>Current Filters</h1>
-                <a href="javascript:void(0)" class="clrAll">Clear all</a>
-              </div>
-              <rp-applied-filters></rp-applied-filters>
-              <rp-filters></rp-filters>
+              <rp-applied-filters *ngIf="filters && filters.length"
+                                  [filters]="filters"
+                                  [filterSettings]="filterSettings"
+                                  (removeFilterEvent)="onRemoveFilterEvent($event)"
+                                  (remoceAllFiltersEvent)="onRemoveAllFiltersEvent($event)"></rp-applied-filters>
+              <rp-filters [filterSettings]="filterSettings"
+                          (addFilterEvent)="onAddFilterEventHandler($event)"></rp-filters>
             </div>
             <div class="dashboardMain">
               <!--<div class="subscriptionNotification">
                 <p>To view unrestricted reports, upgrade your subscription plan today!</p>
                 <div class="clseBtn">&times;</div>
               </div>-->
-              <rp-cohort-list [records]="records"></rp-cohort-list>
+              <div class="dTabs">
+                <rp-tab-view [tabs]="cohortTabs"
+                             [activeTab]="activeTab"
+                             (tabChanged)="onCohortTabChanged($event)"></rp-tab-view>
+                <rp-cohort-list [records]="records"></rp-cohort-list>
+              </div>
             </div>
           </div>
 

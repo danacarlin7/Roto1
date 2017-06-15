@@ -6,6 +6,7 @@ import {OverviewComponent} from "./components/overview/overview.component";
 import {CohortComponent} from "./components/cohort/cohort.component";
 import {ContestComponent} from "./components/contest/contest.component";
 import {OpponentComponent} from "./components/opponent/opponent.component";
+import {AuthGuard} from "../shared/services/auth.guard";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -13,6 +14,7 @@ import {OpponentComponent} from "./components/opponent/opponent.component";
 const routes:Routes = [
   <Route>{
     path: '',
+    canActivate: [AuthGuard],
     component: UserMainComponent,
     data: {title: 'RotoPose - Dashboard'},
     children: [

@@ -8,7 +8,7 @@ import {FilterCriteria} from "../../models/filter-criteria.model";
  * Created by Hiren on 11-06-2017.
  */
 
-
+declare var jQuery:any;
 @Component({
   selector: 'rp-filters',
   templateUrl: './filter.component.html',
@@ -67,8 +67,15 @@ export class FilterComponent {
   }
 
   ngAfterViewInit():void {
-    /* jQuery('.filter-control-container').find('.ui-inputtext').css("background-color","rgba(0,0,0,0)");
-     jQuery('.filter-control-container').find('.ui-inputtext:focus').css("border","none");*/
+    jQuery('.datepicker').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      beforeShow: function (textbox, instance) {
+        instance.dpDiv.css({
+          marginLeft: textbox.offsetWidth + (-228) + 'px'
+        });
+      }
+    });
   }
 
   addFilter(filterKey:string) {

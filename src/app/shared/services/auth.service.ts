@@ -13,13 +13,30 @@ export class AuthService {
 
   }
 
+  getToken():string {
+    return environment.token;
+  }
+
   getHeaders():Headers {
     let headers = new Headers();
     headers.append('content-type', 'application/json');
-    if (localStorage.getItem('token')) {
-      headers.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('token')).token);
+    if (this.getToken()) {
+      headers.append('Authorization', 'Bearer ' + (this.getToken()));
     }
     return headers;
+  }
+
+  isLoggedIn():boolean {
+    let login:boolean;
+    if (environment.token && environment.token.length) {
+      login = true;
+    } else if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length) {
+      login = true;
+    } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
+      login = true;
+    }
+    console.log("isLogin", login);
+    return login;
   }
 
   login(data:string):Observable<any> {
@@ -30,6 +47,7 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
+    sessionStorage.clear();
     window.location.href = '';
     //this.userLoggedInEvent.emit(false);
   }

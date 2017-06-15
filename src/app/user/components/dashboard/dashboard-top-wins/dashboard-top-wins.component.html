@@ -1,0 +1,42 @@
+<div class="row error-container" *ngIf="errorMsg && !isLoading">
+  {{errorMsg}}
+</div>
+<div class="loader-container" *ngIf="isLoading">
+  <md-progress-spinner mode="indeterminate" style="width: 28px;height: 28px"></md-progress-spinner>
+</div>
+<md-card [@enterAnimation]="!isLoading" *ngIf="!isLoading && !errorMsg">
+  <md-card-title>Biggest Wins</md-card-title>
+  <md-card-content>
+    <div class="table-responsive">
+      <table class="table topwins-table">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Contest</th>
+          <th>Profit/Loss</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let record of winRecords;let index = index">
+          <th class="col-md-1 col-xs-1" scope="row">{{index+1}}</th>
+          <td class="col-md-10 col-xs-9 contest-title">{{record._id}}</td>
+          <td class="col-md-1 col-xs-2 text-right">
+            <span *ngIf="(record.net >= 0)" style="color: #4caf50">{{record.net}}</span>
+            <span *ngIf="(record.net < 0)" style="color: #ff0000">{{record.net}}</span>
+          </td>
+          <!--<td class="col-md-1 col-sd-3">{{record.website}}</td>-->
+          <!--<td class="col-md-1 col-sd-2">
+            <div class="progress progress-sm">
+              <div class="progress-bar"
+                   [class.progress-bar-danger]="record.entry_fee > record.net"
+                   [class.progress-bar-success]="record.entry_fee < record.net"
+                   role="progressbar" style="width: 40%">
+              </div>
+            </div>
+          </td>-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-card-content>
+</md-card>
