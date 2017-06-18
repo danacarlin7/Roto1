@@ -31,3 +31,7 @@
   height: 523px;
   overflow-y: auto;
 }
+
+.dashboardContainer .topFiltrWrapper .topFilter .form-group.slctWrapper {
+  width: 15%;
+}

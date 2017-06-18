@@ -8,6 +8,7 @@ import {Overlay} from 'angular2-modal';
 import {overlayConfigFactory} from "angular2-modal";
 import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
 import {UploadsService} from "../../services/uploads.service";
+import {environment} from "../../../../environments/environment";
 /**
  * Created by Hiren on 18-06-2017.
  */
@@ -42,7 +43,7 @@ export class UploadsComponent {
     acceptedFiles: '.csv',
     paramName: 'file',
     autoReset: 500,
-    headers: {'Authorization': 'Bearer ' + this.userDetail.token}
+    headers: {'Authorization': 'Bearer ' + environment.token}
   };
   uploads:ContestHistory[];
   mainDialog;
