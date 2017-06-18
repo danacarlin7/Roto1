@@ -26,11 +26,15 @@ export class FilterService {
 
   }
 
+  getToken():string {
+    return environment.token;
+  }
+
   getHeaders():Headers {
     let headers = new Headers();
     headers.append('content-type', 'application/json');
-    if (localStorage.getItem('token')) {
-      headers.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('token')).token);
+    if (this.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.getToken());
     }
     return headers;
   }

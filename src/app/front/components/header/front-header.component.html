@@ -27,7 +27,7 @@
 
 
           <div class="logoWrapper">
-            <a href="#"><img src="../../../../assets/images/logo.png" alt="LOGO" class="img-responsive"/></a>
+            <a routerLink="/"><img src="../../../../assets/images/logo.png" alt="LOGO" class="img-responsive"/></a>
           </div>
 
           <div class="menuToggle">
@@ -51,8 +51,10 @@
           </div>
           <div class="rightNav">
             <ul>
-              <li class="loginBtn"><a routerLink="/login">Login</a></li>
-              <li class="signUpBtn"><a routerLink="/signUp">Sign Up</a></li>
+              <li class="loginBtn" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+              <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signUp">Sign Up</a></li>
+              <li class="signUpBtn" *ngIf="isLoggedIn"><a style="width: auto" routerLink="/user">Go to Dashboard</a>
+              </li>
               <li class="searchBtn">
                 <a href="javascript:void(0)"><img src="../../../../assets/images/search_icn.png" alt="LOGO"
                                                   class="img-responsive"/></a>
@@ -71,5 +73,4 @@
       </div>
     </div>
   </div>
-
 </header>

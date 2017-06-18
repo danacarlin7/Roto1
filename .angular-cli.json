@@ -19,6 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/c3/c3.min.css",
+        "assets/css/graph.css",
         "assets/css/bootstrap.min.css",
         "assets/css/stylesheet.css",
         "assets/css/responsive.css",
@@ -29,6 +31,7 @@
       ],
       "scripts": [
         "../node_modules/moment/min/moment.min.js",
+        "../node_modules/c3/c3.min.js",
         "assets/js/jquery.js",
         "assets/js/bootstrap.min.js",
         "assets/js/owl.carousel.min.js",

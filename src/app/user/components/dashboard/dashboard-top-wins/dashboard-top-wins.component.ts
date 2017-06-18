@@ -11,29 +11,13 @@ import {UserDashboardServices} from "../../../services/user-dashboard.service";
 
 
 @Component({
-  selector: 'dfs-dashboard-top-wins',
+  selector: 'rp-dashboard-top-wins',
   templateUrl: './dashboard-top-wins.component.html',
-  styleUrls: ['./dashboard-top-wins.component.css'],
-  animations: [
-    trigger(
-      'enterAnimation', [
-        transition(':enter', [
-          style({transform: 'scale(0.98)', opacity: 0}),
-          animate('225ms', style({transform: 'scale(1)', opacity: 1}))
-        ])
-      ]
-    )
-  ]
+  styleUrls: ['./dashboard-top-wins.component.css']
 })
 export class DashboardTopWinsComponent {
-
   readyState = 'inactive';
   errorMsg:string = "";
   isLoading:boolean;
-  winRecords:ContestTopWin[];
-  private _dashboardFilter:DashboardFilter;
-
-  @Input() set dashoardFilter(filter:DashboardFilter) {
-    this._dashboardFilter = filter;
-  }
+  @Input() winRecords:ContestTopWin[];
 }

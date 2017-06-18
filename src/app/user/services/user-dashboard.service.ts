@@ -19,6 +19,7 @@ export class UserDashboardServices {
   }
 
   getToken():string {
+    console.log(environment.token);
     return environment.token;
   }
 
@@ -84,6 +85,19 @@ export class UserDashboardServices {
       });
   }
 
+  retrieveGraphData(tabName:string, filters:FilterCriteria[] = null):Observable<any> {
+    let queryParams:string = tabName;
+    if (filters && filters.length) {
+      queryParams = queryParams + "?" + this.filterService.getQueryParamStringFromFilters(filters)
+    }
+    return this.http.get(environment.api_end_point + 'api/graph/' + queryParams, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   prepareApiUrl(data:DashboardFilter):string {
     let apiUrl = "";
 
@@ -129,6 +143,19 @@ export class UserDashboardServices {
     return this.http.get(environment.api_end_point + "api/report/keyStates" + queryStr, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
+  }
+
+  getProfitByDayOfWeek(data):Observable<any> {
+    let queryStr = '';
+    if (data) {
+      queryStr = this.prepareApiUrl(data);
+    }
+    return this.http.get(environment.api_end_point + "api/chart/profit" + queryStr, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
   }
 
   handelError(error:any) {

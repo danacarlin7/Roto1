@@ -32,11 +32,11 @@ export class DashboardFilterComponent {
 
   constructor() {
     this.selectedDate = moment().toDate();
-    this.filterType = "week";
+    this.filterType = "year";
   }
 
   ngOnInit() {
-    this.dispatchFilterChangeEvent();
+    //this.dispatchFilterChangeEvent();
   }
 
   ngAfterViewInit():void {
@@ -55,6 +55,35 @@ export class DashboardFilterComponent {
     })
     ;
     jQuery('.datepicker').datepicker("setDate", moment(this.selectedDate).format('MM/DD/YYYY'));
+
+    jQuery(window).click(function (e) {
+      jQuery(".dropdownSelect > .dropdownSelectMenu").hide();
+    });
+
+    jQuery(".dropdownSelect > .dropdownSelectClick").click(function (e) {
+      e.stopPropagation();
+      if (jQuery(".dropdownSelect > .dropdownSelectMenu").hasClass("activeSelectMenu")) {
+        jQuery(".dropdownSelect > .dropdownSelectMenu").hide();
+        jQuery(".dropdownSelect > .dropdownSelectMenu").removeClass("activeSelectMenu");
+      }
+      if (jQuery(this).next().hasClass("activeSelectMenu")) {
+        jQuery(this).next().removeClass("activeSelectMenu");
+        jQuery(this).next().hide();
+      }
+      else {
+
+        jQuery(this).next().show();
+        jQuery(this).next().addClass("activeSelectMenu");
+      }
+
+    });
+
+    jQuery(".dropdownSelect > .dropdownSelectMenu > li > a").click(function () {
+
+      var slctTxt = jQuery(this).text();
+      jQuery(this).parents(".dropdownSelectMenu").siblings(".dropdownSelectClick").text(slctTxt);
+    });
+
   }
 
   onDateChanged(event) {

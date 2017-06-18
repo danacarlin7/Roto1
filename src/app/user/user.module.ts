@@ -14,6 +14,7 @@ import {OverviewlistComponent} from "./components/overview/overview-list/overvie
 import {AuthService} from "../shared/services/auth.service";
 import {TabViewComponent} from "./components/common/tab-view/tab-view.component";
 import {CohortComponent} from './components/cohort/cohort.component';
+import {GraphComponent} from './components/graph/graph.component';
 import {CohortListComponent} from './components/cohort/cohort-list/cohort-list.component';
 import {ContestComponent} from "./components/contest/contest.component";
 import {ContestListComponent} from "./components/contest/contest-list/contest-list.component";
@@ -50,7 +51,8 @@ import {DashboardTopWinsComponent} from "./components/dashboard/dashboard-top-wi
     OpponentListComponent,
     DashboardFilterComponent,
     DashboardStaticsComponent,
-    DashboardTopWinsComponent
+    DashboardTopWinsComponent,
+    GraphComponent
   ],
   exports: [
     UserMainComponent

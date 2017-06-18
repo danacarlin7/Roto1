@@ -7,6 +7,7 @@ import {CohortComponent} from "./components/cohort/cohort.component";
 import {ContestComponent} from "./components/contest/contest.component";
 import {OpponentComponent} from "./components/opponent/opponent.component";
 import {AuthGuard} from "../shared/services/auth.guard";
+import {GraphComponent} from "./components/graph/graph.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -38,6 +39,10 @@ const routes:Routes = [
         path: 'opponent',
         component: OpponentComponent
       },
+      <Route>{
+        path: 'graphs',
+        component: GraphComponent
+      }
     ]
   }
 ];
