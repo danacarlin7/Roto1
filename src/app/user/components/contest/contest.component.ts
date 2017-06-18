@@ -54,7 +54,7 @@ export class ContestComponent {
           this.activeTab = this.filterService.activeContestTab = params['tab'];
         }
         else {
-          this.router.navigate(['contests'], {queryParams: {tab: this.activeTab}})
+          this.router.navigate(['/user/contests'], {queryParams: {tab: this.activeTab}})
         }
       }
     )
@@ -75,7 +75,7 @@ export class ContestComponent {
 
   onContestTabChanged(tabName:{value:string,label:string}) {
     this.activeTab = tabName.value;
-    this.router.navigate(['contests'], {queryParams: {tab: tabName.value}})
+    this.router.navigate(['/user/contests'], {queryParams: {tab: tabName.value}})
   }
 
   onAddFilterEventHandler(filter:FilterCriteria) {

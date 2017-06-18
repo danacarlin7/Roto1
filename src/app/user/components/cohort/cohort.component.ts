@@ -47,7 +47,7 @@ export class CohortComponent{
           this.activeTab = this.filterService.activeCohortTab = params['tab'];
         }
         else {
-          this.router.navigate(['cohort'], {queryParams: {tab: this.activeTab}})
+          this.router.navigate(['/user/cohort'], {queryParams: {tab: this.activeTab}})
         }
       }
     )
@@ -70,7 +70,7 @@ export class CohortComponent{
 
   onCohortTabChanged(tabName:{value:string,label:string}) {
     this.activeTab = tabName.value;
-    this.router.navigate(['cohort'], {queryParams: {tab: tabName.value}})
+    this.router.navigate(['/user/cohort'], {queryParams: {tab: tabName.value}})
   }
 
   onAddFilterEventHandler(filter:FilterCriteria) {

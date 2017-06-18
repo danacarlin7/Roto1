@@ -98,6 +98,19 @@ export class UserDashboardServices {
       });
   }
 
+  getBreakdownChartData(data):Observable<any> {
+    let queryStr = '';
+    if (data) {
+      queryStr = this.prepareApiUrl(data);
+    }
+    return this.http.get(environment.api_end_point + "api/chart/activity" + queryStr, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   prepareApiUrl(data:DashboardFilter):string {
     let apiUrl = "";
 

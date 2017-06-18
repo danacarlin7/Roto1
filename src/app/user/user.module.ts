@@ -23,6 +23,11 @@ import {OpponentListComponent} from "./components/opponent/opponents-list/oppone
 import {DashboardFilterComponent} from "./components/dashboard/filter/dashboard-filter.component";
 import {DashboardStaticsComponent} from "./components/dashboard/dashboard-statics/dashboard-statics.component";
 import {DashboardTopWinsComponent} from "./components/dashboard/dashboard-top-wins/dashboard-top-wins.component";
+import {UploadsService} from "./services/uploads.service";
+import {UploadsComponent} from "./components/uploads/uploads.component";
+import {ModalModule} from 'angular2-modal';
+import {BootstrapModalModule} from 'angular2-modal/plugins/bootstrap';
+import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -30,6 +35,9 @@ import {DashboardTopWinsComponent} from "./components/dashboard/dashboard-top-wi
 @NgModule({
   imports: [
     UserRoutingModule,
+    ModalModule.forRoot(),
+    DropzoneModule.forChild(),
+    BootstrapModalModule,
     SharedModule
   ],
   declarations: [
@@ -52,12 +60,13 @@ import {DashboardTopWinsComponent} from "./components/dashboard/dashboard-top-wi
     DashboardFilterComponent,
     DashboardStaticsComponent,
     DashboardTopWinsComponent,
-    GraphComponent
+    GraphComponent,
+    UploadsComponent
   ],
   exports: [
     UserMainComponent
   ],
-  providers: [UserDashboardServices, FilterService]
+  providers: [UserDashboardServices, FilterService,UploadsService]
 })
 export class UserModule {
 

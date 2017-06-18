@@ -22,7 +22,7 @@ export class GraphComponent {
   graphData:GraphData;
   graphTabs = GraphTabs;
   graphTabConstants = GraphTabConstants;
-
+  chartTitle:string = '';
   c3Chart:any;
   activeTab:string = this.graphTabConstants.PROFIT;
 
@@ -59,7 +59,7 @@ export class GraphComponent {
           this.activeTab = this.filterService.activeGraphTab = params['tab'];
         }
         else {
-          this.router.navigate(['graphs'], {queryParams: {tab: this.activeTab}})
+          this.router.navigate(['/user/graphs'], {queryParams: {tab: this.activeTab}})
         }
       }
     )
@@ -81,12 +81,18 @@ export class GraphComponent {
     switch (this.activeTab) {
       case this.graphTabConstants.PROFIT:
         this.prepareProfitChart();
+        if (this.graphData.result && this.graphData.result[0].datas)
+          this.chartTitle = "PROFIT BY DAY ( $" + this.graphData.result[0].datas[this.graphData.result[0].datas.length - 1][1] + " Profit )";
         break;
       case this.graphTabConstants.SITE:
         this.prepareSiteChart();
+        if (this.graphData.result && this.graphData.result[0].datas)
+          this.chartTitle = "PROFIT BY SITE ( $" + this.graphData.result[0].datas[this.graphData.result[0].datas.length - 1][1] + " Profit )";
         break;
       case this.graphTabConstants.SPORT:
         this.prepareSportChart();
+        if (this.graphData.result && this.graphData.result[0].datas)
+          this.chartTitle = "PROFIT BY SPORT ( $" + this.graphData.result[0].datas[this.graphData.result[0].datas.length - 1][1] + " Profit )";
         break;
       case this.graphTabConstants.CATEGORY:
         this.prepareSportChart();
@@ -329,7 +335,7 @@ export class GraphComponent {
 
   onGraphTabChanged(tabName:{value:string,label:string}) {
     this.activeTab = tabName.value;
-    this.router.navigate(['graphs'], {queryParams: {tab: tabName.value}})
+    this.router.navigate(['/user/graphs'], {queryParams: {tab: tabName.value}})
   }
 
   onAddFilterEventHandler(filter:FilterCriteria) {

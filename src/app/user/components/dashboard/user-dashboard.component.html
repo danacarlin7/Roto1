@@ -17,15 +17,6 @@
             </div>
             <div class="sortByMonth">
               <div class="form-group">
-                <label class="">Sort By</label>
-                <div class="dropdownSelect">
-                  <a href="javascript:void(0)" class="dropdownSelectClick form-control">Month</a>
-                  <ul class="dropdownSelectMenu">
-                    <li><a href="javascript:void(0)">1</a></li>
-                    <li><a href="javascript:void(0)">2</a></li>
-                    <li><a href="javascript:void(0)">3</a></li>
-                  </ul>
-                </div>
               </div>
             </div>
             <div class="">
@@ -39,49 +30,47 @@
               <rp-dashboard-top-wins [winRecords]="topWinData"></rp-dashboard-top-wins>
             </div>
             <div class="profitCategoryRght">
-              <div class="table-responsive">
+              <div class="table-responsive" style="overflow: visible">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tr>
                     <th width="86%">By Site</th>
                     <th width="14%">Contests</th>
                   </tr>
                   <tr>
-                    <td>Lorem Ipsum is dummy textLorem Ipsum is ummy textLorem Ipsum ItextLorem Ipsum is dummy text .
+                    <td colspan="2" style="text-align: center">
+                      <div #bySiteChart></div>
                     </td>
-                    <td><img src="../../../../assets/images/profit_cat1.png" alt="" class="img-responsive"/></td>
                   </tr>
                 </table>
               </div>
 
-              <div class="table-responsive">
+              <div class="table-responsive" style="overflow: visible">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tr>
                     <th width="86%">By Sport</th>
                     <th width="14%">Contests</th>
                   </tr>
                   <tr>
-                    <td>Lorem Ipsum is dummy textLorem Ipsum is ummy textLorem Ipsum ItextLorem Ipsum is dummy text .
+                    <td colspan="2" style="text-align: center">
+                      <div #bySportChart></div>
                     </td>
-                    <td><img src="../../../../assets/images/profit_cat3.png" alt="" class="img-responsive"/></td>
                   </tr>
                 </table>
               </div>
 
-              <div class="table-responsive">
+              <!--<div class="table-responsive" style="overflow: visible">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
                   <tr>
                     <th width="86%">By Category</th>
                     <th width="14%">Contests</th>
                   </tr>
                   <tr>
-                    <td>Lorem Ipsum is dummy textLorem Ipsum is ummy textLorem Ipsum ItextLorem Ipsum is dummy text .
-                    </td>
-                    <td><img src="../../../../assets/images/profit_cat2.png" alt="" class="img-responsive"/></td>
+                    <td><div #byCategoryChart></div></td>
                   </tr>
                 </table>
-              </div>
+              </div>-->
 
-              <div class="table-responsive">
+              <div class="table-responsive" style="overflow: visible">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
 
                   <tr>
@@ -89,16 +78,16 @@
                     <th width="14%">Contests</th>
                   </tr>
                   <tr>
-                    <td>Lorem Ipsum is dummy textLorem Ipsum is ummy textLorem Ipsum ItextLorem Ipsum is dummy text .
+                    <td colspan="2" style="text-align: center">
+                      <div #byDayOfWeekChart></div>
                     </td>
-                    <td><img src="../../../../assets/images/profit_cat4.png" alt="" class="img-responsive"/></td>
                   </tr>
                 </table>
               </div>
             </div>
           </div>
 
-          <div class="profitByCat">
+          <!--<div class="profitByCat">
             <div class="profitByCatLft">
               <div class="dHedin">
                 <h3>Profit By Category</h3>
@@ -137,7 +126,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div>-->
 
         </div>
 

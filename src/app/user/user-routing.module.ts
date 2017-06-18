@@ -8,6 +8,7 @@ import {ContestComponent} from "./components/contest/contest.component";
 import {OpponentComponent} from "./components/opponent/opponent.component";
 import {AuthGuard} from "../shared/services/auth.guard";
 import {GraphComponent} from "./components/graph/graph.component";
+import {UploadsComponent} from "./components/uploads/uploads.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -42,6 +43,10 @@ const routes:Routes = [
       <Route>{
         path: 'graphs',
         component: GraphComponent
+      },
+      <Route>{
+        path:'uploads',
+        component:UploadsComponent
       }
     ]
   }

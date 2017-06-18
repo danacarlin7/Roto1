@@ -17,3 +17,17 @@
 .dashboardContainer .topFiltrWrapper .topFilter .form-group {
   width: auto;
 }
+
+
+.dropzone.dz-wrapper .dz-message{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tblScrlCntntWrap {
+  max-height: 523px;
+  height: 523px;
+  overflow-y: auto;
+}
