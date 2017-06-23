@@ -5,10 +5,10 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="loginDetailsWrapper">
           <div class="loginLftWrapper">
-            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive" />
+            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive"/>
           </div>
           <div class="loginRghtWrapper signupRghtWrapper">
-            <div class="mainTab">
+            <!--<div class="mainTab">
               <div class="tab">
                 <ul>
                   <li>
@@ -45,7 +45,7 @@
 
               <div id="OptimizerPackages" class="tabcontent">
                 <ul class="signUpPakges">
-                  <li  class="pkgeactive">
+                  <li class="pkgeactive">
                     <input type="radio" name="package1" value="package1">
                     <h2 class="pkgeName">Weekly</h2>
                     <h3 class="pkgePrice">$18.95</h3>
@@ -66,36 +66,57 @@
                 </ul>
               </div>
 
-            </div>
+            </div>-->
             <div class="formWrapper">
 
-              <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt="" class="img-responsive" /></span><span>Sign Up</span></h3>
+              <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt=""
+                                                 class="img-responsive"/></span><span>Sign Up</span></h3>
               <p>Lorem Ipsum is simply dummy text of the printing and industry.</p>
-              <form>
+              <form [formGroup]="signUpForm">
+                <div class="form-group">
+                  <label class="srOnly">User Name</label>
+                  <input type="text" name="userName" formControlName="userName" placeholder="User Name">
+                </div>
                 <div class="form-group">
                   <label class="srOnly">First Name</label>
-                  <input type="text" name="fName" placeholder="First Name">
+                  <input type="text" name="fName" formControlName="fName" placeholder="First Name">
                 </div>
                 <div class="form-group">
                   <label for="lName" class="srOnly">Last Name</label>
-                  <input type="text" id="lName" name="lName" placeholder="Last Name">
+                  <input type="text" id="lName" name="lName" formControlName="lName" placeholder="Last Name">
                 </div>
                 <div class="form-group">
                   <label for="eId" class="srOnly">Email</label>
-                  <input type="text" id="eId" name="eId" placeholder="Email">
+                  <input type="text" id="eId" name="eId" formControlName="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label class="srOnly">Phone</label>
+                  <input type="text" name="phone" formControlName="phone" placeholder="Phone">
                 </div>
                 <div class="form-group">
                   <label class="srOnly">Password</label>
-                  <input type="password" name="cPassword" placeholder="**********">
+                  <input type="password" name="password" formControlName="password" placeholder="**********">
+                </div>
+                <div class="form-group">
+                  <label class="srOnly">ConformPassword</label>
+                  <input type="password" name="cPassword" formControlName="conformPassword" placeholder="**********">
+                </div>
+                <div class="alert alert-danger" *ngIf="signUpForm.errors?.passwordValidator">Password not
+                  match
                 </div>
                 <div class="form-group chkFrmGrp">
-                  <input type="checkbox" >
-                  <label class="">I Accept the <a href="javascript:void(0)" class="lred">Terms and Conditions</a> of the website</label>
+                  <input type="checkbox">
+                  <label class="">I Accept the <a href="javascript:void(0)" class="lred">Terms and Conditions</a> of the
+                    website</label>
                 </div>
 
                 <input type="button" value="Sign Up" class="formBtn">
               </form>
-
+              <pre>
+              {{signUpForm.valid | json}}
+              {{signUpForm.value | json}}
+              {{signUpForm.errors | json}}
+            </pre>
             </div>
           </div>
         </div>

@@ -18,8 +18,7 @@
   width: auto;
 }
 
-
-.dropzone.dz-wrapper .dz-message{
+.dropzone.dz-wrapper .dz-message {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -35,3 +34,23 @@
 .dashboardContainer .topFiltrWrapper .topFilter .form-group.slctWrapper {
   width: 15%;
 }
+
+.my-pagination .pagination .page-item > a {
+  color: #8f8f8f;
+}
+
+.my-pagination .pagination.pull-right {
+  display: none;
+}
+
+.my-pagination .pagination .page-item.active > a {
+  color: #ffffff;
+  background-color: #f8c534;
+  border-color: #f8c534;
+}
+
+.tFormat table tfoot tr:hover {
+  background: #f7f5f5;
+  box-shadow: 0 0 0 0 rgba(255, 102, 102, 0);
+}
+

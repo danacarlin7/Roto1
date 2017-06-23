@@ -1,0 +1,170 @@
+<div class="page-title">
+  <h3>Memberships</h3>
+</div>
+<div id="main-wrapper">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3 col-md-12 plan-list">
+      <h1 style="text-align: center">Add Membership Plan</h1>
+      <h4 style="text-align: center;color: #ff0000;"
+          *ngIf="errorMsg?.length">
+        {{errorMsg}}
+      </h4>
+      <form [formGroup]="addPlanForm">
+        <md-card>
+          <md-card-content style="padding-top: 10px">
+            <div class="plan-control">
+              <md-select [formControl]="addPlanForm.get('planType')"
+                         placeholder="Payment Type"
+                         style="width: 100%">
+                <md-option [value]="planTypes.FREE">Free</md-option>
+                <md-option [value]="planTypes.SUBSCRIPTION">Subscription</md-option>
+                <md-option [value]="planTypes.ONE_TIME_CHARGE">One time charge</md-option>
+              </md-select>
+            </div>
+            <div *ngIf="selectedPlanType">
+              <div class="plan-control">
+                <md-input-container style="width: 100%">
+                  <input [formControl]="addPlanForm.get('name')"
+                         placeholder="Name"
+                         mdInput>
+                </md-input-container>
+              </div>
+              <div class="plan-control">
+                <md-select placeholder="Plan Category"
+                           formControlName="category"
+                           style="width: 100%">
+                  <md-option [value]="'all_access'">All Services</md-option>
+                  <md-option [value]="'lineup_optimizer'">Line Up Optimizer</md-option>
+                  <md-option [value]="'contest_analyzer'">Contest Analyzer</md-option>
+                  <md-option [value]="'excel_tool'">Excel Tool</md-option>
+                </md-select>
+              </div>
+              <div class="plan-amount plan-control"
+                   *ngIf="selectedPlanType == planTypes.SUBSCRIPTION || selectedPlanType == planTypes.ONE_TIME_CHARGE">
+                <md-input-container style="margin-right: 20px;flex: 1">
+                  <input mdInput
+                         formControlName="planAmount"
+                         placeholder="Payment Amount"
+                         type="number">
+                </md-input-container>
+                <md-select placeholder="Currency"
+                           formControlName="amountCurrency"
+                           style="flex: 1">
+                  <md-option [value]="'usd'">USD</md-option>
+                </md-select>
+              </div>
+              <div *ngIf="selectedPlanType == planTypes.SUBSCRIPTION">
+                <div class="plan-amount plan-control">
+                  <md-input-container style="margin-right: 20px;flex: 1">
+                    <input mdInput
+                           formControlName="planInterval"
+                           placeholder="Payment Interval (recurring)"
+                           type="number">
+                  </md-input-container>
+                  <md-select placeholder="Payment Duration"
+                             formControlName="intervalDuration"
+                             style="flex: 1">
+                    <md-option [value]="timeRangeConstant.MONTH">{{timeRangeConstant.MONTH}}</md-option>
+                    <md-option [value]="timeRangeConstant.WEEK">{{timeRangeConstant.WEEK}}</md-option>
+                    <md-option [value]="timeRangeConstant.DAY">{{timeRangeConstant.DAY}}</md-option>
+                    <md-option [value]="timeRangeConstant.YEAR">{{timeRangeConstant.YEAR}}</md-option>
+                  </md-select>
+                </div>
+                <div class="plan-amount plan-control">
+                  <md-input-container style="flex: 1">
+                    <input mdInput
+                           formControlName="trialPeriod"
+                           placeholder="Free Trial Period (days)"
+                           type="number">
+                  </md-input-container>
+                </div>
+              </div>
+              <div class="plan-expiration plan-control"
+                   *ngIf="selectedPlanType == planTypes.FREE || selectedPlanType == planTypes.ONE_TIME_CHARGE">
+                <div class="control-title">Plan Expiration</div>
+                <md-radio-group [formControl]="addPlanForm.get('expType')" class="plan-expiration-options">
+                  <md-radio-button color="primary" [value]="expirationTypes.NONE">None</md-radio-button>
+                  <md-radio-button [value]="expirationTypes.SPECIFIC_DATE">Specific date</md-radio-button>
+                  <md-radio-button [value]="expirationTypes.TIME_PERIOD">Time period</md-radio-button>
+                </md-radio-group>
+                <div class="specific-date-plan" formGroupName="expSpecificDateValue"
+                     *ngIf="selectedExpType == expirationTypes.SPECIFIC_DATE">
+                  <div class="date">
+                    <md-select placeholder="Year"
+                               formControlName="year">
+                      <md-option *ngFor="let year of spacificTime.YEARS" [value]="year">{{year}}</md-option>
+                    </md-select>
+                    <md-select placeholder="Month"
+                               formControlName="month">
+                      <md-option *ngFor="let month of spacificTime.MONTHS" [value]="month.value">{{month.label}}
+                      </md-option>
+                    </md-select>
+                    <md-select placeholder="Day"
+                               formControlName="day">
+                      <md-option *ngFor="let day of spacificTime.DAYS" [value]="day">{{day}}</md-option>
+                    </md-select>
+                  </div>
+                  <div class="time">
+                    <md-select placeholder="Hour"
+                               formControlName="hour">
+                      <md-option *ngFor="let hour of spacificTime.HOURS" [value]="hour">{{hour}}</md-option>
+                    </md-select>
+                    <md-select placeholder="Minute"
+                               formControlName="minute">
+                      <md-option *ngFor="let minute of spacificTime.MINUTES" [value]="minute">{{minute}}</md-option>
+                    </md-select>
+                  </div>
+                </div>
+                <div class="time-period-plan" formGroupName="expTimePeriodValue"
+                     *ngIf="selectedExpType == expirationTypes.TIME_PERIOD">
+                  <div class="time">
+                    <md-input-container>
+                      <input mdInput
+                             formControlName="count"
+                             placeholder="Number"
+                             type="number">
+                    </md-input-container>
+                    <md-select placeholder="Duration"
+                               formControlName="value">
+                      <md-option [value]="timeRangeConstant.MONTH">{{timeRangeConstant.MONTH}}</md-option>
+                      <md-option [value]="timeRangeConstant.WEEK">{{timeRangeConstant.WEEK}}</md-option>
+                      <md-option [value]="timeRangeConstant.DAY">{{timeRangeConstant.DAY}}</md-option>
+                      <md-option [value]="timeRangeConstant.YEAR">{{timeRangeConstant.YEAR}}</md-option>
+                    </md-select>
+                  </div>
+                </div>
+              </div>
+              <div class="plan-options plan-control">
+                <div style="flex: 1">
+                  <div class="control-title">Enable Plan?</div>
+                  <md-slide-toggle [formControl]="addPlanForm.get('isActive')" #isActive>
+                    {{isActive.checked ? "ON" : "OFF"}}
+                  </md-slide-toggle>
+                </div>
+                <div style="flex: 1">
+                  <div class="control-title">Make Plan Public?</div>
+                  <md-slide-toggle [formControl]="addPlanForm.get('isPublic')" #isPublic>
+                    {{isPublic.checked ? "ON":"OFF"}}
+                  </md-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </md-card-content>
+          <md-card-actions>
+            <button md-button style="margin-right: 10px" (click)="onBtnCancelClicked()">CANCEL</button>
+            <button md-button (click)="onBtnAddClicked()" [disabled]="!addPlanForm.valid">CREATE PLAN</button>
+          </md-card-actions>
+        </md-card>
+      </form>
+      <!--<pre>
+        {{addPlanForm.valid | json}}
+      </pre>
+      <pre>
+        {{addPlanForm.value | json}}
+      </pre>-->
+    </div>
+  </div>
+  <div class="row">
+    <div style="height: 300px"><!--Clear fix--></div>
+  </div>
+</div>

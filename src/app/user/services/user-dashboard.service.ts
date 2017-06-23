@@ -171,6 +171,24 @@ export class UserDashboardServices {
       });
   }
 
+  subscribePlan(token, plan_id):Observable<any> {
+    return this.http.post(environment.api_end_point + 'api/subscribe', {token, plan_id}, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  unsubscribePlan(subscribe_id, at_period_end):Observable<any> {
+    return this.http.put(environment.api_end_point + 'api/unsubscribe/' + subscribe_id, {at_period_end: at_period_end}, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   handelError(error:any) {
     if (error.statusCode == 401) {
       this.authService.logout();

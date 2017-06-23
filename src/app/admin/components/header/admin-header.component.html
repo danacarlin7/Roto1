@@ -1,0 +1,46 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="sidebar-pusher">
+      <a href="javascript:void(0);" class="waves-effect waves-button waves-classic push-sidebar">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <div class="logo-box">
+      <a href="index.html" class="logo-text"><span>MLB</span></a>
+    </div><!-- Logo Box -->
+    <div class="topmenu-outer">
+      <div class="top-menu">
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle waves-effect waves-button waves-classic" data-toggle="dropdown">
+              <span class="user-name">Admin<i class="fa fa-angle-down"></i></span>
+              <img class="img-circle avatar" src="assets/images/avatar1.png" width="40" height="40" alt="">
+            </a>
+            <ul class="dropdown-menu dropdown-list" role="menu">
+              <li role="presentation"><a (click) = "onReleaseOptionClicked()" disabled><i class="fa fa-sign-out m-r-xs"></i>Release</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="log-out waves-effect waves-button waves-classic" (click)="logoutUser()"><span><i class="fa fa-sign-out m-r-xs"></i>Log out</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="waves-effect waves-button waves-classic" id="showRight">
+              <i class="fa fa-comments"></i>
+            </a>
+          </li>
+        </ul><!-- Nav -->
+      </div><!-- Top Menu -->
+    </div>
+  </div>
+</div><!-- Navbar -->
+<!--<p-dialog header="New Release" [(visible)]="isReleasePopupVisible" modal="modal" width="300" responsive="true">
+  <p>You are about to release new version. A release mail will be sent to all the Users. Are you sure you want to perform this action?</p>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" (click)="releaseResponseClicked(false)" label="No"></button>
+      <button type="button" pButton icon="fa-check" (click)="releaseResponseClicked(true)" label="Yes"></button>
+    </div>
+  </p-footer>
+</p-dialog>-->

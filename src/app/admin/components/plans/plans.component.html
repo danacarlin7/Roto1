@@ -1,0 +1,37 @@
+<div class="page-title">
+  <h3>Memberships</h3>
+</div>
+<div id="main-wrapper">
+  <div class="row">
+    <div *ngIf="isLoading" class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
+      <div>
+        <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+      </div>
+    </div>
+    <div *ngIf="!isLoading" class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
+      <dfs-single-plan *ngFor="let plan of plans" [plan]="plan"
+                       (editPlan)="editPlanEventHandler($event)"
+                       (deletePlan)="deletePlanEventHandler($event)"></dfs-single-plan>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <md-card class="membership-options-wrapper">
+        <md-card-content>
+          <div class="membership-options">
+            <button md-raised-button style="width: 100%;padding: 0" [routerLink]="['/admin/plans/add']">
+              <div class="add-plan-btn">
+                <md-icon style="height: 28px;width: 28px">add</md-icon>
+                <span>Add Membership Plan</span>
+              </div>
+            </button>
+            <p style="margin: 15px 5px;text-align: center">
+              Choose how much it costs for access to your Protected Pages & Content.
+            </p>
+            <p>
+              <a>Watch a quick overview video</a>
+            </p>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+</div>

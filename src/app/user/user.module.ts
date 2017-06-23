@@ -28,6 +28,7 @@ import {UploadsComponent} from "./components/uploads/uploads.component";
 import {ModalModule} from 'angular2-modal';
 import {BootstrapModalModule} from 'angular2-modal/plugins/bootstrap';
 import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
+import {SettingsComponent} from "./components/settings/settings.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -35,8 +36,6 @@ import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 @NgModule({
   imports: [
     UserRoutingModule,
-    ModalModule.forRoot(),
-    DropzoneModule.forChild(),
     BootstrapModalModule,
     SharedModule
   ],
@@ -61,7 +60,8 @@ import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
     DashboardStaticsComponent,
     DashboardTopWinsComponent,
     GraphComponent,
-    UploadsComponent
+    UploadsComponent,
+    SettingsComponent
   ],
   exports: [
     UserMainComponent

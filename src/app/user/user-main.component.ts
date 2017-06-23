@@ -15,7 +15,25 @@ import 'rxjs/add/operator/mergeMap';
 })
 export class UserMainComponent {
 
-  constructor(private authService:AuthService, private router:Router) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
+
+  ngOnInit() {
+    this.authService.retrieveLoggedUserInfo()
+      .subscribe(
+        response => {
+          if (response.statusCode == 200) {
+            this.authService.loggedUser = response.data;
+          }
+          else {
+
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+        }
+      )
+  }
+
 }

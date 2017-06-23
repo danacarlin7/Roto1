@@ -1,0 +1,55 @@
+.ui-grid-row{
+margin-bottom: 15px;
+    }
+
+.mat-slide-toggle {
+  line-height: 24px;
+  margin: 0 !important;
+}
+
+.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix{
+    height: auto !important;
+}
+.md-24.pull-right.member.material-icons.mat-icon ,  .md-24.pull-right.verified.material-icons.mat-icon{
+    color: #e91e63;
+}
+a{
+    cursor: pointer;
+}
+
+.login {
+  text-align: left;
+}
+
+.login-in {
+  margin: 0 auto;
+  max-width: 300px;
+  width: 100%;
+}
+
+.login-in input {
+  border: 1px solid #9b9b9b;
+  height: 33px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.login-in small {
+    color: red;
+}
+
+.login-in button {
+  background-color: #e91e63;
+  border: 1px solid #e91e63;
+  color: #ffffff;
+  font-size: 18px;
+  height: 33px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.login-in span {
+  font-size: 12px;
+}
+

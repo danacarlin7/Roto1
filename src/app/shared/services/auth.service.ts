@@ -1,13 +1,29 @@
-import {Injectable} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {environment} from "../../../environments/environment";
+import {LoggedUser} from "../models/logged-user.model";
 /**
  * Created by Hiren on 05-06-2017.
  */
 
 @Injectable()
 export class AuthService {
+
+  private _loggedUser:LoggedUser;
+
+  get loggedUser():LoggedUser {
+    return this._loggedUser;
+  }
+
+  set loggedUser(value:LoggedUser) {
+    this._loggedUser = value;
+    if (this._loggedUser) {
+      this.loggedUserChangeEvent.emit(this._loggedUser);
+    }
+  }
+
+  loggedUserChangeEvent:EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
   constructor(private http:Http) {
 
@@ -39,6 +55,18 @@ export class AuthService {
     return login;
   }
 
+  getUserRole():string {
+    let role:string;
+    if (environment.role) {
+      role = environment.role;
+    } else if (sessionStorage.getItem('data') && JSON.parse(sessionStorage.getItem('data')).role.length) {
+      role = JSON.parse(sessionStorage.getItem('data')).role;
+    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('token')).role.length) {
+      role = JSON.parse(localStorage.getItem('token')).role;
+    }
+    return role;
+  }
+
   login(data:string):Observable<any> {
     return this.http.post(environment.api_end_point + 'authenticate', data, {headers: this.getHeaders()})
       .map(response => response.json())
@@ -50,6 +78,12 @@ export class AuthService {
     sessionStorage.clear();
     window.location.href = '';
     //this.userLoggedInEvent.emit(false);
+  }
+
+  retrieveLoggedUserInfo():Observable<any> {
+    return this.http.get(environment.api_end_point + 'api/memberinfo', {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()))
   }
 
 }

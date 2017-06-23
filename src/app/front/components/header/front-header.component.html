@@ -53,7 +53,10 @@
             <ul>
               <li class="loginBtn" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
               <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signUp">Sign Up</a></li>
-              <li class="signUpBtn" *ngIf="isLoggedIn"><a style="width: auto" routerLink="/user">Go to Dashboard</a>
+              <li class="signUpBtn" *ngIf="isLoggedIn">
+                <a style="width: auto" routerLink="{{role == 'user' ? '/user' : '/admin'}}">
+                  Go to Dashboard
+                </a>
               </li>
               <li class="searchBtn">
                 <a href="javascript:void(0)"><img src="../../../../assets/images/search_icn.png" alt="LOGO"
