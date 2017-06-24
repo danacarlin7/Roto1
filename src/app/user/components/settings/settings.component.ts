@@ -50,12 +50,19 @@ export class SettingsComponent implements OnInit {
 
   @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef:TemplateRef<any>;
 
-  constructor(private authService:AuthService, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal,private dashboardService:UserDashboardServices) {
+  constructor(private authService:AuthService, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
     this.userData = this.authService.loggedUser;
-    this.authService.loggedUserChangeEvent.subscribe(user => this.userData = user);
-    this.user_name = this.userData.user_name;
-    this.activeTab = this.tabs[0].id;
-    overlay.defaultViewContainer = vcRef;
+    this.authService.loggedUserChangeEvent.subscribe(user => {
+      this.userData = user;
+      this.user_name = this.userData.user_name;
+      this.activeTab = this.tabs[0].id;
+      overlay.defaultViewContainer = vcRef;
+    });
+    if (this.userData) {
+      this.user_name = this.userData.user_name;
+      this.activeTab = this.tabs[0].id;
+      overlay.defaultViewContainer = vcRef;
+    }
   }
 
   ngOnInit() {
