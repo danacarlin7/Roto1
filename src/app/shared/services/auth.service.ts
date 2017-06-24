@@ -86,4 +86,10 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()))
   }
 
+  registerNewUser(data:any):Observable<any> {
+    return this.http.post(environment.api_end_point + 'signup', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()))
+  }
+
 }

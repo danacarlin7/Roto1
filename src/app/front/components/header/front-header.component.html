@@ -52,7 +52,7 @@
           <div class="rightNav">
             <ul>
               <li class="loginBtn" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
-              <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signUp">Sign Up</a></li>
+              <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signup">Sign Up</a></li>
               <li class="signUpBtn" *ngIf="isLoggedIn">
                 <a style="width: auto" routerLink="{{role == 'user' ? '/user' : '/admin'}}">
                   Go to Dashboard
