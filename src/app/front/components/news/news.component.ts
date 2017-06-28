@@ -11,9 +11,9 @@ import {NewsService} from "../../services/news.service";
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
-export class NewsComponent{
+export class NewsComponent {
 
- /* newsTabs = NewsTabs;
+  newsTabs = NewsTabs;
   newsTabConstants = NewsTabConstants;
 
   activeTab:string = this.newsTabConstants.NLB;
@@ -25,7 +25,7 @@ export class NewsComponent{
   }
 
   ngOnInit() {
- /!*   this.activeRoute.queryParams.subscribe(
+    this.activeRoute.queryParams.subscribe(
       params => {
         if (params.hasOwnProperty('tab')) {
           this.getData(params['tab']);
@@ -35,7 +35,7 @@ export class NewsComponent{
           this.router.navigate(['/news'], {queryParams: {tab: this.activeTab}})
         }
       }
-    )*!/
+    )
   }
 
   onNewsTabChanged(tabName:{value:string,label:string}) {
@@ -61,6 +61,6 @@ export class NewsComponent{
           console.log('http error => ', error);
         }
       )
-  }*/
+  }
 
 }
