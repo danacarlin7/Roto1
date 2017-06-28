@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
-* {margin:0; padding:0; outline:0; box-sizing:border-box; }
+* {margin:0; padding:0; outline:0; box-sizing:border-box;}
 body {margin:0; padding:0; font-family: 'Roboto', sans-serif; font-size:14px; line-height:normal; color:#2f2f2f; background:#ffc525;}
 html,body{}
 p {display:block; padding-bottom:15px; margin:0; font-size:14px; line-height:22px; color:#2f2f2f;font-weight: 400;}
@@ -82,7 +82,6 @@ section{padding: 100px 0px;}
 	header .bottomHeader .rightNav > ul > .searchBtn .srchBar button{position: absolute;top: 0px;right: 0px;border: 1px solid #FFF;color: #FFF;line-height: 23px;display: block;text-align: center;padding: 6px 12px;background: #000;border-radius: 0px;margin: 0px;height: 100%;border-top-right-radius: 5px;border-bottom-right-radius: 5px;}
 	header .bottomHeader .rightNav > ul > li:first-child{margin-left: 0px;}
 	header .bottomHeader .rightNav > ul > li > a{border: 1px solid #eeeeee;border-radius: 5px;font-size: 15px;color: #FFF;line-height: 23px;width: 100px;display: block;text-align: center;padding: 6px;text-decoration: none;}
-	header .bottomHeader .rightNav > ul > .myAcntBtn  > a{background: #f8c534;border: 1px solid #f8c534;color: #000 !important;padding: 6px 50px 6px 10px;width: auto;background-image: url('../images/select_arowblck.png');background-repeat: no-repeat;background-position: calc(100% - 10px);background-size: 11px;}
 	header .bottomHeader .rightNav > ul > .signUpBtn a{ background: #f8c534; color: #000 !important; border: 1px solid #f8c534 !important;}
 	header .bottomHeader .rightNav > ul > .searchBtn a{width: auto !important; padding: 6px 12px !important;}
 	header .bottomHeader .navbar-default .navbar-collapse .navbar-nav > li{margin-left: 30px;}
@@ -289,9 +288,9 @@ section{padding: 100px 0px;}
 	.loginDetails .formWrapper form .form-group .lred:hover{text-decoration: underline !important;}
 	.loginDetails .formWrapper form .form-group .frgtPsswd{float: right;display: block;color: #e41b24;font-size: 13px;}
 	.loginDetails .formWrapper form .form-group .frgtPsswd:hover{text-decoration: underline !important;}
-	.loginDetails .formWrapper form .form-group label{color: #a9a9a9;font-weight: 400;font-size: 13px;font-family: 'Open Sans';margin-bottom: 0px;}
+	.loginDetails .formWrapper form .form-group label{color: #a9a9a9;font-weight: 400;font-size: 13px;font-family: 'Open Sans';margin-left: 10px;margin-bottom: 0px;}
 	.loginDetails .formWrapper form .form-group .rmbrMe{vertical-align: middle;}
-	.loginDetails .formWrapper form input[type="checkbox"]{margin-top: 0px; margin-right: 10px;}
+	.loginDetails .formWrapper form input[type="checkbox"]{margin-top: 0px;}
 	.loginDetails .formWrapper form input[type="text"], .loginDetails .formWrapper form input[type="password"], .loginDetails .formWrapper form input[type="email"]{border: 1px solid #e1e1e1;padding: 12px;width: 100%;border-radius: 2px;font-size: 14px;font-weight: 400;color: rgba(0,0,0,0.55);line-height: 28px;}
 	.loginDetails .formWrapper form input[type="text"]:focus, .loginDetails .formWrapper form input[type="password"]:focus, .loginDetails .formWrapper form input[type="email"]:focus, .loginDetails .formWrapper form input[type="text"]:hover, .loginDetails .formWrapper form input[type="password"]:hover, .loginDetails .formWrapper form input[type="email"]:hover{box-shadow: 0px 0px 50px rgba(248,197,52,0.7);border: 1px solid #f6e1a5;background: #f7f7f7;}
 	.loginDetails .formWrapper form input[type="button"], .loginDetails .formWrapper form input[type="submit"]{border: 1px solid #000;padding: 16px 10px;width: 100%;border-radius: 5px;font-size: 18px;font-weight: 400;background: #000;color: #FFF;margin-top: 10px;line-height: 22px;}
@@ -560,11 +559,6 @@ section{padding: 100px 0px;}
 		.dTabs .nav-tabs > .active > a, .dTabs .nav-tabs > li > a:hover, .dTabs .nav-tabs > li > a:focus{ background: #fac124; border: 1px solid #fac124; color: #000;}
 		.dTabs .nav-tabs > .active > a:after{content: "";position: absolute;border-left: transparent solid 6px;border-right: transparent solid 6px;border-bottom: #FFF solid 6px;bottom: -1px;left: 50%;margin-left: -6px;}
 		.dTabs .nav-tabs {border-bottom: 0px;display: table;margin-bottom: 10px;}
-
-		.dTabsInner .nav-tabs{width: 100%;border-bottom: 1px solid #dadce0;margin-bottom: 30px;}
-		.dTabsInner .nav-tabs > li > a{background: transparent !important;border: 0px !important;color: #242424 !important;padding: 10px 0px !important;margin-right: 20px !important;}
-		.dTabsInner .nav-tabs > .active > a::after {content: none;}
-		.dTabsInner .nav-tabs > .active > a, .dTabsInner .nav-tabs > li > a:hover, .dTabsInner .nav-tabs > li > a:focus{color: #ffc525 !important;}
 	/* Notification Page Ends */
 
 	/* Pagination CSS Starts */
@@ -580,64 +574,6 @@ section{padding: 100px 0px;}
 
 
 	/* Pagination CSS Ends */
-
-	/* LineUp CSS Starts*/
-		.myAcntBtn .dropdown-menu{top: 44px;left: auto; right: 0px;}
-		.myAcntBtn .dropdown-menu:after{content: "";position: absolute;right: 2px;bottom: 100%;width: 0;height: 0;border-style: solid;border-width: 0 10px 10px 10px;border-color: transparent transparent #FFF transparent;z-index: 9998;}
-		.myAcntBtn .dropdown-menu li{border-bottom: 1px solid #eaeaea;}
-		.myAcntBtn .dropdown-menu li:last-child{border-bottom: 0px;}
-		.myAcntBtn .dropdown-menu li a{line-height: 22px;font-family: 'Open Sans';}
-
-		.sectionHedin{ background: #FFF;padding: 17px 0px;}
-		.sectionHedin .dTabs{position: absolute;top: 50%;transform: translate(0,-50%);right: 35px;}
-
-		.sectionHedin .dTabs .nav-tabs{margin-bottom: 0px;}
-		.lineupHedin h1{margin: 0px;font-size: 28px;line-height: 30px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;}
-		.lineupSection{background: #f2f4f8;padding: 40px 0px;}
-		.lineupSection .dTabs .lineupItmWrap{display: flex;flex-flow: row wrap;justify-content: space-between;}
-		.lineupSection .lineupItmWrap .lineupItm{ background: #FFF;box-shadow: 0px 0px 16px rgba(0,0,0,0.14);width: 48%;margin-bottom: 40px;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName{display: flex;flex-flow: row wrap;align-items: flex-start;justify-content: space-between; position: relative;padding: 20px 20px 5px;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWraper:nth-child(2) .lineUpTeamNameWrap{float: right;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap{height: 100px;width: 100px;display: flex;justify-content: center;align-items: center;border: 1px solid #d9d8d8;border-radius: 2px;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .teamName{font-size: 16px;line-height: 30px;padding: 0px;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap img{width: auto;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime{position: absolute;top: 50%;transform: translate(-50%,-50%);left: 50%;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime p{font-size: 30px;line-height: 30px;padding: 0px;font-family: 'Roboto', sans-serif;font-weight: 300;color: #000;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName{background: #f8c534;padding: 30px 20px 40px;display: flex;justify-content: space-between;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li{font-size: 16px;line-height: 37px;color: #FFF;font-family: 'Roboto', sans-serif;font-weight: 400;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li span{color: #262626; margin-right: 20px;width: 20px;display: inline-block;}
-		.lineupSection .pagination{ justify-content: center;}
-
-	/* LineUp CSS Ends*/
-
-	/* News Starts */
-		.newsSection{padding: 40px 0px; background: #f2f4f8;}
-		.newsItm{background: #FFF;border: 1px solid #d6e4ee;margin-bottom: 30px;}
-		.newsItm:last-child{margin-bottom: 0px;}
-		.newsItm .newsItmTp{padding: 20px;padding-top: 0px; box-shadow: 0px 0px 16px rgba(0,0,0,0.07);}
-		.newsItm .newsItmTp .newsItmNameWrap{display: flex;justify-content: space-between;align-items: center;padding: 30px 0px;border-bottom: 1px solid #e5e5e5;}
-		.newsItmNameWrap .newsItmName{display: flex;align-items: center;}
-		.newsItmName .newsImg{border-radius: 50%;overflow: hidden;margin-right: 10px;}
-		.newsItmName .newsName a{font-size: 18px;line-height: 22px;color: #000;font-family: 'Open Sans'; display: block}
-		.newsItmName .newsName a:hover{color: #F8C534}
-		.newsItmNameWrap .newsItmDate p{font-size: 14px;line-height: 22px;padding: 0px;color: rgba(0,0,0,0.5);font-family: 'Open Sans';}
-		.newsItm .newsItmTp .newsWrap{margin-top: 40px;}
-		.newsItm .newsItmTp .newsWrap h2 a{font-size: 18px;line-height: 22px;color: #000;margin: 0px;margin-bottom: 15px; display: block;}
-		.newsItm .newsItmTp .newsWrap h2 a:hover{color: #F8C534;}
-		.newsItm .newsItmTp .newsWrap p{font-size: 14px;line-height: 28px;color: #7f7f7f;font-weight: 300;padding-bottom: 10px;}
-		.newsItm .newsItmTp .newsWrap i{font-size: 14px;line-height: 28px; color: #f3b60c;}
-
-		.newsItm .newsItmBtm{background: #ffc525;display: flex;justify-content: space-between;align-items: center;padding: 0px;}
-		.newsItmBtm .newsItmBtmLft{display: flex;flex-flow: row wrap;}
-		.newsItmBtm .newsItmBtmLft > div{display: flex; align-items: center;padding: 0px 20px;height: 65px;border-right: 1px solid #FFF;}
-		.newsItmBtmLft3 > div{display: flex; align-items: center;}
-		.newsItmBtmLft3 > div:first-child{margin-right: 30px;}
-
-		.newsItmBtmLft div .txtWrapper{font-size: 16px;line-height: 28px;color: #FFF;font-weight: 500;text-align: center;}
-		.newsItmBtmRght{display: flex; align-items: center;padding: 0px 20px;height: 65px;}
-		.newsItmBtmRght .txtWrapper{font-size: 16px;line-height: 28px;color: #FFF;font-weight: 500;text-align: right;}
-		.newsSection .pagination{ justify-content: center; margin-top: 45px;}
-	/* News Ends &*/
 
 	/* Previous Courses Starts*/
 

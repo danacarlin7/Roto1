@@ -857,7 +857,7 @@ body .ui-tooltip {
 	color: #222222;
 }
 .ui-widget-header {
-	background: #e41b24 50% 50% repeat-x;
+	background: #e41b24  50% 50% repeat-x;
 	color: #fff;
 	font-weight: bold;
 }
@@ -980,30 +980,6 @@ body .ui-tooltip {
 .ui-icon {
 	width: 16px;
 	height: 16px;
-}
-.ui-icon,
-.ui-widget-content .ui-icon {
-
-}
-.ui-widget-header .ui-icon {
-
-}
-.ui-state-default .ui-icon {
-
-}
-.ui-state-hover .ui-icon,
-.ui-state-focus .ui-icon {
-
-}
-.ui-state-active .ui-icon {
-
-}
-.ui-state-highlight .ui-icon {
-
-}
-.ui-state-error .ui-icon,
-.ui-state-error-text .ui-icon {
-
 }
 
 /* positioning */
@@ -1216,14 +1192,14 @@ body .ui-tooltip {
 
 /* Overlays */
 .ui-widget-overlay {
-	background: #aaaaaa  50% 50% repeat-x;
+	background: #aaaaaa 50% 50% repeat-x;
 	opacity: .3;
 	filter: Alpha(Opacity=30); /* support: IE8 */
 }
 .ui-widget-shadow {
 	margin: -8px 0 0 -8px;
 	padding: 8px;
-	background: #aaaaaa  50% 50% repeat-x;
+	background: #aaaaaa 50% 50% repeat-x;
 	opacity: .3;
 	filter: Alpha(Opacity=30); /* support: IE8 */
 	border-radius: 8px;

@@ -10,11 +10,15 @@ import {AuthGuard} from "./services/auth.guard";
 import {DataTableModule} from "angular2-datatable";
 import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 import {ModalModule} from "angular2-modal/esm/index";
+import {TabViewComponent} from "./components/tab-view/tab-view.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
 
 @NgModule({
+  declarations: [
+    TabViewComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -34,6 +38,7 @@ import {ModalModule} from "angular2-modal/esm/index";
     DataTableModule,
     ModalModule,
     DropzoneModule,
+    TabViewComponent
   ]
 })
 export class SharedModule {

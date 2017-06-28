@@ -124,8 +124,6 @@
 	
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-heading .panel-title a{font-size: 15px;}
 	
-	.sectionHedin .dTabs {right: 15px;}
-	
 }
 @media (max-width:991px)
 {	
@@ -238,27 +236,6 @@
 	.dUpldBxRght {width: 100%;padding: 20px 0px;}
 	
 	.dTabs .nav-tabs > li > a {padding: 8px 5px;font-size: 12px;}
-	
-	.lineupHedin h1 {font-size: 20px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap {height: 90px;width: 90px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .teamName {font-size: 14px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime p {font-size: 20px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li {font-size: 14px;line-height: 34px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li span{ margin-right: 15px;}
-	
-	.newsItmBtmRght {padding: 0px 10px;}
-	.newsItmBtm .newsItmBtmLft > div {padding: 0px 10px;}
-	.newsItmBtmLft div .txtWrapper {font-size: 14px;}
-	.newsItmBtmLft3 > div:first-child {margin-right: 15px;}
-	.newsItmBtmRght .txtWrapper {font-size: 14px;}
-	.newsItmBtm .newsItmBtmLft > div{height: 50px;}
-	.newsItmBtmRght{height: 50px;}
-	.newsItm .newsItmTp .newsItmNameWrap{padding: 20px 0px;}
-	.newsItmName .newsImg img{max-width: 60px;}
-	.newsItmName .newsName a{font-size: 16px;}
-	.newsItm .newsItmTp .newsWrap {margin-top: 25px;}
-	.newsItm .newsItmTp .newsWrap h2 a{margin-bottom: 10px;}
-	.newsItm .newsItmTp {padding: 10px; padding-top: 0px;}
 }
 
 @media(max-width:767px)
@@ -473,35 +450,6 @@
 	.pagination {margin: 10px 0px 10px 0px;width: 100%;display: flex;justify-content: center;}
 	.pagination ul li > a{font-size: 12px;padding: 5px 10px;}
 	.dUpldBxLft .dUpldBx p{font-size: 18px;}
-	
-	.lineupHedin{text-align: center;}
-	.sectionHedin .dTabs .nav-tabs{margin: 10px auto 0px;}
-	.sectionHedin .dTabs {right: 0px;position: relative;top: auto;transform: translate(0,0);}
-	.lineupSection .lineupItmWrap .lineupItm{width: 100%; margin-bottom: 20px;}
-	.lineupSection {padding: 20px 0px;}
-	.sectionHedin {padding: 8px 0px;}
-	.lineupHedin h1 {font-size: 16px;}
-	header .bottomHeader .rightNav > ul > .myAcntBtn > a {padding: 7px 28px 6px 10px;}
-	
-	.newsSection{padding: 15px 0px;}
-	.newsSection .dTabs .nav-tabs{margin: 0 auto;width: auto;}
-	.newsItm .newsItmBtm{flex-flow: column wrap;}
-	.newsItmBtm .newsItmBtmLft{width: 100%;}
-	.newsItmBtm .newsItmBtmLft > div{height: 30px;width: 100%; justify-content: center; border-right: 0px; border-bottom: 1px solid #FFF;}
-	.newsItmBtmRght{height: 30px; width: 100%;justify-content: center;}
-	.newsItmName .newsImg img {max-width: 40px;}
-	.newsItmName .newsName a{font-size: 13px;}
-	.newsItmNameWrap .newsItmDate p {   font-size: 12px;}
-	.newsItm .newsItmTp .newsItmNameWrap {padding: 10px 0px;}
-	.newsItm .newsItmTp .newsWrap h2 a{font-size: 14px; line-height: 20px;margin-bottom: 5px;}
-	.newsItm .newsItmTp .newsWrap {margin-top: 10px;}
-	.newsItm .newsItmTp .newsWrap p {font-size: 12px;line-height: 24px;}
-	.newsItm .newsItmTp .newsWrap i {font-size: 13px;line-height: 24px;}
-	.newsItmBtmLft div .txtWrapper {font-size: 13px;}
-	.newsItmBtmRght .txtWrapper {font-size: 13px;}
-	.newsSection .pagination {margin-top: 20px;}
-	.myAcntBtn .dropdown-menu li a{font-size: 13px;}
-	.myAcntBtn .dropdown-menu {top: 41px;}
 }
 
 @media(max-width:679px)
@@ -618,17 +566,6 @@
 	.dTabs .nav-tabs {display: flex;flex-flow: row wrap;justify-content: center;}
 	.dTabs .nav-tabs > li {margin-bottom: 3px;}
 	
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap{width: 70px; height: 70px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap img {width: auto;max-width: 45px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime p {font-size: 15px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .teamName {font-size: 12px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li span {margin-right: 5px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName {padding: 10px 10px 10px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName {padding: 10px 10px 0px;}
-	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li {font-size: 13px;line-height: 28px;}
-	.sectionHedin .dTabs .nav-tabs {margin: 5px auto 0px;}
-	.myAcntBtn .dropdown-menu {top: 36px;}
-	.sectionHedin .dTabs .nav-tabs > li > a {padding: 6px 4px; font-size: 11px;}
 }
 @media(max-width:359px)
 {

@@ -12,7 +12,6 @@ import {UserDashboardServices} from "./services/user-dashboard.service";
 import {FilterService} from "./services/filter.service";
 import {OverviewlistComponent} from "./components/overview/overview-list/overview-list.component";
 import {AuthService} from "../shared/services/auth.service";
-import {TabViewComponent} from "./components/common/tab-view/tab-view.component";
 import {CohortComponent} from './components/cohort/cohort.component';
 import {GraphComponent} from './components/graph/graph.component';
 import {CohortListComponent} from './components/cohort/cohort-list/cohort-list.component';
@@ -48,7 +47,6 @@ import {SettingsComponent} from "./components/settings/settings.component";
     FilterComponent,
     AppliedFiltersComponent,
     OverviewlistComponent,
-    TabViewComponent,
     OverviewlistComponent,
     CohortComponent,
     CohortListComponent,

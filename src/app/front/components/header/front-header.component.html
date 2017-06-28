@@ -38,13 +38,16 @@
               <span><img src="../../../../assets/images/close_icn.png" alt="" class="img-responsive"/></span>
             </div>
             <ul>
-              <li routerLinkActive="active" routerLink="" [routerLinkActiveOptions]="{exact: true}"><a>Home<span
-                class="sr-only">(current)</span></a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="">Home<span class="sr-only">(current)</span></a>
+              </li>
               <li><a>Forums</a></li>
               <li><a>Products</a></li>
               <li><a>Articles</a></li>
               <li><a>Marketplace</a></li>
-              <li><a>Player News</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/news">Player News</a>
+              </li>
               <li><a>Podcasts</a></li>
               <li><a>Lineups</a></li>
             </ul>
