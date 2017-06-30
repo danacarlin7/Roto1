@@ -28,7 +28,7 @@ export class NewsService {
   }
 
   retrieveNews(sportType:string, timePeriod:string = 'cyear'):Observable<any> {
-    return this.http.get(environment.api_end_point + 'api/fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());

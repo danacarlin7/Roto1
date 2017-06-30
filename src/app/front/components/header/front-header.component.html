@@ -44,7 +44,9 @@
               <li><a>Forums</a></li>
               <li><a>Products</a></li>
               <li><a>Articles</a></li>
-              <li><a>Marketplace</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/test">Marketplace</a>
+              </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="/news">Player News</a>
               </li>

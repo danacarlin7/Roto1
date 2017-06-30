@@ -10,6 +10,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {NewsService} from "./services/news.service";
 import {NewsComponent} from "./components/news/news.component";
+import {TestComponent} from "./components/test/test.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -26,6 +27,7 @@ import {NewsComponent} from "./components/news/news.component";
     FrontHomeComponent,
     LoginComponent,
     SignUpComponent,
+    TestComponent,
     NewsComponent
   ],
   exports: [
