@@ -8,7 +8,7 @@ import {Observable} from "rxjs/Rx";
  */
 
 @Injectable()
-export class NewsService {
+export class FrontService {
   constructor(private http:Http, private authService:AuthService) {
 
   }
@@ -29,6 +29,16 @@ export class NewsService {
 
   retrieveNews(sportType:string, timePeriod:string = 'cyear'):Observable<any> {
     return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
+  retrieveDailyLineups(sportType:string, timePeriod:string = 'cyear'):Observable<any> {
+    return this.http.get(environment.api_end_point + 'fetchLineup?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());

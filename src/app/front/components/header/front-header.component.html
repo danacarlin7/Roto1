@@ -43,7 +43,9 @@
               </li>
               <li><a>Forums</a></li>
               <li><a>Products</a></li>
-              <li><a>Articles</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/articles">Articles</a>
+              </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="/test">Marketplace</a>
               </li>
@@ -51,7 +53,9 @@
                 <a routerLink="/news">Player News</a>
               </li>
               <li><a>Podcasts</a></li>
-              <li><a>Lineups</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/lineups">Lineups</a>
+              </li>
             </ul>
           </div>
           <div class="rightNav">

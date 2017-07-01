@@ -1,0 +1,136 @@
+/* 
+    Created on : 26-Jun-2017, 02:35:24
+    Author     : Nihad
+*/
+
+@media (max-width:767px)
+{
+    body {
+
+    }
+
+    .table-container.table-responsive {
+        width: auto ;
+    }
+
+    /*Navigation Bar*/
+    .navbar-first ul {
+        text-align: center;
+    }
+    .navbar-first .navbar-nav>li {
+        display: inline-block ;    
+    }
+
+    .navbar-first .navbar-nav>li>a {
+        font-size: 11px;
+        padding: 1px 7px;
+        line-height: 15px;
+    }
+
+    .navbar-opp .navbar-brand {
+        height: auto ;
+        padding: 10px 10px;
+    }
+
+    .navbar-toggle {
+        margin-top: 3px;    
+    }
+
+    .navbar-toggle img {
+        max-width: 30px ;
+    }
+
+    /*
+    Content
+    */
+    .content-title {
+        text-align: center ;
+        margin-bottom: 20px ;
+    }
+
+    .title-container .col-border-b {
+        border-bottom: 1px solid #eeeff0;
+        margin-bottom: 7px; 
+    }
+    .title-container .btn {
+        width: 100% ;
+        margin-bottom: 7px;
+    }
+
+    .no-padding-right {
+        padding-right: 15px ;
+    }
+
+    .table-filtes-container input, .table-filtes-container select {
+        margin-bottom: 7px; 
+    }
+
+
+    /*
+    Footer
+    */
+    footer>.container {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    footer h3 {
+        font-size: 16px;
+        margin-bottom: 10px ;
+    }
+
+    footer p {
+        font-size: 13px;
+        line-height: 21px;
+        margin-bottom: 20px;
+    }
+
+    footer a.gray-yellow {
+        font-size: 13px;
+        line-height: 24px ;
+    }
+
+    .footer-title {
+        font-size: 16px ;
+        margin-bottom: 10px ;
+    }
+    .footer-title:after {
+        content: none ;
+    }
+
+    footer a.img-btn>img {
+        max-width: 28px;
+    }
+    footer>.footer-bottom>.container {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .footer-bottom p {
+        text-align: center !important ;
+        font-size: 12px;
+        line-height: 21px;
+    }
+}
+
+@media (max-width:1200px)
+{  
+    
+    .navbar-nav>li>a {
+        font-size: 12px ;
+    }
+    
+    .content-title {
+        margin-bottom: 20px;
+    }
+    .navbar-nav>li>a.btn-search {
+            padding: 6px 10px;
+    }
+    .navbar-nav>li.dropdown>a {
+            padding: 8px 13px;
+    }
+    
+}
+
+@media (min-width: 767px) and (max-width:1200px) {
+    
+}

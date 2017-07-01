@@ -1,0 +1,99 @@
+<section class="sectionHedin">
+  <div class="container-fluid ">
+    <div class="common-loader" *ngIf="isLoading">
+      <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
+        <div class="lineupHedin">
+          <h1>Daily Lineups for June 19, 2017</h1>
+        </div>
+        <div class="dTabs">
+          <!-- Nav tabs -->
+          <rp-tab-view [tabs]="lineupTabs"
+                       [activeTab]="activeTab"
+                       (tabChanged)="onLineupTabChanged($event)"></rp-tab-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="lineupSection">
+  <div class="container">
+    <div class="row lineupWrapper">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="dTabs">
+
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="DLineup">
+
+              <div class="lineupItmWrap">
+                <div class="lineupItm">
+                  <div class="lineupTeamName">
+                    <div class="lineUpTeamNameWraper">
+                      <div class="lineUpTeamNameWrap">
+                        <img src="../../../../assets/images/team_logo.png" alt="" class="img-responsive"/>
+                      </div>
+                      <p class="teamName">Cleveland Browns</p>
+                    </div>
+                    <div class="lineUpTeamNameWraper">
+                      <div class="lineUpTeamNameWrap">
+                        <img src="../../../../assets/images/no_img.png" alt="" class="img-responsive"/>
+                      </div>
+                      <p class="teamName">Cleveland Browns</p>
+                    </div>
+                    <div class="lineupMatchTime">
+                      <p>7:05 PM</p>
+                    </div>
+                  </div>
+                  <div class="lineupPlayerName">
+                    <ul class="lineupPlayerWrap">
+                      <li><span>RF</span>Shin-Soo Choo</li>
+                      <li><span>SS</span>Elvis Andrus</li>
+                      <li><span>LF</span>Nomar Mazara</li>
+                      <li><span>DH</span>Adrian Beltre</li>
+                      <li><span>2B</span>Rougned Odor</li>
+                      <li><span>C</span>Jonathan Lucroy</li>
+                      <li><span>1B</span>Mike Napoli</li>
+                      <li><span>3B</span>Joey Gallo</li>
+                      <li><span>CF</span>Delino DeShields</li>
+                    </ul>
+                    <ul class="lineupPlayerWrap">
+                      <li><span>CF</span>Jose Bautista</li>
+                      <li><span>3B</span>Dwight Smith</li>
+                      <li><span>1B</span>Josh Donaldson</li>
+                      <li><span>DH</span>Justin Smoak</li>
+                      <li><span>LF</span>Kendrys Morales</li>
+                      <li><span>LF</span>Steve Pearce</li>
+                      <li><span>SS</span>Ryan Goins</li>
+                      <li><span>2B</span>Darwin Barney</li>
+                      <li><span>C</span>Luke Maile</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="pagination">
+                 <ul>
+                   <li><a href="javascript:void(0)"><span aria-hidden="true">&laquo;</span></a></li>
+                   <li class="active"><a href="javascript:void(0)">1</a></li>
+                   <li><a href="javascript:void(0)">2</a></li>
+                   <li><a href="javascript:void(0)">3</a></li>
+                   <li><a href="javascript:void(0)">...</a></li>
+                   <li><a href="javascript:void(0)">29</a></li>
+                   <li><a href="javascript:void(0)">30</a></li>
+                   <li><a href="javascript:void(0)"><span aria-hidden="true">&raquo;</span></a></li>
+                 </ul>
+               </div>-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

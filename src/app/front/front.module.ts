@@ -8,9 +8,11 @@ import {FrontHeaderComponent} from "./components/header/front-header.component";
 import {FrontHomeComponent} from "./components/home/front-home.component";
 import {LoginComponent} from "./components/login/login.component";
 import {SignUpComponent} from "./components/sign-up/sign-up.component";
-import {NewsService} from "./services/news.service";
+import {FrontService} from "./services/front.service";
 import {NewsComponent} from "./components/news/news.component";
 import {TestComponent} from "./components/test/test.component";
+import {ArticlesComponent} from "./components/articles/articles.component";
+import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -28,12 +30,14 @@ import {TestComponent} from "./components/test/test.component";
     LoginComponent,
     SignUpComponent,
     TestComponent,
-    NewsComponent
+    NewsComponent,
+    ArticlesComponent,
+    DailyLineupComponent
   ],
   exports: [
     FrontMainComponent
   ],
-  providers: [NewsService]
+  providers: [FrontService]
 })
 export class FrontModule {
 

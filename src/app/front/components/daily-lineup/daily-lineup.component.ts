@@ -2,27 +2,25 @@ import {Component} from "@angular/core";
 import {NewsTabs, NewsTabConstants} from "../../constants/menu.constants";
 import {Router, ActivatedRoute} from "@angular/router";
 import {FrontService} from "../../services/front.service";
-import {News} from "../../models/news.model";
 /**
- * Created by Hiren on 28-06-2017.
+ * Created by Hiren on 01-07-2017.
  */
 
 @Component({
-  selector: 'rp-news',
-  templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  selector: 'rp-daily-lineup',
+  templateUrl: './daily-lineup.component.html',
+  styleUrls: ['./daily-lineup.component.css']
 })
-export class NewsComponent {
+export class DailyLineupComponent {
+  lineupTabs = NewsTabs;
+  lineupTabConstants = NewsTabConstants;
 
-  newsTabs = NewsTabs;
-  newsTabConstants = NewsTabConstants;
+  activeTab:string = this.lineupTabConstants.NBA;
 
-  activeTab:string = this.newsTabConstants.NBA;
-
-  newsRecords:News[] = [];
+  lineupRecords:any[] = [];
   isLoading:boolean;
 
-  constructor(private router:Router, private activeRoute:ActivatedRoute, private newsService:FrontService) {
+  constructor(private router:Router, private activeRoute:ActivatedRoute, private frontService:FrontService) {
   }
 
   ngOnInit() {
@@ -33,27 +31,26 @@ export class NewsComponent {
           this.activeTab = params['tab'];
         }
         else {
-          this.router.navigate(['/news'], {queryParams: {tab: this.activeTab}})
+          this.router.navigate(['/lineups'], {queryParams: {tab: this.activeTab}})
         }
       }
     )
   }
 
-  onNewsTabChanged(tabName:{value:string,label:string}) {
+  onLineupTabChanged(tabName:{value:string,label:string}) {
     this.activeTab = tabName.value;
-    this.router.navigate(['/news'], {queryParams: {tab: tabName.value}})
+    this.router.navigate(['/lineups'], {queryParams: {tab: tabName.value}})
   }
 
 
   getData(tabName:string) {
     this.isLoading = true;
-    this.newsService.retrieveNews(tabName)
+    this.frontService.retrieveDailyLineups(tabName)
       .subscribe(
         response => {
           if (response.statusCode == 200) {
             let data:Array<any> = response.data;
-            this.newsRecords = data.map(currData => currData['news'][0]);
-            console.log("records => ", this.newsRecords);
+            console.log("lineup records => ", data);
           } else {
             console.log('response error => ', response);
           }
@@ -65,5 +62,4 @@ export class NewsComponent {
         }
       )
   }
-
 }
