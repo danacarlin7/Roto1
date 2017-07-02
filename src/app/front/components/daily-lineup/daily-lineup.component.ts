@@ -50,7 +50,7 @@ export class DailyLineupComponent {
         response => {
           if (response.statusCode == 200) {
             let data:Array<any> = response.data;
-            console.log("lineup records => ", data);
+            console.log("lineup records data => ", data);
           } else {
             console.log('response error => ', response);
           }

@@ -16,7 +16,7 @@ export interface Lineup {
   team_name:string;
   team_nickname:string;
   team_players:any[];
-  team_lineups:any[];
+  team_lineups:TeamLineup[];
   updated_at:Date;
   created_at:Date;
   __v:number;
@@ -24,3 +24,21 @@ export interface Lineup {
   team_wikipedia_word_mark_url:string;
   team_city:string;
 }
+
+export interface TeamLineup {
+  lineup_data:LineupData[];
+  lineup_no:number;
+  _id:string;
+}
+
+export interface LineupData {
+  _id:string;
+  player_fantasy_data_id?:any;
+  player_position:string;
+  player_last_name:string;
+  player_first_name:string;
+  player_sports_data_id:string;
+  player_stats_global_id:number;
+  player_id:number;
+}
+

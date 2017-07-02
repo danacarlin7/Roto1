@@ -5,7 +5,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
           <nav class="topNavbar">
             <ul class="pull-right">
-              <li><a href="#">Lineup Optimizer</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a routerLink="/lineup-optimizer">Lineup Optimizer</a>
+              </li>
               <li><a href="#">Excel Tool<span class="sr-only">(current)</span></a></li>
               <li><a href="#">Extensions</a></li>
               <li><a href="#">Contest Analyzer</a></li>
@@ -43,13 +45,13 @@
               </li>
               <li><a>Forums</a></li>
               <li><a>Products</a></li>
-              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/articles">Articles</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="/test">Marketplace</a>
               </li>
-              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/news">Player News</a>
               </li>
               <li><a>Podcasts</a></li>

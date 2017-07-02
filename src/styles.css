@@ -64,3 +64,15 @@
   padding: 5px;
   margin: 5px 0;
 }
+
+.ngx-pagination .current {
+  color: #fff !important;
+  padding: 6px 12px !important;
+  background: #f8c534 !important;
+}
+
+.ngx-pagination .disabled {
+  color: #cacaca !important;
+  cursor: default !important;
+  padding: 6px 12px !important;
+}

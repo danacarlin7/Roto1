@@ -11,6 +11,7 @@ import {DataTableModule} from "angular2-datatable";
 import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 import {ModalModule} from "angular2-modal/esm/index";
 import {TabViewComponent} from "./components/tab-view/tab-view.component";
+import {NgxPaginationModule} from "ngx-pagination";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -28,6 +29,7 @@ import {TabViewComponent} from "./components/tab-view/tab-view.component";
     DataTableModule,
     ModalModule.forRoot(),
     DropzoneModule.forChild(),
+    NgxPaginationModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +40,8 @@ import {TabViewComponent} from "./components/tab-view/tab-view.component";
     DataTableModule,
     ModalModule,
     DropzoneModule,
-    TabViewComponent
+    TabViewComponent,
+    NgxPaginationModule
   ]
 })
 export class SharedModule {

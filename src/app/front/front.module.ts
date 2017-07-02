@@ -13,6 +13,7 @@ import {NewsComponent} from "./components/news/news.component";
 import {TestComponent} from "./components/test/test.component";
 import {ArticlesComponent} from "./components/articles/articles.component";
 import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.component";
+import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-optimizer.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -32,7 +33,8 @@ import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.compo
     TestComponent,
     NewsComponent,
     ArticlesComponent,
-    DailyLineupComponent
+    DailyLineupComponent,
+    LineupOptimizerComponent
   ],
   exports: [
     FrontMainComponent

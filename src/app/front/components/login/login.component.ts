@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 import {environment} from "../../../../environments/environment";
 /**
  * Created by Hiren on 07-06-2017.
@@ -15,9 +15,14 @@ import {environment} from "../../../../environments/environment";
 export class LoginComponent {
 
   loginForm:FormGroup;
+  redirectUrl:String;
 
-  constructor(private authService:AuthService, private router:Router) {
-
+  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
+    this.activatedRoute.queryParams.subscribe(
+      (param:Params) => {
+        this.redirectUrl = param['redirect'];
+      }
+    )
   }
 
   ngOnInit() {
@@ -49,8 +54,12 @@ export class LoginComponent {
           }
           environment.token = response.data.token;
           environment.role = response.data.role;
-
-          if (response.data.role == 'admin') {
+          console.log('this.redirectUrl => ', this.redirectUrl);
+          if (this.redirectUrl && this.redirectUrl.length) {
+            this.router.navigate([this.redirectUrl]);
+            this.redirectUrl = ""
+          }
+          else if (response.data.role == 'admin') {
             this.router.navigate(['/admin']);
           } else if (response.data.role == 'user') {
             this.router.navigate(['/user']);
