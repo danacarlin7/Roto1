@@ -14,4 +14,5 @@ export interface Player{
   player_link: string;
   injury_status: boolean;
   injury: Injury;
+  player_image:string;
 }

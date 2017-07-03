@@ -32,46 +32,36 @@
             <div role="tabpanel" class="tab-pane active" id="DLineup">
 
               <div class="lineupItmWrap">
-                <div class="lineupItm">
+                <div class="lineupItm" *ngFor="let currLineup of lineupRecords">
                   <div class="lineupTeamName">
                     <div class="lineUpTeamNameWraper">
-                      <div class="lineUpTeamNameWrap">
-                        <img src="../../../../assets/images/team_logo.png" alt="" class="img-responsive"/>
+                      <div class="lineUpTeamNameWrap" *ngIf="currLineup.first_team.logo_url">
+                        <img [attr.src]="currLineup.first_team.logo_url" alt="" class="img-responsive"/>
                       </div>
-                      <p class="teamName">Cleveland Browns</p>
+                      <p class="teamName">{{currLineup.first_team.name}}</p>
                     </div>
                     <div class="lineUpTeamNameWraper">
-                      <div class="lineUpTeamNameWrap">
-                        <img src="../../../../assets/images/no_img.png" alt="" class="img-responsive"/>
+                      <div class="lineUpTeamNameWrap" *ngIf="currLineup.second_team.logo_url">
+                        <img [attr.src]="currLineup.second_team.logo_url" alt="" class="img-responsive"/>
                       </div>
-                      <p class="teamName">Cleveland Browns</p>
+                      <p class="teamName">{{currLineup.second_team.name}}</p>
                     </div>
                     <div class="lineupMatchTime">
-                      <p>7:05 PM</p>
+                      <p>{{currLineup.game_time | date:'h:m a'}}</p>
                     </div>
                   </div>
                   <div class="lineupPlayerName">
                     <ul class="lineupPlayerWrap">
-                      <li><span>RF</span>Shin-Soo Choo</li>
-                      <li><span>SS</span>Elvis Andrus</li>
-                      <li><span>LF</span>Nomar Mazara</li>
-                      <li><span>DH</span>Adrian Beltre</li>
-                      <li><span>2B</span>Rougned Odor</li>
-                      <li><span>C</span>Jonathan Lucroy</li>
-                      <li><span>1B</span>Mike Napoli</li>
-                      <li><span>3B</span>Joey Gallo</li>
-                      <li><span>CF</span>Delino DeShields</li>
+                      <li *ngFor="let currPlayer of currLineup.first_team.lineup_players">
+                        <span>{{currPlayer.player_position}}</span>
+                        {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                      </li>
                     </ul>
                     <ul class="lineupPlayerWrap">
-                      <li><span>CF</span>Jose Bautista</li>
-                      <li><span>3B</span>Dwight Smith</li>
-                      <li><span>1B</span>Josh Donaldson</li>
-                      <li><span>DH</span>Justin Smoak</li>
-                      <li><span>LF</span>Kendrys Morales</li>
-                      <li><span>LF</span>Steve Pearce</li>
-                      <li><span>SS</span>Ryan Goins</li>
-                      <li><span>2B</span>Darwin Barney</li>
-                      <li><span>C</span>Luke Maile</li>
+                      <li *ngFor="let currPlayer of currLineup.second_team.lineup_players">
+                        <span>{{currPlayer.player_position}}</span>
+                        {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                      </li>
                     </ul>
                   </div>
                 </div>

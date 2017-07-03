@@ -2,6 +2,18 @@
  * Created by Hiren on 01-07-2017.
  */
 
+export interface LineupRecord{
+  game_time:Date;
+  first_team:TeamInfo;
+  second_team:TeamInfo;
+}
+
+export interface TeamInfo{
+  name:string;
+  logo_url:string;
+  lineup_players:LineupData[];
+}
+
 export interface Lineup {
   _id:string;
   game_date:Date;

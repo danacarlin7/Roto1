@@ -76,3 +76,7 @@
   cursor: default !important;
   padding: 6px 12px !important;
 }
+
+header .topHeader .topNavbar > ul > li.active > a {
+  color: #f8c534 !important;
+}
