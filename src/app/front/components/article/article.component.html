@@ -1,0 +1,14 @@
+<section *ngIf="article">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 article-wrapper">
+				<h1 class='brand'>DFSportsGod.</h1>
+				<div class="article">
+					<h3 class='title'>{{article.title.rendered}}</h3>
+					<br /><br />
+					<div class="article_content" [innerHTML]="article.content.rendered"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

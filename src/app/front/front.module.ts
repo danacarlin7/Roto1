@@ -14,6 +14,9 @@ import {TestComponent} from "./components/test/test.component";
 import {ArticlesComponent} from "./components/articles/articles.component";
 import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.component";
 import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-optimizer.component";
+import {ArticleService} from "./services/article.service";
+import {ArticleComponent} from "./components/article/article.component";
+import {InfiniteScrollModule} from "angular2-infinite-scroll/angular2-infinite-scroll";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -21,6 +24,7 @@ import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-opt
 @NgModule({
   imports: [
     FrontRoutingModule,
+    InfiniteScrollModule,
     SharedModule
   ],
   declarations: [
@@ -34,12 +38,14 @@ import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-opt
     NewsComponent,
     ArticlesComponent,
     DailyLineupComponent,
-    LineupOptimizerComponent
+    LineupOptimizerComponent,
+    ArticleComponent,
+    ArticlesComponent
   ],
   exports: [
     FrontMainComponent
   ],
-  providers: [FrontService]
+  providers: [FrontService,ArticleService]
 })
 export class FrontModule {
 
