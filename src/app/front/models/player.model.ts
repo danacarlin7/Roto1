@@ -16,3 +16,33 @@ export interface Player{
   injury: Injury;
   player_image:string;
 }
+
+
+export interface OptimizerPlayer{
+  _id: string;
+  TeamID: number;
+  PlayerID: number;
+  Name: string;
+  Team: string;
+  Position: string;
+  PositionCategory: string;
+  FanDuelSalary?: number;
+  DraftKingsSalary?: number;
+  FantasyDataSalary?: number;
+  InjuryStatus: string;
+  InjuryBodyPart: string;
+  InjuryNotes: string;
+  OpponentID: number;
+  Opponent: string;
+  FantasyPointsFanDuel: number;
+  FantasyPointsDraftKings: number;
+  FanduelValue: string;
+  DraftKingsValue: string;
+  FirstName: string;
+  LastName: string;
+  vsPitcher: string;
+  OverUnder: string;
+  Line: string;
+  Runs: string;
+  BattingOrder?: number;
+}

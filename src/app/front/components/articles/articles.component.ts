@@ -70,7 +70,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   private getIndexOfCategory = (catid:number) => {
-    return this.categories.findIndex((category) => {
+    return this.categories.findIndex(category => {
       return category.id === catid;
     });
   };

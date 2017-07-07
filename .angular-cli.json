@@ -27,8 +27,7 @@
         "assets/css/owl.carousel.min.css",
         "assets/css/jquery.mCustomScrollbar.css",
         "assets/css/datepic.css",
-        "assets/css/main.css",
-        "assets/css/main-responsive.css",
+        "assets/css/bootstrap-slider.min.css",
         "styles.css"
       ],
       "scripts": [
@@ -40,6 +39,7 @@
         "assets/js/jquery.mCustomScrollbar.concat.min.js",
         "assets/js/datepicker.js",
         "assets/js/function.js",
+        "assets/js/bootstrap-slider.min.js",
         "assets/js/main.js"
       ],
       "environmentSource": "environments/environment.ts",

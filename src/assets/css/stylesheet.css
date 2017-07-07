@@ -25,6 +25,7 @@ section{padding: 100px 0px;}
 .sidePad{padding: 0px 35px;}
 .icnWrapper{display: flex;align-items: center;margin-right: 10%;}
 .icnWrapperS{margin-right: 10px;}
+.icnWrapperL{margin-right: 12px;}
 .mainColor{color: #f9d50d;}
 .mainHeadingBlack{font-size: 38px;line-height: 54px;color: #000;font-family: 'Roboto Condensed', sans-serif;font-weight: 700;margin: 0px;}
 .mainPara{font-size: 14px;font-style: italic;color: #636363;font-weight: 400;line-height: 23px;}
@@ -83,6 +84,7 @@ section{padding: 100px 0px;}
 	header .bottomHeader .rightNav > ul > li:first-child{margin-left: 0px;}
 	header .bottomHeader .rightNav > ul > li > a{border: 1px solid #eeeeee;border-radius: 5px;font-size: 15px;color: #FFF;line-height: 23px;width: 100px;display: block;text-align: center;padding: 6px;text-decoration: none;}
 	header .bottomHeader .rightNav > ul > .myAcntBtn  > a{background: #f8c534;border: 1px solid #f8c534;color: #000 !important;padding: 6px 50px 6px 10px;width: auto;background-image: url('../images/select_arowblck.png');background-repeat: no-repeat;background-position: calc(100% - 10px);background-size: 11px;}
+	header .bottomHeader .rightNav > ul > .myAcntBtn  > a:hover, header .bottomHeader .rightNav > ul > .myAcntBtn  > a:focus{background: #f8c534;border: 1px solid #f8c534;color: #000 !important;;padding: 6px 50px 6px 10px;width: auto;background-image: url('../images/select_arowblck.png');background-repeat: no-repeat;background-position: calc(100% - 10px);background-size: 11px;}
 	header .bottomHeader .rightNav > ul > .signUpBtn a{ background: #f8c534; color: #000 !important; border: 1px solid #f8c534 !important;}
 	header .bottomHeader .rightNav > ul > .searchBtn a{width: auto !important; padding: 6px 12px !important;}
 	header .bottomHeader .navbar-default .navbar-collapse .navbar-nav > li{margin-left: 30px;}
@@ -298,11 +300,17 @@ section{padding: 100px 0px;}
 	.loginDetails .formWrapper form input[type="button"]:hover, .loginDetails .formWrapper form input[type="submit"]:hover{ background-color: #f8c534;color: #000; border: 1px solid #f8c534;}
 	.loginDetails .formWrapper .otherSigninPara{font-size: 18px;line-height: 22px;margin-top: 30px;color: #000;text-align: center;}
 	.loginDetails .formWrapper .otherSigninPara a:hover{text-decoration: underline !important;}
-	.loginDetails .formWrapper .loginSocialIcns{display: flex;flex-flow: row wrap;justify-content: center;align-items: center;margin-top: 15px;}
+	.loginDetails .formWrapper .loginSocialIcns{display: flex;flex-flow: row wrap;justify-content: space-between;align-items: center;margin-top: 15px;}
 	.loginDetails .formWrapper .loginSocialIcns img{max-height: 44px; width: auto;}
 	
-	.loginDetails .formWrapper .loginSocialIcns a{margin-right: 20px;}
+	.loginDetails .formWrapper .loginSocialIcns a{margin-right: 2.7%;display: flex;align-items: center;padding: 10px 20px;height: 54px;width: 31.5%;justify-content: center; border-radius: 5px;font-size: 16px;line-height: 33px;color: #FFF;}
 	.loginDetails .formWrapper .loginSocialIcns a:last-child{margin-right: 0px;}
+	.loginDetails .formWrapper .loginSocialIcns .lgTwtr{background:#40bef8;}
+	.loginDetails .formWrapper .loginSocialIcns .lgTwtr:hover{ background: #0aaaf4;}
+	.loginDetails .formWrapper .loginSocialIcns .lgGml{ background: #eb5e4c;}
+	.loginDetails .formWrapper .loginSocialIcns .lgGml:hover{ background: #f94832;}
+	.loginDetails .formWrapper .loginSocialIcns .lgFb{ background: #1e82e8;}
+	.loginDetails .formWrapper .loginSocialIcns .lgFb:hover{ background: #0567cb;}
 	.loginDetails .formWrapper .regstrNmPara{color: #7e7e7e;font-size: 14px;line-height: 20px;padding: 0px;text-align: center;margin-top: 40px;}
 	.loginDetails .formWrapper .regstrNmPara a:hover{text-decoration: underline !important;}
 	
@@ -582,17 +590,17 @@ section{padding: 100px 0px;}
 	/* Pagination CSS Ends */
 	
 	/* LineUp CSS Starts*/
-		.myAcntBtn .dropdown-menu{top: 44px;left: auto; right: 0px;}
-		.myAcntBtn .dropdown-menu:after{content: "";position: absolute;right: 2px;bottom: 100%;width: 0;height: 0;border-style: solid;border-width: 0 10px 10px 10px;border-color: transparent transparent #FFF transparent;z-index: 9998;}
+		.myAcntBtn .dropdown-menu{top: 44px;left: auto; right: 0px;border-top-right-radius: 0px;}
+		.myAcntBtn .dropdown-menu:after{content: "";position: absolute;right: 0px;bottom: 99%;width: 0;height: 0;border-style: solid;border-width: 0 10px 10px 10px;border-color: transparent transparent #FFF transparent;z-index: 9998;}
 		.myAcntBtn .dropdown-menu li{border-bottom: 1px solid #eaeaea;}
 		.myAcntBtn .dropdown-menu li:last-child{border-bottom: 0px;}
 		.myAcntBtn .dropdown-menu li a{line-height: 22px;font-family: 'Open Sans';}
 	
-		.sectionHedin{ background: #FFF;padding: 17px 0px;}
+		.sectionHedin{ background: #FFF;padding: 17px 0px;box-shadow: 0px 2px 3px rgba(0,0,0,0.05);position: relative;}
 		.sectionHedin .dTabs{position: absolute;top: 50%;transform: translate(0,-50%);right: 35px;}
 		
 		.sectionHedin .dTabs .nav-tabs{margin-bottom: 0px;}
-		.lineupHedin h1{margin: 0px;font-size: 28px;line-height: 30px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;}
+		.lineupHedin h1{margin: 0px;font-size: 28px;line-height: 30px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;text-transform: uppercase;}
 		.lineupSection{background: #f2f4f8;padding: 40px 0px;}
 		.lineupSection .dTabs .lineupItmWrap{display: flex;flex-flow: row wrap;justify-content: space-between;}
 		.lineupSection .lineupItmWrap .lineupItm{ background: #FFF;box-shadow: 0px 0px 16px rgba(0,0,0,0.14);width: 48%;margin-bottom: 40px;}
@@ -639,19 +647,133 @@ section{padding: 100px 0px;}
 		.newsSection .pagination{ justify-content: center; margin-top: 45px;}
 	/* News Ends &*/
 	
-	/* Previous Courses Starts*/
+	/* MLB Optimizing Starts*/
 		
-	/* Previous Courses Ends*/
+		.mlbBannerSection{background: url("../images/mlb_banner.jpg") no-repeat center center; background-size: cover; padding: 230px 0px 270px;}
+		.mlbBannerHedin{display: flex;justify-content: flex-end;}
+		.mlbBannerHedin h1{margin: 0px;font-size: 33px;line-height: 35px;color: #000;display: flex;flex-flow: column wrap;justify-content: flex-start;font-family: 'Open Sans', sans-serif;font-weight: 400;}	
+		.mlbBannerHedin h1 .mlbBannerBig{font-family: 'Roboto Condensed', sans-serif; font-size: 93px;line-height: 85px;}
+		.mlbTopSection{background: #f2f4f8;}
+		.mlbTopSectionWrap{display: flex;flex-flow: row wrap;justify-content: space-between;align-items: flex-start;}
+		.mlbTopLftHedin{margin: 0px;font-size: 38px;line-height: 40px;font-family: 'Roboto Condensed', sans-serif;font-weight: 600; color: #000;}
+		.mlbTopLftPara{font-size: 22px;line-height: 28px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;margin-top: 20px;}
+		.dwnldBtn{font-size: 18px;line-height: 22px; padding: 10px 20px;background: #f8c534;border: 1px solid #f8c534;border-radius: 4px;margin-top: 25px; color: #000;}
+		.dwnldBtn:hover, .dwnldBtn:focus{background: #000;color: #FFF !important;border: 1px solid #000 !important;}
+		.mlbInfoSection{ background: #FFF;}
+		.mlbInfoTp{background: #ffc524;text-align: center;padding: 30px 0px;}
+		.mlbInfoTp .mlbInfoTpHedin{margin-top: 0px;font-size: 24px;line-height: 25px;background: rgb(255, 197, 36) none repeat scroll 0% 0%;font-family: 'Roboto Condensed', sans-serif;color: #000;}
+		.mlbInfoTp .mlbInfoTpPara{font-size: 18px;line-height: 22px;font-family: 'Open Sans';font-weight: 300;color: #000;padding: 0px;}
+		.mlbInfoMid{display: flex;flex-flow: row wrap;justify-content: space-between;margin-top: 10px;}
+		.mlbInfoMid .mlbInfoMidLft{ background: #f2f2f2; width: 49.5%; padding: 30px;}
+		.mlbInfoMid .mlbInfoMidRght{ background: #f2f2f2; width: 49.5%; padding: 30px;}
+		.mlbInfoMidHedin{margin-top: 0px;font-family: 'Roboto Condensed', sans-serif;font-weight: 600;font-size: 38px;margin-bottom: 15px;}
+		.mlbInfoLst{margin: 0px;list-style-type: numeric;font-family: 'Open Sans';font-weight: 300;margin-left: 20px;}
+		.mlbInfoLst li{font-size: 16px;line-height: 26px; margin-bottom: 10px; color: #3b3b3b;}
+		.mlbInfoLst li:last-child{margin-bottom: 0px;}
+		.mlbInfoBot p{font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f;padding-bottom: 20px;}
+		.mlbInfoBot p:last-child{padding-bottom: 0px;}
+		.mlbInfoBot{margin-top: 35px;}
+		.mlbDescSection{background: #f2f4f8;}
+		.mlbDescSectionWrap{display: flex;flex-flow: row wrap;justify-content: space-between;}
+		.mlbDescSectionWrap .mlbDescItm{width: 49%; background: #FFF; border: 1px solid #e7e7e7;margin-bottom: 30px;}
+		.mlbDescSectionWrap .mlbDescItm:nth-last-child(-n+2){margin-bottom: 0px;}
+		.mlbDescItmTp{padding: 25px 20px 20px;;}
+		.mlbDescItm .mlbDescHedin{font-size: 25px;line-height: 28px;margin-top: 0px;font-weight: 600;margin-bottom: 12px; display: block;}
+		.mlbDescItm .mlbDescHedin:hover, .mlbDescItm .mlbDescHedin:focus{color: #FFC524;}
+		.mlbDescItm .mlbDescPara{font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f; }
+		.mlbDescItm .mlbDescPara:last-child{padding-bottom: 0px;}
+		.mlbDescItm .mlbDescItmTp{min-height: 190px;}
+		.mlbDescLst{list-style-type: initial;font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f;margin-left: 20px;}
+	/* MLB Optimizing Ends*/
 	
+	/* FAQ Starts */
+		.faqSection{background: #f2f4f8;padding: 40px 0px;}
+		.faqSection .panel-group .panel {border-radius: 5px;box-shadow: none;	border-color: #EEEEEE;}	
+		.faqSection .panel-default > .panel-heading {padding: 0;border-radius: 0;color: #212121;background-color: #FAFAFA;border-color: #EEEEEE;}	
+		.faqSection .panel-title {font-size: 14px;}	
+		.faqSection .panel-title > a {display: block;padding: 15px 40px 15px 20px;;text-decoration: none;font-size: 15px;line-height: 23px;background: #f8c534;color: #000;font-family: 'Open Sans';font-weight: 600; position: relative;}
+		.faqSection .more-less {color: #212121; position: absolute; top: 50%; right: 15px; transform: translate(0,-50%);}	
+		.faqSection .panel-default > .panel-heading + .panel-collapse > .panel-body {border-top-color: #EEEEEE;	padding: 15px 20px;box-shadow: 0px 2px 5px rgba(0,0,0,0.1);}
+		.faqSection .panel-default .panel-body p{font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f;}
+		.faqSection .panel-default .panel-body .faqList{list-style-type: none;font-size: 16px;line-height: 34px;font-family: 'Open Sans';font-weight: 300;color: #3b3b3b;}
+		.faqSection .panel-default .panel-body .faqSignUpBtn{display: block;background: #f8c534;color: #000 !important;border: 1px solid #f8c534 !important;border-radius: 5px;
+font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}	
+		.faqSection .panel-default .panel-body .faqSignUpBtn:hover, .faqSection .panel-default .panel-body .faqSignUpBtn:focus{ background: #000; color: #FFF !important; border: 1px solid #000 !important;}
+		.faqSection .panel-group .panel + .panel {margin-top: 20px;}
+	/* FAQ Ends */
 	
-	/* Tab CSS Strats */		
+	/* Glossary Starts */
+	
+		.glossarySection{background: #F2F4F8; padding: 40px 0px;}
+		.glossarySection .mainHeadingBlack {font-size: 24px;}
+		.glossarySection p{font-size: 17px;line-height: 20px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;}
+		.glossarySection p.smlP{font-size: 16px; line-height: 16px;}
+		.glossaryPWrap p{font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #6f6f6f;padding-bottom: 20px;}
+		.glossaryPWrap p strong{color: #000;}
+		.glossaryVideoSection{display: flex;flex-flow: row wrap;justify-content: space-between;margin-top: 25px;}
+		.glossaryVideoSection > div{width: 48%;}
+		.glossaryVideoSection > div iframe{width: 100%; height: 316px;}
+		.glossaryVideoSection > div h4{margin: 0px;font-size: 25px;line-height: 30px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300; margin-bottom: 20px;}
+		.glossaryPWrap{margin-top: 20px;}
 		
-	/* Tab CSS Ends */
+	/* Glossary Ends */
+	
+	/* MarketPlace Starts */
+	
+		.mPlaceSection{background: #F2F4F8;}
+		
+		.mPlaceWrap .mPlaceItm{display: flex;flex-flow: row wrap;justify-content: space-between;align-items: flex-start;background: #FFF;border: 1px solid #dedede;box-shadow: 0px 0px 12px 1px rgba(0,0,0,0.1);border-radius: 5px;margin-bottom: 30px;}
+		.mPlaceWrap .mPlaceItm:last-child{margin-bottom: 0px;}
+		.mPlaceTp{display: flex;flex-flow: row wrap;justify-content: space-between;align-items: flex-start;padding:25px 15px;}
+		.mPlaceImgWrap{width: 24%;border: 1px solid #dadada;}
+		.mPlaceInfoWrap{width: 74%;}
+		.mPlaceInfoWrap .mPlaceHedin{font-size: 25px;line-height: 28px;margin-top: 0px;font-weight: 600;margin-bottom: 12px;display: block;text-transform: uppercase;}
+		.mPlaceInfoWrap .mPlaceHedin:hover{color: #FFC524;}
+		.mPlaceInfoWrap .mPlacePara{font-size: 16px;line-height: 26px;color: #3b3b3b;font-family: 'Roboto', sans-serif;font-weight: 300;margin-top: 15px;}
+		.mPlaceWrtr{font-size: 16px;line-height: 26px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;padding-bottom: 0px;}
+		.mPlaceWrtr a{font-weight: 500;color: #FFC524;}
+		.mPlaceBtnWrap{width: 100%;background: #FFC525;padding: 15px 15px;display: flex;flex-flow: row wrap;justify-content: space-between;align-items: center;}
+		.mPlaceBtnWrap .mPlacePrice{padding: 0px;font-size: 18px;line-height: 28px;color: #FFF;font-weight: 500;text-align: center;}
+		.mPlaceBtnWrap a{padding: 10px 20px;border-radius: 3px;background: #7f7e7e;border: 1px solid #7f7e7e;color: #FFF;font-weight: 500;font-size: 15px;}
+		.mPlaceBtnWrap a:hover{background: #FFF; color: #FFC524; border: 1px solid #FFF;}
+		
+		
+		.mPlaceDSection .mPlaceDWrap{display: flex;flex-flow: row wrap;justify-content: space-between;align-items: flex-start;}
+		.mPlaceDWrap .authorBx{width: 25%;background: #FFF;box-shadow: 0px 0px 5px rgba(0,0,0,0.1);border-radius: 5px;}
+		.mPlaceDWrap .authorBx .authorBxTp{padding: 15px;}
+		.mPlaceDWrap .authorBx img{max-width: 110px;border-radius: 50%;margin: 0 auto;padding: 4px;background: #FFF;box-shadow: 0px 0px 2px rgba(0,0,0,0.1);}
+		.mPlaceDWrap .authorBx .authorName{text-align: center;margin-top: 10px;font-size: 21px;font-family: 'Open Sans';}
+		.mPlaceDWrap .authorBx p{font-size: 14px;line-height: 23px;color: #8f8f8f;font-family: 'Open Sans';padding: 0px;margin-bottom: 8px;text-align: center;}
+		.authorBx .btnWrapper{padding: 15px 0px 0px;border-top: 1px solid #e6e6e6;display: flex;flex-flow: row wrap;justify-content: space-between;background: #Eeeeee;}
+		.authorBx .btnWrapper h4{margin-top: 0px;text-align: center;width: 100%;}
+		.authorBx .btnWrapper > div{width: 50%; padding: 10px 10px;border-right: 1px solid #ddd;border-top: 1px solid #ddd;}
+		.authorBx .btnWrapper > div:last-child{border-right: 0px;}
+		.authorBx .btnWrapper > div a{text-align: center;display: block; color: #f8c534;display: flex;flex-flow: column wrap;font-size: 14px;justify-content: center;align-items: center;height: 100%; font-weight: 600;}
+		
+		.mPlaceDSection .mPlaceInfoWrap .mPlaceHedin {font-size: 19px; margin-bottom: 5px;}
+		.mPlaceDSection .mPlaceInfoWrap .mPlacePara {font-size: 14px;line-height: 24px;margin-top: 10px;padding-bottom: 0px;}
+		.mPlaceDSection .mPlaceWrtr {font-size: 15px;line-height: 22px;}
+		.mPlaceDSection .mPlaceWrap{width: 73%;}
+		.mPlaceDPkgeWrap{width: 100%;background: #FFC525;padding: 15px 15px;}
+		.mPlaceDPkgeWrap h4{font-size: 20px;font-weight: 600;margin-bottom: 20px; color: #FFF;}
+		.pkgeCntnt{ margin-bottom: 10px;}
+		.pkgeCntnt h5{font-size: 18px;line-height: 28px;color: #000;font-weight: 400;padding: 0px;margin-top: 18px; margin-bottom: 0px;}
+		.mPlaceDPkgeWrap .mPlaceWrtr a{color: #FFF;}
+		.pkgePara{font-size: 16px;line-height: 30px;color: #323232;font-weight: 300;padding: 0px;}
+	/* MarketPlace Ends */
+	
+	/* Article Section Starts */
+	
+		.articleSection{padding: 40px 0px;background: #f2f4f8;}
+		.articleSection .mPlaceWrap .mPlaceItm{border-bottom: 2px solid #d4d4d4;}
+		.articleSection .mPlaceWrtr{display: inline-block; margin-right: 20px;}
+		.articleSection .mPlaceWrtr:last-child{margin-right: 0px;}
+		.articleSection .mPlaceWrap{width: 100%;}
+		.articleSection .mPlaceInfoWrap .mPlacePara{padding-bottom: 15px;}
+	
+	/* Article Section Ends */
 	
 /* Dashboard Main Ends */
 
 
-.form-control option {
-	border-right: #ccc solid 1px;
-	/* border-left: #ccc solid 1px; */
-}
+		.form-control option {border-right: #ccc solid 1px;}

@@ -1,178 +1,86 @@
-<section>
-	<div class="article_tabs">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<ul class="tabs-list">
-						<li (click)="onTabChanged('trending')"
-							[class.active]="activeTab == 'trending'">
-							<span>Trending Topics</span>
-						</li><li *ngFor="let category of categories;"
-							(click)="onTabChanged(category)"
-							[class.active]="activeTab == category.id">
-							<span>{{ category.name }}</span>
-						</li>
-					</ul>
-					<ul *ngIf="activeTab=='trending'" class="tabs-list sub-tabs-list">
-						<li *ngFor="let subtab of subTrendingTabs;"
-							(click)="onTabChanged(subtab)"
-							[class.active]="subActiveTab == subtab">
-							<span>{{ subTrendingTabsLabels[subtab] }}</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="article_preview grey_bg">
-		<div class="container">
-			<div class="single-article">
-				<div class="row" *ngIf="activeSingle">
-					<div class="col-sm-12 article-wrapper">
-						<button class="btn btn-danger btn-go-back" (click)="goBackToTab()">Go Back...</button>
-						<div class="clearfix"></div>
-						<h3 class="single-article-title">{{activeSingle.title.rendered}}</h3>
-						<br /><br />
-						<div class="single-article-content" [innerHTML]="activeSingle.content.rendered"></div>
-					</div>
-				</div>
-			</div>
-			<div class="trending-topics" *ngIf="!activeSingle">
-				<div class="row" *ngIf="subActiveTab == 'week'">
-					<div class="col-sm-12" *ngIf="week.length>0">
-						<div *ngFor="let post of week;">
-							<div [innerHtml]="post.content.rendered"></div>
-						</div>
-					</div>
-					<div class="col-sm-12 text-center" *ngIf="week.length == 0">
-						<h3>There is no Article of the Week.</h3>
-					</div>
-				</div>
-				<div class="ap_1" *ngIf="(subActiveTab == 'hot') && hot.length>0">
-					<div class="row">
-						<div class="col-sm-6"><img src="assets/images/article_1.jpg"></div>
-						<div class="col-sm-6">
-							<div class="ap_1_h">
-								<div class="ap_1_h_c" *ngFor="let post of hot;">
-									<div class="f_category_content fullwidth">
-										<h5>{{post.title.rendered}}</h5>
-										<p>{{post.extract}}</p>
-										<button class="btn btn_read btn-primary" (click)="switchToSingle(post)">Read More</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row" *ngIf="(subActiveTab == 'hot') && hot.length==0">
-					<div class="col-sm-12 text-center">
-						<h3>There is no Hot Topics today.</h3>
-					</div>
-				</div>
-				<div class="row" *ngIf="subActiveTab == 'featured'">
-					<div class="col-sm-12">
-						<div class="f_category">
-							<div class="f_category_c" *ngFor="let post of featured">
-								<img alt="Media Placeholder" [ngClass]="{'noImage':!findMedia(post.featured_media)}" src="{{findMedia(post.featured_media)}}" />
-								<div [ngClass]="{'fullwidth':!findMedia(post.featured_media)}" class="f_category_content">
-									<h5>{{post.title.rendered}}</h5>
-									<p>{{post.extract}}</p>
-									<button class="btn btn_read btn-primary" (click)="switchToSingle(post)">Read More</button>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 text-center" *ngIf="featured.length==0">
-						<h3>There is no Featured Articles.</h3>
-					</div>
-				</div>
-				<div class="row" *ngIf="subActiveTab == 'top'">
-					<div class="col-sm-12">
-						<div class="f_category">
-							<div class="f_category_c" *ngFor="let post of top">
-								<img alt="Media Placeholder" [ngClass]="{'noImage':!findMedia(post.featured_media)}" src="{{findMedia(post.featured_media)}}" />
-								<div [ngClass]="{'fullwidth':!findMedia(post.featured_media)}" class="f_category_content">
-									<h5>{{post.title.rendered}}</h5>
-									<p>{{post.extract}}</p>
-									<button class="btn btn_read btn-primary" (click)="switchToSingle(post)">Read More</button>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 text-center" *ngIf="top.length==0">
-						<h3>There is no Top Articles.</h3>
-					</div>
-				</div>
-				<div class="row" *ngIf="subActiveTab == 'recent'">
-					<div class="col-sm-12">
-						<div class="f_category">
-							<div class="f_category_c" *ngFor="let post of recent">
-								<img alt="Media Placeholder" [ngClass]="{'noImage':!findMedia(post.featured_media)}" src="{{findMedia(post.featured_media)}}" />
-								<div [ngClass]="{'fullwidth':!findMedia(post.featured_media)}" class="f_category_content">
-									<h5>{{post.title.rendered}}</h5>
-									<p>{{post.extract}}</p>
-									<button class="btn btn_read btn-primary" (click)="switchToSingle(post)">Read More</button>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 text-center" *ngIf="recent.length==0">
-						<h3>There is no Recent Articles.</h3>
-					</div>
-				</div>
-				<div class="row" *ngIf="subActiveTab == 'newest'">
-					<div class="col-sm-12">
-						<div class="f_category">
-							<div class="f_category_c" *ngFor="let post of newest">
-								<img alt="Media Placeholder" [ngClass]="{'noImage':!findMedia(post.featured_media)}" src="{{findMedia(post.featured_media)}}" />
-								<div [ngClass]="{'fullwidth':!findMedia(post.featured_media)}" class="f_category_content">
-									<h5>{{post.title.rendered}}</h5>
-									<p>{{post.extract}}</p>
-									<button class="btn btn_read btn-primary" (click)="switchToSingle(post)">Read More</button>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 text-center" *ngIf="newest.length==0">
-						<h3>There is no Newest Articles.</h3>
-					</div>
-				</div>
-			</div>
-			<div class="category-list" *ngIf="!activeSingle">
-				<div *ngFor="let category of categories;">
-					<div class="row">
-						<div class="col-sm-12" *ngIf="(activeTab==category.id) && hasPosts(category.id)" id="cat-{{category.id}}" >
-							<div class="f_category"
-								infinite-scroll
-								debounce
-					            [infiniteScrollDistance]="2"
-					            [infiniteScrollThrottle]="300"
-					            (scrolled)="onScroll(category)">
-								<div class="f_category_c" *ngFor="let post of posts[category.id]">
-									<img alt="Media Placeholder" *ngIf="findMedia(post.featured_media)!=false" src="{{findMedia(post.featured_media)}}" />
-									<div [ngClass]="{'fullwidth':!findMedia(post.featured_media)}" class="f_category_content">
-										<h5>{{post.title.rendered}}</h5>
-										<p>{{post.extract}}</p>
-										<button class="btn btn_read btn-primary" (click)="switchToSingle(post)">Read More</button>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="loading text-center" *ngIf="isLoading"><img src="assets/images/loading.gif" alt ="Loading ..." /></div>
-								<div class="text-center load-more-block" *ngIf="false && category.loaded<category.count">
-									<button class="btn btn-info btn-load-more" (click)="loadMorePosts(category)">Load More ...</button>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-12 text-center" *ngIf="(activeTab==category.id) && !hasPosts(category.id)">
-							<h3>There is no {{ category.name }} Articles.</h3>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<section class="sectionHedin">
+  <div class="container ">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="lineupHedin">
+          <h1>Articles</h1>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="articleSection">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="dTabs">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li (click)="onTabChanged('trending')"
+                [class.active]="activeTab == 'trending'">
+              <a>Trending Topics</a>
+            </li>
+            <li *ngFor="let category of categories;"
+                (click)="onTabChanged(category)"
+                [class.active]="activeTab == category.id">
+              <a>{{ category.name }}</a>
+            </li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="NFL">
+
+              <div class="dTabs dTabsInner">
+                <!-- Nav tabs -->
+                <ul *ngIf="activeTab=='trending'" class="nav nav-tabs">
+                  <li *ngFor="let subtab of subTrendingTabs;"
+                      (click)="onTabChanged(subtab)"
+                      [class.active]="subActiveTab == subtab">
+                    <a>{{ subTrendingTabsLabels[subtab] }}</a>
+                  </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="All">
+                    <div class="mPlaceWrap">
+
+                      <div class="mPlaceItm" *ngFor="let post of featured">
+                        <div class="mPlaceTp">
+                          <div class="mPlaceImgWrap">
+                            <img alt="Media Placeholder" class="img-responsive"
+                                 [ngClass]="{'noImage':!findMedia(post.featured_media)}"
+                                 src="{{findMedia(post.featured_media)}}"/>
+                          </div>
+                          <div class="mPlaceInfoWrap">
+                            <a href="article_detail.html" class="mPlaceHedin">{{post.title.rendered}}</a>
+                            <p class="mPlacePara">{{post.extract}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="pagination">
+                      <ul>
+                        <li><a href="javascript:void(0)"><span aria-hidden="true">&laquo;</span></a></li>
+                        <li class="active"><a href="javascript:void(0)">1</a></li>
+                        <li><a href="javascript:void(0)">2</a></li>
+                        <li><a href="javascript:void(0)">3</a></li>
+                        <li><a href="javascript:void(0)">...</a></li>
+                        <li><a href="javascript:void(0)">29</a></li>
+                        <li><a href="javascript:void(0)">30</a></li>
+                        <li><a href="javascript:void(0)"><span aria-hidden="true">&raquo;</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

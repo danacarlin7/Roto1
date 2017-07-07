@@ -1,33 +1,33 @@
-$(document).ready(function() {	
-						   
+$(document).ready(function() {
+
 	//Custom Scroll Bar
-	
+
 	$(".articleDetails .articleDetailsWrapper .articleWrapper").mCustomScrollbar({
 		axis:"x",
 		theme:"dark-thick"
 	});
-	
+
 	$('.menuToggle').click(function(){
 		$(".mainMenu").addClass("tglMnu");
 	});
-	
+
 	$(".closeBtn").click(function(e){
 		e.preventDefault();
 		$(this).parent().removeClass("tglMnu");
-	});	
-	
-	
-	
+	});
+
+
+
 	$(".newsDetails .tabWrapper #headLines .panel-group .panel").click(function(){
 		$(".newsDetails .tabWrapper #headLines .panel-group .panel").removeClass("active");
 		$(this).addClass("active");
 	});
-	
+
 	$(".newsDetails .tabWrapper #clubNews .panel-group .panel").click(function(){
 		$(".newsDetails .tabWrapper #clubNews .panel-group .panel").removeClass("active");
 		$(this).addClass("active");
 	});
-	
+
 	$("header .bottomHeader .rightNav > ul > .searchBtn a").click(function(e){
 		e.stopPropagation();
 		if ($(window).width() >= 480) {
@@ -41,13 +41,13 @@ $(document).ready(function() {
                 width: 195
             },100);
 		}
-														   
+
 	});
 	$("header .bottomHeader .rightNav > ul > .searchBtn .srchBar").click(function(e){
-		e.stopPropagation();															   										   
+		e.stopPropagation();
 	});
-	
-	
+
+
 	$(document).click(function (e) {
 		var container = $("header .bottomHeader .rightNav > ul > .searchBtn");
 
@@ -56,15 +56,15 @@ $(document).ready(function() {
 			$("header .bottomHeader .rightNav > ul > .searchBtn .srchBar").width(0);
 		}
   	});
-	
-	
+
+
 	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		$($(e.target).attr('href'))
 			.find('.owl-carousel')
 			.owlCarousel('invalidate', 'width')
 			.owlCarousel('update')
 	});
-	
+
 	$('.matchDetailsSlider').owlCarousel({
 		margin: 30,
 		nav: true,
@@ -87,11 +87,11 @@ $(document).ready(function() {
 		  }
 		}
 	});
-	$( ".matchDetailsSlider .owl-prev").html('<img src="images/slider_lft_arow.png" alt="" />');
-	$( ".matchDetailsSlider .owl-next").html('<img src="images/slider_rght_arow.png" alt="" />');		
-     
+	$( ".matchDetailsSlider .owl-prev").html('<img src="../../assets/images/slider_lft_arow.png" alt="" />');
+	$( ".matchDetailsSlider .owl-next").html('<img src="../../assets/images/slider_rght_arow.png" alt="" />');
 
-	$('.socialDetailsSlider').owlCarousel({    									  
+
+	$('.socialDetailsSlider').owlCarousel({
 		items: 1,
 		margin: 0,
 		nav: true,
@@ -100,9 +100,9 @@ $(document).ready(function() {
 		autoplayTimeout:3000,
 		autoplayHoverPause:true
 	});
-	$( ".socialDetailsSlider .owl-prev").html('<img src="images/social_slider_top_arow.png" alt="" />');
-	$( ".socialDetailsSlider .owl-next").html('<img src="images/social_slider_bottom_arow.png" alt="" />');		
-	
+	$( ".socialDetailsSlider .owl-prev").html('<img src="../../assets/images/social_slider_top_arow.png" alt="" />');
+	$( ".socialDetailsSlider .owl-next").html('<img src="../../assets/images/social_slider_bottom_arow.png" alt="" />');
+
 	$('.latestNewsDetailsSlider').owlCarousel({
 		margin: 30,
 		nav: true,
@@ -125,17 +125,17 @@ $(document).ready(function() {
 		  }
 		}
 	});
-	$( ".latestNewsDetailsSlider .owl-prev").html('<img src="images/slider_lft_arow.png" alt="" />');
-	$( ".latestNewsDetailsSlider .owl-next").html('<img src="images/slider_rght_arow.png" alt="" />');	
-	
+	$( ".latestNewsDetailsSlider .owl-prev").html('<img src="../../assets/images/slider_lft_arow.png" alt="" />');
+	$( ".latestNewsDetailsSlider .owl-next").html('<img src="../../assets/images/slider_rght_arow.png" alt="" />');
+
 	$(".clseBtn").click(function(){
 		$(this).parent().hide();
 	});
-	
+
 	$(".clrAll").click(function(){
 		$(".curntFilters").hide();
 	});
-	
+
 	$(".mainTab > .tab > ul > li > a").on("click", function(e){
 		 e.preventDefault();
 		 var openTab = $(this).attr("href");
@@ -144,35 +144,35 @@ $(document).ready(function() {
 		 $(".mainTab > .tab > ul > li > a").removeClass("active");
 		 $(this).addClass("active");
 	 });
-	
+
 	$(".signupRghtWrapper .mainTab .tabcontent .signUpPakges li input").click(function(){
 		if($(".signupRghtWrapper .mainTab .tabcontent .signUpPakges li input").is(':checked'))
 		{
 			$(".signupRghtWrapper .mainTab .tabcontent .signUpPakges li").removeClass('pkgeactive');
 			$(this).parent().addClass('pkgeactive');
-		
+
 		}
-	});	
-	
+	});
+
 	/* Same height */
-	
+
 	$(window).resize(function(){
 		var cirWidth=$('.profitByCatRght > ul > li').width();
 		$('.profitByCatRght > ul > li').height(cirWidth);
 	}).trigger('resize');
-	
+
 	/* Same Height Ends */
-	
+
 	/* Top filter fixed js Starts */
-	
+
 	var $window = $(window).on('resize', function(){
 		if ($(window).width() >= 992)
 		{
 			$(window).scroll(function(){
 			  var sticky = $('.topFiltrWrapper'),
 				  scroll = $(window).scrollTop();
-			
-			  if (scroll >= 190) 
+
+			  if (scroll >= 190)
 			  {
 				  sticky.addClass('fixedDash');
 				  $(".fixdPad").css("padding-top","80px");
@@ -185,15 +185,15 @@ $(document).ready(function() {
 			});
 		}
 	}).trigger('resize');
-	
+
 	/* Top filter fixed js Ends */
-	
+
 	/* Dashboard filter dropdown */
-	
+
 	$(window).click(function(e) {
 		$(".dropdownSelect > .dropdownSelectMenu").hide();
 	});
-	
+
 	$(".dropdownSelect > .dropdownSelectClick").click(function(e){
 		e.stopPropagation();
 		if($(".dropdownSelect > .dropdownSelectMenu").hasClass("activeSelectMenu"))
@@ -208,36 +208,36 @@ $(document).ready(function() {
 		}
 		else
 		{
-			
+
 			$(this).next().show();
 			$(this).next().addClass("activeSelectMenu");
 		}
-							
+
 	});
-	
+
 	$(".dropdownSelect > .dropdownSelectMenu > li > a").click(function(){
-																	   
-		var slctTxt= $(this).text();	
+
+		var slctTxt= $(this).text();
 		$(this).parents(".dropdownSelectMenu").siblings(".dropdownSelectClick").text(slctTxt);
 	});
-	
+
 	/* Dashboard filter dropdown */
-	
-	
+
+
 	/* Date Picker JS */
-	
+
 	$('.datepicker').datepicker({
 		changeMonth: true,
 		 changeYear: true,
-		 beforeShow: function (textbox, instance) {   
+		 beforeShow: function (textbox, instance) {
 		 instance.dpDiv.css({
 		 marginLeft: textbox.offsetWidth+ (-228) + 'px'
 	  });
 	 }
    });
-	
+
 	/* Date Picker Ends */
-	
-	
-	
+
+
+
 });

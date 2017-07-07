@@ -17,6 +17,11 @@ import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-opt
 import {ArticleService} from "./services/article.service";
 import {ArticleComponent} from "./components/article/article.component";
 import {InfiniteScrollModule} from "angular2-infinite-scroll/angular2-infinite-scroll";
+import {LineupOptimizerService} from "./services/lineup-optimizer.service";
+import {ForgotPasswordComponent} from "./components/forgot-password/forgot-password.component";
+import {DFSBasicsComponent} from "./components/dfs-basics/dfs-basics.component";
+import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
+import {FAQComponent} from "./components/faq/faq.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -40,12 +45,16 @@ import {InfiniteScrollModule} from "angular2-infinite-scroll/angular2-infinite-s
     DailyLineupComponent,
     LineupOptimizerComponent,
     ArticleComponent,
-    ArticlesComponent
+    ArticlesComponent,
+    ForgotPasswordComponent,
+    DFSBasicsComponent,
+    ExcelToolComponent,
+    FAQComponent
   ],
   exports: [
     FrontMainComponent
   ],
-  providers: [FrontService,ArticleService]
+  providers: [FrontService,ArticleService,LineupOptimizerService]
 })
 export class FrontModule {
 

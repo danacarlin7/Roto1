@@ -1,14 +1,15 @@
 import {Injectable} from "@angular/core";
-import {Http,Headers,Response} from "@angular/http";
+import {Http, Headers, Response} from "@angular/http";
 import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs/Rx";
 /**
- * Created by Hiren on 28-06-2017.
+ * Created by Hiren on 05-07-2017.
  */
 
 @Injectable()
-export class FrontService {
+export class LineupOptimizerService {
+
   constructor(private http:Http, private authService:AuthService) {
 
   }
@@ -26,8 +27,8 @@ export class FrontService {
     return headers;
   }
 
-  retrieveNews(sportType:string, timePeriod:string = 'cyear'):Observable<any> {
-    return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
+  retrieveSlates(operator:string, sport:string):Observable<any> {
+    return this.http.get(environment.api_end_point + 'api/slates?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -35,9 +36,8 @@ export class FrontService {
       });
   }
 
-
-  retrieveDailyLineups(sportType:string, timePeriod:string = 'cyear'):Observable<any> {
-    return this.http.get(environment.api_end_point + 'fetchLineup?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
+  retrievePlayers(operator:string , sport:string, slateId:number):Observable<any> {
+    return this.http.get(environment.api_end_point + 'api/optimizer/playersBySlate?sport=' + sport + '&slate_id=' + slateId + '&operator=' + operator, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -50,4 +50,5 @@ export class FrontService {
       this.authService.logout();
     }
   }
+
 }
