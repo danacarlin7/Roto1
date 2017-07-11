@@ -11,10 +11,25 @@ a, a:hover, a:focus {
     color: #999;
     text-decoration: none ;
 }
+
+label {
+    font-family: 'Open Sans', Helvetica, sans-serif;
+}
+
+.my-body p {
+    padding-bottom: 0 ;
+}
+
+footer img,
+.container-main img {
+    display: initial;
+    width: auto;
+}
+
 input.input-sm, select.input-sm {
     font-family: 'Open Sans', Helvetica, sans-serif;
-    height: 44px;
-    padding: 12px 10px;
+    height: 43px;
+    padding: 10px 10px;
     font-size: 13px;
 }
 
@@ -31,6 +46,12 @@ input.input-gray-black:focus, select.input-gray-black:focus, input.input-gray-bl
 input.file {
     visibility: hidden;
     position: absolute;
+    width: 10px;
+}
+input.no-border {
+    border: 0px !important ;
+    box-shadow: none !important ;
+    webkit-box-shadow: none  !important;
 }
 
 .table td>input.input-sm, .table td>select.input-sm {
@@ -63,7 +84,7 @@ input.file {
 /*
 Body
 */
-body {
+div.my-body {
 
     background-color: #fff;
     font-family: 'Roboto', 'Open Sans', Helvetica, sans-serif;
@@ -72,15 +93,16 @@ body {
 }
 
 .col-padding {
-    padding: 15px;
-    padding-bottom: 0 ;
+    padding-left: 15px;
+    padding-bottom: 0;
+    padding-top: 21px;
 }
 
 .col-padding>.btn {
     margin-bottom: 15px;
 }
 
-section {
+section.my-section {
     padding: 15px ;
     margin-left: -15px;
     margin-right: -15px;
@@ -100,8 +122,13 @@ section.section-gray {
 
 .table-filtes-container.section-gray label {
     font-weight: 500 ;
+    color: #000;
+    vertical-align: middle;
 }
 
+/*
+Table
+*/
 table {
     font-weight: normal ;
     font-family: 'Open Sans', Helvetica, sans-serif;
@@ -145,7 +172,7 @@ th>.glyphicon {
 }
 
 td.td-team {
-    padding: 0px !important ; 
+    padding: 0px !important ;
 }
 
 td .pagination {
@@ -161,9 +188,11 @@ td .pagination {
     color: #000;
 }
 
+.team-table.table>tbody>tr>td>input,
 .team-table.table>tbody>tr>td {
     font-size: 16px ;
     color: #000;
+    text-align: center ;
 }
 
 .team-table tbody {
@@ -176,8 +205,8 @@ td .pagination {
     vertical-align: middle !important ;
 }
 
-.table.df-table>thead>tr>th, .table.df-table>tbody>tr>th, 
-.table.df-table>tfoot>tr>th, .table.df-table>thead>tr>td, 
+.table.df-table>thead>tr>th, .table.df-table>tbody>tr>th,
+.table.df-table>tfoot>tr>th, .table.df-table>thead>tr>td,
 .table.df-table>tbody>tr>td, .table.df-table>tfoot>tr>td {
     padding: 21px 10px;
     vertical-align: middle ;
@@ -189,6 +218,11 @@ td .pagination {
     background-color: #fff;
 }
 
+.lineups-container {
+    max-height: 954px;
+    overflow-y: auto ;
+}
+
 /*
 Buttons
 */
@@ -197,13 +231,14 @@ Buttons
     border-radius: 5px;
     border: 0;
 }
+
 .btn.active, .btn:active {
     webkit-box-shadow: none ;
     box-shadow: none ;
 }
 
 .btn.btn-noradius {
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .btn.btn-yellow, .btn.btn-yellow-black, .btn.btn-gray-yellow:hover, .btn.btn-gray-yellow:active, .btn.btn-gray-yellow:focus, .btn.btn-gray-yellow.active {
@@ -238,14 +273,31 @@ Buttons
 
 .btn.btn-black-gray:hover,
 .btn.btn-gray-black, .btn.btn-gray-yellow  {
-    background-color: #919191;
-    background: #919191;
+    background-color: #727272;
+    background: #727272;
     color: #fff;
-    border: 1px solid #919191 ;
+    border: 1px solid #727272 ;
+}
+
+.postion-btns .btn {
+    margin-right: 7px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    margin-bottom: 21px;
+    width: 53px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .input-group-btn>.btn.margin-left-5 {
     margin-left: 5px;
+}
+.input-group-btn>.btn.margin-left-10 {
+    margin-left: 10px;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px ;
 }
 
 a.gray-yellow {
@@ -305,6 +357,10 @@ Notifications
     color: #ff6666;
 }
 
+.alert .btn {
+    min-width: 85px;
+}
+
 .alert-dismissable .close, .alert-dismissible .close {
     right: -5px;
     color: #fff;
@@ -318,14 +374,18 @@ Notifications
     color: #000;
     background-color: #fec425;
     border-color: #fec425;
-    padding: 25px 20px;
+    padding: 30px 20px;
 }
 .alert-yellow .btn {
     margin-right: 10px;
 }
 .alert-yellow .alert-message {
-    margin-left: 50px ;
-    font-family: 'Open Sans', Helvetica, sans-serif;
+    font-family: 'Open Sans', Helvetica, sans-serif ;
+    max-height: 100px;
+    overflow-y: auto;
+    padding-left: 10px;
+    line-height: 36px;
+    margin-bottom: 0;
 }
 
 .alert.alert-apsolute-down {
@@ -353,7 +413,7 @@ Tables
 Navigation Bar
 */
 .closeBtn {
-    display: none ;   
+    display: none ;
 }
 .header-first {
     background-color: #141414;
@@ -435,6 +495,7 @@ Navigation Bar
 }
 
 .container-main {
+    padding-top: 15px ;
     background-color: #fff;
 }
 
@@ -444,14 +505,20 @@ Main Container
 .main-conainer {
 
 }
+
+section.my-section.title-container {
+    padding-top: 0px;
+}
+
 .content-title {
     font-size: 28px;
-    font-weight: lighter ;
+    line-height: 1.6;
+    font-weight: 300 ;
     color: #000 ;
     margin: 0px ;
 }
 
-.table-container {
+section.my-section.table-container {
     padding: 0;
 }
 
@@ -459,6 +526,17 @@ Main Container
     padding-right: 0px;
 }
 
+.form-inline select.form-control {
+    margin-right: 7px;
+}
+.filter-form  select.form-control {
+    border-radius: 2px;
+}
+
+
+.filter-form a.btn {
+    font-family: "Open Sans", sans-serif ;
+}
 /*
 Footer
 */
@@ -556,8 +634,8 @@ ul.footer-networks>li {
 }
 
 .panel-df-table>.panel-heading {
-    padding: 21px 10px ;
-    line-height: 23px;
+    padding: 14px 10px;
+    line-height: 34px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -618,7 +696,6 @@ Modal
 
 .modal-body {
     padding: 30px;
-    padding-top: 0 ;
 }
 
 .yellow-container {
@@ -685,11 +762,11 @@ Modal
     padding: 8px 11px;
     color: #000;
 }
-.filter-table .pagination>li:last-child>a, .filter-table .pagination>li:last-child>span, 
+.filter-table .pagination>li:last-child>a, .filter-table .pagination>li:last-child>span,
 .filter-table .pagination>li:first-child>a, .filter-table .pagination>li:first-child>span {
     border-radius: 0px ;
 }
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, 
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span,
 .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: #eee;
     border-color: #ddd;

@@ -1,6 +1,8 @@
-import { MdButtonModule, MdCardModule, MdProgressSpinnerModule, MdIconModule,
+import {
+  MdButtonModule, MdCardModule, MdProgressSpinnerModule, MdIconModule,
   MdSlideToggleModule, MdTooltipModule, MdMenuModule, MdInputModule, MdSelectModule, MdRadioModule, MdDialogModule,
-  MdDatepickerModule, MdNativeDateModule, MdListModule} from "@angular/material";
+  MdDatepickerModule, MdNativeDateModule, MdListModule, MdProgressBarModule
+} from "@angular/material";
 /**
  * Created by Hiren on 11-06-2017.
  */
@@ -20,5 +22,6 @@ export const SharedMaterialComponents = [
   MdDialogModule,
   MdDatepickerModule,
   MdNativeDateModule,
-  MdListModule
+  MdListModule,
+  MdProgressBarModule
 ];

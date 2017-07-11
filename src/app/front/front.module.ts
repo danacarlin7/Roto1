@@ -22,6 +22,8 @@ import {ForgotPasswordComponent} from "./components/forgot-password/forgot-passw
 import {DFSBasicsComponent} from "./components/dfs-basics/dfs-basics.component";
 import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
+import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
+import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -30,7 +32,7 @@ import {FAQComponent} from "./components/faq/faq.component";
   imports: [
     FrontRoutingModule,
     InfiniteScrollModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     FrontMainComponent,
@@ -49,7 +51,9 @@ import {FAQComponent} from "./components/faq/faq.component";
     ForgotPasswordComponent,
     DFSBasicsComponent,
     ExcelToolComponent,
-    FAQComponent
+    FAQComponent,
+    AdvFilterComponent,
+    LineupPlayerFilter
   ],
   exports: [
     FrontMainComponent

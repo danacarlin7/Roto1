@@ -45,9 +45,13 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="All">
-                    <div class="mPlaceWrap">
-
-                      <div class="mPlaceItm" *ngFor="let post of featured">
+                    <div class="mPlaceWrap"
+                         infinite-scroll
+                         debounce
+                         [infiniteScrollDistance]="2"
+                         [infiniteScrollThrottle]="300"
+                         (scrolled)="onScroll(category)">
+                   <!--   <div class="mPlaceItm" *ngFor="let post of []">
                         <div class="mPlaceTp">
                           <div class="mPlaceImgWrap">
                             <img alt="Media Placeholder" class="img-responsive"
@@ -59,20 +63,7 @@
                             <p class="mPlacePara">{{post.extract}}</p>
                           </div>
                         </div>
-                      </div>
-                    </div>
-
-                    <div class="pagination">
-                      <ul>
-                        <li><a href="javascript:void(0)"><span aria-hidden="true">&laquo;</span></a></li>
-                        <li class="active"><a href="javascript:void(0)">1</a></li>
-                        <li><a href="javascript:void(0)">2</a></li>
-                        <li><a href="javascript:void(0)">3</a></li>
-                        <li><a href="javascript:void(0)">...</a></li>
-                        <li><a href="javascript:void(0)">29</a></li>
-                        <li><a href="javascript:void(0)">30</a></li>
-                        <li><a href="javascript:void(0)"><span aria-hidden="true">&raquo;</span></a></li>
-                      </ul>
+                      </div>-->
                     </div>
                   </div>
                 </div>

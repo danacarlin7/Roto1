@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {ArticleService} from "../../services/article.service";
 
 @Component({
@@ -9,10 +9,12 @@ import {ArticleService} from "../../services/article.service";
 })
 export class ArticleComponent implements OnInit {
 
-  constructor(private activatedR:ActivatedRoute,private articleService:ArticleService) { }
+  constructor(private activatedR:ActivatedRoute, private articleService:ArticleService) {
+  }
 
-  id: any;
-  article: any;
+  id:any;
+  article:any;
+  category:any;
 
   ngOnInit() {
     this.activatedR.params.subscribe(

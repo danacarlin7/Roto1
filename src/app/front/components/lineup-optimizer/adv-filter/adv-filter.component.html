@@ -1,0 +1,270 @@
+<div class="modal fade" id="advance-feature-filters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span>
+        </button>
+        <h2 class="modal-title" id="myModalLabel">Settings</h2>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-pills nav-black" role="tablist">
+          <li role="presentation" class="active"><a href="#basic" aria-controls="home" role="tab" data-toggle="tab">Basic</a>
+          </li>
+          <li role="presentation"><a href="#Filters" aria-controls="profile" role="tab" data-toggle="tab">Filters</a>
+          </li>
+          <li role="presentation"><a href="#Stacking" aria-controls="messages" role="tab"
+                                     data-toggle="tab">Stacking</a></li>
+        </ul>
+        <!-- /Nav tabs -->
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!--<div class="row row30">
+          <div class="col-lg-12 text-center yellow-container">
+            <a class="btn btn-link btn-link-back"><img src="../../../../../assets/img/save_general_n.png"/> Save General
+              Settings</a>
+            <a class="btn btn-link btn-link-back"><img src="../../../../../assets/img/load_saved_n.png"/> Load Saved
+              Settings</a>
+            <a class="btn btn-link btn-link-back"><img src="../../../../../assets/img/restore_n.png"/> Restore Default
+              Settings</a>
+          </div>
+        </div>-->
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <!-- Basic -->
+              <div role="tabpanel" class="tab-pane active" id="basic">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="filter-range-container">
+                      <h4 class="rangeslider-value">Variability: <span id="VariabilitySliderVal">0</span></h4>
+                      <input id="Variability" type="text"/>
+                      <span class="slider-range slider-min">0</span><span class="slider-range slider-max">100%</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="filter-range-container">
+                      <h4 class="rangeslider-value">Number Of Lineups To Produce: <span id="nlpSliderVal">10</span>
+                      </h4>
+                      <input id="nlp" type="text"/>
+                      <span class="slider-range slider-min">0</span><span class="slider-range slider-max">200</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="filter-range-container">
+                      <h4 class="rangeslider-value">Number Of Unique Players: <span id="nupSliderVal">4</span></h4>
+                      <input id="nup" type="text"/>
+                      <span class="slider-range slider-min">1</span><span class="slider-range slider-max">5</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="filter-range-container">
+                      <h4 class="rangeslider-value">Max Exposure: <span id="meSliderVal">20%</span></h4>
+                      <input id="me" type="text"/>
+                      <span class="slider-range slider-min">0</span><span class="slider-range slider-max">100%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="filter-range-container">
+                      <h4 class="rangeslider-value">Min/Max Salary: <span id="mmsSliderVal">$50000</span></h4>
+                      <input id="mms" type="text"/>
+                      <span class="slider-range slider-min">{{advFilterSettings?.salaryMin}}</span><span
+                      class="slider-range slider-max">{{advFilterSettings?.salaryMax}}</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="filter-range-container text-center">
+                      <div class="checkbox-overlay">
+                        <div class="checkbox">
+                          <input id="checkbox1" type="checkbox" [(ngModel)]="noBattingVsPitchers">
+                          <label for="checkbox1">
+                            No Batters vs Pitchers
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /Basic -->
+
+              <!-- Filters -->
+              <div role="tabpanel" class="tab-pane" id="Filters">
+                <div class="row">
+                  <!-- Left -->
+                  <div class="col-md-5">
+                    <h4 class="filters-h">Player Pool Filters</h4>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="filter-range-container">
+                          <h4 class="rangeslider-value">Projection Filter: <span
+                            id="ProjectionFilterSliderVal">(?)</span></h4>
+                          <input id="ProjectionFilter" type="text"/>
+                          <span class="slider-range slider-min">0</span><span
+                          class="slider-range slider-max">35</span>
+                        </div>
+                        <div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="filter-range-container">
+                          <h4 class="rangeslider-value">Salary Filter: <span id="SalaryFilterSliderVal">(?)</span>
+                          </h4>
+                          <input id="SalaryFilter"/>
+                          <span class="slider-range slider-min">2000</span><span
+                          class="slider-range slider-max">11700</span>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="filter-range-container">
+                          <h4 class="rangeslider-value">Value Filter: <span id="ValueFilterSliderVal">(?)</span></h4>
+                          <input id="ValueFilter"/>
+                          <span class="slider-range slider-min">0</span><span class="slider-range slider-max">4</span>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="filter-range-container">
+                          <h4 class="rangeslider-value">Batting Order: <span id="BattingOrderSliderVal">(?)</span>
+                          </h4>
+                          <input id="BattingOrder" type="text"/>
+                          <span class="slider-range slider-min">1</span><span class="slider-range slider-max">9</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /Left -->
+
+                  <!-- Right -->
+                  <div class="col-md-7">
+                    <h4 class="filters-h">Players Per Team <span>( Change All Max )</span></h4>
+                    <div class="row">
+                      <div class="col-md-12 table-responsive">
+                        <table class="table td-center team-table">
+                          <thead>
+                          <tr>
+                            <th>Min</th>
+                            <th></th>
+                            <th>Max</th>
+                            <th></th>
+                            <th>Min</th>
+                            <th></th>
+                            <th>Max</th>
+                          </tr>
+                          </thead>
+                          <tbody *ngIf="advFilterSettings">
+                          <tr *ngFor="let game of advFilterSettings.games">
+                            <td><input class="form-control no-border" [(ngModel)]="game.homeTeamMinValue">
+                            </td>
+                            <td class="td-team"><img style="width: 100px;height: 60px"  [attr.src]="game.homeTeamLogo" (click)="onGameClick(game)"/></td>
+                            <td><input class="form-control no-border" [(ngModel)]="game.homeTeamMaxValue">
+                            </td>
+                            <td>@</td>
+                            <td><input class="form-control no-border" [(ngModel)]="game.awayTeamMinValue">
+                            </td>
+                            <td class="td-team"><img style="width: 100px;height: 60px" [attr.src]="game.awayTeamLogo"/></td>
+                            <td><input class="form-control no-border" [(ngModel)]="game.awayTeamMaxValue">
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Filters -->
+
+              <!-- Stacking -->
+              <div role="tabpanel" class="tab-pane" id="Stacking">
+                <div class="panel-container panel-table table-responsive">
+                  <table class="table filter-table">
+                    <thead>
+                    <tr>
+                      <th>Select Stack</th>
+                      <th>Team</th>
+                      <th># of Players</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>Select Stack</td>
+                      <td>
+                        <select class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                      </td>
+                      <td>
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                          </ul>
+                        </nav>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Select Stack</td>
+                      <td>
+                        <select class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                      </td>
+                      <td>
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                          </ul>
+                        </nav>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Select Stack</td>
+                      <td>
+                        <select class="form-control">
+                          <option>1</option>
+                          <option>2</option>
+                        </select>
+                      </td>
+                      <td>
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li class="active"><a href="#">5</a></li>
+                          </ul>
+                        </nav>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- Stacking -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Modal Body -->
+    </div>
+  </div>
+</div>

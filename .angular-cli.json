@@ -28,6 +28,8 @@
         "assets/css/jquery.mCustomScrollbar.css",
         "assets/css/datepic.css",
         "assets/css/bootstrap-slider.min.css",
+        "assets/css/main.css",
+        "assets/css/main-responsive.css",
         "styles.css"
       ],
       "scripts": [

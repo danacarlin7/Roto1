@@ -1,452 +1,162 @@
-<div class="container-fluid container-main">
+<div class="my-body">
+  <div id="my-progress-bar" *ngIf="isLoading">
+    <md-progress-bar mode="query" color="accent"></md-progress-bar>
+  </div>
+  <div class="container-fluid container-main my-common-class">
 
-  <!-- Title -->
-  <section class="title-container">
-    <div class="row">
-      <div class="col-lg-5">
-        <h4 class="content-title">Lineup Optimizer</h4>
-      </div>
-      <div class="col-lg-3 col-sm-5 col-border-b">
-        <a class="btn btn-yellow-black">FanDuel</a>
-        <a class="btn btn-gray-black">Draftkings</a>
-      </div>
-      <div class="col-lg-1 col-sm-2 col-border-b">
-        <a class="btn btn-gray-black" data-toggle="modal" data-target="#advance-feature-filters">Settings</a>
-      </div>
-      <div class="col-lg-3 col-sm-5 text-right">
-        <a class="btn btn-gray-black active">All</a>
-        <a class="btn btn-gray-black">My Pool</a>
-        <a class="btn btn-gray-black">Daily Lineups</a>
-      </div>
-    </div>
-  </section>
-  <!--/ Title -->
+    <!-- Title -->
 
-  <!-- Filters -->
-  <section class="table-filtes-container section-gray">
-    <div class="row">
-      <div class="col-lg-7 col-md-6">
-        <div class="row">
-          <div class="col-lg-2 col-sm-3 no-padding-right">
-            <select class="form-control input-sm" (change)="onSlateChanged($event)">
-              <option *ngFor="let slate of slates" [value]="slate.SlateID">{{slate.Slate}}</option>
-            </select>
-          </div>
-          <div class="col-sm-3 no-padding-right">
-            <!-- == If yo do not need filter icon, remove this class "filter-icon" == -->
-            <div class="filter-icon">
-              <input class="form-control input-sm" type="text" placeholder="Team">
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <!-- == If yo do not need red x, remove this classes "filter-icon filter-icon-x" == -->
-            <div class="filter-icon filter-icon-x">
-              <input class="form-control input-sm" type="text" placeholder="Search">
-            </div>
-          </div>
+    <section class="my-section title-container">
+      <div class="row">
+        <div class="col-lg-5">
+          <h4 class="content-title">Lineup Optimizer</h4>
+        </div>
+        <div class="col-lg-3 col-sm-5 col-border-b">
+          <a class="btn"
+             (click)="operatorChanged('FanDuel')"
+             [class.btn-gray-black]="selectedOperator != 'FanDuel'"
+             [class.btn-yellow-black]="selectedOperator == 'FanDuel'">FanDuel</a>
+          <a class="btn"
+             (click)="operatorChanged('DraftKings')"
+             [class.btn-gray-black]="selectedOperator != 'DraftKings'"
+             [class.btn-yellow-black]="selectedOperator=='DraftKings'">DraftKings</a>
+        </div>
+        <div class="col-lg-1 col-sm-2 col-border-b">
+
+        </div>
+        <div class="col-lg-3 col-sm-5 text-right">
+          <a class="btn btn-gray-black" data-toggle="modal" data-target="#advance-feature-filters">Settings</a>
+          <!--<a class="btn btn-gray-black active">All</a>
+          <a class="btn btn-gray-black">My Pool</a>
+          <a class="btn btn-gray-black">Daily Lineups</a>-->
         </div>
       </div>
-      <div class="col-lg-5 col-md-6">
-        <div class="row">
-          <div class="col-sm-3 no-padding-right">
-            <!-- input class="form-control input-sm" type="text" placeholder="Select Projection"-->
-            <select class="form-control input-sm">
-              <option>Select Projection</option>
-              <option>Projection 1</option>
-              <option>Projection 3</option>
-              <option>Projection 4</option>
-              <option>Projection 5</option>
-            </select>
-          </div>
-          <div class="col-sm-3 no-padding-right">
-            <input class="form-control input-sm" type="date">
-          </div>
-          <div class="col-md-3 col-sm-4 no-padding-right">
-            <select class="form-control input-sm">
-              <option>Add Filter</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-          <div class="col-md-3 col-sm-2">
-            <a class="btn btn-lg btn-yellow-black btn-noradius btn-block">Save</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Filters -->
+    </section>
+    <!--/ Title -->
 
-  <!-- Table -->
-  <section class="table-container table-responsive">
-    <table class="table main-table table-striped td-center">
-      <thead>
-      <tr>
-        <th>Lock</th>
-        <th>Exclude</th>
-        <th>Player Name</th>
-        <th>Position</th>
-        <th>Team</th>
-        <th>Salary</th>
-        <th>Hand</th>
-        <th>Batting Order</th>
-        <th>Opponent</th>
-        <th>vs Pitcher</th>
-        <th>Runs</th>
-        <th>O/U</th>
-        <th>Line</th>
-        <th>Exposure</th>
-        <th>Projection</th>
-        <th>Value</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let player of players">
-        <td class="text-center"><img src="../../../../assets/img/Key.png"/></td>
-        <td><img src="../../../../assets/img/x-red.png"/></td>
-        <td>{{player.Name}}</td>
-        <td>{{player.Position}}</td>
-        <td>{{player.Team}}</td>
-        <td>{{player.FantasyDataSalary}}</td>
-        <td>{{player.H}}</td>
-        <td>{{player.BattingOrder ? player.BattingOrder : '-'}}</td>
-        <td>{{player.Opponent}}</td>
-        <td>{{player.vsPitcher}}</td>
-        <td>{{player.Runs}}</td>
-        <td>{{player.OverUnder}}</td>
-        <td>{{player.Line}}</td>
-        <td><input class="form-control input-sm" type="text" placeholder="100%"></td>
-        <td><input class="form-control input-sm" type="text" placeholder="100%"></td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
-  </section>
-  <!--/ Table -->
-  <div class="modal fade" id="advance-feature-filters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span>
-          </button>
-          <h2 class="modal-title" id="myModalLabel">Settings</h2>
-
-          <!-- Nav tabs -->
-          <ul class="nav nav-pills nav-black" role="tablist">
-            <li role="presentation" class="active"><a href="#basic" aria-controls="home" role="tab" data-toggle="tab">Basic</a>
-            </li>
-            <li role="presentation"><a href="#Filters" aria-controls="profile" role="tab" data-toggle="tab">Filters</a>
-            </li>
-            <li role="presentation"><a href="#Stacking" aria-controls="messages" role="tab"
-                                       data-toggle="tab">Stacking</a></li>
-          </ul>
-          <!-- /Nav tabs -->
-        </div>
-
-        <!-- Modal Body -->
-        <div class="modal-body">
-          <div class="row row30">
-            <div class="col-lg-12 text-center yellow-container">
-              <a class="btn btn-link btn-link-back"><img src="img/save_general_n.png"/> Save General Settings</a>
-              <a class="btn btn-link btn-link-back"><img src="img/load_saved_n.png"/> Load Saved Settings</a>
-              <a class="btn btn-link btn-link-back"><img src="img/restore_n.png"/> Restore Default Settings</a>
-            </div>
-          </div>
+    <!-- Filters -->
+    <section class="my-section table-filtes-container section-gray">
+      <div class="row">
+        <div class="col-lg-7 col-md-6">
           <div class="row">
-            <div class="col-lg-12">
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <!-- Basic -->
-                <div role="tabpanel" class="tab-pane active" id="basic">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="filter-range-container">
-                        <h4 class="rangeslider-value">Variability: <span id="VariabilitySliderVal">90%</span></h4>
-                        <input id="Variability" type="text" data-slider-min="0" data-slider-max="100"
-                               data-slider-step="1" data-slider-value="90"/>
-                        <span class="slider-range slider-min">0</span><span class="slider-range slider-max">100%</span>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="filter-range-container">
-                        <h4 class="rangeslider-value">Number Of Lineups To Produce: <span id="nlpSliderVal">10</span>
-                        </h4>
-                        <input id="nlp" type="text" data-slider-min="0" data-slider-max="200" data-slider-step="1"
-                               data-slider-value="10"/>
-                        <span class="slider-range slider-min">0</span><span class="slider-range slider-max">200</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="filter-range-container">
-                        <h4 class="rangeslider-value">Number Of Unique Players: <span id="nupSliderVal">4</span></h4>
-                        <input id="nup" type="text" data-slider-min="0" data-slider-max="5" data-slider-step="1"
-                               data-slider-value="4"/>
-                        <span class="slider-range slider-min">1</span><span class="slider-range slider-max">5</span>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="filter-range-container">
-                        <h4 class="rangeslider-value">Max Exposure: <span id="meSliderVal">20%</span></h4>
-                        <input id="me" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1"
-                               data-slider-value="10"/>
-                        <span class="slider-range slider-min">0</span><span class="slider-range slider-max">100%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="filter-range-container">
-                        <h4 class="rangeslider-value">Min/Max Salary: <span id="mmsSliderVal">$50000</span></h4>
-                        <input id="mms" type="text" data-slider-min="25000" data-slider-max="50000"
-                               data-slider-step="100" data-slider-value="50000"/>
-                        <span class="slider-range slider-min">$25000</span><span
-                        class="slider-range slider-max">$500000</span>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="filter-range-container text-center">
-                        <div class="checkbox-overlay">
-                          <div class="checkbox">
-                            <input id="checkbox1" type="checkbox">
-                            <label for="checkbox1">
-                              No Batters vs Pitchers
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /Basic -->
-
-                <!-- Filters -->
-                <div role="tabpanel" class="tab-pane" id="Filters">
-                  <div class="row">
-                    <!-- Left -->
-                    <div class="col-md-5">
-                      <h4 class="filters-h">Player Pool Filters</h4>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="filter-range-container">
-                            <h4 class="rangeslider-value">Projection Filter: <span
-                              id="ProjectionFilterSliderVal">(?)</span></h4>
-                            <input id="ProjectionFilter" type="text" data-slider-min="1" data-slider-max="34"
-                                   data-slider-step="0.5" data-slider-value="[0,33]"/>
-                            <span class="slider-range slider-min">0</span><span
-                            class="slider-range slider-max">35</span>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="filter-range-container">
-                            <h4 class="rangeslider-value">Salary Filter: <span id="SalaryFilterSliderVal">(?)</span>
-                            </h4>
-                            <input id="SalaryFilter" type="text" data-slider-min="2000" data-slider-max="11700"
-                                   data-slider-step="100" data-slider-value="[2000,8000]"/>
-                            <span class="slider-range slider-min">2000</span><span
-                            class="slider-range slider-max">11700</span>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="filter-range-container">
-                            <h4 class="rangeslider-value">Value Filter: <span id="ValueFilterSliderVal">(?)</span></h4>
-                            <input id="ValueFilter" type="text" data-slider-min="0" data-slider-max="4"
-                                   data-slider-step="0.1" data-slider-value="[0,3.94]"/>
-                            <span class="slider-range slider-min">0</span><span class="slider-range slider-max">4</span>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="filter-range-container">
-                            <h4 class="rangeslider-value">Batting Order: <span id="BattingOrderSliderVal">(?)</span>
-                            </h4>
-                            <input id="BattingOrder" type="text" data-slider-min="1" data-slider-max="9"
-                                   data-slider-step="1" data-slider-value="[1,7]"/>
-                            <span class="slider-range slider-min">1</span><span class="slider-range slider-max">9</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /Left -->
-
-                    <!-- Right -->
-                    <div class="col-md-7">
-                      <h4 class="filters-h">Players Per Team <span>( Change All Max )</span></h4>
-                      <div class="row">
-                        <div class="col-md-12 table-responsive">
-                          <table class="table td-center team-table">
-                            <thead>
-                            <tr>
-                              <th>Min</th>
-                              <th></th>
-                              <th>Max</th>
-                              <th></th>
-                              <th>Min</th>
-                              <th></th>
-                              <th>Max</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team1.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team2.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team3.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team4.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team1.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team2.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team1.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team2.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team1.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team2.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team1.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team2.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            <tr>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team1.jpg"/></td>
-                              <td>2</td>
-                              <td>@</td>
-                              <td>0</td>
-                              <td class="td-team"><img src="img/team2.jpg"/></td>
-                              <td>2</td>
-                            </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- /Filters -->
-
-                <!-- Stacking -->
-                <div role="tabpanel" class="tab-pane" id="Stacking">
-                  <div class="panel-container panel-table table-responsive">
-                    <table class="table filter-table">
-                      <thead>
-                      <tr>
-                        <th>Select Stack</th>
-                        <th>Team</th>
-                        <th># of Players</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr>
-                        <td>Select Stack</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                          </select>
-                        </td>
-                        <td>
-                          <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                              <li class="active"><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#">5</a></li>
-                            </ul>
-                          </nav>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Select Stack</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                          </select>
-                        </td>
-                        <td>
-                          <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                              <li><a href="#">1</a></li>
-                              <li class="active"><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#">5</a></li>
-                            </ul>
-                          </nav>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Select Stack</td>
-                        <td>
-                          <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                          </select>
-                        </td>
-                        <td>
-                          <nav aria-label="Page navigation">
-                            <ul class="pagination">
-                              <li><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li class="active"><a href="#">5</a></li>
-                            </ul>
-                          </nav>
-                        </td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <!-- Stacking -->
+            <div class="col-lg-2 col-sm-3 no-padding-right">
+              <select class="form-control input-sm" (change)="onSlateChanged($event)">
+                <option [value]="0">All Slates</option>
+                <option *ngFor="let slate of slates" [value]="slate.SlateID">{{slate.Slate}}</option>
+              </select>
+            </div>
+            <div class="col-sm-3 no-padding-right">
+              <select class="form-control input-sm" (change)="selectedGameChanged($event)">
+                <option [value]="0">All Games</option>
+                <option *ngFor="let game of games"
+                        [value]="game.gameId">
+                  {{game.homeTeam}}-{{game.awayTeam}}
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-6">
+              <!-- == If yo do not need red x, remove this classes "filter-icon filter-icon-x" == -->
+              <div class="filter-icon filter-icon-x">
+                <input class="form-control input-sm" [(ngModel)]="searchStr" type="text" placeholder="Search">
               </div>
             </div>
           </div>
         </div>
-        <!-- /Modal Body -->
+        <div class="col-lg-5 col-md-6">
+          <div class="row">
+            <div class="col-md-5 col-sm-4 no-padding-right">
+              <!-- input class="form-control input-sm" type="text" placeholder="Select Projection"-->
+              <select class="form-control input-sm">
+                <option>Select Projection</option>
+                <option>Projection 1</option>
+                <option>Projection 3</option>
+                <option>Projection 4</option>
+                <option>Projection 5</option>
+              </select>
+            </div>
+            <div class="col-sm-3 no-padding-right">
+              <input class="form-control input-sm" type="text" value="06/07/2017">
+            </div>
+            <div class="col-md-4 col-sm-5">
+              <a class="btn btn-lg btn-yellow-black btn-noradius btn-block" (click)="onBtnGenerateLineupClick()">Generate
+                Lineups</a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+    <!--/ Filters -->
+
+    <!-- Table -->
+    <section class="my-section table-container table-responsive">
+      <table class="table main-table table-striped td-center">
+        <thead>
+        <tr>
+          <th>Lock</th>
+          <th>Exclude</th>
+          <th>Player Name</th>
+          <th>Position</th>
+          <th>Team</th>
+          <th>Salary</th>
+          <th>Hand</th>
+          <th>Batting Order</th>
+          <th>Opponent</th>
+          <th>vs Pitcher</th>
+          <th>Runs</th>
+          <th>O/U</th>
+          <th>Line</th>
+          <th>Exposure</th>
+          <th>Projection</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--<tr>
+          <td class="text-center"><img src="../../../../assets/img/Key.png"/></td>
+          <td><a href="#"><img src="../../../../assets/img/x-red.png"/></a></td>
+          <td>Blake Grifin Blake Grifin</td>
+          <td>PF</td>
+          <td>Manchester Utd</td>
+          <td>$9100</td>
+          <td>HOU</td>
+          <td>PF</td>
+          <td>LAC</td>
+          <td></td>
+          <td>22.5</td>
+          <td>HOU</td>
+          <td></td>
+          <td><input class="form-control input-sm" type="text" placeholder="100%"></td>
+          <td><input class="form-control input-sm" type="text" placeholder="100%"></td>
+          <td></td>
+        </tr>-->
+        <tr *ngFor="let player of players | lineupOppFilter:['FirstName','LastName','fullName']:searchStr">
+          <td class="text-center"><img src="../../../../assets/img/Key.png"/></td>
+          <td><img src="../../../../assets/img/x-red.png"
+                   (click)="btnExcludePlayerClicked(player)"
+                   style="cursor: pointer"/></td>
+          <td>{{player.Name}}</td>
+          <td>{{player.Position}}</td>
+          <td>{{player.Team}}</td>
+          <td>{{player.Salary}}</td>
+          <td>{{player.BatHand}} - {{player.ThrowHand}}</td>
+          <td>{{player.BattingOrder ? player.BattingOrder : '-'}}</td>
+          <td>{{player.Opponent}}</td>
+          <td>{{player.vsPitcher}}</td>
+          <td>{{player.Runs}}</td>
+          <td>{{player.OverUnder}}</td>
+          <td>{{player.Line}}</td>
+          <td><input class="form-control input-sm" [(ngModel)]="player.exposureValue" type="number" max="100" min="0"
+                     placeholder="100%">
+          </td>
+          <td>{{player.Points ? player.Points : '-'}}</td>
+          <td>{{player.Value ? player.Value : '-'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <!--/ Table -->
+    <rp-adv-filter [advFilterSettings]="advFilterSettings"
+                   #advFilterPopup
+                   (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-adv-filter>
   </div>
 </div>

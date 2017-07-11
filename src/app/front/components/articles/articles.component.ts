@@ -13,6 +13,7 @@ export class ArticlesComponent implements OnInit {
   constructor(private authService:AuthService, private router:Router, private articleService:ArticleService) {
   }
 
+  category:any;
   categories:Array<any>;
   posts:Object = {};
   media:Object = {};
@@ -193,6 +194,6 @@ export class ArticlesComponent implements OnInit {
   }
 
   onScroll(category) {
-    this.loadMorePosts(category);
+    //this.loadMorePosts(category);
   }
 }
