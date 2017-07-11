@@ -122,10 +122,6 @@ export class AdvFilterComponent {
     this.salarySettingValue = [0, 5];
     this.salarySlider.on("slide", (slideEvt) => {
       let b = slideEvt.value;
-      if (this._advFilterSettings) {
-        this._advFilterSettings.salaryMin = b[0];
-        this._advFilterSettings.salaryMax = b[1];
-      }
       this.salarySettingValue = b;
     });
 

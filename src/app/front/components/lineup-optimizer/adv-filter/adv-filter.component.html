@@ -106,34 +106,45 @@
                     <div class="row">
                       <div class="col-md-12">
                         <div class="filter-range-container">
-                          <h4 class="rangeslider-value">Projection Filter: <span
-                            id="ProjectionFilterSliderVal">(?)</span></h4>
+                          <h4 class="rangeslider-value">Projection Filter:
+                            <span *ngIf="projectionFilterValue" id="ProjectionFilterSliderVal">
+                            ({{projectionFilterValue[0]}} - {{projectionFilterValue[1]}})</span></h4>
                           <input id="ProjectionFilter" type="text"/>
-                          <span class="slider-range slider-min">0</span><span
-                          class="slider-range slider-max">35</span>
+                          <span class="slider-range slider-min">{{advFilterSettings?.projectionMin}}</span>
+                          <span class="slider-range slider-max">{{advFilterSettings?.projectionMax}}</span>
                         </div>
                         <div>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="filter-range-container">
-                          <h4 class="rangeslider-value">Salary Filter: <span id="SalaryFilterSliderVal">(?)</span>
+                          <h4 class="rangeslider-value">Salary Filter: <span id="SalaryFilterSliderVal"
+                                                                             *ngIf="salaryFilterValue">
+                            ({{salaryFilterValue[0]}} - {{salaryFilterValue[1]}})
+                          </span>
                           </h4>
                           <input id="SalaryFilter"/>
-                          <span class="slider-range slider-min">2000</span><span
-                          class="slider-range slider-max">11700</span>
+                          <span class="slider-range slider-min">{{advFilterSettings?.salaryMin}}</span><span
+                          class="slider-range slider-max">{{advFilterSettings?.salaryMax}}</span>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="filter-range-container">
-                          <h4 class="rangeslider-value">Value Filter: <span id="ValueFilterSliderVal">(?)</span></h4>
+                          <h4 class="rangeslider-value">Value Filter: <span *ngIf="valueFilterValue"
+                                                                            id="ValueFilterSliderVal">
+                            ({{valueFilterValue[0]}} - {{valueFilterValue[1]}})
+                          </span></h4>
                           <input id="ValueFilter"/>
-                          <span class="slider-range slider-min">0</span><span class="slider-range slider-max">4</span>
+                          <span class="slider-range slider-min">{{advFilterSettings?.valueMin}}</span>
+                          <span class="slider-range slider-max">{{advFilterSettings?.valueMax}}</span>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="filter-range-container">
-                          <h4 class="rangeslider-value">Batting Order: <span id="BattingOrderSliderVal">(?)</span>
+                          <h4 class="rangeslider-value">Batting Order: <span *ngIf="battingOrderFilterValue"
+                                                                             id="BattingOrderSliderVal">
+                            ({{battingOrderFilterValue[0]}} - {{battingOrderFilterValue[1]}})
+                          </span>
                           </h4>
                           <input id="BattingOrder" type="text"/>
                           <span class="slider-range slider-min">1</span><span class="slider-range slider-max">9</span>
@@ -164,13 +175,15 @@
                           <tr *ngFor="let game of advFilterSettings.games">
                             <td><input class="form-control no-border" [(ngModel)]="game.homeTeamMinValue">
                             </td>
-                            <td class="td-team"><img style="width: 100px;height: 60px"  [attr.src]="game.homeTeamLogo" (click)="onGameClick(game)"/></td>
+                            <td class="td-team"><img style="width: 100px;height: 60px" [attr.src]="game.homeTeamLogo"
+                                                     (click)="onGameClick(game)"/></td>
                             <td><input class="form-control no-border" [(ngModel)]="game.homeTeamMaxValue">
                             </td>
                             <td>@</td>
                             <td><input class="form-control no-border" [(ngModel)]="game.awayTeamMinValue">
                             </td>
-                            <td class="td-team"><img style="width: 100px;height: 60px" [attr.src]="game.awayTeamLogo"/></td>
+                            <td class="td-team"><img style="width: 100px;height: 60px" [attr.src]="game.awayTeamLogo"/>
+                            </td>
                             <td><input class="form-control no-border" [(ngModel)]="game.awayTeamMaxValue">
                             </td>
                           </tr>
