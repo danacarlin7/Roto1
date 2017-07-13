@@ -92,8 +92,8 @@ export class LineupOptimizerService {
       });
   }
 
-  generateLineups(data:any, operator:string, sport:string, since:string = 'yesterday'):Observable<any> {
-    return this.http.post(environment.api_end_point + 'api/optimizer/lineups?sport=' + sport + '&since=' + since + '&operator=' + operator, JSON.stringify(data), {headers: this.getHeaders()})
+  generateLineups(data:any, operator:string, sport:string, since:string = '', date_exact: string = '2017-07-09'):Observable<any> {
+    return this.http.post(environment.api_end_point + 'api/optimizer/lineups?sport=' + sport + '&since=' + since + '&date_exact=' + date_exact + '&operator=' + operator, JSON.stringify(data), {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
