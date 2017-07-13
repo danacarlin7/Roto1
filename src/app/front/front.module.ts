@@ -25,6 +25,7 @@ import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
+import {InjuriesComponent} from "./components/injuries/injuries.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -55,7 +56,8 @@ import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
     ExcelToolComponent,
     FAQComponent,
     AdvFilterComponent,
-    LineupPlayerFilter
+    LineupPlayerFilter,
+    InjuriesComponent
   ],
   exports: [
     FrontMainComponent
