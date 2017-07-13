@@ -13,9 +13,10 @@ import {LoggedUser} from "../../../shared/models/logged-user.model";
 })
 export class UserHeaderComponent {
   loggedUser: LoggedUser;
-
+  role: string;
   constructor(private authService: AuthService) {
     this.loggedUser = this.authService.loggedUser;
+    this.role = this.authService.getUserRole();
     this.authService.loggedUserChangeEvent.subscribe(
       user => this.loggedUser = user
     )

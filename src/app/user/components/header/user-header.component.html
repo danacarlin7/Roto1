@@ -6,6 +6,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
           <nav class="topNavbar">
             <ul class="pull-right">
+              <li routerLinkActive="active" *ngIf="role == 'provider'" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/provider-lineup">My Lineups</a>
+              </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/lineup-optimizer">Lineup Optimizer</a>
               </li>

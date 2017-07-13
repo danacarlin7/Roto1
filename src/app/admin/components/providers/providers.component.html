@@ -1,0 +1,110 @@
+<div class="page-title">
+  <h3>Site providers</h3>
+</div>
+<div id="main-wrapper">
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <div>
+        <button [routerLink]="['/admin/addprovider']" md-mini-fab>
+          <md-icon>add</md-icon>
+        </button>
+        <!--<button [routerLink]="['/admin/uploadprovider']" md-mini-fab>-->
+        <!--<md-icon>backup</md-icon>-->
+        <!--</button>-->
+        <table class="table table-striped" [mfData]="allSearch" #mf="mfDataTable" [mfRowsOnPage]="10">
+          <thead>
+          <tr>
+            <th colspan="3">
+              <input class="form-control" (keyup)="filterProvider()" [(ngModel)]="filterQuery"
+                     placeholder="Search provider"
+                     value=""/>
+            </th>
+            <th colspan="2">
+              <select class="form-control" [(ngModel)]="filterType" (change)="filterProvider()">
+                <option *ngFor="let type of selectedType" [ngValue]="type">{{type.label}}</option>
+              </select>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <mfDefaultSorter by="first_name">First Name</mfDefaultSorter>
+            </th>
+            <th>
+              Last Name
+            </th>
+            <th>
+              Email
+            </th>
+            <th>
+              Active/Deactive
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let providers of mf.data">
+            <td>{{providers.first_name}}
+              <md-icon *ngIf="providers.is_verified" md-tooltip='Verified' tooltip-position='above'
+                       class='md-24 pull-right verified'>check
+              </md-icon>
+              <md-icon *ngIf="!providers.is_verified" md-tooltip='Not Verified' tooltip-position='above'
+                       class='md-24 pull-right unverified'>clear
+              </md-icon>
+              <md-icon *ngIf="providers.is_providerspace" md-tooltip='providerspace User' tooltip-position='above'
+                       class='md-24 pull-right provider'>flag
+              </md-icon>
+            </td>
+            <td>{{providers.last_name}}</td>
+            <td>{{providers.email}}</td>
+            <td>
+              <div *ngIf="providers.is_active">
+                <md-slide-toggle (change)="changeStatus(providers._id)" checked="checked"></md-slide-toggle>
+              </div>
+              <div *ngIf="!providers.is_active">
+                <md-slide-toggle (change)="changeStatus(providers._id)"></md-slide-toggle>
+              </div>
+            </td>
+            <td class="provider-icon">
+              <a *ngIf="!providers.is_verified" md-tooltip='Verify Email' (click)="sendVerifyEmail(providers.email)">
+                <md-icon>email</md-icon>
+              </a>
+              <!--<a md-tooltip='Change Password' (click)="changePassword(providers.email)"><i class="fa fa-unlock"></i></a>-->
+            </td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr>
+            <td colspan="5">
+              <mfBootstrapPaginator class="provider_pag" [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<p-dialog header="Change Password" [(visible)]="changePasswordPopup" modal="modal" responsive="true">
+	<div class="login">
+		<div class="login-in">
+			<form (ngSubmit)="onChangePassword(f)" #f="ngForm">
+				<fieldset>
+					<small [hidden]="password.valid || (password.pristine && !f.submitted)">
+								Please Enter Minimum 6 Characters
+								</small>
+					<input minlength="6" type="password" name="password" ngModel required #password="ngModel" placeholder="Password">
+					<small [hidden]="confirmPassword.valid ||  (confirmPassword.pristine && !f.submitted)">
+								Password mismatch
+							</small>
+					<input minlength="6" type="password" name="confirmPassword" ngModel required validateEqual="password" #confirmPassword="ngModel"
+					 placeholder="Confirm Password">
+					<button type="submit" [disabled]="!f.form.valid">Change Password</button>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</p-dialog>-->

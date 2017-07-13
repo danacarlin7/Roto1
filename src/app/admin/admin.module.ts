@@ -8,6 +8,7 @@ import {MembershipPlanService} from "./services/membership-plan.service";
 import {LeftbarComponent} from "./components/left-bar/left-bar.component";
 import {AdminHeaderComponent} from "./components/header/admin-header.component";
 import {MembersComponent, AddMemberComponent, UploadMemberComponent} from "./components/members/members.component";
+import {ProvidersComponent, AddProviderComponent} from "./components/providers/providers.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {PlansComponent} from "./components/plans/plans.component";
 import {AddPlanComponent} from "./components/plans/add-plan/add-plan.component";
@@ -28,8 +29,10 @@ import {DeletePlanAlert} from "./components/plans/delete-plan/delete-plan.compon
     LeftbarComponent,
     AdminHeaderComponent,
     MembersComponent,
+    ProvidersComponent,
     DashboardComponent,
     AddMemberComponent,
+    AddProviderComponent,
     UploadMemberComponent,
     PlansComponent,
     AddPlanComponent,

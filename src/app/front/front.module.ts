@@ -11,6 +11,7 @@ import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {FrontService} from "./services/front.service";
 import {NewsComponent} from "./components/news/news.component";
 import {TestComponent} from "./components/test/test.component";
+import {ProviderLineupComponent} from "./components/provider-lineup/provider-lineup.component";
 import {ArticlesComponent} from "./components/articles/articles.component";
 import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.component";
 import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-optimizer.component";
@@ -42,6 +43,7 @@ import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
     LoginComponent,
     SignUpComponent,
     TestComponent,
+    ProviderLineupComponent,
     NewsComponent,
     ArticlesComponent,
     DailyLineupComponent,

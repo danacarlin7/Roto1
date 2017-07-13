@@ -61,7 +61,7 @@ export class LoginComponent {
           }
           else if (response.data.role == 'admin') {
             this.router.navigate(['/admin']);
-          } else if (response.data.role == 'user') {
+          } else if (response.data.role == 'user' || response.data.role == 'provider') {
             this.router.navigate(['/user']);
           }
         } else {

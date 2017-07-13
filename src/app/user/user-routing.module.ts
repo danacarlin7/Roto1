@@ -10,6 +10,7 @@ import {AuthGuard} from "../shared/services/auth.guard";
 import {GraphComponent} from "./components/graph/graph.component";
 import {UploadsComponent} from "./components/uploads/uploads.component";
 import {SettingsComponent} from "./components/settings/settings.component";
+
 /**
  * Created by Hiren on 05-06-2017.
  */
