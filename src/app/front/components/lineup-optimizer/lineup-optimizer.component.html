@@ -57,7 +57,8 @@
             <div class="col-sm-6">
               <!-- == If yo do not need red x, remove this classes "filter-icon filter-icon-x" == -->
               <div class="filter-icon filter-icon-x">
-                <input class="form-control input-sm" (input)="onSearchStrChanged($event)" type="text" placeholder="Search">
+                <input class="form-control input-sm" (input)="onSearchStrChanged($event)" type="text"
+                       placeholder="Search">
               </div>
             </div>
           </div>
@@ -108,7 +109,9 @@
             <mfDefaultSorter by="Salary">Salary</mfDefaultSorter>
           </th>
           <th>Hand</th>
-          <th><mfDefaultSorter by="BattingOrder">Batting Order</mfDefaultSorter></th>
+          <th>
+            <mfDefaultSorter by="BattingOrder">Batting Order</mfDefaultSorter>
+          </th>
           <th>
             <mfDefaultSorter by="Opponent">Opponent</mfDefaultSorter>
           </th>
@@ -168,6 +171,7 @@
     </section>
     <!--/ Table -->
     <rp-adv-filter [advFilterSettings]="advFilterSettings"
+                   [stackingData]="stackingData"
                    #advFilterPopup
                    (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-adv-filter>
   </div>

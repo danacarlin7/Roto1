@@ -43,7 +43,14 @@ export class AdvFilterComponent {
 
   filters:LineupOppFilterCriteria[];
 
+  stackingTeam1:{name:string,players:number} = {name: '-', players: 0};
+  stackingTeam2:{name:string,players:number} = {name: '-', players: 0};
+  stackingTeam3:{name:string,players:number} = {name: '-', players: 0};
+
   gamesObj:any = {};
+
+  @Input()
+  stackingData:{team:string,teamId:number}[];
 
   @Output()
   filterCriteriaChanged:EventEmitter<LineupOppFilterCriteria[]> = new EventEmitter<LineupOppFilterCriteria[]>();
@@ -285,6 +292,21 @@ export class AdvFilterComponent {
 
   onGameClick(game:Game) {
     console.log("Game => ", game);
+  }
+
+  getStakingData():{name:string,players:number}[] {
+    let data = [];
+    if (this.stackingTeam1.name != '-') {
+      data.push(this.stackingTeam1);
+    }
+    if (this.stackingTeam2.name != '-') {
+      data.push(this.stackingTeam2);
+    }
+    if (this.stackingTeam3.name != '-') {
+      data.push(this.stackingTeam3);
+    }
+    console.log("stacking data => ",data);
+    return data;
   }
 
 }

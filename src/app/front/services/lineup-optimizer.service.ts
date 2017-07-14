@@ -92,7 +92,7 @@ export class LineupOptimizerService {
       });
   }
 
-  generateLineups(data:any, operator:string, sport:string, since:string = '', date_exact: string = '2017-07-09'):Observable<any> {
+  generateLineups(data:any, operator:string, sport:string, since:string = '', date_exact:string = '2017-07-09'):Observable<any> {
     return this.http.post(environment.api_end_point + 'api/optimizer/lineups?sport=' + sport + '&since=' + since + '&date_exact=' + date_exact + '&operator=' + operator, JSON.stringify(data), {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
@@ -103,6 +103,20 @@ export class LineupOptimizerService {
 
   retrieveAdvFilterSettings(operator:string, sport:string, slateId:number):Observable<any> {
     let url = environment.api_end_point + 'api/optimizer/filter?date_exact=2017-07-09&sport=' + sport + '&operator=' + operator;
+    if (slateId != 0) {
+      url += '&slate_id=' + slateId;
+    }
+    return this.http.get(url, {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
+  retrieveStackingData(sport:string, slateId:number):Observable<any> {
+    let url = environment.api_end_point + 'api/optimizer/stacking?date_exact=2017-07-09&sport=' + sport;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
     }

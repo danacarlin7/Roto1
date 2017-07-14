@@ -211,19 +211,24 @@
                     <tr>
                       <td>Select Stack</td>
                       <td>
-                        <select class="form-control">
-                          <option>1</option>
-                          <option>2</option>
+                        <select class="form-control" [(ngModel)]="stackingTeam1.name">
+                          <option [value]="'-'" selected>Select team</option>
+                          <option *ngFor="let team of stackingData" [value]="team.team">{{team.team}}</option>
                         </select>
                       </td>
                       <td>
                         <nav aria-label="Page navigation">
                           <ul class="pagination">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            <li [class.active]="stackingTeam1.players == 1"
+                                (click)="stackingTeam1.players = 1"><a>1</a></li>
+                            <li [class.active]="stackingTeam1.players == 2"
+                                (click)="stackingTeam1.players = 2"><a>2</a></li>
+                            <li [class.active]="stackingTeam1.players == 3"
+                                (click)="stackingTeam1.players = 3"><a>3</a></li>
+                            <li [class.active]="stackingTeam1.players == 4"
+                                (click)="stackingTeam1.players = 4"><a>4</a></li>
+                            <li [class.active]="stackingTeam1.players == 5"
+                                (click)="stackingTeam1.players = 5"><a>5</a></li>
                           </ul>
                         </nav>
                       </td>
@@ -231,19 +236,24 @@
                     <tr>
                       <td>Select Stack</td>
                       <td>
-                        <select class="form-control">
-                          <option>1</option>
-                          <option>2</option>
+                        <select class="form-control" [(ngModel)]="stackingTeam2.name">
+                          <option [value]="'-'" selected>Select team</option>
+                          <option *ngFor="let team of stackingData" [value]="team.team">{{team.team}}</option>
                         </select>
                       </td>
                       <td>
                         <nav aria-label="Page navigation">
                           <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
+                            <li [class.active]="stackingTeam2.players == 1"
+                                (click)="stackingTeam2.players = 1"><a>1</a></li>
+                            <li [class.active]="stackingTeam2.players == 2"
+                                (click)="stackingTeam2.players = 2"><a>2</a></li>
+                            <li [class.active]="stackingTeam2.players == 3"
+                                (click)="stackingTeam2.players = 3"><a>3</a></li>
+                            <li [class.active]="stackingTeam2.players == 4"
+                                (click)="stackingTeam2.players = 4"><a>4</a></li>
+                            <li [class.active]="stackingTeam2.players == 5"
+                                (click)="stackingTeam2.players = 5"><a>5</a></li>
                           </ul>
                         </nav>
                       </td>
@@ -251,19 +261,24 @@
                     <tr>
                       <td>Select Stack</td>
                       <td>
-                        <select class="form-control">
-                          <option>1</option>
-                          <option>2</option>
+                        <select class="form-control" [(ngModel)]="stackingTeam3.name">
+                          <option [value]="'-'">Select team</option>
+                          <option *ngFor="let team of stackingData" [value]="team.team">{{team.team}}</option>
                         </select>
                       </td>
                       <td>
                         <nav aria-label="Page navigation">
                           <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li class="active"><a href="#">5</a></li>
+                            <li [class.active]="stackingTeam3.players == 1"
+                                (click)="stackingTeam3.players = 1"><a>1</a></li>
+                            <li [class.active]="stackingTeam3.players == 2"
+                                (click)="stackingTeam3.players = 2"><a>2</a></li>
+                            <li [class.active]="stackingTeam3.players == 3"
+                                (click)="stackingTeam3.players = 3"><a>3</a></li>
+                            <li [class.active]="stackingTeam3.players == 4"
+                                (click)="stackingTeam3.players = 4"><a>4</a></li>
+                            <li [class.active]="stackingTeam3.players == 5"
+                                (click)="stackingTeam3.players = 5"><a>5</a></li>
                           </ul>
                         </nav>
                       </td>

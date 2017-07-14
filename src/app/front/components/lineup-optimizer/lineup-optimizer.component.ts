@@ -31,6 +31,7 @@ export class LineupOptimizerComponent {
   advFilterSettings:AdvFilterSettings;
   isLoading:boolean;
   games:Game[];
+  stackingData:{team:string,teamId:number}[];
 
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
@@ -46,6 +47,7 @@ export class LineupOptimizerComponent {
     this.getSlates();
     this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
     this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
+    this.getStackingData(this.selectedSport, this.selectedSlate);
   }
 
   operatorChanged(name:string) {
@@ -122,6 +124,20 @@ export class LineupOptimizerComponent {
       )
   }
 
+  getStackingData(sport:string, slateId:number) {
+    this.optimizerService.retrieveStackingData(sport, slateId)
+      .subscribe(
+        response => {
+          if (response.statusCode == 200) {
+            this.stackingData = response.data;
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+        }
+      )
+  }
+
   selectedGameChanged(event:any) {
     this.selectedGame = event.target.value;
     this.applyFilters();
@@ -191,6 +207,20 @@ export class LineupOptimizerComponent {
         }
       }
     );
+    let stackData = this.advFilterPopup.getStakingData();
+    if (stackData && stackData.length) {
+      stackData.forEach(
+        stackTeam => {
+          teams.forEach(team => {
+            if (stackTeam.name == team.teamName) {
+              console.log("in stack team  old =>", team.maxPlayers);
+              team.minPlayers = stackTeam.players;
+              team.maxPlayers = stackTeam.players;
+              console.log("in stack team  new =>", team.maxPlayers);
+            }
+          })
+        })
+    }
     return teams;
   }
 
