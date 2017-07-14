@@ -6,6 +6,7 @@ import {AdvFilterSettings, Game} from "../../models/adv-filter-setting.model";
 import {LineupOppFilterCriteria} from "../../models/filter-criteria.model";
 import {AdvFilterComponent} from "./adv-filter/adv-filter.component";
 import {LineupOppFilterConstants} from "../../constants/lineup-opp.constants";
+import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
 /**
  * Created by Hiren on 02-07-2017.
  */
@@ -25,6 +26,7 @@ export class LineupOptimizerComponent {
   selectedSlate:number = 0;
   selectedGame:number = 0;
   slates:Slate[];
+  allPlayers:OptimizerPlayer[];
   players:OptimizerPlayer[];
   advFilterSettings:AdvFilterSettings;
   isLoading:boolean;
@@ -86,7 +88,8 @@ export class LineupOptimizerComponent {
       .subscribe(
         response => {
           this.isLoading = false;
-          this.players = response as OptimizerPlayer[];
+          this.allPlayers = response as OptimizerPlayer[];
+          this.players = this.allPlayers.map(player => player);
           console.log("No of players => ", this.players.length);
         },
         error => {
@@ -193,10 +196,20 @@ export class LineupOptimizerComponent {
 
   btnExcludePlayerClicked(player:OptimizerPlayer) {
     player.isExcluded = true;
+    this.filterPlayers(this.searchStr);
   }
 
   onAdvFilterCriteriaChangedEvent(filters:LineupOppFilterCriteria[]) {
     this.applyFilters();
   }
 
+  onSearchStrChanged(event) {
+    this.searchStr = event.target.value;
+    this.filterPlayers(this.searchStr);
+  }
+
+  filterPlayers(searchStr:string = "") {
+    let filters = new LineupPlayerFilter();
+    this.players = filters.transform(this.allPlayers, ['FirstName', 'LastName', 'fullName'], searchStr);
+  }
 }

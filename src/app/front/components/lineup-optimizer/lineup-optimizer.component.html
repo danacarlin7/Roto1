@@ -57,7 +57,7 @@
             <div class="col-sm-6">
               <!-- == If yo do not need red x, remove this classes "filter-icon filter-icon-x" == -->
               <div class="filter-icon filter-icon-x">
-                <input class="form-control input-sm" [(ngModel)]="searchStr" type="text" placeholder="Search">
+                <input class="form-control input-sm" (input)="onSearchStrChanged($event)" type="text" placeholder="Search">
               </div>
             </div>
           </div>
@@ -89,47 +89,52 @@
 
     <!-- Table -->
     <section class="my-section table-container table-responsive">
-      <table class="table main-table table-striped td-center">
+      <table class="table main-table table-striped td-center" [mfData]="players" #records="mfDataTable"
+             [mfRowsOnPage]="10">
         <thead>
         <tr>
           <th>Lock</th>
           <th>Exclude</th>
-          <th>Player Name</th>
-          <th>Position</th>
-          <th>Team</th>
-          <th>Salary</th>
+          <th>
+            <mfDefaultSorter by="FirstName">Player Name</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="Position">Position</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="Team">Team</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="Salary">Salary</mfDefaultSorter>
+          </th>
           <th>Hand</th>
-          <th>Batting Order</th>
-          <th>Opponent</th>
-          <th>vs Pitcher</th>
-          <th>Runs</th>
-          <th>O/U</th>
-          <th>Line</th>
+          <th><mfDefaultSorter by="BattingOrder">Batting Order</mfDefaultSorter></th>
+          <th>
+            <mfDefaultSorter by="Opponent">Opponent</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="vsPitcher">vs Pitcher</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="Runs">Runs</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="OverUnder">O/U</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="Line">Line</mfDefaultSorter>
+          </th>
           <th>Exposure</th>
-          <th>Projection</th>
-          <th>Value</th>
+          <th>
+            <mfDefaultSorter by="Points">Projection</mfDefaultSorter>
+          </th>
+          <th>
+            <mfDefaultSorter by="Value">Value</mfDefaultSorter>
+          </th>
         </tr>
         </thead>
         <tbody>
-        <!--<tr>
-          <td class="text-center"><img src="../../../../assets/img/Key.png"/></td>
-          <td><a href="#"><img src="../../../../assets/img/x-red.png"/></a></td>
-          <td>Blake Grifin Blake Grifin</td>
-          <td>PF</td>
-          <td>Manchester Utd</td>
-          <td>$9100</td>
-          <td>HOU</td>
-          <td>PF</td>
-          <td>LAC</td>
-          <td></td>
-          <td>22.5</td>
-          <td>HOU</td>
-          <td></td>
-          <td><input class="form-control input-sm" type="text" placeholder="100%"></td>
-          <td><input class="form-control input-sm" type="text" placeholder="100%"></td>
-          <td></td>
-        </tr>-->
-        <tr *ngFor="let player of players | lineupOppFilter:['FirstName','LastName','fullName']:searchStr">
+        <tr *ngFor="let player of records.data">
           <td class="text-center"><img src="../../../../assets/img/Key.png"/></td>
           <td><img src="../../../../assets/img/x-red.png"
                    (click)="btnExcludePlayerClicked(player)"
@@ -152,6 +157,13 @@
           <td>{{player.Value ? player.Value : '-'}}</td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="16">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
       </table>
     </section>
     <!--/ Table -->
