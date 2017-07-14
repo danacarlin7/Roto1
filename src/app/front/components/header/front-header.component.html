@@ -14,7 +14,9 @@
               </li>
               <li><a href="#">Extensions</a></li>
               <li><a href="#">Contest Analyzer</a></li>
-              <li><a href="#">Injury Feeds</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/injuries">Injury Feeds</a>
+              </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/basics">DFS Basics</a>
               </li>
