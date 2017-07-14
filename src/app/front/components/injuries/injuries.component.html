@@ -63,63 +63,68 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active">
-                    <div class="no-news-msg" *ngIf="!allInjuriesRecords || !allInjuriesRecords.length">No injuries data available !!</div>
+                    <div class="no-news-msg" *ngIf="!allInjuriesRecords || !allInjuriesRecords.length">No data available !!</div>
                     <div class="newsItmWrap">
-                      <div class="newsItm" *ngFor="let injury of allInjuriesRecords | paginate: {
+                      <div class="newsItm" *ngFor="let inj of allInjuriesRecords | paginate: {
                                                       itemsPerPage: 10,
                                                       currentPage: currentPage}">
                         <div class="newsItmTp">
                           <div class="newsItmNameWrap">
                             <div class="newsItmName">
                               <span class="newsImg">
-                                <img [attr.src]="injury?.player_image" alt=""
+                                <img [attr.src]="inj?.player_image ? inj.player_image : 'http://static.fantasydata.com/headshots/mlb/low-res/0.png'" alt=""
                                      style="width: 70px;height: 70px"
                                      class="img-responsive"/></span>
-                              <span class="newsName"><a href="javascript:void(0)">{{injury?.first_name}} {{injury?.last_name}}</a></span>
+                              <span class="newsName"><a href="javascript:void(0)">{{inj?.first_name}} {{inj?.last_name}}</a></span>
+                              <span class="news-position"><a href="javascript:void(0)">{{inj?.position}} </a></span>
+                              <span class="news-position"><a href="javascript:void(0)">{{inj?.team_name}} </a></span>
+
                             </div>
                             <div class="newsItmDate">
-                              <p>{{injury?.injury?.return_date | date : 'MMM dd, yyyy h:m a'}}</p>
+                              <p>{{inj?.injury_news_date | date : 'MMM dd, yyyy h:m a'}}</p>
                             </div>
                           </div>
-                          <div class="newsWrap"  *ngIf="injury?.injury?.status">
-                            <h2><a>{{injury?.injury?.detail}}</a></h2>
-                            <p style="text-align: justify">{{injury?.injury?.location}}</p>
-                            <p style="text-align: justify">{{injury?.injury?.return_date}}</p>
-                            <p style="text-align: justify">{{injury?.injury?.type}}</p>
-                            <p style="text-align: justify">{{injury?.injury?.status}}</p>
+                          <div class="newsWrap">
+                            <h2><a>{{inj?.injury_headline}}</a></h2>
+                            <p style="text-align: justify">{{inj?.injury_notes}}</p>
+                            <h5 *ngIf="inj.injury_analysis">Analysis</h5>
+                            <p *ngIf="inj.injury_analysis" style="text-align: justify">{{inj?.injury_analysis}}</p>
                             <!--<i class="newsReprtr">As reported by RotoGrinders Player Projections</i>-->
                           </div>
                         </div>
-                        <!--<div class="newsItmBtm">
+                        <div class="newsItmBtm">
                           <div class="newsItmBtmLft">
-                            <div class="newsItmBtmLft1">
-                              <span class="icnWrapperS"><img src="../../../../assets/images/news_icn1.png" alt=""
-                                                             class="img-responsive"/></span><span class="txtWrapper">86.14 Proj</span>
-                            </div>
-                            <div class="newsItmBtmLft2">
-                              <span class="txtWrapper">10.90 pt/$</span>
-                            </div>
-                            <div class="newsItmBtmLft3">
-                              <div class="">
-                                <span class="txtWrapper">$7,900</span>
-                              </div>
-                              <div class="">
-                                <span class="icnWrapperS"><img src="../../../../assets/images/contests_icn1.png" alt=""
-                                                               class="img-responsive"/></span><span class="txtWrapper">93.72 Proj</span>
-                              </div>
-                            </div>
-                            <div class="newsItmBtmLft4">
-                              <span class="txtWrapper">13.58 pt/$</span>
+                            <!--<div class="newsItmBtmLft1">-->
+                              <!--&lt;!&ndash;<span class="icnWrapperS"><img src="../../../../assets/images/news_icn1.png" alt=""&ndash;&gt;-->
+                                                             <!--&lt;!&ndash;class="img-responsive"/></span><span class="txtWrapper">86.14 Proj</span>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--<div class="newsItmBtmLft2">-->
+                              <!--<span class="txtWrapper">10.90 pt/$</span>-->
+                            <!--</div>-->
+                            <!--<div class="newsItmBtmLft3">-->
+                              <!--<div class="">-->
+                                <!--<span class="txtWrapper">$7,900</span>-->
+                              <!--</div>-->
+                              <!--<div class="">-->
+                                <!--<span class="icnWrapperS"><img src="../../../../assets/images/contests_icn1.png" alt=""-->
+                                                               <!--class="img-responsive"/></span><span class="txtWrapper">93.72 Proj</span>-->
+                              <!--</div>-->
+                            <!--</div>-->
+                            <div class="newsItmBtmLft4" *ngIf="inj.injury.return_date">
+                              <span class="injury-data">Return Date: </span>
+                              <span class="txtWrapper">{{inj?.injury?.return_date}}</span>
                             </div>
                             <div class="newsItmBtmLft5">
-                              <span class="txtWrapper">$6,900</span>
+                              <span class="injury-data">Injury : </span>
+                              <span class="txtWrapper">{{inj?.injury?.type}}</span>
                             </div>
                           </div>
                           <div class="newsItmBtmRght">
-                            <span class="icnWrapperS"><img src="../../../../assets/images/news_icn2.png" alt=""
-                                                           class="img-responsive"/></span><span class="txtWrapper">pga general-strategy</span>
+                            <!--<span class="icnWrapperS"><img src="../../../../assets/images/news_icn2.png" alt=""-->
+                                                           <!--class="img-responsive"/></span>-->
+                            <span class="txtWrapper injury-status">{{inj?.injury?.status}}</span>
                           </div>
-                        </div>-->
+                        </div>
                       </div>
                     </div>
 

@@ -17,4 +17,9 @@ export interface Injuries {
   updated_at: Date;
   created_at: Date;
   player_image: string;
+  injury_news_date: Date;
+  injury_priority: number;
+  injury_headline: string;
+  injury_notes: string;
+  injury_analysis: string;
 }
