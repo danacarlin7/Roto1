@@ -14,6 +14,9 @@ import {ForgotPasswordComponent} from "./components/forgot-password/forgot-passw
 import {DFSBasicsComponent} from "./components/dfs-basics/dfs-basics.component";
 import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
+
+import {ProviderComponent} from "./components/provider/provider.component";
+
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -34,7 +37,8 @@ const routes:Routes = [
       <Route>{path: 'basics', component: DFSBasicsComponent},
       <Route>{path: 'excel-tool', component: ExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
-      <Route>{path: 'lineup-optimizer', canActivate: [AuthGuard], component: LineupOptimizerComponent}
+      <Route>{path: 'lineup-optimizer', canActivate: [AuthGuard], component: LineupOptimizerComponent},
+      <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent}
     ]
   }
 ];
