@@ -92,4 +92,16 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()))
   }
 
+  verifyEmail(data:any) {
+    return this.http.post(environment.api_end_point + 'getToken',data)
+      .map(res => res.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  changePassword(data) {
+    return this.http.post(environment.api_end_point + 'verifyToken', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()))
+  }
+
 }

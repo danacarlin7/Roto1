@@ -26,6 +26,8 @@ import {FAQComponent} from "./components/faq/faq.component";
 import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
 import {InjuriesComponent} from "./components/injuries/injuries.component";
+import {ChangePasswordComponent} from "./components/change-password/change-password.component";
+import {VerifyTokenComponent} from "./components/forgot-password/verify-token.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -57,7 +59,9 @@ import {InjuriesComponent} from "./components/injuries/injuries.component";
     FAQComponent,
     AdvFilterComponent,
     LineupPlayerFilter,
-    InjuriesComponent
+    InjuriesComponent,
+    ChangePasswordComponent,
+    VerifyTokenComponent
   ],
   exports: [
     FrontMainComponent

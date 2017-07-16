@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ArticleService} from "../../services/article.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {ArticleService} from "../../services/article.service";
 })
 export class ArticleComponent implements OnInit {
 
-  constructor(private activatedR:ActivatedRoute, private articleService:ArticleService) {
+  constructor(private activatedR:ActivatedRoute,private router:Router , private articleService:ArticleService) {
   }
 
   id:any;
@@ -29,4 +29,7 @@ export class ArticleComponent implements OnInit {
     );
   }
 
+  btnBackClick(){
+    this.router.navigate(['/articles'])
+  }
 }

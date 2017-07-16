@@ -16,6 +16,9 @@ import {DFSBasicsComponent} from "./components/dfs-basics/dfs-basics.component";
 import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 import {InjuriesComponent} from "./components/injuries/injuries.component";
+import {ChangePasswordComponent} from "./components/change-password/change-password.component";
+import {VerifyTokenComponent} from "./components/forgot-password/verify-token.component";
+import {ArticleComponent} from "./components/article/article.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -26,6 +29,8 @@ const routes:Routes = [
     data: {title: 'RotoPose - Home'},
     children: [
       <Route>{path: '', component: FrontHomeComponent},
+      <Route>{path: ':token/verify', component: VerifyTokenComponent},
+      <Route>{path: ':token/change-password', component: ChangePasswordComponent},
       <Route>{path: 'login', component: LoginComponent},
       <Route>{path: 'signup', component: SignUpComponent},
       <Route>{path: 'forgot-password', component: ForgotPasswordComponent},
@@ -34,6 +39,7 @@ const routes:Routes = [
       <Route>{path: 'provider-lineup', canActivate: [AuthGuard], component: ProviderLineupComponent},
       <Route>{path: 'news', component: NewsComponent},
       <Route>{path: 'lineups', component: DailyLineupComponent},
+      <Route>{path: 'articles/:id', component: ArticleComponent},
       <Route>{path: 'articles', component: ArticlesComponent},
       <Route>{path: 'basics', component: DFSBasicsComponent},
       <Route>{path: 'excel-tool', component: ExcelToolComponent},

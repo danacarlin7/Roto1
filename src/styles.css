@@ -118,3 +118,9 @@ ul.pagination.pull-right{
 mfDefaultSorter a{
   color: #000;
 }
+
+
+.article-details .row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}

@@ -16,11 +16,16 @@ export class LoginComponent {
 
   loginForm:FormGroup;
   redirectUrl:String;
-
+  msg:string;
   constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
     this.activatedRoute.queryParams.subscribe(
       (param:Params) => {
         this.redirectUrl = param['redirect'];
+        if(param.hasOwnProperty('info')){
+          if(param['info'] == 'pc'){
+            this.msg = 'Your password is successfully updated.'
+          }
+        }
       }
     )
   }
