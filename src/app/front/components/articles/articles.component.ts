@@ -42,9 +42,9 @@ export class ArticlesComponent implements OnInit {
   related:Object = {};
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
-    }
+    // if (!this.authService.isLoggedIn()) {
+    //   this.router.navigate(['/login']);
+    // }
 
     this.activeTab = 'trending';
     this.subActiveTab = 'week';
