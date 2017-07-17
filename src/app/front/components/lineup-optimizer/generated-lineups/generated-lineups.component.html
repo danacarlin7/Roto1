@@ -1,0 +1,110 @@
+<div class="container-fluid container-main">
+
+  <!-- Title -->
+  <section class="my-section title-container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="content-title">Crunchs_1<a class="btn btn-sm" href="#"><img
+          src="../../../../../assets/images/pen.png" alt="edit"/></a></h4>
+      </div>
+    </div>
+  </section>
+  <!--/ Title -->
+
+
+  <!-- Main Content -->
+  <div class="row section-gray gen-lineup-cont">
+    <!-- Right side -->
+    <div class="col-lg-3 col-md-5 col-sm-5 col-xs-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="head-black text-center">
+            <h4>{{usedPlayers?.length}} Players Used | {{lineups?.length}} Lineups</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="btn-group btn-group-justified btn-group-noradius filter-buttons" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-lg btn-grayl-grayl active">ALL</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-lg btn-grayl-grayl">P</button>
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-lg btn-grayl-grayl">H</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 table-responsive">
+          <table class="table table-black table-gen-lin">
+            <tr *ngFor="let player of usedPlayers">
+              <td width="30"><a><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
+              <td>
+                <img src="../../../../../assets/images/team_logo.png" alt="team_logo"/>
+                <span>{{player.fullName}}</span><span class="light-dot green-dot"></span>
+              </td>
+              <td width="90">{{player.exposure}}({{player.numOfLineups}})</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- /Right side -->
+
+    <!-- Left side -->
+    <div class="col-lg-9 col-md-7 col-sm-7 col-xs-12">
+      <div class="row" style="display: flex;flex-wrap: wrap">
+        <div class="col-lg-6 col-md-12 table-responsive" *ngFor="let lineup of lineups">
+          <table class="table df-table black-head table-hover">
+            <thead>
+            <tr>
+              <th width="50">Pos</th>
+              <th>Player Name</th>
+              <th width="80">B. Ord</th>
+              <th>Opp</th>
+              <th width="80">Proj</th>
+              <th width="80">Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let player of lineup.players">
+              <td>P</td>
+              <td>{{player.fullName}}</td>
+              <td>{{getBattingOrderByPlayerId(player.id)}}<span class="light-dot green-dot"></span></td>
+              <td><b>TB</b>@StL</td>
+              <td>{{player.fppg.toFixed(2)}}</td>
+              <td>${{player.salary}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="row table-footer-total">
+            <div class="col-sm-7">
+              <span>Totals</span>
+            </div>
+            <div class="col-sm-5 text-right">
+              <div class="total-val"><span>{{lineup.totalFantasyPoints.toFixed(2)}}</span></div>
+              <div class="total-val"><span>${{lineup.totalSalary}}</span></div>
+            </div>
+          </div>
+          <div class="row table-footer-draft">
+            <div class="col-sm-6">
+              <span>Draftkings_arcade_1</span>
+            </div>
+            <div class="col-sm-6 text-right">
+              <span>FANTASY [ CRUNCHER ]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Left side -->
+  </div>
+  <!-- Main Content -->
+</div>

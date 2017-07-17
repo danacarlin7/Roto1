@@ -28,6 +28,7 @@ import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
 import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {VerifyTokenComponent} from "./components/forgot-password/verify-token.component";
+import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -61,7 +62,8 @@ import {VerifyTokenComponent} from "./components/forgot-password/verify-token.co
     LineupPlayerFilter,
     InjuriesComponent,
     ChangePasswordComponent,
-    VerifyTokenComponent
+    VerifyTokenComponent,
+    GeneratedLineupsComponent
   ],
   exports: [
     FrontMainComponent

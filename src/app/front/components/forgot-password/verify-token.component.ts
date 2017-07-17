@@ -20,6 +20,19 @@ export class VerifyTokenComponent {
     this.activatedRoute.params.subscribe(
       param => {
         this.token = param['token'];
+        let checkNoPassword = this.token.split('_');
+        if (checkNoPassword[0] == 'pass') {
+          this.router.navigate([checkNoPassword[1] + '/change-password']);
+        } else {
+          /*this.services.verifyToken(this.token).subscribe(
+            success => {
+              this.router.navigate(['/login', {'token': 'abcs'}]);
+            },
+            error => {
+              console.log("http error => ", error);
+            }
+          )*/
+        }
       }
     )
   }

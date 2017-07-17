@@ -19,6 +19,7 @@ import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {VerifyTokenComponent} from "./components/forgot-password/verify-token.component";
 import {ArticleComponent} from "./components/article/article.component";
+import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -45,6 +46,7 @@ const routes:Routes = [
       <Route>{path: 'excel-tool', component: ExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
       <Route>{path: 'lineup-optimizer', canActivate: [AuthGuard], component: LineupOptimizerComponent},
+      <Route>{path: 'generated-lineups', canActivate: [AuthGuard], component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
     ]
   }

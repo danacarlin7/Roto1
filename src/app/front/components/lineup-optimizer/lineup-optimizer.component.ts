@@ -7,6 +7,8 @@ import {LineupOppFilterCriteria} from "../../models/filter-criteria.model";
 import {AdvFilterComponent} from "./adv-filter/adv-filter.component";
 import {LineupOppFilterConstants} from "../../constants/lineup-opp.constants";
 import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
+import {Router} from "@angular/router";
+import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 /**
  * Created by Hiren on 02-07-2017.
  */
@@ -35,7 +37,7 @@ export class LineupOptimizerComponent {
 
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
-  constructor(private optimizerService:LineupOptimizerService) {
+  constructor(private optimizerService:LineupOptimizerService, private router:Router) {
 
   }
 
@@ -156,12 +158,19 @@ export class LineupOptimizerComponent {
   }
 
   onBtnGenerateLineupClick() {
+    this.isLoading = true;
     this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)
       .subscribe(
         response => {
-          console.log("GenerateLineup response => ", response);
+          if (response.statusCode == 200) {
+            this.isLoading = false;
+            console.log("GenerateLineup response => ", response);
+            this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
+            this.router.navigate(['generated-lineups']);
+          }
         },
         error => {
+          this.isLoading = false;
           console.log("GenerateLineup response error=> ", error);
         }
       )

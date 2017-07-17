@@ -8,6 +8,7 @@ import {OptimizerPlayer} from "../models/player.model";
 import {FilterCriteria} from "../../user/models/filter-criteria.model";
 import {LineupOppFilterCriteria} from "../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../constants/lineup-opp.constants";
+import {GeneratedLineupRecords} from "../models/generated-lineup.model";
 /**
  * Created by Hiren on 05-07-2017.
  */
@@ -18,6 +19,16 @@ export class LineupOptimizerService {
   players:OptimizerPlayer[];
   playersSubject:Subject<OptimizerPlayer[]> = new Subject<OptimizerPlayer[]>();
   players$:Observable<OptimizerPlayer[]> = this.playersSubject.asObservable();
+
+  private _generatedLineups:GeneratedLineupRecords;
+
+  get generatedLineups():GeneratedLineupRecords {
+    return this._generatedLineups;
+  }
+
+  set generatedLineups(value:GeneratedLineupRecords) {
+    this._generatedLineups = value;
+  }
 
   constructor(private http:Http, private authService:AuthService) {
 
@@ -132,6 +143,17 @@ export class LineupOptimizerService {
     if (error.statusCode == 401) {
       this.authService.logout();
     }
+  }
+
+  getBattingOrderByPlayerId(id:number):number {
+    let order:number = 0;
+    this.players.forEach(player => {
+      if (player.PlayerID == id) {
+        order = player.BattingOrder;
+        return;
+      }
+    });
+    return order;
   }
 
   applyFilters(filters:LineupOppFilterCriteria[]) {
