@@ -61,7 +61,7 @@
     <!-- Left side -->
     <div class="col-lg-9 col-md-7 col-sm-7 col-xs-12">
       <div class="row" style="display: flex;flex-wrap: wrap">
-        <div class="col-lg-6 col-md-12 table-responsive" *ngFor="let lineup of lineups">
+        <div class="col-lg-6 col-md-12 table-responsive" *ngFor="let lineup of lineups;let index = index">
           <table class="table df-table black-head table-hover">
             <thead>
             <tr>
@@ -75,10 +75,10 @@
             </thead>
             <tbody>
             <tr *ngFor="let player of lineup.players">
-              <td>P</td>
+              <td>{{player.position}}</td>
               <td>{{player.fullName}}</td>
               <td>{{getBattingOrderByPlayerId(player.id)}}<span class="light-dot green-dot"></span></td>
-              <td><b>TB</b>@StL</td>
+              <td><b>{{getOpponentNameByPlayerId(player.id)}}</b>@{{getHomeTeamByPlayerId(player.id)}}</td>
               <td>{{player.fppg.toFixed(2)}}</td>
               <td>${{player.salary}}</td>
             </tr>
@@ -95,10 +95,10 @@
           </div>
           <div class="row table-footer-draft">
             <div class="col-sm-6">
-              <span>Draftkings_arcade_1</span>
+              <span>{{getSlateName()}}</span>
             </div>
             <div class="col-sm-6 text-right">
-              <span>FANTASY [ CRUNCHER ]</span>
+              <span>LINEUP - {{index}}</span>
             </div>
           </div>
         </div>

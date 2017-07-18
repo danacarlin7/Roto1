@@ -159,6 +159,15 @@ export class LineupOptimizerComponent {
 
   onBtnGenerateLineupClick() {
     this.isLoading = true;
+    let activeSlate = this.slates.filter(slate => {
+      if (slate.SlateID == this.selectedSlate) {
+        return true;
+      }
+    });
+    if (activeSlate && activeSlate.length) {
+      this.optimizerService.selectedSlate = activeSlate[0];
+    }
+
     this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)
       .subscribe(
         response => {

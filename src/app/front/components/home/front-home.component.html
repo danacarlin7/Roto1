@@ -882,55 +882,17 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="twtr">
               <div class="owl-carousel owl-theme socialDetailsSlider">
-                <div class="item">
+                <div class="item" *ngFor="let tweet of twitterFeeds">
                   <div class="socialImgBx">
-                    <img src="../../../../assets/images/social_img.png" alt="" class="img-responsive"/>
+                    <img [attr.src]="tweet?.user?.profile_background_image_url_https"
+                         style="width:290px;height: 180px"
+                         alt="" class="img-responsive"/>
                   </div>
                   <div class="socialTxtBx">
-                    <h1 class="socialNameWrapper"><span class="socialName">Social</span><span
-                      class="socialIcn"><img src="../../../../assets/images/twitter_icn_white.png" alt=""
-                                             class="img-responsive"/></span></h1>
-                    <p class="socialMsg">Lorem ipsum iusto odio dignissimos ducimus qui blanditiis
-                      http://abxjfhkjdsLorem ipsuusto odio dignissimos ducimus qui blanitiis
-                      http://abxjfhkjdsLorem ipsum iusto odio dignissimos ducimus qui blanditiis
-                      http://abxjfhkjdsLorem ipsumiusto odio dignissmos ducimus qui
-                      blanditiis </p>
-                    <a class="socialLink" href="#">http://abxjfhkjds http://abxjfhkjds</a>
-                    <p class="hrsAgo">19 hours ago</p>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="socialImgBx">
-                    <img src="../../../../assets/images/social_img1.png" alt="" class="img-responsive"/>
-                  </div>
-                  <div class="socialTxtBx">
-                    <h1 class="socialNameWrapper"><span class="socialName">Social</span><span
-                      class="socialIcn"><img src="../../../../assets/images/twitter_icn_white.png" alt=""
-                                             class="img-responsive"/></span></h1>
-                    <p class="socialMsg">Lorem ipsum iusto odio dignissimos ducimus qui blanditiis
-                      http://abxjfhkjdsLorem ipsuusto odio dignissimos ducimus qui blanitiis
-                      http://abxjfhkjdsLorem ipsum iusto odio dignissimos ducimus qui blanditiis
-                      http://abxjfhkjdsLorem ipsumiusto odio dignissmos ducimus qui
-                      blanditiis </p>
-                    <a class="socialLink" href="#">http://abxjfhkjds http://abxjfhkjds</a>
-                    <p class="hrsAgo">19 hours ago</p>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="socialImgBx">
-                    <img src="../../../../assets/images/social_img.png" alt="" class="img-responsive"/>
-                  </div>
-                  <div class="socialTxtBx">
-                    <h1 class="socialNameWrapper"><span class="socialName">Social</span><span
-                      class="socialIcn"><img src="../../../../assets/images/twitter_icn_white.png" alt=""
-                                             class="img-responsive"/></span></h1>
-                    <p class="socialMsg">Lorem ipsum iusto odio dignissimos ducimus qui blanditiis
-                      http://abxjfhkjdsLorem ipsuusto odio dignissimos ducimus qui blanitiis
-                      http://abxjfhkjdsLorem ipsum iusto odio dignissimos ducimus qui blanditiis
-                      http://abxjfhkjdsLorem ipsumiusto odio dignissmos ducimus qui
-                      blanditiis </p>
-                    <a class="socialLink" href="#">http://abxjfhkjds http://abxjfhkjds</a>
-                    <p class="hrsAgo">19 hours ago</p>
+                    <h1 class="socialNameWrapper"><span class="socialName">{{tweet?.user.name}}</span><span class="socialIcn"></span></h1>
+                    <p class="socialMsg">{{tweet?.text}}</p>
+                    <!--<a class="socialLink" href="#">http://abxjfhkjds http://abxjfhkjds</a>-->
+                    <p class="hrsAgo">{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</p>
                   </div>
                 </div>
               </div>

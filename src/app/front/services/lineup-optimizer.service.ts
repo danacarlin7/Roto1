@@ -9,6 +9,7 @@ import {FilterCriteria} from "../../user/models/filter-criteria.model";
 import {LineupOppFilterCriteria} from "../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../constants/lineup-opp.constants";
 import {GeneratedLineupRecords} from "../models/generated-lineup.model";
+import {Slate} from "../models/slate.model";
 /**
  * Created by Hiren on 05-07-2017.
  */
@@ -16,6 +17,7 @@ import {GeneratedLineupRecords} from "../models/generated-lineup.model";
 @Injectable()
 export class LineupOptimizerService {
 
+  selectedSlate:Slate;
   players:OptimizerPlayer[];
   playersSubject:Subject<OptimizerPlayer[]> = new Subject<OptimizerPlayer[]>();
   players$:Observable<OptimizerPlayer[]> = this.playersSubject.asObservable();
@@ -154,6 +156,28 @@ export class LineupOptimizerService {
       }
     });
     return order;
+  }
+
+  getOpponentByPlayerId(id:number):string {
+    let opponent:string = "";
+    this.players.forEach(player => {
+      if (player.PlayerID == id) {
+        opponent = player.Opponent;
+        return;
+      }
+    });
+    return opponent;
+  }
+
+  getHomeTeamByPlayerId(id:number):string {
+    let team:string = "";
+    this.players.forEach(player => {
+      if (player.PlayerID == id) {
+        team = player.Team;
+        return;
+      }
+    });
+    return team;
   }
 
   applyFilters(filters:LineupOppFilterCriteria[]) {

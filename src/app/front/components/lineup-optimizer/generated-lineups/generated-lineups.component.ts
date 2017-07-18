@@ -30,8 +30,20 @@ export class GeneratedLineupsComponent {
     }
   }
 
-  getBattingOrderByPlayerId(id:number):number{
+  getBattingOrderByPlayerId(id:number):number {
     return this.optimizerService.getBattingOrderByPlayerId(id);
+  }
+
+  getOpponentNameByPlayerId(id:number):string {
+    return this.optimizerService.getOpponentByPlayerId(id);
+  }
+
+  getHomeTeamByPlayerId(id:number) {
+    return this.optimizerService.getHomeTeamByPlayerId(id);
+  }
+
+  getSlateName():string {
+    return this.optimizerService.selectedSlate ? this.optimizerService.selectedSlate.Slate : '';
   }
 
 }

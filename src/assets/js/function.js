@@ -91,7 +91,7 @@ $(document).ready(function() {
 	$( ".matchDetailsSlider .owl-next").html('<img src="../../assets/images/slider_rght_arow.png" alt="" />');
 
 
-	$('.socialDetailsSlider').owlCarousel({
+	/*$('.socialDetailsSlider').owlCarousel({
 		items: 1,
 		margin: 0,
 		nav: true,
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		autoplayHoverPause:true
 	});
 	$( ".socialDetailsSlider .owl-prev").html('<img src="../../assets/images/social_slider_top_arow.png" alt="" />');
-	$( ".socialDetailsSlider .owl-next").html('<img src="../../assets/images/social_slider_bottom_arow.png" alt="" />');
+	$( ".socialDetailsSlider .owl-next").html('<img src="../../assets/images/social_slider_bottom_arow.png" alt="" />');*/
 
 	$('.latestNewsDetailsSlider').owlCarousel({
 		margin: 30,
