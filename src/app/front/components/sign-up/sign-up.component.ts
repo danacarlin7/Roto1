@@ -115,6 +115,14 @@ export class SignUpComponent {
         response => {
           if (response.statusCode == 200) {
             console.log("sign up successful => ", response);
+            this.authService.registerWP(data).subscribe(
+              success => {
+                console.log('WP user registered.');
+              },
+              error => {
+                console.log('WP Error => ', error);
+              }
+            );
             this.router.navigate(['/login']);
           }
         },
