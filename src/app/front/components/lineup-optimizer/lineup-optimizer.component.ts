@@ -34,6 +34,7 @@ export class LineupOptimizerComponent {
   isLoading:boolean;
   games:Game[];
   stackingData:{team:string,teamId:number}[];
+  lockedPlayers:number[] = [];
 
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
@@ -192,7 +193,7 @@ export class LineupOptimizerComponent {
       players: this.players
         .filter(currPlayer => !currPlayer.isExcluded)
         .map(currPlayer => {
-          return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue}
+          return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue, force: currPlayer.isLocked}
         }),
       variation: this.advFilterPopup.variabilityValue,
       maxExposure: this.advFilterPopup.maxExposureValue,
@@ -244,6 +245,7 @@ export class LineupOptimizerComponent {
 
   btnExcludePlayerClicked(player:OptimizerPlayer) {
     player.isExcluded = true;
+    this.unlockPlayer(player);
     this.filterPlayers(this.searchStr);
   }
 
@@ -260,4 +262,38 @@ export class LineupOptimizerComponent {
     let filters = new LineupPlayerFilter();
     this.players = filters.transform(this.allPlayers, ['FirstName', 'LastName', 'fullName'], searchStr);
   }
+
+  togglePlayerLock(player:OptimizerPlayer) {
+    if (player.isLocked) {
+      this.unlockPlayer(player);
+    }
+    else {
+      if (this.lockedPlayers && this.lockedPlayers.length < 6) {
+        this.lockPlayer(player);
+      }
+    }
+  }
+
+  lockPlayer(player:OptimizerPlayer) {
+    player.isLocked = true;
+    if (this.lockedPlayers && this.lockedPlayers.indexOf(player.PlayerID) == -1) {
+      this.lockedPlayers.push(player.PlayerID);
+    }
+  }
+
+  unlockPlayer(player:OptimizerPlayer) {
+    player.isLocked = false;
+    if (this.lockedPlayers && this.lockedPlayers.indexOf(player.PlayerID) >= 0) {
+      this.lockedPlayers.splice(this.lockedPlayers.indexOf(player.PlayerID), 1);
+    }
+  }
+
+  onExposureTxtboxBlurEvent(event, player:OptimizerPlayer) {
+    let value = event.target.value;
+    if (value > 100) {
+      event.target.value = 100;
+      player.exposureValue = 100;
+    }
+  }
+
 }

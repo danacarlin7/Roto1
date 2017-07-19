@@ -30,4 +30,5 @@ export interface UsedPlayer{
   fullName: string;
   id: number;
   exposure: string;
+  teamLogo:string;
 }

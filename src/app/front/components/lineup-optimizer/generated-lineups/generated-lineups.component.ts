@@ -43,7 +43,7 @@ export class GeneratedLineupsComponent {
   }
 
   getSlateName():string {
-    return this.optimizerService.selectedSlate ? this.optimizerService.selectedSlate.Slate : '';
+    return this.optimizerService.selectedSlate ? this.optimizerService.selectedSlate.Slate : 'All Slates';
   }
 
 }

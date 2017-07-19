@@ -46,4 +46,5 @@ export interface OptimizerPlayer{
   GameID: number;
   isExcluded:boolean;
   exposureValue:number;
+  isLocked:boolean;
 }

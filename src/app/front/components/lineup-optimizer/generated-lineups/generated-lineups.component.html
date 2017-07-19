@@ -4,7 +4,7 @@
   <section class="my-section title-container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="content-title">Crunchs_1<a class="btn btn-sm" href="#"><img
+        <h4 class="content-title">{{getSlateName()}}<a class="btn btn-sm" href="#"><img
           src="../../../../../assets/images/pen.png" alt="edit"/></a></h4>
       </div>
     </div>
@@ -47,7 +47,8 @@
             <tr *ngFor="let player of usedPlayers">
               <td width="30"><a><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></td>
               <td>
-                <img src="../../../../../assets/images/team_logo.png" alt="team_logo"/>
+                <img [attr.src]="player.teamLogo" alt="team_logo"
+                     style="width: 25px;height: 25px"/>
                 <span>{{player.fullName}}</span><span class="light-dot green-dot"></span>
               </td>
               <td width="90">{{player.exposure}}({{player.numOfLineups}})</td>
@@ -98,7 +99,7 @@
               <span>{{getSlateName()}}</span>
             </div>
             <div class="col-sm-6 text-right">
-              <span>LINEUP - {{index}}</span>
+              <span>LINEUP - {{index + 1}}</span>
             </div>
           </div>
         </div>

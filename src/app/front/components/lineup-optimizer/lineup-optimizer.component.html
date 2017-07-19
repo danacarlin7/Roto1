@@ -94,7 +94,7 @@
              [mfRowsOnPage]="10">
         <thead>
         <tr>
-          <th>Lock</th>
+          <th><mfDefaultSorter by="isLocked">Lock</mfDefaultSorter></th>
           <th>Exclude</th>
           <th>
             <mfDefaultSorter by="FirstName">Player Name</mfDefaultSorter>
@@ -138,7 +138,12 @@
         </thead>
         <tbody>
         <tr *ngFor="let player of records.data">
-          <td class="text-center"><img src="../../../../assets/img/Key.png"/></td>
+          <td class="text-center" (click)="togglePlayerLock(player)">
+            <img *ngIf="player.isLocked" src="../../../../assets/img/Key.png" md-tooltip="Locked"/>
+            <img *ngIf="!player.isLocked"
+                 [ngStyle]="{'opacity': (lockedPlayers?.length >= 6)? '0.5' : '1'}"
+                 src="../../../../assets/img/unlock.png" md-tooltip="Unlocked"/>
+          </td>
           <td><img src="../../../../assets/img/x-red.png"
                    (click)="btnExcludePlayerClicked(player)"
                    style="cursor: pointer"/></td>
@@ -153,7 +158,9 @@
           <td>{{player.Runs}}</td>
           <td>{{player.OverUnder}}</td>
           <td>{{player.Line}}</td>
-          <td><input class="form-control input-sm" [(ngModel)]="player.exposureValue" type="number" max="100" min="0"
+          <td><input class="form-control input-sm" [(ngModel)]="player.exposureValue"
+                     (blur)="onExposureTxtboxBlurEvent($event,player)"
+                     type="number" max="100" min="0"
                      placeholder="100%">
           </td>
           <td>{{player.Points ? player.Points : '-'}}</td>
