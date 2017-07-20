@@ -76,9 +76,10 @@ export class AuthService {
   @Output() userLoggedInEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loginWP(data: string): Observable<any> {
+    console.log(data);
     return this.http.post('http://forum.dfsportgod.com/dfsauth/nglogin/', data)
       .map(response => response.json())
-      .catch(error => Observable.throw(error.json()))
+      .catch(error => Observable.throw(error.json()));
   }
 
 
