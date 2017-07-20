@@ -133,6 +133,15 @@ export class LineupOptimizerComponent {
         response => {
           if (response.statusCode == 200) {
             this.stackingData = response.data;
+            this.stackingData = this.stackingData.sort((n1, n2) => {
+              if (n1.team > n2.team) {
+                return 1;
+              }
+              if (n1.team < n2.team) {
+                return -1;
+              }
+              return 0;
+            })
           }
         },
         error => {
@@ -230,14 +239,22 @@ export class LineupOptimizerComponent {
     if (stackData && stackData.length) {
       stackData.forEach(
         stackTeam => {
+          let teamFlag:boolean = false;
           teams.forEach(team => {
             if (stackTeam.name == team.teamName) {
-              console.log("in stack team  old =>", team.maxPlayers);
+              teamFlag = true;
               team.minPlayers = stackTeam.players;
               team.maxPlayers = stackTeam.players;
-              console.log("in stack team  new =>", team.maxPlayers);
+              return;
             }
-          })
+          });
+          if (!teamFlag) {
+            teams.push({
+              teamName: stackTeam.name,
+              minPlayers: stackTeam.players,
+              maxPlayers: stackTeam.players
+            })
+          }
         })
     }
     return teams;

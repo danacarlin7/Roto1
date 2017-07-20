@@ -42,7 +42,11 @@
             <div class="col-lg-2 col-sm-3 no-padding-right">
               <select class="form-control input-sm" (change)="onSlateChanged($event)">
                 <option [value]="0">All Slates</option>
-                <option *ngFor="let slate of slates" [value]="slate.SlateID">{{slate.Slate}}</option>
+                <option *ngFor="let slate of slates" [value]="slate.SlateID">
+                  {{slate.StartTime | date:'h:mm a EEE, MMM d'}}
+                  {{' - '+slate.NumberOfGames+' Games - '}}
+                  {{slate.Slate}}
+                </option>
               </select>
             </div>
             <div class="col-sm-3 no-padding-right">
@@ -94,7 +98,9 @@
              [mfRowsOnPage]="10">
         <thead>
         <tr>
-          <th><mfDefaultSorter by="isLocked">Lock</mfDefaultSorter></th>
+          <th>
+            <mfDefaultSorter by="isLocked">Lock</mfDefaultSorter>
+          </th>
           <th>Exclude</th>
           <th>
             <mfDefaultSorter by="FirstName">Player Name</mfDefaultSorter>
@@ -179,6 +185,7 @@
     <!--/ Table -->
     <rp-adv-filter [advFilterSettings]="advFilterSettings"
                    [stackingData]="stackingData"
+                   [selectedOperator]="selectedOperator"
                    #advFilterPopup
                    (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-adv-filter>
   </div>
