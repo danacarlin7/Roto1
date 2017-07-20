@@ -93,7 +93,7 @@ export class LoginComponent {
             user => {
               console.log("user details => ", user);
           //     localStorage.setItem('user', JSON.stringify(user.data));
-              this.authService.loginWP(JSON.stringify(response.data)).subscribe(
+              this.authService.loginWP(JSON.stringify(data)).subscribe(
                 response => {
                   if(response.uid) {
                     let uid = response.uid;
