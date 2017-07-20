@@ -215,6 +215,7 @@ Buttons
     font-size: 16px;
     border-radius: 5px;
     border: 0;
+    padding: 10px 16px 10px 16px !important;
 }
 .btn.active, .btn:active {
     webkit-box-shadow: none ;
@@ -946,3 +947,43 @@ Modal
     border-color: #5cb85c; }
 .radio-success input[type="radio"]:checked + label::after {
     background-color: #5cb85c; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,14 +10,12 @@ import {AuthService} from '../../../shared/services/auth.service';
 import * as $ from 'jquery';
 
 @Component({
-  selector: 'provider-root',
-  templateUrl: './provider.component.html',
-  styleUrls: ['./provider.component.css'],
+  selector: 'provider-public-root',
+  templateUrl: './public.component.html',
+  styleUrls: ['./public.component.css'],
   providers: [PlayerGetService, CompGetService, LineupPostService, AuthService]
 })
-export class ProviderComponent implements OnInit, OnDestroy {
-  private subscription:Subscription;
-
+export class ProviderPublicComponent {
   title = '';
 
   operators = ['DraftKings', 'FanDuel'];
@@ -97,15 +95,6 @@ export class ProviderComponent implements OnInit, OnDestroy {
         if (this.currentSlate == '') this.setSlate(this.slates[0].SlateID + "--" + this.slates[0].Slate);
         this.showPlayersForSlate();
       });
-  }
-
-  ngOnInit() {
-    let timer = TimerObservable.create(2000, 3600000);
-    this.subscription = timer.subscribe(t => this.getScores());
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   showSlatesForOperator = (operator) => {
@@ -575,5 +564,12 @@ export class ProviderComponent implements OnInit, OnDestroy {
   }
   populateUpload = (fileName) => {
     $('#fileTextBox').val(fileName.replace(/C:\\fakepath\\/i, ''));
+  }
+
+  // For provider public page
+  getHiddenLineups = () => {
+    this.lps.getHiddenLineups(this.currentOperator, this.currentSport).subscribe(result => {
+       this.allLineupsWithHiding = result.json()['data'];
+    });
   }
 }

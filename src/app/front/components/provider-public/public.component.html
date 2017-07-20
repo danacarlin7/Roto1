@@ -1,0 +1,166 @@
+s<div *ngIf="userRole != 'provider'"> 
+    <section class="sectionHedin">
+    	<div class="container ">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                	<div class="lineupHedin linUpHedin">
+                    	<h1>Lineups</h1>
+                    </div>
+                    <div class="sectionHedinBtn clearfix">
+                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="currentOperator = $event.target.id;" [ngClass]="{'btn btn-yellow': (operator == currentOperator)}">{{operator}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>		
+    <section class="linUpSection">    	
+    	<div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                	<div class="dTabs">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" *ngFor="let sport of sports" [ngClass]="{'active': (sport == currentSport)}"><a href="javascript:void(0)" role="tab" data-toggle="tab" id="{{sport}}" (click)="currentSport = $event.target.id;">{{sport}}</a></li>
+                        </ul>
+                        <div class="linUpFrm">
+                        	<div class="form-group slctWrapper">
+                                <label class="srOnly">Filter By Year</label>
+                                <div class="dropdownSelect">
+                                	<a  href="javascript:void(0)" class="dropdownSelectClick form-control">{{currentSlate}}</a>
+                                    <ul class="dropdownSelectMenu">
+                                    	<li><a href="javascript:void(0)" *ngFor="let slate of slates" id="{{slate.Slate}}" (click)="currentSlate = $event.target.id;">{{slate.Slate}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group dteWrapper">
+                                <input type="text" class="form-control datepicker" name="dateFrom" placeholder="Date">
+                            </div>
+                            
+                            <div class="form-group clearfix">
+                            	<div class="form-group">
+                                    <button type="button" class="form-control">Prev</button>
+                                </div>
+                                <div class="form-group">
+                                     <button type="button" class="form-control">Next</button>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <!-- Tab panes -->
+                        <div class="tab-content">                            
+                            <div role="tabpanel" class="tab-pane active" id="NFL">
+                            
+                           		<div class="lneUpSection clearfix">
+                                	<div class="lneUpSecLft">
+                                    	<div class="lneUpImgBx">
+                                        	<img src="images/dashboard_profile_img.png" alt="" class="img-responsive">
+                                        </div>
+                                        <div class="lneUpNameBx">
+                                        	<p>Derek backwith</p>
+                                            <a href="javascript:void(0)">Download Lineup</a>
+                                        </div>
+                                        <div class="lneUpIcn">
+                                        	<img src="images/a_icn.png" alt="" class="img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="lneUpSecRght">
+                                    	<h4 class="lneUpHedin">Lineup Name </h4>
+                                        <div class="tFormat">
+                                            <div class="table-responsive">
+                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                    <tbody>
+                                                    <tr class="dHedin">
+                                                        <th width="15%">Pos</th>
+                                                        <th width="20%">Player Name</th>
+                                                        <th width="15%">B. Ord</th>
+                                                        <th width="20%">Opp</th>
+                                                        <th width="15%">Proj</th> 
+                                                        <th width="15%">Salary</th>                                   
+                                                    </tr>
+                                                    <tr>
+                                                        <td>P</td>
+                                                        <td>Jake Odorizzi p</td>
+                                                        <td>PF <span class="grnDot"></span></td>
+                                                        <td>TB@StL</td>
+                                                        <td>19.84</td>
+                                                        <td>$9500</td>
+                                                    </tr>
+                                                    <tr class="dtSubs">
+                                                    	<td colspan="6"><a href="javascript:void(0)">Subscrive  to View More</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1B</td>
+                                                        <td>Jake Odorizzi p</td>
+                                                        <td>PF <span class="grnDot"></span></td>
+                                                        <td>TB@StL</td>
+                                                        <td>19.84</td>
+                                                        <td>$9500</td>
+                                                    </tr>
+                                                    <tr class="dtSubs">
+                                                    	<td colspan="6"><a href="javascript:void(0)">Subscrive  to View More</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2B</td>
+                                                        <td>Jake Odorizzi p</td>
+                                                        <td>PF <span class="grnDot"></span></td>
+                                                        <td>TB@StL</td>
+                                                        <td>19.84</td>
+                                                        <td>$9500</td>
+                                                    </tr>
+                                                     <tr class="dtSubs">
+                                                    	<td colspan="6"><a href="javascript:void(0)">Subscrive  to View More</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>SS</td>
+                                                        <td>Jake Odorizzi p</td>
+                                                        <td>PF <span class="grnDot"></span></td>
+                                                        <td>TB@StL</td>
+                                                        <td>19.84</td>
+                                                        <td>$9500</td>
+                                                    </tr>  
+                                                    <tr>
+                                                        <td>OF</td>
+                                                        <td>Jake Odorizzi p</td>
+                                                        <td>PF <span class="grnDot"></span></td>
+                                                        <td>TB@StL</td>
+                                                        <td>19.84</td>
+                                                        <td>$9500</td>
+                                                    </tr>
+                                                    <tr class="proTotal">
+                                                    	<td colspan="4">Totals</td>
+                                                        <td>147</td>
+                                                        <td>454.2</td>
+                                                    </tr>
+                                                    <tr class="lastTRw">
+                                                    	<td colspan="3">Draftkings_arcade_1</td>
+                                                        <td colspan="3">FANTASY [ CRUNCHER ]</td>
+                                                    </tr>
+                                                    
+                                                </tbody></table>
+                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="pagination">
+                                    <ul>
+                                        <li><a href="javascript:void(0)"><span aria-hidden="true">«</span></a></li>
+                                        <li class="active"><a href="javascript:void(0)">1</a></li>
+                                        <li><a href="javascript:void(0)">2</a></li>
+                                        <li><a href="javascript:void(0)">3</a></li>
+                                        <li><a href="javascript:void(0)">...</a></li>
+                                        <li><a href="javascript:void(0)">29</a></li>
+                                        <li><a href="javascript:void(0)">30</a></li>
+                                        <li><a href="javascript:void(0)"><span aria-hidden="true">»</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       	</div>
+    </section>
+</div>

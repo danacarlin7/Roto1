@@ -16,6 +16,7 @@ import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 
 import {ProviderComponent} from "./components/provider/provider.component";
+import {ProviderPublicComponent} from "./components/provider-public/public.component";
 
 /**
  * Created by Hiren on 05-06-2017.
@@ -38,7 +39,8 @@ const routes:Routes = [
       <Route>{path: 'excel-tool', component: ExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
       <Route>{path: 'lineup-optimizer', canActivate: [AuthGuard], component: LineupOptimizerComponent},
-      <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent}
+      <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent},
+      <Route>{path: 'provider-public-lineups', canActivate: [AuthGuard], component: ProviderPublicComponent}
     ]
   }
 ];

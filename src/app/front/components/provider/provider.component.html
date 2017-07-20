@@ -7,7 +7,7 @@
                     <div class="col-lg-6 col-md-5 col-sm-5">
                         <h4 class="content-title">Provider Lineups</h4>
                     </div>
-                    <div class="col-lg-6 col-md-7 col-sm-7 text-right">
+                    <div class="col-lg-6 col-md-7 col-sm-7 text-right" *ngIf="userRole == 'provider'">
                         <form class="form-inline">
                             <select (change)="showSlatesForOperator($event.target.value);" class="form-control input-sm input-gray-black">
 								<option *ngFor="let operator of operators" value="{{operator}}">{{operator}}</option>
@@ -18,7 +18,7 @@
                             <select (change)="setSlate($event.target.value);" class="form-control input-sm input-gray-black">
 								<option *ngFor="let slate of slates" value="{{slate.SlateID}}--{{slate.Slate}}">{{slate.Slate}}</option>
                             </select>
-                            <button type="submit" class="btn btn-lg btn-gray-yellow btn-noradius" [disabled]="(slates == null || slates.length == 0 || userRole != 'provider')" (click)="showPlayersForSlate();">GetPlayers</button>
+                            <button type="submit" class="btn btn-lg btn-gray-yellow btn-noradius" [disabled]="(slates == null || slates.length == 0)" (click)="showPlayersForSlate();">GetPlayers</button>
                         </form>
                     </div>
                 </div>
@@ -50,15 +50,12 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-6 text-right" *ngIf="((playersAsked != null) && (playersAsked == true)) || (userRole != 'provider')">
+                    <div class="col-md-6 text-right" *ngIf="(playersAsked != null) && (playersAsked == true) && (userRole == 'provider')">
                         <form class="form-inline">
                             <div class="form-group">
-                                <label for="upload-lineups">Download All Lineups :</label>
-                                <select (change)="setProvider($event.target.value);" class="form-control input-sm">
-									<option *ngFor="let provider of providers" value="{{provider}}">{{provider}}</option>
-                                </select>
+								<label for="upload-lineups">Set Lineup Name:</label>
+								<input class="form-control input-sm" type="text" name="LineupName" (change)="currLineupName = $event.target.value;" />
                             </div>
-                            <button type="submit" class="btn btn-lg btn-gray-yellow btn-noradius" (click)="downloadCSVLineups();" [disabled]="providers == null || providers.length == 0">Download</button>
                         </form>
                     </div>
                 </div>
@@ -206,12 +203,14 @@
 			
             <!-- Load Message -->
 			<div class="row">
-				<div class="col-lg-12" *ngIf="(providerLineups != null) && (providerLineups.length > 0)">
+				<div class="col-lg-12" *ngIf="(lineupsOnlyName != null) && (lineupsOnlyName.length > 0)">
 					<div class="lineups-div alert-yellow" role="alert">
-						<div *ngFor="let pLineup of providerLineups">
+						<div *ngFor="let pLineup of lineupsOnlyName">
 							<div class="lineups-tr">
 								<a *ngIf="userRole == 'provider'" (click)="loadLineup(pLineup['_id']);" class="btn btn-gray-black pull-left">Load</a>
 								<a class="btn btn-black-gray pull-left" (click)="deleteLineup(pLineup['_id']);">Delete</a>
+								<input type="text" name="LineupName" (change)="pLineup['LineupName'] = $event.target.value;" />
+								<a class="btn btn-black-gray pull-left" (click)="setName(pLineup);">SetName</a>
 								<p class="alert-message">{{pLineup['Lineup']}}</p>
 							</div>
 						</div>

@@ -13,8 +13,8 @@ export class LineupPostService {
   getHeaders():Headers {
     let headers = new Headers();
     headers.append('content-type', 'application/json');
-    if (localStorage.getItem('token')) {
-      headers.append('Authorization', 'Bearer ' + JSON.parse(localStorage.getItem('token')).token);
+    if (this.getToken()) {
+      headers.append('Authorization', 'Bearer ' + this.getToken());
     }
     return headers;
   }
@@ -32,7 +32,7 @@ export class LineupPostService {
   }
 
    createLineup(lineup) {
-      return this.http.post(environment.api_end_point + 'api/uploadLineup', JSON.stringify(lineup), {headers: this.getHeaders()});
+      return this.http.post(environment.api_end_point + 'api/lineup', JSON.stringify(lineup), {headers: this.getHeaders()});
     }
 
     getProviders(operator, sport, slate) {
@@ -40,12 +40,16 @@ export class LineupPostService {
     }
 
     getLineups(operator, sport, slate, provider) {
-      return this.http.get(environment.api_end_point + 'api/lineups?operator=' + operator + '&sport=' + sport + '&date_exact=2017-07-09&slate_id=' + slate + '&provider=' + provider, {headers: this.getHeaders()});
+      return this.http.get(environment.api_end_point + 'api/lineup?operator=' + operator + '&sport=' + sport + '&since=today&slate_id=' + slate, {headers: this.getHeaders()});
     }
     deleteLineup(operator, sport, slate, provider, id) {
-      return this.http.delete(environment.api_end_point + 'api/lineups/' + id, {headers: this.getHeaders()});
+      return this.http.delete(environment.api_end_point + 'api/lineup/' + id, {headers: this.getHeaders()});
     }
     updateLineup(operator, sport, slate, provider, id, lineup) {
-      return this.http.post(environment.api_end_point + 'api/updateLineup/' + operator + '/' + sport + '/' + slate + '/' + provider + '/' + id, JSON.stringify(lineup), {headers: this.getHeaders()});
+      return this.http.patch(environment.api_end_point + 'api/lineup/' + operator + '/' + sport + '/' + slate + '/' + provider + '/' + id, JSON.stringify(lineup), {headers: this.getHeaders()});
     }
+	
+	getHiddenLineups(operator, sport) {
+      return this.http.get(environment.api_end_point + 'api/lineup?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()});
+	}
 };

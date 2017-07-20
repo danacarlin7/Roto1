@@ -29,6 +29,7 @@ import {PlayerGetService} from './services/fetchPlayers';
 import {CompGetService} from './services/fetchCompositions';
 import {LineupPostService} from './services/postLineups';
 import {ProviderComponent} from "./components/provider/provider.component";
+import {ProviderPublicComponent} from "./components/provider-public/public.component";
 
 /**
  * Created by Hiren on 04-06-2017.
@@ -60,10 +61,12 @@ import {ProviderComponent} from "./components/provider/provider.component";
     FAQComponent,
     AdvFilterComponent,
     LineupPlayerFilter, 
-    ProviderComponent
+    ProviderComponent,
+    ProviderPublicComponent
   ],
   exports: [
     ProviderComponent,
+    ProviderPublicComponent,
     FrontMainComponent
   ],
   providers: [FrontService,ArticleService,LineupOptimizerService, PlayerGetService, CompGetService, LineupPostService]
