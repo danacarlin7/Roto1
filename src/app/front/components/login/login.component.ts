@@ -39,30 +39,30 @@ export class LoginComponent {
     })
   }
 
-   createCookie(name,value,days) {
-      var expires = "";
-      if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + value + expires + "; domain=dfsportgod.com; path=/";
-   }
-
-    readCookie(name) {
-      var nameEQ = name + "=";
-      var ca = document.cookie.split(';');
-      for(var i=0;i < ca.length;i++) {
-          var c = ca[i];
-          while (c.charAt(0)==' ') c = c.substring(1,c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-      }
-      return null;
+  createCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
     }
+    document.cookie = name + "=" + value + expires + "; domain=dfsportgod.com; path=/";
+  }
 
-    removeCookie(name) {
-      document.cookie = name + "=; expires=" + new Date(0).toUTCString() +"; domain=dfsportgod.com; path=/";
+  readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
+    return null;
+  }
+
+  removeCookie(name) {
+    document.cookie = name + "=; expires=" + new Date(0).toUTCString() + "; domain=dfsportgod.com; path=/";
+  }
 
 
   onSignInBtnClick() {
@@ -92,14 +92,16 @@ export class LoginComponent {
           this.authService.userInfo().subscribe(
             user => {
               console.log("user details => ", user);
-          //     localStorage.setItem('user', JSON.stringify(user.data));
+              //     localStorage.setItem('user', JSON.stringify(user.data));
               this.authService.loginWP(JSON.stringify(data)).subscribe(
                 response => {
-                  if(response.uid) {
+                  if (response.uid) {
                     let uid = response.uid;
                     this.removeCookie('dfs_wp_logout');
                     this.createCookie('dfs_wp_user', uid, 1);
                     this.createCookie('dfs_wp_email', user.data.email, 1);
+                  } else {
+                    console.log(response);
                   }
                 }
               );
@@ -107,11 +109,10 @@ export class LoginComponent {
           );
 
 
-
           console.log('this.redirectUrl => ', this.redirectUrl);
           if (this.redirectUrl && this.redirectUrl.length) {
             this.router.navigate([this.redirectUrl]);
-            this.redirectUrl = ""
+            this.redirectUrl = "";
           }
           else if (response.data.role == 'admin') {
             this.router.navigate(['/admin']);

@@ -120,7 +120,7 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()));
   }
 
-  registerWP(data) {
+  registerWP(data: string): Observable<any> {
     return this.http.post('http://forum.dfsportgod.com/dfsauth/register/', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
