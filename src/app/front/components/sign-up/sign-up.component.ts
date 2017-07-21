@@ -115,7 +115,7 @@ export class SignUpComponent {
         response => {
           if (response.statusCode == 200) {
             console.log("sign up successful => ", response);
-            this.authService.registerWP(data).subscribe(
+            this.authService.registerWP(JSON.stringify(data)).subscribe(
               success => {
                 console.log('WP user registered.');
               },
