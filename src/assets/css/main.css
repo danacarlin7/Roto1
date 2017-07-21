@@ -84,7 +84,6 @@ input.no-border {
 /*
 Body
 */
-body, 
 div.my-body {
 
     background-color: #fff;
@@ -180,7 +179,7 @@ th>.glyphicon {
 }
 
 td.td-team {
-    padding: 0px !important ; 
+    padding: 0px !important ;
 }
 td.td-team>img{
     max-width: 100px;
@@ -217,8 +216,8 @@ td .pagination {
     vertical-align: middle !important ;
 }
 
-.table.df-table>thead>tr>th, .table.df-table>tbody>tr>th, 
-.table.df-table>tfoot>tr>th, .table.df-table>thead>tr>td, 
+.table.df-table>thead>tr>th, .table.df-table>tbody>tr>th,
+.table.df-table>tfoot>tr>th, .table.df-table>thead>tr>td,
 .table.df-table>tbody>tr>td, .table.df-table>tfoot>tr>td {
     padding: 21px 10px;
     vertical-align: middle ;
@@ -304,14 +303,14 @@ td .pagination {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
     -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
     -moz-box-shadow:  0px 0px 20px rgba(0, 0, 0, 0.16);
-    
+
 }
 .gen-lineup-cont table.df-table {
     margin-bottom: 0 ;
 }
 
-.gen-lineup-cont .table.df-table>thead>tr>th, .gen-lineup-cont .table.df-table>tbody>tr>th, 
-.gen-lineup-cont .table.df-table>tfoot>tr>th, .gen-lineup-cont .table.df-table>thead>tr>td, 
+.gen-lineup-cont .table.df-table>thead>tr>th, .gen-lineup-cont .table.df-table>tbody>tr>th,
+.gen-lineup-cont .table.df-table>tfoot>tr>th, .gen-lineup-cont .table.df-table>thead>tr>td,
 .gen-lineup-cont .table.df-table>tbody>tr>td, .gen-lineup-cont .table.df-table>tfoot>tr>td {
     padding: 13px 10px;
     vertical-align: middle ;
@@ -423,7 +422,7 @@ Buttons
     background: #1a1a1a;
     color: #fff;
     border: 1px solid #1a1a1a ;
-} 
+}
 
 .btn.btn-grayl-grayl:hover,.btn.btn-grayl-grayl:active, .btn.btn-grayl-grayl:focus, .btn.btn-grayl-grayl.active {
     background-color: #333;
@@ -442,8 +441,8 @@ Buttons
     padding-right: 0;
 }
 
-.btn-group-noradius.btn-group>.btn-group:first-child:not(:last-child)>.btn:last-child, 
-.btn-group-noradius.btn-group>.btn-group:first-child:not(:last-child)>.dropdown-toggle, 
+.btn-group-noradius.btn-group>.btn-group:first-child:not(:last-child)>.btn:last-child,
+.btn-group-noradius.btn-group>.btn-group:first-child:not(:last-child)>.dropdown-toggle,
 .btn-group-noradius.btn-group>.btn-group:last-child:not(:first-child)>.btn:first-child {
     border-radius: 0 ;
 }
@@ -575,7 +574,7 @@ Tables
 Navigation Bar
 */
 .closeBtn {
-    display: none ;   
+    display: none ;
 }
 .header-first {
     background-color: #141414;
@@ -679,7 +678,7 @@ Main Container
     padding-left: 15px;
 }
 .total-val>span {
-    text-align: center ; 
+    text-align: center ;
 }
 
 section.my-section.title-container {
@@ -950,11 +949,11 @@ Modal
     padding: 8px 11px;
     color: #000;
 }
-.filter-table .pagination>li:last-child>a, .filter-table .pagination>li:last-child>span, 
+.filter-table .pagination>li:last-child>a, .filter-table .pagination>li:last-child>span,
 .filter-table .pagination>li:first-child>a, .filter-table .pagination>li:first-child>span {
     border-radius: 0px ;
 }
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, 
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span,
 .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: #eee;
     border-color: #ddd;
