@@ -36,7 +36,7 @@ export class AdvFilterComponent {
   noOfUniquePlayersValue:number;
   noOfLineupValue:number;
   maxExposureValue:number;
-  salarySettingValue:any[] = [0,5];
+  salarySettingValue:any[] = [0, 5];
   noBattingVsPitchers:boolean;
 
   projectionFilterValue:any[];
@@ -125,9 +125,9 @@ export class AdvFilterComponent {
     this.maxExposureSlider.bootstrapSlider({
       min: 10,
       max: 100,
-      value: 10
+      value: 100
     });
-    this.maxExposureValue = 10;
+    this.maxExposureValue = 100;
     this.maxExposureSlider.on("slide", (slideEvt) => {
       jQuery("#meSliderVal").text(slideEvt.value + "%");
       this.maxExposureValue = slideEvt.value;

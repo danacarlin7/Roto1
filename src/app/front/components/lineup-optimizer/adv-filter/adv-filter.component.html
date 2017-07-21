@@ -64,7 +64,8 @@
                   </div>
                   <div class="col-md-6">
                     <div class="filter-range-container">
-                      <h4 class="rangeslider-value">Max Exposure: <span id="meSliderVal">10%</span></h4>
+                      <h4 class="rangeslider-value">Max Exposure: <span id="meSliderVal">{{maxExposureValue}}%</span>
+                      </h4>
                       <input id="me" type="text"/>
                       <span class="slider-range slider-min">10%</span><span class="slider-range slider-max">100%</span>
                     </div>
@@ -162,7 +163,8 @@
                         <h4 class="filters-h">Players Per Team </h4>
                       </div>
                       <div class="col-md-4 col-xs-2">
-                        <input class="form-control input-sm margin-bottom-10" (input)="onGlobalMaxValueChanged($event)" [value]="getMaxGameValue()" type="text"
+                        <input class="form-control input-sm margin-bottom-10" (input)="onGlobalMaxValueChanged($event)"
+                               [value]="getMaxGameValue()" type="text"
                                placeholder="Max">
                       </div>
                     </div>

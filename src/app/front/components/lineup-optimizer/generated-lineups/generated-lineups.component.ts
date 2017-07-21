@@ -16,6 +16,8 @@ export class GeneratedLineupsComponent {
   lineups:GeneratedLineup[];
   usedPlayers:UsedPlayer[];
 
+  activeUsedPlayerTab:'all'|'p'|'h';
+
   constructor(private optimizerService:LineupOptimizerService, private router:Router) {
 
   }
@@ -44,6 +46,33 @@ export class GeneratedLineupsComponent {
 
   getSlateName():string {
     return this.optimizerService.selectedSlate ? this.optimizerService.selectedSlate.Slate : 'All Slates';
+  }
+
+  getUsedPlayers():UsedPlayer[] {
+    let players:UsedPlayer[];
+    switch (this.activeUsedPlayerTab) {
+      case 'all':
+        players = this.usedPlayers;
+        break;
+      case 'p':
+        players = this.usedPlayers.filter(
+          currPlayer => {
+            return (currPlayer.position.toLowerCase() == 'p')
+          }
+        );
+        break;
+      case 'h':
+        players = this.usedPlayers.filter(
+          currPlayer => {
+            return (currPlayer.position.toLowerCase() != 'p')
+          }
+        );
+        break;
+      default:
+        players = this.usedPlayers;
+        break;
+    }
+    return players;
   }
 
 }
