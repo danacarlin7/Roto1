@@ -61,7 +61,10 @@
               <td>
                 <img [attr.src]="player.teamLogo" alt="team_logo"
                      style="width: 25px;height: 25px"/>
-                <span>{{player.fullName}}</span><span class="light-dot green-dot"></span>
+                <span>{{player.fullName}}</span>
+                <span class="light-dot"
+                      [class.yellow-dot]="!player.battingOrderConfirmed"
+                      [class.green-dot]="player.battingOrderConfirmed"></span>
               </td>
               <td width="90">{{player.exposure}}({{player.numOfLineups}})</td>
             </tr>
@@ -90,7 +93,10 @@
             <tr *ngFor="let player of lineup.players">
               <td>{{player.position}}</td>
               <td>{{player.fullName}}</td>
-              <td>{{getBattingOrderByPlayerId(player.id)}}<span class="light-dot green-dot"></span></td>
+              <td>{{getBattingOrderByPlayerId(player.id)}}
+                <span class="light-dot"
+                      [class.yellow-dot]="!player.battingOrderConfirmed"
+                      [class.green-dot]="player.battingOrderConfirmed"></span></td>
               <td>{{getOpponentNameByPlayerId(player.id)}}@<b>{{getHomeTeamByPlayerId(player.id)}}</b></td>
               <td>{{player.fppg.toFixed(2)}}</td>
               <td>${{player.salary}}</td>

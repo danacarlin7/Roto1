@@ -39,7 +39,11 @@ export class LineupOptimizerComponent {
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
   constructor(private optimizerService:LineupOptimizerService, private router:Router) {
-
+    this.selectedOperator = this.optimizerService.selectedOperator;
+    this.selectedSport = this.optimizerService.selectedSport;
+    this.selectedSlate = this.optimizerService.selectedSlate;
+    this.selectedGame = this.optimizerService.selectedGame;
+    this.searchStr = this.optimizerService.searchStr;
   }
 
   ngOnInit() {
@@ -56,15 +60,21 @@ export class LineupOptimizerComponent {
   operatorChanged(name:string) {
     if (this.selectedOperator != name) {
       this.selectedOperator = name;
+      this.optimizerService.selectedOperator = name;
       this.optimizerService.players = [];
       this.initiateData();
     }
   }
 
+  isSlateChanged:boolean;
+
   onSlateChanged(event:any) {
     console.log("selected slate => ", event.target.value);
     this.selectedSlate = event.target.value;
+    this.optimizerService.selectedSlate = event.target.value;
+    this.selectedGame = this.optimizerService.selectedGame = 0;
     this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
+    this.isSlateChanged = true;
   }
 
   getSlates() {
@@ -114,6 +124,12 @@ export class LineupOptimizerComponent {
             if (!(response.data instanceof Array)) {
               this.advFilterSettings = response.data;
               this.games = this.advFilterSettings.games;
+              if (this.isSlateChanged) {
+                setTimeout(() => {
+                  this.applyFilters();
+                  this.isSlateChanged = false;
+                }, 50);
+              }
             }
             console.log("Filter settings => ", this.advFilterSettings);
           } else {
@@ -152,6 +168,7 @@ export class LineupOptimizerComponent {
 
   selectedGameChanged(event:any) {
     this.selectedGame = event.target.value;
+    this.optimizerService.selectedGame = event.target.value;
     this.applyFilters();
   }
 
@@ -159,7 +176,7 @@ export class LineupOptimizerComponent {
     let filters:LineupOppFilterCriteria[] = [];
     filters.push(<LineupOppFilterCriteria>{
       filterKey: LineupOppFilterConstants.GAME_TYPE,
-      filterValue: this.selectedGame,
+      filterValue: this.selectedGame == 0 ? this.games.map(game => game.gameId) : [this.selectedGame],
       maxValue: 0,
       minValue: 0
     });
@@ -175,7 +192,7 @@ export class LineupOptimizerComponent {
       }
     });
     if (activeSlate && activeSlate.length) {
-      this.optimizerService.selectedSlate = activeSlate[0];
+      this.optimizerService.activeSlate = activeSlate[0];
     }
 
     this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)

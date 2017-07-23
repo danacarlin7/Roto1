@@ -17,7 +17,15 @@ import {Slate} from "../models/slate.model";
 @Injectable()
 export class LineupOptimizerService {
 
-  selectedSlate:Slate;
+  searchStr:string = '';
+  selectedOperator:string = 'FanDuel';
+  selectedSport:string = 'MLB';
+  selectedSlate:number = 0;
+  selectedGame:number = 0;
+  filterSettings:AdvFilterSettings;
+
+  activeSlate:Slate;
+
   players:OptimizerPlayer[];
   playersSubject:Subject<OptimizerPlayer[]> = new Subject<OptimizerPlayer[]>();
   players$:Observable<OptimizerPlayer[]> = this.playersSubject.asObservable();
@@ -233,9 +241,15 @@ export class LineupOptimizerService {
           case LineupOppFilterConstants.GAME_TYPE:
             players = players.filter(
               (currPlayer:OptimizerPlayer) => {
-                if (currPlayer.GameID == currFilter.filterValue || currFilter.filterValue == 0) {
-                  return true;
+                let isPlayerInSlate:boolean = false;
+                for (let i = 0; i < currFilter.filterValue.length; i++) {
+                  let currValue = currFilter.filterValue[i];
+                  if (currPlayer.GameID == currValue) {
+                    isPlayerInSlate = true;
+                    break;
+                  }
                 }
+                return isPlayerInSlate;
               }
             );
             break;

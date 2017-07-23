@@ -45,7 +45,7 @@ export class GeneratedLineupsComponent {
   }
 
   getSlateName():string {
-    return this.optimizerService.selectedSlate ? this.optimizerService.selectedSlate.Slate : 'All Slates';
+    return this.optimizerService.selectedSlate ? this.optimizerService.activeSlate.Slate : 'All Slates';
   }
 
   getUsedPlayers():UsedPlayer[] {

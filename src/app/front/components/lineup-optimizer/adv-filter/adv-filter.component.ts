@@ -35,7 +35,7 @@ export class AdvFilterComponent {
   variabilityValue:number;
   noOfUniquePlayersValue:number;
   noOfLineupValue:number;
-  maxExposureValue:number;
+  maxExposureValue:number = 100;
   salarySettingValue:any[] = [0, 5];
   noBattingVsPitchers:boolean;
 
