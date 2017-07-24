@@ -14,6 +14,7 @@ declare var jQuery:any;
 export class FrontHomeComponent implements AfterViewInit {
 
   twitterFeeds:Array<any>;
+  facebookFeeds:Array<any>;
 
   constructor(private frontService:FrontService) {
 
@@ -29,6 +30,23 @@ export class FrontHomeComponent implements AfterViewInit {
               this.twitterFeeds = feeds.splice(0, Math.min(10, feeds.length));
               console.log("tweets => ", this.twitterFeeds);
               this.renderTwitterFeeds();
+            }
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+        }
+      );
+
+    this.frontService.retrieveFBFeeds()
+      .subscribe(
+        response => {
+          if (response.statusCode == 200) {
+            let feeds:Array<any> = response.data;
+            if (feeds && feeds.length) {
+              this.facebookFeeds = feeds.splice(0, Math.min(10, feeds.length));
+              console.log("fb posts => ", this.facebookFeeds);
+              this.renderFacebookFeeds();
             }
           }
         },
@@ -55,4 +73,19 @@ export class FrontHomeComponent implements AfterViewInit {
     }, 10);
   }
 
+  renderFacebookFeeds() {
+    setTimeout(() => {
+      jQuery('.fbDetailsSlider').owlCarousel({
+        items: 1,
+        margin: 0,
+        nav: true,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true
+      });
+      jQuery(".socialDetailsSlider .owl-prev").html('<img src="../../../../assets/images/social_slider_top_arow.png" alt="" />');
+      jQuery(".socialDetailsSlider .owl-next").html('<img src="../../../../assets/images/social_slider_bottom_arow.png" alt="" />');
+    }, 10);
+  }
 }

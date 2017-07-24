@@ -14,17 +14,24 @@ import {environment} from "../../../../environments/environment";
 })
 export class LoginComponent {
 
-  loginForm: FormGroup;
-  redirectUrl: String;
-  msg: string;
+  loginForm:FormGroup;
+  redirectUrl:String;
+  msg:string;
 
-  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
+  isError:boolean;
+  errorMsg:string;
+  showVerifyLink:boolean;
+
+  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
     this.activatedRoute.queryParams.subscribe(
-      (param: Params) => {
+      (param:Params) => {
         this.redirectUrl = param['redirect'];
         if (param.hasOwnProperty('info')) {
           if (param['info'] == 'pc') {
             this.msg = 'Your password is successfully updated.'
+          }
+          else if (param['info'] == 'verify') {
+            this.msg = 'Your account is successfully verified.'
           }
         }
       }
@@ -125,6 +132,16 @@ export class LoginComponent {
       },
       error => {
         console.log("login error => ", error);
+
+        if (error.data == 'userNotFound') {
+          this.isError = true;
+          this.errorMsg = "Invalid email or password. Please check your account details"
+        }
+        else if (error.data == 'userIsNotVerifiedWithNullPWD') {
+          this.isError = true;
+          this.errorMsg = "Your account is not verified.Please check your email for verification link or get the new link.";
+          this.showVerifyLink = true;
+        }
       });
   }
 }

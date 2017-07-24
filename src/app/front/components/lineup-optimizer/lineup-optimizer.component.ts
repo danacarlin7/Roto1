@@ -85,6 +85,7 @@ export class LineupOptimizerComponent {
           this.isLoading = false;
           if (response.statusCode == 200) {
             this.slates = response.data;
+            this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
           } else {
 

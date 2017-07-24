@@ -17,9 +17,10 @@ import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
-import {VerifyTokenComponent} from "./components/forgot-password/verify-token.component";
 import {ArticleComponent} from "./components/article/article.component";
 import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
+import {SubscribeComponent} from "./components/subscribe/subscribe.component";
+import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -30,7 +31,7 @@ const routes:Routes = [
     data: {title: 'RotoPose - Home'},
     children: [
       <Route>{path: '', component: FrontHomeComponent},
-      <Route>{path: ':token/verify', component: VerifyTokenComponent},
+      <Route>{path: ':token/verify', component: VerifyAccComponent},
       <Route>{path: ':token/change-password', component: ChangePasswordComponent},
       <Route>{path: 'login', component: LoginComponent},
       <Route>{path: 'signup', component: SignUpComponent},
@@ -48,6 +49,7 @@ const routes:Routes = [
       <Route>{path: 'lineup-optimizer', canActivate: [AuthGuard], component: LineupOptimizerComponent},
       <Route>{path: 'generated-lineups', canActivate: [AuthGuard], component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
+      <Route>{path: 'subscribe', component: SubscribeComponent},
     ]
   }
 ];

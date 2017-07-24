@@ -27,8 +27,9 @@ import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-f
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
 import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
-import {VerifyTokenComponent} from "./components/forgot-password/verify-token.component";
 import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
+import {SubscribeComponent} from "./components/subscribe/subscribe.component";
+import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -62,13 +63,14 @@ import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated
     LineupPlayerFilter,
     InjuriesComponent,
     ChangePasswordComponent,
-    VerifyTokenComponent,
-    GeneratedLineupsComponent
+    GeneratedLineupsComponent,
+    SubscribeComponent,
+    VerifyAccComponent
   ],
   exports: [
     FrontMainComponent
   ],
-  providers: [FrontService,ArticleService,LineupOptimizerService]
+  providers: [FrontService, ArticleService, LineupOptimizerService]
 })
 export class FrontModule {
 

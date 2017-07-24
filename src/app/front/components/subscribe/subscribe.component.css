@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+.main-content{
+  margin-top: 50px;
+}
+
+.plan-price-card{
+  margin: 20px auto;
+}
+
+.plan-validity{
+  font-size: 18px;
+}
+
+.plan-validity-sub-title{
+  margin-top: 20px;
+}
+/*SWAPN8689QR*/
+.plan-price{
+  margin-top: 30px;
+}
+
+.plan-price-unit{
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.plan-apply-btn{
+  margin-top: 30px;
+}
+
+.price-terms{
+  margin-top: 20px;
+}
+
+.reactive-membership{
+  margin-top: 20px;
+}
+
+.dfs-testimonial-container{
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.dfs-testimonial-point{
+  color: #cccccc;
+}
+
+.dfs-testimonial{
+  font-style: italic;
+}
+
+.dfs-testimonial-owner{
+  margin-top: 20px;
+  color: #cccccc;
+}
+
+.group_label {
+  font-size: 32px;
+  text-align: center;
+  margin: 15px auto;
+}
+
+.plan_group {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.plan-price-card-wrapper {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+.plan-price-card {
+  padding: 15px 30px;
+  background: #fff;
+  border: solid 1px #777;
+}
+
+.unsubscribeOption {
+  margin-bottom: 25px;
+}
+
+.unsubscribeModal input[type=radio] {
+  margin-right: 1em;
+  float: left;
+}
