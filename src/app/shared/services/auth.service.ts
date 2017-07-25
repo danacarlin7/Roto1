@@ -77,7 +77,7 @@ export class AuthService {
 
   loginWP(data:string):Observable<any> {
     console.log(data);
-    return this.http.post('http://forum.dfsportgod.com/dfsauth/nglogin/', data)
+    return this.http.post('http://13.56.129.231/dfsauth/nglogin/', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
   }
@@ -127,7 +127,7 @@ export class AuthService {
   }
 
   registerWP(data:string):Observable<any> {
-    return this.http.post('http://forum.dfsportgod.com/dfsauth/register/', data)
+    return this.http.post('http://13.56.129.231/dfsauth/register/', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
   }
