@@ -92,7 +92,7 @@ export class LineupOptimizerService {
   }
 
   retrieveSlates(operator:string, sport:string):Observable<any> {
-    return this.http.get(environment.api_end_point + 'api/slates?date_exact=2017-07-09&operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + 'api/slates?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -101,7 +101,7 @@ export class LineupOptimizerService {
   }
 
   retrievePlayers(operator:string, sport:string, slateId:number):Observable<any> {
-    let url = environment.api_end_point + 'api/optimizer/playersBySlate?date_exact=2017-07-09&sport=' + sport + '&operator=' + operator;
+    let url = environment.api_end_point + 'api/optimizer/playersBySlate?sport=' + sport + '&operator=' + operator;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
     }
@@ -123,7 +123,7 @@ export class LineupOptimizerService {
   }
 
   retrieveAdvFilterSettings(operator:string, sport:string, slateId:number):Observable<any> {
-    let url = environment.api_end_point + 'api/optimizer/filter?date_exact=2017-07-09&sport=' + sport + '&operator=' + operator;
+    let url = environment.api_end_point + 'api/optimizer/filter?sport=' + sport + '&operator=' + operator;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
     }
@@ -137,7 +137,7 @@ export class LineupOptimizerService {
 
 
   retrieveStackingData(sport:string, slateId:number):Observable<any> {
-    let url = environment.api_end_point + 'api/optimizer/stacking?date_exact=2017-07-09&sport=' + sport;
+    let url = environment.api_end_point + 'api/optimizer/stacking?sport=' + sport;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
     }

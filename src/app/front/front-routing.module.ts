@@ -21,6 +21,7 @@ import {ArticleComponent} from "./components/article/article.component";
 import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
 import {SubscribeComponent} from "./components/subscribe/subscribe.component";
 import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
+import {MarketPlaceComponent} from "./components/market-place/market-place.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -36,10 +37,9 @@ const routes:Routes = [
       <Route>{path: 'login', component: LoginComponent},
       <Route>{path: 'signup', component: SignUpComponent},
       <Route>{path: 'forgot-password', component: ForgotPasswordComponent},
-      <Route>{path: 'test', component: TestComponent},
-      <Route>{path: 'test', component: TestComponent},
       <Route>{path: 'provider-lineup', canActivate: [AuthGuard], component: ProviderLineupComponent},
       <Route>{path: 'news', component: NewsComponent},
+      <Route>{path: 'market-place', component: MarketPlaceComponent},
       <Route>{path: 'lineups', component: DailyLineupComponent},
       <Route>{path: 'articles/:id', component: ArticleComponent},
       <Route>{path: 'articles', component: ArticlesComponent},

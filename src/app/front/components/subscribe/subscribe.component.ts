@@ -28,6 +28,8 @@ export class SubscribeComponent implements OnInit {
   selectedPlan;
   userData;
 
+  isLoading:boolean;
+
   unsubscribeOption = "at_period_end";
 
   period_text = {week: 'Weekly', month: 'Monthly', year: 'Yearly', annual: 'Annually'};
@@ -48,9 +50,11 @@ export class SubscribeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.frontService.getSubscribePlans().subscribe(
       response => {
-        this.plans = response.data;
+        this.isLoading = false;
+        this.plans = response.data[0].data;
       }
     );
   }
@@ -67,30 +71,35 @@ export class SubscribeComponent implements OnInit {
 
   onBtnSubscribeClick(plan) {
     this.selectedPlan = plan;
-    var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
-      locale: 'auto',
-      token: (token:any) => {
-        // You can access the token ID with `token.id`.
-        // Get the token ID to your server-side code for use.
-        console.log("token call back => ", token);
-        this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id)
-          .subscribe(
-            response => {
-              if (response.statusCode == 200) {
-                console.log("subscribePlan Success => ", response.data);
+    localStorage.setItem('selectedPlan', plan.plan_id);
+    if (this.authService.isLoggedIn()) {
+      var handler = (<any>window).StripeCheckout.configure({
+        key: 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
+        locale: 'auto',
+        token: (token:any) => {
+          // You can access the token ID with `token.id`.
+          // Get the token ID to your server-side code for use.
+          console.log("token call back => ", token);
+          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id)
+            .subscribe(
+              response => {
+                if (response.statusCode == 200) {
+                  console.log("subscribePlan Success => ", response.data);
+                }
               }
-            }
-          );
-      }
-    });
+            );
+        }
+      });
 
-    handler.open({
-      name: this.selectedPlan.name,
-      description: this.selectedPlan.interval != 'day' ? this.period_text[this.selectedPlan.interval] : 'Every ' + this.selectedPlan.interval_count + ' days',
-      amount: this.selectedPlan.amount,
-      email: this.userData.email
-    });
+      handler.open({
+        name: this.selectedPlan.name,
+        description: this.selectedPlan.interval != 'day' ? this.period_text[this.selectedPlan.interval] : 'Every ' + this.selectedPlan.interval_count + ' days',
+        amount: this.selectedPlan.amount,
+        email: this.userData.email
+      });
+    } else {
+      this.router.navigate(['/login'], {queryParams: {redirect: location.pathname}});
+    }
   }
 
   onBtnUnsubscribeClick(plan) {

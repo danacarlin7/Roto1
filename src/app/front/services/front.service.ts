@@ -72,7 +72,7 @@ export class FrontService {
   }
 
   getSubscribePlans():Observable<any> {
-    return this.http.get(environment.api_end_point + "api/plans", {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());

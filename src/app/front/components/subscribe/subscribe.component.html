@@ -1,126 +1,39 @@
-<div class="container main-content">
-	<div class="row">
-		<div class="col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5" style="text-align: center">
-			<img class="thumb-image loaded"
-			style="width: 100px"
-			src="https://static1.squarespace.com/static/560b3ec7e4b01d2677300947/t/58f57e671b631bc59d0f4309/1492483692460/?format=300w" />
-		</div>
-	</div>
-	<div *ngFor="let group of plans">
-		<div class="row plan_group" *ngIf="group._id!=null">
-			<div class="col-xs-12" style="text-align: center;margin: 10px">
-				<h2>{{ group.group_name }}</h2>
-				<label style="margin-top: 10px">
-					Access to All VIP Tools
-				</label>
-			</div>
-			<div class="col-sm-4 plan-price-card-wrapper" style="text-align: center;" *ngFor="let plan of group.data;">
-				<div class="plan-price-card">
-					<h3 class="text-align-center plan-validity"><strong>{{ plan.name }}</strong></h3>
-					<p class="plan-validity-sub-title">{{ plan.trial_period_days?plan.trial_period_days+'-Day Free Trial':' ' }}</p>
-					<h1 class="text-align-center plan-price">${{ plan.amount / 100 }}</h1>
-					<p class="text-align-center plan-price-unit">{{ plan.interval!='day'?period_text[plan.interval]:'Every ' + plan.interval_count + ' days' }}</p>
-					<div *ngIf="checkPlanStatus(plan.plan_id)">
-						<button class="plan-apply-btn btn btn-default" (click)="onBtnSubscribeClick(plan)" disabled="disabled">Subscribe</button>
-					</div>
-					<div *ngIf="!checkPlanStatus(plan.plan_id)">
-						<button class="plan-apply-btn btn btn-default" (click)="onBtnSubscribeClick(plan)">Subscribe</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1">
-			<div style="text-align: center">
-				<h2>
-				All-Access To The Following Sports
-				</h2>
-				<label style="margin-top: 10px">
-					<strong>AS A VIP MEMBER YOU WILL RECEIVE:</strong>
-				</label>
-			</div>
-			<div style="margin: 20px auto">
-				<ul style="list-style: disc">
-					<li>Access to all NBA, NFL, NHL, MLB, EPL, UCL, MMA, and NASCAR products
-					in our private members only Slack Channel. &nbsp;</li>
-					<li>Receive Full Line-ups for DraftKings and FanDuel that are carefully
-					crafted by our expert panel&nbsp;</li>
-					<li>Access to exclusive VIP articles that are posted 6 times per week
-						and are full of insider info.
-					</li>
-					<li>Cheatsheets that show projections for each game and sport that show
-						the theory and statistics behind our Line-Ups.
-					</li>
-					<li>Access to our Exclusive Members Only Slack Channel and Online DFS
-						Community.
-					</li>
-					<li>Full-time staff working around the clock to answer your questions.
-					</li>
-					<li>Ranked DFS Professionals (Ranked top 200 in the world on
-						rotogrinders.com)
-					</li>
-					<li>Daily Articles written by the pros for every sport on DraftKings and
-						FanDuel
-					</li>
-					<li>Tools to help you make your own lineups and become a better player
-					</li>
-					<li>FanDuel optimized lineups straight from the Pros</li>
-					<li>Draft Kings optimized lineups straight from the Pros</li>
-					<li>Pro question and answers live Slack chatroom</li>
-					<li>Professionalism and transparency (You know 100% what you are signing
-						up for and the team you are signing up with)
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1" style="text-align: center">
-			<h4>OUR MEMBERS ARE WINNING BIG AND PAYING THEIR BILLS WITH DFS</h4>
-		</div>
-		<div class="col-sm-12" style="text-align: center">
-			<img class="thumb-image"
-			style="width: 250px;margin: 30px"
-			src="https://static1.squarespace.com/static/560b3ec7e4b01d2677300947/t/58ab1644f5e23130913fe9e6/1487607375034/"/>
-			<img class="thumb-image"
-			style="width: 250px;margin: 30px"
-			src="https://static1.squarespace.com/static/560b3ec7e4b01d2677300947/t/58a5e4619de4bb898be4a525/1487266926091/"/>
-			<img class="thumb-image"
-			style="width: 250px;margin: 30px"
-			src="https://static1.squarespace.com/static/560b3ec7e4b01d2677300947/t/58a5e43e59cc6860ea3a1f6b/1487266885173/"/>
-		</div>
-	</div>
-</div>
-
-<template #unsubscribeTemplateRef let-unsubscribeDialog="dialogRef">
-	<div class="unsubscribeModal">
-		<div class="modal-header">
-			<h1 class="modal-title text-center" id="myModalLabel">End Subscription</h1>
-		</div>
-		<div class="modal-body">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="unsubscribeOption">
-						<input type="radio" name="unsubscribeOption" value="immediate" [(ngModel)]="unsubscribeOption" />
-						<div class="info">
-							<p><strong>Immediately</strong></p>
-							<p class="text-muted">End the subscription immediately.</p>
-						</div>
-					</div>
-					<div class="unsubscribeOption">
-						<input type="radio" name="unsubscribeOption" value="at_period_end" [(ngModel)]="unsubscribeOption" />
-						<div class="info">
-							<p><strong>At period end</strong></p>
-							<p class="text-muted">End the subscription at the end of the current billing period.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" (click)="unsubscribeDialog.close(true)">Close</button>
-			<button type="button" class="btn btn-primary" (click)="endSubscription(unsubscribeDialog)">End Subscription</button>
-		</div>
-	</div>
-</template>
+<!-- Login Page Starts -->
+<section class="loginDetails">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="loginDetailsWrapper">
+          <div class="loginLftWrapper">
+            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive"/>
+          </div>
+          <div class="loginRghtWrapper signupRghtWrapper">
+            <div class="mainTab">
+              <div class="tab">
+                <ul>
+                  <li style="width: 100%">
+                    <a href="#VIPPackages " class="tablinks active">All Access Packages</a>
+                  </li>
+                </ul>
+              </div>
+              <div id="VIPPackages" class="tabcontent" style="display:block;">
+                <div class="rp-plan-container">
+                  <div class="common-loader" *ngIf="isLoading">
+                    <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+                  </div>
+                  <div class="rp-plan" *ngFor="let plan of plans">
+                    <div class="plan-name">{{plan.name}}</div>
+                    <div class="plan-price">{{(plan.amount / 100) | currency:'USD':true}}</div>
+                    <div class="plan-time">{{'/'+plan.interval_count+' '+plan.interval}}</div>
+                    <button class="btn-subscribe btn-lg btn-default" (click)="onBtnSubscribeClick(plan)">Subscribe</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Login Page Ends -->

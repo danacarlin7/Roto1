@@ -30,6 +30,7 @@ import {ChangePasswordComponent} from "./components/change-password/change-passw
 import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
 import {SubscribeComponent} from "./components/subscribe/subscribe.component";
 import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
+import {MarketPlaceComponent} from "./components/market-place/market-place.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -65,7 +66,8 @@ import {VerifyAccComponent} from "./components/forgot-password/verify-acc.compon
     ChangePasswordComponent,
     GeneratedLineupsComponent,
     SubscribeComponent,
-    VerifyAccComponent
+    VerifyAccComponent,
+    MarketPlaceComponent
   ],
   exports: [
     FrontMainComponent

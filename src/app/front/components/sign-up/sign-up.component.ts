@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {FormGroup, FormControl, Validators, AbstractControl} from "@angular/forms";
 import {UserDashboardServices} from "../../../user/services/user-dashboard.service";
 import {environment} from "../../../../environments/environment";
+import {FrontService} from "../../services/front.service";
 /**
  * Created by Hiren on 07-06-2017.
  */
@@ -21,9 +22,10 @@ export class SignUpComponent {
   username_error = 0;
   isUserExist:number = 0;
   checkingUserName:boolean;
+
   @ViewChild('signUpError') signUpErrorRef:ElementRef;
 
-  constructor(private authService:AuthService, private router:Router, private renderer:Renderer2, private dashboardService:UserDashboardServices) {
+  constructor(private authService:AuthService, private router:Router, private renderer:Renderer2, private dashboardService:UserDashboardServices, private frontService:FrontService) {
     this.signUpForm = new FormGroup({
       userName: new FormControl('', Validators.required),
       fName: new FormControl('', Validators.required),
@@ -39,6 +41,7 @@ export class SignUpComponent {
   ngOnInit() {
 
   }
+
 
   onTxtUserNameBlur() {
     if (this.username == this.signUpForm.value['userName']) {

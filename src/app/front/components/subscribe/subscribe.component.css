@@ -1,86 +1,41 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
-.main-content{
-  margin-top: 50px;
+.rp-plan-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-.plan-price-card{
-  margin: 20px auto;
+.rp-plan {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fafafa;
+  transition: 300ms;
 }
 
-.plan-validity{
+.rp-plan:hover{
+  box-shadow: 2px 1px 10px 0 rgba(0, 0, 0, 0.2);
+  transition: 225ms;
+}
+
+.plan-name {
+  font-size: 22px;
+  margin: 10px;
+}
+
+.plan-price {
+  font-size: 30px;
+  margin: 10px;
+}
+
+.plan-time {
   font-size: 18px;
+  margin: 10px;
 }
 
-.plan-validity-sub-title{
-  margin-top: 20px;
-}
-/*SWAPN8689QR*/
-.plan-price{
-  margin-top: 30px;
-}
+.btn-subscribe {
 
-.plan-price-unit{
-  margin-top: 20px;
-  font-size: 20px;
-}
-
-.plan-apply-btn{
-  margin-top: 30px;
-}
-
-.price-terms{
-  margin-top: 20px;
-}
-
-.reactive-membership{
-  margin-top: 20px;
-}
-
-.dfs-testimonial-container{
-  font-size: 18px;
-  margin-top: 30px;
-}
-
-.dfs-testimonial-point{
-  color: #cccccc;
-}
-
-.dfs-testimonial{
-  font-style: italic;
-}
-
-.dfs-testimonial-owner{
-  margin-top: 20px;
-  color: #cccccc;
-}
-
-.group_label {
-  font-size: 32px;
-  text-align: center;
-  margin: 15px auto;
-}
-
-.plan_group {
-  margin-bottom: 60px;
-  text-align: center;
-}
-
-.plan-price-card-wrapper {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
-.plan-price-card {
-  padding: 15px 30px;
-  background: #fff;
-  border: solid 1px #777;
-}
-
-.unsubscribeOption {
-  margin-bottom: 25px;
-}
-
-.unsubscribeModal input[type=radio] {
-  margin-right: 1em;
-  float: left;
 }
