@@ -50,6 +50,6 @@ export class LineupPostService {
     }
 	
 	getHiddenLineups(operator, sport) {
-      return this.http.get(environment.api_end_point + 'api/lineup?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()});
+      return this.http.get(environment.api_end_point + 'api/lineups?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()});
 	}
 };
