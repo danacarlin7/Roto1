@@ -46,8 +46,8 @@ const routes:Routes = [
       <Route>{path: 'basics', component: DFSBasicsComponent},
       <Route>{path: 'excel-tool', component: ExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
-      <Route>{path: 'lineup-optimizer', canActivate: [AuthGuard], component: LineupOptimizerComponent},
-      <Route>{path: 'generated-lineups', canActivate: [AuthGuard], component: GeneratedLineupsComponent},
+      <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
+      <Route>{path: 'generated-lineups', component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
       <Route>{path: 'subscribe', component: SubscribeComponent},
     ]
