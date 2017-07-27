@@ -166,6 +166,7 @@ export class AddProviderComponent implements OnInit {
     form.value.is_providerspace = true;
     form.value.is_tool = true;
     form.value.role = "provider";
+    console.log(form.value);
     this.providerService.saveProvider(form.value).subscribe(
       success => this.router.navigate(['/admin/providers']),
       error => {
@@ -178,6 +179,37 @@ export class AddProviderComponent implements OnInit {
 
 }
 
+
+@Component({
+  selector: 'app-providers',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./providers.component.css']
+})
+export class EditProviderComponent implements OnInit {
+
+  constructor(private authService: AuthService, private providerService: AdminDashboardService, private router: Router) {
+  }
+
+  ngOnInit() {
+
+  }
+
+  onProvidersEdit(form: NgForm) {
+    form.value.is_providerspace = true;
+    form.value.is_tool = true;
+    form.value.role = "provider";
+    console.log(form.value);
+    // this.providerService.saveProvider(form.value).subscribe(
+    //   success => this.router.navigate(['/admin/providers']),
+    //   error => {
+    //     console.log("Add provider error => ", error);
+    //     //this.providerService.logout();
+    //     //this.router.navigate(['/login']);
+    //   }
+    // )
+  }
+
+}
 
 // @Component({
 //   selector: 'app-providers',
