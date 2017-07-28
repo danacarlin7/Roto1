@@ -117,12 +117,17 @@
             <div class="dropdown">
               <a href="javascript:void(0)" class="btn btn-default dropdown-toggle" type="button" id="profileDrpdwn"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                <span class="icnWrapperS"><img src="../../../../assets/images/dashboard_profile_img.png" alt=""
-                                               class="img-responsive"/></span>
+                <span class="icnWrapperS">
+                  <!--<img src="../../../../assets/images/dashboard_profile_img.png" alt=""-->
+                                               <!--class="img-responsive"/>-->
+                   <img [attr.src]="loggedUser?.profile_image ? 'https://api.dfsportgod.com/images/'+ loggedUser?.profile_image : '../../../../assets/images/dashboard_profile_img.png'" alt=""
+                        class="img-responsive"/>
+                </span>
+
                 <span class="profileName">{{loggedUser?.first_name}} {{loggedUser?.last_name}}</span>
               </a>
               <ul class="dropdown-menu" aria-labelledby="profileDrpdwn">
-                <li><a href="#">My Profile</a></li>
+                <!--<li><a href="#">My Profile</a></li>-->
                 <li><a routerLink="/user/settings">Setting</a></li>
                 <li><a (click)="logoutUser()">Log Out</a></li>
               </ul>
