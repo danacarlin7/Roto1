@@ -23,10 +23,14 @@ section {
 .lineup-table tr th {
   background-color: #e6e6e6;
   border-right: 1px solid #cbcbcb;
+  border-top: none;
+  border-bottom: none;
   padding: 15px 10px;
 }
 
 .lineup-table tr td {
   border-right: 1px solid #cbcbcb;
+  border-top: none;
+  border-bottom: none;
   padding: 8px 10px;
 }

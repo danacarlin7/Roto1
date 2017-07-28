@@ -11,6 +11,7 @@
               <div>
                 <ul class="list-group settings-list">
                   <li class="list-group-item" *ngFor="let tab of tabs;" [class.active]="tab.id == activeTab"
+                      [routerLink]="tab.id"
                       (click)="onClickTab(tab.id)">
                     {{tab.name}}
                   </li>
@@ -135,6 +136,7 @@
     </div>
   </div>
 </section>
+<router-outlet></router-outlet>
 <!--<div class="container main-content">
 
 

@@ -3,6 +3,7 @@ import {Http, Headers,Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
+import {Analyst} from "../models/provider.model";
 /**
  * Created by Hiren on 09-06-2017.
  */
@@ -11,6 +12,8 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class AdminDashboardService {
   endpoint:string = "https://api.dfsportgod.com/";
+
+  selectedProvider:Analyst;
 
   constructor(private http:Http, private authService:AuthService) {
 

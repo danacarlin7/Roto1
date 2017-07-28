@@ -17,6 +17,7 @@ import 'rxjs/Rx';
 import {AuthService} from "../../../shared/services/auth.service";
 import {LoggedUser} from "../../../shared/models/logged-user.model";
 import {UserDashboardServices} from "../../services/user-dashboard.service";
+import {Router} from "@angular/router";
 import {environment} from "../../../../environments/environment";
 
 @Component({
@@ -36,11 +37,11 @@ export class SettingsComponent implements OnInit {
       name: 'Your Profile'
     },
     {
-      id: 'password',
+      id: 'change-password',
       name: 'Change Password'
     },
     {
-      id: 'subscribe',
+      id: 'subscriptions',
       name: 'Subscribe Plan'
     }
   ];
@@ -70,7 +71,7 @@ export class SettingsComponent implements OnInit {
 
   @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef: TemplateRef<any>;
 
-  constructor(private authService: AuthService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private dashboardService: UserDashboardServices) {
+  constructor(private authService:AuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
     this.userData = this.authService.loggedUser;
     this.authService.loggedUserChangeEvent.subscribe(user => {
       this.userData = user;

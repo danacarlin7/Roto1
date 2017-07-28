@@ -10,6 +10,9 @@ import {AuthGuard} from "../shared/services/auth.guard";
 import {GraphComponent} from "./components/graph/graph.component";
 import {UploadsComponent} from "./components/uploads/uploads.component";
 import {SettingsComponent} from "./components/settings/settings.component";
+import {UpdatePasswordComponent} from "./components/settings/update-password/update-password.component";
+import {UserProfileComponent} from "./components/settings/user-profile/user-profile.component";
+import {SubscriptionsComponent} from "./components/settings/subscriptions/subscriptions.component";
 
 /**
  * Created by Hiren on 05-06-2017.
@@ -52,7 +55,21 @@ const routes:Routes = [
       },
       <Route>{
         path: 'settings',
-        component: SettingsComponent
+        component: SettingsComponent,
+        children: [
+          <Route>{
+            path: 'change-password',
+            component: UpdatePasswordComponent
+          },
+          <Route>{
+            path: 'profile',
+            component: UserProfileComponent
+          },
+          <Route>{
+            path: 'subscriptions',
+            component: SubscriptionsComponent
+          }
+        ]
       },
     ]
   }

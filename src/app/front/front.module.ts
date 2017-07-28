@@ -31,6 +31,7 @@ import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated
 import {SubscribeComponent} from "./components/subscribe/subscribe.component";
 import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
 import {MarketPlaceComponent} from "./components/market-place/market-place.component";
+import {ExtensionsComponent} from "./components/extensions/extensions.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -67,7 +68,8 @@ import {MarketPlaceComponent} from "./components/market-place/market-place.compo
     GeneratedLineupsComponent,
     SubscribeComponent,
     VerifyAccComponent,
-    MarketPlaceComponent
+    MarketPlaceComponent,
+    ExtensionsComponent
   ],
   exports: [
     FrontMainComponent

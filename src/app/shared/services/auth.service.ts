@@ -46,9 +46,7 @@ export class AuthService {
     let login: boolean;
     if (environment.token && environment.token.length) {
       login = true;
-    } else if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length) {
-      login = true;
-    } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
+    } else if (localStorage.getItem('remember') == '1' && localStorage.getItem('token') && localStorage.getItem('token').length) {
       login = true;
     }
     console.log("isLogin", login);
@@ -59,10 +57,8 @@ export class AuthService {
     let role: string;
     if (environment.role) {
       role = environment.role;
-    } else if (sessionStorage.getItem('data') && JSON.parse(sessionStorage.getItem('data')).role.length) {
-      role = JSON.parse(sessionStorage.getItem('data')).role;
-    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('token')).role.length) {
-      role = JSON.parse(localStorage.getItem('token')).role;
+    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('data')).role.length) {
+      role = JSON.parse(localStorage.getItem('data')).role;
     }
     return role;
   }

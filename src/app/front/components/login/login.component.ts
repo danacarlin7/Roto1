@@ -82,15 +82,11 @@ export class LoginComponent {
         if (response.statusCode == 200) {
           console.log("login successful => ", response);
           if (this.loginForm.value.rememberMe) {
-            localStorage.setItem('data', JSON.stringify(response.data));
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('role', response.data.role);
+            localStorage.setItem('remember', '1');
           }
-          else {
-            sessionStorage.setItem('data', JSON.stringify(response.data));
-            sessionStorage.setItem('token', response.data.token);
-            sessionStorage.setItem('role', response.data.role);
-          }
+          localStorage.setItem('data', JSON.stringify(response.data));
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('role', response.data.role);
 
           environment.token = response.data.token;
           environment.role = response.data.role;

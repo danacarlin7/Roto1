@@ -22,6 +22,7 @@ import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated
 import {SubscribeComponent} from "./components/subscribe/subscribe.component";
 import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
 import {MarketPlaceComponent} from "./components/market-place/market-place.component";
+import {ExtensionsComponent} from "./components/extensions/extensions.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -40,6 +41,7 @@ const routes:Routes = [
       <Route>{path: 'provider-lineup', canActivate: [AuthGuard], component: ProviderLineupComponent},
       <Route>{path: 'news', component: NewsComponent},
       <Route>{path: 'market-place', component: MarketPlaceComponent},
+      <Route>{path: 'extensions', component: ExtensionsComponent},
       <Route>{path: 'lineups', component: DailyLineupComponent},
       <Route>{path: 'articles/:id', component: ArticleComponent},
       <Route>{path: 'articles', component: ArticlesComponent},

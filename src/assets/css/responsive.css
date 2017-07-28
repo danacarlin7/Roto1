@@ -129,14 +129,9 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .bottomHeader .navbar-default .navbar-toggle {border: 0px;margin-right: 2px;margin-top: 11px;}
 	header .bottomHeader .navbar-default .navbar-toggle .icon-bar {width: 28px;height: 3px;border-radius: 1px;background-color: #FFF;}
 	header .bottomHeader .navbar-default .navbar-toggle:hover, header .bottomHeader .navbar-default .navbar-toggle:focus{background: transparent;}
-	header .bottomHeader .navbar-default .navbar-toggle:hover .icon-bar, header .bottomHeader .navbar-default .navbar-toggle:focus .icon-bar{background-color: #f8c534;}
-	
-	section {padding: 45px 0px;}
-	
-	header .topHeader .topNavbar > ul > li > a {font-size: 12px;padding: 10px 12px;}
-	
-	
-	
+	header .bottomHeader .navbar-default .navbar-toggle:hover .icon-bar, header .bottomHeader .navbar-default .navbar-toggle:focus .icon-bar{background-color: #f8c534;}	
+	section {padding: 45px 0px;}	
+	header .topHeader .topNavbar > ul > li > a {font-size: 12px;padding: 10px 12px;}	
 	
 	.matchDetails .matchDetailsSlider .owl-item .item ul > li{font-size: 15px;}
 	.matchDetails .tabWrapper .nav-tabs > li > a {font-size: 15px;padding: 11px 20px;}
@@ -266,16 +261,28 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbTopLftPara {font-size: 19px;line-height: 22px;margin-top: 15px;}
 	.dwnldBtn {font-size: 16px;line-height: 22px;padding: 8px 20px;}
 	.mlbInfoTp .mlbInfoTpPara {font-size: 16px;}
-	.mlbInfoTp .mlbInfoTpHedin {font-size: 22px;}
+	.mlbInfoTp .mlbInfoTpHedin {font-size: 22px;margin-bottom: 15px;}
 	.mlbInfoTp {padding: 22px 0px;}
-	.mlbInfoMidHedin {font-size: 25px;}
+	.mlbInfoMidHedin {font-size: 24px;}
 	.mlbInfoLst li {font-size: 14px;line-height: 24px;}
 	.mlbInfoBot p {font-size: 14px;line-height: 27px;}
-	.mlbDescItm .mlbDescHedin {font-size: 19px;line-height: 25px;}
-	.mlbDescItm .mlbDescPara {font-size: 14px;line-height: 25px;}
-	.mlbInfoMid .mlbInfoMidLft {padding: 25px;}
+	.mlbDescItm .mlbDescHedin {font-size: 19px;line-height: 25px; margin-bottom: 5px;}
+	.mlbDescItm .mlbDescPara {font-size: 14px;line-height: 24px;}
+	.mlbInfoMid .mlbInfoMidLft {padding: 20px 15px;}
+	.mlbInfoMid .mlbInfoMidRght{padding: 20px 15px;}
 	.mlbDescItm .mlbDescItmTp {min-height: 207px;}
-	.mlbDescLst {font-size: 14px; line-height: 26px;}
+	.mlbDescLst {font-size: 14px; line-height: 24px;}
+	
+	.mlbTopSectionWrap{padding: 15px 20px;}
+	.mlbTopLftHedin {font-size: 22px;line-height: 25px;width: 40%;}
+	.mlbTopLftPara {font-size: 19px;line-height: 24px;width: 60%;}
+	.mlbInfoSection {padding: 45px 0px;}
+	.mlbInfoLst li span {left: -11px;padding: 0px 7px 0px 7px;line-height: 21px;}
+	.mlbDescItm .mlbDescItmTp {top: 45%;z-index: 9;	left: 15px;right: 15px;}
+	.mlbDescSectionWrap .mlbDescItm {margin-bottom: 140px;}
+	.mlbDescSectionWrap .mlbDescItm2 {margin-bottom: 230px;}
+	.mlbDescSectionWrap .mlbDescItm:last-child {margin-bottom: 100px;}
+	
 	
 	.faqSection .panel-title > a {padding: 12px 40px 12px 20px;font-size: 14px;}
 	.faqSection .panel-default .panel-body p {font-size: 15px;}
@@ -314,6 +321,32 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	
 	.articleSection .mPlaceWrap{width: 100%;}
 	.articleSection .mPlaceImgWrap img {max-width: 300px;margin: 0 auto;}
+	
+	.lneUpSecLft > .lneUpIcn {width: 35px;height: 35px;padding: 4px 0px;}
+	.lneUpSecLft {padding: 25px 0px 25px 30px;width: 30%;}
+	.lneUpSecLft > .lneUpNameBx p {   font-size: 15px;  line-height: 22px;}
+	.lneUpSecRght {width: 68%;}
+	.lneUpSecLft > .lneUpNameBx a { font-size: 14px;}
+	.lneUpSection .tFormat table {min-width: 100%;width: 680px;}
+	.linUpSection .tFormat table tr.proTotal td { font-size: 14px;}
+	.linUpSection .tFormat table tr.lastTRw td {font-size: 14px;}
+	.linUpSection .form-group .form-control {max-width: 130px;min-width: 130px; font-size: 14px;}
+	
+	.bowerBannerSection {padding: 130px 0px 150px;}
+	.bowerBannerHedin h1 .bowerBannerBig {font-size: 58px;line-height: 65px;}
+	.bowerBannerHedin h1{font-size: 30px;}
+	.bowerPara {font-size: 15px;}
+	.bowerHedin{font-size: 24px;}
+	.bowerSection3 ul li {font-size: 15px;}
+
+	.infoSec1Rght {width: 60%;}
+	.infoSec1Lft {width: 38%;}
+	.infoHedin{font-size: 50px; margin-bottom: 15px;}
+	.infoSecHedin {font-size: 30px;line-height: 40px;margin-bottom: 0px;}
+	.infoPara {font-size: 19px;line-height: 30px;}
+	.infoSec2Hedin {font-size: 30px;line-height: 40px;}
+	.infoSec4Lft > .bowerDwnBtn {font-size: 15px;padding: 10px 10px;margin-top: 5px;}
+	
 }
 
 @media(max-width:767px)
@@ -552,21 +585,25 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.myAcntBtn .dropdown-menu li a{font-size: 13px;}
 	.myAcntBtn .dropdown-menu {top: 41px;}
 	
-	.mlbTopSectionWrap {flex-flow: column wrap;justify-content: flex-start;align-items: center;}
+	.mlbTopSectionWrap {flex-flow: column wrap;justify-content: flex-start;align-items: center;position: static;margin-top: 15px;width: 100%;}
 	.mlbBannerHedin h1 {font-size: 23px; }
 	.mlbBannerHedin h1 .mlbBannerBig {font-size: 45px;line-height: 40px;}
 	.mlbBannerSection {padding: 50px 0px 50px;}
-	.mlbTopLftHedin {font-size: 25px;line-height: 30px;text-align: center;}
-	.mlbTopLftPara {font-size: 15px;line-height: 22px;margin-top: 8px;text-align: center;}
+	.mlbTopLftHedin {font-size: 25px;line-height: 30px;text-align: center;width: 100%;margin-top: 10px; margin-right: 0px;}
+	.mlbTopLftPara {font-size: 15px;line-height: 22px;margin-top: 8px;text-align: center;width: 100%;}
 	.dwnldBtn {font-size: 14px;line-height: 20px;padding: 6px 20px;margin-top: 0px; margin: 0 auto;float: none;display: block;}
-	.mlbTopLft{margin-bottom: 15px;}
+	.mlbTopLft{margin-bottom: 0px;display: block;}
+	.mlbTopLft img {display: block; margin: 0 auto; max-width: 170px;}
+	.mlbTopLftTxt {display: block;}
+	.mlbInfoSection {padding: 20px 0px;}
+	
 	.mlbInfoTp .mlbInfoTpHedin {font-size: 18px;margin-bottom: 5px;}
 	.mlbInfoTp .mlbInfoTpPara {font-size: 13px;line-height: 20px;}
 	.mlbInfoTp {padding: 15px 0px;}
 	.mlbInfoMid .mlbInfoMidLft {padding: 15px;width: 100%;margin-bottom: 10px;}
 	.mlbInfoMid .mlbInfoMidRght{padding: 15px;width: 100%;}
-	.mlbInfoMidHedin {font-size: 20px;margin-bottom: 10px;}
-	.mlbInfoLst{margin-left: 15px;}
+	.mlbInfoMidHedin {font-size: 20px;}
+	.mlbInfoLst{margin-left: 19px;}
 	.mlbInfoLst li {font-size: 13px;line-height: 22px;}
 	.mlbInfoBot {margin-top: 20px;}
 	.mlbInfoBot p {font-size: 13px;line-height: 24px;padding-bottom: 10px;}
@@ -575,7 +612,8 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbDescItm .mlbDescHedin {font-size: 17px;line-height: 20px;margin-bottom: 7px;}
 	.mlbDescItmTp {padding: 20px 15px 15px;}
 	.mlbDescItm .mlbDescPara {font-size: 13px;line-height: 22px;}
-	.mlbDescItm .mlbDescItmTp {min-height: auto;}
+	.mlbDescItm .mlbDescItmTp {min-height: auto;position: static;}
+	.mlbDescSectionWrap .mlbDescItm:last-child {margin-bottom: 0px;}
 	.mlbDescLst {font-size: 13px;line-height: 24px;}
 	
 	.faqSection .panel-title > a {padding: 12px 15px;font-size: 12px;}
@@ -622,6 +660,52 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.loginDetails .formWrapper .loginSocialIcns .lgGml img {max-width: 32px;}
 	
 	.articleSection .mPlaceImgWrap img {max-width: 280px;}
+	
+	.linUpSection .dTabs .nav-tabs{margin: 0 auto;}
+	.linUpSection .linUpFrm {position: relative;top: 0px;right: 0px;text-align: center;margin-top: 12px;}
+	.linUpSection .form-group .form-control {max-width: 120px;min-width: 120px;font-size: 13px !important;text-align: left; padding-top: 6px; padding-bottom: 6px;}
+	.linUpHedin{text-align: left;}
+	.lneUpSecLft > .lneUpImgBx {width: 20%;}
+	.lneUpSecLft > .lneUpNameBx {padding: 0px 10px;width: 80%;}
+	.lneUpSecLft {padding: 10px 0px 10px 40px;width: 100%;}
+	.lneUpSecRght {width: 100%;margin-top: 20px;}
+	.lneUpSection .tFormat table {width: 550px;}
+	.lneUpSection {margin-bottom: 25px;}
+	.lneUpSecRght .lneUpHedin {font-size: 16px;}
+	.linUpSection .tFormat table tr.proTotal td {font-size: 13px;}
+	.linUpSection .tFormat table tr.lastTRw td {font-size: 13px;}
+	.lneUpSecLft > .lneUpNameBx p {font-size: 13px;}
+	.lneUpSecLft > .lneUpNameBx a {font-size: 13px;}
+	.sectionHedinBtn a {padding: 5px 10px; font-size: 13px;}
+	.lneUpSection .dropdownSelect .dropdownSelectMenu > li > a {text-align: left;}
+	
+	.bowerBannerHedin h1 .bowerBannerBig {font-size: 36px;line-height: 40px;}
+	.bowerBannerHedin h1 {font-size: 20px;}
+	.bowerBannerSection {padding: 40px 0px 40px;}
+	.bowerSection1 {padding: 30px 0px;}
+	.bowerHedin {font-size: 18px;line-height: 24px;margin-bottom: 10px;}
+	.bowerSecHedin {font-size: 13px;margin-bottom: 0px;}
+	.bowerDwnBtn {padding: 4px 25px;font-size: 14px;}
+	.bowerSection2Tp{padding: 30px 0px;}
+	.bowerPara {font-size: 13px;line-height: 22px;}
+	.bowerSection2Rght{width: 100%;}
+	.bowerSection2Lft{width: 100%; margin-bottom: 10px;}
+	.bowerSection3{padding: 30px 0px;}
+	.bowerSection3 ul li {font-size: 13px;line-height: 24px;}
+	
+	.infoSec1Lft {width: 100%; float:right;}
+	.infoHedin {font-size: 28px;margin-bottom: 0px;}
+	.infoSecHedin {font-size: 16px;line-height: 24px;padding-bottom: 10px;}
+	.infoPara {font-size: 13px;line-height: 22px;}
+	.infoSec1Rght {width: 100%;float: left;}
+	.infoSec2Lft {width: 100%;}
+	.infoSec2Rght {width: 100%;margin-bottom: 10px;}
+	.infoSec2Hedin {font-size: 18px;line-height: 26px;}
+	.infoSec3Lft {width: 100%;}
+	.infoSec3Rght {float: right;width: 100%;}
+	.infoSec4Lft {float: left;width: 100%;}
+	.infoSec4Lft > .bowerDwnBtn {font-size: 12px;padding: 3px 10px;margin-top: 5px;}
+	.infoSec4Rght {float: right;width: 100%;margin-bottom: 10px;}
 }
 
 @media(max-width:679px)
@@ -642,6 +726,8 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 4px 8px !important;}
 	header .bottomHeader .rightNav {width: 146px;right: 43px;top: 9px;}
 	header .bottomHeader .rightNav > ul > li {margin-left: 3px;	position: relative;}
+	.mlbBannerHedin {justify-content: flex-start;}
+	
 	.dashboardHeader .bottomHeader .rightNav #profileDrpdwn {font-size: 12px;}
 	.dashboardHeader .bottomHeader .rightNav img {max-width: 26px;}
 	.boPrt1 .bannerTopTxt{width: 230px;}
@@ -740,7 +826,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbBannerSection {padding: 30px 0px 30px;}
 	.mlbBannerHedin h1 {font-size: 18px;line-height: 24px;}
 	.mlbBannerHedin h1 .mlbBannerBig {font-size: 35px;line-height: 35px;}
-	.mlbTopLftHedin {font-size: 20px;line-height: 22px;}
+	.mlbTopLftHedin {font-size: 18px;line-height: 22px;}
 	.mlbTopLftPara {font-size: 13px;line-height: 15px;padding-bottom: 12px;}
 	.dwnldBtn {font-size: 13px;line-height: 20px;padding: 3px 15px;}
 	.mlbInfoTp .mlbInfoTpHedin { font-size: 16px;}
@@ -777,6 +863,10 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.pkgeCntnt h5 {font-size: 13px;margin-top: 5px;}
 	.articleSection .mPlaceImgWrap img {max-width: 190px;}
 	.articleSection .mPlaceWrtr{display: block; text-align: center; margin: 0px;}
+	.linUpSection .form-group .form-control {max-width: 100px;min-width: 100px;font-size: 11px !important;padding: 4px 5px;}
+	.linUpSection .linUpFrm > .form-group {margin-left: 2px;}
+	.linUpSection .linUpFrm > .form-group > .form-group .form-control {min-width: 40px;max-width: 40px;border-radius: 0px;}
+	.lneUpSecRght .lneUpHedin {font-size: 15px;}
 }
 @media(max-width:359px)
 {
