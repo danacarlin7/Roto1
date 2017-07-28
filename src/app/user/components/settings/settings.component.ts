@@ -17,6 +17,7 @@ import 'rxjs/Rx';
 import {AuthService} from "../../../shared/services/auth.service";
 import {LoggedUser} from "../../../shared/models/logged-user.model";
 import {UserDashboardServices} from "../../services/user-dashboard.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-settings',
@@ -26,6 +27,10 @@ import {UserDashboardServices} from "../../services/user-dashboard.service";
 export class SettingsComponent implements OnInit {
 
   tabs = [
+    {
+      id: 'image',
+      name: 'Profile Image'
+    },
     {
       id: 'profile',
       name: 'Your Profile'
@@ -42,15 +47,30 @@ export class SettingsComponent implements OnInit {
 
   activeTab = null;
 
-  userData:LoggedUser;
+  userData: LoggedUser;
   user_name = '';
   unsubscribeOption = "at_period_end";
 
   selectedPlan;
 
-  @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef:TemplateRef<any>;
+  filename;
+  configUpload = {
+    // Change this to your upload POST address:
+    server: 'https://api.dfsportgod.com/api/uploadImage',
+    maxFilesize: 50,
+    acceptedFiles: 'image/*',
+    paramName: 'file',
+    autoReset: 500,
+    headers: {'Authorization': 'Bearer ' + environment.token}
+  };
+  mainDialog;
+  subDialog;
 
-  constructor(private authService:AuthService, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
+  isLoading: boolean;
+
+  @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef: TemplateRef<any>;
+
+  constructor(private authService: AuthService, overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal, private dashboardService: UserDashboardServices) {
     this.userData = this.authService.loggedUser;
     this.authService.loggedUserChangeEvent.subscribe(user => {
       this.userData = user;
@@ -65,11 +85,35 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+
   ngOnInit() {
   }
 
   onClickTab(tab) {
     this.activeTab = tab;
+  }
+
+  fileUploadEvent(event) {
+    let fileList: FileList = event.target.files;
+    if (fileList.length > 0) {
+      this.authService.uploadProfile(fileList).subscribe(
+        data => console.log('success'),
+        error => console.log(error)
+      );
+    }
+  }
+
+  onUploadError(event) {
+    console.log(event);
+  }
+
+  onUploadSuccess(event) {
+    // this.getUploads();
+  }
+
+  onSending(file) {
+    this.filename = file[0].name.split('-');
+    this.filename = this.filename[0];
   }
 
   onBtnUnsubscribeClick(plan) {

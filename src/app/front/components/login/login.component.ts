@@ -53,7 +53,7 @@ export class LoginComponent {
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
       expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + value + expires + "; domain=dfsportgod.com; path=/";
+    document.cookie = name + "=" + value + expires + "; domain=rotopros.com; path=/";
   }
 
   readCookie(name) {
@@ -68,7 +68,7 @@ export class LoginComponent {
   }
 
   removeCookie(name) {
-    document.cookie = name + "=; expires=" + new Date(0).toUTCString() + "; domain=dfsportgod.com; path=/";
+    document.cookie = name + "=; expires=" + new Date(0).toUTCString() + "; domain=rotopros.com; path=/";
   }
 
 

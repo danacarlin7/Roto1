@@ -16,6 +16,7 @@ export interface LoggedUser{
   is_subscribe: boolean;
   is_memberspace: boolean;
   is_active: boolean;
+  profile_image: string;
 }
 
 
