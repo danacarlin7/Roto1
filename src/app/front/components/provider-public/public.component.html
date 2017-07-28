@@ -7,7 +7,7 @@
                     	<h1>Lineups</h1>
                     </div>
                     <div class="sectionHedinBtn clearfix">
-                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="currentOperator = $event.target.id;" [ngClass]="{'btn btn-yellow': (operator == currentOperator)}">{{operator}}</a>
+                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="showSlatesForOperator($event.target.id);" [ngClass]="{'btn-yellow': (operator == currentOperator)}">{{operator}}</a>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 	<div class="dTabs">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" *ngFor="let sport of sports" [ngClass]="{'active': (sport == currentSport)}"><a href="javascript:void(0)" role="tab" data-toggle="tab" id="{{sport}}" (click)="currentSport = $event.target.id;">{{sport}}</a></li>
+                            <li role="presentation" *ngFor="let sport of sports" [ngClass]="{'active': (sport == currentSport)}"><a href="javascript:void(0)" role="tab" data-toggle="tab" id="{{sport}}" (click)="showSlatesForSport($event.target.id);">{{sport}}</a></li>
                         </ul>
                         <div class="linUpFrm">
                         	<div class="form-group slctWrapper">
@@ -28,7 +28,7 @@
                                 <div class="dropdownSelect">
                                 	<a  href="javascript:void(0)" class="dropdownSelectClick form-control">{{currentSlate}}</a>
                                     <ul class="dropdownSelectMenu">
-                                    	<li><a href="javascript:void(0)" *ngFor="let slate of slates" id="{{slate.Slate}}" (click)="currentSlate = $event.target.id;">{{slate.Slate}}</a></li>
+                                    	<li><a href="javascript:void(0)" *ngFor="let slate of slates" id="{{slate.SlateID}}--{{slate.Slate}}" (click)="setSlate( $event.target.id);">{{slate.Slate}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                      <button type="button" class="form-control" (click)="setDate(true);">Next</button>
                                 </div>
 
-                                <input type="button" (click)="getFilteredHiddenLineups();" value="GetLineups" />
+                                <button type="button" class="form-control btn-yellow" (click)="getDataForLineups();">GetLineups</button>
                             </div>
                         </div>
                         <!-- Tab panes -->
@@ -81,7 +81,7 @@
                                         <div class="tFormat">
                                             <div class="table-responsive">
                                                 <table cellspacing="0" cellpadding="0" border="0">
-                                                    <tbody>
+                                                    <thead>
                                                     <tr class="dHedin">
                                                         <th width="15%">Pos</th>
                                                         <th width="20%">Player Name</th>
@@ -90,62 +90,32 @@
                                                         <th width="15%">Proj</th> 
                                                         <th width="15%">Salary</th>                                   
                                                     </tr>
-                                                    <tr>
-                                                        <td>P</td>
-                                                        <td>Jake Odorizzi p</td>
-                                                        <td>PF <span class="grnDot"></span></td>
-                                                        <td>TB@StL</td>
-                                                        <td>19.84</td>
-                                                        <td>$9500</td>
-                                                    </tr>
-                                                    <tr class="dtSubs">
-                                                    	<td colspan="6"><a href="javascript:void(0)">Subscrive  to View More</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1B</td>
-                                                        <td>Jake Odorizzi p</td>
-                                                        <td>PF <span class="grnDot"></span></td>
-                                                        <td>TB@StL</td>
-                                                        <td>19.84</td>
-                                                        <td>$9500</td>
-                                                    </tr>
-                                                    <tr class="dtSubs">
-                                                    	<td colspan="6"><a href="javascript:void(0)">Subscrive  to View More</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2B</td>
-                                                        <td>Jake Odorizzi p</td>
-                                                        <td>PF <span class="grnDot"></span></td>
-                                                        <td>TB@StL</td>
-                                                        <td>19.84</td>
-                                                        <td>$9500</td>
-                                                    </tr>
-                                                     <tr class="dtSubs">
-                                                    	<td colspan="6"><a href="javascript:void(0)">Subscrive  to View More</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>SS</td>
-                                                        <td>Jake Odorizzi p</td>
-                                                        <td>PF <span class="grnDot"></span></td>
-                                                        <td>TB@StL</td>
-                                                        <td>19.84</td>
-                                                        <td>$9500</td>
-                                                    </tr>  
-                                                    <tr>
-                                                        <td>OF</td>
-                                                        <td>Jake Odorizzi p</td>
-                                                        <td>PF <span class="grnDot"></span></td>
-                                                        <td>TB@StL</td>
-                                                        <td>19.84</td>
-                                                        <td>$9500</td>
-                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let player of currLineup['Lineup']" [ngClass]="{'dtSubs': player.hasOwnProperty('_id')}">
+                                                          <td *ngIf="!player.hasOwnProperty('_id')">{{player['Position']}}</td>
+                                                          <td *ngIf="!player.hasOwnProperty('_id')">{{player['Name']}}</td>
+                                                          <td *ngIf="!player.hasOwnProperty('_id')">{{(player['Player'] == null) ? '' : player['Player']['OperatorPosition']}} <span class="grnDot"></span></td>
+                                                          <td *ngIf="!player.hasOwnProperty('_id')">
+                                                            <span *ngIf="player['Player'] != null">
+                                                              <span *ngIf="player['Player']['IsHomeTeam'] == 'Y'"><b>{{player['Player']['Team']}}</b></span>
+                                                              <span *ngIf="player['Player']['IsHomeTeam'] != 'Y'">{{player['Player']['Opposition']}}</span>
+                                                              @
+                                                              <span *ngIf="player['Player']['IsHomeTeam'] != 'Y'"><b>{{player['Player']['Team']}}</b></span>
+                                                              <span *ngIf="player['Player']['IsHomeTeam'] == 'Y'">{{player['Player']['Opposition']}}</span>
+                                                            </span>
+                                                          </td>
+                                                          <td *ngIf="!player.hasOwnProperty('_id')">{{(player['Player'] == null) ? '' : player['Player']['FantasyPoints' + currentOperator]}}</td>
+                                                          <td *ngIf="!player.hasOwnProperty('_id')">${{(player['Player'] == null) ? '' : player['Player']['OperatorSalary']}}</td>
+                                                          <td *ngIf="player.hasOwnProperty('_id')" colspan="6"><a href="javascript:void(0)" (click)="showSubscribePage();">Subscribe to View More</a></td>
+                                                        </tr>
                                                     <tr class="proTotal">
                                                     	<td colspan="4">Totals</td>
-                                                        <td>147</td>
-                                                        <td>454.2</td>
+                                                        <td>{{currLineup['TotalPoints']}}</td>
+                                                        <td>{{currLineup['TotalSalary']}}</td>
                                                     </tr>
                                                     <tr class="lastTRw">
-                                                    	<td colspan="3">Draftkings_arcade_1</td>
+                                                    	<td colspan="3">{{currLineup['LineupName']}}</td>
                                                         <td colspan="3">FANTASY [ CRUNCHER ]</td>
                                                     </tr>
                                                     

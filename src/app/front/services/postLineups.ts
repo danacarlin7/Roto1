@@ -39,8 +39,8 @@ export class LineupPostService {
       return this.http.get(environment.api_end_point + 'api/providers?operator=' + operator + '&sport=' + sport + '&slate_id=' + slate, {headers: this.getHeaders()});
     }
 
-    getLineups(operator, sport, slate, provider) {
-      return this.http.get(environment.api_end_point + 'api/lineup?operator=' + operator + '&sport=' + sport + '&since=today&slate_id=' + slate, {headers: this.getHeaders()});
+    getLineups(operator, sport) {
+      return this.http.get(environment.api_end_point + 'api/lineup?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()});
     }
     deleteLineup(operator, sport, slate, provider, id) {
       return this.http.delete(environment.api_end_point + 'api/lineup/' + id, {headers: this.getHeaders()});

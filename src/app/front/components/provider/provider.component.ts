@@ -393,9 +393,23 @@ export class ProviderComponent implements OnInit, OnDestroy {
     this.getLineups();
   }
 
+  getLineupsForCurrDayAndSlate = (allLineups): Object[] => {
+    var today = new Date().toJSON().slice(0, 10);
+
+    var currLineups = [];
+    for (var lineup of allLineups) {
+      if (lineup['SlateID'] == this.currentSlateID) {
+        var lineupDate = lineup['StartDate'].slice(0, 10);
+        if (lineupDate == today) {
+          currLineups.push(lineup);
+        }
+      }
+    }
+    return currLineups;
+  }
   getLineups = () => {
-    this.lps.getLineups(this.currentOperator, this.currentSport, this.currentSlateID, this.userName).subscribe(result => {
-      this.providerLineups = result.json()['data'];
+    this.lps.getLineups(this.currentOperator, this.currentSport).subscribe(result => {
+      this.providerLineups = this.getLineupsForCurrDayAndSlate(result.json()['data']);
 	  this.lineupsOnlyName = this.providerLineups;
 	  for (var i in this.lineupsOnlyName) {
 	      this.lineupsOnlyName[i]['Lineup'] = this.lineupsOnlyName[i]['Lineup'].map(player => player['Name']);
@@ -548,26 +562,6 @@ export class ProviderComponent implements OnInit, OnDestroy {
 
   setProvider = (provider) => {
     this.currProvider = provider;
-  }
-  downloadCSVLineups = () => {
-    this.lps.getLineups(this.currentOperator, this.currentSport, this.currentSlateID, this.currProvider).subscribe(result => {
-      var lineups = result.json()['data'];
-      var dataStr = "";
-      for (var i in lineups) {
-        var lineup = lineups[i]['Lineup'];
-
-        var lineupStr = "";
-        for (var j in lineup) {
-          lineupStr = lineupStr + lineup[j] + ",";
-        }
-        lineupStr = lineupStr.substr(0, lineupStr.length - 1);
-        dataStr = dataStr + lineupStr + "\n";
-      }
-
-      var blob = new Blob([dataStr], {type: 'text/csv'});
-      var url = window.URL.createObjectURL(blob);
-      window.open(url);
-    });
   }
   
   clickUpload = () => {
