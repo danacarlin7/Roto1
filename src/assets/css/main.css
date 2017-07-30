@@ -51,7 +51,7 @@ input.file {
 input.no-border {
     border: 0px !important ;
     box-shadow: none !important ;
-    webkit-box-shadow: none  !important;
+    -webkit-box-shadow: none  !important;
 }
 
 .table td>input.input-sm, .table td>select.input-sm {
@@ -108,6 +108,8 @@ section.my-section {
     margin-right: -15px;
     margin-bottom: 1px ;
 }
+
+div.section-gray,
 section.section-gray {
     background-color: #f2f4f8;
 }
@@ -171,8 +173,17 @@ th>.glyphicon {
     background-color: #f6f7fa;
 }
 
+.team-table-container {
+    max-height: 555px ;
+    overflow-y: auto ;
+}
+
 td.td-team {
     padding: 0px !important ;
+}
+td.td-team>img{
+    max-width: 100px;
+    max-height: 60px ;
 }
 
 td .pagination {
@@ -218,10 +229,137 @@ td .pagination {
     background-color: #fff;
 }
 
+.table-black tr>td {
+    background-color: #000 ;
+    color: #fff ;
+}
+.table-black tr>td a {
+    color: #fff ;
+}
+
+.table-gen-lin tr>td {
+    font-size: 14px ;
+}
+
+.table.table-gen-lin>tbody>tr:first-child>td {
+    border: 0px ;
+}
+
+.table.table-gen-lin>tbody>tr>td{
+    border-width: 1px ;
+    padding: 17px 15px;
+    vertical-align: middle ;
+}
+
+.table.table-gen-lin>tbody>tr.tr-yellow>td {
+    background-color: #f8c534 ;
+    color: #000 ;
+    border-color: #f8c534 ;
+}
+.table.table-gen-lin>tbody>tr.tr-yellow>td .glyphicon {
+    color: #000 ;
+}
+
+.table.table-gen-lin>tbody>tr.tr-gray>td {
+    background-color: #333 ;
+    border-color: #333 ;
+}
+.table.table-gen-lin>tbody>tr.tr-after-gray>td {
+    border-top-width: 0px ;
+}
+
 .lineups-container {
     max-height: 954px;
     overflow-y: auto ;
 }
+
+.table-footer-total {
+    font-family: "Open Sans", sans-serif ;
+    padding: 13px 0px;
+    background-color: #d7d7d7;
+    margin: 0;
+    font-size: 16px ;
+    color: #000 ;
+}
+.table-footer-total>div {
+    padding-left: 10px ;
+    padding-right: 10px ;
+}
+
+.table-footer-draft {
+    font-family: "Open Sans", sans-serif ;
+    padding: 13px 0px;
+    background-color: #000 ;
+    margin: 0;
+    font-size: 16px ;
+    color: #d7d7d7 ;
+    margin-bottom: 20px ;
+}
+
+.gen-lineup-cont .head-black,
+.gen-lineup-cont .filter-buttons,
+.gen-lineup-cont table.df-table,
+.gen-lineup-cont table.table-gen-lin {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
+    -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow:  0px 0px 20px rgba(0, 0, 0, 0.16);
+
+}
+.gen-lineup-cont table.df-table {
+    margin-bottom: 0 ;
+}
+
+.gen-lineup-cont .table.df-table>thead>tr>th, .gen-lineup-cont .table.df-table>tbody>tr>th,
+.gen-lineup-cont .table.df-table>tfoot>tr>th, .gen-lineup-cont .table.df-table>thead>tr>td,
+.gen-lineup-cont .table.df-table>tbody>tr>td, .gen-lineup-cont .table.df-table>tfoot>tr>td {
+    padding: 13px 10px;
+    vertical-align: middle ;
+    padding-left: 15px ;
+    padding-right: 15px ;
+}
+.gen-lineup-cont .table.df-table>tbody>tr>td {
+    color: #8f8f8f ;
+}
+.gen-lineup-cont .table.df-table>tbody>tr>td>b {
+    color: #000 ;
+}
+
+.gen-lineup-cont .table.df-table>tbody>tr:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
+    -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow:  0px 0px 20px rgba(0, 0, 0, 0.16);
+}
+.gen-lineup-cont .table.df-table>tbody>tr:hover>td {
+    color: #000 ;
+}
+
+.light-dot {
+    position: relative ;
+    padding: 3px 8px;
+}
+.light-dot:before {
+    content: " ";
+    position: absolute;
+    border-radius: 50%;
+    background-color: #34b434;
+    width: 6px;
+    height: 6px;
+    top: 40% ;
+    left: 8px;
+}
+
+.light-dot.green-dot:before {
+    background-color: #34b434 ;
+}
+.light-dot.yellow-dot:before {
+    background-color: #f8c534 ;
+}
+
+.light-dot.red-dot:before {
+    background-color: #de0d0d ;
+}
+
+
 
 /*
 Buttons
@@ -233,7 +371,7 @@ Buttons
 }
 
 .btn.active, .btn:active {
-    webkit-box-shadow: none ;
+    -webkit-box-shadow: none ;
     box-shadow: none ;
 }
 
@@ -272,11 +410,25 @@ Buttons
 }
 
 .btn.btn-black-gray:hover,
-.btn.btn-gray-black, .btn.btn-gray-yellow  {
+.btn.btn-gray-black, .btn.btn-gray-yellow {
     background-color: #727272;
     background: #727272;
     color: #fff;
     border: 1px solid #727272 ;
+}
+
+.btn.btn-grayl-grayl {
+    background-color: #1a1a1a;
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #1a1a1a ;
+}
+
+.btn.btn-grayl-grayl:hover,.btn.btn-grayl-grayl:active, .btn.btn-grayl-grayl:focus, .btn.btn-grayl-grayl.active {
+    background-color: #333;
+    background: #333;
+    color: #fff;
+    border: 1px solid #333 ;
 }
 
 .postion-btns .btn {
@@ -287,6 +439,12 @@ Buttons
     width: 53px;
     padding-left: 0;
     padding-right: 0;
+}
+
+.btn-group-noradius.btn-group>.btn-group:first-child:not(:last-child)>.btn:last-child,
+.btn-group-noradius.btn-group>.btn-group:first-child:not(:last-child)>.dropdown-toggle,
+.btn-group-noradius.btn-group>.btn-group:last-child:not(:first-child)>.btn:first-child {
+    border-radius: 0 ;
 }
 
 .input-group-btn>.btn.margin-left-5 {
@@ -334,6 +492,9 @@ a.img-btn>img:hover {
     background-color: #000 ;
 }
 
+.btn-group-vertical>.btn.active, .btn-group-vertical>.btn:active, .btn-group-vertical>.btn:focus, .btn-group-vertical>.btn:hover, .btn-group>.btn.active, .btn-group>.btn:active, .btn-group>.btn:focus, .btn-group>.btn:hover {
+    z-index: initial ;
+}
 
 /*
 Notifications
@@ -506,11 +667,26 @@ Main Container
 
 }
 
+.gen-lineup-cont {
+    padding-top: 40px ;
+}
+
+.total-val {
+    display: inline-block;
+    text-align: left;
+    width: 80px;
+    padding-left: 15px;
+}
+.total-val>span {
+    text-align: center ;
+}
+
 section.my-section.title-container {
     padding-top: 0px;
 }
 
 .content-title {
+    font-family: "Roboto", sans-serif ;
     font-size: 28px;
     line-height: 1.6;
     font-weight: 300 ;
@@ -518,6 +694,17 @@ section.my-section.title-container {
     margin: 0px ;
 }
 
+.head-black {
+    background-color: #1c1c1c;
+    color: #fff ;
+    border-radius: 4px 4px 0 0 ;
+    padding: 10px 7px;
+    border-bottom: 1px solid #464646 ;
+}
+
+.head-black>h4 {
+    display: inline-block;
+}
 section.my-section.table-container {
     padding: 0;
 }

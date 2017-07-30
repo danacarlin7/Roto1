@@ -3,6 +3,7 @@ import {Http, Headers,Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
+import {Analyst} from "../models/provider.model";
 /**
  * Created by Hiren on 09-06-2017.
  */
@@ -11,6 +12,8 @@ import {environment} from "../../../environments/environment";
 @Injectable()
 export class AdminDashboardService {
   endpoint:string = "https://api.dfsportgod.com/";
+
+  selectedProvider:Analyst;
 
   constructor(private http:Http, private authService:AuthService) {
 
@@ -56,9 +59,28 @@ export class AdminDashboardService {
       });
   }
 
+  getProviders() {
+    return this.http.get(environment.api_end_point + 'api/getProviders', {headers:this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.hendleError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
 
   deleteMember(id) {
     return this.http.delete(environment.api_end_point + 'api/member/' + id, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.hendleError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  deleteProvider(id) {
+    return this.http.delete(environment.api_end_point + 'api/provider/' + id, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.hendleError(error.json());
@@ -75,6 +97,15 @@ export class AdminDashboardService {
       });
   }
 
+  editProvider(member) {
+    return this.http.post(environment.api_end_point + 'api/editProvider', member, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.hendleError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   saveMember(member) {
     return this.http.post(environment.api_end_point + 'api/member', JSON.stringify(member), {headers: this.getHeaders()})
       .map(response => response.json())
@@ -83,6 +114,16 @@ export class AdminDashboardService {
         return Observable.throw(error.json())
       });
   }
+
+  saveProvider(member) {
+    return this.http.post(environment.api_end_point + 'api/provider', JSON.stringify(member), {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.hendleError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
 
 
   verifyEmail(email) {
@@ -105,6 +146,15 @@ export class AdminDashboardService {
 
   changeMemberStatus(id) {
     return this.http.put(environment.api_end_point + 'api/member/' + id, '', {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.hendleError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  changeProviderStatus(id) {
+    return this.http.put(environment.api_end_point + 'api/provider/' + id, '', {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.hendleError(error.json());

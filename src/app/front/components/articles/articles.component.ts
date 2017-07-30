@@ -42,9 +42,9 @@ export class ArticlesComponent implements OnInit {
   related:Object = {};
 
   ngOnInit() {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/']);
-    }
+    // if (!this.authService.isLoggedIn()) {
+    //   this.router.navigate(['/login']);
+    // }
 
     this.activeTab = 'trending';
     this.subActiveTab = 'week';
@@ -52,9 +52,9 @@ export class ArticlesComponent implements OnInit {
     this.articleService.fetchCategories().subscribe(
       categories => {
         this.categories = categories;
-        for (var i = 0; i < this.categories.length; i++) {
+        for (let i = 0; i < this.categories.length; i++) {
           this.categories[i]['loaded'] = 0;
-          var category = this.categories[i];
+          let category = this.categories[i];
           this.posts[category.id] = [];
           this.fetchPostsByCat(category);
         }
@@ -63,7 +63,7 @@ export class ArticlesComponent implements OnInit {
     this.articleService.fetchRelated().subscribe(
       ids => {
         this.related = ids;
-        for (var key in ids) {
+        for (let key in ids) {
           this.fetchPostsByType(key);
         }
       }
@@ -71,31 +71,31 @@ export class ArticlesComponent implements OnInit {
   }
 
   private getIndexOfCategory = (catid:number) => {
-    return this.categories.findIndex(category => {
+    return this.categories.findIndex((category, index) => {
       return category.id === catid;
     });
   };
 
 
   fetchPostsByCat(category) {
-    var catid = category.id;
+    let catid = category.id;
     this.isLoading = true;
     this.articleService.fetchPosts({categories: category['id'], per_page: 5, offset: category['loaded']}).subscribe(
       posts => {
         this.categories[this.getIndexOfCategory(catid)].loaded += posts.length;
-        var mid = [];
-        for (var j = 0; j < posts.length; j++) {
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
           posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
           if (posts[j].featured_media)
             mid.push(posts[j].featured_media);
           this.posts[catid].push(posts[j]);
         }
-        var mids = mid.join(',');
+        let mids = mid.join(',');
         if (mids) {
           this.articleService.fetchMedia({include: mids}).subscribe(
             images => {
-              for (var k = 0; k < images.length; k++) {
-                var image = images[k];
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
                 this.media[image.id] = image.source_url;
               }
             }
@@ -107,11 +107,11 @@ export class ArticlesComponent implements OnInit {
   }
 
   fetchPostsByType(key:string) {
-    var cid = this.related[key].join(',');
+    let cid = this.related[key].join(',');
     this.articleService.fetchPosts({include: cid}).subscribe(
       posts => {
-        var mid = [];
-        for (var j = 0; j < posts.length; j++) {
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
           posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
           if (posts[j].featured_media)
             mid.push(posts[j].featured_media);
@@ -119,12 +119,12 @@ export class ArticlesComponent implements OnInit {
         this[key] = posts;
         // if(key=='week')
         //   console.log(posts);
-        var mids = mid.join(',');
+        let mids = mid.join(',');
         if (mids) {
           this.articleService.fetchMedia({include: mids}).subscribe(
             images => {
-              for (var k = 0; k < images.length; k++) {
-                var image = images[k];
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
                 this.media[image.id] = image.source_url;
               }
             }
@@ -135,8 +135,8 @@ export class ArticlesComponent implements OnInit {
   }
 
   encodeHtml(extract:string) {
-    var extract = extract.replace(/<[^>]+>/gm, '');
-    var txt = document.createElement("textarea");
+    extract = extract.replace(/<[^>]+>/gm, '');
+    let txt = document.createElement("textarea");
     txt.innerHTML = extract;
     extract = txt.value;
     if (extract.length > 250)
@@ -181,6 +181,7 @@ export class ArticlesComponent implements OnInit {
 
   switchToSingle(post) {
     this.activeSingle = post;
+    //this.router.navigate(['articles',post.id])
   }
 
   goBackToTab() {
@@ -194,6 +195,6 @@ export class ArticlesComponent implements OnInit {
   }
 
   onScroll(category) {
-    //this.loadMorePosts(category);
+    this.loadMorePosts(category);
   }
 }

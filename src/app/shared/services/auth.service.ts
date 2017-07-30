@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from "@angular/core";
+import {Injectable, EventEmitter, Output} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {environment} from "../../../environments/environment";
@@ -10,30 +10,30 @@ import {LoggedUser} from "../models/logged-user.model";
 @Injectable()
 export class AuthService {
 
-  private _loggedUser:LoggedUser;
+  private _loggedUser: LoggedUser;
 
-  get loggedUser():LoggedUser {
+  get loggedUser(): LoggedUser {
     return this._loggedUser;
   }
 
-  set loggedUser(value:LoggedUser) {
+  set loggedUser(value: LoggedUser) {
     this._loggedUser = value;
     if (this._loggedUser) {
       this.loggedUserChangeEvent.emit(this._loggedUser);
     }
   }
 
-  loggedUserChangeEvent:EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
+  loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
-  constructor(private http:Http) {
+  constructor(private http: Http) {
 
   }
 
-  getToken():string {
+  getToken(): string {
     return environment.token;
   }
 
-  getHeaders():Headers {
+  getHeaders(): Headers {
     let headers = new Headers();
     headers.append('content-type', 'application/json');
     if (this.getToken()) {
@@ -42,36 +42,42 @@ export class AuthService {
     return headers;
   }
 
-  isLoggedIn():boolean {
-    let login:boolean;
+  isLoggedIn(): boolean {
+    let login: boolean;
     if (environment.token && environment.token.length) {
       login = true;
-    } else if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length) {
-      login = true;
-    } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
+    } else if (localStorage.getItem('remember') == '1' && localStorage.getItem('token') && localStorage.getItem('token').length) {
       login = true;
     }
     console.log("isLogin", login);
     return login;
   }
 
-  getUserRole():string {
-    let role:string;
+  getUserRole(): string {
+    let role: string;
     if (environment.role) {
       role = environment.role;
-    } else if (sessionStorage.getItem('data') && JSON.parse(sessionStorage.getItem('data')).role.length) {
-      role = JSON.parse(sessionStorage.getItem('data')).role;
-    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('token')).role.length) {
-      role = JSON.parse(localStorage.getItem('token')).role;
+    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('data')).role.length) {
+      role = JSON.parse(localStorage.getItem('data')).role;
     }
     return role;
   }
 
-  login(data:string):Observable<any> {
+  login(data: string): Observable<any> {
     return this.http.post(environment.api_end_point + 'authenticate', data, {headers: this.getHeaders()})
       .map(response => response.json())
-      .catch(error => Observable.throw(error.json()))
+      .catch(error => Observable.throw(error.json()));
   }
+
+  @Output() userLoggedInEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  loginWP(data: string): Observable<any> {
+    console.log(data);
+    return this.http.post('http://13.56.129.231/dfsauth/nglogin/', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
 
   logout() {
     localStorage.clear();
@@ -80,16 +86,61 @@ export class AuthService {
     //this.userLoggedInEvent.emit(false);
   }
 
-  retrieveLoggedUserInfo():Observable<any> {
+  retrieveLoggedUserInfo(): Observable<any> {
     return this.http.get(environment.api_end_point + 'api/memberinfo', {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  registerNewUser(data: any): Observable<any> {
+    return this.http.post(environment.api_end_point + 'signup', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()))
   }
 
-  registerNewUser(data:any):Observable<any> {
-    return this.http.post(environment.api_end_point + 'signup', data)
+  verifyEmail(data: any) {
+    return this.http.post(environment.api_end_point + 'getToken', data)
+      .map(res => res.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  verifyToken(token): Observable<any> {
+    return this.http.post(environment.api_end_point + 'verifyToken', {token: token})
       .map(response => response.json())
-      .catch(error => Observable.throw(error.json()))
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  changePassword(data) {
+    return this.http.post(environment.api_end_point + 'verifyToken', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  userInfo() {
+    return this.http.get(environment.api_end_point + 'api/memberinfo', {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  registerWP(data: string): Observable<any> {
+    return this.http.post('http://13.56.129.231/dfsauth/register/', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
+  uploadProfile(fileList) {
+    let file: File = fileList[0];
+    let formData: FormData = new FormData();
+    formData.append('uploadFile', file, file.name);
+    return this.http.post(environment.api_end_point + 'api/uploadImage', formData, {
+      headers: new Headers({
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + this.getToken()
+      })
+    })
+      .map(res => res.json())
+      .catch(error => Observable.throw(error.json()));
   }
 
 }

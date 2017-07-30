@@ -20,20 +20,20 @@ import {environment} from "../../../../environments/environment";
 })
 export class UploadsComponent {
 
-  constructor(private router:Router,
-              private activatdRoute:ActivatedRoute,
-              private uploadService:UploadsService,
-              private dashboardService:UserDashboardServices,
-              private authservice:AuthService,
-              private overlay:Overlay,
-              private vcRef:ViewContainerRef,
-              public modal:Modal,
-              private changeDetectionRef:ChangeDetectorRef,
-              private filterService:FilterService) {
+  constructor(private router: Router,
+              private activatdRoute: ActivatedRoute,
+              private uploadService: UploadsService,
+              private dashboardService: UserDashboardServices,
+              private authservice: AuthService,
+              private overlay: Overlay,
+              private vcRef: ViewContainerRef,
+              public modal: Modal,
+              private changeDetectionRef: ChangeDetectorRef,
+              private filterService: FilterService) {
     overlay.defaultViewContainer = vcRef;
   }
 
-  selectedHistory:ContestHistory;
+  selectedHistory: ContestHistory;
   filename;
   userDetail = JSON.parse(localStorage.getItem('data'));
   configUpload = {
@@ -45,14 +45,14 @@ export class UploadsComponent {
     autoReset: 500,
     headers: {'Authorization': 'Bearer ' + environment.token}
   };
-  uploads:ContestHistory[];
+  uploads: ContestHistory[];
   mainDialog;
   subDialog;
 
-  isLoading:boolean;
+  isLoading: boolean;
 
-  @ViewChild('downloadTemplateRef') public downloadTemplateRef:TemplateRef<any>;
-  @ViewChild('deleteTemplateRef') public deleteTemplateRef:TemplateRef<any>;
+  @ViewChild('downloadTemplateRef') public downloadTemplateRef: TemplateRef<any>;
+  @ViewChild('deleteTemplateRef') public deleteTemplateRef: TemplateRef<any>;
 
   ngOnInit() {
     this.getUploads();
@@ -75,7 +75,7 @@ export class UploadsComponent {
   }
 
   fileUploadEvent(event) {
-    let fileList:FileList = event.target.files;
+    let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
       this.uploadService.uploadContests(fileList).subscribe(
         data => console.log('success'),
@@ -98,7 +98,7 @@ export class UploadsComponent {
     //file[2].append('type', this.filename)
   }
 
-  onTableRowClicked(history:ContestHistory) {
+  onTableRowClicked(history: ContestHistory) {
     this.selectedHistory = history;
     this.modal.open(this.downloadTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext))
   }
@@ -123,7 +123,7 @@ export class UploadsComponent {
       )
   }
 
-  getFileSize(size:number):string {
+  getFileSize(size: number): string {
     if (size) {
       return (size / 1024).toFixed(2);
     }

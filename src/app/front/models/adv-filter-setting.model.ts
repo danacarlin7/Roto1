@@ -23,7 +23,7 @@ export interface Game {
   awayTeamId:number;
   awayTeam:string;
   awayTeamLogo:string;
-  GameID:number;
+  gameId:number;
   homeTeamMinValue?:number;
   homeTeamMaxValue?:number;
   awayTeamMinValue?:number;

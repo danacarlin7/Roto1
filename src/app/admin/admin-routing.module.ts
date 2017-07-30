@@ -4,6 +4,7 @@ import {AdminMainComponent} from "./admin-main.component";
 import {AuthGuard} from "../shared/services/auth.guard";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {MembersComponent, AddMemberComponent, UploadMemberComponent} from "./components/members/members.component";
+import {ProvidersComponent, AddProviderComponent, EditProviderComponent } from "./components/providers/providers.component";
 import {PlansComponent} from "./components/plans/plans.component";
 import {AddPlanComponent} from "./components/plans/add-plan/add-plan.component";
 import {EditPlanComponent} from "./components/plans/edit-plan/edit-plan.component";
@@ -41,6 +42,24 @@ const routes:Routes = [
         component: UploadMemberComponent,
         canActivate: [AuthGuard],
         data: {title: "Upload Member", type: "admin"}
+      },
+      <Route>{
+        path: 'providers',
+        component: ProvidersComponent,
+        canActivate: [AuthGuard],
+        data: {title: "Providers", type: "admin"}
+      },
+      {
+        path: 'addprovider',
+        component: AddProviderComponent,
+        canActivate: [AuthGuard],
+        data: {title: "Add provider", type: "admin"}
+      },
+      {
+        path: 'updateProvider',
+        component: EditProviderComponent,
+        canActivate: [AuthGuard],
+        data: {title: "Edit provider", type: "admin"}
       },
       {
         path: 'plans',

@@ -1,25 +1,3 @@
-*, *:before, *:after {
-    -webkit-font-smoothing: antialiased;
-}
-h1,h2,h3,h4,h5 {
-  font-weight: bold !important;
-}
-div.article-wrapper {
-  margin-top: 80px;
-}
-div.article {
-  margin-top: 80px;
-}
-div.article_content {
-  font-size: 16px !important;
-  line-height: 26px !important;
-}
-p {
-  display: block;
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-p:before {
-  content: '';
-  margin-top:20px;
+.article-details {
+  padding: 20px;
 }

@@ -88,3 +88,39 @@ header .topHeader .topNavbar > ul > li.active > a {
 #my-progress-bar .mat-progress-bar-fill::after {
   background-color: #f8c534 !important;
 }
+
+
+mfPaginator{
+  display: flex;
+  justify-content: space-between;
+}
+
+ul.pagination{
+  width: auto;
+  order: 2;
+}
+
+ul.pagination.pull-right{
+  width: auto;
+  order: 1;
+}
+
+.page-item .page-link{
+  color: #666;
+  background-color: #ffffff;
+}
+
+.page-item.active .page-link{
+  color: #ffffff;
+  background-color: #f8c534;
+}
+
+mfDefaultSorter a{
+  color: #000;
+}
+
+
+.article-details .row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}

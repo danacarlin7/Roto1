@@ -13,6 +13,9 @@ import {Lineup, LineupRecord, TeamInfo, TeamLineup, LineupData} from "../../mode
   styleUrls: ['./daily-lineup.component.css']
 })
 export class DailyLineupComponent {
+
+  todayDate = new Date();
+
   lineupTabs = NewsTabs;
   lineupTabConstants = NewsTabConstants;
 

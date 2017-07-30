@@ -11,6 +11,7 @@ import {SignUpComponent} from "./components/sign-up/sign-up.component";
 import {FrontService} from "./services/front.service";
 import {NewsComponent} from "./components/news/news.component";
 import {TestComponent} from "./components/test/test.component";
+import {ProviderLineupComponent} from "./components/provider-lineup/provider-lineup.component";
 import {ArticlesComponent} from "./components/articles/articles.component";
 import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.component";
 import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-optimizer.component";
@@ -31,6 +32,13 @@ import {LineupPostService} from './services/postLineups';
 import {ProviderComponent} from "./components/provider/provider.component";
 import {ProviderPublicComponent} from "./components/provider-public/public.component";
 
+import {InjuriesComponent} from "./components/injuries/injuries.component";
+import {ChangePasswordComponent} from "./components/change-password/change-password.component";
+import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
+import {SubscribeComponent} from "./components/subscribe/subscribe.component";
+import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
+import {MarketPlaceComponent} from "./components/market-place/market-place.component";
+import {ExtensionsComponent} from "./components/extensions/extensions.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -49,6 +57,7 @@ import {ProviderPublicComponent} from "./components/provider-public/public.compo
     LoginComponent,
     SignUpComponent,
     TestComponent,
+    ProviderLineupComponent,
     NewsComponent,
     ArticlesComponent,
     DailyLineupComponent,
@@ -60,9 +69,16 @@ import {ProviderPublicComponent} from "./components/provider-public/public.compo
     ExcelToolComponent,
     FAQComponent,
     AdvFilterComponent,
-    LineupPlayerFilter, 
     ProviderComponent,
-    ProviderPublicComponent
+    ProviderPublicComponent,
+    LineupPlayerFilter,
+    InjuriesComponent,
+    ChangePasswordComponent,
+    GeneratedLineupsComponent,
+    SubscribeComponent,
+    VerifyAccComponent,
+    MarketPlaceComponent,
+    ExtensionsComponent
   ],
   exports: [
     ProviderComponent,

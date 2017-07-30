@@ -28,6 +28,9 @@ import {ModalModule} from 'angular2-modal';
 import {BootstrapModalModule} from 'angular2-modal/plugins/bootstrap';
 import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 import {SettingsComponent} from "./components/settings/settings.component";
+import {UpdatePasswordComponent} from "./components/settings/update-password/update-password.component";
+import {UserProfileComponent} from "./components/settings/user-profile/user-profile.component";
+import {SubscriptionsComponent} from "./components/settings/subscriptions/subscriptions.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -59,12 +62,15 @@ import {SettingsComponent} from "./components/settings/settings.component";
     DashboardTopWinsComponent,
     GraphComponent,
     UploadsComponent,
-    SettingsComponent
+    SettingsComponent,
+    UpdatePasswordComponent,
+    UserProfileComponent,
+    SubscriptionsComponent
   ],
   exports: [
     UserMainComponent
   ],
-  providers: [UserDashboardServices, FilterService,UploadsService]
+  providers: [UserDashboardServices, FilterService, UploadsService]
 })
 export class UserModule {
 

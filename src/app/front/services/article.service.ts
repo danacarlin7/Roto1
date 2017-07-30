@@ -7,8 +7,8 @@ import {Router} from '@angular/router';
 @Injectable()
 export class ArticleService {
 
-  provider:string = "http://forum.dfsportgod.com/wp-json/wp/v2/";
-  customProvider:string = "http://forum.dfsportgod.com/dfspostmeta/get/";
+  provider:string = "http://13.56.129.231/wp-json/wp/v2/";
+  customProvider:string = "http://13.56.129.231/dfspostmeta/get/";
 
   constructor(private http:Http, private router:Router) {
   }
@@ -16,7 +16,7 @@ export class ArticleService {
   getHeaders():Headers {
     let headers = new Headers();
     headers.append('content-type', 'application/json');
-    
+
     return headers;
   }
 

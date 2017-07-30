@@ -16,6 +16,8 @@ input[type="button"], input[type="submit"]{transition:all 0.3s ease; -ms-transit
 input,  select, textarea {font-size:14px; color:#3a3a3a; vertical-align:middle; font-family: 'Roboto', sans-serif; outline:none;}
 form {margin:0 !important;}
 
+.clearfix:before, .clearfix:after {content:''; display:block; height:0; overflow:hidden;}
+.clearfix:after {clear:both;}
 /*
 .container{max-width: 1200px; margin:0 auto; width:100%;padding: 0px 15px;}
 .containerFluid{margin: 0 auto; width: 100%; padding: 0px 15px;}
@@ -84,7 +86,7 @@ section{padding: 100px 0px;}
 	header .bottomHeader .rightNav > ul > li:first-child{margin-left: 0px;}
 	header .bottomHeader .rightNav > ul > li > a{border: 1px solid #eeeeee;border-radius: 5px;font-size: 15px;color: #FFF;line-height: 23px;width: 100px;display: block;text-align: center;padding: 6px;text-decoration: none;}
 	header .bottomHeader .rightNav > ul > .myAcntBtn  > a{background: #f8c534;border: 1px solid #f8c534;color: #000 !important;padding: 6px 50px 6px 10px;width: auto;background-image: url('../images/select_arowblck.png');background-repeat: no-repeat;background-position: calc(100% - 10px);background-size: 11px;}
-	header .bottomHeader .rightNav > ul > .myAcntBtn  > a:hover, header .bottomHeader .rightNav > ul > .myAcntBtn  > a:focus{background: #f8c534;border: 1px solid #f8c534;color: #000 !important;;padding: 6px 50px 6px 10px;width: auto;background-image: url('../images/select_arowblck.png');background-repeat: no-repeat;background-position: calc(100% - 10px);background-size: 11px;}
+	header .bottomHeader .rightNav > ul > .myAcntBtn  > a:hover, header .bottomHeader .rightNav > ul > .myAcntBtn  > a:focus{background: #f8c534;border: 1px solid #f8c534;color: #000 !important;width: auto;background-image: url('../images/select_arowblck.png');background-repeat: no-repeat;background-position: calc(100% - 10px);background-size: 11px;}
 	header .bottomHeader .rightNav > ul > .signUpBtn a{ background: #f8c534; color: #000 !important; border: 1px solid #f8c534 !important;}
 	header .bottomHeader .rightNav > ul > .searchBtn a{width: auto !important; padding: 6px 12px !important;}
 	header .bottomHeader .navbar-default .navbar-collapse .navbar-nav > li{margin-left: 30px;}
@@ -650,39 +652,53 @@ section{padding: 100px 0px;}
 	/* MLB Optimizing Starts*/
 		
 		.mlbBannerSection{background: url("../images/mlb_banner.jpg") no-repeat center center; background-size: cover; padding: 230px 0px 270px;}
-		.mlbBannerHedin{display: flex;justify-content: flex-end;}
+		.mlbBannerHedin{display: flex;justify-content: flex-start;}
 		.mlbBannerHedin h1{margin: 0px;font-size: 33px;line-height: 35px;color: #000;display: flex;flex-flow: column wrap;justify-content: flex-start;font-family: 'Open Sans', sans-serif;font-weight: 400;}	
 		.mlbBannerHedin h1 .mlbBannerBig{font-family: 'Roboto Condensed', sans-serif; font-size: 93px;line-height: 85px;}
-		.mlbTopSection{background: #f2f4f8;}
-		.mlbTopSectionWrap{display: flex;flex-flow: row wrap;justify-content: space-between;align-items: flex-start;}
-		.mlbTopLftHedin{margin: 0px;font-size: 38px;line-height: 40px;font-family: 'Roboto Condensed', sans-serif;font-weight: 600; color: #000;}
-		.mlbTopLftPara{font-size: 22px;line-height: 28px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;margin-top: 20px;}
-		.dwnldBtn{font-size: 18px;line-height: 22px; padding: 10px 20px;background: #f8c534;border: 1px solid #f8c534;border-radius: 4px;margin-top: 25px; color: #000;}
+		.mlbTopSection{background: #f2f4f8; position: relative;padding: 0px;}
+		.mlbTopSectionWrap{display: flex;justify-content: space-between;align-items: center;padding: 25px 30px;background: #f8c534;position: absolute;top: -115px;box-shadow: 0px 7px 15px rgba(0,0,0,0.24);width: calc(100% - 30px);}
+		.mlbTopLft{display: flex;align-items: center;}
+		.mlbTopLftTxt{display: flex;align-items: center;}
+		.mlbTopLft img{display: inline-block; vertical-align: middle;max-width: 170px;margin-right: 20px;}
+		.mlbTopLft .mlbtoplfttxt{display: inline-block; vertical-align: middle;}
+		.mlbTopLftHedin{margin: 0px;font-size: 32px;line-height: 40px;font-family: 'Roboto Condensed', sans-serif;font-weight: 600;color: #000;font-style: italic;margin-right: 10px;}
+		.mlbTopLftPara{font-size: 28px;line-height: 40px;color: #000;font-family: 'Roboto', sans-serif;font-weight: 300;margin-top: 0px; padding: 0px;}
+		.dwnldBtn{font-size: 18px;line-height: 22px; padding: 10px 20px;background: #FFF;border: 1px solid #f8c534;border-radius: 4px; color: #000;}
 		.dwnldBtn:hover, .dwnldBtn:focus{background: #000;color: #FFF !important;border: 1px solid #000 !important;}
-		.mlbInfoSection{ background: #FFF;}
-		.mlbInfoTp{background: #ffc524;text-align: center;padding: 30px 0px;}
-		.mlbInfoTp .mlbInfoTpHedin{margin-top: 0px;font-size: 24px;line-height: 25px;background: rgb(255, 197, 36) none repeat scroll 0% 0%;font-family: 'Roboto Condensed', sans-serif;color: #000;}
-		.mlbInfoTp .mlbInfoTpPara{font-size: 18px;line-height: 22px;font-family: 'Open Sans';font-weight: 300;color: #000;padding: 0px;}
+		.mlbInfoSection{ background: #f2f4f8;padding: 70px 0px 100px;}
+		.mlbInfoTp{text-align: center;padding: 30px 0px;}
+		.mlbInfoTp .mlbInfoTpHedin{margin-top: 0px;font-size: 24px;line-height: 25px;font-family: 'Roboto Condensed', sans-serif;color: #000;font-size: 28px;line-height: 30px; font-weight: 600;margin-bottom: 20px;}
+		.mlbInfoTp .mlbInfoTpPara{font-size: 18px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #000;padding: 0px;}
+		.mlbInfoTp .mlbInfoTpPara sup{font-size: 30px;font-weight: 600;display: inline-block;vertical-align: bottom;}
 		.mlbInfoMid{display: flex;flex-flow: row wrap;justify-content: space-between;margin-top: 10px;}
-		.mlbInfoMid .mlbInfoMidLft{ background: #f2f2f2; width: 49.5%; padding: 30px;}
-		.mlbInfoMid .mlbInfoMidRght{ background: #f2f2f2; width: 49.5%; padding: 30px;}
-		.mlbInfoMidHedin{margin-top: 0px;font-family: 'Roboto Condensed', sans-serif;font-weight: 600;font-size: 38px;margin-bottom: 15px;}
-		.mlbInfoLst{margin: 0px;list-style-type: numeric;font-family: 'Open Sans';font-weight: 300;margin-left: 20px;}
-		.mlbInfoLst li{font-size: 16px;line-height: 26px; margin-bottom: 10px; color: #3b3b3b;}
-		.mlbInfoLst li:last-child{margin-bottom: 0px;}
+		.mlbInfoMid .mlbInfoMidLft{ background: #f2f2f2; width: 49.5%; padding: 30px;box-shadow: 0px 0px 20px rgba(0,0,0,0.12);}
+		.mlbInfoMid .mlbInfoMidRght{ background: #f2f2f2; width: 49.5%; padding: 30px;box-shadow: 0px 0px 20px rgba(0,0,0,0.12);}
+		.mlbInfoMidHedin{margin-top: 0px;font-family: 'Roboto Condensed', sans-serif;font-weight: 600;font-size: 38px;padding-bottom: 15px;display: flex;
+align-items: center; margin-bottom: 0px;}
+		.mlbInfoMidHedin .icnWrapperS{ position: relative;}
+		.mlbInfoMidHedin .icnWrapperS:after{content: ""; position: absolute; width: 1px; height:21px; left: 50%; top: 100%;background: #BBBBBB;}
+
+		.mlbInfoLst{margin: 0px;font-family: 'Open Sans';font-weight: 300;margin-left: 20px;}
+		.mlbInfoLst li{font-size: 16px;line-height: 26px; padding-bottom: 15px; color: #3b3b3b;position: relative;padding-left: 30px;border-left: #ccc solid 1px;}
+		.mlbInfoLst li span{position: absolute;left: -13px;padding: 0px 8px 0px 9px;line-height: 24px;border: 1px solid #bbbbbb;border-radius: 50%;font-size: 12px;top: 0;background: #fff;}
+		.mlbInfoLst li span:after{ content:""; position: absolute; left: 100%; width: 10px; height: 1px; background: #BBBBBB;top: 50%;}
+		
+		.mlbInfoLst li:last-child{padding-bottom: 0px;border-left: 0;}
 		.mlbInfoBot p{font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f;padding-bottom: 20px;}
 		.mlbInfoBot p:last-child{padding-bottom: 0px;}
 		.mlbInfoBot{margin-top: 35px;}
-		.mlbDescSection{background: #f2f4f8;}
+		.mlbDescSection{background: #FFF;}
 		.mlbDescSectionWrap{display: flex;flex-flow: row wrap;justify-content: space-between;}
-		.mlbDescSectionWrap .mlbDescItm{width: 49%; background: #FFF; border: 1px solid #e7e7e7;margin-bottom: 30px;}
-		.mlbDescSectionWrap .mlbDescItm:nth-last-child(-n+2){margin-bottom: 0px;}
+		.mlbDescSectionWrap .mlbDescItm{width: 49%; background: #FFF; border: 1px solid #e7e7e7;margin-bottom: 100px; position: relative;}
+		.mlbDescSectionWrap .mlbDescItm2{width: 100%;margin-bottom: 200px;}
+		.mlbDescSectionWrap .mlbDescItm:last-child{margin-bottom: 50px;}
 		.mlbDescItmTp{padding: 25px 20px 20px;;}
 		.mlbDescItm .mlbDescHedin{font-size: 25px;line-height: 28px;margin-top: 0px;font-weight: 600;margin-bottom: 12px; display: block;}
 		.mlbDescItm .mlbDescHedin:hover, .mlbDescItm .mlbDescHedin:focus{color: #FFC524;}
 		.mlbDescItm .mlbDescPara{font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f; }
 		.mlbDescItm .mlbDescPara:last-child{padding-bottom: 0px;}
-		.mlbDescItm .mlbDescItmTp{min-height: 190px;}
+		.mlbDescItm .mlbDescItmTp{min-height: 200px;position: absolute;top: 55%;z-index: 9;background: #FFF;left: 25px;right: 25px;box-shadow: 0px 2px 20px rgba(0,0,0,0.2);}
+		.mlbDescItm2 .mlbDescItmTp{left: 35px;right: 35px;}
 		.mlbDescLst{list-style-type: initial;font-size: 16px;line-height: 28px;font-family: 'Open Sans';font-weight: 300;color: #7f7f7f;margin-left: 20px;}
 	/* MLB Optimizing Ends*/
 	
@@ -772,6 +788,119 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
 		.articleSection .mPlaceInfoWrap .mPlacePara{padding-bottom: 15px;}
 	
 	/* Article Section Ends */
+	
+	/* LineUp Section Starts */
+	
+		.sectionHedinBtn{position: absolute;top: 50%;right: 15px;transform: translate(0,-50%);}
+		.sectionHedinBtn a{margin-right: 3px;line-height: 20px;border: 1px solid #7f7e7e;border-radius: 2px;background: #7f7e7e;color: #FFF;font-family: 'Open Sans';font-size: 14px;padding: 10px 20.8px;position: relative;}
+		.sectionHedinBtn a:last-child{margin-right: 0px;}
+		.sectionHedinBtn a:hover, .sectionHedinBtn a:focus{background: #fac124;border: 1px solid #fac124;color: #000;}
+		
+		.lneUpSection {margin-bottom: 45px;}
+		.lneUpSecLft{display: table;position: relative;padding: 25px 0px 25px 40px;background: #1c1c1c;float: left;width: 24%;}
+		.lneUpSecLft > .lneUpImgBx{display: table-cell; vertical-align: middle; margin-right: 5px;width: 36%;}
+		.lneUpSecLft > .lneUpImgBx img{padding: 5px;background: #474747;border-radius: 50%}
+		.lneUpSecLft > .lneUpNameBx{display: table-cell; vertical-align: middle;padding: 0px 5px;width: 64%;}
+		.lneUpSecLft > .lneUpNameBx p{font-size: 17px;line-height: 30px;padding: 0px;color: #FFF;text-transform: uppercase;}
+		.lneUpSecLft > .lneUpNameBx a{font-size: 14px;color: #f8c534;}
+		.lneUpSecLft > .lneUpIcn{position: absolute; top: 0px; left: 0px;width: 40px;height: 40px;background: #ffc525;padding: 8px 0px;}
+		.lneUpSecLft > .lneUpIcn img{width: auto; margin: auto;}
+		
+		.lneUpSecRght{float: right;width: 74%;}
+		.lneUpSecRght .lneUpHedin{margin-top: 0px;font-size: 18px;color: #000;font-family: 'Open Sans';}
+		.lneUpHedin{margin-top: 0px;font-size: 18px;color: #000;font-family: 'Open Sans';}
+		.linUpSection {padding: 40px 0px;background: #f2f4f8;}
+		.linUpSection .tab-content{margin-top: 30px;}
+		.linUpSection .tFormat table .dHedin th{padding-top: 10px; padding-bottom: 10px;}
+		.linUpSection .tFormat table tr td{padding-top: 6px; padding-bottom: 6px;}
+		.linUpSection .tFormat table tr.proTotal{ background: #d7d7d7;}
+		.linUpSection .tFormat table tr.proTotal td{font-size: 16px; color: #000;}
+		.linUpSection .tFormat table tr.lastTRw{background: #000;}
+		.linUpSection .tFormat table tr.lastTRw td{font-size: 16px; color: #FFF;}
+		.linUpSection .tFormat table tr.dtSubs{background: #f8c534;}
+		.linUpSection .tFormat table tr.dtSubs td{color: #000; text-align: center;}
+		
+		.linUpSection .form-group .form-control{border: 1px solid rgba(154,154,154,0.3);padding: 8px 11px;font-size: 16px;line-height: 24px;color: #a0a0a0 !important;font-family: 'Open Sans';height: auto;border-radius: 2px;max-width: 140px;min-width: 140px;}
+		.linUpSection .linUpFrm{position: absolute;top: 0px;right: 15px;}
+		.linUpSection .linUpFrm > .form-group{display: inline-block; margin-bottom: 0px; vertical-align: middle; margin-left: 10px;}
+		.linUpSection .linUpFrm > .form-group:first-child{margin-left: 0px;}
+		.linUpSection .linUpFrm > .form-group > .form-group{float: left; margin-bottom: 0px;}
+		.linUpSection .linUpFrm > .form-group > .form-group .form-control {min-width: 60px; max-width: 60px; border-radius: 0px;}
+		.linUpSection .linUpFrm > .form-group.dteWrapper .form-control {font-size: 14px;font-style: italic;padding-right: 30px;background-image: url('../images/date_picker_icn.png');background-repeat: no-repeat;background-position: calc(100% - 10px);}
+		
+		.linUpSection .tFormat table .subsHide{}
+		.linUpSection .tFormat table .subsHideTbl{display: none;}
+		.lneUpSecRght .table-responsive{padding-bottom: 10px;}
+	
+	/* LineUp Section Ends */
+	
+	/* Bower Section Starts */
+	
+		.bowerBannerSection{background: url("../images/extension.jpg") no-repeat center center; background-size: cover; padding: 200px 0px 220px;}
+		.bowerBannerHedin{display: flex;justify-content: flex-start;}
+		.bowerBannerHedin h1{margin: 0px;font-size: 33px;line-height: 35px;color: #FFF;display: flex;flex-flow: column wrap;justify-content: flex-start;font-family: 'Open Sans', sans-serif;font-weight: 400;}	
+		.bowerBannerHedin h1 .bowerBannerBig{font-family: 'Roboto Condensed', sans-serif; font-size: 72px;line-height: 85px;}
+		
+		.bowerSection1{text-align: center; background: #FFF;padding: 60px 0px;}
+		.bowerHedin{font-family: 'Roboto Condensed', sans-serif;color: #000;font-size: 28px;line-height: 30px;font-weight: 600;margin-bottom: 20px;margin-top: 0px;}
+		.bowerByInfo{font-size: 16px;line-height: 22px;color: #000;margin-bottom: 10px;font-family: 'Open Sans', sans-serif;font-weight: 300;}
+		.bowerByInfo span{color: #00a2ff;}
+		.bowerPara{font-size: 16px;line-height: 28px;color: #616161;font-family: 'Open Sans', sans-serif;font-weight: 300;}
+		.bowerPara:last-child{padding-bottom: 0px;}
+		.bowerPara span{color: #00a2ff;}
+		
+		.bowerSection2{padding: 0px;}
+		.bowerSection2Tp{background: #f2f4f8; padding: 60px 0px;}
+		.bowerVideoDemo{display: flex;justify-content: space-between;margin-top: 30px;}
+		.bowerVideoDemoBx{width: 49%;box-shadow: 0px 0px 25px 5px rgba(0,0,0,0.05);}
+		.bowerVideoDemoBx iframe{width: 100%; height: 322px;}
+		.bowerVideoDemoTxtBx{padding: 30px;}
+		.bowerVideoDemoTxtBx h3{font-family: 'Roboto Condensed', sans-serif;color: #000;font-size: 28px;line-height: 30px;font-weight: 600;margin-bottom: 20px;margin-top: 0px;}
+		
+		.bowerSecHedin{color: #414141;font-family: 'Open Sans', sans-serif;font-size: 16px;margin-bottom: 10px;}
+		.bowerDwnBtn{background: #f8c534;border: 1px solid #f8c534;border-radius: 4px;padding: 12px 43px;font-size: 18px;line-height: 22px;color: #000;display: inline-block;}
+		.bowerDwnBtn:hover{background: #000;color: #FFF !important;border: 1px solid #000 !important;}
+		
+		.bowerSection2Lft{float: left; width: 40%;}
+		.bowerSection2Rght{float: right; width: 58%;}
+		
+		.bowerSection3{background: #FFF;padding: 60px 0px;}
+		.bowerSection3 ul{text-align: left; list-style-type: initial; list-style-position: inside; margin-bottom: 0px;}
+		.bowerSection3 ul li{font-size: 16px;line-height: 28px;color: #616161;font-family: 'Open Sans', sans-serif;font-weight: 300;margin-bottom: 10px;}
+		.bowerSection3 ul li span{color: #00a2ff;}
+		.bowerSection3 .bowerSecHedin{margin-top: 10px;}
+		.bowerSection3 .bowerHedin{margin-bottom: 10px;}
+		
+	/* Bower Section Ends */
+	
+	/* Info Section Starts */
+	
+		.infoSection1{background: #FFF;}
+		.infoHedin{font-family: 'Roboto Condensed', sans-serif;color: #000;font-size: 65px;line-height: 50px;font-weight: 600;margin-bottom: 30px;margin-top: 0px;}
+		.infoSecHedin{margin: 0px;font-size: 35px;line-height: 42px;font-weight: 300;margin-bottom: 5px; color: #00a2ff;}
+		.infoPara{font-size: 21px;line-height: 34px;color: #222;font-family: 'Open Sans', sans-serif;}
+		.infoPara span{color: #00a2ff;}
+		.infoSec1Lft{float: left;width: 32%;}
+		.infoSec1Rght{float: right; width: 66%;}
+		
+		.infoSec1Lft ul{text-align: center; margin-top: 20px;}
+		.infoSec1Lft ul li{width: 24%;display: inline-block;vertical-align: middle;}
+		
+		.infoSection2{background: #F2F4F8;}
+		.infoSec2Hedin{font-family: 'Open Sans', sans-serif;color: #000;font-size: 34px;line-height: 44px;font-weight: 600;margin-bottom: 20px;margin-top: 0px;}
+		.infoSec2Hedin span{color: #00a2ff;}
+		.infoSec2Lft{width: 65%;float: left;}
+		.infoSec2Rght{float: right; width: 33%;}
+		
+		.infoSection3{background: #FFF;}
+		.infoSec3Lft{float: left;width: 48%;}
+		.infoSec3Rght{float: right; width: 48%;}
+		
+		.infoSection4{background: #F2F4F8;}
+		.infoSec4Lft{float: left; width: 48%;}
+		.infoSec4Rght{float: right; width: 48%;}
+		.infoSec4Lft > .bowerDwnBtn{font-size: 22px;padding: 14px 45px;display: block;text-align: center;margin-top: 20px;}
+	/* Info Section Ends */
 	
 /* Dashboard Main Ends */
 

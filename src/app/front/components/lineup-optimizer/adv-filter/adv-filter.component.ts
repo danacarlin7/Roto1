@@ -18,6 +18,9 @@ declare var jQuery:any;
 export class AdvFilterComponent {
 
 
+  @Input()
+  selectedOperator:string;
+
   variabilitySlider:any;
   noOfUniquePlayersSlider:any;
   salarySlider:any;
@@ -32,8 +35,8 @@ export class AdvFilterComponent {
   variabilityValue:number;
   noOfUniquePlayersValue:number;
   noOfLineupValue:number;
-  maxExposureValue:number;
-  salarySettingValue:any[];
+  maxExposureValue:number = 100;
+  salarySettingValue:any[] = [0, 5];
   noBattingVsPitchers:boolean;
 
   projectionFilterValue:any[];
@@ -43,7 +46,14 @@ export class AdvFilterComponent {
 
   filters:LineupOppFilterCriteria[];
 
+  stackingTeam1:{name:string,players:number} = {name: '-', players: 0};
+  stackingTeam2:{name:string,players:number} = {name: '-', players: 0};
+  stackingTeam3:{name:string,players:number} = {name: '-', players: 0};
+
   gamesObj:any = {};
+
+  @Input()
+  stackingData:{team:string,teamId:number}[];
 
   @Output()
   filterCriteriaChanged:EventEmitter<LineupOppFilterCriteria[]> = new EventEmitter<LineupOppFilterCriteria[]>();
@@ -58,6 +68,16 @@ export class AdvFilterComponent {
   set advFilterSettings(value:AdvFilterSettings) {
     this._advFilterSettings = value;
     this.updateSliders();
+    if (this._advFilterSettings) {
+      this._advFilterSettings.games.forEach(
+        game => {
+          game.homeTeamMinValue = 0;
+          game.awayTeamMinValue = 0;
+          game.awayTeamMaxValue = this.getMaxGameValue();
+          game.homeTeamMaxValue = this.getMaxGameValue();
+        }
+      )
+    }
   }
 
   constructor() {
@@ -105,9 +125,9 @@ export class AdvFilterComponent {
     this.maxExposureSlider.bootstrapSlider({
       min: 10,
       max: 100,
-      value: 10
+      value: 100
     });
-    this.maxExposureValue = 10;
+    this.maxExposureValue = 100;
     this.maxExposureSlider.on("slide", (slideEvt) => {
       jQuery("#meSliderVal").text(slideEvt.value + "%");
       this.maxExposureValue = slideEvt.value;
@@ -163,7 +183,7 @@ export class AdvFilterComponent {
     this.valueFilterSlider.bootstrapSlider({
       min: 0,
       max: 4,
-      step: 0.1,
+      step: 0.05,
       value: [0, 2.3]
     });
     this.valueFilterSlider.on("slide", function (slideEvt) {
@@ -198,14 +218,26 @@ export class AdvFilterComponent {
   updateSliders() {
     if (this.salarySlider) {
       let salarySliderValue = this.salarySlider.data('bootstrapSlider').getValue();
+      let maxSalary:number;
+      let minSalary:number;
+      switch (this.selectedOperator) {
+        case 'FanDuel':
+          minSalary = 20000;
+          maxSalary = 35000;
+          break;
+        case 'DraftKings':
+          minSalary = 30000;
+          maxSalary = 50000;
+          break;
+      }
       this.salarySlider.bootstrapSlider({
         range: true,
-        max: this._advFilterSettings.salaryMax,
-        min: this._advFilterSettings.salaryMin,
+        max: maxSalary,
+        min: minSalary,
         step: 100
       });
-      this.salarySettingValue = [this._advFilterSettings.salaryMin, this._advFilterSettings.salaryMax]
-      this.salarySlider.bootstrapSlider('setValue', [this._advFilterSettings.salaryMin, this._advFilterSettings.salaryMax]);
+      this.salarySettingValue = [minSalary, maxSalary];
+      this.salarySlider.bootstrapSlider('setValue', [minSalary, maxSalary]);
     }
     if (this.salaryFilterSlider) {
       let salarySliderValue = this.salaryFilterSlider.data('bootstrapSlider').getValue();
@@ -235,7 +267,7 @@ export class AdvFilterComponent {
         range: true,
         max: this._advFilterSettings.valueMax,
         min: this._advFilterSettings.valueMin,
-        step: 0.1
+        step: 0.05
       });
       this.valueFilterSlider.bootstrapSlider('setValue', [this._advFilterSettings.valueMin, this._advFilterSettings.valueMax]);
       this.valueFilterValue = [this._advFilterSettings.valueMin, this._advFilterSettings.valueMax];
@@ -287,4 +319,40 @@ export class AdvFilterComponent {
     console.log("Game => ", game);
   }
 
+  getStakingData():{name:string,players:number}[] {
+    let data = [];
+    if (this.stackingTeam1.name != '-') {
+      data.push(this.stackingTeam1);
+    }
+    if (this.stackingTeam2.name != '-') {
+      data.push(this.stackingTeam2);
+    }
+    if (this.stackingTeam3.name != '-') {
+      data.push(this.stackingTeam3);
+    }
+    console.log("stacking data => ", data);
+    return data;
+  }
+
+  getMaxGameValue():number {
+    let value:number;
+    switch (this.selectedOperator) {
+      case 'FanDuel':
+        value = 4;
+        break;
+      case 'DraftKings':
+        value = 8;
+        break;
+    }
+    return value;
+  }
+
+  onGlobalMaxValueChanged(event) {
+    this._advFilterSettings.games.forEach(
+      game => {
+        console.log("value  => => ", +event.target.value);
+        game.homeTeamMaxValue = game.awayTeamMaxValue = +event.target.value;
+      }
+    )
+  }
 }
