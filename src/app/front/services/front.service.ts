@@ -90,6 +90,15 @@ export class FrontService {
       .map((response:Response) => response.json());
   }
 
+  retrieveProvider(){
+    return this.http.get(environment.api_end_point + "providers", {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   handelError(error:any) {
     if (error.statusCode == 401) {
       this.authService.logout();

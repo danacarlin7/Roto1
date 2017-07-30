@@ -97,7 +97,7 @@ export class AdminDashboardService {
   }
 
   editProvider(member:Analyst):Observable<any> {
-    return this.http.post(environment.api_end_point + '/api/provider/' + member._id, member, {headers: this.getHeaders()})
+    return this.http.post(environment.api_end_point + 'api/provider/' + member._id, member, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.hendleError(error.json());
