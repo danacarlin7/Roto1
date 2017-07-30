@@ -53,6 +53,7 @@ export class UploadsComponent {
 
   @ViewChild('downloadTemplateRef') public downloadTemplateRef: TemplateRef<any>;
   @ViewChild('deleteTemplateRef') public deleteTemplateRef: TemplateRef<any>;
+  @ViewChild('fanDualInfo') public fanDualInfo: TemplateRef<any>;
 
   ngOnInit() {
     this.getUploads();
@@ -63,8 +64,8 @@ export class UploadsComponent {
     this.uploadService.getUploads().subscribe(
       uploads => {
         this.uploads = uploads.data;
-        this.changeDetectionRef.detectChanges();
         this.isLoading = false;
+        this.changeDetectionRef.detectChanges();
       },
       error => {
         console.log("HTTP Error => ", error);
@@ -92,6 +93,7 @@ export class UploadsComponent {
     this.getUploads();
   }
 
+
   onSending(file) {
     this.filename = file[0].name.split('-');
     this.filename = this.filename[0];
@@ -101,6 +103,10 @@ export class UploadsComponent {
   onTableRowClicked(history: ContestHistory) {
     this.selectedHistory = history;
     this.modal.open(this.downloadTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext))
+  }
+
+  onFandualInfoClicked() {
+    this.modal.open(this.fanDualInfo, overlayConfigFactory({isBlocking: false}, BSModalContext))
   }
 
   deleteHistoryClicked(downloadDialog) {

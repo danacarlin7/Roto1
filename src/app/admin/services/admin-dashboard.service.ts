@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers,Response} from "@angular/http";
+import {Http, Headers, Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
@@ -51,7 +51,7 @@ export class AdminDashboardService {
   }
 
   getMembers() {
-    return this.http.get(environment.api_end_point + 'api/getMembers', {headers:this.getHeaders()})
+    return this.http.get(environment.api_end_point + 'api/getMembers', {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.hendleError(error.json());
@@ -60,14 +60,13 @@ export class AdminDashboardService {
   }
 
   getProviders() {
-    return this.http.get(environment.api_end_point + 'api/getProviders', {headers:this.getHeaders()})
+    return this.http.get(environment.api_end_point + 'api/getProviders', {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.hendleError(error.json());
         return Observable.throw(error.json())
       });
   }
-
 
 
   deleteMember(id) {
@@ -97,8 +96,8 @@ export class AdminDashboardService {
       });
   }
 
-  editProvider(member) {
-    return this.http.post(environment.api_end_point + 'api/editProvider', member, {headers: this.getHeaders()})
+  editProvider(member:Analyst):Observable<any> {
+    return this.http.post(environment.api_end_point + '/api/provider/' + member._id, member, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.hendleError(error.json());
@@ -123,7 +122,6 @@ export class AdminDashboardService {
         return Observable.throw(error.json())
       });
   }
-
 
 
   verifyEmail(email) {

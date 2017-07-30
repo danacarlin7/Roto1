@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <div>
-        <button [routerLink]="['/admin/addprovider']" md-mini-fab>
+        <button [routerLink]="['/admin/providers/add']" md-mini-fab>
           <md-icon>add</md-icon>
         </button>
         <!--<button [routerLink]="['/admin/uploadprovider']" md-mini-fab>-->
@@ -67,6 +67,9 @@
               </div>
             </td>
             <td class="provider-icon">
+              <a md-tooltip='Edit' (click)="editProvider(providers)">
+                <md-icon>edit</md-icon>
+              </a>
               <a *ngIf="!providers.is_verified" md-tooltip='Verify Email' (click)="sendVerifyEmail(providers.email)">
                 <md-icon>email</md-icon>
               </a>
