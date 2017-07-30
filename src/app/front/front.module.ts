@@ -25,6 +25,13 @@ import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
+
+import {PlayerGetService} from './services/fetchPlayers';
+import {CompGetService} from './services/fetchCompositions';
+import {LineupPostService} from './services/postLineups';
+import {ProviderComponent} from "./components/provider/provider.component";
+import {ProviderPublicComponent} from "./components/provider-public/public.component";
+
 import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
@@ -62,6 +69,8 @@ import {ExtensionsComponent} from "./components/extensions/extensions.component"
     ExcelToolComponent,
     FAQComponent,
     AdvFilterComponent,
+    ProviderComponent,
+    ProviderPublicComponent,
     LineupPlayerFilter,
     InjuriesComponent,
     ChangePasswordComponent,
@@ -72,9 +81,11 @@ import {ExtensionsComponent} from "./components/extensions/extensions.component"
     ExtensionsComponent
   ],
   exports: [
+    ProviderComponent,
+    ProviderPublicComponent,
     FrontMainComponent
   ],
-  providers: [FrontService, ArticleService, LineupOptimizerService]
+  providers: [FrontService,ArticleService,LineupOptimizerService, PlayerGetService, CompGetService, LineupPostService]
 })
 export class FrontModule {
 

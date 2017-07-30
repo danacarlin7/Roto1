@@ -15,6 +15,10 @@ import {ForgotPasswordComponent} from "./components/forgot-password/forgot-passw
 import {DFSBasicsComponent} from "./components/dfs-basics/dfs-basics.component";
 import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
+
+import {ProviderComponent} from "./components/provider/provider.component";
+import {ProviderPublicComponent} from "./components/provider-public/public.component";
+
 import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {ArticleComponent} from "./components/article/article.component";
@@ -48,6 +52,8 @@ const routes:Routes = [
       <Route>{path: 'basics', component: DFSBasicsComponent},
       <Route>{path: 'excel-tool', component: ExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
+      <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent},
+      <Route>{path: 'provider-public-lineups', canActivate: [AuthGuard], component: ProviderPublicComponent}
       <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
       <Route>{path: 'generated-lineups', component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
