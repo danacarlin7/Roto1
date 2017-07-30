@@ -4,10 +4,13 @@ import {AdminMainComponent} from "./admin-main.component";
 import {AuthGuard} from "../shared/services/auth.guard";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {MembersComponent, AddMemberComponent, UploadMemberComponent} from "./components/members/members.component";
-import {ProvidersComponent, AddProviderComponent, EditProviderComponent } from "./components/providers/providers.component";
+import {ProvidersComponent} from "./components/providers/providers.component";
 import {PlansComponent} from "./components/plans/plans.component";
 import {AddPlanComponent} from "./components/plans/add-plan/add-plan.component";
 import {EditPlanComponent} from "./components/plans/edit-plan/edit-plan.component";
+import {AddProviderComponent} from "./components/providers/add-provider/add-provider.component";
+import {EditProviderComponent} from "./components/providers/edit-provider/edit-provider.component";
+import {EditProviderGuard} from "./edit-provider.guard";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -50,15 +53,15 @@ const routes:Routes = [
         data: {title: "Providers", type: "admin"}
       },
       {
-        path: 'addprovider',
+        path: 'providers/add',
         component: AddProviderComponent,
         canActivate: [AuthGuard],
         data: {title: "Add provider", type: "admin"}
       },
       {
-        path: 'updateProvider',
+        path: 'providers/edit',
         component: EditProviderComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard,EditProviderGuard],
         data: {title: "Edit provider", type: "admin"}
       },
       {

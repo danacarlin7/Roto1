@@ -62,21 +62,23 @@
                               (success)="onUploadSuccess($event)" (sending)="onSending($event)"></dropzone>
                   </div>
                   <div class="dUpldBxRght">
-                    <a href="javascript:void(0)"><span class="icnWrapperS"><img src="../../../../assets/images/dUpld_icn1.png" alt=""
-                                                                                class="img-responsive"/></span><span
+                    <a (click)="onFandualInfoClicked()"><span class="icnWrapperS"><img
+                      src="../../../../assets/images/dUpld_icn1.png" alt=""
+                      class="img-responsive"/></span><span
                       class="gTxt">How do I get my results data from FanDuel?</span></a>
-                    <a href="javascript:void(0)"><span class="icnWrapperS"><img src="../../../../assets/images/dUpld_icn2.png" alt=""
-                                                                                class="img-responsive"/></span><span
+                    <a href="javascript:void(0)"><span class="icnWrapperS"><img
+                      src="../../../../assets/images/dUpld_icn2.png" alt=""
+                      class="img-responsive"/></span><span
                       class="gTxt">How do I get my results data from DraftKings?</span></a>
                     <!--<a href="javascript:void(0)"><span class="icnWrapperS"><img src="images/dUpld_icn3.png" alt=""-->
-                                                                                <!--class="img-responsive"/></span><span-->
-                      <!--class="gTxt">How do I get my results data from Yahoo?</span></a>-->
+                    <!--class="img-responsive"/></span><span-->
+                    <!--class="gTxt">How do I get my results data from Yahoo?</span></a>-->
                     <!--<a href="javascript:void(0)"><span class="icnWrapperS"><img src="images/dUpld_icn4.png" alt=""-->
-                                                                                <!--class="img-responsive"/></span><span-->
-                      <!--class="gTxt">How do I get my results data from FantasyDraft?</span></a>-->
+                    <!--class="img-responsive"/></span><span-->
+                    <!--class="gTxt">How do I get my results data from FantasyDraft?</span></a>-->
                     <!--<a href="javascript:void(0)"><span class="icnWrapperS"><img src="images/dUpld_icn5.png" alt=""-->
-                                                                                <!--class="img-responsive"/></span><span-->
-                      <!--class="gTxt">How do I get my results data from DraftDay?</span></a>-->
+                    <!--class="img-responsive"/></span><span-->
+                    <!--class="gTxt">How do I get my results data from DraftDay?</span></a>-->
                   </div>
                 </div>
 
@@ -151,6 +153,40 @@
         class="glyphicon glyphicon-trash" area-hidden="true"></span> Delete File
       </button>
       <button type="button" class="btn btn-default" (click)="downloadDialog.close(true)">Close</button>
+    </div>
+  </div>
+</template>
+
+<template #fanDualInfo let-deleteDialog="dialogRef">
+  <div>
+    <div class="modal-header">
+      <button type="button" class="close" (click)="deleteDialog.close(true)"><span aria-hidden="true">&times;</span>
+      </button>
+      <h1 class="modal-title" style="font-size: 26px">How to Export Your Data from FanDuel</h1>
+    </div>
+    <div class="modal-body modal-body-scroller">
+      <div class="row">
+        <div class="col-sm-6">
+          <h4>Here's how to get your data off FanDuel:</h4>
+          <ol class="ol-list">
+            <li>Go to the My Entry History page on FanDuel.com, logging in if prompted.<br><a
+              href="https://www.fanduel.com/p/MyEntryHistory" target="_blank" class="btn btn-primary">Click here to open
+              this in a new browser tab.</a></li>
+            <li>Click the "Download as CSV" button.</li>
+            <li>If you have more than 1000 contests, you will prompted to download multiple files. Grab all you need.
+            </li>
+            <li>You're done! Now just upload the files to RotoTracker.</li>
+          </ol>
+          <p class="info_p"><em>Pro tip: If the file automatically opens up in a program like Excel, instead try right clicking on the
+            link and "Save As" to save a file to the desktop. Then upload this to RotoTracker directly.</em></p></div>
+        <div class="info_image" class="col-sm-6"><img src="../../../../assets/img/fanduel_upload_info.png" class="img-responsive"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="confirmDeleteClicked(deleteDialog);"><span
+        class="glyphicon glyphicon-trash" area-hidden="true"></span> Confirm Delete
+      </button>
+      <button type="button" class="btn btn-default" (click)="deleteDialog.close(true)">Close</button>
     </div>
   </div>
 </template>

@@ -38,15 +38,17 @@ export class SubscribeComponent implements OnInit {
 
   constructor(private router:Router, private authService:AuthService, private frontService:FrontService, private injector:Injector, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal) {
     overlay.defaultViewContainer = vcRef;
-    this.userData = this.authService.retrieveLoggedUserInfo()
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.userData = response.data;
-            this.authService.loggedUser = this.userData;
+    if (this.authService.isLoggedIn()) {
+      this.userData = this.authService.retrieveLoggedUserInfo()
+        .subscribe(
+          response => {
+            if (response.statusCode == 200) {
+              this.userData = response.data;
+              this.authService.loggedUser = this.userData;
+            }
           }
-        }
-      );
+        );
+    }
   }
 
   ngOnInit() {
@@ -57,16 +59,6 @@ export class SubscribeComponent implements OnInit {
         this.plans = response.data[0].data;
       }
     );
-  }
-
-  checkPlanStatus(plan_id) {
-    var subscribed = false;
-    this.userData.subscriptions.map((plan) => {
-      if (plan.plan_id == plan_id) {
-        subscribed = true;
-      }
-    });
-    return subscribed;
   }
 
   onBtnSubscribeClick(plan) {

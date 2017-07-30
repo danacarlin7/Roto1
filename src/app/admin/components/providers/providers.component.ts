@@ -6,17 +6,17 @@ import {Subscription} from 'rxjs';
 import {AuthService} from "../../../shared/services/auth.service";
 import {AdminDashboardService} from "../../services/admin-dashboard.service";
 import {UserDashboardServices} from "../../../user/services/user-dashboard.service";
-declare var jQuery: any;
+declare var jQuery:any;
 
 interface Provider {
-  email: string,
-  first_name: string,
-  last_name: string,
-  password: string
+  email:string,
+  first_name:string,
+  last_name:string,
+  password:string
 }
 
 @Component({
-  selector: 'app-providers',
+  selector: 'rp-providers',
   templateUrl: './providers.component.html',
   styleUrls: ['./providers.component.css']
 })
@@ -24,14 +24,14 @@ export class ProvidersComponent implements OnInit {
 
   allproviders = [];
   searchProviders = [];
-  changePasswordPopup: boolean;
-  busy: Subscription;
-  filterQuery: String = "";
-  filterType: String = "";
-  selectedType: any;
+  changePasswordPopup:boolean;
+  busy:Subscription;
+  filterQuery:String = "";
+  filterType:String = "";
+  selectedType:any;
   allSearch = [];
 
-  constructor(private providerService: AdminDashboardService, private authService: AuthService, private router: Router) {
+  constructor(private providerService:AdminDashboardService, private authService:AuthService, private router:Router) {
     this.selectedType = [
       {
         label: "All",
@@ -123,15 +123,9 @@ export class ProvidersComponent implements OnInit {
   }
 
 
-  edit(provider) {
-    this.providerService.editProvider(provider).subscribe(
-      success => {
-      },
-      error => {
-        //this.providerService.logout();
-        //this.router.navigate(['/login']);
-      }
-    )
+  editProvider(provider) {
+    this.providerService.selectedProvider = provider;
+    this.router.navigate(['admin/providers/edit']);
   }
 
   changeStatus(id) {
@@ -142,105 +136,7 @@ export class ProvidersComponent implements OnInit {
     )
   }
 
-  onChangePassword(f: any) {
+  onChangePassword(f:any) {
 
   }
 }
-
-
-@Component({
-  selector: 'app-providers',
-  templateUrl: './add.component.html',
-  styleUrls: ['./providers.component.css']
-})
-export class AddProviderComponent implements OnInit {
-
-  constructor(private authService: AuthService, private providerService: AdminDashboardService, private router: Router) {
-  }
-
-  ngOnInit() {
-
-  }
-
-  onProvidersAdd(form: NgForm) {
-    form.value.is_providerspace = true;
-    form.value.is_tool = true;
-    form.value.role = "provider";
-    console.log(form.value);
-    this.providerService.saveProvider(form.value).subscribe(
-      success => this.router.navigate(['/admin/providers']),
-      error => {
-        console.log("Add provider error => ", error);
-        //this.providerService.logout();
-        //this.router.navigate(['/login']);
-      }
-    )
-  }
-
-}
-
-
-@Component({
-  selector: 'app-providers',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./providers.component.css']
-})
-export class EditProviderComponent implements OnInit {
-
-  constructor(private authService: AuthService, private providerService: AdminDashboardService, private router: Router) {
-  }
-
-  ngOnInit() {
-
-  }
-
-  onProvidersEdit(form: NgForm) {
-    form.value.is_providerspace = true;
-    form.value.is_tool = true;
-    form.value.role = "provider";
-    console.log(form.value);
-    // this.providerService.saveProvider(form.value).subscribe(
-    //   success => this.router.navigate(['/admin/providers']),
-    //   error => {
-    //     console.log("Add provider error => ", error);
-    //     //this.providerService.logout();
-    //     //this.router.navigate(['/login']);
-    //   }
-    // )
-  }
-
-}
-
-// @Component({
-//   selector: 'app-providers',
-//   templateUrl: './uploadprovider.component.html',
-//   styleUrls: ['./providers.component.css']
-// })
-// export class UploadProviderComponent implements OnInit {
-//
-//   userDetail = JSON.parse(localStorage.getItem('data'));
-//   configUpload = {
-//     // Change this to your upload POST address:
-//     server: 'https://api.dfsportgod.com/api/uploadProviders',
-//     maxFilesize: 50,
-//     acceptedFiles: '.csv',
-//     paramName: 'file',
-//     headers: {'Authorization': 'Bearer ' + this.userDetail.token}
-//   };
-//
-//   constructor(private providerService:AuthService, private router:Router) {
-//   }
-//
-//   ngOnInit() {
-//
-//   }
-//
-//   onUploadError(event) {
-//     console.log(event);
-//   }
-//
-//   onUploadSuccess(event) {
-//     this.router.navigate(['/admin/providers']);
-//   }
-//
-// }

@@ -15,7 +15,7 @@ import {environment} from "../../../../environments/environment";
 export class LoginComponent {
 
   loginForm:FormGroup;
-  redirectUrl:String;
+  redirectUrl:string;
   msg:string;
 
   isError:boolean;
@@ -114,7 +114,7 @@ export class LoginComponent {
 
           console.log('this.redirectUrl => ', this.redirectUrl);
           if (this.redirectUrl && this.redirectUrl.length) {
-            this.router.navigate([this.redirectUrl]);
+            this.router.navigateByUrl(this.redirectUrl);
             this.redirectUrl = "";
           }
           else if (response.data.role == 'admin') {

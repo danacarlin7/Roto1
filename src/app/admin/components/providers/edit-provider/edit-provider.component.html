@@ -1,0 +1,60 @@
+<div class="page-inner">
+  <div class="page-title">
+    <h3>Add Analyst</h3>
+  </div>
+  <div id="main-wrapper">
+    <div *ngIf="isError" class="row">
+      <div class="alert alert-danger fade in" style="margin: 15px">
+        {{errorMsg}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-white">
+          <div class="panel-heading clearfix">
+            <h4 class="panel-title">Edit Provider</h4>
+          </div>
+          <div class="panel-body">
+            <form [formGroup]="providerForm" (ngSubmit)="onProvidersEdit()" class="form-horizontal">
+              <div class="form-group">
+                <label for="input-Default" class="col-sm-2 control-label">First Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="first_name" formControlName="fName" class="form-control" id="input-Default"
+                         required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Last Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="last_name" formControlName="lName" class="form-control" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" name="email" formControlName="email" class="form-control" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Biodata</label>
+                <div class="col-sm-10">
+                  <textarea rows="4" cols="125" name="bios" formControlName="bio" class="form-control"
+                            required></textarea>
+
+                </div>
+              </div>
+              <div style="display: flex">
+                <button type="button" class="btn btn-primary" (click)="btnCancelClicked()" style="margin-right: 10px">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary" style="margin-right: 10px">Save</button>
+                <md-progress-spinner *ngIf="isLoading" mode="indeterminate" color="accent"
+                                     style="display: inline;width: 30px;height: 30px"></md-progress-spinner>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div><!-- Row -->
+  </div><!-- Main Wrapper -->
+</div><!-- Page Inner -->
