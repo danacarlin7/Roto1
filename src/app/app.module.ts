@@ -32,8 +32,8 @@ import {environment} from "../environments/environment";
 export class AppModule {
   constructor(private authService:AuthService) {
     if (this.authService.isLoggedIn()) {
-      environment.token = localStorage.getItem('token') ? localStorage.getItem('token') : sessionStorage.getItem('token');
-      environment.role = localStorage.getItem('role') ? localStorage.getItem('role') : sessionStorage.getItem('role');
+      environment.token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
+      environment.role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
     }
   }
 }

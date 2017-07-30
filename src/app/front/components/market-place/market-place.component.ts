@@ -14,7 +14,7 @@ export class MarketPlaceComponent {
   isError:boolean;
   errorMsg:string;
   providers:any[];
-  currentPage: number;
+  currentPage:number;
 
   constructor(private frontService:FrontService) {
 
@@ -42,4 +42,7 @@ export class MarketPlaceComponent {
       )
   }
 
+  btnCheckoutProviderClicked(provider) {
+    console.log("provider => ", provider);
+  }
 }

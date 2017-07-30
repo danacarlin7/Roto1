@@ -20,4 +20,8 @@ export class FrontHeaderComponent {
     this.role = this.authService.getUserRole();
   }
 
+  btnLogoutClicked() {
+    this.authService.logout();
+  }
+
 }

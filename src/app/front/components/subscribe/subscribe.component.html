@@ -16,16 +16,22 @@
                   </li>
                 </ul>
               </div>
-              <div id="VIPPackages" class="tabcontent" style="display:block;">
+              <div id="VIPPackages" class="tabcontent" style="display:block;min-height: 400px">
                 <div class="rp-plan-container">
                   <div class="common-loader" *ngIf="isLoading">
-                    <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+                    <md-progress-spinner mode="indeterminate" color="accent"
+                                         style="width: 50px;height: 50px"></md-progress-spinner>
+                  </div>
+                  <div style="display: flex;justify-content: center;align-items: center"
+                       *ngIf="!plans || !plans.length">
+                    <span>No Package Found</span>
                   </div>
                   <div class="rp-plan" *ngFor="let plan of plans">
                     <div class="plan-name">{{plan.name}}</div>
                     <div class="plan-price">{{(plan.amount / 100) | currency:'USD':true}}</div>
                     <div class="plan-time">{{'/'+plan.interval_count+' '+plan.interval}}</div>
-                    <button class="btn-subscribe btn-lg btn-default" (click)="onBtnSubscribeClick(plan)">Subscribe</button>
+                    <button class="btn-subscribe btn-lg btn-default" (click)="onBtnSubscribeClick(plan)">Subscribe
+                    </button>
                   </div>
                 </div>
               </div>
