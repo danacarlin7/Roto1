@@ -41,15 +41,14 @@ export class SettingsComponent implements OnInit {
       name: 'Change Password'
     },
     {
-      id: 'saved-cards',
-      name: 'Saved Cards'
-    },
-    {
       id: 'subscriptions',
       name: 'Subscribe Plan'
     }
   ];
-
+/* {
+ id: 'saved-cards',
+ name: 'Saved Cards'
+ },*/
   isLoading: boolean;
 
 
