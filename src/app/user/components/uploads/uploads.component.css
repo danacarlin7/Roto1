@@ -1,4 +1,4 @@
-.dUpldBxLft{
+.dUpldBxLft {
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
@@ -16,18 +16,35 @@
   flex: 1;
 }
 
-.ol-list{
+.ol-list {
 
 }
 
-.info_image{
+.info_image {
 
 }
 
-.info_p{
+.info_p {
 
 }
 
-.modal-dialog{
-  width:800px !important;
+.modal-dialog {
+  width: 800px !important;
+}
+
+.info-title {
+  font-size: 20px;
+}
+
+.info-list {
+  margin-left: 20px;
+}
+
+.info-list li {
+  margin: 5px auto;
+}
+
+.pro-tip {
+  font-size: 16px;
+  font-style: italic;
 }

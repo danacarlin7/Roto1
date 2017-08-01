@@ -31,6 +31,8 @@ import {SettingsComponent} from "./components/settings/settings.component";
 import {UpdatePasswordComponent} from "./components/settings/update-password/update-password.component";
 import {UserProfileComponent} from "./components/settings/user-profile/user-profile.component";
 import {SubscriptionsComponent} from "./components/settings/subscriptions/subscriptions.component";
+import {ProfilePictureComponent} from "./components/settings/profile-picture/profile-picture.component";
+import {SavedCardsComponent} from "./components/settings/saved-cards/saved-cards.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -65,7 +67,9 @@ import {SubscriptionsComponent} from "./components/settings/subscriptions/subscr
     SettingsComponent,
     UpdatePasswordComponent,
     UserProfileComponent,
-    SubscriptionsComponent
+    SubscriptionsComponent,
+    ProfilePictureComponent,
+    SavedCardsComponent
   ],
   exports: [
     UserMainComponent

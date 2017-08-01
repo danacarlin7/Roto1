@@ -62,11 +62,11 @@
                               (success)="onUploadSuccess($event)" (sending)="onSending($event)"></dropzone>
                   </div>
                   <div class="dUpldBxRght">
-                    <a (click)="onFandualInfoClicked()"><span class="icnWrapperS"><img
+                    <a data-toggle="modal" data-target="#myModal1"><span class="icnWrapperS"><img
                       src="../../../../assets/images/dUpld_icn1.png" alt=""
                       class="img-responsive"/></span><span
                       class="gTxt">How do I get my results data from FanDuel?</span></a>
-                    <a href="javascript:void(0)"><span class="icnWrapperS"><img
+                    <a data-toggle="modal" data-target="#myModal2"><span class="icnWrapperS"><img
                       src="../../../../assets/images/dUpld_icn2.png" alt=""
                       class="img-responsive"/></span><span
                       class="gTxt">How do I get my results data from DraftKings?</span></a>
@@ -156,37 +156,76 @@
     </div>
   </div>
 </template>
-
-<template #fanDualInfo let-deleteDialog="dialogRef">
-  <div>
-    <div class="modal-header">
-      <button type="button" class="close" (click)="deleteDialog.close(true)"><span aria-hidden="true">&times;</span>
-      </button>
-      <h1 class="modal-title" style="font-size: 26px">How to Export Your Data from FanDuel</h1>
-    </div>
-    <div class="modal-body modal-body-scroller">
-      <div class="row">
-        <div class="col-sm-6">
-          <h4>Here's how to get your data off FanDuel:</h4>
-          <ol class="ol-list">
-            <li>Go to the My Entry History page on FanDuel.com, logging in if prompted.<br><a
-              href="https://www.fanduel.com/p/MyEntryHistory" target="_blank" class="btn btn-primary">Click here to open
-              this in a new browser tab.</a></li>
-            <li>Click the "Download as CSV" button.</li>
-            <li>If you have more than 1000 contests, you will prompted to download multiple files. Grab all you need.
-            </li>
-            <li>You're done! Now just upload the files to RotoTracker.</li>
-          </ol>
-          <p class="info_p"><em>Pro tip: If the file automatically opens up in a program like Excel, instead try right clicking on the
-            link and "Save As" to save a file to the desktop. Then upload this to RotoTracker directly.</em></p></div>
-        <div class="info_image" class="col-sm-6"><img src="../../../../assets/img/fanduel_upload_info.png" class="img-responsive"></div>
+<div class="modal fade" id="myModal1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">How to Export Your Data from FanDuel</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <p class="info-title">Here's how to get your data off FanDuel:</p>
+            <ol class="info-list">
+              <li>Go to the My Entry History page on FanDuel.com, logging in if prompted.<br><a
+                href="https://www.fanduel.com/p/MyEntryHistory" target="_blank" class="btn btn-primary">Click here to
+                open
+                this in a new browser tab.</a></li>
+              <li>Click the "Download as CSV" button.</li>
+              <li>If you have more than 1000 contests, you will prompted to download multiple files. Grab all you
+                need.
+              </li>
+              <li>You're done! Now just upload the files to RotoTracker.</li>
+            </ol>
+            <p class="pro-tip">
+              Pro tip: If the file automatically opens up in a program like Excel, instead try right clicking on the
+              link and "Save As" to save a file to the desktop. Then upload this to RotoTracker directly.
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <img src="../../../../assets/img/fanduel_upload_info.png" class="img-responsive">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="confirmDeleteClicked(deleteDialog);"><span
-        class="glyphicon glyphicon-trash" area-hidden="true"></span> Confirm Delete
-      </button>
-      <button type="button" class="btn btn-default" (click)="deleteDialog.close(true)">Close</button>
+  </div>
+</div>
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">How to Export Your Data from DraftKings</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <p class="info-title">Here's how to get your data off DraftKings:</p>
+            <ol class="info-list">
+              <li>Go to the My Contests tab on DraftKings.com, logging in if prompted.<br><a
+                href="https://www.draftkings.com/mycontests" target="_blank" class="btn btn-primary">Open this page in a
+                new browser tab.</a></li>
+              <li>Click the "History" button next to "Live" and "Upcoming".</li>
+              <li>Click "Download Entry History" to download all your results.</li>
+              <li>You're done! Now just upload the file to RotoTracker.</li>
+            </ol>
+            <p class="pro-tip">
+              Pro tip: If the file automatically opens up in a program like Excel, instead try right clicking on the
+              link and "Save As" to save a file to the desktop. Then upload this to RotoTracker directly.
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <img src="../../../../assets/img/draftkings_upload_info.png" class="img-responsive">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
-</template>
+</div>
