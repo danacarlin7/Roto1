@@ -11,6 +11,7 @@ import {EditPlanComponent} from "./components/plans/edit-plan/edit-plan.componen
 import {AddProviderComponent} from "./components/providers/add-provider/add-provider.component";
 import {EditProviderComponent} from "./components/providers/edit-provider/edit-provider.component";
 import {EditProviderGuard} from "./edit-provider.guard";
+import {ExcelComponent} from "./components/excel/excel.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -33,6 +34,12 @@ const routes:Routes = [
         component: MembersComponent,
         canActivate: [AuthGuard],
         data: {title: "Members", type: "admin"}
+      },
+      <Route>{
+        path: 'excel',
+        component: ExcelComponent,
+        canActivate: [AuthGuard],
+        data: {title: "Excel", type: "admin"}
       },
       {
         path: 'addmember',
@@ -81,7 +88,7 @@ const routes:Routes = [
         component: EditPlanComponent,
         canActivate: [AuthGuard],
         data: {title: "Add new plan", type: "admin"}
-      },
+      }
     ]
     /* children:[
      { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard],data:{title:"Dashboard",type:"admin"}},
