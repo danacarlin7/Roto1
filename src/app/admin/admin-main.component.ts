@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from "@angular/core";
-import {AuthService} from "../shared/services/auth.service";
+import {CustomAuthService} from "../shared/services/auth.service";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -12,7 +12,7 @@ import {AuthService} from "../shared/services/auth.service";
 })
 export class AdminMainComponent {
 
-  constructor(private authService:AuthService) {
+  constructor(private authService:CustomAuthService) {
 
   }
 

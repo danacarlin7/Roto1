@@ -14,7 +14,7 @@ import {Overlay} from 'angular2-modal';
 import {overlayConfigFactory} from "angular2-modal";
 import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
 import 'rxjs/Rx';
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 import {FrontService} from "../../services/front.service";
 
 @Component({
@@ -36,7 +36,7 @@ export class SubscribeComponent implements OnInit {
 
   @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef:TemplateRef<any>;
 
-  constructor(private router:Router, private authService:AuthService, private frontService:FrontService, private injector:Injector, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal) {
+  constructor(private router:Router, private authService:CustomAuthService, private frontService:FrontService, private injector:Injector, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal) {
     overlay.defaultViewContainer = vcRef;
     if (this.authService.isLoggedIn()) {
       this.userData = this.authService.retrieveLoggedUserInfo()

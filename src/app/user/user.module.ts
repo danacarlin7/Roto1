@@ -11,7 +11,7 @@ import {AppliedFiltersComponent} from "./components/filters/applied-filters/appl
 import {UserDashboardServices} from "./services/user-dashboard.service";
 import {FilterService} from "./services/filter.service";
 import {OverviewlistComponent} from "./components/overview/overview-list/overview-list.component";
-import {AuthService} from "../shared/services/auth.service";
+import {CustomAuthService} from "../shared/services/auth.service";
 import {CohortComponent} from './components/cohort/cohort.component';
 import {GraphComponent} from './components/graph/graph.component';
 import {CohortListComponent} from './components/cohort/cohort-list/cohort-list.component';

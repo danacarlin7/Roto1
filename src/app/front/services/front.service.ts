@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, Response} from "@angular/http";
-import {AuthService} from "../../shared/services/auth.service";
+import {CustomAuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs/Rx";
 /**
@@ -9,7 +9,7 @@ import {Observable} from "rxjs/Rx";
 
 @Injectable()
 export class FrontService {
-  constructor(private http:Http, private authService:AuthService) {
+  constructor(private http:Http, private authService:CustomAuthService) {
 
   }
 

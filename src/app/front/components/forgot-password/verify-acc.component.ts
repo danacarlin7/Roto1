@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 /**
  * Created by Hiren on 24-07-2017.
@@ -19,7 +19,7 @@ export class VerifyAccComponent{
   reSendToken:boolean;
   isLoading:boolean;
 
-  constructor(private router:Router, private activatedRoute:ActivatedRoute,private authService:AuthService) {
+  constructor(private router:Router, private activatedRoute:ActivatedRoute,private authService:CustomAuthService) {
 
   }
 

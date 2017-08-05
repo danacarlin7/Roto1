@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {AdminDashboardService} from "../../services/admin-dashboard.service";
 declare var jQuery:any;
 import * as c3 from "c3";
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('thirtyDayChart') thirtyDayChart:ElementRef;
   @ViewChild('ninetyDayChart') ninetyDayChart:ElementRef;
 
-  constructor(private authService:AuthService, private dashboardService:AdminDashboardService) {
+  constructor(private authService:CustomAuthService, private dashboardService:AdminDashboardService) {
   }
 
   ngOnInit() {

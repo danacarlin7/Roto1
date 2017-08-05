@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 06-07-2017.
  */
@@ -16,7 +16,7 @@ export class ForgotPasswordComponent {
   errorMsg:string;
   isMailSent:boolean;
 
-  constructor(private authService:AuthService) {
+  constructor(private authService:CustomAuthService) {
 
   }
 

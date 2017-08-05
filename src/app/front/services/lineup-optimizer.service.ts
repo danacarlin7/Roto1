@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, Response} from "@angular/http";
-import {AuthService} from "../../shared/services/auth.service";
+import {CustomAuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
 import {Observable, BehaviorSubject, Subject} from "rxjs/Rx";
 import {AdvFilterSettings} from "../models/adv-filter-setting.model";
@@ -40,7 +40,7 @@ export class LineupOptimizerService {
     this._generatedLineups = value;
   }
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private http: Http, private authService: CustomAuthService) {
 
   }
 

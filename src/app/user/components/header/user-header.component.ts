@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 import {LoggedUser} from "../../../shared/models/logged-user.model";
 /**
  * Created by Hiren on 11-06-2017.
@@ -14,7 +14,7 @@ import {LoggedUser} from "../../../shared/models/logged-user.model";
 export class UserHeaderComponent {
   loggedUser: LoggedUser;
   role: string;
-  constructor(private authService: AuthService) {
+  constructor(private authService: CustomAuthService) {
     this.loggedUser = this.authService.loggedUser;
     this.role = this.authService.getUserRole();
     this.authService.loggedUserChangeEvent.subscribe(

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers, Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {AuthService} from "../../shared/services/auth.service";
+import {CustomAuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
 import {Analyst} from "../models/provider.model";
 /**
@@ -15,7 +15,7 @@ export class AdminDashboardService {
 
   selectedProvider:Analyst;
 
-  constructor(private http:Http, private authService:AuthService) {
+  constructor(private http:Http, private authService:CustomAuthService) {
 
   }
 

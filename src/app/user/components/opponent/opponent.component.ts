@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {OpponentData} from "../../models/opponent-data.model";
 import {FilterCriteria} from "../../models/filter-criteria.model";
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 import {FilterService} from "../../services/filter.service";
 import {UserDashboardServices} from "../../services/user-dashboard.service";
 /**
@@ -20,7 +20,7 @@ export class OpponentComponent {
   filterSettings:any;
   filterEventSubscription:any;
 
-  constructor(private authService:AuthService, private filterService:FilterService, private dashboardService:UserDashboardServices) {
+  constructor(private authService:CustomAuthService, private filterService:FilterService, private dashboardService:UserDashboardServices) {
     this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(
       filters => {
         this.getData(filters);

@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {AuthService} from "../../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../../shared/services/auth.service";
 import {AdminDashboardService} from "../../../services/admin-dashboard.service";
 import {Router} from "@angular/router";
 import {NgForm, FormGroup, FormControl, Validators} from "@angular/forms";
@@ -23,7 +23,7 @@ export class EditProviderComponent implements OnInit {
   errorMsg:string;
   isLoading:boolean;
 
-  constructor(private authService:AuthService, private providerService:AdminDashboardService, private router:Router) {
+  constructor(private authService:CustomAuthService, private providerService:AdminDashboardService, private router:Router) {
     this.selectedProvider = this.providerService.selectedProvider;
     if (!this.selectedProvider) {
       this.router.navigate(['admin/providers'])

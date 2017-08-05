@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService} from "../shared/services/auth.service";
+import {CustomAuthService} from "../shared/services/auth.service";
 import {Router} from "@angular/router";
 /**
  * Created by Hiren on 04-06-2017.
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class FrontMainComponent {
 
-  constructor(private authService:AuthService, private router:Router) {
+  constructor(private authService:CustomAuthService, private router:Router) {
 
   }
 

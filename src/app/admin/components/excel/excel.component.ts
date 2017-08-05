@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from "@angular/core";
 import {Router} from "@angular/router";
 import {environment} from "../../../../environments/environment";
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 import {Overlay} from 'angular2-modal';
 /**
  * Created by Hiren on 24-05-2017.
@@ -26,7 +26,7 @@ export class ExcelComponent{
     autoReset: 500,
     headers: {'Authorization': 'Bearer ' + environment.token}
   };
-  constructor(private authService:AuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef) {
+  constructor(private authService:CustomAuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef) {
 
   }
 

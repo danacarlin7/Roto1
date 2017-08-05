@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 //import {Provider} from '../../../forms/provider';
 import {Subscription} from 'rxjs';
-import {AuthService} from "../../../shared/services/auth.service";
+import {CustomAuthService} from "../../../shared/services/auth.service";
 import {AdminDashboardService} from "../../services/admin-dashboard.service";
 import {UserDashboardServices} from "../../../user/services/user-dashboard.service";
 declare var jQuery:any;
@@ -31,7 +31,7 @@ export class ProvidersComponent implements OnInit {
   selectedType:any;
   allSearch = [];
 
-  constructor(private providerService:AdminDashboardService, private authService:AuthService, private router:Router) {
+  constructor(private providerService:AdminDashboardService, private authService:CustomAuthService, private router:Router) {
     this.selectedType = [
       {
         label: "All",
