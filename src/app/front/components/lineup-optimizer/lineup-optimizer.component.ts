@@ -35,6 +35,7 @@ export class LineupOptimizerComponent {
   games:Game[];
   stackingData:{team:string,teamId:number}[];
   lockedPlayers:number[] = [];
+  todayDate = new Date();
 
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
