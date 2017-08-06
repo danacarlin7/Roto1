@@ -1,6 +1,6 @@
-<div *ngIf="userRole != 'provider'"> 
+<!--<div *ngIf="userRole != 'provider'"> -->
     <section class="sectionHedin">
-    	<div class="container ">
+    	<div class="container " style="margin: auto;">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 	<div class="lineupHedin linUpHedin">
@@ -12,9 +12,9 @@
                 </div>
             </div>
         </div>
-    </section>		
-    <section class="linUpSection">    	
-    	<div class="container">
+    </section>
+    <section class="linUpSection">
+    	<div class="container" style="margin: auto;">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 	<div class="dTabs">
@@ -43,11 +43,11 @@
                                     </ul>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group dteWrapper">
                                 <input type="text" class="form-control datepicker" name="dateFrom" placeholder="Date" value="{{currentDateStr}}">
                             </div>
-                            
+
                             <div class="form-group clearfix">
                             	<div class="form-group">
                                     <button type="button" class="form-control" (click)="setDate(false);">Prev</button>
@@ -60,9 +60,9 @@
                             </div>
                         </div>
                         <!-- Tab panes -->
-                        <div class="tab-content">                            
+                        <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="NFL">
-                            
+
                            		<div *ngFor="let currLineup of currPageHiddenLineups" class="lneUpSection clearfix">
                                 	<div class="lneUpSecLft">
                                     	<div class="lneUpImgBx">
@@ -87,8 +87,8 @@
                                                         <th width="20%">Player Name</th>
                                                         <th width="15%">B. Ord</th>
                                                         <th width="20%">Opp</th>
-                                                        <th width="15%">Proj</th> 
-                                                        <th width="15%">Salary</th>                                   
+                                                        <th width="15%">Proj</th>
+                                                        <th width="15%">Salary</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -118,13 +118,13 @@
                                                     	<td colspan="3">{{currLineup['LineupName']}}</td>
                                                         <td colspan="3">FANTASY [ CRUNCHER ]</td>
                                                     </tr>
-                                                    
+
                                                 </tbody></table>
-                    
+
                                             </div>
                                         </div>
                                     </div>
-                                </div>   
+                                </div>
                                 <div class="pagination">
                                     <ul>
                                         <li (click)="currentLineupsPage = 1; showPagination();"><a href="javascript:void(0)"><span aria-hidden="true">«</span></a></li>
@@ -143,4 +143,4 @@
             </div>
        	</div>
     </section>
-</div>
+<!--</div>-->

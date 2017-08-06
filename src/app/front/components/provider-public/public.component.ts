@@ -8,7 +8,7 @@ import {CompGetService} from '../../services/fetchCompositions';
 import {LineupPostService} from '../../services/postLineups';
 import {AuthService} from '../../../shared/services/auth.service';
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'provider-public-root',
@@ -24,7 +24,7 @@ export class ProviderPublicComponent {
   currentSport = 'MLB';
   currentSlate = '';
   currentSlateID = 0;
-  
+
   slates = [];
   players = [];
   fixtures = [];
@@ -61,9 +61,9 @@ export class ProviderPublicComponent {
     );
     this.authService.loggedUserChangeEvent.subscribe(
       user => { this.userData = user; this.userName = this.userData.first_name + " " + this.userData.last_name; }
-    );	
+    );
     this.userRole = this.authService.getUserRole();
-	
+
     this.currentDate = new Date();
     var date = this.currentDate.toJSON().slice(0, 10).replace(new RegExp("-", 'g'), "/");
     this.currentDateStr = date.substring(5) + "/" + date.substring(0, 4);
@@ -103,7 +103,7 @@ export class ProviderPublicComponent {
     for (var i in slateData) {
 	    slateMap[slateData[i].Slate] = slateData[i];
   	}
-	
+
   	var slates = [];
   	for (var key in slateMap) {
   	  slates.push(slateMap[key]);
@@ -294,7 +294,7 @@ export class ProviderPublicComponent {
   }
   weekOfYear = (date): number => {
     var onejan = new Date(date.getFullYear(), 0, 1);
-    return Math.ceil((((date.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);    
+    return Math.ceil((((date.getTime() - onejan.getTime()) / 86400000) + onejan.getDay() + 1) / 7);
   }
   setDate = (isForward) => {
     var time = this.currentDate.getTime();

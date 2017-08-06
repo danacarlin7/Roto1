@@ -27,9 +27,9 @@ export class ProviderComponent implements OnInit, OnDestroy {
   currentSport = 'MLB';
   currentSlate = '';
   currentSlateID = 0;
-  
+
   currLineupName = '';
-  
+
   slates = [];
   players = [];
   fixtures = [];
@@ -88,9 +88,9 @@ export class ProviderComponent implements OnInit, OnDestroy {
     );
     this.authService.loggedUserChangeEvent.subscribe(
       user => { this.userData = user; this.userName = this.userData.first_name + " " + this.userData.last_name; }
-    );	
+    );
     this.userRole = this.authService.getUserRole();
-	
+
     this.pgs.getSlates(this.currentOperator, this.currentSport)
       .subscribe(result => {
         this.slates = this.deDuplicateSlates(result.json()['data']);
@@ -139,7 +139,7 @@ export class ProviderComponent implements OnInit, OnDestroy {
     for (var i in slateData) {
 	  slateMap[slateData[i].Slate] = slateData[i];
 	}
-	
+
 	var slates = [];
 	for (var key in slateMap) {
 	  slates.push(slateMap[key]);
@@ -563,7 +563,7 @@ export class ProviderComponent implements OnInit, OnDestroy {
   setProvider = (provider) => {
     this.currProvider = provider;
   }
-  
+
   clickUpload = () => {
     $('#fileControl').trigger('click');
   }

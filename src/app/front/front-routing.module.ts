@@ -53,7 +53,7 @@ const routes:Routes = [
       <Route>{path: 'excel-tool', component: ExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
       <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent},
-      <Route>{path: 'provider-public-lineups', canActivate: [AuthGuard], component: ProviderPublicComponent},
+      <Route>{path: 'provider-public-lineups', component: ProviderPublicComponent},
       <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
       <Route>{path: 'generated-lineups', component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
