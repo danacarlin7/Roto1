@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 23-06-2017.
  */
@@ -10,7 +10,7 @@ import {CustomAuthService} from "../../../shared/services/auth.service";
   styleUrls: ['./admin-header.component.css']
 })
 export class AdminHeaderComponent {
-  constructor(private authService:CustomAuthService) {
+  constructor(private authService:AuthService) {
   }
 
   isReleasePopupVisible:boolean;

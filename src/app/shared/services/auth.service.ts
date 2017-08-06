@@ -8,7 +8,7 @@ import {LoggedUser} from "../models/logged-user.model";
  */
 
 @Injectable()
-export class CustomAuthService {
+export class AuthService {
 
   private _loggedUser:LoggedUser;
 

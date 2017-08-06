@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {CustomAuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
 /**
  * Created by Hiren on 04-06-2017.
@@ -10,7 +10,7 @@ import {environment} from "../../../environments/environment";
 export class CouponsService {
   endpoint:string = "https://api.dfsportgod.com/";
 
-  constructor(private http:Http, private authService:CustomAuthService) {
+  constructor(private http:Http, private authService:AuthService) {
 
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {ArticleService} from "../../services/article.service";
 
 @Component({
@@ -10,7 +10,7 @@ import {ArticleService} from "../../services/article.service";
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private authService:CustomAuthService, private router:Router, private articleService:ArticleService) {
+  constructor(private authService:AuthService, private router:Router, private articleService:ArticleService) {
   }
 
   category:any;

@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 //import {Member} from '../../../forms/member';
 import {Subscription} from 'rxjs';
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {AdminDashboardService} from "../../services/admin-dashboard.service";
 import {UserDashboardServices} from "../../../user/services/user-dashboard.service";
 declare var jQuery:any;
@@ -31,7 +31,7 @@ export class MembersComponent implements OnInit {
   selectedType:any;
   allSearch = [];
 
-  constructor(private memberService:AdminDashboardService, private authService:CustomAuthService, private router:Router) {
+  constructor(private memberService:AdminDashboardService, private authService:AuthService, private router:Router) {
     this.selectedType = [
       {
         label: "All",
@@ -155,7 +155,7 @@ export class MembersComponent implements OnInit {
 })
 export class AddMemberComponent implements OnInit {
 
-  constructor(private authService:CustomAuthService,private memberService:AdminDashboardService, private router:Router) {
+  constructor(private authService:AuthService,private memberService:AdminDashboardService, private router:Router) {
   }
 
   ngOnInit() {
@@ -194,7 +194,7 @@ export class UploadMemberComponent implements OnInit {
     headers: {'Authorization': 'Bearer ' + this.userDetail.token}
   };
 
-  constructor(private memberService:CustomAuthService, private router:Router) {
+  constructor(private memberService:AuthService, private router:Router) {
   }
 
   ngOnInit() {

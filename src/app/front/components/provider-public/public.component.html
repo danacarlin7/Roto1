@@ -7,7 +7,7 @@
                     	<h1>Lineups</h1>
                     </div>
                     <div class="sectionHedinBtn clearfix">
-                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="showSlatesForOperator($event.target.id);" [ngClass]="{'btn-yellow': (operator == currentOperator)}">{{operator}}</a>
+                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="showSlatesForOperator($event.target.id);" [ngClass]="{'btn-yellow': operator === currentOperator }">{{operator}}</a>
                     </div>
                 </div>
             </div>
@@ -114,10 +114,10 @@
                                                         <td>{{currLineup['TotalPoints']}}</td>
                                                         <td>{{currLineup['TotalSalary']}}</td>
                                                     </tr>
-                                                    <tr class="lastTRw">
-                                                    	<td colspan="3">{{currLineup['LineupName']}}</td>
-                                                        <td colspan="3">FANTASY [ CRUNCHER ]</td>
-                                                    </tr>
+                                                    <!--<tr class="lastTRw">-->
+                                                    	<!--<td colspan="3">{{currLineup['LineupName']}}</td>-->
+                                                        <!--<td colspan="3">FANTASY [ CRUNCHER ]</td>-->
+                                                    <!--</tr>-->
 
                                                 </tbody></table>
 

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-import {CustomAuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {MembershipPlan} from "../models/plan.model";
 import {environment} from "../../../environments/environment";
 /**
@@ -14,7 +14,7 @@ export class MembershipPlanService {
 
   editPlan:MembershipPlan;
 
-  constructor(private http:Http, private authService:CustomAuthService) {
+  constructor(private http:Http, private authService:AuthService) {
 
   }
 

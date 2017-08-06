@@ -3,7 +3,7 @@ import {Router, ActivatedRoute} from "@angular/router";
 import {UserDashboardServices} from "../../services/user-dashboard.service";
 import {FilterService} from "../../services/filter.service";
 import {ContestHistory} from "../../models/contest";
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {Overlay} from 'angular2-modal';
 import {overlayConfigFactory} from "angular2-modal";
 import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
@@ -24,7 +24,7 @@ export class UploadsComponent {
               private activatdRoute:ActivatedRoute,
               private uploadService:UploadsService,
               private dashboardService:UserDashboardServices,
-              private authservice:CustomAuthService,
+              private authservice:AuthService,
               private overlay:Overlay,
               private vcRef:ViewContainerRef,
               public modal:Modal,

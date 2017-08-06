@@ -7,14 +7,14 @@ import {FilterService} from "./filter.service";
 import {environment} from "../../../environments/environment";
 import * as moment from 'moment';
 import {DashboardFilter} from "../models/dashboard-filter.model";
-import {CustomAuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 /**
  * Created by Hiren on 11-06-2017.
  */
 
 @Injectable()
 export class UserDashboardServices {
-  constructor(private http:Http, private filterService:FilterService, private authService:CustomAuthService) {
+  constructor(private http:Http, private filterService:FilterService, private authService:AuthService) {
 
   }
 

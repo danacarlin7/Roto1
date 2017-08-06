@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {CustomAuthService} from "../shared/services/auth.service";
+import {AuthService} from "../shared/services/auth.service";
 import {Router, NavigationEnd} from "@angular/router";
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -15,7 +15,7 @@ import 'rxjs/add/operator/mergeMap';
 })
 export class UserMainComponent {
 
-  constructor(private authService: CustomAuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 

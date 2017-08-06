@@ -14,7 +14,7 @@ import {Overlay} from 'angular2-modal';
 import {overlayConfigFactory} from "angular2-modal";
 import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
 import 'rxjs/Rx';
-import {CustomAuthService} from "../../../../shared/services/auth.service";
+import {AuthService} from "../../../../shared/services/auth.service";
 import {LoggedUser} from "../../../../shared/models/logged-user.model";
 import {UserDashboardServices} from "../../../services/user-dashboard.service";
 import {Router} from "@angular/router";
@@ -31,7 +31,7 @@ import {environment} from "../../../../../environments/environment";
 export class UserProfileComponent{
   userData: LoggedUser;
   user_name = '';
-  constructor(private authService:CustomAuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
+  constructor(private authService:AuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
     this.userData = this.authService.loggedUser;
     this.authService.loggedUserChangeEvent.subscribe(user => {
       this.userData = user;

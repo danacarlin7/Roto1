@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {FormGroup, Validators, FormControl, AbstractControl} from "@angular/forms";
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 /**
  * Created by Hiren on 15-07-2017.
@@ -18,7 +18,7 @@ export class ChangePasswordComponent {
   isError:boolean;
   errorMsg:string;
 
-  constructor(private authService:CustomAuthService, private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private authService:AuthService, private activatedRoute:ActivatedRoute, private router:Router) {
     this.changePasswordForm = new FormGroup({
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])

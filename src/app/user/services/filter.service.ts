@@ -2,7 +2,7 @@ import {CohortTabConstants, ContestTabConstants, GraphTabConstants} from "../con
 import {FilterCriteria} from "../models/filter-criteria.model";
 import {EventEmitter, Injectable} from "@angular/core";
 import {Http, Headers} from "@angular/http";
-import {CustomAuthService} from "../../shared/services/auth.service";
+import {AuthService} from "../../shared/services/auth.service";
 import {Observable} from "rxjs/Rx";
 import {FilterKeyConstants} from "../constants/filter.constant";
 import * as moment from 'moment';
@@ -22,7 +22,7 @@ export class FilterService {
 
   filtersChangedEvent:EventEmitter<FilterCriteria[]> = new EventEmitter<FilterCriteria[]>();
 
-  constructor(private http:Http, private authService:CustomAuthService) {
+  constructor(private http:Http, private authService:AuthService) {
 
   }
 

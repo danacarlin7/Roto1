@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {CustomAuthService} from "../../../../shared/services/auth.service";
+import {AuthService} from "../../../../shared/services/auth.service";
 import {AdminDashboardService} from "../../../services/admin-dashboard.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
@@ -15,7 +15,7 @@ import {NgForm} from "@angular/forms";
 })
 export class AddProviderComponent implements OnInit {
 
-  constructor(private authService: CustomAuthService, private providerService: AdminDashboardService, private router: Router) {
+  constructor(private authService: AuthService, private providerService: AdminDashboardService, private router: Router) {
   }
 
   ngOnInit() {

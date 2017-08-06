@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {LoggedUser} from "../../../shared/models/logged-user.model";
 /**
  * Created by Hiren on 05-06-2017.
@@ -15,7 +15,7 @@ export class FrontHeaderComponent {
   isLoggedIn:boolean;
   role:string;
 
-  constructor(private authService:CustomAuthService) {
+  constructor(private authService:AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.role = this.authService.getUserRole();
   }

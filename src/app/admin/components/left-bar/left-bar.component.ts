@@ -1,5 +1,5 @@
 import {Component, Output, EventEmitter, ElementRef} from "@angular/core";
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 23-06-2017.
  */
@@ -14,7 +14,7 @@ declare var jQuery:any;
 export class LeftbarComponent {
   @Output() checkAdmin:EventEmitter<any> = new EventEmitter();
 
-  constructor(private element:ElementRef, private authService:CustomAuthService) {
+  constructor(private element:ElementRef, private authService:AuthService) {
 
   }
 

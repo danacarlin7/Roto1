@@ -1,5 +1,5 @@
 import {Component, ViewChild, ElementRef, Renderer2} from "@angular/core";
-import {CustomAuthService} from "../../../shared/services/auth.service";
+import {AuthService} from "../../../shared/services/auth.service";
 import {Router} from "@angular/router";
 import {FormGroup, FormControl, Validators, AbstractControl} from "@angular/forms";
 import {UserDashboardServices} from "../../../user/services/user-dashboard.service";
@@ -25,7 +25,7 @@ export class SignUpComponent {
 
   @ViewChild('signUpError') signUpErrorRef:ElementRef;
 
-  constructor(private authService:CustomAuthService, private router:Router, private renderer:Renderer2, private dashboardService:UserDashboardServices, private frontService:FrontService) {
+  constructor(private authService:AuthService, private router:Router, private renderer:Renderer2, private dashboardService:UserDashboardServices, private frontService:FrontService) {
     this.signUpForm = new FormGroup({
       userName: new FormControl('', Validators.required),
       fName: new FormControl('', Validators.required),
