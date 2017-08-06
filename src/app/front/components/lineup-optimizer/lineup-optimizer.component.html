@@ -74,11 +74,12 @@
               </select>-->
             </div>
             <div class="col-sm-3 no-padding-right">
-              <input class="form-control input-sm" type="text" value="9 July, 2017">
+              <input class="form-control input-sm" type="text" value="{{todayDate | date:'dd MMM, yyyy'}}">
             </div>
             <div class="col-md-4 col-sm-5">
-              <a class="btn btn-lg btn-yellow-black btn-noradius btn-block" (click)="onBtnGenerateLineupClick()">Generate
-                Lineups</a>
+              <a class="btn btn-lg btn-yellow-black btn-noradius btn-block" (click)="onBtnGenerateLineupClick()">
+                Generate Lineups
+              </a>
             </div>
           </div>
         </div>
