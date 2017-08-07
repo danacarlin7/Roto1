@@ -7,7 +7,7 @@
                     	<h1>Lineups</h1>
                     </div>
                     <div class="sectionHedinBtn clearfix">
-                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="showSlatesForOperator($event.target.id);" [ngClass]="{'btn-yellow': operator === currentOperator }">{{operator}}</a>
+                    	<a href="javascript:void(0)" *ngFor="let operator of operators" id="{{operator}}" (click)="showSlatesForOperator($event.target.id);" [ngClass]="{'active': (operator == currentOperator) }">{{operator}}</a>
                     </div>
                 </div>
             </div>

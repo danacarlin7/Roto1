@@ -1,6 +1,4 @@
-import {Component, Output, EventEmitter, OnInit, OnDestroy} from '@angular/core';
-import {Subscription} from "rxjs";
-import {TimerObservable} from "rxjs/observable/TimerObservable";
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {PlayerGetService} from '../../services/fetchPlayers';
