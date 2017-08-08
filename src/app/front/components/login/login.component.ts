@@ -3,6 +3,7 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {AuthService} from "../../../shared/services/auth.service";
 import {Router, ActivatedRoute, Params} from "@angular/router";
 import {environment} from "../../../../environments/environment";
+// import { AuthService } from 'ng2-social-login/src/app/cuppaOAuth/auth.service';
 /**
  * Created by Hiren on 07-06-2017.
  */
@@ -14,17 +15,38 @@ import {environment} from "../../../../environments/environment";
 })
 export class LoginComponent {
 
-  loginForm:FormGroup;
-  redirectUrl:string;
-  msg:string;
+  loginForm: FormGroup;
+  redirectUrl: string;
+  msg: string;
 
-  isError:boolean;
-  errorMsg:string;
-  showVerifyLink:boolean;
+  isError: boolean;
+  errorMsg: string;
+  showVerifyLink: boolean;
 
-  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
+
+  private authServerBaseUrl = 'http://localhost:4000';
+  private config = {
+    "loginRoute": "login",
+    "linkedin": {
+      "authEndpoint": this.authServerBaseUrl + "/auth/linkedin",
+      "clientId": "8176r44lz2ewos",
+      "redirectURI": this.authServerBaseUrl + "/user"
+    },
+    "facebook": {
+      "authEndpoint": this.authServerBaseUrl + "/auth/facebook",
+      "clientId": "302642623492507",
+      "redirectURI": this.authServerBaseUrl + "/user"
+    },
+    "google": {
+      "authEndpoint": this.authServerBaseUrl + "/auth/google",
+      "clientId": "15581973506-rgbi7mbph0jad1hbqnoln05i8c0k29cn.apps.googleusercontent.com",
+      "redirectURI": this.authServerBaseUrl + "/user"
+    }
+  };
+
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
     this.activatedRoute.queryParams.subscribe(
-      (param:Params) => {
+      (param: Params) => {
         this.redirectUrl = param['redirect'];
         if (param.hasOwnProperty('info')) {
           if (param['info'] == 'pc') {

@@ -12,6 +12,7 @@ import {AdminModule} from "./admin/admin.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthService} from "./shared/services/auth.service";
 import {environment} from "../environments/environment";
+// import { CuppaOAuthModule } from 'ng2-social-login';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {environment} from "../environments/environment";
     FrontModule,
     UserModule,
     AdminModule,
+    // CuppaOAuthModule,
     SharedModule.forRoot(),
     AppRoutingModule
   ],

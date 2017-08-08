@@ -7,7 +7,10 @@
           <nav class="topNavbar">
             <ul class="pull-right">
               <li routerLinkActive="active" *ngIf="role == 'provider'" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/provider-lineup">My Lineups</a>
+                <a routerLink="/provider-lineups">My Lineups</a>
+              </li>
+              <li routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/provider-public-lineups">Lineups</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/lineup-optimizer">Lineup Optimizer</a>

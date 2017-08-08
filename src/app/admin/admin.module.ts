@@ -18,6 +18,7 @@ import {DeletePlanAlert} from "./components/plans/delete-plan/delete-plan.compon
 import {AddProviderComponent} from "./components/providers/add-provider/add-provider.component";
 import {EditProviderComponent} from "./components/providers/edit-provider/edit-provider.component";
 import {EditProviderGuard} from "./edit-provider.guard";
+import {ExcelComponent} from "./components/excel/excel.component"
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -42,7 +43,8 @@ import {EditProviderGuard} from "./edit-provider.guard";
     AddPlanComponent,
     EditPlanComponent,
     SinglePlanComponent,
-    DeletePlanAlert
+    DeletePlanAlert,
+    ExcelComponent
   ],
   exports: [
     AdminMainComponent
