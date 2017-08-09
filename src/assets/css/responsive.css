@@ -122,6 +122,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.sectionHedin .dTabs {right: 15px;}
 	
 	
+	
 }
 @media (max-width:991px)
 {	
@@ -346,6 +347,32 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.infoPara {font-size: 19px;line-height: 30px;}
 	.infoSec2Hedin {font-size: 30px;line-height: 40px;}
 	.infoSec4Lft > .bowerDwnBtn {font-size: 15px;padding: 10px 10px;margin-top: 5px;}
+	
+	.ylwTpBx{padding: 20px 15px;}
+	.ylwTpBx h3{font-size: 17px;}
+	.ylwTpBx p img{max-width: 15px;}
+	.ylwTpBxBtmBxInfo{padding: 20px 15px;}
+	.indexNPrt2MidSlider{padding: 0px 15px;}
+	.wlwTpBx{padding: 20px 0px;}
+	.nSocialTbBxInfo {padding: 0px 10px 20px;}
+	.nSocialTbBxInfoTp > a{font-size: 16px;}
+	.nSocialTbBxInfoTp > a img{max-width: 15px;}
+	.nltstNwsInfoTme .icnWrapperS {margin-right: 0px;}
+	.nltstNwsInfoDte i, .nltstNwsInfoTme i {font-size: 12px;}
+	.ylwTpBxBtmBx2Wrap {padding: 15px 0px;}
+	.ylwTpBxBtmBx2 {padding: 15px;}
+	.nltstNwsInfoDte {width: 100%;}
+	.nltstNwsInfoTme {width: 100%;}
+	.nltstNwsInfoTpWrp {padding: 0px 10px 20px;}
+	.nltstNwsInfoBtm h4{font-size: 16px;}
+	.nSlider .owl-nav, .midSlider .owl-nav{font-size: 14px;padding: 0px 10px 20px;}
+
+	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p {font-size: 50px; line-height: 55px;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p .white {font-size: 70px;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt > p {font-size: 18px;line-height: 25px;}
+	.indexNPrt1 .carousel-caption{top: 35%;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt > a {font-size: 16px;line-height: 16px;}
+	.tpCntrl {bottom: 20px;}
 	
 }
 
@@ -706,6 +733,28 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.infoSec4Lft {float: left;width: 100%;}
 	.infoSec4Lft > .bowerDwnBtn {font-size: 12px;padding: 3px 10px;margin-top: 5px;}
 	.infoSec4Rght {float: right;width: 100%;margin-bottom: 10px;}
+	
+	.indexNPrt2Lft{width: 100%;}
+	.indexNPrt2Mid{width: 100%;}
+	.indexNPrt2Rght{width: 100%;}
+	.ylwTpBx {padding: 15px 15px;margin-bottom: 10px;}
+	.ylwTpBxBtmBx {margin-bottom: 10px;}
+	.ylwTpBxBtmBx2 p {font-size: 13px;}
+	.nltstNwsInfoTme, .nltstNwsInfoDte {width: auto;}
+	.wlwTpBx{padding: 15px 0px;}
+	.midSlider .nltstNwsInfoTpWrp p {font-size: 13px;line-height: 20px;}
+	.indexNPrt2Rght .nav > li > a {   height: 45px;}
+	.indexNPrt2Rght .nav > li > a > img{max-width: 18px;}
+	.nSocialTbBxInfo p {font-size: 13px;}
+	
+	.tpCntrl {bottom: 10px;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt > a {font-size: 14px;line-height: 10px;margin-top: -10px;padding: 8px 20px;}
+	
+	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p {font-size: 30px;line-height: 30px;}
+	.indexNPrt1 .carousel-caption {top: 50%;width: 90%;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt > p{display: none;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p .white {font-size: 35px;}
+	.tpCntrl .carousel-control{font-size: 14px;}
 }
 
 @media(max-width:679px)
@@ -722,10 +771,10 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav .logoWrapper{max-width: 120px;}
 	header .topHeader .topNavbar > ul > li > a {font-size: 10px;}
 	.matchDetails .tabWrapper .nav-tabs > li > a {font-size: 13px;padding: 5px 8px;}
-	header .bottomHeader .rightNav > ul > li > a {font-size: 11px;color: #FFF;line-height: 13px;width: 52px;}
+	header .bottomHeader .rightNav > ul > li > a {font-size: 11px;color: #FFF;line-height: 13px;width: 53px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 4px 8px !important;}
 	header .bottomHeader .rightNav {width: 146px;right: 43px;top: 9px;}
-	header .bottomHeader .rightNav > ul > li {margin-left: 3px;	position: relative;}
+	header .bottomHeader .rightNav > ul > li {margin-left: 2px;	position: relative;}
 	.mlbBannerHedin {justify-content: flex-start;}
 	
 	.dashboardHeader .bottomHeader .rightNav #profileDrpdwn {font-size: 12px;}
@@ -867,6 +916,12 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.linUpSection .linUpFrm > .form-group {margin-left: 2px;}
 	.linUpSection .linUpFrm > .form-group > .form-group .form-control {min-width: 40px;max-width: 40px;border-radius: 0px;}
 	.lneUpSecRght .lneUpHedin {font-size: 15px;}
+	
+	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p {font-size: 20px;line-height: 20px;}
+	.indexNPrt1 .carousel-caption {top: 18%;width: 90%;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt > p{display: none;}
+	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p .white {font-size: 25px;}
+	.tpCntrl .carousel-control{font-size: 13px;}
 }
 @media(max-width:359px)
 {

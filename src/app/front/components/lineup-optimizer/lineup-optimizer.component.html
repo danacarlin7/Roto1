@@ -152,7 +152,7 @@
           <td>{{player.Position}}</td>
           <td>{{player.Team}}</td>
           <td>{{player.Salary}}</td>
-          <td>{{player.BatHand}} - {{player.ThrowHand}}</td>
+          <td><span md-tooltip="Bat hand">{{player.BatHand}}</span> - <span md-tooltip="Throw hand">{{player.ThrowHand}}</span></td>
           <td>{{player.BattingOrder ? player.BattingOrder : '-'}}</td>
           <td>{{player.Opponent}}</td>
           <td>{{player.vsPitcher}}</td>

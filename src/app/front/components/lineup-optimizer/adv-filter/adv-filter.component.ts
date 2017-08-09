@@ -51,9 +51,16 @@ export class AdvFilterComponent {
   stackingTeam3:{name:string,players:number} = {name: '-', players: 0};
 
   gamesObj:any = {};
-
+  private _stackingData:{team:string,teamId:number}[];
   @Input()
-  stackingData:{team:string,teamId:number}[];
+  set stackingData(value:{team:string,teamId:number}[]) {
+    this._stackingData = value;
+    this.prepareStacks();
+  }
+
+  stack1:{team:string,teamId:number}[] = [];
+  stack2:{team:string,teamId:number}[] = [];
+  stack3:{team:string,teamId:number}[] = [];
 
   @Output()
   filterCriteriaChanged:EventEmitter<LineupOppFilterCriteria[]> = new EventEmitter<LineupOppFilterCriteria[]>();
@@ -284,6 +291,35 @@ export class AdvFilterComponent {
     return this.filters;
   }
 
+  prepareStacks() {
+    if (this._stackingData) {
+      this.stack1 = [];
+      this.stack2 = [];
+      this.stack3 = [];
+      this._stackingData.forEach(
+        value => {
+          if (value.team != this.stackingTeam2.name && value.team != this.stackingTeam3.name) {
+            this.stack1.push(value);
+          }
+        }
+      );
+      this._stackingData.forEach(
+        value => {
+          if (value.team != this.stackingTeam1.name && value.team != this.stackingTeam3.name) {
+            this.stack2.push(value);
+          }
+        }
+      );
+      this._stackingData.forEach(
+        value => {
+          if (value.team != this.stackingTeam1.name && value.team != this.stackingTeam2.name) {
+            this.stack3.push(value);
+          }
+        }
+      )
+    }
+  }
+
   prepareFilters() {
     this.filters = [];
     this.filters.push({
@@ -354,5 +390,37 @@ export class AdvFilterComponent {
         game.homeTeamMaxValue = game.awayTeamMaxValue = +event.target.value;
       }
     )
+  }
+
+  validateStakingPlayerCount(team:{name:string,players:number}) {
+    let playerCount = this.stackingTeam1.players + this.stackingTeam2.players + this.stackingTeam3.players;
+    switch (this.selectedOperator) {
+      case 'FanDuel':
+        if (playerCount > 9) {
+          team.players = 0;
+        }
+        break;
+      case 'DraftKings':
+        if (playerCount > 10) {
+          team.players = 0;
+        }
+        break;
+    }
+  }
+
+  validateHomeTeamMinValue(event, game) {
+    let value = event.target.value;
+    if (value > game.homeTeamMaxValue) {
+      event.target.value = 0;
+      game.homeTeamMinValue = 0;
+    }
+  }
+
+  validateAwayTeamMinValue(event, game) {
+    let value = event.target.value;
+    if (value > game.awayTeamMaxValue) {
+      event.target.value = 0;
+      game.awayTeamMinValue = 0;
+    }
   }
 }

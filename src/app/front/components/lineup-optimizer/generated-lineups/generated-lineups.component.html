@@ -95,6 +95,7 @@
               <td>{{player.fullName}}</td>
               <td>{{getBattingOrderByPlayerId(player.id)}}
                 <span class="light-dot"
+                      [md-tooltip]="player.battingOrderConfirmed ? ' Player in starting lineup with confirmed batting order ': ' projected batting order for player'"
                       [class.yellow-dot]="!player.battingOrderConfirmed"
                       [class.green-dot]="player.battingOrderConfirmed"></span></td>
               <td>{{getOpponentNameByPlayerId(player.id)}}@<b>{{getHomeTeamByPlayerId(player.id)}}</b></td>
@@ -117,7 +118,7 @@
               <span>{{getSlateName()}}</span>
             </div>
             <div class="col-sm-6 text-right">
-              <span>LINEUP - {{index + 1}}</span>
+              <span>LINEUP : {{index + 1}}</span>
             </div>
           </div>
         </div>

@@ -91,7 +91,7 @@ $(document).ready(function() {
 	$( ".matchDetailsSlider .owl-next").html('<img src="images/slider_rght_arow.png" alt="" />');
 
 
-/*	$('.socialDetailsSlider').owlCarousel({
+	$('.socialDetailsSlider').owlCarousel({
 		items: 1,
 		margin: 0,
 		nav: true,
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		autoplayHoverPause:true
 	});
 	$( ".socialDetailsSlider .owl-prev").html('<img src="images/social_slider_top_arow.png" alt="" />');
-	$( ".socialDetailsSlider .owl-next").html('<img src="images/social_slider_bottom_arow.png" alt="" />');		*/
+	$( ".socialDetailsSlider .owl-next").html('<img src="images/social_slider_bottom_arow.png" alt="" />');
 
 	$('.latestNewsDetailsSlider').owlCarousel({
 		margin: 30,
@@ -128,6 +128,44 @@ $(document).ready(function() {
 	$( ".latestNewsDetailsSlider .owl-prev").html('<img src="images/slider_lft_arow.png" alt="" />');
 	$( ".latestNewsDetailsSlider .owl-next").html('<img src="images/slider_rght_arow.png" alt="" />');
 
+
+/*
+	$('.nSlider').owlCarousel({
+		items: 1,
+		margin: 0,
+		nav: true,
+		loop: true,
+		autoplay:true,
+		autoplayTimeout:3000,
+		autoplayHoverPause:true
+	});
+
+	$( ".nSlider .owl-prev").html('<i class="icnWrapperS"><img src="images/blkArowLft.png" alt="" class="img-responsive"></i><span>Previous</span>');
+	$( ".nSlider .owl-next").html('<i class="icnWrapperS">Next</i><span><img src="images/blkArow.png" alt="" class="img-responsive"></span>');
+*/
+
+
+	/*$('.midSlider').owlCarousel({
+		items: 1,
+		margin: 20,
+		nav: true,
+		loop: true,
+		autoplay:true,
+		autoplayTimeout:3000,
+		autoplayHoverPause:true,
+		responsive: {
+		  0: {
+			items: 1
+		  },
+		  600: {
+			items: 2
+		  }
+		}
+	});
+
+	$( ".midSlider .owl-prev").html('<i class="icnWrapperS"><img src="images/blkArowLft.png" alt="" class="img-responsive"></i><span>Previous</span>');
+	$( ".midSlider .owl-next").html('<i class="icnWrapperS">Next</i><span><img src="images/blkArow.png" alt="" class="img-responsive"></span>');
+	*/
 	$(".clseBtn").click(function(){
 		$(this).parent().hide();
 	});
@@ -250,5 +288,7 @@ $(document).ready(function() {
 	$(".linUpSection .tFormat table tr.dtSubs").click(function(){
 		$(this).prev(".subsHide").find(".subsHideTbl").css("display", "block");
 	});
+
+
 
 });

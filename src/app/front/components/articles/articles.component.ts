@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {AuthService} from "../../../shared/services/auth.service";
 import {ArticleService} from "../../services/article.service";
 
@@ -10,7 +10,7 @@ import {ArticleService} from "../../services/article.service";
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private authService:AuthService, private router:Router, private articleService:ArticleService) {
+  constructor(private authService:AuthService, private activatedRoute:ActivatedRoute,private router:Router, private articleService:ArticleService) {
   }
 
   category:any;
@@ -42,12 +42,17 @@ export class ArticlesComponent implements OnInit {
   related:Object = {};
 
   ngOnInit() {
-    // if (!this.authService.isLoggedIn()) {
-    //   this.router.navigate(['/login']);
-    // }
 
     this.activeTab = 'trending';
     this.subActiveTab = 'week';
+
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        if (params.hasOwnProperty('tab')) {
+          this.activeTab = params['tab'];
+        }
+      }
+    );
 
     this.articleService.fetchCategories().subscribe(
       categories => {

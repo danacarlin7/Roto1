@@ -39,6 +39,7 @@ import {SubscribeComponent} from "./components/subscribe/subscribe.component";
 import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
 import {MarketPlaceComponent} from "./components/market-place/market-place.component";
 import {ExtensionsComponent} from "./components/extensions/extensions.component";
+import {StackingDataFilter} from "./components/lineup-optimizer/adv-filter/stacking-data.pipe";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -78,7 +79,8 @@ import {ExtensionsComponent} from "./components/extensions/extensions.component"
     SubscribeComponent,
     VerifyAccComponent,
     MarketPlaceComponent,
-    ExtensionsComponent
+    ExtensionsComponent,
+    StackingDataFilter
   ],
   exports: [
     ProviderComponent,
