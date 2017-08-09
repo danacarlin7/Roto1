@@ -21,7 +21,6 @@ export class ExcelComponent{
     // Change this to your upload POST address:
     server: 'https://api.dfsportgod.com/api/uploadExcel',
     maxFilesize: 50,
-    acceptedFiles: '*',
     paramName: 'file',
     autoReset: 500,
     headers: {'Authorization': 'Bearer ' + environment.token}
