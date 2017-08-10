@@ -152,8 +152,16 @@
           <td>{{player.Position}}</td>
           <td>{{player.Team}}</td>
           <td>{{player.Salary}}</td>
-          <td><span md-tooltip="Bat hand">{{player.BatHand}}</span> - <span md-tooltip="Throw hand">{{player.ThrowHand}}</span></td>
-          <td>{{player.BattingOrder ? player.BattingOrder : '-'}}</td>
+          <td><span md-tooltip="Bat hand">{{player.BatHand}}</span> - <span
+            md-tooltip="Throw hand">{{player.ThrowHand}}</span></td>
+          <td>
+            {{player.BattingOrder ? player.BattingOrder : '-'}}
+            <span class="light-dot"
+                  *ngIf="player.BattingOrder"
+                  [md-tooltip]="player.BattingOrderConfirmed ? ' Player in starting lineup with confirmed batting order ': ' projected batting order for player'"
+                  [class.yellow-dot]="!player.BattingOrderConfirmed"
+                  [class.green-dot]="player.BattingOrderConfirmed"></span>
+          </td>
           <td>{{player.Opponent}}</td>
           <td>{{player.vsPitcher}}</td>
           <td>{{player.Runs}}</td>

@@ -322,33 +322,40 @@ export class AdvFilterComponent {
 
   prepareFilters() {
     this.filters = [];
-    this.filters.push({
-      filterKey: LineupOppFilterConstants.PROJECTION,
-      minValue: this.projectionFilterValue[0],
-      maxValue: this.projectionFilterValue[1],
-      filterValue: this.projectionFilterValue
-    });
+    if (this.projectionFilterValue[0] != this._advFilterSettings.projectionMin || this.projectionFilterValue[0] != this._advFilterSettings.projectionMax) {
+      this.filters.push({
+        filterKey: LineupOppFilterConstants.PROJECTION,
+        minValue: this.projectionFilterValue[0],
+        maxValue: this.projectionFilterValue[1],
+        filterValue: this.projectionFilterValue
+      });
+    }
 
-    this.filters.push({
-      filterKey: LineupOppFilterConstants.PLAYER_SALARY,
-      minValue: this.salaryFilterValue[0],
-      maxValue: this.salaryFilterValue[1],
-      filterValue: this.salaryFilterValue
-    });
+    if (this.salaryFilterValue[0] != this._advFilterSettings.salaryMin || this.salaryFilterValue[0] != this._advFilterSettings.salaryMax) {
+      this.filters.push({
+        filterKey: LineupOppFilterConstants.PLAYER_SALARY,
+        minValue: this.salaryFilterValue[0],
+        maxValue: this.salaryFilterValue[1],
+        filterValue: this.salaryFilterValue
+      });
+    }
 
-    this.filters.push({
-      filterKey: LineupOppFilterConstants.PLAYER_BATTING_ORDER,
-      minValue: this.battingOrderFilterValue[0],
-      maxValue: this.battingOrderFilterValue[1],
-      filterValue: this.battingOrderFilterValue
-    });
-
-    this.filters.push({
-      filterKey: LineupOppFilterConstants.PLAYER_VALUE,
-      minValue: this.valueFilterValue[0],
-      maxValue: this.valueFilterValue[1],
-      filterValue: this.valueFilterValue
-    });
+    if (this.battingOrderFilterValue[0] != 0 || this.battingOrderFilterValue[0] != 9) {
+      this.filters.push({
+        filterKey: LineupOppFilterConstants.PLAYER_BATTING_ORDER,
+        minValue: this.battingOrderFilterValue[0],
+        maxValue: this.battingOrderFilterValue[1],
+        filterValue: this.battingOrderFilterValue
+      });
+    }
+    if (this.valueFilterValue[0] != this._advFilterSettings.valueMin || this.valueFilterValue[0] != this._advFilterSettings.valueMax) {
+      this.filters.push({
+        filterKey: LineupOppFilterConstants.PLAYER_VALUE,
+        minValue: this.valueFilterValue[0],
+        maxValue: this.valueFilterValue[1],
+        filterValue: this.valueFilterValue
+      });
+    }
   }
 
   onGameClick(game:Game) {
@@ -357,13 +364,13 @@ export class AdvFilterComponent {
 
   getStakingData():{name:string,players:number}[] {
     let data = [];
-    if (this.stackingTeam1.name != '-') {
+    if (this.stackingTeam1.name != '-' && this.stackingTeam1.players) {
       data.push(this.stackingTeam1);
     }
-    if (this.stackingTeam2.name != '-') {
+    if (this.stackingTeam2.name != '-' && this.stackingTeam2.players) {
       data.push(this.stackingTeam2);
     }
-    if (this.stackingTeam3.name != '-') {
+    if (this.stackingTeam3.name != '-' && this.stackingTeam3.players) {
       data.push(this.stackingTeam3);
     }
     console.log("stacking data => ", data);

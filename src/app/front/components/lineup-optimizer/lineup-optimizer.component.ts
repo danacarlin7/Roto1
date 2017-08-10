@@ -215,41 +215,81 @@ export class LineupOptimizerComponent {
   }
 
   prepareLineupData() {
-    return {
+    let lineupData = {
       sport: this.selectedSport,
       site: this.selectedOperator,
       players: this.players
         .filter(currPlayer => !currPlayer.isExcluded)
         .map(currPlayer => {
           return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue, force: currPlayer.isLocked}
-        }),
-      variation: this.advFilterPopup.variabilityValue,
-      maxExposure: this.advFilterPopup.maxExposureValue,
-      noBattersVsPitchers: this.advFilterPopup.noBattingVsPitchers,
-      numberOfUniquePlayers: this.advFilterPopup.noOfUniquePlayersValue,
-      numberOfLineups: this.advFilterPopup.noOfLineupValue,
-      minTotalSalary: this.advFilterPopup.salarySettingValue[0],
-      maxTotalSalary: this.advFilterPopup.salarySettingValue[1],
-      minMaxPlayersFromTeam: this.prepareMinMaxPlayerFromTeam()
+        })
     };
+
+    if (this.advFilterPopup.variabilityValue) {
+      lineupData['variation'] = this.advFilterPopup.variabilityValue;
+    }
+
+    if (this.advFilterPopup.maxExposureValue != 100) {
+      lineupData['maxExposure'] = this.advFilterPopup.maxExposureValue;
+    }
+
+    if (this.advFilterPopup.noOfUniquePlayersValue != 1) {
+      lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
+    }
+
+    if (this.advFilterPopup.noOfLineupValue != 1) {
+      lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
+    }
+
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != 20000) {
+      lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
+    }
+
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != 35000) {
+      lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
+    }
+
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != 30000) {
+      lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
+    }
+
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != 50000) {
+      lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
+    }
+
+    lineupData['noBattersVsPitchers'] = this.advFilterPopup.noBattingVsPitchers;
+    lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
+
+    return lineupData;
   }
 
   prepareMinMaxPlayerFromTeam():any[] {
     let teams = [];
+    let defaultMinValue = 0;
+    let defaultMaxValue = 0;
+    if (this.selectedOperator == 'FanDuel') {
+      defaultMinValue = 0;
+      defaultMaxValue = 4;
+    }
+    if (this.selectedOperator == 'DraftKings') {
+      defaultMinValue = 0;
+      defaultMaxValue = 8;
+    }
+
     this.advFilterSettings.games.forEach(
       currGame => {
-        if (currGame.homeTeamMinValue || currGame.homeTeamMaxValue) {
+        if (currGame.homeTeamMinValue != defaultMinValue || currGame.homeTeamMaxValue != defaultMaxValue) {
           teams.push({
             teamName: currGame.homeTeam,
-            minPlayers: currGame.homeTeamMinValue,
-            maxPlayers: currGame.homeTeamMaxValue
+            minPlayers: +currGame.homeTeamMinValue,
+            maxPlayers: +currGame.homeTeamMaxValue
           });
         }
-        if (currGame.awayTeamMinValue || currGame.awayTeamMaxValue) {
+        if (currGame.awayTeamMinValue != defaultMinValue || currGame.awayTeamMaxValue != defaultMaxValue) {
           teams.push({
             teamName: currGame.awayTeam,
-            minPlayers: currGame.awayTeamMinValue,
-            maxPlayers: currGame.awayTeamMaxValue
+            minPlayers: +currGame.awayTeamMinValue,
+            maxPlayers: +currGame.awayTeamMaxValue
           })
         }
       }

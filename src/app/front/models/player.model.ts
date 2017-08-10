@@ -29,6 +29,7 @@ export interface OptimizerPlayer{
   TeamID: number;
   Team: string;
   BattingOrder?: number;
+  BattingOrderConfirmed:boolean;
   OpponentID: number;
   Opponent: string;
   Salary: number;
