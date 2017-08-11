@@ -151,7 +151,8 @@
               <div class="ylwTpBxBtmSlidr">
                 <div class="owl-carousel owl-theme nSlider nSlider1">
                   <div class="item" *ngFor="let news of allNewsRecords">
-                    <img style="width: 100px;margin: 0 auto;" [attr.src]="news?.player?.player_image" alt="" class="img-responsive">
+                    <img style="width: 100px;margin: 0 auto;" [attr.src]="news?.player?.player_image" alt=""
+                         class="img-responsive">
                     <div class="nltstNwsInfoTpWrp">
                       <div class="nltstNwsInfoTp clearfix">
                         <div class="nltstNwsInfoDte">
@@ -167,7 +168,7 @@
                       </div>
                       <div class="nltstNwsInfoBtm">
                         <h4>{{news?.news_headline}}</h4>
-                        <p>{{news?.news_notes}}</p>
+                        <p class="news-notes">{{news?.news_notes}}</p>
                       </div>
                     </div>
 
@@ -189,11 +190,12 @@
             <div class="owl-carousel owl-theme midSlider midSlider1">
               <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item"
                    *ngFor="let article of baseballArticles">
-                <img *ngIf="findMedia(article.featured_media)!=false"
-                     src="{{findMedia(article.featured_media)}}" alt="" class="img-responsive">
+                <img style="width: 264px;height:186px;"
+                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                     alt="" class="img-responsive">
                 <div class="nltstNwsInfoTpWrp">
                   <h4><a>{{article.title.rendered}}</a></h4>
-                  <p>{{article.extract}}</p>
+                  <p class="news-notes">{{article.extract?.slice(0,150)}}...</p>
                 </div>
               </div>
             </div>
@@ -208,11 +210,12 @@
             <div class="owl-carousel owl-theme midSlider midSlider2">
               <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item"
                    *ngFor="let article of footballArticles">
-                <img *ngIf="findMedia(article.featured_media)!=false"
-                     src="{{findMedia(article.featured_media)}}" alt="" class="img-responsive">
+                <img style="width: 264px;height:186px;"
+                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/football.jpg'"
+                     alt="" class="img-responsive">
                 <div class="nltstNwsInfoTpWrp">
                   <h4><a>{{article.title.rendered}}</a></h4>
-                  <p>{{article.extract}}</p>
+                  <p class="news-notes">{{article.extract?.slice(0,150)}}...</p>
                 </div>
               </div>
             </div>
@@ -227,11 +230,12 @@
             <div class="owl-carousel owl-theme midSlider midSlider3">
               <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item"
                    *ngFor="let article of basketballArticles">
-                <img *ngIf="findMedia(article.featured_media)!=false"
-                     src="{{findMedia(article.featured_media)}}" alt="" class="img-responsive">
+                <img style="width: 264px;height:186px;"
+                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                     alt="" class="img-responsive">
                 <div class="nltstNwsInfoTpWrp">
                   <h4><a>{{article.title.rendered}}</a></h4>
-                  <p>{{article.extract}}</p>
+                  <p>{{article.extract?.slice(0,150)}}...</p>
                 </div>
               </div>
             </div>
@@ -260,9 +264,9 @@
             <div role="tabpanel" class="tab-pane active" id="nTwtr">
               <div class="nSocialTbWrap">
                 <div class="nSocialTbBx" *ngFor="let tweet of twitterFeeds">
-                  <img [attr.src]="tweet?.user?.profile_background_image_url_https"
-                       style="width:290px;height: 180px"
-                       alt="" class="img-responsive"/>
+                  <img
+                    [attr.src]="tweet?.user?.profile_background_image_url_https ? tweet?.user?.profile_background_image_url_https : '../../../../assets/images/twitter-befault.jpg'"
+                    alt="" class="img-responsive"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
                       <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.name}}</span><i><img
@@ -273,7 +277,7 @@
                         <i>{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</i>
                       </div>
                     </div>
-                    <p>{{tweet?.text}}</p>
+                    <p>{{tweet?.text?.slice(0,150)}}...</p>
                     <a href="javascript:void(0)" class="nRdMor">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>
@@ -282,96 +286,21 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="nFb">
               <div class="nSocialTbWrap">
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
+                <div class="nSocialTbBx" *ngFor="let tweet of facebookFeeds">
+                  <img
+                    [attr.src]="tweet?.attachments?.data[0]?.media?.image?.src ? tweet?.attachments?.data[0]?.media?.image?.src :'../../../../assets/images/f-default.jpg'"
+                    alt="" class="img-responsive"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
+                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.message}}</span><i><img
                         src="../../../../assets/images/facebook_icn.png"></i></a>
                       <div class="nltstNwsInfoTme">
                         <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
                                                        class="img-responsive"></span>
-                        <i>19 hours ago</i>
+                        <i>{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</i>
                       </div>
                     </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/facebook_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/facebook_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/facebook_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/facebook_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
+                    <p>{{tweet?.text?.slice(0,150)}}...</p>
                     <a href="javascript:void(0)" class="nRdMor">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>

@@ -36,7 +36,7 @@ export class FrontHomeComponent implements AfterViewInit {
           if (response.statusCode == 200) {
             let feeds:Array<any> = response.data.statuses;
             if (feeds && feeds.length) {
-              this.twitterFeeds = feeds.splice(0, Math.min(10, feeds.length));
+              this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
               console.log("tweets => ", this.twitterFeeds);
             }
           }
@@ -52,7 +52,7 @@ export class FrontHomeComponent implements AfterViewInit {
           if (response.statusCode == 200) {
             let feeds:Array<any> = response.data;
             if (feeds && feeds.length) {
-              this.facebookFeeds = feeds.splice(0, Math.min(10, feeds.length));
+              this.facebookFeeds = feeds.splice(0, Math.min(5, feeds.length));
               console.log("fb posts => ", this.facebookFeeds);
             }
           }

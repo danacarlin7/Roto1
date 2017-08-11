@@ -43,6 +43,10 @@ export class SettingsComponent implements OnInit {
     {
       id: 'subscriptions',
       name: 'Subscribe Plan'
+    },
+    {
+      id: 'saved-cards',
+      name: 'Saved Cards'
     }
   ];
 /* {

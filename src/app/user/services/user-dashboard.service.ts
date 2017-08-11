@@ -198,6 +198,39 @@ export class UserDashboardServices {
       });
   }
 
+  getSavedCards():Observable<any> {
+    return this.http.get(environment.api_end_point + 'api/member/cards', {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  updateDefaultPaymentCard(cardId:string):Observable<any> {
+    return this.http.put(environment.api_end_point + 'api/member/cards', {
+      default_source: cardId
+    }, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  removePaymentCard(cardId:string):Observable<any> {
+    return this.http.delete(environment.api_end_point + 'api/member/cards', {
+      headers: this.getHeaders(), body: JSON.stringify({
+        card_id: cardId
+      })
+    })
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   handelError(error:any) {
     if (error.statusCode == 401) {
       this.authService.logout();
