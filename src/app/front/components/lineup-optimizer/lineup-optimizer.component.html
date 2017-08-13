@@ -22,7 +22,13 @@
                [class.btn-gray-black]="selectedOperator != 'FanDuel'"
                [class.btn-yellow-black]="selectedOperator == 'FanDuel'">FanDuel</a>
           </span>
-          <a class="btn btn-gray-black" data-toggle="modal" data-target="#advance-feature-filters">Settings</a>
+          <span class="setting-btn">
+            <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
+                  [mdTooltipPosition]="'before'"></span>
+            <a class="btn btn-gray-black" [class.active]="isSavedFiltersApplied" data-toggle="modal"
+               (click)="isSavedFiltersApplied = false;"
+               data-target="#advance-feature-filters">Settings</a>
+          </span>
         </div>
       </div>
     </section>
@@ -193,6 +199,7 @@
                    #advFilterPopup
                    (viewRenderedEvent)="onAdvFilterSettingsViewReady()"
                    (saveAdvFilterValueEvent)="onSaveAdvFilterValueEvent($event)"
+                   (removeAdvFilterValueEvent)="onRemoveAdvFilterValueEvent()"
                    (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-adv-filter>
   </div>
 </div>

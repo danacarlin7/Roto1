@@ -173,6 +173,10 @@ export class LineupOptimizerService {
     )
   }
 
+  removeAdvFilterValue() {
+    localStorage.removeItem('advFilterValue');
+  }
+
   handelError(error:any) {
     if (error.statusCode == 401) {
       this.authService.logout();

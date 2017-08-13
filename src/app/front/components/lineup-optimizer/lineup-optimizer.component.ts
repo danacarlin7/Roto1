@@ -39,6 +39,7 @@ export class LineupOptimizerComponent {
   todayDate = new Date();
 
   advFilterValue:AdvFilterValue;
+  isSavedFiltersApplied:boolean;
 
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
@@ -138,6 +139,9 @@ export class LineupOptimizerComponent {
                 .subscribe(
                   filterValue => {
                     this.advFilterValue = filterValue;
+                    if (this.advFilterValue) {
+                      this.isSavedFiltersApplied = true;
+                    }
                     this.advFilterSettings = response.data;
                     console.log("in retrieve method advFilterValue => ", this.advFilterValue);
                     console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
@@ -394,5 +398,9 @@ export class LineupOptimizerComponent {
           this.advFilterValue = filterValue;
         }
       )
+  }
+
+  onRemoveAdvFilterValueEvent() {
+    this.optimizerService.removeAdvFilterValue();
   }
 }

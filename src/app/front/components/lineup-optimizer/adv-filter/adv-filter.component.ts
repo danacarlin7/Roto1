@@ -72,6 +72,9 @@ export class AdvFilterComponent {
   saveAdvFilterValueEvent:EventEmitter<AdvFilterValue> = new EventEmitter<AdvFilterValue>();
 
   @Output()
+  removeAdvFilterValueEvent:EventEmitter<null> = new EventEmitter<null>();
+
+  @Output()
   viewRenderedEvent:EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
@@ -618,6 +621,7 @@ export class AdvFilterComponent {
     this.noBattingVsPitchers = false;
     this.emitFilterChangeEvent();
     this.isSettingsUpdated = true;
+    this.removeAdvFilterValueEvent.emit(null);
   }
 
   resetGames() {
