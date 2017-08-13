@@ -9,6 +9,7 @@ import {LineupOppFilterConstants} from "../../constants/lineup-opp.constants";
 import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
 import {Router} from "@angular/router";
 import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
+import {AdvFilterValue} from "../../models/adv-filter-value.model";
 /**
  * Created by Hiren on 02-07-2017.
  */
@@ -37,6 +38,8 @@ export class LineupOptimizerComponent {
   lockedPlayers:number[] = [];
   todayDate = new Date();
 
+  advFilterValue:AdvFilterValue;
+
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
   constructor(private optimizerService:LineupOptimizerService, private router:Router) {
@@ -47,15 +50,9 @@ export class LineupOptimizerComponent {
     this.searchStr = this.optimizerService.searchStr;
   }
 
-  ngOnInit() {
-    this.initiateData();
-  }
-
   initiateData() {
     this.getSlates();
-    this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
-    this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
-    this.getStackingData(this.selectedSport, this.selectedSlate);
+    this.playersListUpdated();
   }
 
   operatorChanged(name:string) {
@@ -88,6 +85,7 @@ export class LineupOptimizerComponent {
             this.slates = response.data;
             this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
+            this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
           } else {
 
           }
@@ -99,6 +97,17 @@ export class LineupOptimizerComponent {
       )
   }
 
+  playersListUpdated() {
+    this.optimizerService.players$.subscribe(
+      players => {
+        this.isLoading = false;
+        this.allPlayers = players as OptimizerPlayer[];
+        this.players = this.allPlayers.map(player => player);
+        console.log("No of players => ", this.players.length);
+      }
+    )
+  }
+
   getPlayers(operator:string, sport:string, slateId:number) {
     this.isLoading = true;
     this.optimizerService.getPlayers(operator, sport, slateId)
@@ -108,6 +117,7 @@ export class LineupOptimizerComponent {
           this.allPlayers = response as OptimizerPlayer[];
           this.players = this.allPlayers.map(player => player);
           console.log("No of players => ", this.players.length);
+          this.getStackingData(this.selectedSport, this.selectedSlate);
         },
         error => {
           this.isLoading = false;
@@ -124,16 +134,23 @@ export class LineupOptimizerComponent {
           if (response.statusCode == 200) {
             this.isLoading = false;
             if (!(response.data instanceof Array)) {
-              this.advFilterSettings = response.data;
-              this.games = this.advFilterSettings.games;
-              if (this.isSlateChanged) {
-                setTimeout(() => {
-                  this.applyFilters();
-                  this.isSlateChanged = false;
-                }, 50);
-              }
+              this.optimizerService.retrieveSavedAdvFilterValue()
+                .subscribe(
+                  filterValue => {
+                    this.advFilterValue = filterValue;
+                    this.advFilterSettings = response.data;
+                    console.log("in retrieve method advFilterValue => ", this.advFilterValue);
+                    console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
+                    this.games = this.advFilterSettings.games;
+                    if (this.isSlateChanged) {
+                      setTimeout(() => {
+                        this.applyFilters();
+                        this.isSlateChanged = false;
+                      }, 50);
+                    }
+                  }
+                );
             }
-            console.log("Filter settings => ", this.advFilterSettings);
           } else {
             this.isLoading = false;
           }
@@ -151,6 +168,8 @@ export class LineupOptimizerComponent {
         response => {
           if (response.statusCode == 200) {
             this.stackingData = response.data;
+            console.log("Stacking data => ", this.stackingData);
+            this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
             this.stackingData = this.stackingData.sort((n1, n2) => {
               if (n1.team > n2.team) {
                 return 1;
@@ -175,6 +194,7 @@ export class LineupOptimizerComponent {
   }
 
   applyFilters() {
+    console.log("applyFilters method called");
     let filters:LineupOppFilterCriteria[] = [];
     filters.push(<LineupOppFilterCriteria>{
       filterKey: LineupOppFilterConstants.GAME_TYPE,
@@ -265,35 +285,7 @@ export class LineupOptimizerComponent {
 
   prepareMinMaxPlayerFromTeam():any[] {
     let teams = [];
-    let defaultMinValue = 0;
-    let defaultMaxValue = 0;
-    if (this.selectedOperator == 'FanDuel') {
-      defaultMinValue = 0;
-      defaultMaxValue = 4;
-    }
-    if (this.selectedOperator == 'DraftKings') {
-      defaultMinValue = 0;
-      defaultMaxValue = 8;
-    }
-
-    this.advFilterSettings.games.forEach(
-      currGame => {
-        if (currGame.homeTeamMinValue != defaultMinValue || currGame.homeTeamMaxValue != defaultMaxValue) {
-          teams.push({
-            teamName: currGame.homeTeam,
-            minPlayers: +currGame.homeTeamMinValue,
-            maxPlayers: +currGame.homeTeamMaxValue
-          });
-        }
-        if (currGame.awayTeamMinValue != defaultMinValue || currGame.awayTeamMaxValue != defaultMaxValue) {
-          teams.push({
-            teamName: currGame.awayTeam,
-            minPlayers: +currGame.awayTeamMinValue,
-            maxPlayers: +currGame.awayTeamMaxValue
-          })
-        }
-      }
-    );
+    teams = this.advFilterPopup.getMinMaxPlayerFromTeam();
     let stackData = this.advFilterPopup.getStakingData();
     if (stackData && stackData.length) {
       stackData.forEach(
@@ -372,4 +364,35 @@ export class LineupOptimizerComponent {
     }
   }
 
+  onAdvFilterSettingsViewReady() {
+    /*this.advFilterValue = {
+     variability: 20,
+     numberOfUniquePlayers: 4,
+     mixMaxSalary: [25000, 30000],
+     numberOfLineups: 10,
+     maxExposure: 80,
+     noBatterVsPitchers: true,
+     projectionFilter: [5, 10],
+     salaryFilter: [2000, 2200],
+     valueFilter: [2, 4],
+     battingOrderFilter: [3, 7],
+     playerPerTeams: [{teamName: 'ARI', minPlayers: 2, maxPlayers: 3}, {
+     teamName: 'ATL',
+     minPlayers: 1,
+     maxPlayers: 3
+     }, {teamName: 'BAL', minPlayers: 0, maxPlayers: 2}],
+     stackingTeams: [{name: 'ARI', players: 3}, {name: 'ATL', players: 1}, {name: 'BAL', players: 2}]
+     };*/
+    this.initiateData();
+  }
+
+  onSaveAdvFilterValueEvent(filterValue:AdvFilterValue) {
+    this.optimizerService.updateAdvFilterValue(filterValue)
+      .subscribe(
+        bool => {
+          console.log("Filter value saved");
+          this.advFilterValue = filterValue;
+        }
+      )
+  }
 }

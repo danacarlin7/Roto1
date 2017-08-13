@@ -74,7 +74,7 @@
               </select>-->
             </div>
             <div class="col-sm-3 no-padding-right">
-              <input class="form-control input-sm" type="text" value="{{todayDate | date:'dd MMM, yyyy'}}">
+              <input class="form-control input-sm" type="text" disabled value="{{todayDate | date:'dd MMM, yyyy'}}">
             </div>
             <div class="col-md-4 col-sm-5">
               <a class="btn btn-lg btn-yellow-black btn-noradius btn-block" (click)="onBtnGenerateLineupClick()">
@@ -88,7 +88,7 @@
     <!--/ Filters -->
 
     <!-- Table -->
-    <section class="my-section table-container table-responsive">
+    <section class="my-section table-container table-responsive" style="padding: 0;">
       <table class="table main-table table-striped td-center lineup-table" [mfData]="players" #records="mfDataTable"
              [mfRowsOnPage]="10">
         <thead>
@@ -188,8 +188,11 @@
     <!--/ Table -->
     <rp-adv-filter [advFilterSettings]="advFilterSettings"
                    [stackingData]="stackingData"
+                   [advFilterValue]="advFilterValue"
                    [selectedOperator]="selectedOperator"
                    #advFilterPopup
+                   (viewRenderedEvent)="onAdvFilterSettingsViewReady()"
+                   (saveAdvFilterValueEvent)="onSaveAdvFilterValueEvent($event)"
                    (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-adv-filter>
   </div>
 </div>

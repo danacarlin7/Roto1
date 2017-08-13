@@ -3,6 +3,7 @@ import {AdvFilterSettings, Game} from "../../../models/adv-filter-setting.model"
 import {LineupOppFilterCriteria} from "../../../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants";
 import {OptimizerPlayer} from "../../../models/player.model";
+import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 /**
  * Created by Hiren on 09-07-2017.
  */
@@ -17,6 +18,8 @@ declare var jQuery:any;
 })
 export class AdvFilterComponent {
 
+
+  isSettingsUpdated:boolean;
 
   @Input()
   selectedOperator:string;
@@ -36,13 +39,16 @@ export class AdvFilterComponent {
   noOfUniquePlayersValue:number;
   noOfLineupValue:number;
   maxExposureValue:number = 100;
-  salarySettingValue:any[] = [0, 5];
+  salarySettingValue:any[] = [];
   noBattingVsPitchers:boolean;
 
   projectionFilterValue:any[];
   salaryFilterValue:any[];
   valueFilterValue:any[];
   battingOrderFilterValue:any[];
+
+  @Input()
+  advFilterValue:AdvFilterValue;
 
   filters:LineupOppFilterCriteria[];
 
@@ -63,6 +69,12 @@ export class AdvFilterComponent {
   stack3:{team:string,teamId:number}[] = [];
 
   @Output()
+  saveAdvFilterValueEvent:EventEmitter<AdvFilterValue> = new EventEmitter<AdvFilterValue>();
+
+  @Output()
+  viewRenderedEvent:EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
   filterCriteriaChanged:EventEmitter<LineupOppFilterCriteria[]> = new EventEmitter<LineupOppFilterCriteria[]>();
 
   private _advFilterSettings:AdvFilterSettings;
@@ -76,14 +88,16 @@ export class AdvFilterComponent {
     this._advFilterSettings = value;
     this.updateSliders();
     if (this._advFilterSettings) {
-      this._advFilterSettings.games.forEach(
-        game => {
-          game.homeTeamMinValue = 0;
-          game.awayTeamMinValue = 0;
-          game.awayTeamMaxValue = this.getMaxGameValue();
-          game.homeTeamMaxValue = this.getMaxGameValue();
-        }
-      )
+      this.resetGames();
+    }
+    if (this.advFilterValue) {
+      console.log("in setter advFilterValue => ", this.advFilterValue);
+      setTimeout(()=> {
+        this.setSliderValues();
+        this.setGameValues();
+        this.setStackingValues();
+        this.emitFilterChangeEvent();
+      }, 20);
     }
   }
 
@@ -102,6 +116,7 @@ export class AdvFilterComponent {
     this.variabilitySlider.on("slide", (slideEvt) => {
       jQuery("#VariabilitySliderVal").text(slideEvt.value + "%");
       this.variabilityValue = slideEvt.value;
+      this.isSettingsUpdated = true;
     });
 
     this.noOfLineupSlider = jQuery("#nlp");
@@ -114,6 +129,7 @@ export class AdvFilterComponent {
     this.noOfLineupSlider.on("slide", (slideEvt) => {
       jQuery("#nlpSliderVal").text(slideEvt.value);
       this.noOfLineupValue = slideEvt.value;
+      this.isSettingsUpdated = true;
     });
 
     this.noOfUniquePlayersSlider = jQuery("#nup");
@@ -126,6 +142,7 @@ export class AdvFilterComponent {
     this.noOfUniquePlayersSlider.on("slide", (slideEvt) => {
       jQuery("#nupSliderVal").text(slideEvt.value);
       this.noOfUniquePlayersValue = slideEvt.value;
+      this.isSettingsUpdated = true;
     });
 
     this.maxExposureSlider = jQuery("#me");
@@ -138,18 +155,20 @@ export class AdvFilterComponent {
     this.maxExposureSlider.on("slide", (slideEvt) => {
       jQuery("#meSliderVal").text(slideEvt.value + "%");
       this.maxExposureValue = slideEvt.value;
+      this.isSettingsUpdated = true;
     });
 
     this.salarySlider = jQuery("#mms");
     this.salarySlider.bootstrapSlider({
       range: true,
-      max: 5,
+      max: 6,
       min: 0
     });
-    this.salarySettingValue = [0, 5];
+    this.salarySettingValue = [0, 6];
     this.salarySlider.on("slide", (slideEvt) => {
       let b = slideEvt.value;
       this.salarySettingValue = b;
+      this.isSettingsUpdated = true;
     });
 
     this.projectionFilterSlider = jQuery("#ProjectionFilter");
@@ -164,6 +183,7 @@ export class AdvFilterComponent {
       var a = b.split(",");
       jQuery("#ProjectionMinFilterSliderVal").text(a[0]);
       jQuery("#ProjectionMaxFilterSliderVal").text(a[1]);
+      this.isSettingsUpdated = true;
     });
     this.projectionFilterSlider.on("slideStop", (slideEvt) => {
       this.projectionFilterValue = slideEvt.value;
@@ -181,6 +201,7 @@ export class AdvFilterComponent {
       var a = b.split(",");
       jQuery("#SalaryMinFilterSliderVal").text(a[0]);
       jQuery("#SalaryMaxFilterSliderVal").text(a[1]);
+      this.isSettingsUpdated = true;
     });
     this.salaryFilterSlider.on("slideStop", (slideEvt) => {
       this.salaryFilterValue = slideEvt.value;
@@ -202,6 +223,7 @@ export class AdvFilterComponent {
     this.valueFilterSlider.on("slideStop", (slideEvt) => {
       this.valueFilterValue = slideEvt.value;
       this.emitFilterChangeEvent();
+      this.isSettingsUpdated = true;
     });
     this.battingFilterSlider = jQuery("#BattingOrder");
     this.battingFilterSlider.bootstrapSlider({
@@ -215,14 +237,33 @@ export class AdvFilterComponent {
       var a = b.split(",");
       jQuery("#BattingOrderMinSliderVal").text(a[0]);
       jQuery("#BattingOrderMaxSliderVal").text(a[1]);
+      this.isSettingsUpdated = true;
     });
     this.battingFilterSlider.on("slideStop", (slideEvt) => {
       this.battingOrderFilterValue = slideEvt.value;
       this.emitFilterChangeEvent();
     });
+
+    this.viewRenderedEvent.emit(true);
   }
 
   updateSliders() {
+    if (this.variabilitySlider) {
+      this.variabilityValue = 0;
+      this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
+    }
+    if (this.noOfLineupSlider) {
+      this.noOfLineupValue = 1;
+      this.noOfLineupSlider.bootstrapSlider('setValue', this.noOfLineupValue);
+    }
+    if (this.noOfUniquePlayersSlider) {
+      this.noOfUniquePlayersValue = 1;
+      this.noOfUniquePlayersSlider.bootstrapSlider('setValue', this.noOfUniquePlayersValue);
+    }
+    if (this.maxExposureSlider) {
+      this.maxExposureValue = 100;
+      this.maxExposureSlider.bootstrapSlider('setValue', this.maxExposureValue);
+    }
     if (this.salarySlider) {
       let salarySliderValue = this.salarySlider.data('bootstrapSlider').getValue();
       let maxSalary:number;
@@ -282,8 +323,87 @@ export class AdvFilterComponent {
     this.battingOrderFilterValue = [0, 9];
   }
 
+  setSliderValues() {
+    if (this.salarySlider) {
+      this.salarySettingValue = this.advFilterValue.mixMaxSalary;
+      console.log("this.advFilterValue.mixMaxSalary", this.advFilterValue.mixMaxSalary);
+      console.log("this.salarySettingValue => ", this.salarySettingValue);
+      this.salarySlider.bootstrapSlider('setValue', this.salarySettingValue);
+    }
+    if (this.noOfUniquePlayersSlider) {
+      this.noOfUniquePlayersValue = this.advFilterValue.numberOfUniquePlayers;
+      this.noOfUniquePlayersSlider.bootstrapSlider('setValue', this.noOfUniquePlayersValue);
+    }
+    if (this.variabilitySlider) {
+      this.variabilityValue = this.advFilterValue.variability;
+      this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
+    }
+    if (this.noOfLineupSlider) {
+      this.noOfLineupValue = this.advFilterValue.numberOfLineups;
+      this.noOfLineupSlider.bootstrapSlider('setValue', this.noOfLineupValue);
+    }
+    if (this.maxExposureSlider) {
+      this.maxExposureValue = this.advFilterValue.maxExposure;
+      this.maxExposureSlider.bootstrapSlider('setValue', this.maxExposureValue);
+    }
+    this.noBattingVsPitchers = this.advFilterValue.noBatterVsPitchers;
+    if (this.salaryFilterSlider) {
+      this.salaryFilterValue = this.advFilterValue.salaryFilter;
+      this.salaryFilterSlider.bootstrapSlider('setValue', this.salaryFilterValue);
+    }
+    if (this.projectionFilterSlider) {
+      this.projectionFilterValue = this.advFilterValue.projectionFilter;
+      this.projectionFilterSlider.bootstrapSlider('setValue', this.projectionFilterValue);
+    }
+    if (this.valueFilterSlider) {
+      this.valueFilterValue = this.advFilterValue.valueFilter;
+      this.valueFilterSlider.bootstrapSlider('setValue', this.valueFilterValue);
+    }
+    if (this.battingFilterSlider) {
+      this.battingOrderFilterValue = this.advFilterValue.battingOrderFilter;
+      this.battingFilterSlider.bootstrapSlider('setValue', this.battingOrderFilterValue);
+    }
+  }
+
+  setGameValues() {
+    if (this.advFilterValue.playerPerTeams) {
+      this.advFilterValue.playerPerTeams.forEach(
+        currValue => {
+          this._advFilterSettings.games.forEach(
+            game => {
+              if (game.homeTeam == currValue.teamName) {
+                game.homeTeamMinValue = currValue.minPlayers;
+                game.homeTeamMaxValue = currValue.maxPlayers;
+                return;
+              }
+              if (game.awayTeam == currValue.teamName) {
+                game.awayTeamMinValue = currValue.minPlayers;
+                game.awayTeamMaxValue = currValue.maxPlayers;
+                return;
+              }
+            })
+        })
+    }
+  }
+
+  setStackingValues() {
+    if (this.advFilterValue.stackingTeams) {
+      this.advFilterValue.stackingTeams.forEach(
+        (currValue, i) => {
+          if (i == 0) {
+            this.stackingTeam1 = currValue;
+          } else if (i == 1) {
+            this.stackingTeam2 = currValue;
+          } else if (i == 2) {
+            this.stackingTeam3 = currValue;
+          }
+        }
+      )
+    }
+  }
+
   emitFilterChangeEvent() {
-    this.filterCriteriaChanged.emit(this.filters);
+    this.filterCriteriaChanged.emit(this.getFilters());
   }
 
   getFilters():LineupOppFilterCriteria[] {
@@ -391,9 +511,11 @@ export class AdvFilterComponent {
   }
 
   onGlobalMaxValueChanged(event) {
+    if (this.getMaxGameValue() < +event.target.value) {
+      event.target.value = this.getMaxGameValue();
+    }
     this._advFilterSettings.games.forEach(
       game => {
-        console.log("value  => => ", +event.target.value);
         game.homeTeamMaxValue = game.awayTeamMaxValue = +event.target.value;
       }
     )
@@ -429,5 +551,90 @@ export class AdvFilterComponent {
       event.target.value = 0;
       game.awayTeamMinValue = 0;
     }
+  }
+
+  saveAdvFilters() {
+    let filterValue:AdvFilterValue = <AdvFilterValue>{
+      variability: this.variabilityValue,
+      numberOfUniquePlayers: this.noOfUniquePlayersValue,
+      mixMaxSalary: this.salarySettingValue,
+      numberOfLineups: this.noOfLineupValue,
+      maxExposure: this.maxExposureValue,
+      noBatterVsPitchers: this.noBattingVsPitchers,
+      projectionFilter: this.projectionFilterValue,
+      salaryFilter: this.salaryFilterValue,
+      valueFilter: this.valueFilterValue,
+      battingOrderFilter: this.battingOrderFilterValue,
+      playerPerTeams: this.getMinMaxPlayerFromTeam(),
+      stackingTeams: this.getStakingData()
+    };
+    this.saveAdvFilterValueEvent.emit(filterValue);
+  }
+
+  getMinMaxPlayerFromTeam():{teamName:string,minPlayers:number,maxPlayers:number}[] {
+    let teams:{teamName:string,minPlayers:number,maxPlayers:number}[] = [];
+    let defaultMinValue = 0;
+    let defaultMaxValue = 0;
+    if (this.selectedOperator == 'FanDuel') {
+      defaultMinValue = 0;
+      defaultMaxValue = 4;
+    }
+    if (this.selectedOperator == 'DraftKings') {
+      defaultMinValue = 0;
+      defaultMaxValue = 8;
+    }
+    this.advFilterSettings.games.forEach(
+      currGame => {
+        if (currGame.homeTeamMinValue != defaultMinValue || currGame.homeTeamMaxValue != defaultMaxValue) {
+          teams.push({
+            teamName: currGame.homeTeam,
+            minPlayers: +currGame.homeTeamMinValue,
+            maxPlayers: +currGame.homeTeamMaxValue
+          });
+        }
+        if (currGame.awayTeamMinValue != defaultMinValue || currGame.awayTeamMaxValue != defaultMaxValue) {
+          teams.push({
+            teamName: currGame.awayTeam,
+            minPlayers: +currGame.awayTeamMinValue,
+            maxPlayers: +currGame.awayTeamMaxValue
+          })
+        }
+      }
+    );
+    return teams;
+  }
+
+  onBtnSaveAdvFilterValueClicked() {
+    if (this.isSettingsUpdated) {
+      this.saveAdvFilters();
+      this.isSettingsUpdated = false;
+    }
+  }
+
+  onBtnRestoreDefaultClicked() {
+    this.updateSliders();
+    this.resetGames();
+    this.resetStacking();
+    this.noBattingVsPitchers = false;
+    this.emitFilterChangeEvent();
+    this.isSettingsUpdated = true;
+  }
+
+  resetGames() {
+    this._advFilterSettings.games.forEach(
+      game => {
+        game.homeTeamMinValue = 0;
+        game.awayTeamMinValue = 0;
+        game.awayTeamMaxValue = this.getMaxGameValue();
+        game.homeTeamMaxValue = this.getMaxGameValue();
+      }
+    )
+  }
+
+  resetStacking() {
+    this.stackingTeam1 = {name: '-', players: 0};
+    this.stackingTeam2 = {name: '-', players: 0};
+    this.stackingTeam3 = {name: '-', players: 0};
+    this.prepareStacks();
   }
 }
