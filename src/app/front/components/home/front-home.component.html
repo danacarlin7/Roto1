@@ -265,7 +265,7 @@
               <div class="nSocialTbWrap">
                 <div class="nSocialTbBx" *ngFor="let tweet of twitterFeeds">
                   <img
-                    [attr.src]="tweet?.user?.profile_background_image_url_https ? tweet?.user?.profile_background_image_url_https : '../../../../assets/images/twitter-befault.jpg'"
+                    [attr.src]="tweet?.user?.profile_banner_url ? tweet?.user?.profile_banner_url : '../../../../assets/images/twitter-befault.jpg'"
                     alt="" class="img-responsive"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
