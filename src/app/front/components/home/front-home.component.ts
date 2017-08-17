@@ -34,7 +34,8 @@ export class FrontHomeComponent implements AfterViewInit {
       .subscribe(
         response => {
           if (response.statusCode == 200) {
-            let feeds:Array<any> = response.data.statuses;
+            console.log(response.data);
+            let feeds:Array<any> = response.data;
             if (feeds && feeds.length) {
               this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
               console.log("tweets => ", this.twitterFeeds);
