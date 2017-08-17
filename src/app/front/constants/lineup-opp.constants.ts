@@ -10,4 +10,5 @@ export class LineupOppFilterConstants {
   public static PLAYER_BATTING_ORDER:string = 'playerBattingOrder';
   public static PROJECTION:string = 'projection';
   public static PLAYER_VALUE:string = 'playerValue';
+  public static PLAYER_POSITION:string = 'playerPosition';
 }

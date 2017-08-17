@@ -12,6 +12,7 @@ import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 import {ModalModule} from "angular2-modal/esm/index";
 import {TabViewComponent} from "./components/tab-view/tab-view.component";
 import {NgxPaginationModule} from "ngx-pagination";
+import {SharedPrimeNGComponents} from "./prime-ng-components";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -26,6 +27,7 @@ import {NgxPaginationModule} from "ngx-pagination";
     ReactiveFormsModule,
     HttpModule,
     SharedMaterialComponents,
+    SharedPrimeNGComponents,
     DataTableModule,
     ModalModule.forRoot(),
     DropzoneModule.forChild(),
@@ -37,6 +39,7 @@ import {NgxPaginationModule} from "ngx-pagination";
     ReactiveFormsModule,
     HttpModule,
     SharedMaterialComponents,
+    SharedPrimeNGComponents,
     DataTableModule,
     ModalModule,
     DropzoneModule,

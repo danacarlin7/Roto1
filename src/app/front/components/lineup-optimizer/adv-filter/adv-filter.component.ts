@@ -4,6 +4,7 @@ import {LineupOppFilterCriteria} from "../../../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants";
 import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
+import {SelectItem} from "primeng/primeng";
 /**
  * Created by Hiren on 09-07-2017.
  */
@@ -46,6 +47,7 @@ export class AdvFilterComponent {
   salaryFilterValue:any[];
   valueFilterValue:any[];
   battingOrderFilterValue:any[];
+  positionFilterValue:any[];
 
   @Input()
   advFilterValue:AdvFilterValue;
@@ -100,12 +102,27 @@ export class AdvFilterComponent {
         this.setGameValues();
         this.setStackingValues();
         this.emitFilterChangeEvent();
+        this.positionFilterValue = this.advFilterValue.positionFilter;
       }, 20);
     }
   }
 
-  constructor() {
+  positions:SelectItem[];
 
+  constructor() {
+    this.positions = [];
+    this.positions.push({label: 'P', value: 'p'});
+    this.positions.push({label: 'C', value: 'c'});
+    this.positions.push({label: '1B', value: '1b'});
+    this.positions.push({label: '2B', value: '2b'});
+    this.positions.push({label: '3B', value: '3b'});
+    this.positions.push({label: 'SS', value: 'ss'});
+    this.positions.push({label: 'OF', value: 'of'});
+  }
+
+  onPlayerPositionFilterChanged(event) {
+    this.emitFilterChangeEvent();
+    console.log("value => ", this.positionFilterValue);
   }
 
   ngAfterViewInit() {
@@ -117,11 +134,13 @@ export class AdvFilterComponent {
     });
     this.variabilityValue = 0;
     this.variabilitySlider.on("slide", (slideEvt) => {
-      jQuery("#VariabilitySliderVal").text(slideEvt.value + "%");
       this.variabilityValue = slideEvt.value;
       this.isSettingsUpdated = true;
+      console.log("variabilityValue => ", this.variabilityValue);
     });
-
+    this.variabilitySlider.on("slideStop", (slideEvt) => {
+      this.variabilityValue = slideEvt.value;
+    });
     this.noOfLineupSlider = jQuery("#nlp");
     this.noOfLineupSlider.bootstrapSlider({
       min: 1,
@@ -130,11 +149,12 @@ export class AdvFilterComponent {
     });
     this.noOfLineupValue = 1;
     this.noOfLineupSlider.on("slide", (slideEvt) => {
-      jQuery("#nlpSliderVal").text(slideEvt.value);
       this.noOfLineupValue = slideEvt.value;
       this.isSettingsUpdated = true;
     });
-
+    this.noOfLineupSlider.on("slideStop", (slideEvt) => {
+      this.noOfLineupValue = slideEvt.value;
+    });
     this.noOfUniquePlayersSlider = jQuery("#nup");
     this.noOfUniquePlayersSlider.bootstrapSlider({
       min: 1,
@@ -143,11 +163,12 @@ export class AdvFilterComponent {
     });
     this.noOfUniquePlayersValue = 1;
     this.noOfUniquePlayersSlider.on("slide", (slideEvt) => {
-      jQuery("#nupSliderVal").text(slideEvt.value);
       this.noOfUniquePlayersValue = slideEvt.value;
       this.isSettingsUpdated = true;
     });
-
+    this.noOfUniquePlayersSlider.on("slideStop", (slideEvt) => {
+      this.noOfUniquePlayersValue = slideEvt.value;
+    });
     this.maxExposureSlider = jQuery("#me");
     this.maxExposureSlider.bootstrapSlider({
       min: 10,
@@ -156,11 +177,12 @@ export class AdvFilterComponent {
     });
     this.maxExposureValue = 100;
     this.maxExposureSlider.on("slide", (slideEvt) => {
-      jQuery("#meSliderVal").text(slideEvt.value + "%");
       this.maxExposureValue = slideEvt.value;
       this.isSettingsUpdated = true;
     });
-
+    this.maxExposureSlider.on("slideStop", (slideEvt) => {
+      this.maxExposureValue = slideEvt.value;
+    });
     this.salarySlider = jQuery("#mms");
     this.salarySlider.bootstrapSlider({
       range: true,
@@ -173,7 +195,9 @@ export class AdvFilterComponent {
       this.salarySettingValue = b;
       this.isSettingsUpdated = true;
     });
-
+    this.salarySlider.on("slideStop", (slideEvt) => {
+      this.salarySettingValue = slideEvt.value;
+    });
     this.projectionFilterSlider = jQuery("#ProjectionFilter");
     this.projectionFilterSlider.bootstrapSlider({
       min: 1,
@@ -184,8 +208,7 @@ export class AdvFilterComponent {
     this.projectionFilterSlider.on("slide", function (slideEvt) {
       var b = slideEvt.value.toString();
       var a = b.split(",");
-      jQuery("#ProjectionMinFilterSliderVal").text(a[0]);
-      jQuery("#ProjectionMaxFilterSliderVal").text(a[1]);
+      this.projectionFilterValue = slideEvt.value;
       this.isSettingsUpdated = true;
     });
     this.projectionFilterSlider.on("slideStop", (slideEvt) => {
@@ -202,8 +225,7 @@ export class AdvFilterComponent {
     this.salaryFilterSlider.on("slide", function (slideEvt) {
       var b = slideEvt.value.toString();
       var a = b.split(",");
-      jQuery("#SalaryMinFilterSliderVal").text(a[0]);
-      jQuery("#SalaryMaxFilterSliderVal").text(a[1]);
+      this.salaryFilterValue = slideEvt.value;
       this.isSettingsUpdated = true;
     });
     this.salaryFilterSlider.on("slideStop", (slideEvt) => {
@@ -220,8 +242,7 @@ export class AdvFilterComponent {
     this.valueFilterSlider.on("slide", function (slideEvt) {
       var b = slideEvt.value.toString();
       var a = b.split(",");
-      jQuery("#ValueMinFilterSliderVal").text(a[0]);
-      jQuery("#ValueMaxFilterSliderVal").text(a[1]);
+      this.valueFilterValue = slideEvt.value;
     });
     this.valueFilterSlider.on("slideStop", (slideEvt) => {
       this.valueFilterValue = slideEvt.value;
@@ -238,8 +259,7 @@ export class AdvFilterComponent {
     this.battingFilterSlider.on("slide", function (slideEvt) {
       var b = slideEvt.value.toString();
       var a = b.split(",");
-      jQuery("#BattingOrderMinSliderVal").text(a[0]);
-      jQuery("#BattingOrderMaxSliderVal").text(a[1]);
+      this.battingOrderFilterValue = slideEvt.value;
       this.isSettingsUpdated = true;
     });
     this.battingFilterSlider.on("slideStop", (slideEvt) => {
@@ -339,6 +359,7 @@ export class AdvFilterComponent {
     }
     if (this.variabilitySlider) {
       this.variabilityValue = this.advFilterValue.variability;
+      console.log("this.advFilterValue.variability => ",this.advFilterValue.variability);
       this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
     }
     if (this.noOfLineupSlider) {
@@ -406,6 +427,7 @@ export class AdvFilterComponent {
   }
 
   emitFilterChangeEvent() {
+    this.isSettingsUpdated = true;
     this.filterCriteriaChanged.emit(this.getFilters());
   }
 
@@ -477,6 +499,14 @@ export class AdvFilterComponent {
         minValue: this.valueFilterValue[0],
         maxValue: this.valueFilterValue[1],
         filterValue: this.valueFilterValue
+      });
+    }
+    if (this.positionFilterValue && this.positionFilterValue.length) {
+      this.filters.push({
+        filterKey: LineupOppFilterConstants.PLAYER_POSITION,
+        minValue: '',
+        maxValue: '',
+        filterValue: this.positionFilterValue
       });
     }
   }
@@ -568,6 +598,7 @@ export class AdvFilterComponent {
       salaryFilter: this.salaryFilterValue,
       valueFilter: this.valueFilterValue,
       battingOrderFilter: this.battingOrderFilterValue,
+      positionFilter: this.positionFilterValue,
       playerPerTeams: this.getMinMaxPlayerFromTeam(),
       stackingTeams: this.getStakingData()
     };
@@ -621,6 +652,7 @@ export class AdvFilterComponent {
     this.noBattingVsPitchers = false;
     this.emitFilterChangeEvent();
     this.isSettingsUpdated = true;
+    this.positionFilterValue = [];
     this.removeAdvFilterValueEvent.emit(null);
   }
 

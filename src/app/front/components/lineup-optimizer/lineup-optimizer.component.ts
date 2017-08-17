@@ -45,7 +45,7 @@ export class LineupOptimizerComponent {
 
   constructor(private optimizerService:LineupOptimizerService, private router:Router) {
     this.selectedOperator = this.optimizerService.selectedOperator;
-    this.selectedSport = this.optimizerService.selectedSport;
+    this.optimizerService.selectedSport = this.selectedSport;
     this.selectedSlate = this.optimizerService.selectedSlate;
     this.selectedGame = this.optimizerService.selectedGame;
     this.searchStr = this.optimizerService.searchStr;

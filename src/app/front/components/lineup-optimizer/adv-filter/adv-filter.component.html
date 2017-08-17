@@ -22,7 +22,8 @@
       <div class="modal-body">
         <div class="row row30">
           <div class="col-lg-12 text-center yellow-container">
-            <a class="btn btn-link btn-link-back" (click)="onBtnSaveAdvFilterValueClicked()" [class.disabled]="!isSettingsUpdated"><img
+            <a class="btn btn-link btn-link-back" (click)="onBtnSaveAdvFilterValueClicked()"
+               [class.disabled]="!isSettingsUpdated"><img
               src="../../../../../assets/img/save_general_n.png"/> Save
               Settings</a>
             <a class="btn btn-link btn-link-back" (click)="onBtnRestoreDefaultClicked()"><img
@@ -39,14 +40,14 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="filter-range-container">
-                      <h4 class="rangeslider-value">Variability: <span id="VariabilitySliderVal">0</span></h4>
+                      <h4 class="rangeslider-value">Variability: <span id="VariabilitySliderVal">{{variabilityValue}}%</span></h4>
                       <input id="Variability" type="text"/>
                       <span class="slider-range slider-min">0</span><span class="slider-range slider-max">100%</span>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="filter-range-container">
-                      <h4 class="rangeslider-value">Number Of Lineups To Produce: <span id="nlpSliderVal">1</span>
+                      <h4 class="rangeslider-value">Number Of Lineups To Produce: <span id="nlpSliderVal">{{noOfLineupValue}}</span>
                       </h4>
                       <input id="nlp" type="text"/>
                       <span class="slider-range slider-min">1</span><span class="slider-range slider-max">200</span>
@@ -57,7 +58,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="filter-range-container">
-                      <h4 class="rangeslider-value">Number Of Unique Players: <span id="nupSliderVal">1</span></h4>
+                      <h4 class="rangeslider-value">Number Of Unique Players: <span id="nupSliderVal">{{noOfUniquePlayersValue}}</span></h4>
                       <input id="nup" type="text"/>
                       <span class="slider-range slider-min">1</span><span class="slider-range slider-max">5</span>
                     </div>
@@ -153,6 +154,17 @@
                           <span class="slider-range slider-min">0</span><span class="slider-range slider-max">9</span>
                         </div>
                       </div>
+                      <div class="col-md-12">
+                        <div class="filter-range-container">
+                          <h4 class="rangeslider-value">Position:
+                          </h4>
+                          <p-multiSelect [options]="positions"
+                                         class="player-position-opt"
+                                         [(ngModel)]="positionFilterValue"
+                                         (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                   <!-- /Left -->

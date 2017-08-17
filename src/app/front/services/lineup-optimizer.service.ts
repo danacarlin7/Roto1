@@ -20,7 +20,7 @@ export class LineupOptimizerService {
 
   searchStr:string = '';
   selectedOperator:string = 'FanDuel';
-  selectedSport:string = 'MLB';
+  selectedSport:string;
   selectedSlate:number = 0;
   selectedGame:number = 0;
   filterSettings:AdvFilterSettings;
@@ -263,6 +263,21 @@ export class LineupOptimizerService {
                 if (currPlayer.BattingOrder >= currFilter.minValue && currPlayer.BattingOrder <= currFilter.maxValue) {
                   return true;
                 }
+              }
+            );
+            break;
+          case LineupOppFilterConstants.PLAYER_POSITION:
+            players = players.filter(
+              (currPlayer:OptimizerPlayer) => {
+                let isPlayerHasMatchedPosition:boolean = false;
+                for (let i = 0; i < currFilter.filterValue.length; i++) {
+                  let currValue = currFilter.filterValue[i];
+                  if ((currPlayer.Position + '').toLowerCase() == currValue.toLowerCase()) {
+                    isPlayerHasMatchedPosition = true;
+                    break;
+                  }
+                }
+                return isPlayerHasMatchedPosition;
               }
             );
             break;

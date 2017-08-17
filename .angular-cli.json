@@ -19,6 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/c3/c3.min.css",
         "assets/css/graph.css",
         "assets/css/bootstrap.min.css",
