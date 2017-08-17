@@ -19,6 +19,7 @@ export class FrontHomeComponent implements AfterViewInit {
 
   twitterFeeds:Array<any>;
   facebookFeeds:Array<any>;
+  instagramFeeds:Array<any>;
 
   footballArticles:any[];
   basketballArticles:any[];
@@ -62,6 +63,25 @@ export class FrontHomeComponent implements AfterViewInit {
           console.log("http error => ", error);
         }
       );
+
+    this.frontService.retrieveInstaFeeds()
+      .subscribe(
+        response => {
+          if (response.statusCode == 200) {
+            let feeds:Array<any> = response.data.data;
+            if (feeds && feeds.length) {
+              this.instagramFeeds = feeds.splice(0, Math.min(5, feeds.length));
+              console.log("instagram posts => ", this.instagramFeeds);
+            }
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+        }
+      );
+
+
+
 
     this.retrieveBaseballArticles();
     this.retrieveBasketBallArticles();
