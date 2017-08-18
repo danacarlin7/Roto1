@@ -5,6 +5,7 @@ import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants"
 import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 import {SelectItem} from "primeng/primeng";
+import {AuthService} from "../../../../shared/services/auth.service";
 /**
  * Created by Hiren on 09-07-2017.
  */
@@ -108,8 +109,8 @@ export class AdvFilterComponent {
   }
 
   positions:SelectItem[];
-
-  constructor() {
+  isLogIn:boolean;
+  constructor(private authService:AuthService) {
     this.positions = [];
     this.positions.push({label: 'P', value: 'p'});
     this.positions.push({label: 'C', value: 'c'});
@@ -118,6 +119,8 @@ export class AdvFilterComponent {
     this.positions.push({label: '3B', value: '3b'});
     this.positions.push({label: 'SS', value: 'ss'});
     this.positions.push({label: 'OF', value: 'of'});
+
+    this.isLogIn = this.authService.isLoggedIn();
   }
 
   onPlayerPositionFilterChanged(event) {
@@ -139,6 +142,7 @@ export class AdvFilterComponent {
       console.log("variabilityValue => ", this.variabilityValue);
     });
     this.variabilitySlider.on("slideStop", (slideEvt) => {
+      this.isSettingsUpdated = true;
       this.variabilityValue = slideEvt.value;
     });
     this.noOfLineupSlider = jQuery("#nlp");
@@ -153,6 +157,7 @@ export class AdvFilterComponent {
       this.isSettingsUpdated = true;
     });
     this.noOfLineupSlider.on("slideStop", (slideEvt) => {
+      this.isSettingsUpdated = true;
       this.noOfLineupValue = slideEvt.value;
     });
     this.noOfUniquePlayersSlider = jQuery("#nup");
@@ -167,6 +172,7 @@ export class AdvFilterComponent {
       this.isSettingsUpdated = true;
     });
     this.noOfUniquePlayersSlider.on("slideStop", (slideEvt) => {
+      this.isSettingsUpdated = true;
       this.noOfUniquePlayersValue = slideEvt.value;
     });
     this.maxExposureSlider = jQuery("#me");
@@ -181,6 +187,7 @@ export class AdvFilterComponent {
       this.isSettingsUpdated = true;
     });
     this.maxExposureSlider.on("slideStop", (slideEvt) => {
+      this.isSettingsUpdated = true;
       this.maxExposureValue = slideEvt.value;
     });
     this.salarySlider = jQuery("#mms");
@@ -196,6 +203,7 @@ export class AdvFilterComponent {
       this.isSettingsUpdated = true;
     });
     this.salarySlider.on("slideStop", (slideEvt) => {
+      this.isSettingsUpdated = true;
       this.salarySettingValue = slideEvt.value;
     });
     this.projectionFilterSlider = jQuery("#ProjectionFilter");

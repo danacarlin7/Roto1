@@ -146,31 +146,43 @@ export class LineupOptimizerService {
   }
 
   updateAdvFilterValue(filterValue:AdvFilterValue):Observable<any> {
-    return new Observable(
-      observer => {
-        if (filterValue) {
-          localStorage.setItem('advFilterValue', JSON.stringify(filterValue));
-        }
-        observer.next(true);
-        observer.complete();
-      }
-    )
+    /* return new Observable(
+     observer => {
+     if (filterValue) {
+     localStorage.setItem('advFilterValue', JSON.stringify(filterValue));
+     }
+     observer.next(true);
+     observer.complete();
+     }
+     )*/
+    return this.http.post(environment.api_end_point + 'api/optimizer/settings', filterValue ? filterValue : [], {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
   }
 
   retrieveSavedAdvFilterValue():Observable<any> {
-    return new Observable(
-      observer => {
-        let valueStr:string = localStorage.getItem('advFilterValue');
-        let valueObj = null;
-        try {
-          valueObj = JSON.parse(valueStr);
-        } catch (e) {
-          console.log("advFilter value parse error");
-        }
-        observer.next(valueObj);
-        observer.complete();
-      }
-    )
+    /*return new Observable(
+     observer => {
+     let valueStr:string = localStorage.getItem('advFilterValue');
+     let valueObj = null;
+     try {
+     valueObj = JSON.parse(valueStr);
+     } catch (e) {
+     console.log("advFilter value parse error");
+     }
+     observer.next(valueObj);
+     observer.complete();
+     }
+     )*/
+    return this.http.get(environment.api_end_point + 'api/optimizer/settings', {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
   }
 
   removeAdvFilterValue() {

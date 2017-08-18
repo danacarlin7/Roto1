@@ -10,6 +10,7 @@ import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
 import {Router} from "@angular/router";
 import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
+import {AuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 02-07-2017.
  */
@@ -43,7 +44,7 @@ export class LineupOptimizerComponent {
 
   @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
 
-  constructor(private optimizerService:LineupOptimizerService, private router:Router) {
+  constructor(private optimizerService:LineupOptimizerService, private router:Router, private authService:AuthService) {
     this.selectedOperator = this.optimizerService.selectedOperator;
     this.optimizerService.selectedSport = this.selectedSport;
     this.selectedSlate = this.optimizerService.selectedSlate;
@@ -135,25 +136,39 @@ export class LineupOptimizerComponent {
           if (response.statusCode == 200) {
             this.isLoading = false;
             if (!(response.data instanceof Array)) {
-              this.optimizerService.retrieveSavedAdvFilterValue()
-                .subscribe(
-                  filterValue => {
-                    this.advFilterValue = filterValue;
-                    if (this.advFilterValue) {
-                      this.isSavedFiltersApplied = true;
+              if (this.authService.isLoggedIn()) {
+                this.optimizerService.retrieveSavedAdvFilterValue()
+                  .subscribe(
+                    savedFilterResponse => {
+                      if (savedFilterResponse.statusCode == 200) {
+                        this.advFilterValue = savedFilterResponse.data;
+                        if (this.advFilterValue) {
+                          this.isSavedFiltersApplied = true;
+                        }
+                      }
+                      this.advFilterSettings = response.data;
+                      console.log("in retrieve method advFilterValue => ", this.advFilterValue);
+                      console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
+                      this.games = this.advFilterSettings.games;
+                      if (this.isSlateChanged) {
+                        setTimeout(() => {
+                          this.applyFilters();
+                          this.isSlateChanged = false;
+                        }, 50);
+                      }
                     }
-                    this.advFilterSettings = response.data;
-                    console.log("in retrieve method advFilterValue => ", this.advFilterValue);
-                    console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
-                    this.games = this.advFilterSettings.games;
-                    if (this.isSlateChanged) {
-                      setTimeout(() => {
-                        this.applyFilters();
-                        this.isSlateChanged = false;
-                      }, 50);
-                    }
-                  }
-                );
+                  );
+              } else {
+                this.advFilterSettings = response.data;
+                console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
+                this.games = this.advFilterSettings.games;
+                if (this.isSlateChanged) {
+                  setTimeout(() => {
+                    this.applyFilters();
+                    this.isSlateChanged = false;
+                  }, 50);
+                }
+              }
             }
           } else {
             this.isLoading = false;
@@ -393,14 +408,16 @@ export class LineupOptimizerComponent {
   onSaveAdvFilterValueEvent(filterValue:AdvFilterValue) {
     this.optimizerService.updateAdvFilterValue(filterValue)
       .subscribe(
-        bool => {
-          console.log("Filter value saved");
-          this.advFilterValue = filterValue;
+        response => {
+          if (response.statusCode == 200) {
+            console.log("Filter value saved");
+            this.advFilterValue = filterValue;
+          }
         }
       )
   }
 
   onRemoveAdvFilterValueEvent() {
-    this.optimizerService.removeAdvFilterValue();
+    this.onSaveAdvFilterValueEvent(null);
   }
 }

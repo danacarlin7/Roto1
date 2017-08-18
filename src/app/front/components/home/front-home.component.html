@@ -244,7 +244,7 @@
         </div>
         <div class="indexNPrt2Rght">
           <div class="ylwTpBx clearfix">
-            <h3 routerLink="/news">Latest News<span><img src="../../../../assets/images/blkArow.png"></span></h3>
+            <h3 routerLink="/news">Social Feeds<span><img src="../../../../assets/images/blkArow.png"></span></h3>
             <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
           </div>
 
@@ -266,7 +266,7 @@
                 <div class="nSocialTbBx" *ngFor="let tweet of twitterFeeds">
                   <img
                     [attr.src]="tweet?.user?.profile_banner_url ? tweet?.user?.profile_banner_url : '../../../../assets/images/twitter-befault.jpg'"
-                    alt="" class="img-responsive"/>
+                    alt="" class="img-responsive social-feed-img"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
                       <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.name}}</span><i><img
@@ -289,7 +289,7 @@
                 <div class="nSocialTbBx" *ngFor="let tweet of facebookFeeds">
                   <img
                     [attr.src]="tweet?.attachments?.data[0]?.media?.image?.src ? tweet?.attachments?.data[0]?.media?.image?.src :'../../../../assets/images/f-default.jpg'"
-                    alt="" class="img-responsive"/>
+                    alt="" class="img-responsive social-feed-img"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
                       <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.message}}</span><i><img
@@ -309,96 +309,21 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="nInsta">
               <div class="nSocialTbWrap">
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
+                <div class="nSocialTbBx" *ngFor="let tweet of instagramFeeds">
+                  <img
+                    [attr.src]="tweet?.images?.thumbnail?.url ? tweet?.images?.thumbnail?.url :'../../../../assets/images/f-default.jpg'"
+                    alt="" class="img-responsive social-feed-img"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
+                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.full_name}}</span><i><img
                         src="../../../../assets/images/insta_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
+                      <!--<div class="nltstNwsInfoTme">
                         <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
                                                        class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
+                        <i>{{tweet.created_time |date:'dd MMM, yyyy h:m a'}}</i>
+                      </div>-->
                     </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/insta_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/insta_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/insta_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-
-                <div class="nSocialTbBx">
-                  <img src="../../../../assets/images/nSocialImg1.png" alt="">
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">Social</span><i><img
-                        src="../../../../assets/images/insta_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>19 hours ago</i>
-                      </div>
-                    </div>
-                    <p>Lorem ipsum iusto odio dignissimos ducimus qui blanditiis http://abxjfhLorem ipsuusto odio iusto
-                      odio dignissimos iusto odio dignissimos </p>
+                    <p>{{tweet?.caption?.slice(0,150)}}...</p>
                     <a href="javascript:void(0)" class="nRdMor">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>
