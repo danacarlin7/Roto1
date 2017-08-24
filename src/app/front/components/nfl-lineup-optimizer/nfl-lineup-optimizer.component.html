@@ -9,12 +9,12 @@
     <section class="my-section title-container">
       <div class="row">
         <div class="col-md-5">
-          <h4 class="content-title">MLB Lineup Optimizer</h4>
+          <h4 class="content-title">NFL Lineup Optimizer</h4>
         </div>
         <div class="col-md-2" style="position: relative">
           <span style="padding-right: 20px">
-            <a class="btn btn-yellow-black">MLB</a>
-            <a class="btn btn-gray-black" routerLink="nfl">NFL</a>
+            <a class="btn btn-gray-black" routerLink="/lineup-optimizer">MLB</a>
+            <a class="btn btn-yellow-black ">NFL</a>
           </span>
           <span class="error-msg" *ngIf="isError">{{errorMsg}}</span>
         </div>
@@ -122,21 +122,20 @@
           <th>
             <mfDefaultSorter by="Salary">Salary</mfDefaultSorter>
           </th>
-          <th>Hand</th>
           <th>
-            <mfDefaultSorter by="BattingOrder">Batting Order</mfDefaultSorter>
+            Team pts
+          </th>
+          <th>
+            Opp pts
+          </th>
+          <th>
+            Total pts
+          </th>
+          <th>
+            Weather
           </th>
           <th>
             <mfDefaultSorter by="Opponent">Opponent</mfDefaultSorter>
-          </th>
-          <th>
-            <mfDefaultSorter by="vsPitcher">vs Pitcher</mfDefaultSorter>
-          </th>
-          <th>
-            <mfDefaultSorter by="Runs">Runs</mfDefaultSorter>
-          </th>
-          <th>
-            <mfDefaultSorter by="OverUnder">O/U</mfDefaultSorter>
           </th>
           <th>
             <mfDefaultSorter by="Line">Line</mfDefaultSorter>
@@ -165,20 +164,11 @@
           <td>{{player.Position}}</td>
           <td>{{player.Team}}</td>
           <td>{{player.Salary}}</td>
-          <td><span md-tooltip="Bat hand">{{player.BatHand}}</span> - <span
-            md-tooltip="Throw hand">{{player.ThrowHand}}</span></td>
-          <td>
-            {{player.BattingOrder ? player.BattingOrder : '-'}}
-            <span class="light-dot"
-                  *ngIf="player.BattingOrder"
-                  [md-tooltip]="player.BattingOrderConfirmed ? ' Player in starting lineup with confirmed batting order ': ' projected batting order for player'"
-                  [class.yellow-dot]="!player.BattingOrderConfirmed"
-                  [class.green-dot]="player.BattingOrderConfirmed"></span>
-          </td>
+          <td> -</td>
+          <td> -</td>
+          <td> -</td>
+          <td> -</td>
           <td>{{player.Opponent}}</td>
-          <td>{{player.vsPitcher}}</td>
-          <td>{{player.Runs}}</td>
-          <td>{{player.OverUnder}}</td>
           <td>{{player.Line}}</td>
           <td><input class="form-control input-sm" [(ngModel)]="player.exposureValue"
                      (blur)="onExposureTxtboxBlurEvent($event,player)"
@@ -199,14 +189,14 @@
       </table>
     </section>
     <!--/ Table -->
-    <rp-adv-filter [advFilterSettings]="advFilterSettings"
-                   [stackingData]="stackingData"
-                   [advFilterValue]="advFilterValue"
-                   [selectedOperator]="selectedOperator"
-                   #advFilterPopup
-                   (viewRenderedEvent)="onAdvFilterSettingsViewReady()"
-                   (saveAdvFilterValueEvent)="onSaveAdvFilterValueEvent($event)"
-                   (removeAdvFilterValueEvent)="onRemoveAdvFilterValueEvent()"
-                   (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-adv-filter>
+    <rp-nfl-adv-filter [advFilterSettings]="advFilterSettings"
+                       [stackingData]="stackingData"
+                       [advFilterValue]="advFilterValue"
+                       [selectedOperator]="selectedOperator"
+                       #advFilterPopup
+                       (viewRenderedEvent)="onAdvFilterSettingsViewReady()"
+                       (saveAdvFilterValueEvent)="onSaveAdvFilterValueEvent($event)"
+                       (removeAdvFilterValueEvent)="onRemoveAdvFilterValueEvent()"
+                       (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-nfl-adv-filter>
   </div>
 </div>

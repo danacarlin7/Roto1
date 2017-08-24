@@ -27,6 +27,7 @@ import {SubscribeComponent} from "./components/subscribe/subscribe.component";
 import {VerifyAccComponent} from "./components/forgot-password/verify-acc.component";
 import {MarketPlaceComponent} from "./components/market-place/market-place.component";
 import {ExtensionsComponent} from "./components/extensions/extensions.component";
+import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -55,6 +56,8 @@ const routes:Routes = [
       <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent},
       <Route>{path: 'provider-public-lineups', component: ProviderPublicComponent},
       <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
+      <Route>{path: 'lineup-optimizer/mlb', component: LineupOptimizerComponent},
+      <Route>{path: 'lineup-optimizer/nfl', component: NFLLineupOptimizerComponent},
       <Route>{path: 'generated-lineups', component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
       <Route>{path: 'subscribe', component: SubscribeComponent},

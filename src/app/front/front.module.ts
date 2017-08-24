@@ -40,6 +40,8 @@ import {VerifyAccComponent} from "./components/forgot-password/verify-acc.compon
 import {MarketPlaceComponent} from "./components/market-place/market-place.component";
 import {ExtensionsComponent} from "./components/extensions/extensions.component";
 import {StackingDataFilter} from "./components/lineup-optimizer/adv-filter/stacking-data.pipe";
+import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
+import {NFLAdvFilterComponent} from "./components/nfl-lineup-optimizer/nfl-filters/nfl-filters.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -80,7 +82,9 @@ import {StackingDataFilter} from "./components/lineup-optimizer/adv-filter/stack
     VerifyAccComponent,
     MarketPlaceComponent,
     ExtensionsComponent,
-    StackingDataFilter
+    StackingDataFilter,
+    NFLLineupOptimizerComponent,
+    NFLAdvFilterComponent
   ],
   exports: [
     ProviderComponent,

@@ -4,12 +4,13 @@ import {LineupOptimizerService} from "../../services/lineup-optimizer.service";
 import {OptimizerPlayer} from "../../models/player.model";
 import {AdvFilterSettings, Game} from "../../models/adv-filter-setting.model";
 import {LineupOppFilterCriteria} from "../../models/filter-criteria.model";
-import {AdvFilterComponent} from "./adv-filter/adv-filter.component";
+import {NFLAdvFilterComponent} from "./nfl-filters/nfl-filters.component";
 import {LineupOppFilterConstants} from "../../constants/lineup-opp.constants";
 import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
 import {Router} from "@angular/router";
 import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
+import {AdvFilterComponent} from "../lineup-optimizer/adv-filter/adv-filter.component";
 import {AuthService} from "../../../shared/services/auth.service";
 /**
  * Created by Hiren on 02-07-2017.
@@ -18,15 +19,14 @@ import {AuthService} from "../../../shared/services/auth.service";
 declare var jQuery:any;
 
 @Component({
-  selector: 'rp-lineup-optimizer',
-  templateUrl: './lineup-optimizer.component.html',
-  styleUrls: ['./lineup-optimizer.component.css']
+  selector: 'rp--nfl-optimizer',
+  templateUrl: './nfl-lineup-optimizer.component.html',
+  styleUrls: ['./nfl-lineup-optimizer.component.css']
 })
-export class LineupOptimizerComponent {
-
+export class NFLLineupOptimizerComponent {
   searchStr:string = '';
   selectedOperator:string = 'FanDuel';
-  selectedSport:string = 'MLB';
+  selectedSport:string = 'NFL';
   selectedSlate:number = 0;
   selectedGame:number = 0;
   slates:Slate[];
@@ -34,17 +34,16 @@ export class LineupOptimizerComponent {
   players:OptimizerPlayer[];
   advFilterSettings:AdvFilterSettings;
   isLoading:boolean;
-  isError:boolean;
-  errorMsg:string;
   games:Game[];
   stackingData:{team:string,teamId:number}[];
   lockedPlayers:number[] = [];
   todayDate = new Date();
-
+  isError:boolean;
+  errorMsg:string;
   advFilterValue:AdvFilterValue;
   isSavedFiltersApplied:boolean;
 
-  @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
+  @ViewChild('advFilterPopup') advFilterPopup:NFLAdvFilterComponent;
 
   constructor(private optimizerService:LineupOptimizerService, private router:Router, private authService:AuthService) {
     this.selectedOperator = this.optimizerService.selectedOperator;
@@ -302,38 +301,15 @@ export class LineupOptimizerComponent {
       lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
     }
 
-    lineupData['noBattersVsPitchers'] = this.advFilterPopup.noBattingVsPitchers;
+    lineupData['no_def_vs_opp_players'] = this.advFilterPopup.noDefVsOpp;
     lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
-
+    lineupData['stacking'] = this.advFilterPopup.getStakingData();
+    console.info("lineupData => ", lineupData);
     return lineupData;
   }
 
   prepareMinMaxPlayerFromTeam():any[] {
-    let teams = [];
-    teams = this.advFilterPopup.getMinMaxPlayerFromTeam();
-    let stackData = this.advFilterPopup.getStakingData();
-    if (stackData && stackData.length) {
-      stackData.forEach(
-        stackTeam => {
-          let teamFlag:boolean = false;
-          teams.forEach(team => {
-            if (stackTeam.name == team.teamName) {
-              teamFlag = true;
-              team.minPlayers = stackTeam.players;
-              team.maxPlayers = stackTeam.players;
-              return;
-            }
-          });
-          if (!teamFlag) {
-            teams.push({
-              teamName: stackTeam.name,
-              minPlayers: stackTeam.players,
-              maxPlayers: stackTeam.players
-            })
-          }
-        })
-    }
-    return teams;
+    return this.advFilterPopup.getMinMaxPlayerFromTeam();
   }
 
   btnExcludePlayerClicked(player:OptimizerPlayer) {

@@ -61,28 +61,27 @@ export class LineupOptimizerService {
   getPlayers(operator:string, sport:string, slateId:number):Observable<OptimizerPlayer[]> {
     return new Observable<OptimizerPlayer[]>(
       observer => {
-        if (this.players && this.players.length) {
-          observer.next(this.players);
-        }
-        else {
-          this.retrievePlayers(operator, sport, slateId)
-            .subscribe(
-              response => {
-                if (response.statusCode == 200) {
-                  this.players = response.data.map(currPlayer => {
-                    if (currPlayer.BattingOrder == null) {
-                      currPlayer.BattingOrder = 0;
-                    }
-                    if (currPlayer.Value == null) {
-                      currPlayer.Value = 0;
-                    }
-                    return currPlayer;
-                  });
-                  observer.next(this.players);
-                }
+        /* if (this.players && this.players.length && this.selectedSport == sport) {
+         observer.next(this.players);
+         }
+         else {*/
+        this.retrievePlayers(operator, sport, slateId)
+          .subscribe(
+            response => {
+              if (response.statusCode == 200) {
+                this.players = response.data.map(currPlayer => {
+                  if (currPlayer.BattingOrder == null) {
+                    currPlayer.BattingOrder = 0;
+                  }
+                  if (currPlayer.Value == null) {
+                    currPlayer.Value = 0;
+                  }
+                  return currPlayer;
+                });
+                observer.next(this.players);
               }
-            );
-        }
+            }
+          );
       }
     ).share();
   }

@@ -4,21 +4,21 @@ import {LineupOppFilterCriteria} from "../../../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants";
 import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
-import {SelectItem} from "primeng/primeng";
 import {AuthService} from "../../../../shared/services/auth.service";
+import {SelectItem} from "primeng/primeng";
 /**
- * Created by Hiren on 09-07-2017.
+ * Created by Hiren on 16-08-2017.
  */
 
 declare var jQuery:any;
 
 @Component({
-  selector: 'rp-adv-filter',
-  templateUrl: './adv-filter.component.html',
-  styleUrls: ['./adv-filter.component.css'],
+  selector: 'rp-nfl-adv-filter',
+  templateUrl: './nfl-filters.component.html',
+  styleUrls: ['./nfl-filters.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class AdvFilterComponent {
+export class NFLAdvFilterComponent {
 
 
   isSettingsUpdated:boolean;
@@ -42,8 +42,8 @@ export class AdvFilterComponent {
   noOfLineupValue:number;
   maxExposureValue:number = 100;
   salarySettingValue:any[] = [];
-  noBattingVsPitchers:boolean;
-
+  noDefVsOpp:boolean;
+//no_def_vs_opp_players
   projectionFilterValue:any[];
   salaryFilterValue:any[];
   valueFilterValue:any[];
@@ -55,9 +55,10 @@ export class AdvFilterComponent {
 
   filters:LineupOppFilterCriteria[];
 
-  stackingTeam1:{name:string,players:number} = {name: '-', players: 0};
-  stackingTeam2:{name:string,players:number} = {name: '-', players: 0};
-  stackingTeam3:{name:string,players:number} = {name: '-', players: 0};
+  stackingTeam_QB_WR:string[] = [];
+  stackingTeam_QB_WR_TE:string[] = [];
+  stackingTeam_QB_TE:string[] = [];
+  stackingTeam_RB_D:string[] = [];
 
   gamesObj:any = {};
   private _stackingData:{team:string,teamId:number}[];
@@ -67,9 +68,12 @@ export class AdvFilterComponent {
     this.prepareStacks();
   }
 
-  stack1:{team:string,teamId:number}[] = [];
-  stack2:{team:string,teamId:number}[] = [];
-  stack3:{team:string,teamId:number}[] = [];
+  selectedStakeTypes:string[] = [];
+
+  stack1:SelectItem[] = [];
+  stack2:SelectItem[] = [];
+  stack3:SelectItem[] = [];
+  stack4:SelectItem[] = [];
 
   @Output()
   saveAdvFilterValueEvent:EventEmitter<AdvFilterValue> = new EventEmitter<AdvFilterValue>();
@@ -106,22 +110,28 @@ export class AdvFilterComponent {
         this.positionFilterValue = this.advFilterValue.positionFilter;
       }, 20);
     }
+
+    this.initPositionFilter();
   }
 
   positions:SelectItem[];
   isLogIn:boolean;
 
   constructor(private authService:AuthService) {
-    this.positions = [];
-    this.positions.push({label: 'P', value: 'p'});
-    this.positions.push({label: 'C', value: 'c'});
-    this.positions.push({label: '1B', value: '1b'});
-    this.positions.push({label: '2B', value: '2b'});
-    this.positions.push({label: '3B', value: '3b'});
-    this.positions.push({label: 'SS', value: 'ss'});
-    this.positions.push({label: 'OF', value: 'of'});
-
     this.isLogIn = this.authService.isLoggedIn();
+  }
+
+  initPositionFilter() {
+    this.positions = [];
+    //QB, RB, WR, TE, K, DST
+    this.positions.push({label: 'QB', value: 'QB'});
+    this.positions.push({label: 'RB', value: 'RB'});
+    this.positions.push({label: 'WR', value: 'WR'});
+    this.positions.push({label: 'TE', value: 'TE'});
+    if (this.selectedOperator == 'FanDuel') {
+      this.positions.push({label: 'K', value: 'K'});
+    }
+    this.positions.push({label: 'DST', value: 'DST'});
   }
 
   onPlayerPositionFilterChanged(event) {
@@ -378,7 +388,7 @@ export class AdvFilterComponent {
       this.maxExposureValue = this.advFilterValue.maxExposure;
       this.maxExposureSlider.bootstrapSlider('setValue', this.maxExposureValue);
     }
-    this.noBattingVsPitchers = this.advFilterValue.noBatterVsPitchers;
+    this.noDefVsOpp = this.advFilterValue.noBatterVsPitchers;
     if (this.salaryFilterSlider && this.advFilterValue.salaryFilter && this.advFilterValue.salaryFilter.length) {
       this.salaryFilterValue = this.advFilterValue.salaryFilter;
       this.salaryFilterSlider.bootstrapSlider('setValue', this.salaryFilterValue);
@@ -419,19 +429,19 @@ export class AdvFilterComponent {
   }
 
   setStackingValues() {
-    if (this.advFilterValue.stackingTeams) {
-      this.advFilterValue.stackingTeams.forEach(
-        (currValue, i) => {
-          if (i == 0) {
-            this.stackingTeam1 = currValue;
-          } else if (i == 1) {
-            this.stackingTeam2 = currValue;
-          } else if (i == 2) {
-            this.stackingTeam3 = currValue;
-          }
-        }
-      )
-    }
+    /*    if (this.advFilterValue.stackingTeams) {
+     this.advFilterValue.stackingTeams.forEach(
+     (currValue, i) => {
+     if (i == 0) {
+     this.stackingTeam_QB_WR = currValue;
+     } else if (i == 1) {
+     this.stackingTeam_QB_WR_TB = currValue;
+     } else if (i == 2) {
+     this.stackingTeam_QB_TB = currValue;
+     }
+     }
+     )
+     }*/
   }
 
   emitFilterChangeEvent() {
@@ -446,30 +456,13 @@ export class AdvFilterComponent {
 
   prepareStacks() {
     if (this._stackingData) {
-      this.stack1 = [];
-      this.stack2 = [];
-      this.stack3 = [];
-      this._stackingData.forEach(
-        value => {
-          if (value.team != this.stackingTeam2.name && value.team != this.stackingTeam3.name) {
-            this.stack1.push(value);
-          }
-        }
-      );
-      this._stackingData.forEach(
-        value => {
-          if (value.team != this.stackingTeam1.name && value.team != this.stackingTeam3.name) {
-            this.stack2.push(value);
-          }
-        }
-      );
-      this._stackingData.forEach(
-        value => {
-          if (value.team != this.stackingTeam1.name && value.team != this.stackingTeam2.name) {
-            this.stack3.push(value);
-          }
-        }
-      )
+      let teams = this._stackingData.map(currTeam => {
+        return {label: currTeam.team, value: currTeam.team}
+      });
+      this.stack1 = teams;
+      this.stack2 = teams;
+      this.stack3 = teams;
+      this.stack4 = teams;
     }
   }
 
@@ -523,18 +516,26 @@ export class AdvFilterComponent {
     console.log("Game => ", game);
   }
 
-  getStakingData():{name:string,players:number}[] {
+  getStakingData():any[] {
     let data = [];
-    if (this.stackingTeam1.name != '-' && this.stackingTeam1.players) {
-      data.push(this.stackingTeam1);
-    }
-    if (this.stackingTeam2.name != '-' && this.stackingTeam2.players) {
-      data.push(this.stackingTeam2);
-    }
-    if (this.stackingTeam3.name != '-' && this.stackingTeam3.players) {
-      data.push(this.stackingTeam3);
-    }
-    console.log("stacking data => ", data);
+    this.selectedStakeTypes.forEach(
+      currType => {
+        switch (currType) {
+          case 'QB_WR':
+            data.push({stackType: currType, stackTeams: this.stackingTeam_QB_WR});
+            break;
+          case 'QB_WR_TE':
+            data.push({stackType: currType, stackTeams: this.stackingTeam_QB_WR_TE});
+            break;
+          case 'QB_TE':
+            data.push({stackType: currType, stackTeams: this.stackingTeam_QB_TE});
+            break;
+          case 'RB_D':
+            data.push({stackType: currType, stackTeams: this.stackingTeam_RB_D});
+            break;
+        }
+      }
+    );
     return data;
   }
 
@@ -562,22 +563,6 @@ export class AdvFilterComponent {
     )
   }
 
-  validateStakingPlayerCount(team:{name:string,players:number}) {
-    let playerCount = this.stackingTeam1.players + this.stackingTeam2.players + this.stackingTeam3.players;
-    switch (this.selectedOperator) {
-      case 'FanDuel':
-        if (playerCount > 9) {
-          team.players = 0;
-        }
-        break;
-      case 'DraftKings':
-        if (playerCount > 10) {
-          team.players = 0;
-        }
-        break;
-    }
-  }
-
   validateHomeTeamMinValue(event, game) {
     let value = event.target.value;
     if (value > game.homeTeamMaxValue) {
@@ -601,7 +586,7 @@ export class AdvFilterComponent {
       mixMaxSalary: this.salarySettingValue,
       numberOfLineups: this.noOfLineupValue,
       maxExposure: this.maxExposureValue,
-      noBatterVsPitchers: this.noBattingVsPitchers,
+      noBatterVsPitchers: this.noDefVsOpp,
       projectionFilter: this.projectionFilterValue,
       salaryFilter: this.salaryFilterValue,
       valueFilter: this.valueFilterValue,
@@ -657,7 +642,7 @@ export class AdvFilterComponent {
     this.updateSliders();
     this.resetGames();
     this.resetStacking();
-    this.noBattingVsPitchers = false;
+    this.noDefVsOpp = false;
     this.emitFilterChangeEvent();
     this.isSettingsUpdated = true;
     this.positionFilterValue = [];
@@ -676,9 +661,21 @@ export class AdvFilterComponent {
   }
 
   resetStacking() {
-    this.stackingTeam1 = {name: '-', players: 0};
-    this.stackingTeam2 = {name: '-', players: 0};
-    this.stackingTeam3 = {name: '-', players: 0};
+    this.stackingTeam_QB_WR = [];
+    this.stackingTeam_QB_WR_TE = [];
+    this.stackingTeam_QB_TE = [];
+    this.stackingTeam_RB_D = [];
     this.prepareStacks();
+  }
+
+  onStackingTypeSelect(value:string) {
+    if (this.selectedStakeTypes.indexOf('RB_D') > -1) {
+      this.selectedStakeTypes = [];
+      this.selectedStakeTypes.push('RB_D');
+      this.selectedStakeTypes.push(value);
+    } else {
+      this.selectedStakeTypes = [];
+      this.selectedStakeTypes.push(value);
+    }
   }
 }

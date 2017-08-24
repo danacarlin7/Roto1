@@ -17,5 +17,5 @@ export interface AdvFilterValue {
   battingOrderFilter:number[];
   positionFilter:any[];
   playerPerTeams:{teamName:string,minPlayers:number,maxPlayers:number}[];
-  stackingTeams:{name:string,players:number}[];
+  stackingTeams:any[];
 }

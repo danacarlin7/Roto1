@@ -301,7 +301,7 @@
                       </div>
                     </div>
                     <p>{{tweet?.text?.slice(0,150)}}...</p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
+                    <a href="{{tweet?.attachments?.data[0]?.url}}" target="_blank" class="nRdMor">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>
                 </div>
@@ -324,7 +324,7 @@
                       </div>-->
                     </div>
                     <p>{{tweet?.caption?.slice(0,150)}}...</p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
+                    <a href="{{tweet?.link}}" class="nRdMor" target="_blank">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>
                 </div>

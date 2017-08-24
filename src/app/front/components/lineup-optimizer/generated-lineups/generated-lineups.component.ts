@@ -16,7 +16,7 @@ export class GeneratedLineupsComponent {
   lineups:GeneratedLineup[];
   usedPlayers:UsedPlayer[];
 
-  activeUsedPlayerTab:'all'|'p'|'h';
+  activeUsedPlayerTab:'all'|'p'|'h' = 'all';
 
   constructor(private optimizerService:LineupOptimizerService, private router:Router) {
 
