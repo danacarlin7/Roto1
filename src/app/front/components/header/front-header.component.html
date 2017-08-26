@@ -5,9 +5,12 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
           <nav class="topNavbar">
             <ul class="pull-right">
-
-              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/lineup-optimizer">Lineup Optimizer</a>
+              <li class="lineup-dropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a>Lineup Optimizer<span class="caret"></span></a>
+                <div class="dropdown-content">
+                  <a routerLink="/lineup-optimizer1">MLB Optimizer</a>
+                  <a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a>
+                </div>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/excel-tool">Excel Tool<span class="sr-only">(current)</span></a>
