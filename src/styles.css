@@ -173,3 +173,9 @@ mfDefaultSorter a {
   padding-top: 11px !important;
   padding-bottom: 11px !important;
 }
+
+@media (max-width: 767px) {
+  header .topHeader .topNavbar {
+    overflow: visible;
+  }
+}

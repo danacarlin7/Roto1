@@ -42,6 +42,22 @@ export class AuthService {
     return headers;
   }
 
+  isSubscriber():boolean {
+    let isSubscribe = false;
+    if (this.loggedUser) {
+      if (this.loggedUser.is_subscribe) {
+        isSubscribe = true;
+      }
+    }
+    return isSubscribe;
+  }
+
+  subscriptionAlertEvent:EventEmitter<any> = new EventEmitter<any>();
+
+  showSubscriptionAlert() {
+    this.subscriptionAlertEvent.emit(true);
+  }
+
   isLoggedIn():boolean {
     let login:boolean;
     if (environment.token && environment.token.length) {

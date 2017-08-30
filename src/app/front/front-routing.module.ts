@@ -28,6 +28,8 @@ import {VerifyAccComponent} from "./components/forgot-password/verify-acc.compon
 import {MarketPlaceComponent} from "./components/market-place/market-place.component";
 import {ExtensionsComponent} from "./components/extensions/extensions.component";
 import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
+import {SubscriptionGuard} from "../shared/services/subscription.guard";
+import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -61,6 +63,7 @@ const routes:Routes = [
       <Route>{path: 'generated-lineups', component: GeneratedLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
       <Route>{path: 'subscribe', component: SubscribeComponent},
+      <Route>{path: 'contact-analyzer', component: ContactAnalyzerComponent},
     ]
   }
 ];

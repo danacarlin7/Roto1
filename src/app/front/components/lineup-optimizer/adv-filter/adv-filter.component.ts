@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation, EventEmitter, Output} from "@angular/core";
+import {Component, Input, ViewEncapsulation, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
 import {AdvFilterSettings, Game} from "../../../models/adv-filter-setting.model";
 import {LineupOppFilterCriteria} from "../../../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants";
@@ -58,6 +58,8 @@ export class AdvFilterComponent {
   stackingTeam1:{name:string,players:number} = {name: '-', players: 0};
   stackingTeam2:{name:string,players:number} = {name: '-', players: 0};
   stackingTeam3:{name:string,players:number} = {name: '-', players: 0};
+
+  @ViewChild('settingPopup') settingPopup:ElementRef;
 
   gamesObj:any = {};
   private _stackingData:{team:string,teamId:number}[];
@@ -648,9 +650,18 @@ export class AdvFilterComponent {
 
   onBtnSaveAdvFilterValueClicked() {
     if (this.isSettingsUpdated) {
-      this.saveAdvFilters();
-      this.isSettingsUpdated = false;
+      if (this.authService.isSubscriber()) {
+        this.saveAdvFilters();
+        this.isSettingsUpdated = false;
+      }
+      else {
+        //this.authService.showSubscriptionAlert();
+      }
     }
+  }
+
+  ngOnDestory() {
+    //jQuery(this.settingPopup.nativeElement).modal('hide');
   }
 
   onBtnRestoreDefaultClicked() {

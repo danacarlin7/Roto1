@@ -42,6 +42,7 @@ import {ExtensionsComponent} from "./components/extensions/extensions.component"
 import {StackingDataFilter} from "./components/lineup-optimizer/adv-filter/stacking-data.pipe";
 import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
 import {NFLAdvFilterComponent} from "./components/nfl-lineup-optimizer/nfl-filters/nfl-filters.component";
+import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -84,7 +85,8 @@ import {NFLAdvFilterComponent} from "./components/nfl-lineup-optimizer/nfl-filte
     ExtensionsComponent,
     StackingDataFilter,
     NFLLineupOptimizerComponent,
-    NFLAdvFilterComponent
+    NFLAdvFilterComponent,
+    ContactAnalyzerComponent
   ],
   exports: [
     ProviderComponent,
