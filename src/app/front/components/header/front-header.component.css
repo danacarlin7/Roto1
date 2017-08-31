@@ -31,3 +31,21 @@
 .lineup-dropdown:hover .dropdown-content {
   display: block;
 }
+
+/*.lineup-menu-full-view {
+  display: block;
+}
+
+.lineup-menu-mobile-view {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .lineup-menu-full-view {
+    display: none;
+  }
+
+  .lineup-menu-mobile-view {
+    display: block;
+  }
+}*/
