@@ -11,7 +11,7 @@
             <div class="formWrapper">
               <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt=""
                                                  class="img-responsive"/></span><span>Login</span></h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>-->
               <div class="alert alert-success fade in" *ngIf="msg">
                 {{msg}}
               </div>
@@ -46,19 +46,19 @@
                 <input type="submit" value="Login" (click)="onSignInBtnClick()" class="formBtn"
                        [disabled]="!loginForm.valid">
               </form>
-              <p class="otherSigninPara">You can also <a href="javascript:void(0)" class="lred">sign up here or</a> sign
-                in by:</p>
-              <!--<cuppa-oauth [authConfig]="config"></cuppa-oauth>-->
-              <div class="loginSocialIcns">
-                <a href="javascript:void(0)"><img src="../../../../assets/images/facebook.png" alt=""
-                                                  class="img-responsive"/></a>
-                <a href="javascript:void(0)"><img src="../../../../assets/images/gmail.png" alt=""
-                                                  class="img-responsive"/></a>
-                <a href="javascript:void(0)"><img src="../../../../assets/images/twitter.png" alt=""
-                                                  class="img-responsive"/></a>
-              </div>
-              <p class="regstrNmPara">Don’t you have an account? <a href="javascript:void(0)" class="lred">Register
-                Now!</a> it’s really simple and you can start enjoing all the benefits!</p>
+              <!--<p class="otherSigninPara">You can also <a href="javascript:void(0)" class="lred">sign up here or</a> sign-->
+                <!--in by:</p>-->
+              <!--&lt;!&ndash;<cuppa-oauth [authConfig]="config"></cuppa-oauth>&ndash;&gt;-->
+              <!--<div class="loginSocialIcns">-->
+                <!--<a href="javascript:void(0)"><img src="../../../../assets/images/facebook.png" alt=""-->
+                                                  <!--class="img-responsive"/></a>-->
+                <!--<a href="javascript:void(0)"><img src="../../../../assets/images/gmail.png" alt=""-->
+                                                  <!--class="img-responsive"/></a>-->
+                <!--<a href="javascript:void(0)"><img src="../../../../assets/images/twitter.png" alt=""-->
+                                                  <!--class="img-responsive"/></a>-->
+              <!--</div>-->
+              <p class="regstrNmPara">Don’t you have an account?  <a routerLink="/signup"  class="lred">Register
+                Now!</a> It’s really simple and you can start enjoying all the benefits!</p>
             </div>
           </div>
         </div>
