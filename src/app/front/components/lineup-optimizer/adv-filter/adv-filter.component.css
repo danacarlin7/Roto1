@@ -12,6 +12,6 @@ section.my-section {
   margin-bottom: 1px;
 }
 
-a .disabled {
+a.inactive {
   opacity: 0.4;
 }

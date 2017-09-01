@@ -49,7 +49,8 @@ import {ExcelComponent} from "./components/excel/excel.component"
   exports: [
     AdminMainComponent
   ],
-  providers: [AdminDashboardService, CouponsService, MembershipPlanService,EditProviderGuard]
+  providers: [AdminDashboardService, CouponsService, MembershipPlanService,EditProviderGuard],
+  entryComponents:[DeletePlanAlert]
 })
 export class AdminModule {
 

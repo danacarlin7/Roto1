@@ -35,6 +35,15 @@ export class FrontService {
       });
   }
 
+  retrieveHomepageNews():Observable<any> {
+    return this.http.get(environment.api_end_point + 'fetchLatestNews?count=10', {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   retrieveInjuries(sportType:string):Observable<any> {
     return this.http.get(environment.api_end_point + 'injuries?sport=' + sportType, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
@@ -99,7 +108,7 @@ export class FrontService {
       .map((response:Response) => response.json());
   }
 
-  retrieveProvider(){
+  retrieveProvider() {
     return this.http.get(environment.api_end_point + "providers", {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {

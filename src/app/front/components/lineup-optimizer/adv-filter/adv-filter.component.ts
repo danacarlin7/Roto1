@@ -655,7 +655,7 @@ export class AdvFilterComponent {
         this.isSettingsUpdated = false;
       }
       else {
-        //this.authService.showSubscriptionAlert();
+        this.authService.showSubscriptionAlert();
       }
     }
   }

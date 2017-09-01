@@ -56,7 +56,26 @@ export class SubscribeComponent implements OnInit {
     this.frontService.getSubscribePlans().subscribe(
       response => {
         this.isLoading = false;
-        this.plans = response.data[0].data;
+        if (this.authService.loggedUser) {
+          if (this.authService.loggedUser.is_memberspace) {
+            for (let i = 0; response.data && response.data.length; i++) {
+              if (response.data[i].group == 'dfsportsgods') {
+                this.plans = response.data[i].data;
+                break;
+              }
+            }
+          }
+          else {
+            for (let i = 0; response.data && response.data.length; i++) {
+              if (response.data[i].group == 'rotopros') {
+                this.plans = response.data[i].data;
+                break;
+              }
+            }
+          }
+        } else {
+          this.plans = response.data[0].data;
+        }
       }
     );
   }

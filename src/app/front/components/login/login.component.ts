@@ -55,6 +55,9 @@ export class LoginComponent {
           else if (param['info'] == 'verify') {
             this.msg = 'Your account is successfully verified.'
           }
+          else if(param['info'] == 'signup_success'){
+            this.msg = 'Your account is successfully created. We have sent you a mail with account verification link. Please verify your account.'
+          }
         }
       }
     )
