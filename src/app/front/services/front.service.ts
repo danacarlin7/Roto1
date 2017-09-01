@@ -26,7 +26,7 @@ export class FrontService {
     return headers;
   }
 
-  retrieveNews(sportType:string, timePeriod:string = 'cmonth'):Observable<any> {
+  retrieveNews(sportType:string, timePeriod:string = '30days'):Observable<any> {
     return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
