@@ -85,7 +85,7 @@ export class SubscribeComponent implements OnInit {
     localStorage.setItem('selectedPlan', plan.plan_id);
     if (this.authService.isLoggedIn()) {
       var handler = (<any>window).StripeCheckout.configure({
-        key: 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
+        key: 'pk_live_ot2q3JGgPLEfvia8StJWO0b7',
         locale: 'auto',
         token: (token:any) => {
           // You can access the token ID with `token.id`.
