@@ -23,6 +23,8 @@ export class AuthService {
     }
   }
 
+  isLoggedInEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
+
   loggedUserChangeEvent:EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
   constructor(private http:Http) {

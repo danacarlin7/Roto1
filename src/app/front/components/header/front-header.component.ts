@@ -18,10 +18,35 @@ export class FrontHeaderComponent {
   constructor(private authService:AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.role = this.authService.getUserRole();
+    this.authService.isLoggedInEvent.subscribe(
+      data => {
+        this.isLoggedIn = data;
+        this.role = this.authService.getUserRole();
+      }
+    );
   }
 
   btnLogoutClicked() {
     this.authService.logout();
+  }
+
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.authService.retrieveLoggedUserInfo()
+        .subscribe(
+          response => {
+            if (response.statusCode == 200) {
+              this.authService.loggedUser = response.data;
+            }
+            else {
+
+            }
+          },
+          error => {
+            console.log("http error => ", error);
+          }
+        )
+    }
   }
 
 }
