@@ -6,6 +6,7 @@ import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 import {SelectItem} from "primeng/primeng";
 import {AuthService} from "../../../../shared/services/auth.service";
+import {Router} from "@angular/router";
 /**
  * Created by Hiren on 09-07-2017.
  */
@@ -22,6 +23,7 @@ export class AdvFilterComponent {
 
 
   isSettingsUpdated:boolean;
+  showSubscriptionAlert:boolean;
 
   @Input()
   selectedOperator:string;
@@ -113,7 +115,7 @@ export class AdvFilterComponent {
   positions:SelectItem[];
   isLogIn:boolean;
 
-  constructor(private authService:AuthService) {
+  constructor(private authService:AuthService, private router:Router) {
     this.positions = [];
     this.positions.push({label: 'P', value: 'p'});
     this.positions.push({label: 'C', value: 'c'});
@@ -653,9 +655,12 @@ export class AdvFilterComponent {
       if (this.authService.isSubscriber()) {
         this.saveAdvFilters();
         this.isSettingsUpdated = false;
+        this.showSubscriptionAlert = false;
+        console.log("Filter settings saved");
       }
       else {
-        this.authService.showSubscriptionAlert();
+        this.showSubscriptionAlert = true;
+        //this.authService.showSubscriptionAlert();
       }
     }
   }
@@ -691,5 +696,15 @@ export class AdvFilterComponent {
     this.stackingTeam2 = {name: '-', players: 0};
     this.stackingTeam3 = {name: '-', players: 0};
     this.prepareStacks();
+  }
+
+  onSubscribeLinkClick() {
+    jQuery(this.settingPopup.nativeElement).modal('hide');
+    this.showSubscriptionAlert = false;
+    this.router.navigate(['/subscribe']);
+  }
+
+  onSubscriptionAlertCloseClick() {
+    this.showSubscriptionAlert = false;
   }
 }
