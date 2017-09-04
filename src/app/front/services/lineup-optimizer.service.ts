@@ -20,7 +20,7 @@ export class LineupOptimizerService {
 
   searchStr:string = '';
   selectedOperator:string = 'FanDuel';
-  selectedSport:string = 'MLB';
+  selectedSport:string;
   selectedSlate:number = 0;
   selectedGame:number = 0;
   filterSettings:AdvFilterSettings;
@@ -61,28 +61,27 @@ export class LineupOptimizerService {
   getPlayers(operator:string, sport:string, slateId:number):Observable<OptimizerPlayer[]> {
     return new Observable<OptimizerPlayer[]>(
       observer => {
-        if (this.players && this.players.length) {
-          observer.next(this.players);
-        }
-        else {
-          this.retrievePlayers(operator, sport, slateId)
-            .subscribe(
-              response => {
-                if (response.statusCode == 200) {
-                  this.players = response.data.map(currPlayer => {
-                    if (currPlayer.BattingOrder == null) {
-                      currPlayer.BattingOrder = 0;
-                    }
-                    if (currPlayer.Value == null) {
-                      currPlayer.Value = 0;
-                    }
-                    return currPlayer;
-                  });
-                  observer.next(this.players);
-                }
+        /* if (this.players && this.players.length && this.selectedSport == sport) {
+         observer.next(this.players);
+         }
+         else {*/
+        this.retrievePlayers(operator, sport, slateId)
+          .subscribe(
+            response => {
+              if (response.statusCode == 200) {
+                this.players = response.data.map(currPlayer => {
+                  if (currPlayer.BattingOrder == null) {
+                    currPlayer.BattingOrder = 0;
+                  }
+                  if (currPlayer.Value == null) {
+                    currPlayer.Value = 0;
+                  }
+                  return currPlayer;
+                });
+                observer.next(this.players);
               }
-            );
-        }
+            }
+          );
       }
     ).share();
   }
@@ -146,31 +145,43 @@ export class LineupOptimizerService {
   }
 
   updateAdvFilterValue(filterValue:AdvFilterValue):Observable<any> {
-    return new Observable(
-      observer => {
-        if (filterValue) {
-          localStorage.setItem('advFilterValue', JSON.stringify(filterValue));
-        }
-        observer.next(true);
-        observer.complete();
-      }
-    )
+    /* return new Observable(
+     observer => {
+     if (filterValue) {
+     localStorage.setItem('advFilterValue', JSON.stringify(filterValue));
+     }
+     observer.next(true);
+     observer.complete();
+     }
+     )*/
+    return this.http.post(environment.api_end_point + 'api/optimizer/settings', filterValue ? filterValue : [], {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
   }
 
   retrieveSavedAdvFilterValue():Observable<any> {
-    return new Observable(
-      observer => {
-        let valueStr:string = localStorage.getItem('advFilterValue');
-        let valueObj = null;
-        try {
-          valueObj = JSON.parse(valueStr);
-        } catch (e) {
-          console.log("advFilter value parse error");
-        }
-        observer.next(valueObj);
-        observer.complete();
-      }
-    )
+    /*return new Observable(
+     observer => {
+     let valueStr:string = localStorage.getItem('advFilterValue');
+     let valueObj = null;
+     try {
+     valueObj = JSON.parse(valueStr);
+     } catch (e) {
+     console.log("advFilter value parse error");
+     }
+     observer.next(valueObj);
+     observer.complete();
+     }
+     )*/
+    return this.http.get(environment.api_end_point + 'api/optimizer/settings', {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
   }
 
   removeAdvFilterValue() {
@@ -263,6 +274,21 @@ export class LineupOptimizerService {
                 if (currPlayer.BattingOrder >= currFilter.minValue && currPlayer.BattingOrder <= currFilter.maxValue) {
                   return true;
                 }
+              }
+            );
+            break;
+          case LineupOppFilterConstants.PLAYER_POSITION:
+            players = players.filter(
+              (currPlayer:OptimizerPlayer) => {
+                let isPlayerHasMatchedPosition:boolean = false;
+                for (let i = 0; i < currFilter.filterValue.length; i++) {
+                  let currValue = currFilter.filterValue[i];
+                  if ((currPlayer.Position + '').toLowerCase() == currValue.toLowerCase()) {
+                    isPlayerHasMatchedPosition = true;
+                    break;
+                  }
+                }
+                return isPlayerHasMatchedPosition;
               }
             );
             break;

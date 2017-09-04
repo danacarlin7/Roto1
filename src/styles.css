@@ -89,38 +89,93 @@ header .topHeader .topNavbar > ul > li.active > a {
   background-color: #f8c534 !important;
 }
 
-
-mfPaginator{
+mfPaginator {
   display: flex;
   justify-content: space-between;
 }
 
-ul.pagination{
+ul.pagination {
   width: auto;
   order: 2;
 }
 
-ul.pagination.pull-right{
+ul.pagination.pull-right {
   width: auto;
   order: 1;
 }
 
-.page-item .page-link{
+.page-item .page-link {
   color: #666;
   background-color: #ffffff;
 }
 
-.page-item.active .page-link{
+.page-item.active .page-link {
   color: #ffffff;
   background-color: #f8c534;
 }
 
-mfDefaultSorter a{
+mfDefaultSorter a {
   color: #000;
 }
-
 
 .article-details .row {
   margin-right: 0 !important;
   margin-left: 0 !important;
+}
+
+.player-position-opt {
+  width: 100%;
+}
+
+.player-position-opt .ui-multiselect {
+  width: 100%;
+}
+
+.player-position-opt .ui-multiselect-label-container {
+  color: #000;
+}
+
+.player-position-opt .ui-multiselect-label-container label {
+  font-weight: inherit;
+}
+
+.player-position-opt .ui-multiselect-header {
+  background-color: #fff !important;
+}
+
+.player-position-opt .ui-multiselect-trigger {
+
+}
+
+.player-position-opt .ui-multiselect-filter-container {
+
+}
+
+.player-position-opt .ui-multiselect-panel {
+
+}
+
+.player-position-opt .ui-multiselect-item {
+  background-color: #fff !important;
+  border: none !important;
+  border-bottom: 1px solid #dcdcdc !important;
+  color: #000 !important;
+}
+
+.player-position-opt .ui-multiselect-item.ui-state-highlight {
+  background-color: #fff !important;
+  border: none !important;
+  border-bottom: 1px solid #dcdcdc !important;
+  color: #000 !important;
+}
+
+.filter-range-container {
+  padding-top: 11px !important;
+  padding-bottom: 11px !important;
+}
+
+@media (max-width: 767px) {
+  header .topHeader .topNavbar {
+    overflow: visible;
+  }
 }

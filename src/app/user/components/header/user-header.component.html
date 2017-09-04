@@ -6,20 +6,28 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
           <nav class="topNavbar">
             <ul class="pull-right">
-              <li routerLinkActive="active" *ngIf="role == 'provider'" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/provider-lineups">My Lineups</a>
-              </li>
-              <li routerLinkActive="active"  [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/provider-public-lineups">Lineups</a>
-              </li>
-              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/lineup-optimizer">Lineup Optimizer</a>
+              <!--<li routerLinkActive="active" *ngIf="role == 'provider'" [routerLinkActiveOptions]="{exact: false}">-->
+                <!--<a routerLink="/provider-lineups">My Lineups</a>-->
+              <!--</li>-->
+              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
+                <!--<a routerLink="/provider-public-lineups">Lineups</a>-->
+              <!--</li>-->
+              <li class="lineup-dropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a>Lineup Optimizer<span class="caret"></span></a>
+                <div class="dropdown-content">
+                  <a routerLink="/lineup-optimizer">MLB Optimizer</a>
+                  <a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a>
+                </div>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/excel-tool">Excel Tool<span class="sr-only">(current)</span></a>
               </li>
-              <li><a href="#">Extensions</a></li>
-              <li><a href="#">Contest Analyzer</a></li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/extensions">Extensions</a>
+              </li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/contact-analyzer">Contest Analyzer</a>
+              </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/injuries">Injury Feeds</a>
               </li>
@@ -122,9 +130,11 @@
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <span class="icnWrapperS">
                   <!--<img src="../../../../assets/images/dashboard_profile_img.png" alt=""-->
-                                               <!--class="img-responsive"/>-->
-                   <img [attr.src]="loggedUser?.profile_image ? 'https://api.dfsportgod.com/images/'+ loggedUser?.profile_image : '../../../../assets/images/dashboard_profile_img.png'" alt=""
-                        class="img-responsive"/>
+                  <!--class="img-responsive"/>-->
+                   <img
+                     [attr.src]="loggedUser?.profile_image ? 'https://api.dfsportgod.com/images/'+ loggedUser?.profile_image : '../../../../assets/images/dashboard_profile_img.png'"
+                     alt=""
+                     class="img-responsive"/>
                 </span>
 
                 <span class="profileName">{{loggedUser?.first_name}} {{loggedUser?.last_name}}</span>

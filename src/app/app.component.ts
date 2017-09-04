@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ElementRef} from '@angular/core';
 import {AuthService} from "./shared/services/auth.service";
 import {Router} from "@angular/router";
 import {environment} from "../environments/environment";
+
+declare var jQuery:any;
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,13 @@ import {environment} from "../environments/environment";
 })
 export class AppComponent {
 
+  @ViewChild('subscriptionAlert') subscriptionAlert:ElementRef;
+
   constructor(private authService:AuthService, private router:Router) {
+    this.authService.subscriptionAlertEvent.subscribe(
+      data => {
+        jQuery(this.subscriptionAlert.nativeElement).modal();
+      }
+    )
   }
 }

@@ -26,7 +26,7 @@ export class FrontService {
     return headers;
   }
 
-  retrieveNews(sportType:string, timePeriod:string = 'cmonth'):Observable<any> {
+  retrieveNews(sportType:string, timePeriod:string = '30days'):Observable<any> {
     return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
@@ -54,7 +54,7 @@ export class FrontService {
   }
 
   retrieveTwitterFeeds():Observable<any> {
-    return this.http.get(environment.api_end_point + 'getFeeds', {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + 'getTwitterFeeds', {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -64,6 +64,15 @@ export class FrontService {
 
   retrieveFBFeeds():Observable<any> {
     return this.http.get(environment.api_end_point + 'getFBPost', {headers: this.getHeaders()})
+      .map((reponse:Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  retrieveInstaFeeds():Observable<any> {
+    return this.http.get(environment.api_end_point + 'getInstaPosts', {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
