@@ -350,9 +350,11 @@
             Subscription Required
           </div>
           <div class="alert-content">
-            It looks like you do not have access to a plan yet. Please
+            It looks like you do not currently have a subscription.
+            <a (click)="onSubscribeLinkClick()" style="color: #0070ff" data-dismiss="modal">Subscribe</a> today for full access!
+           <!-- It looks like you do not have access to a plan yet. Please
             <a (click)="onSubscribeLinkClick()" style="color: #0070ff" data-dismiss="modal">subscribe now</a> for full access to
-            RotoPros.
+            RotoPros.-->
           </div>
           <div class="alert-footer">
             <button type="button" class="btn btn-default" (click)="onSubscriptionAlertCloseClick()">Close</button>

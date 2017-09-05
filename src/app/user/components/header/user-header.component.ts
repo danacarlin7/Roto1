@@ -1,32 +1,43 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild} from "@angular/core";
 import {AuthService} from "../../../shared/services/auth.service";
 import {LoggedUser} from "../../../shared/models/logged-user.model";
 /**
  * Created by Hiren on 11-06-2017.
  */
 
-
+declare var jQuery:any;
 @Component({
   selector: 'rp-user-header',
   templateUrl: './user-header.component.html',
   styleUrls: ['./user-header.component.css']
 })
 export class UserHeaderComponent {
-  loggedUser: LoggedUser;
-  role: string;
-  constructor(private authService: AuthService) {
+  @ViewChild('profilePic') profilePic:ElementRef;
+  loggedUser:LoggedUser;
+  profileImagePath:string;
+  role:string;
+
+  constructor(private authService:AuthService) {
     this.loggedUser = this.authService.loggedUser;
+    if (this.loggedUser) {
+      this.profileImagePath = this.loggedUser.profile_image;
+    }
     this.role = this.authService.getUserRole();
     this.authService.loggedUserChangeEvent.subscribe(
-      user => this.loggedUser = user
+      user => {
+        this.loggedUser = user;
+        this.profileImagePath = this.loggedUser.profile_image;
+        console.log("profileImagePath => ", this.profileImagePath);
+        jQuery(this.profilePic.nativeElement).attr("src", 'https://api.dfsportgod.com/images/'+this.profileImagePath);
+      }
     );
   }
 
-  createCookie(name,value,days) {
+  createCookie(name, value, days) {
     var expires = "";
     if (days) {
       var date = new Date();
-      date.setTime(date.getTime() + (days*24*60*60*1000));
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
       expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + value + expires + "; domain=rotopros.com; path=/";
@@ -44,7 +55,7 @@ export class UserHeaderComponent {
   // }
 
   removeCookie(name) {
-    document.cookie = name + "=; expires=" + new Date(0).toUTCString() +"; domain=rotopros.com; path=/";
+    document.cookie = name + "=; expires=" + new Date(0).toUTCString() + "; domain=rotopros.com; path=/";
   }
 
 

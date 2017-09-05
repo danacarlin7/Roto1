@@ -179,3 +179,14 @@ mfDefaultSorter a {
     overflow: visible;
   }
 }
+
+.home-profile .dropdown .dropdown-menu li{border-bottom: 1px solid #eaeaea;}
+.home-profile .dropdown .dropdown-menu li:last-child{border-bottom: 0px;}
+.home-profile .dropdown .dropdown-menu li a{line-height: 22px; font-family: 'Open Sans';}
+.home-profile .dropdown .dropdown-menu li a:hover{color: #f8c534;}
+.home-profile img{border-radius: 50%;max-width: 40px !important;}
+.home-profile .profileName{max-width: 100px;  text-overflow: ellipsis;  overflow: hidden;}
+.home-profile #profileDrpdwn{display: flex;flex-flow: row wrap;align-items: center;justify-content: space-between;background: transparent;border-radius: 0px;border: 0px;color: rgba(255,255,255,0.7);font-size: 16px;line-height: 25.33px;padding: 0px;}
+.home-profile #profileDrpdwn:hover, .home-profile #profileDrpdwn:focus{color: #FFF;}
+.home-profile .dropdown .dropdown-menu{left: initial; right: 0px;}
+.home-profile .dropdown .dropdown-menu:after{content: "";position: absolute;right: 14px;bottom: 100%;width: 0;height: 0;border-style: solid;border-width: 0 10px 10px 10px;border-color: transparent transparent #FFF transparent;z-index: 9998;}

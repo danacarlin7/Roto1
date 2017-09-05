@@ -35,6 +35,9 @@
                 <a routerLink="/basics">DFS Basics</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/subscribe">Plans</a>
+              </li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/faq">FAQ</a>
               </li>
             </ul>
@@ -132,7 +135,8 @@
                   <!--<img src="../../../../assets/images/dashboard_profile_img.png" alt=""-->
                   <!--class="img-responsive"/>-->
                    <img
-                     [attr.src]="loggedUser?.profile_image ? 'https://api.dfsportgod.com/images/'+ loggedUser?.profile_image : '../../../../assets/images/dashboard_profile_img.png'"
+                     #profilePic
+                     [attr.src]="profileImagePath ? 'https://api.dfsportgod.com/images/'+ profileImagePath : '../../../../assets/images/dashboard_profile_img.png'"
                      alt=""
                      class="img-responsive"/>
                 </span>
