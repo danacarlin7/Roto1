@@ -17,7 +17,7 @@
               </div>
               <div class="alert alert-warning fade in" *ngIf="isError">
                 {{errorMsg }}
-                <a [routerLink]="['verify','verify']" *ngIf="showVerifyLink"> Get verification link</a>
+                <a [routerLink]="'/verify'" *ngIf="showVerifyLink"> Get verification link</a>
               </div>
               <form [formGroup]="loginForm">
                 <div class="form-group">
@@ -47,17 +47,17 @@
                        [disabled]="!loginForm.valid">
               </form>
               <!--<p class="otherSigninPara">You can also <a href="javascript:void(0)" class="lred">sign up here or</a> sign-->
-                <!--in by:</p>-->
+              <!--in by:</p>-->
               <!--&lt;!&ndash;<cuppa-oauth [authConfig]="config"></cuppa-oauth>&ndash;&gt;-->
               <!--<div class="loginSocialIcns">-->
-                <!--<a href="javascript:void(0)"><img src="../../../../assets/images/facebook.png" alt=""-->
-                                                  <!--class="img-responsive"/></a>-->
-                <!--<a href="javascript:void(0)"><img src="../../../../assets/images/gmail.png" alt=""-->
-                                                  <!--class="img-responsive"/></a>-->
-                <!--<a href="javascript:void(0)"><img src="../../../../assets/images/twitter.png" alt=""-->
-                                                  <!--class="img-responsive"/></a>-->
+              <!--<a href="javascript:void(0)"><img src="../../../../assets/images/facebook.png" alt=""-->
+              <!--class="img-responsive"/></a>-->
+              <!--<a href="javascript:void(0)"><img src="../../../../assets/images/gmail.png" alt=""-->
+              <!--class="img-responsive"/></a>-->
+              <!--<a href="javascript:void(0)"><img src="../../../../assets/images/twitter.png" alt=""-->
+              <!--class="img-responsive"/></a>-->
               <!--</div>-->
-              <p class="regstrNmPara">Don’t you have an account?  <a routerLink="/signup"  class="lred">Register
+              <p class="regstrNmPara">Don’t you have an account? <a routerLink="/signup" class="lred">Register
                 Now!</a> It’s really simple and you can start enjoying all the benefits!</p>
             </div>
           </div>

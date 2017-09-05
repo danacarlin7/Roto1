@@ -40,6 +40,7 @@ const routes:Routes = [
     data: {title: 'RotoPose - Home'},
     children: [
       <Route>{path: '', component: FrontHomeComponent},
+      <Route>{path: 'verify', component: VerifyAccComponent},
       <Route>{path: ':token/verify', component: VerifyAccComponent},
       <Route>{path: ':token/change-password', component: ChangePasswordComponent},
       <Route>{path: 'login', component: LoginComponent},
