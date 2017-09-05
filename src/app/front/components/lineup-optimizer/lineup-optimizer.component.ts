@@ -269,47 +269,50 @@ export class LineupOptimizerComponent {
           return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue, force: currPlayer.isLocked}
         })
     };
+    if (this.authService.isSubscriber()) {
+      if (this.advFilterPopup.variabilityValue) {
+        lineupData['variation'] = this.advFilterPopup.variabilityValue;
+      }
 
-    if (this.advFilterPopup.variabilityValue) {
-      lineupData['variation'] = this.advFilterPopup.variabilityValue;
+      if (this.advFilterPopup.maxExposureValue != 100) {
+        lineupData['maxExposure'] = this.advFilterPopup.maxExposureValue;
+      }
+
+      if (this.advFilterPopup.noOfUniquePlayersValue != 1) {
+        lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
+      }
+
+      if (this.advFilterPopup.noOfLineupValue != 1) {
+        lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
+      }
+
+      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != 20000) {
+        lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
+      }
+
+      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != 35000) {
+        lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
+      }
+
+      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != 30000) {
+        lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
+      }
+
+      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != 50000) {
+        lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
+      }
+
+      lineupData['noBattersVsPitchers'] = this.advFilterPopup.noBattingVsPitchers;
+      lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
     }
-
-    if (this.advFilterPopup.maxExposureValue != 100) {
-      lineupData['maxExposure'] = this.advFilterPopup.maxExposureValue;
-    }
-
-    if (this.advFilterPopup.noOfUniquePlayersValue != 1) {
-      lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
-    }
-
-    if (this.advFilterPopup.noOfLineupValue != 1) {
-      lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
-    }
-
-    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != 20000) {
-      lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
-    }
-
-    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != 35000) {
-      lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
-    }
-
-    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != 30000) {
-      lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
-    }
-
-    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != 50000) {
-      lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
-    }
-
-    lineupData['noBattersVsPitchers'] = this.advFilterPopup.noBattingVsPitchers;
-    lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
-
     return lineupData;
   }
 
   prepareMinMaxPlayerFromTeam():any[] {
     let teams = [];
+    if (!this.authService.isSubscriber()) {
+      return [];
+    }
     teams = this.advFilterPopup.getMinMaxPlayerFromTeam();
     let stackData = this.advFilterPopup.getStakingData();
     if (stackData && stackData.length) {
@@ -425,5 +428,15 @@ export class LineupOptimizerComponent {
 
   onRemoveAdvFilterValueEvent() {
     this.onSaveAdvFilterValueEvent(null);
+  }
+
+  onAdvFilterPopupClick() {
+    this.isSavedFiltersApplied = false;
+    if (this.authService.isSubscriber()) {
+      jQuery(this.advFilterPopup.settingPopup.nativeElement).modal();
+    }
+    else {
+      this.authService.showSubscriptionAlert();
+    }
   }
 }

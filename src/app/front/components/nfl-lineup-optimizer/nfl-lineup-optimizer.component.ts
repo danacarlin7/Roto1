@@ -402,4 +402,14 @@ export class NFLLineupOptimizerComponent {
   onRemoveAdvFilterValueEvent() {
     this.onSaveAdvFilterValueEvent(null);
   }
+
+  onAdvFilterPopupClick() {
+    this.isSavedFiltersApplied = false;
+    if (this.authService.isSubscriber()) {
+      jQuery(this.advFilterPopup.settingPopup.nativeElement).modal();
+    }
+    else {
+      this.authService.showSubscriptionAlert();
+    }
+  }
 }

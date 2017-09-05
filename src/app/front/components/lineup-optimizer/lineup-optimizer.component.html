@@ -32,9 +32,8 @@
           <span class="setting-btn">
             <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
                   [mdTooltipPosition]="'before'"></span>
-            <a class="btn btn-gray-black" [class.active]="isSavedFiltersApplied" data-toggle="modal"
-               (click)="isSavedFiltersApplied = false;"
-               data-target="#advance-feature-filters">Settings</a>
+            <a class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
+               (click)="onAdvFilterPopupClick()">Settings</a>
           </span>
         </div>
       </div>

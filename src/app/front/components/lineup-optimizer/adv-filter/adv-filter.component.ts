@@ -46,11 +46,11 @@ export class AdvFilterComponent {
   salarySettingValue:any[] = [];
   noBattingVsPitchers:boolean;
 
-  projectionFilterValue:any[];
-  salaryFilterValue:any[];
-  valueFilterValue:any[];
-  battingOrderFilterValue:any[];
-  positionFilterValue:any[];
+  projectionFilterValue:any[] = [];
+  salaryFilterValue:any[] = [];
+  valueFilterValue:any[] = [];
+  battingOrderFilterValue:any[] = [];
+  positionFilterValue:any[] = [];
 
   @Input()
   advFilterValue:AdvFilterValue;
@@ -444,8 +444,11 @@ export class AdvFilterComponent {
   }
 
   getFilters():LineupOppFilterCriteria[] {
-    this.prepareFilters();
-    return this.filters;
+    if (this.authService.isSubscriber()) {
+      this.prepareFilters();
+      return this.filters;
+    }
+    return [];
   }
 
   prepareStacks() {

@@ -14,11 +14,19 @@ export class AppComponent {
 
   @ViewChild('subscriptionAlert') subscriptionAlert:ElementRef;
 
+  isLoggedIn:boolean;
+
   constructor(private authService:AuthService, private router:Router) {
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.authService.subscriptionAlertEvent.subscribe(
       data => {
         jQuery(this.subscriptionAlert.nativeElement).modal();
       }
-    )
+    );
+    this.authService.isLoggedInEvent.subscribe(
+      data => {
+        this.isLoggedIn = data;
+      }
+    );
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation, EventEmitter, Output} from "@angular/core";
+import {Component, Input, ViewEncapsulation, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
 import {AdvFilterSettings, Game} from "../../../models/adv-filter-setting.model";
 import {LineupOppFilterCriteria} from "../../../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants";
@@ -49,6 +49,8 @@ export class NFLAdvFilterComponent {
   valueFilterValue:any[];
   battingOrderFilterValue:any[];
   positionFilterValue:any[];
+
+  @ViewChild('settingPopup') settingPopup:ElementRef;
 
   @Input()
   advFilterValue:AdvFilterValue;
