@@ -28,7 +28,9 @@ export class UserHeaderComponent {
         this.loggedUser = user;
         this.profileImagePath = this.loggedUser.profile_image;
         console.log("profileImagePath => ", this.profileImagePath);
-        jQuery(this.profilePic.nativeElement).attr("src", 'https://api.dfsportgod.com/images/'+this.profileImagePath);
+        if (this.profileImagePath) {
+          jQuery(this.profilePic.nativeElement).attr("src", 'https://api.dfsportgod.com/images/' + this.profileImagePath);
+        }
       }
     );
   }

@@ -252,8 +252,8 @@ export class FrontHomeComponent implements AfterViewInit {
           if (response.statusCode == 200) {
             let data:Array<any> = response.data;
             let tempNews = data.map(currData => currData['news'][0]);
-            this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 10));
-            this.renderNews();
+            this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
+            //this.renderNews();
           } else {
             console.log('response error => ', response);
           }

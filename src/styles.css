@@ -190,3 +190,15 @@ mfDefaultSorter a {
 .home-profile #profileDrpdwn:hover, .home-profile #profileDrpdwn:focus{color: #FFF;}
 .home-profile .dropdown .dropdown-menu{left: initial; right: 0px;}
 .home-profile .dropdown .dropdown-menu:after{content: "";position: absolute;right: 14px;bottom: 100%;width: 0;height: 0;border-style: solid;border-width: 0 10px 10px 10px;border-color: transparent transparent #FFF transparent;z-index: 9998;}
+
+@media (max-width:768px)
+{
+  .home-profile img{border-radius: 50%;max-width: 30px !important;}
+}
+
+@media (max-width: 767px)
+{
+  header .bottomHeader .rightNav{
+    width: auto !important;
+  }
+}

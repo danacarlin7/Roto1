@@ -58,9 +58,9 @@
       </div>
     </div>
     <div class="bxBottom">
-      <p class="statsNum" *ngIf="contestData.roi >= 0 || !contestData.roi">{{(contestData?.roi? '$' + ( contestData.roi
+      <p class="statsNum" *ngIf="contestData.roi >= 0 || !contestData.roi">{{(contestData?.roi? '%' + ( contestData.roi
         | number): '-' )}}</p>
-      <p class="statsNum" *ngIf="contestData.roi < 0">{{(contestData?.roi? '- $' + ( (contestData.roi * -1) | number):
+      <p class="statsNum" *ngIf="contestData.roi < 0">{{(contestData?.roi? '- %' + ( (contestData.roi * -1) | number):
         '-' )}}</p>
     </div>
   </div>
