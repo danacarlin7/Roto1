@@ -87,7 +87,8 @@
               <li class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
                   [routerLinkActiveOptions]="{exact: true}">
                 <a>Lineup Optimizer<span class="caret"></span></a>
-                <div class="dropdown-content">
+                <div class="dropdown-content" routerLinkActive="active"
+                     [routerLinkActiveOptions]="{exact: true}">
                   <a routerLink="/lineup-optimizer">MLB Optimizer</a>
                   <a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a>
                 </div>

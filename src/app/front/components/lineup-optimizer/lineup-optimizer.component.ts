@@ -286,19 +286,19 @@ export class LineupOptimizerComponent {
         lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
       }
 
-      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != 20000) {
+      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.MLB_MIN_SALARY_FOR_FANDUAL) {
         lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
       }
 
-      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != 35000) {
+      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.MLB_MAX_SALARY_FOR_FANDUAL) {
         lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
       }
 
-      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != 30000) {
+      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.MLB_MIN_SALARY_FOR_DRAFT_KING) {
         lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
       }
 
-      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != 50000) {
+      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.MLB_MAX_SALARY_FOR_DRAFT_KING) {
         lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
       }
 

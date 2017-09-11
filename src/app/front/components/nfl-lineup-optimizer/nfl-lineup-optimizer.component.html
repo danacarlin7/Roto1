@@ -32,8 +32,9 @@
           <span class="setting-btn">
             <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
                   [mdTooltipPosition]="'before'"></span>
-            <a class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
-               (click)="onAdvFilterPopupClick()">Settings</a>
+            <button class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
+               [disabled]="isLoading"
+               (click)="onAdvFilterPopupClick()">Settings</button>
           </span>
         </div>
       </div>
@@ -89,9 +90,10 @@
               <input class="form-control input-sm" type="text" disabled value="{{todayDate | date:'dd MMM, yyyy'}}">
             </div>
             <div class="col-md-4 col-sm-5">
-              <a class="btn btn-lg btn-yellow-black btn-noradius btn-block" (click)="onBtnGenerateLineupClick()">
+              <button class="btn btn-lg btn-yellow-black btn-noradius btn-block"
+                 [class.generate-lineup_btn_disabled]="isLoading" [disabled]="isLoading" (click)="onBtnGenerateLineupClick()">
                 Generate Lineups
-              </a>
+              </button>
             </div>
           </div>
         </div>

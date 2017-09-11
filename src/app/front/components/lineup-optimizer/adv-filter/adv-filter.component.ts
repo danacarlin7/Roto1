@@ -7,6 +7,7 @@ import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 import {SelectItem} from "primeng/primeng";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {Router} from "@angular/router";
+import {LineupOptimizerService} from "../../../services/lineup-optimizer.service";
 /**
  * Created by Hiren on 09-07-2017.
  */
@@ -114,6 +115,8 @@ export class AdvFilterComponent {
 
   positions:SelectItem[];
   isLogIn:boolean;
+
+  lineupOptimizerServiceConst = LineupOptimizerService;
 
   constructor(private authService:AuthService, private router:Router) {
     this.positions = [];
@@ -305,12 +308,12 @@ export class AdvFilterComponent {
       let minSalary:number;
       switch (this.selectedOperator) {
         case 'FanDuel':
-          minSalary = 20000;
-          maxSalary = 35000;
+          minSalary = this.lineupOptimizerServiceConst.MLB_MIN_SALARY_FOR_FANDUAL;
+          maxSalary = this.lineupOptimizerServiceConst.MLB_MAX_SALARY_FOR_FANDUAL;
           break;
         case 'DraftKings':
-          minSalary = 30000;
-          maxSalary = 50000;
+          minSalary = this.lineupOptimizerServiceConst.MLB_MIN_SALARY_FOR_DRAFT_KING;
+          maxSalary = this.lineupOptimizerServiceConst.MLB_MAX_SALARY_FOR_DRAFT_KING;
           break;
       }
       this.salarySlider.bootstrapSlider({

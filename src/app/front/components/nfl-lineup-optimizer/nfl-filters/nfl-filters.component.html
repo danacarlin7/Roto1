@@ -82,8 +82,8 @@
                         <span id="mmsSliderVal">{{salarySettingValue[0]}}-{{salarySettingValue[1]}}</span></h4>
                       <input id="mms" type="text"/>
                       <span
-                        class="slider-range slider-min">{{selectedOperator == 'FanDuel' ? 20000 : 30000}}</span><span
-                      class="slider-range slider-max">{{selectedOperator == 'FanDuel' ? 35000 : 50000}}</span>
+                        class="slider-range slider-min">{{selectedOperator == 'FanDuel' ? lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_FANDUAL : lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_DRAFT_KING}}</span><span
+                      class="slider-range slider-max">{{selectedOperator == 'FanDuel' ? lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_FANDUAL : lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_DRAFT_KING}}</span>
                     </div>
                   </div>
                   <div class="col-md-6">

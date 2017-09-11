@@ -6,6 +6,7 @@ import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {SelectItem} from "primeng/primeng";
+import {LineupOptimizerService} from "../../../services/lineup-optimizer.service";
 /**
  * Created by Hiren on 16-08-2017.
  */
@@ -118,6 +119,8 @@ export class NFLAdvFilterComponent {
 
   positions:SelectItem[];
   isLogIn:boolean;
+
+  lineupOptimizerServiceConst = LineupOptimizerService;
 
   constructor(private authService:AuthService) {
     this.isLogIn = this.authService.isLoggedIn();
@@ -313,12 +316,12 @@ export class NFLAdvFilterComponent {
       let minSalary:number;
       switch (this.selectedOperator) {
         case 'FanDuel':
-          minSalary = 20000;
-          maxSalary = 35000;
+          minSalary = this.lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_FANDUAL;
+          maxSalary = this.lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_FANDUAL;
           break;
         case 'DraftKings':
-          minSalary = 30000;
-          maxSalary = 50000;
+          minSalary = this.lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_DRAFT_KING;
+          maxSalary = this.lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_DRAFT_KING;
           break;
       }
       this.salarySlider.bootstrapSlider({

@@ -18,6 +18,15 @@ import {AdvFilterValue} from "../models/adv-filter-value.model";
 @Injectable()
 export class LineupOptimizerService {
 
+  public static MLB_MIN_SALARY_FOR_DRAFT_KING:number = 30000;
+  public static MLB_MAX_SALARY_FOR_DRAFT_KING:number = 50000;
+  public static MLB_MIN_SALARY_FOR_FANDUAL:number = 20000;
+  public static MLB_MAX_SALARY_FOR_FANDUAL:number = 35000;
+  public static NFL_MIN_SALARY_FOR_DRAFT_KING:number = 25000;
+  public static NFL_MAX_SALARY_FOR_DRAFT_KING:number = 50000;
+  public static NFL_MIN_SALARY_FOR_FANDUAL:number = 30000;
+  public static NFL_MAX_SALARY_FOR_FANDUAL:number = 60000;
+
   searchStr:string = '';
   selectedOperator:string = 'FanDuel';
   selectedSport:string;
