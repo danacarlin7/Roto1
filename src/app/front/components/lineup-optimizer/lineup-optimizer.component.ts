@@ -35,6 +35,7 @@ export class LineupOptimizerComponent {
   advFilterSettings:AdvFilterSettings;
   isLoading:boolean;
   isError:boolean;
+  isDataError:boolean;
   errorMsg:string;
   errorData:string;
   games:Game[];
@@ -90,14 +91,19 @@ export class LineupOptimizerComponent {
             this.slates = response.data;
             this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
+            this.selectedSlate = this.slates[0].SlateID;
+            this.optimizerService.selectedSlate = this.selectedSlate;
+            this.selectedGame = this.optimizerService.selectedGame = 0;
+            this.isSlateChanged = true;
             this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
           } else {
-
+            this.isLoading = false;
           }
         },
         error => {
           this.isLoading = false;
           this.isError = true;
+          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving slates.";
           this.errorData = error.message;
           console.log("http error => ", error);
@@ -130,6 +136,7 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
+          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving players.";
           this.errorData = error.message;
           console.log("http error => ", error);
@@ -169,6 +176,7 @@ export class LineupOptimizerComponent {
                     error => {
                       this.isLoading = false;
                       this.isError = true;
+                      this.isDataError = true;
                       this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
                       this.errorData = error.message;
                     }
@@ -192,6 +200,7 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
+          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
           this.errorData = error.message;
           console.log("http error => ", error);
@@ -221,6 +230,7 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
+          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving staking info.";
           this.errorData = error.message;
         }
@@ -272,7 +282,8 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
-          this.errorMsg = error.message;
+          this.errorMsg = "Oops! something went wrong while generating lineups.";
+          this.errorData = error.message;
           console.log("GenerateLineup response error=> ", error);
         }
       )

@@ -39,7 +39,9 @@ export class NFLLineupOptimizerComponent {
   lockedPlayers:number[] = [];
   todayDate = new Date();
   isError:boolean;
+  isDataError:boolean;
   errorMsg:string;
+  errorData:string;
   advFilterValue:AdvFilterValue;
   isSavedFiltersApplied:boolean;
 
@@ -88,13 +90,21 @@ export class NFLLineupOptimizerComponent {
             this.slates = response.data;
             this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
+            this.selectedSlate = this.slates[0].SlateID;
+            this.optimizerService.selectedSlate = this.selectedSlate;
+            this.selectedGame = this.optimizerService.selectedGame = 0;
+            this.isSlateChanged = true;
             this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
           } else {
-
+            this.isLoading = false;
           }
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving slates.";
+          this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -124,6 +134,10 @@ export class NFLLineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving players.";
+          this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -157,6 +171,13 @@ export class NFLLineupOptimizerComponent {
                           this.isSlateChanged = false;
                         }, 50);
                       }
+                    },
+                    error => {
+                      this.isLoading = false;
+                      this.isError = true;
+                      this.isDataError = true;
+                      this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
+                      this.errorData = error.message;
                     }
                   );
               } else {
@@ -177,6 +198,10 @@ export class NFLLineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.isDataError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
+          this.errorData = error.message;
           console.log("http error => ", error);
         }
       )
@@ -202,6 +227,11 @@ export class NFLLineupOptimizerComponent {
           }
         },
         error => {
+          this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving staking info.";
+          this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -246,13 +276,14 @@ export class NFLLineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
-            this.router.navigate(['generated-lineups']);
+            this.router.navigate(['nfl-lineups']);
           }
         },
         error => {
           this.isLoading = false;
           this.isError = true;
-          this.errorMsg = error.message;
+          this.errorMsg = "Oops! something went wrong while generating lineups.";
+          this.errorData = error.message;
           console.log("GenerateLineup response error=> ", error);
         }
       )

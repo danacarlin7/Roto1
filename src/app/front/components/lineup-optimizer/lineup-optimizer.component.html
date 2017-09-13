@@ -16,7 +16,6 @@
             <a class="btn btn-yellow-black">MLB</a>
             <a class="btn btn-gray-black" routerLink="nfl">NFL</a>
           </span>
-          <span class="error-msg" *ngIf="isError">{{errorMsg}}</span>
         </div>
         <div class="col-md-5 text-right">
           <span style="padding-right: 20px">
@@ -33,21 +32,23 @@
             <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
                   [mdTooltipPosition]="'before'"></span>
             <button class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
-               [disabled]="isLoading || isError"
+               [disabled]="isLoading || isDataError"
                (click)="onAdvFilterPopupClick()">Settings</button>
           </span>
         </div>
       </div>
     </section>
     <!--/ Title -->
-
+    <section class="error-container" *ngIf="isError">
+      <span class="error-msg" [md-tooltip]="errorData">{{errorMsg}}</span>
+    </section>
     <!-- Filters -->
     <section class="my-section table-filtes-container section-gray">
       <div class="row">
         <div class="col-lg-7 col-md-6">
           <div class="row">
             <div class="col-lg-2 col-sm-3 no-padding-right">
-              <select class="form-control input-sm" (change)="onSlateChanged($event)">
+              <select class="form-control input-sm" [(ngModel)]="selectedSlate" (change)="onSlateChanged($event)">
                 <option [value]="0">All Slates</option>
                 <option *ngFor="let slate of slates" [value]="slate.SlateID">
                   {{slate.StartTime | date:'h:mm a EEE, MMM d'}}
@@ -91,7 +92,7 @@
             </div>
             <div class="col-md-4 col-sm-5">
               <button class="btn btn-lg btn-yellow-black btn-noradius btn-block"
-                      [class.generate-lineup_btn_disabled]="isLoading || isError" [disabled]="isLoading || isError" (click)="onBtnGenerateLineupClick()">
+                      [class.generate-lineup_btn_disabled]="isLoading || isDataError" [disabled]="isLoading || isDataError" (click)="onBtnGenerateLineupClick()">
                 Generate Lineups
               </button>
             </div>

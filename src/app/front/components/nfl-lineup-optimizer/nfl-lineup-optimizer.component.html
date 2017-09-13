@@ -16,7 +16,6 @@
             <a class="btn btn-gray-black" routerLink="/lineup-optimizer">MLB</a>
             <a class="btn btn-yellow-black ">NFL</a>
           </span>
-          <span class="error-msg" *ngIf="isError">{{errorMsg}}</span>
         </div>
         <div class="col-md-5 text-right">
           <span style="padding-right: 20px">
@@ -33,21 +32,23 @@
             <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
                   [mdTooltipPosition]="'before'"></span>
             <button class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
-               [disabled]="isLoading"
-               (click)="onAdvFilterPopupClick()">Settings</button>
+                    [disabled]="isLoading || isDataError"
+                    (click)="onAdvFilterPopupClick()">Settings</button>
           </span>
         </div>
       </div>
     </section>
     <!--/ Title -->
-
+    <section class="error-container" *ngIf="isError">
+      <span class="error-msg" [md-tooltip]="errorData">{{errorMsg}}</span>
+    </section>
     <!-- Filters -->
     <section class="my-section table-filtes-container section-gray">
       <div class="row">
         <div class="col-lg-7 col-md-6">
           <div class="row">
             <div class="col-lg-2 col-sm-3 no-padding-right">
-              <select class="form-control input-sm" (change)="onSlateChanged($event)">
+              <select class="form-control input-sm" [(ngModel)]="selectedSlate" (change)="onSlateChanged($event)">
                 <option [value]="0">All Slates</option>
                 <option *ngFor="let slate of slates" [value]="slate.SlateID">
                   {{slate.StartTime | date:'h:mm a EEE, MMM d'}}
@@ -91,7 +92,8 @@
             </div>
             <div class="col-md-4 col-sm-5">
               <button class="btn btn-lg btn-yellow-black btn-noradius btn-block"
-                 [class.generate-lineup_btn_disabled]="isLoading" [disabled]="isLoading" (click)="onBtnGenerateLineupClick()">
+                      [class.generate-lineup_btn_disabled]="isLoading || isDataError" [disabled]="isLoading || isDataError"
+                      (click)="onBtnGenerateLineupClick()">
                 Generate Lineups
               </button>
             </div>
@@ -125,6 +127,7 @@
           </th>
           <th>
             Team pts
+            <mfDefaultSorter by="TeamPoints">Team pts</mfDefaultSorter>
           </th>
           <th>
             Opp pts
@@ -165,9 +168,9 @@
           <td>{{player.Position}}</td>
           <td>{{player.Team}}</td>
           <td>{{player.Salary}}</td>
-          <td> -</td>
-          <td> -</td>
-          <td> -</td>
+          <td>{{player.TeamPoints}}</td>
+          <td>{{player.OppPoints}}</td>
+          <td>{{player.TotalPoints}}</td>
           <td> -</td>
           <td>{{player.Opponent}}</td>
           <td>{{player.Line}}</td>
