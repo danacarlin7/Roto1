@@ -59,6 +59,16 @@
   -webkit-animation-fill-mode: forwards;
 }
 
+@media (max-width: 1024px) {
+  .dropdown-content:after {
+    display: none;
+  }
+  .dropdown-content {
+    left:20px;
+    right:20px;
+  }
+}
+
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes mymove {
   0% {

@@ -35,6 +35,24 @@ export class UserHeaderComponent {
     );
   }
 
+  ngAfterViewInit(){
+    jQuery('.menuToggle').click(function(){
+      jQuery(".mainMenu").addClass("tglMnu");
+    });
+
+    jQuery(".closeBtn").click(function(e){
+      e.preventDefault();
+      jQuery(this).parent().removeClass("tglMnu");
+    });
+  }
+
+  closeMobileMenu() {
+    console.log("closeMobileMenu");
+    if (jQuery(".mainMenu").hasClass("tglMnu")) {
+      jQuery(".mainMenu").removeClass("tglMnu");
+    }
+  }
+
   createCookie(name, value, days) {
     var expires = "";
     if (days) {

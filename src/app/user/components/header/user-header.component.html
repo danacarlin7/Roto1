@@ -7,17 +7,17 @@
           <nav class="topNavbar">
             <ul class="pull-right">
               <!--<li routerLinkActive="active" *ngIf="role == 'provider'" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a routerLink="/provider-lineups">My Lineups</a>-->
+              <!--<a routerLink="/provider-lineups">My Lineups</a>-->
               <!--</li>-->
               <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a routerLink="/provider-public-lineups">Lineups</a>-->
+              <!--<a routerLink="/provider-public-lineups">Lineups</a>-->
               <!--</li>-->
               <!--<li class="lineup-dropdown" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a>Lineup Optimizer<span class="caret"></span></a>-->
-                <!--<div class="dropdown-content">-->
-                  <!--<a routerLink="/lineup-optimizer">MLB Optimizer</a>-->
-                  <!--<a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a>-->
-                <!--</div>-->
+              <!--<a>Lineup Optimizer<span class="caret"></span></a>-->
+              <!--<div class="dropdown-content">-->
+              <!--<a routerLink="/lineup-optimizer">MLB Optimizer</a>-->
+              <!--<a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a>-->
+              <!--</div>-->
               <!--</li>-->
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/excel-tool">Excel Tool<span class="sr-only">(current)</span></a>
@@ -68,7 +68,7 @@
             </div>
             <ul>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a [routerLink]="'/user'">
+                <a [routerLink]="'/user'" (click)="closeMobileMenu()">
                   <div class="icnWrapperD">
                     <img src="../../../../assets/images/dashboard_icn1.png" alt="" class="img-responsive"/>
                   </div>
@@ -76,7 +76,7 @@
                 </a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/user/overview">
+                <a routerLink="/user/overview" (click)="closeMobileMenu()">
                   <div class="icnWrapperD">
                     <img src="../../../../assets/images/dashboard_icn2.png" alt=""
                          class="img-responsive"/>
@@ -85,7 +85,7 @@
                 </a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/user/cohort">
+                <a routerLink="/user/cohort" (click)="closeMobileMenu()">
                   <div class="icnWrapperD">
                     <img src="../../../../assets/images/dashboard_icn3.png" alt=""
                          class="img-responsive"/>
@@ -94,7 +94,7 @@
                 </a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/user/contests">
+                <a routerLink="/user/contests" (click)="closeMobileMenu()">
                   <div class="icnWrapperD">
                     <img src="../../../../assets/images/dashboard_icn4.png" alt=""
                          class="img-responsive"/>
@@ -103,7 +103,7 @@
                 </a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/user/opponent">
+                <a routerLink="/user/opponent" (click)="closeMobileMenu()">
                   <span class="icnWrapperD">
                     <img src="../../../../assets/images/dashboard_icn5.png" alt=""
                          class="img-responsive"/></span>
@@ -111,7 +111,7 @@
                 </a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/user/graphs">
+                <a routerLink="/user/graphs" (click)="closeMobileMenu()">
                   <span class="icnWrapperD"><img src="../../../../assets/images/dashboard_icn6.png"
                                                  alt="" class="img-responsive"/>
                   </span>
@@ -119,7 +119,7 @@
                 </a>
               </li>
               <li routerLinkActive="active">
-                <a routerLink="/user/uploads">
+                <a routerLink="/user/uploads" (click)="closeMobileMenu()">
                   <span class="icnWrapperD">
                     <img src="../../../../assets/images/dashboard_icn7.png" alt="" class="img-responsive"/></span>
                   <span class="menuName">Uploads</span>

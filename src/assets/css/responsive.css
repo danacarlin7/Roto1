@@ -9,7 +9,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 14px;}
 .dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li a{width: 100px;}
 .dashboardHeader .bottomHeader .logoWrapper, header .logoWrapper{max-width: 200px;}
 header .bottomHeader .rightNav > ul > li > a{width: 90px;}
-header .bottomHeader .bottomHeaderNav .mainMenu {	padding-right: 260px;}
+header .bottomHeader .bottomHeaderNav .mainMenu {	padding-right: 300px;}
 }
 @media (max-width:1199px)
 {
@@ -42,30 +42,30 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 .dashboardContainer .fixedDash .topFilter {width: 84% !important;}
 .dashboardContainer .topFiltrWrapper .dashboardName h1{font-size: 25px;}
 .dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {font-size: 13px;}
-	
+
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{max-width: 112px; font-size: 13px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group label {font-size: 13px;	margin-right: 4px;}
-	
+
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {	background-size: 14px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child .form-control {padding-left: 32px !important;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child {width: 19% !important;margin-left: 0px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child .form-control {background-size: 14px !important;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{padding: 9px;}
 	.dashboardContainer .topFiltrWrapper{padding: 25px 30px;}
-	
+
 	.dUpldBtnWrapper {flex-direction: column;}
 	.dUpldBxRght a .gTxt { font-size: 13px;}
 	.dUpldBtnWrapper .dUpldBtnBx {margin-right: 0px;}
 	.dUpldBtnWrapper > p{margin-top: 10px;}
-	
+
 	.dTabs .nav-tabs > li > a{padding: 10px 12px;}
-	
+
 	.dashboardHeader .bottomHeader .logoWrapper, header .logoWrapper{max-width: 170px;}
 	header .bottomHeader .rightNav > ul > li > a {width: 75px;font-size: 14px;}
 	header .bottomHeader .bottomHeaderNav .mainMenu {padding-right: 230px;}
 	.mlbDescItm .mlbDescItmTp {min-height: 225px;}
 	.glossaryVideoSection > div iframe {width: 100%;height: 254px;}
-	
+
 }
 @media (max-width:1100px)
 {
@@ -91,11 +91,11 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .bottomHeader .rightNav > ul > .searchBtn .srchBar button {padding: 6px 12px;}
 	header .bottomHeader .rightNav > ul > .searchBtn .srchBar .form-group input{padding: 8px 53px 8px 8px;}
 	header .bottomHeader .rightNav > ul > li > a {font-size: 14px;line-height: 19px;width: 90px;}
-	
+
 	.articleDetails .articleDetailsWrapper .articleWrapper .articleBx {width: 520px;}
 	.articleDetails .articleDetailsWrapper .articleWrapper .articleWrapperBx{width: 3270px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 6.5px 12px !important;}
-	
+
 	.dashboardHeader .bottomHeader .logoWrapper {position: relative;left: 0px;transform: translate(0,0);max-width: 160px;}
 	.dashboardHeader .bottomHeader .rightNav img {max-width: 32px;}
 	.dashboardHeader .bottomHeader .bottomHeaderNav {justify-content: space-between;}
@@ -113,34 +113,34 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.dashboardHome .profitByCat .profitByCatRght {width: 100%;}
 	.dashboardHome .profitByCat .profitByCatRght ul{display: flex;flex-flow: row wrap;justify-content: space-around;align-items: flex-start;}
 	.dashboardHome .profitByCat .profitByCatRght ul li{width: 35% !important;margin: 0px !important;}
-	
+
 	.dashboardHome .profitCategory .profitCategoryLft .tblScrlCntntWrap{max-height: 360px;; height: auto !important;}
-	
-	
+
+
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-heading .panel-title a{font-size: 15px;}
-	
+
 	.sectionHedin .dTabs {right: 15px;}
-	
-	
-	
+
+
+
 }
 @media (max-width:991px)
-{	
-	
+{
+
 	header .bottomHeader .navbar-default .navbar-toggle {border: 0px;margin-right: 2px;margin-top: 11px;}
 	header .bottomHeader .navbar-default .navbar-toggle .icon-bar {width: 28px;height: 3px;border-radius: 1px;background-color: #FFF;}
 	header .bottomHeader .navbar-default .navbar-toggle:hover, header .bottomHeader .navbar-default .navbar-toggle:focus{background: transparent;}
-	header .bottomHeader .navbar-default .navbar-toggle:hover .icon-bar, header .bottomHeader .navbar-default .navbar-toggle:focus .icon-bar{background-color: #f8c534;}	
-	section {padding: 45px 0px;}	
-	header .topHeader .topNavbar > ul > li > a {font-size: 12px;padding: 10px 12px;}	
-	
+	header .bottomHeader .navbar-default .navbar-toggle:hover .icon-bar, header .bottomHeader .navbar-default .navbar-toggle:focus .icon-bar{background-color: #f8c534;}
+	section {padding: 45px 0px;}
+	header .topHeader .topNavbar > ul > li > a {font-size: 12px;padding: 10px 12px;}
+
 	.matchDetails .matchDetailsSlider .owl-item .item ul > li{font-size: 15px;}
 	.matchDetails .tabWrapper .nav-tabs > li > a {font-size: 15px;padding: 11px 20px;}
 
 	.boPrt1 .bannerTopTxt h1 {font-size: 60px;line-height: 65px;letter-spacing: -4.5px;}
 	.boPrt1 .bannerTopTxt p {font-size: 17px;}
 	.boPrt1 .bannerTopTxt a {font-size: 17px;padding: 10px 30px;margin-top: 25px;}
-	
+
 	.newsDetails .newsDetailsLft{padding: 0px;margin-bottom: 25px;}
 	.newsDetails .tabWrapper{padding: 0px;}
 	.newsDetails .newsDetailsLft > p{font-size: 15px;margin: 0px;}
@@ -148,24 +148,24 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.newsDetails .tabWrapper .nav-tabs > li > a{font-size: 17px;}
 	.newsDetails .tabWrapper .panel-group .panel-default > .panel-heading .panel-title{font-size: 15px;}
 	.newsDetails .tabWrapper .nav-tabs > li {float: left; margin-right: 50px;}
-	
+
 	.latestNewsDetails .latestNewsWrapper h1 {font-size: 45px;line-height: 50px;}
 	.latestNewsDetails .latestNewsWrapper p {font-size: 15px;}
 	.latestNewsDetails .latestNewsWrapper h1{margin-bottom: 15px;}
 	.latestNewsDetails .latestNewsWrapper{padding-bottom: 50px;}
-	
+
 	.socialDetails .tabWrapper{padding-right: 45px;}
 	.socialDetails .tabWrapper .nav-tabs{right: 45px;}
 	.socialDetails .socialDetailsSlider .owl-item .item .socialTxtBx .socialNameWrapper {font-size: 35px;line-height: 24px;}
 	.socialDetails .socialDetailsSlider .owl-item .item .socialTxtBx .socialMsg {font-size: 15px;}
 	.socialDetails .socialDetailsSlider .owl-item .item .socialTxtBx .socialLink {font-size: 15px;}
 	.socialDetails .tabWrapper .nav-tabs > li > a{width: 65px;}
-	
-	
+
+
 	.articleDetails .articleLftPtrn {left: -128px;}
 	.articleDetails .articleLftPtrn > img{left: 38%;}
-	
-	
+
+
 	.mainHeadingBlack {font-size: 35px;}
 	.newsletterDetails .newsletterPara{font-size: 20px;}
 	.newsletterDetails form {margin-top: 50px !important;}
@@ -173,17 +173,17 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.newsletterDetails form input[type="button"], .newsletterDetails form input[type="submit"] {padding: 12px 40px;}
 	.articleDetails .articleDetailsWrapper > p {margin-bottom: 20px; width: 80%;font-size: 15px;}
 	.articleDetails .articleDetailsWrapper .articleWrapper .articleBx .articlePara {font-size: 15px;}
-	
-	
+
+
 	footer .topFooter .footerHdin {font-size: 18px;margin-bottom: 22px;}
 	footer .topFooter .footerPara {font-size: 14px;}
 	footer .topFooter .footerLinks > li {font-size: 14px;line-height: 30px;}
 	footer .bottomFooter p {font-size: 13px;}
-	
+
 
 	header .bottomHeader .rightNav {top: 12px;}
 	header .bottomHeader .bottomHeaderNav .mainMenu ul li:last-child a{border-bottom: 0px;}
-	
+
 	.loginDetails .loginDetailsWrapper .loginRghtWrapper {width: 420px;}
 	.loginDetails .loginDetailsWrapper .loginRghtWrapper{padding: 25px;}
 	.loginDetails .formWrapper{padding: 30px 25px;}
@@ -195,52 +195,52 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.loginDetails .formWrapper .otherSigninPara {font-size: 16px;margin-top: 20px;}
 	.loginDetails .formWrapper .loginSocialIcns {margin-top: 8px;}
 	.loginDetails .formWrapper .loginSocialIcns a {padding: 10px 10px; height: 46px; font-size: 15px;}
-	
+
 	.loginDetails .formWrapper .loginSocialIcns img {min-width: 10px;max-width: 20px;}
 	.loginDetails .formWrapper .loginSocialIcns .lgGml img{ max-width: 44px;}
 	.loginDetails .formWrapper .regstrNmPara {margin-top: 22px;}
 	.loginDetails .loginDetailsWrapper .loginLftWrapper {left: -238px;max-width: 600px;}
 	.loginDetails .formWrapper form .form-group {margin-bottom: 15px;}
-	
+
 	.frgtPasswdDetails{padding: 175px 0px;}
 	.signupRghtWrapper .mainTab .tabcontent {padding: 20px 25px 0px;}
 	.signupRghtWrapper .mainTab .tab ul li a {font-size: 15px;padding: 18px 0px;}
-	
+
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group { margin: 7px 0px;display: flex;align-items: center;margin-left: 0px;width: 32% !important;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control{width: 100%;max-width: initial;padding: 6px 10px !important; font-size: 14px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper{display: flex; justify-content: space-between;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control{width: 79%;}
 	.dashboardContainer .topFiltrWrapper {padding: 25px 20px;}
-	
+
 	.dashboardContainer > .dashboardContainerWrapper .topStats .topStatsBx{width: 48%; margin: 10px 0px;}
 	.dashboardContainer > .dashboardContainerWrapper > div {padding: 15px 0px;}
 	.dashboardContainer .topFiltrWrapper .topFilter{width: 100%;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child {width: 32% !important;margin-left: 0px;}
-	
+
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-heading .panel-title a{padding: 15px 10px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body{padding: 15px;}
-	
+
 	.dashboardContainer > .dashboardContainerWrapper .dashMainWrapper .leftFilter {width: 34%;}
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain {width: 62%;}
 	.tFormat table .dHedin th {padding: 15px 10px !important;font-size: 14px;}
 	.tFormat table tr td {padding: 15px !important;}
-	
+
 	.dashboardContainerWrapper{padding: 0px 20px !important;}
-	
+
 	.dashboardContainer .topFiltrWrapper .dashboardName{width: auto;}
-	
+
 	.dUpldBxLft {width: 100%;height: 130px;}
 	.dUpldBxRght {width: 100%;padding: 20px 0px;}
-	
+
 	.dTabs .nav-tabs > li > a {padding: 8px 5px;font-size: 12px;}
-	
+
 	.lineupHedin h1 {font-size: 20px;}
 	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap {height: 90px;width: 90px;}
 	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .teamName {font-size: 14px;}
 	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime p {font-size: 20px;}
 	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li {font-size: 14px;line-height: 34px;}
 	.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li span{ margin-right: 15px;}
-	
+
 	.newsItmBtmRght {padding: 0px 10px;}
 	.newsItmBtm .newsItmBtmLft > div {padding: 0px 10px;}
 	.newsItmBtmLft div .txtWrapper {font-size: 14px;}
@@ -254,7 +254,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.newsItm .newsItmTp .newsWrap {margin-top: 25px;}
 	.newsItm .newsItmTp .newsWrap h2 a{margin-bottom: 10px;}
 	.newsItm .newsItmTp {padding: 10px; padding-top: 0px;}
-	
+
 	.mlbBannerHedin h1 .mlbBannerBig {font-size: 60px;line-height: 60px;}
 	.mlbBannerHedin h1 {font-size: 30px;}
 	.mlbBannerSection {padding: 90px 0px 110px;}
@@ -273,7 +273,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbInfoMid .mlbInfoMidRght{padding: 20px 15px;}
 	.mlbDescItm .mlbDescItmTp {min-height: 207px;}
 	.mlbDescLst {font-size: 14px; line-height: 24px;}
-	
+
 	.mlbTopSectionWrap{padding: 15px 20px;}
 	.mlbTopLftHedin {font-size: 22px;line-height: 25px;width: 40%;}
 	.mlbTopLftPara {font-size: 19px;line-height: 24px;width: 60%;}
@@ -283,12 +283,12 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbDescSectionWrap .mlbDescItm {margin-bottom: 140px;}
 	.mlbDescSectionWrap .mlbDescItm2 {margin-bottom: 230px;}
 	.mlbDescSectionWrap .mlbDescItm:last-child {margin-bottom: 100px;}
-	
-	
+
+
 	.faqSection .panel-title > a {padding: 12px 40px 12px 20px;font-size: 14px;}
 	.faqSection .panel-default .panel-body p {font-size: 15px;}
 	.faqSection .panel-group .panel + .panel {margin-top: 15px;}
-	
+
 	.glossarySection{padding: 25px 0px;}
 	.glossarySection .mainHeadingBlack {font-size: 20px;}
 	.glossarySection p {font-size: 16px;}
@@ -302,7 +302,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mPlaceWrtr {font-size: 15px;}
 	.mPlaceTp {padding: 20px 15px;}
 	.mPlaceBtnWrap {padding: 10px 15px;}
-	
+
 	.mPlaceDWrap .authorBx { width: 31%;}
 	.mPlaceDSection .mPlaceWrap {width: 68%;}
 	.mPlaceDWrap .authorBx img {max-width: 100px;}
@@ -315,14 +315,14 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mPlaceDPkgeWrap h4 {margin-bottom: 15px;}
 	.pkgeCntnt h5 {font-size: 16px; margin-top: 15px;}
 	.pkgePara {font-size: 14px;line-height: 24px;margin-top: 5px;}
-	
+
 	.mPlaceDSection .mPlaceImgWrap {width: 100%;margin-bottom: 15px;}
 	.mPlaceDSection .mPlaceImgWrap img{max-width: 210px;margin: 0 auto;}
 	.mPlaceDSection .mPlaceInfoWrap {width: 100%;}
-	
+
 	.articleSection .mPlaceWrap{width: 100%;}
 	.articleSection .mPlaceImgWrap img {max-width: 300px;margin: 0 auto;}
-	
+
 	.lneUpSecLft > .lneUpIcn {width: 35px;height: 35px;padding: 4px 0px;}
 	.lneUpSecLft {padding: 25px 0px 25px 30px;width: 30%;}
 	.lneUpSecLft > .lneUpNameBx p {   font-size: 15px;  line-height: 22px;}
@@ -332,7 +332,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.linUpSection .tFormat table tr.proTotal td { font-size: 14px;}
 	.linUpSection .tFormat table tr.lastTRw td {font-size: 14px;}
 	.linUpSection .form-group .form-control {max-width: 130px;min-width: 130px; font-size: 14px;}
-	
+
 	.bowerBannerSection {padding: 130px 0px 150px;}
 	.bowerBannerHedin h1 .bowerBannerBig {font-size: 58px;line-height: 65px;}
 	.bowerBannerHedin h1{font-size: 30px;}
@@ -347,7 +347,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.infoPara {font-size: 19px;line-height: 30px;}
 	.infoSec2Hedin {font-size: 30px;line-height: 40px;}
 	.infoSec4Lft > .bowerDwnBtn {font-size: 15px;padding: 10px 10px;margin-top: 5px;}
-	
+
 	.ylwTpBx{padding: 20px 15px;}
 	.ylwTpBx h3{font-size: 17px;}
 	.ylwTpBx p img{max-width: 15px;}
@@ -373,7 +373,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.indexNPrt1 .carousel-caption{top: 35%;}
 	.indexNPrt1 .carousel-caption .bannerTopTxt > a {font-size: 16px;line-height: 16px;}
 	.tpCntrl {bottom: 20px;}
-	
+
 }
 
 @media(max-width:767px)
@@ -383,17 +383,17 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mainHeadingBlack {font-size: 23px;line-height: 45px;}
 	.clseBtn{top: 3px; transform: translate(0,0); font-size: 15px;}
 	header .bottomHeader .bottomHeaderNav .menuToggle img{max-width: 30px;}
-	
+
 	header .bottomHeader .navbar-default .navbar-collapse{float: none !important; margin-top: 12px;}
 	.dashboardHeader .bottomHeader .logoWrapper , header .logoWrapper{max-width: 145px;}
 	header .bottomHeader .rightNav > ul > li > a{font-size: 13px;color: #FFF;line-height: 19px;width: 80px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 6.5px 10px !important;}
 	header .bottomHeader .rightNav{width: 216px;}
-	
-	
-	
+
+
+
 	.articleDetails .articleLftPtrn{display: none;}
-	
+
 	header .topHeader .topNavbar > ul > li > a {font-size: 11px;padding: 8px 8px;}
 	header .topHeader .topNavbar > ul > .active > a, header .topHeader .topNavbar > ul > .active > a:focus, header .topHeader .topNavbar > ul > .active > a:hover{background: transparent;}
 	header .bottomHeader{padding: 16px 0px !important;}
@@ -402,25 +402,25 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 13px;}
 	header .bottomHeader .bottomHeaderNav .mainMenu .closeBtn{max-width: 15px;}
 	.bottomHeader .rightNav > ul > .searchBtn .srchBar .form-group input {padding: 8px 48px 8px 8px;}
-	.newsDetails .tabWrapper .panel-group .panel.active .panel-collapse {padding-bottom: 15px;}	
+	.newsDetails .tabWrapper .panel-group .panel.active .panel-collapse {padding-bottom: 15px;}
 	.boPrt1 {height: 260px;padding: 0px;display: flex;align-items: center;}
 	.boPrt1 .bannerTopTxt{width: 270px;}
 	.boPrt1 .bannerTopTxt h1 {font-size: 36px;line-height: 40px;letter-spacing: -0.5px;flex-flow: row wrap;justify-content: center;}
 	.boPrt1 .bannerTopTxt h1 > span:first-child{margin-right: 6px;}
 	.boPrt1 .bannerTopTxt p {font-size: 14px;line-height: 20px;align-items: center;}
 	.boPrt1 .bannerTopTxt a {font-size: 14px;padding: 4px 26px;margin-top: 5px;margin: 0 auto;}
-	
+
 	.articleDetails .articleDetailsWrapper{padding: 0px;}
 	.articleDetails .articleDetailsWrapper .mainHeadingBlack{text-align: center;}
-	
-	
+
+
 	.newsletterDetails .newsletterPara {font-size: 15px;line-height: 23px;}
 	.newsletterDetails form{margin-top: 30px !important;}
 	.newsletterDetails form .form-group input {font-size: 13px;;padding: 7px 12px;}
 	.newsletterDetails form .form-group {margin-right: 5px !important;}
 	.newsletterDetails form input[type="button"], .newsletterDetails form input[type="submit"] {padding: 7px 18px; font-size: 14px;}
 	.newsletterDetails .newsletterDetailsWrapper .privacyPara {float: none;font-size: 12px;text-align: center;}
-	
+
 	footer .topFooter{padding: 25px 0px;}
 	footer .topFooter .footerHdin {font-size: 16px;margin-bottom: 10px;}
 	footer .topFooter .logoWrapper {margin-bottom: 10px;}
@@ -431,7 +431,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	footer .topFooter .footerSocialLinks > li img{max-width: 28px;}
 	footer .bottomFooter p {font-size: 12px; text-align: center;line-height: 21px;}
 	footer .bottomFooter .bottomFooterRght p{float: none;}
-	
+
 	.matchDetails .tabWrapper .tab-content {margin-top: 25px;}
 	.matchDetails .matchDetailsSlider .owl-item .item ul > li {font-size: 13px;}
 	.latestNewsDetails .latestNewsWrapper {padding: 15px 15px 20px;}
@@ -455,7 +455,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .topHeader .topNavbar{padding: 5px 0px;overflow: hidden;}
 	header .topHeader .topNavbar > ul{justify-content: center;float: none !important;}
 	header .topHeader .topNavbar > ul > li > a {font-size: 11px;padding: 1px 7px;line-height: 15px;}
-	
+
 	.matchDetails .tabWrapper .nav-tabs > li > a {font-size: 14px;padding: 6px 12px;}
 	.newsDetails{padding: 20px 0px;}
 	.latestNewsDetails .latestNewsDetailsSlider .latestNewsTxt h3{line-height: 22px;}
@@ -477,11 +477,11 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.latestNewsDetails .latestNewsDetailsSlider .latestNewsTxt {padding: 12px;}
 	footer .bottomFooter{padding: 5px 0px;}
 	.mCSB_horizontal.mCSB_inside > .mCSB_container {margin-bottom: 40px;}
-	
+
 	header .bottomHeader .rightNav {top: 10px;}
 	.socialDetailsSlider .owl-nav{display: none;}
 	footer .topFooter .footerHdin::after{content: none;}
-	
+
 	.loginDetails .loginDetailsWrapper .loginLftWrapper{display: none;}
 	.loginDetails .loginDetailsWrapper{justify-content: center;}
 	.loginDetails .loginDetailsWrapper .loginRghtWrapper {padding: 15px;}
@@ -496,26 +496,26 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.loginDetails .formWrapper .loginSocialIcns {margin-top: 0px;}
 	.loginDetails .formWrapper .loginSocialIcns img {max-height: 30px;}
 	.loginDetails .formWrapper .regstrNmPara {margin-top: 10px;font-size: 13px;}
-	
+
 	.frgtPasswdDetails{padding: 25px 0px;}
 	.signupRghtWrapper .mainTab .tabcontent .signUpPakges li .pkgeName {font-size: 14px;margin-bottom: 4px;}
 	.signupRghtWrapper .mainTab .tabcontent .signUpPakges li .pkgePrice {font-size: 20px;padding-bottom: 5px;}
 	.signupRghtWrapper .mainTab .tabcontent .signUpPakges li .pkgeTime {font-size: 15px;}
 	.signupRghtWrapper .mainTab .tab ul li a {padding: 10px 0px;font-size: 14px;}
 	.signupRghtWrapper .mainTab .tabcontent .signUpPakges li{padding: 8px 0px;}
-	
+
 	.loginDetails .formWrapper form input[type="text"]:focus, .loginDetails .formWrapper form input[type="password"]:focus, .loginDetails .formWrapper form input[type="email"]:focus, .loginDetails .formWrapper form input[type="text"]:hover, .loginDetails .formWrapper form input[type="password"]:hover, .loginDetails .formWrapper form input[type="email"]:hover {box-shadow: 0px 0px 22px rgba(248,197,52,0.5);}
 	.signupRghtWrapper .mainTab .tabcontent .signUpPakges li.pkgeactive, .signupRghtWrapper .mainTab .tabcontent .signUpPakges li:hover {background: #FFF;box-shadow: 0px 0px 15px rgba(0,0,0,0.28);}
-	
+
 	.dashboardHeader .bottomHeader .rightNav{width: auto;}
 	.dashboardHeader .bottomHeader .rightNav #profileDrpdwn {font-size: 13px;}
 	.dashboardHeader .bottomHeader .rightNav img {max-width: 30px;}
-	
+
 	.dashboardHome .profitCategory .profitCategoryLft table {min-width: 100%;width: 100%;}
 	.dashboardHome .profitCategory .profitCategoryLft .tblScrlCntntWrap{min-width: 100%;width: 100%;max-height: 306px;}
 	.dashboardHome .profitCategory .profitCategoryRght .table-responsive {width: 100%;}
 	.dashboardHome .profitCategory .profitCategoryRght .table-responsive:last-child{margin: 0px;}
-	
+
 	.dHedin h3 {font-size: 15px;line-height: 20px;}
 	.dHedin {padding: 12px 20px;}
 	.sortByMonth .form-group .dropdownSelectClick{padding: 6px 10px;font-size: 13px;}
@@ -532,7 +532,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.dashboardContainer > .dashboardContainerWrapper > div {padding: 10px 0px;}
 	.dashboardContainer > .dashboardContainerWrapper{padding: 0px 15px !important;}
 	.dashboardHome .profitCategory .profitCategoryLft .table-responsive{margin-bottom: 0px;}
-	
+
 	.dashboardContainer .topFiltrWrapper .dashboardName h1 {font-size: 22px;line-height: 22px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group .form-control {padding: 5px 10px !important;font-size: 13px;}
 	.dashboardContainer .topFiltrWrapper {padding: 20px 15px;;}
@@ -541,11 +541,11 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.dashboardContainer > .dashboardContainerWrapper .topStats .bxBottom p{font-size: 22px;}
 	.dashboardContainer > .dashboardContainerWrapper .topStats .bxTop h4 {font-size: 18px;}
 	.dashboardContainer > .dashboardContainerWrapper .topStats .bxTop p{font-size: 13px;}
-	
+
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group label{font-size: 13px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {width: 77%;font-style: normal;}
 	.dashboardHome {padding: 30px 0px 35px;}
-	
+
 	.dashboardContainer > .dashboardContainerWrapper .dashMainWrapper .leftFilter {width: 100%;}
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain {width: 100%;margin-top: 10px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-heading .panel-title a {padding: 10px 10px;font-size: 14px;}
@@ -554,28 +554,28 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body .form-group label {font-size: 13px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body .form-group .filterBtnWrapper .form-control{padding: 6px 10px; font-size: 13px;}
 	.dashboardContainerWrapper .leftFilter .addFilter .panel-group .panel-default .panel-collapse .panel-body .form-group .filterBtnWrapper button{font-size: 13px;}
-	
+
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain .subscriptionNotification{padding: 6px 15px; margin-bottom: 20px;}
 	.dashboardContainer > .dashboardContainerWrapper .dashboardMain .subscriptionNotification p{font-size: 13px;line-height: 16px;}
 	.tFormat table .dHedin th {padding: 10px !important;font-size: 14px;}
 	.tFormat table tr td {padding: 10px !important;font-size: 13px;}
-	
+
 	.dashboardContainerWrapper .leftFilter .addFilter h2, .dashboardContainerWrapper .leftFilter .filterTopHedin h1 {font-size: 17px; line-height: 24px;}
-	
+
 	.dashboardContainer .topFiltrWrapper .topFilter .dteWrapper .form-control {background-size: 14px;}
 	.dashboardContainer .topFiltrWrapper .topFilter .form-group:first-child .form-control {background-size: 13px !important;padding-left: 28px !important;}
 	.dashboardHeader .bottomHeader .rightNav .dropdown .dropdown-menu li a {line-height: 18px;	font-size: 13px;}
-	
+
 	.listingOpponents {padding: 6px 15px;}
 	.listingOpponents p{font-size: 13px; line-height: 16px;}
-	
+
 	.dUpldBxWrapper{padding-bottom: 0px;}
 	.dashboardMainHedin {font-size: 16px;line-height: 22px;}
 	.dashboardMainPara {font-size: 13px;line-height: 20px;margin-bottom: 0px;}
 	.dashboardUpload {margin-top: 20px;padding: 15px;}
-	
+
 	.dUpldBxRght a .gTxt {font-size: 12px;line-height: 17px;}
-	
+
 	.dUpldBtnWrapper .dUpldBtnBx p {font-size: 13px;}
 	.dUpldBtnWrapper .dUpldBtnBx .dUpldBtn a {width: 85px;padding: 0px 10px;}
 	.dUpldBtnWrapper > p {font-size: 12px;margin-top: 8px;text-align: center;line-height: 18px;}
@@ -611,7 +611,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.newsSection .pagination {margin-top: 20px;}
 	.myAcntBtn .dropdown-menu li a{font-size: 13px;}
 	.myAcntBtn .dropdown-menu {top: 41px;}
-	
+
 	.mlbTopSectionWrap {flex-flow: column wrap;justify-content: flex-start;align-items: center;position: static;margin-top: 15px;width: 100%;}
 	.mlbBannerHedin h1 {font-size: 23px; }
 	.mlbBannerHedin h1 .mlbBannerBig {font-size: 45px;line-height: 40px;}
@@ -623,7 +623,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbTopLft img {display: block; margin: 0 auto; max-width: 170px;}
 	.mlbTopLftTxt {display: block;}
 	.mlbInfoSection {padding: 20px 0px;}
-	
+
 	.mlbInfoTp .mlbInfoTpHedin {font-size: 18px;margin-bottom: 5px;}
 	.mlbInfoTp .mlbInfoTpPara {font-size: 13px;line-height: 20px;}
 	.mlbInfoTp {padding: 15px 0px;}
@@ -642,7 +642,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mlbDescItm .mlbDescItmTp {min-height: auto;position: static;}
 	.mlbDescSectionWrap .mlbDescItm:last-child {margin-bottom: 0px;}
 	.mlbDescLst {font-size: 13px;line-height: 24px;}
-	
+
 	.faqSection .panel-title > a {padding: 12px 15px;font-size: 12px;}
 	.faqSection .panel-default > .panel-heading + .panel-collapse > .panel-body {padding: 12px 15px;}
 	.faqSection .panel-default .panel-body p {font-size: 12px;line-height: 21px;}
@@ -650,7 +650,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.faqSection .panel-title > a {padding: 10px 30px 10px 15px;font-size: 11px;line-height: 20px;}
 	.faqSection .panel-group .panel + .panel {margin-top: 10px;}
 	.faqSection {padding: 20px 0px !important;}
-	
+
 	.glossarySection .mainHeadingBlack {font-size: 15px;line-height: 35px; text-align: center;}
 	.glossarySection p { font-size: 14px;padding-bottom: 10px;text-align: center;}
 	.glossarySection p.smlP {font-size: 13px;line-height: 12px;text-align: center;}
@@ -658,7 +658,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.glossaryVideoSection > div {width: 100%;margin-bottom: 20px;}
 	.glossaryVideoSection > div h4 {font-size: 16px;line-height: 20px;margin-bottom: 10px;}
 	.glossaryVideoSection > div iframe {width: 100%;}
-	
+
 	.mPlaceImgWrap {width: 100%;}
 	.mPlaceBtnWrap{max-width: 380px;width: 100%;margin: 0 auto;}
 	.mPlaceImgWrap img{max-width: 280px;width: 100%;margin: 0 auto;}
@@ -671,7 +671,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.mPlaceBtnWrap a {padding: 6px 15px;font-size: 13px;}
 	.mPlaceBtnWrap {padding: 6px 15px;}
 	.mPlaceWrap .mPlaceItm{margin-bottom: 15px;}
-	
+
 	.mPlaceDWrap .authorBx {width: 100%;}
 	.mPlaceDSection .mPlaceWrap {width: 100%; margin-top: 15px;}
 	.mPlaceInfoWrap {margin-top: 15px;}
@@ -685,9 +685,9 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.loginDetails .formWrapper .loginSocialIcns img {min-width: 9px;max-width: 13px;}
 	.loginDetails .formWrapper .loginSocialIcns .lgFb img {min-width: 7px; width: 7px;}
 	.loginDetails .formWrapper .loginSocialIcns .lgGml img {max-width: 32px;}
-	
+
 	.articleSection .mPlaceImgWrap img {max-width: 280px;}
-	
+
 	.linUpSection .dTabs .nav-tabs{margin: 0 auto;}
 	.linUpSection .linUpFrm {position: relative;top: 0px;right: 0px;text-align: center;margin-top: 12px;}
 	.linUpSection .form-group .form-control {max-width: 120px;min-width: 120px;font-size: 13px !important;text-align: left; padding-top: 6px; padding-bottom: 6px;}
@@ -705,7 +705,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.lneUpSecLft > .lneUpNameBx a {font-size: 13px;}
 	.sectionHedinBtn a {padding: 5px 10px; font-size: 13px;}
 	.lneUpSection .dropdownSelect .dropdownSelectMenu > li > a {text-align: left;}
-	
+
 	.bowerBannerHedin h1 .bowerBannerBig {font-size: 36px;line-height: 40px;}
 	.bowerBannerHedin h1 {font-size: 20px;}
 	.bowerBannerSection {padding: 40px 0px 40px;}
@@ -719,7 +719,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.bowerSection2Lft{width: 100%; margin-bottom: 10px;}
 	.bowerSection3{padding: 30px 0px;}
 	.bowerSection3 ul li {font-size: 13px;line-height: 24px;}
-	
+
 	.infoSec1Lft {width: 100%; float:right;}
 	.infoHedin {font-size: 28px;margin-bottom: 0px;}
 	.infoSecHedin {font-size: 16px;line-height: 24px;padding-bottom: 10px;}
@@ -733,7 +733,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.infoSec4Lft {float: left;width: 100%;}
 	.infoSec4Lft > .bowerDwnBtn {font-size: 12px;padding: 3px 10px;margin-top: 5px;}
 	.infoSec4Rght {float: right;width: 100%;margin-bottom: 10px;}
-	
+
 	.indexNPrt2Lft{width: 100%;}
 	.indexNPrt2Mid{width: 100%;}
 	.indexNPrt2Rght{width: 100%;}
@@ -746,10 +746,10 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.indexNPrt2Rght .nav > li > a {   height: 45px;}
 	.indexNPrt2Rght .nav > li > a > img{max-width: 18px;}
 	.nSocialTbBxInfo p {font-size: 13px;}
-	
+
 	.tpCntrl {bottom: 10px;}
 	.indexNPrt1 .carousel-caption .bannerTopTxt > a {font-size: 14px;line-height: 10px;margin-top: -10px;padding: 8px 20px;}
-	
+
 	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p {font-size: 30px;line-height: 30px;}
 	.indexNPrt1 .carousel-caption {top: 50%;width: 90%;}
 	.indexNPrt1 .carousel-caption .bannerTopTxt > p{display: none;}
@@ -776,7 +776,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .bottomHeader .rightNav {width: 146px;right: 43px;top: 9px;}
 	header .bottomHeader .rightNav > ul > li {margin-left: 2px;	position: relative;}
 	.mlbBannerHedin {justify-content: flex-start;}
-	
+
 	.dashboardHeader .bottomHeader .rightNav #profileDrpdwn {font-size: 12px;}
 	.dashboardHeader .bottomHeader .rightNav img {max-width: 26px;}
 	.boPrt1 .bannerTopTxt{width: 230px;}
@@ -916,7 +916,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	.linUpSection .linUpFrm > .form-group {margin-left: 2px;}
 	.linUpSection .linUpFrm > .form-group > .form-group .form-control {min-width: 40px;max-width: 40px;border-radius: 0px;}
 	.lneUpSecRght .lneUpHedin {font-size: 15px;}
-	
+
 	.indexNPrt1 .carousel-caption .bannerTopTxt h1 p {font-size: 20px;line-height: 20px;}
 	.indexNPrt1 .carousel-caption {top: 18%;width: 90%;}
 	.indexNPrt1 .carousel-caption .bannerTopTxt > p{display: none;}

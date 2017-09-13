@@ -48,4 +48,16 @@ export interface OptimizerPlayer{
   isExcluded:boolean;
   exposureValue:number;
   isLocked:boolean;
+  SlateIds: number[];
+  GameKey: string;
+  GameDate: Date;
+  Week: number;
+  TotalPoints: number;
+  TeamPoints: number;
+  OppPoints: number;
+  Temperature?: any;
+  Humidity?: any;
+  WindSpeed?: any;
+  OpponentRank: number;
+  OpponentPositionRank: number;
 }

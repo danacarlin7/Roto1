@@ -63,38 +63,38 @@
           <div class="menuToggle">
             <img src="../../../../assets/images/menu-toggle.png" alt=""/>
           </div>
-          <div class="mainMenu" [ngStyle]="{'padding-right.px': isLoggedIn ? 300: 260}">
+          <div class="mainMenu">
             <div class="closeBtn">
               <span><img src="../../../../assets/images/close_icn.png" alt="" class="img-responsive"/></span>
             </div>
             <ul>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a routerLink="">Home<span class="sr-only">(current)</span></a>
+                <a routerLink="" (click)="closeMobileMenu()">Home<span class="sr-only">(current)</span></a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a target="_blank" href="http://forum.rotopros.com/">Forums</a>
+                <a target="_blank" (click)="closeMobileMenu()" href="http://forum.rotopros.com/">Forums</a>
               </li>
               <!--<li><a>Products</a></li>-->
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/articles">Articles</a>
+                <a routerLink="/articles" (click)="closeMobileMenu()">Articles</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a target="_blank" href="https://rotopros.slack.com">Slack</a>
+                <a target="_blank" href="https://rotopros.slack.com" (click)="closeMobileMenu()">Slack</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/news">Player News</a>
+                <a routerLink="/news" (click)="closeMobileMenu()">Player News</a>
               </li>
               <li class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
                   [routerLinkActiveOptions]="{exact: true}">
                 <a>Lineup Optimizer<span class="caret"></span></a>
                 <div class="dropdown-content" routerLinkActive="active"
                      [routerLinkActiveOptions]="{exact: true}">
-                  <a routerLink="/lineup-optimizer">MLB Optimizer</a>
-                  <a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a>
+                  <a routerLink="/lineup-optimizer" (click)="closeMobileMenu()">MLB Optimizer</a>
+                  <a routerLink="/lineup-optimizer/nfl" (click)="closeMobileMenu()">NFL Optimizer</a>
                 </div>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/subscribe">Plans</a>
+                <a routerLink="/subscribe" (click)="closeMobileMenu()">Plans</a>
               </li>
               <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/lineups">Lineups</a>

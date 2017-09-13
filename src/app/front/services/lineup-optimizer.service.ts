@@ -89,6 +89,12 @@ export class LineupOptimizerService {
                 });
                 observer.next(this.players);
               }
+            },
+            error => {
+              observer.error(error);
+            },
+            () => {
+              observer.complete()
             }
           );
       }
@@ -128,6 +134,7 @@ export class LineupOptimizerService {
 
   retrieveAdvFilterSettings(operator:string, sport:string, slateId:number):Observable<any> {
     let url = environment.api_end_point + 'optimizer/filter?sport=' + sport + '&operator=' + operator;
+    // let url = environment.api_end_point + 'api/optimizer/newSettings?sport=' + sport + '&operator=' + operator;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
     }

@@ -7,14 +7,14 @@ $(document).ready(function() {
 		theme:"dark-thick"
 	});
 
-	$('.menuToggle').click(function(){
+/*	$('.menuToggle').click(function(){
 		$(".mainMenu").addClass("tglMnu");
 	});
 
 	$(".closeBtn").click(function(e){
 		e.preventDefault();
 		$(this).parent().removeClass("tglMnu");
-	});
+	});*/
 
 
 

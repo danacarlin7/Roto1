@@ -36,6 +36,7 @@ export class LineupOptimizerComponent {
   isLoading:boolean;
   isError:boolean;
   errorMsg:string;
+  errorData:string;
   games:Game[];
   stackingData:{team:string,teamId:number}[];
   lockedPlayers:number[] = [];
@@ -96,6 +97,9 @@ export class LineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving slates.";
+          this.errorData = error.message;
           console.log("http error => ", error);
         }
       )
@@ -125,6 +129,9 @@ export class LineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving players.";
+          this.errorData = error.message;
           console.log("http error => ", error);
         }
       )
@@ -158,6 +165,12 @@ export class LineupOptimizerComponent {
                           this.isSlateChanged = false;
                         }, 50);
                       }
+                    },
+                    error => {
+                      this.isLoading = false;
+                      this.isError = true;
+                      this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
+                      this.errorData = error.message;
                     }
                   );
               } else {
@@ -178,6 +191,9 @@ export class LineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
+          this.errorData = error.message;
           console.log("http error => ", error);
         }
       )
@@ -203,7 +219,10 @@ export class LineupOptimizerComponent {
           }
         },
         error => {
-          console.log("http error => ", error);
+          this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving staking info.";
+          this.errorData = error.message;
         }
       )
   }
@@ -247,7 +266,7 @@ export class LineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
-            this.router.navigate(['generated-lineups']);
+            this.router.navigate(['mlb-lineups']);
           }
         },
         error => {
