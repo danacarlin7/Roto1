@@ -101,8 +101,11 @@
                       [md-tooltip]="player.battingOrderConfirmed ? ' Player in starting lineup with confirmed batting order ': ' projected batting order for player'"
                       [class.yellow-dot]="!player.battingOrderConfirmed"
                       [class.green-dot]="player.battingOrderConfirmed"></span></td>-->
-              <td>{{getHomeTeamByPlayerId(player.id)}}@<b>{{getOpponentNameByPlayerId(player.id)}}</b></td>
-              <td>{{player.Value}}</td>
+              <td *ngIf="isAwayTeamPlayer(player)"><b>{{player.team}}</b>@{{getHomeTeamByAwayTeamName(player.team)}}
+              </td>
+              <td *ngIf="isHomeTeamPlayer(player)">{{getAwayTeamByHomeTeamName(player.team)}}@<b>{{player.team}}</b>
+              </td>
+              <td>{{getPlayerValueByPlayerId(player.id)}}</td>
               <td>{{player.fppg.toFixed(2)}}</td>
               <td>${{player.salary}}</td>
             </tr>

@@ -35,6 +35,7 @@ export class LineupOptimizerService {
   filterSettings:AdvFilterSettings;
 
   activeSlate:Slate;
+  slates:Slate;
 
   players:OptimizerPlayer[];
   playersSubject:Subject<OptimizerPlayer[]> = new Subject<OptimizerPlayer[]>();
@@ -241,6 +242,17 @@ export class LineupOptimizerService {
       }
     });
     return team;
+  }
+
+  getPlayerValueByPlayerId(id:number):number {
+    let value:number = 0;
+    this.players.forEach(player => {
+      if (player.PlayerID == id) {
+        value = player.Value;
+        return;
+      }
+    });
+    return value;
   }
 
   applyFilters(filters:LineupOppFilterCriteria[]) {

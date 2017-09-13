@@ -62,7 +62,7 @@
                 <option [value]="0">All Games</option>
                 <option *ngFor="let game of games"
                         [value]="game.gameId">
-                  {{game.homeTeam}}-{{game.awayTeam}}
+                  {{game.awayTeam}}@{{game.homeTeam}}
                 </option>
               </select>
             </div>

@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {LineupOptimizerService} from "../../../services/lineup-optimizer.service";
 import {GeneratedLineup, LineupPlayer, UsedPlayer} from "../../../models/generated-lineup.model";
 import {Router} from "@angular/router";
+import {Game} from "../../../models/adv-filter-setting.model";
 /**
  * Created by Hiren on 16-07-2017.
  */
@@ -42,6 +43,46 @@ export class GeneratedLineupsComponent {
 
   getHomeTeamByPlayerId(id:number) {
     return this.optimizerService.getHomeTeamByPlayerId(id);
+  }
+
+  getHomeTeamByAwayTeamName(team:string):string {
+    let games:Game[] = this.optimizerService.filterSettings.games;
+    for (let i = 0; games && games.length > i; i++) {
+      if (games[i].awayTeam == team) {
+        return games[i].homeTeam;
+      }
+    }
+    return '';
+  }
+
+  getAwayTeamByHomeTeamName(team:string):string {
+    let games:Game[] = this.optimizerService.filterSettings.games;
+    for (let i = 0; games && games.length > i; i++) {
+      if (games[i].homeTeam == team) {
+        return games[i].awayTeam;
+      }
+    }
+    return '';
+  }
+
+  isAwayTeamPlayer(player:LineupPlayer):boolean {
+    let games:Game[] = this.optimizerService.filterSettings.games;
+    for (let i = 0; games && games.length > i; i++) {
+      if (games[i].awayTeam == player.team) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  isHomeTeamPlayer(player:LineupPlayer):boolean {
+    let games:Game[] = this.optimizerService.filterSettings.games;
+    for (let i = 0; games && games.length > i; i++) {
+      if (games[i].homeTeam == player.team) {
+        return true;
+      }
+    }
+    return false;
   }
 
   getSlateName():string {

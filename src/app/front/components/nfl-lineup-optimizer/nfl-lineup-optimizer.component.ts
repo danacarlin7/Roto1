@@ -269,6 +269,8 @@ export class NFLLineupOptimizerComponent {
       this.optimizerService.activeSlate = activeSlate[0];
     }
 
+    this.optimizerService.filterSettings = this.advFilterSettings;
+
     this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)
       .subscribe(
         response => {
