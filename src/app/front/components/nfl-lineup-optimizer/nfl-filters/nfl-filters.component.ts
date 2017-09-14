@@ -135,8 +135,11 @@ export class NFLAdvFilterComponent {
     this.positions.push({label: 'TE', value: 'TE'});
     if (this.selectedOperator == 'FanDuel') {
       this.positions.push({label: 'K', value: 'K'});
+      this.positions.push({label: 'D', value: 'D'});
     }
-    this.positions.push({label: 'DST', value: 'DST'});
+    if (this.selectedOperator == 'DraftKings') {
+      this.positions.push({label: 'DST', value: 'DST'});
+    }
   }
 
   onPlayerPositionFilterChanged(event) {
@@ -165,9 +168,9 @@ export class NFLAdvFilterComponent {
     this.noOfLineupSlider.bootstrapSlider({
       min: 1,
       max: 200,
-      value: 1
+      value: 10
     });
-    this.noOfLineupValue = 1;
+    this.noOfLineupValue = 10;
     this.noOfLineupSlider.on("slide", (slideEvt) => {
       this.noOfLineupValue = slideEvt.value;
       this.isSettingsUpdated = true;
@@ -299,7 +302,7 @@ export class NFLAdvFilterComponent {
       this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
     }
     if (this.noOfLineupSlider) {
-      this.noOfLineupValue = 1;
+      this.noOfLineupValue = 10;
       this.noOfLineupSlider.bootstrapSlider('setValue', this.noOfLineupValue);
     }
     if (this.noOfUniquePlayersSlider) {

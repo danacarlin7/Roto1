@@ -157,9 +157,9 @@ export class AdvFilterComponent {
     this.noOfLineupSlider.bootstrapSlider({
       min: 1,
       max: 200,
-      value: 1
+      value: 10
     });
-    this.noOfLineupValue = 1;
+    this.noOfLineupValue = 10;
     this.noOfLineupSlider.on("slide", (slideEvt) => {
       this.noOfLineupValue = slideEvt.value;
       this.isSettingsUpdated = true;
@@ -291,7 +291,7 @@ export class AdvFilterComponent {
       this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
     }
     if (this.noOfLineupSlider) {
-      this.noOfLineupValue = 1;
+      this.noOfLineupValue = 10;
       this.noOfLineupSlider.bootstrapSlider('setValue', this.noOfLineupValue);
     }
     if (this.noOfUniquePlayersSlider) {

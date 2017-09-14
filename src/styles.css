@@ -135,6 +135,16 @@ mfDefaultSorter a {
   color: #000;
 }
 
+.used-player-position-opt .ui-multiselect-label-container {
+  color: #fff;
+}
+
+.used-player-position-opt .ui-state-default {
+  border: 1px solid #333333;
+  background: #333333;
+  color: #fff;
+}
+
 .player-position-opt .ui-multiselect-label-container label {
   font-weight: inherit;
 }

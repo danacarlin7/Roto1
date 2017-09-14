@@ -312,7 +312,7 @@ export class LineupOptimizerComponent {
         lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
       }
 
-      if (this.advFilterPopup.noOfLineupValue != 1) {
+      if (this.advFilterPopup.noOfLineupValue != 10) {
         lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
       }
 
