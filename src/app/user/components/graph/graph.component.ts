@@ -81,17 +81,17 @@ export class GraphComponent {
     switch (this.activeTab) {
       case this.graphTabConstants.PROFIT:
         this.prepareProfitChart();
-        if (this.graphData.result && this.graphData.result[0].datas)
+        if (this.graphData.result && this.graphData.result[0].datas && this.graphData.result[0].datas.length)
           this.chartTitle = "PROFIT BY DAY ( $" + this.graphData.result[0].datas[this.graphData.result[0].datas.length - 1][1] + " Profit )";
         break;
       case this.graphTabConstants.SITE:
         this.prepareSiteChart();
-        if (this.graphData.result && this.graphData.result[0].datas)
+        if (this.graphData.result && this.graphData.result[0].datas && this.graphData.result[0].datas.length)
           this.chartTitle = "PROFIT BY SITE ( $" + this.graphData.result[0].datas[this.graphData.result[0].datas.length - 1][1] + " Profit )";
         break;
       case this.graphTabConstants.SPORT:
         this.prepareSportChart();
-        if (this.graphData.result && this.graphData.result[0].datas)
+        if (this.graphData.result && this.graphData.result[0].datas && this.graphData.result[0].datas.length)
           this.chartTitle = "PROFIT BY SPORT ( $" + this.graphData.result[0].datas[this.graphData.result[0].datas.length - 1][1] + " Profit )";
         break;
       case this.graphTabConstants.CATEGORY:

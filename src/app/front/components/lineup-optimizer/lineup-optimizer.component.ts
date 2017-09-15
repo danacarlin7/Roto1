@@ -152,7 +152,7 @@ export class LineupOptimizerComponent {
           if (response.statusCode == 200) {
             this.isLoading = false;
             if (!(response.data instanceof Array)) {
-              if (this.authService.isLoggedIn()) {
+              if (this.authService.isLoggedIn() && this.authService.isSubscriber()) {
                 this.optimizerService.retrieveSavedAdvFilterValue()
                   .subscribe(
                     savedFilterResponse => {

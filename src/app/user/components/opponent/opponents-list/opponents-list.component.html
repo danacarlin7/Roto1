@@ -15,7 +15,7 @@
         <td>{{data.entries}}</td>
         <td>{{data.total_win_count}}</td>
         <td>{{data.win_percentage.toFixed(2)}}</td>
-        <td>{{data.fee}}</td>
+        <td>{{data.fee?.toFixed(2)}}</td>
         <td [ngStyle]="{color: (data.net > 0)? '#4caf50' : '#ff0000'}">{{data.net}}</td>
         <td>{{data.date | date:'dd MMM yy'}}</td>
       </tr>

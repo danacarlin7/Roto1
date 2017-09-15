@@ -66,18 +66,18 @@ export class OverviewlistComponent {
       case 'Entry fees':
       case 'Net profit/loss':
         if (data[key] < 0) {
-          displayValue = data[key] ? '($' + this.numberPipe.transform(data[key] * -1) + ')' : '-';
+          displayValue = (data[key] && !isNaN(data[key])) ? '($' + this.numberPipe.transform(data[key] * -1) + ')' : '-';
         }
         else {
-          displayValue = data[key] ? '$' + this.numberPipe.transform(data[key]) : '-';
+          displayValue = (data[key] && !isNaN(data[key])) ? '$' + this.numberPipe.transform(data[key]) : '-';
         }
         break;
       case 'ITM':
       case 'ROI':
-        displayValue = data[key] ? this.numberPipe.transform(data[key]) + '%' : '-';
+        displayValue = (data[key] && !isNaN(data[key])) ? this.numberPipe.transform(data[key]) + '%' : '-';
         break;
       default:
-        displayValue = data[key] != null ? this.numberPipe.transform(data[key]) : '-';
+        displayValue = (data[key] != null && !isNaN(data[key])) ? this.numberPipe.transform(data[key]) : '-';
         break;
     }
     return displayValue;
