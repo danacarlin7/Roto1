@@ -153,6 +153,14 @@ mfDefaultSorter a {
   background-color: #fff !important;
 }
 
+.used-player-position-opt .ui-multiselect-header {
+  background-color: #f7f5f5 !important;
+}
+
+.used-player-position-opt .ui-widget-content{
+  background-color: #f7f5f5 !important;
+}
+
 .player-position-opt .ui-multiselect-trigger {
 
 }
@@ -172,11 +180,20 @@ mfDefaultSorter a {
   color: #000 !important;
 }
 
+.used-player-position-opt .ui-multiselect-item {
+  background-color: #f7f5f5 !important;
+}
+
+
 .player-position-opt .ui-multiselect-item.ui-state-highlight {
   background-color: #fff !important;
   border: none !important;
   border-bottom: 1px solid #dcdcdc !important;
   color: #000 !important;
+}
+
+.used-player-position-opt .ui-multiselect-item.ui-state-highlight {
+  background-color: #f7f5f5 !important;
 }
 
 .filter-range-container {
