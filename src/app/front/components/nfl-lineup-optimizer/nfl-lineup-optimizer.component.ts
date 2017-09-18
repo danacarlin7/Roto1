@@ -76,7 +76,7 @@ export class NFLLineupOptimizerComponent {
     this.selectedSlate = event.target.value;
     this.optimizerService.selectedSlate = event.target.value;
     this.selectedGame = this.optimizerService.selectedGame = 0;
-    this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
+    this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
     this.isSlateChanged = true;
   }
 

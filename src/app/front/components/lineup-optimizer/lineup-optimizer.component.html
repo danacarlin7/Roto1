@@ -49,7 +49,7 @@
           <div class="row">
             <div class="col-lg-2 col-sm-3 no-padding-right">
               <select class="form-control input-sm" [(ngModel)]="selectedSlate" (change)="onSlateChanged($event)">
-                <option [value]="0">All Slates</option>
+                <!--<option [value]="0">All Slates</option>-->
                 <option *ngFor="let slate of slates" [value]="slate.SlateID">
                   {{slate.StartTime | date:'h:mm a EEE, MMM d'}}
                   {{' - '+slate.NumberOfGames+' Games - '}}
