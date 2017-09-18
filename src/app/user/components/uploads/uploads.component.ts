@@ -13,6 +13,7 @@ import {environment} from "../../../../environments/environment";
  * Created by Hiren on 18-06-2017.
  */
 
+
 @Component({
   selector: 'rp-uploads',
   templateUrl: './uploads.component.html',

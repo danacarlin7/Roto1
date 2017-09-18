@@ -45,6 +45,7 @@ export class LoginComponent {
   };
 
   constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
+    console.log('in Login constructor');
     this.activatedRoute.queryParams.subscribe(
       (param:Params) => {
         this.redirectUrl = param['redirect'];
