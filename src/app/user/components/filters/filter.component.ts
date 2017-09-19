@@ -127,6 +127,9 @@ export class FilterComponent {
 
   prepareSiteData(siteData:Array<any>) {
     this.sitesData = [];
+    if (!siteData) {
+      siteData = [];
+    }
     siteData.forEach(season => {
       this.sitesData.push({label: season[1], value: season[0]});
     })
@@ -134,6 +137,9 @@ export class FilterComponent {
 
   prepareSportData(sportData:Array<any>) {
     this.sportData = [];
+    if (!sportData) {
+      sportData = [];
+    }
     sportData.forEach(season => {
       this.sportData.push({label: season[1], value: season[0]});
     })
@@ -141,6 +147,9 @@ export class FilterComponent {
 
   prepareSeasonData(seasonData:Array<any>) {
     this.seasonData = [];
+    if (!seasonData) {
+      seasonData = [];
+    }
     seasonData.forEach(season => {
       this.seasonData.push({label: season[1], value: season[0]});
     })
@@ -148,6 +157,9 @@ export class FilterComponent {
 
   prepareContestData(contestData:Array<any>) {
     this.contestData = [];
+    if (!contestData) {
+      contestData = [];
+    }
     contestData.forEach(season => {
       this.contestData.push({label: season[1], value: season[0]});
     })
@@ -155,6 +167,9 @@ export class FilterComponent {
 
   prepareTimePeriodData(timePeriod:Array<any>) {
     this.timePeriodData = [];
+    if (!timePeriod) {
+      timePeriod = [];
+    }
     timePeriod.forEach(season => {
       this.timePeriodData.push({label: season[1], value: season[0]});
     })
@@ -162,6 +177,9 @@ export class FilterComponent {
 
   prepareWeekdayData(timePeriod:Array<any>) {
     this.weekdayData = [];
+    if (!timePeriod) {
+      timePeriod = [];
+    }
     timePeriod.forEach(season => {
       this.weekdayData.push({label: season[1], value: season[0]});
     })
@@ -169,6 +187,9 @@ export class FilterComponent {
 
   prepareEntryFeeDataData(feeData:Array<any>) {
     this.entryFeeData = [];
+    if (!feeData) {
+      feeData = [];
+    }
     feeData.forEach(season => {
       this.entryFeeData.push({label: season[1], value: season[0]});
     })
@@ -176,6 +197,9 @@ export class FilterComponent {
 
   prepareContestEntriesData(contestData:Array<any>) {
     this.contestEntriesData = [];
+    if (!contestData) {
+      contestData = [];
+    }
     contestData.forEach(currData => {
       this.contestEntriesData.push({label: currData[1], value: currData[0]});
     })
@@ -183,6 +207,9 @@ export class FilterComponent {
 
   prepareMaxContestEntriesData(contestData:Array<any>) {
     this.maxContestEntriesData = [];
+    if (!contestData) {
+      contestData = [];
+    }
     contestData.forEach(currData => {
       this.maxContestEntriesData.push({label: currData[1], value: currData[0]});
     })
@@ -190,6 +217,9 @@ export class FilterComponent {
 
   prepareRangeOfEntriesData(contestData:Array<any>) {
     this.rangeOfEntriesData = [];
+    if (!contestData) {
+      contestData = [];
+    }
     contestData.forEach(currData => {
       this.rangeOfEntriesData.push({label: currData[1], value: currData[0]});
     })

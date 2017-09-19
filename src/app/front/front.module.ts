@@ -32,6 +32,8 @@ import {LineupPostService} from './services/postLineups';
 import {ProviderComponent} from "./components/provider/provider.component";
 import {ProviderPublicComponent} from "./components/provider-public/public.component";
 
+
+
 import {InjuriesComponent} from "./components/injuries/injuries.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {GeneratedLineupsComponent} from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
@@ -43,6 +45,7 @@ import {StackingDataFilter} from "./components/lineup-optimizer/adv-filter/stack
 import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
 import {NFLAdvFilterComponent} from "./components/nfl-lineup-optimizer/nfl-filters/nfl-filters.component";
 import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
+import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -86,7 +89,8 @@ import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-an
     StackingDataFilter,
     NFLLineupOptimizerComponent,
     NFLAdvFilterComponent,
-    ContactAnalyzerComponent
+    ContactAnalyzerComponent,
+    GeneratedNFLLineupsComponent
   ],
   exports: [
     ProviderComponent,

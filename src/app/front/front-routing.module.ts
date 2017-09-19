@@ -30,6 +30,7 @@ import {ExtensionsComponent} from "./components/extensions/extensions.component"
 import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
 import {SubscriptionGuard} from "../shared/services/subscription.guard";
 import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
+import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -40,6 +41,7 @@ const routes:Routes = [
     data: {title: 'RotoPose - Home'},
     children: [
       <Route>{path: '', component: FrontHomeComponent},
+      <Route>{path: 'verify', component: VerifyAccComponent},
       <Route>{path: ':token/verify', component: VerifyAccComponent},
       <Route>{path: ':token/change-password', component: ChangePasswordComponent},
       <Route>{path: 'login', component: LoginComponent},
@@ -60,7 +62,8 @@ const routes:Routes = [
       <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
       <Route>{path: 'lineup-optimizer/mlb', component: LineupOptimizerComponent},
       <Route>{path: 'lineup-optimizer/nfl', component: NFLLineupOptimizerComponent},
-      <Route>{path: 'generated-lineups', component: GeneratedLineupsComponent},
+      <Route>{path: 'mlb-lineups', component: GeneratedLineupsComponent},
+      <Route>{path: 'nfl-lineups', component: GeneratedNFLLineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
       <Route>{path: 'subscribe', component: SubscribeComponent},
       <Route>{path: 'contact-analyzer', component: ContactAnalyzerComponent},

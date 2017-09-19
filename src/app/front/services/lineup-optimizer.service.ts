@@ -18,6 +18,15 @@ import {AdvFilterValue} from "../models/adv-filter-value.model";
 @Injectable()
 export class LineupOptimizerService {
 
+  public static MLB_MIN_SALARY_FOR_DRAFT_KING:number = 30000;
+  public static MLB_MAX_SALARY_FOR_DRAFT_KING:number = 50000;
+  public static MLB_MIN_SALARY_FOR_FANDUAL:number = 20000;
+  public static MLB_MAX_SALARY_FOR_FANDUAL:number = 35000;
+  public static NFL_MIN_SALARY_FOR_DRAFT_KING:number = 25000;
+  public static NFL_MAX_SALARY_FOR_DRAFT_KING:number = 50000;
+  public static NFL_MIN_SALARY_FOR_FANDUAL:number = 30000;
+  public static NFL_MAX_SALARY_FOR_FANDUAL:number = 60000;
+
   searchStr:string = '';
   selectedOperator:string = 'FanDuel';
   selectedSport:string;
@@ -26,6 +35,7 @@ export class LineupOptimizerService {
   filterSettings:AdvFilterSettings;
 
   activeSlate:Slate;
+  slates:Slate;
 
   players:OptimizerPlayer[];
   playersSubject:Subject<OptimizerPlayer[]> = new Subject<OptimizerPlayer[]>();
@@ -80,6 +90,12 @@ export class LineupOptimizerService {
                 });
                 observer.next(this.players);
               }
+            },
+            error => {
+              observer.error(error);
+            },
+            () => {
+              observer.complete()
             }
           );
       }
@@ -119,6 +135,7 @@ export class LineupOptimizerService {
 
   retrieveAdvFilterSettings(operator:string, sport:string, slateId:number):Observable<any> {
     let url = environment.api_end_point + 'optimizer/filter?sport=' + sport + '&operator=' + operator;
+    // let url = environment.api_end_point + 'api/optimizer/newSettings?sport=' + sport + '&operator=' + operator;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
     }
@@ -225,6 +242,17 @@ export class LineupOptimizerService {
       }
     });
     return team;
+  }
+
+  getPlayerValueByPlayerId(id:number):number {
+    let value:number = 0;
+    this.players.forEach(player => {
+      if (player.PlayerID == id) {
+        value = player.Value;
+        return;
+      }
+    });
+    return value;
   }
 
   applyFilters(filters:LineupOppFilterCriteria[]) {

@@ -7,8 +7,12 @@
         <h4 class="modal-title">Subscription Required</h4>
       </div>
       <div class="modal-body">
-        <p style="font-size: 19px">Dear user it looks like you haven't subscribe to any plan yet, Please
-          <a routerLink="/subscribe" style="color: #0070ff"  data-dismiss="modal">subscribe now</a> and get access to full site.</p>
+        <p style="font-size: 19px">It looks like you do not currently have a subscription.
+          <a routerLink="/subscribe" style="color: #0070ff" data-dismiss="modal">Subscribe</a> today for full access!
+        </p>
+        <p *ngIf="!isLoggedIn" style="font-size: 19px">Already have Subscription ?
+          <a routerLink="/login" style="color: #0070ff" data-dismiss="modal">Login</a> here!
+        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

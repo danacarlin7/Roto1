@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation, EventEmitter, Output} from "@angular/core";
+import {Component, Input, ViewEncapsulation, EventEmitter, Output, ViewChild, ElementRef} from "@angular/core";
 import {AdvFilterSettings, Game} from "../../../models/adv-filter-setting.model";
 import {LineupOppFilterCriteria} from "../../../models/filter-criteria.model";
 import {LineupOppFilterConstants} from "../../../constants/lineup-opp.constants";
@@ -6,6 +6,7 @@ import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {SelectItem} from "primeng/primeng";
+import {LineupOptimizerService} from "../../../services/lineup-optimizer.service";
 /**
  * Created by Hiren on 16-08-2017.
  */
@@ -49,6 +50,8 @@ export class NFLAdvFilterComponent {
   valueFilterValue:any[];
   battingOrderFilterValue:any[];
   positionFilterValue:any[];
+
+  @ViewChild('settingPopup') settingPopup:ElementRef;
 
   @Input()
   advFilterValue:AdvFilterValue;
@@ -117,6 +120,8 @@ export class NFLAdvFilterComponent {
   positions:SelectItem[];
   isLogIn:boolean;
 
+  lineupOptimizerServiceConst = LineupOptimizerService;
+
   constructor(private authService:AuthService) {
     this.isLogIn = this.authService.isLoggedIn();
   }
@@ -130,8 +135,11 @@ export class NFLAdvFilterComponent {
     this.positions.push({label: 'TE', value: 'TE'});
     if (this.selectedOperator == 'FanDuel') {
       this.positions.push({label: 'K', value: 'K'});
+      this.positions.push({label: 'D', value: 'D'});
     }
-    this.positions.push({label: 'DST', value: 'DST'});
+    if (this.selectedOperator == 'DraftKings') {
+      this.positions.push({label: 'DST', value: 'DST'});
+    }
   }
 
   onPlayerPositionFilterChanged(event) {
@@ -160,9 +168,9 @@ export class NFLAdvFilterComponent {
     this.noOfLineupSlider.bootstrapSlider({
       min: 1,
       max: 200,
-      value: 1
+      value: 10
     });
-    this.noOfLineupValue = 1;
+    this.noOfLineupValue = 10;
     this.noOfLineupSlider.on("slide", (slideEvt) => {
       this.noOfLineupValue = slideEvt.value;
       this.isSettingsUpdated = true;
@@ -294,7 +302,7 @@ export class NFLAdvFilterComponent {
       this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
     }
     if (this.noOfLineupSlider) {
-      this.noOfLineupValue = 1;
+      this.noOfLineupValue = 10;
       this.noOfLineupSlider.bootstrapSlider('setValue', this.noOfLineupValue);
     }
     if (this.noOfUniquePlayersSlider) {
@@ -311,12 +319,12 @@ export class NFLAdvFilterComponent {
       let minSalary:number;
       switch (this.selectedOperator) {
         case 'FanDuel':
-          minSalary = 20000;
-          maxSalary = 35000;
+          minSalary = this.lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_FANDUAL;
+          maxSalary = this.lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_FANDUAL;
           break;
         case 'DraftKings':
-          minSalary = 30000;
-          maxSalary = 50000;
+          minSalary = this.lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_DRAFT_KING;
+          maxSalary = this.lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_DRAFT_KING;
           break;
       }
       this.salarySlider.bootstrapSlider({

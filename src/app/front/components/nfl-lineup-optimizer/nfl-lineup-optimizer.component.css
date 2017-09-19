@@ -54,12 +54,14 @@ section.my-section {
   background: #F44336;
 }
 
+.error-container {
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+  margin:0 -15px 0 -15px;
+  background-color: rgba(244, 67, 54, 0.17);
+}
+
 .error-msg {
-  display: block;
-  position: absolute;
-  overflow: visible;
-  white-space: nowrap;
-  /* text-align: center; */
   color: #F44336;
-  left: -85px;
 }

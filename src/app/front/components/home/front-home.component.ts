@@ -81,8 +81,6 @@ export class FrontHomeComponent implements AfterViewInit {
       );
 
 
-
-
     this.retrieveBaseballArticles();
     this.retrieveBasketBallArticles();
     this.retrieveFootballArticles();
@@ -248,14 +246,14 @@ export class FrontHomeComponent implements AfterViewInit {
   allNewsRecords:News[] = [];
 
   retrieveNews() {
-    this.frontService.retrieveNews('MLB')
+    this.frontService.retrieveHomepageNews()
       .subscribe(
         response => {
           if (response.statusCode == 200) {
             let data:Array<any> = response.data;
             let tempNews = data.map(currData => currData['news'][0]);
-            this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 10));
-            this.renderNews();
+            this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
+            //this.renderNews();
           } else {
             console.log('response error => ', response);
           }

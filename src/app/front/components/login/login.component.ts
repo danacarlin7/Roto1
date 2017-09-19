@@ -15,13 +15,13 @@ import {environment} from "../../../../environments/environment";
 })
 export class LoginComponent {
 
-  loginForm: FormGroup;
-  redirectUrl: string;
-  msg: string;
+  loginForm:FormGroup;
+  redirectUrl:string;
+  msg:string;
 
-  isError: boolean;
-  errorMsg: string;
-  showVerifyLink: boolean;
+  isError:boolean;
+  errorMsg:string;
+  showVerifyLink:boolean;
 
 
   private authServerBaseUrl = 'http://localhost:4000';
@@ -44,9 +44,10 @@ export class LoginComponent {
     }
   };
 
-  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
+  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
+    console.log('in Login constructor');
     this.activatedRoute.queryParams.subscribe(
-      (param: Params) => {
+      (param:Params) => {
         this.redirectUrl = param['redirect'];
         if (param.hasOwnProperty('info')) {
           if (param['info'] == 'pc') {
@@ -54,6 +55,9 @@ export class LoginComponent {
           }
           else if (param['info'] == 'verify') {
             this.msg = 'Your account is successfully verified.'
+          }
+          else if (param['info'] == 'signup_success') {
+            this.msg = 'Your account is successfully created. We have sent you a mail with account verification link. Please verify your account.'
           }
         }
       }
@@ -133,8 +137,23 @@ export class LoginComponent {
             }
           );
 
+          this.authService.retrieveLoggedUserInfo()
+            .subscribe(
+              response => {
+                if (response.statusCode == 200) {
+                  this.authService.loggedUser = response.data;
+                }
+                else {
+
+                }
+              },
+              error => {
+                console.log("http error => ", error);
+              }
+            );
 
           console.log('this.redirectUrl => ', this.redirectUrl);
+          this.authService.isLoggedInEvent.emit(true);
           if (this.redirectUrl && this.redirectUrl.length) {
             this.router.navigateByUrl(this.redirectUrl);
             this.redirectUrl = "";
@@ -142,7 +161,7 @@ export class LoginComponent {
           else if (response.data.role == 'admin') {
             this.router.navigate(['/admin']);
           } else if (response.data.role == 'user' || response.data.role == 'provider') {
-            this.router.navigate(['/user']);
+            this.router.navigate(['/']);
           }
         } else {
           console.log("login error => ", response);
@@ -150,15 +169,18 @@ export class LoginComponent {
       },
       error => {
         console.log("login error => ", error);
-
+        this.msg = '';
         if (error.data == 'userNotFound') {
           this.isError = true;
           this.errorMsg = "Invalid email or password. Please check your account details"
         }
-        else if (error.data == 'userIsNotVerifiedWithNullPWD') {
+        else if (error.data == 'userIsNotVerifiedWithNullPWD' || error.data == 'userIsNotVerified') {
           this.isError = true;
           this.errorMsg = "Your account is not verified.Please check your email for verification link or get the new link.";
           this.showVerifyLink = true;
+        } else {
+          this.isError = true;
+          this.errorMsg = error.message;
         }
       });
   }

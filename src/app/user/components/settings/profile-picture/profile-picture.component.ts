@@ -24,11 +24,11 @@ import {environment} from "../../../../../environments/environment";
  */
 
 @Component({
-  selector:'rp-profile-pic',
-  templateUrl:'./profile-picture.component.html',
-  styleUrls:['./profile-picture.component.css']
+  selector: 'rp-profile-pic',
+  templateUrl: './profile-picture.component.html',
+  styleUrls: ['./profile-picture.component.css']
 })
-export class ProfilePictureComponent{
+export class ProfilePictureComponent {
 
   filename;
   configUpload = {
@@ -40,12 +40,13 @@ export class ProfilePictureComponent{
     autoReset: 500,
     headers: {'Authorization': 'Bearer ' + environment.token}
   };
+
   constructor(private authService:AuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
 
   }
 
   fileUploadEvent(event) {
-    let fileList: FileList = event.target.files;
+    let fileList:FileList = event.target.files;
     if (fileList.length > 0) {
       this.authService.uploadProfile(fileList).subscribe(
         data => console.log('success'),
@@ -59,7 +60,21 @@ export class ProfilePictureComponent{
   }
 
   onUploadSuccess(event) {
-    // this.getUploads();
+    console.log("Profile Pic updated");
+    this.authService.retrieveLoggedUserInfo()
+      .subscribe(
+        response => {
+          if (response.statusCode == 200) {
+            this.authService.loggedUser = response.data;
+          }
+          else {
+
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+        }
+      );
   }
 
   onSending(file) {

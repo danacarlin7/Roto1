@@ -10,7 +10,7 @@ import {ArticleService} from "../../services/article.service";
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private authService:AuthService, private activatedRoute:ActivatedRoute,private router:Router, private articleService:ArticleService) {
+  constructor(private authService:AuthService, private activatedRoute:ActivatedRoute, private router:Router, private articleService:ArticleService) {
   }
 
   category:any;
@@ -42,10 +42,6 @@ export class ArticlesComponent implements OnInit {
   related:Object = {};
 
   ngOnInit() {
-
-    this.activeTab = 'trending';
-    this.subActiveTab = 'week';
-
     this.activatedRoute.queryParams.subscribe(
       params => {
         if (params.hasOwnProperty('tab')) {
@@ -56,10 +52,20 @@ export class ArticlesComponent implements OnInit {
 
     this.articleService.fetchCategories().subscribe(
       categories => {
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i].id == 1) {
+            categories.splice(i, 1);
+            break;
+          }
+        }
         this.categories = categories;
         for (let i = 0; i < this.categories.length; i++) {
           this.categories[i]['loaded'] = 0;
           let category = this.categories[i];
+          if (i == 0) {
+            this.activeTab = category.id;
+            this.subActiveTab = '';
+          }
           this.posts[category.id] = [];
           this.fetchPostsByCat(category);
         }

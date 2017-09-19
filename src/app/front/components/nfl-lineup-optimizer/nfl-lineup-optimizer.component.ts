@@ -39,7 +39,9 @@ export class NFLLineupOptimizerComponent {
   lockedPlayers:number[] = [];
   todayDate = new Date();
   isError:boolean;
+  isDataError:boolean;
   errorMsg:string;
+  errorData:string;
   advFilterValue:AdvFilterValue;
   isSavedFiltersApplied:boolean;
 
@@ -74,7 +76,7 @@ export class NFLLineupOptimizerComponent {
     this.selectedSlate = event.target.value;
     this.optimizerService.selectedSlate = event.target.value;
     this.selectedGame = this.optimizerService.selectedGame = 0;
-    this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
+    this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
     this.isSlateChanged = true;
   }
 
@@ -88,13 +90,21 @@ export class NFLLineupOptimizerComponent {
             this.slates = response.data;
             this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
+            this.selectedSlate = this.slates[0].SlateID;
+            this.optimizerService.selectedSlate = this.selectedSlate;
+            this.selectedGame = this.optimizerService.selectedGame = 0;
+            this.isSlateChanged = true;
             this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
           } else {
-
+            this.isLoading = false;
           }
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving slates.";
+          this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -124,6 +134,10 @@ export class NFLLineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving players.";
+          this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -137,7 +151,7 @@ export class NFLLineupOptimizerComponent {
           if (response.statusCode == 200) {
             this.isLoading = false;
             if (!(response.data instanceof Array)) {
-              if (this.authService.isLoggedIn()) {
+              if (this.authService.isLoggedIn() && this.authService.isSubscriber()) {
                 this.optimizerService.retrieveSavedAdvFilterValue()
                   .subscribe(
                     savedFilterResponse => {
@@ -157,6 +171,13 @@ export class NFLLineupOptimizerComponent {
                           this.isSlateChanged = false;
                         }, 50);
                       }
+                    },
+                    error => {
+                      this.isLoading = false;
+                      this.isError = true;
+                      this.isDataError = true;
+                      this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
+                      this.errorData = error.message;
                     }
                   );
               } else {
@@ -177,6 +198,10 @@ export class NFLLineupOptimizerComponent {
         },
         error => {
           this.isLoading = false;
+          this.isError = true;
+          this.isDataError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving filter settings.";
+          this.errorData = error.message;
           console.log("http error => ", error);
         }
       )
@@ -202,6 +227,11 @@ export class NFLLineupOptimizerComponent {
           }
         },
         error => {
+          this.isLoading = false;
+          this.isError = true;
+          this.errorMsg = "Oops! something went wrong while retrieving staking info.";
+          this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -239,6 +269,8 @@ export class NFLLineupOptimizerComponent {
       this.optimizerService.activeSlate = activeSlate[0];
     }
 
+    this.optimizerService.filterSettings = this.advFilterSettings;
+
     this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)
       .subscribe(
         response => {
@@ -246,13 +278,14 @@ export class NFLLineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
-            this.router.navigate(['generated-lineups']);
+            this.router.navigate(['nfl-lineups']);
           }
         },
         error => {
           this.isLoading = false;
           this.isError = true;
-          this.errorMsg = error.message;
+          this.errorMsg = "Oops! something went wrong while generating lineups.";
+          this.errorData = error.message;
           console.log("GenerateLineup response error=> ", error);
         }
       )
@@ -281,23 +314,23 @@ export class NFLLineupOptimizerComponent {
       lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
     }
 
-    if (this.advFilterPopup.noOfLineupValue != 1) {
+    if (this.advFilterPopup.noOfLineupValue != 10) {
       lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
     }
 
-    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != 20000) {
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NFL_MIN_SALARY_FOR_FANDUAL) {
       lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
     }
 
-    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != 35000) {
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NFL_MAX_SALARY_FOR_FANDUAL) {
       lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
     }
 
-    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != 30000) {
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NFL_MIN_SALARY_FOR_DRAFT_KING) {
       lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
     }
 
-    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != 50000) {
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NFL_MAX_SALARY_FOR_DRAFT_KING) {
       lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
     }
 
@@ -401,5 +434,15 @@ export class NFLLineupOptimizerComponent {
 
   onRemoveAdvFilterValueEvent() {
     this.onSaveAdvFilterValueEvent(null);
+  }
+
+  onAdvFilterPopupClick() {
+    this.isSavedFiltersApplied = false;
+    if (this.authService.isSubscriber()) {
+      jQuery(this.advFilterPopup.settingPopup.nativeElement).modal();
+    }
+    else {
+      this.authService.showSubscriptionAlert();
+    }
   }
 }

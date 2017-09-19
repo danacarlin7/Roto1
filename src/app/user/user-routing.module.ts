@@ -60,6 +60,11 @@ const routes:Routes = [
         component: SettingsComponent,
         children: [
           <Route>{
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'profile-picture'
+          },
+          <Route>{
             path: 'change-password',
             component: UpdatePasswordComponent
           },

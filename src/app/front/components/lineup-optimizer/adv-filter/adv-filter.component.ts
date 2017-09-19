@@ -6,6 +6,8 @@ import {OptimizerPlayer} from "../../../models/player.model";
 import {AdvFilterValue} from "../../../models/adv-filter-value.model";
 import {SelectItem} from "primeng/primeng";
 import {AuthService} from "../../../../shared/services/auth.service";
+import {Router} from "@angular/router";
+import {LineupOptimizerService} from "../../../services/lineup-optimizer.service";
 /**
  * Created by Hiren on 09-07-2017.
  */
@@ -22,6 +24,7 @@ export class AdvFilterComponent {
 
 
   isSettingsUpdated:boolean;
+  showSubscriptionAlert:boolean;
 
   @Input()
   selectedOperator:string;
@@ -44,11 +47,11 @@ export class AdvFilterComponent {
   salarySettingValue:any[] = [];
   noBattingVsPitchers:boolean;
 
-  projectionFilterValue:any[];
-  salaryFilterValue:any[];
-  valueFilterValue:any[];
-  battingOrderFilterValue:any[];
-  positionFilterValue:any[];
+  projectionFilterValue:any[] = [];
+  salaryFilterValue:any[] = [];
+  valueFilterValue:any[] = [];
+  battingOrderFilterValue:any[] = [];
+  positionFilterValue:any[] = [];
 
   @Input()
   advFilterValue:AdvFilterValue;
@@ -113,7 +116,9 @@ export class AdvFilterComponent {
   positions:SelectItem[];
   isLogIn:boolean;
 
-  constructor(private authService:AuthService) {
+  lineupOptimizerServiceConst = LineupOptimizerService;
+
+  constructor(private authService:AuthService, private router:Router) {
     this.positions = [];
     this.positions.push({label: 'P', value: 'p'});
     this.positions.push({label: 'C', value: 'c'});
@@ -152,9 +157,9 @@ export class AdvFilterComponent {
     this.noOfLineupSlider.bootstrapSlider({
       min: 1,
       max: 200,
-      value: 1
+      value: 10
     });
-    this.noOfLineupValue = 1;
+    this.noOfLineupValue = 10;
     this.noOfLineupSlider.on("slide", (slideEvt) => {
       this.noOfLineupValue = slideEvt.value;
       this.isSettingsUpdated = true;
@@ -286,7 +291,7 @@ export class AdvFilterComponent {
       this.variabilitySlider.bootstrapSlider('setValue', this.variabilityValue);
     }
     if (this.noOfLineupSlider) {
-      this.noOfLineupValue = 1;
+      this.noOfLineupValue = 10;
       this.noOfLineupSlider.bootstrapSlider('setValue', this.noOfLineupValue);
     }
     if (this.noOfUniquePlayersSlider) {
@@ -303,12 +308,12 @@ export class AdvFilterComponent {
       let minSalary:number;
       switch (this.selectedOperator) {
         case 'FanDuel':
-          minSalary = 20000;
-          maxSalary = 35000;
+          minSalary = this.lineupOptimizerServiceConst.MLB_MIN_SALARY_FOR_FANDUAL;
+          maxSalary = this.lineupOptimizerServiceConst.MLB_MAX_SALARY_FOR_FANDUAL;
           break;
         case 'DraftKings':
-          minSalary = 30000;
-          maxSalary = 50000;
+          minSalary = this.lineupOptimizerServiceConst.MLB_MIN_SALARY_FOR_DRAFT_KING;
+          maxSalary = this.lineupOptimizerServiceConst.MLB_MAX_SALARY_FOR_DRAFT_KING;
           break;
       }
       this.salarySlider.bootstrapSlider({
@@ -442,8 +447,11 @@ export class AdvFilterComponent {
   }
 
   getFilters():LineupOppFilterCriteria[] {
-    this.prepareFilters();
-    return this.filters;
+    if (this.authService.isSubscriber()) {
+      this.prepareFilters();
+      return this.filters;
+    }
+    return [];
   }
 
   prepareStacks() {
@@ -653,8 +661,11 @@ export class AdvFilterComponent {
       if (this.authService.isSubscriber()) {
         this.saveAdvFilters();
         this.isSettingsUpdated = false;
+        this.showSubscriptionAlert = false;
+        console.log("Filter settings saved");
       }
       else {
+        this.showSubscriptionAlert = true;
         //this.authService.showSubscriptionAlert();
       }
     }
@@ -691,5 +702,15 @@ export class AdvFilterComponent {
     this.stackingTeam2 = {name: '-', players: 0};
     this.stackingTeam3 = {name: '-', players: 0};
     this.prepareStacks();
+  }
+
+  onSubscribeLinkClick() {
+    jQuery(this.settingPopup.nativeElement).modal('hide');
+    this.showSubscriptionAlert = false;
+    this.router.navigate(['/subscribe']);
+  }
+
+  onSubscriptionAlertCloseClick() {
+    this.showSubscriptionAlert = false;
   }
 }

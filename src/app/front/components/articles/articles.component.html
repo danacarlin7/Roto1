@@ -39,9 +39,9 @@
         <div class="dTabs">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"
+            <!--<li role="presentation"
                 [class.active]="activeTab == 'trending'"
-                (click)="onTabChanged('trending')"><a role="tab" data-toggle="tab">Trending Topics</a></li>
+                (click)="onTabChanged('trending')"><a role="tab" data-toggle="tab">Trending Topics</a></li>-->
             <li role="presentation"
                 [class.active]="activeTab == category.id"
                 (click)="onTabChanged(category)"
@@ -109,7 +109,8 @@
                                   <a class="mPlaceHedin">{{post.title.rendered}}</a>
                                   <p class="mPlacePara">{{post.extract}}</p>
                                   <!--<p class="mPlaceWrtr">Posted By: <a href="javascript:void(0)">Derek Carty</a></p>-->
-                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd MMM yyyy h:m a'}}</a></p>
+                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd
+                                    MMM yyyy h:m a'}}</a></p>
                                 </div>
                               </div>
                             </div>
@@ -129,7 +130,8 @@
                                   <a class="mPlaceHedin">{{post.title.rendered}}</a>
                                   <p class="mPlacePara">{{post.extract}}</p>
                                   <!--<p class="mPlaceWrtr">Posted By: <a href="javascript:void(0)">Derek Carty</a></p>-->
-                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd MMM yyyy h:m a'}}</a></p>
+                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd
+                                    MMM yyyy h:m a'}}</a></p>
                                 </div>
                               </div>
                             </div>
@@ -149,7 +151,8 @@
                                   <a class="mPlaceHedin">{{post.title.rendered}}</a>
                                   <p class="mPlacePara">{{post.extract}}</p>
                                   <!--<p class="mPlaceWrtr">Posted By: <a href="javascript:void(0)">Derek Carty</a></p>-->
-                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd MMM yyyy h:m a'}}</a></p>
+                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd
+                                    MMM yyyy h:m a'}}</a></p>
                                 </div>
                               </div>
                             </div>
@@ -169,7 +172,8 @@
                                   <a class="mPlaceHedin">{{post.title.rendered}}</a>
                                   <p class="mPlacePara">{{post.extract}}</p>
                                   <!--<p class="mPlaceWrtr">Posted By: <a href="javascript:void(0)">Derek Carty</a></p>-->
-                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd MMM yyyy h:m a'}}</a></p>
+                                  <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd
+                                    MMM yyyy h:m a'}}</a></p>
                                 </div>
                               </div>
                             </div>
@@ -227,7 +231,8 @@
                             <a class="mPlaceHedin">{{post.title.rendered}}</a>
                             <p class="mPlacePara">{{post.extract}}</p>
                             <!--<p class="mPlaceWrtr">Posted By: <a href="javascript:void(0)">Derek Carty</a></p>-->
-                            <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd MMM yyyy h:m a'}}</a></p>
+                            <p class="mPlaceWrtr">Posted Date: <a href="javascript:void(0)">{{post.date | date:'dd MMM
+                              yyyy h:m a'}}</a></p>
                           </div>
                         </div>
                       </div>

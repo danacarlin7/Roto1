@@ -13,6 +13,7 @@ import {environment} from "../../../../environments/environment";
  * Created by Hiren on 18-06-2017.
  */
 
+
 @Component({
   selector: 'rp-uploads',
   templateUrl: './uploads.component.html',
@@ -50,6 +51,7 @@ export class UploadsComponent {
   subDialog;
 
   isLoading:boolean;
+  isRestricted:boolean;
 
   @ViewChild('downloadTemplateRef') public downloadTemplateRef:TemplateRef<any>;
   @ViewChild('deleteTemplateRef') public deleteTemplateRef:TemplateRef<any>;
@@ -65,6 +67,17 @@ export class UploadsComponent {
       uploads => {
         this.uploads = uploads.data;
         this.isLoading = false;
+        let count = 0;
+        this.uploads.forEach(
+          upload => {
+            count += upload.imported;
+          });
+        if (!this.authservice.isSubscriber() && count >= 200) {
+          this.isRestricted = true;
+        }
+        else {
+          this.isRestricted = false;
+        }
         this.changeDetectionRef.detectChanges();
       },
       error => {

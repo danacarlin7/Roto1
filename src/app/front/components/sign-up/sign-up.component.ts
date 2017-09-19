@@ -30,7 +30,7 @@ export class SignUpComponent {
       userName: new FormControl('', Validators.required),
       fName: new FormControl('', Validators.required),
       lName: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
+      phone: new FormControl(''),
       email: new FormControl('', [Validators.required, this.mailFormat]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
@@ -126,7 +126,7 @@ export class SignUpComponent {
                 console.log('WP Error => ', error);
               }
             );
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login'],{queryParams:{info:'signup_success'}});
           }
         },
         error => {

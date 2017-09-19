@@ -7,10 +7,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 
 @Component({
-  selector:'rp-verify-acc',
-  templateUrl:'./verify-acc.component.html'
+  selector: 'rp-verify-acc',
+  templateUrl: './verify-acc.component.html'
 })
-export class VerifyAccComponent{
+export class VerifyAccComponent {
 
   token:string;
   isError:boolean;
@@ -19,32 +19,37 @@ export class VerifyAccComponent{
   reSendToken:boolean;
   isLoading:boolean;
 
-  constructor(private router:Router, private activatedRoute:ActivatedRoute,private authService:AuthService) {
+  constructor(private router:Router, private activatedRoute:ActivatedRoute, private authService:AuthService) {
 
   }
 
   ngOnInit() {
-    this.isLoading = true;
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/']);
+    }
     this.activatedRoute.params.subscribe(
       param => {
         this.token = param['token'];
-        let checkNoPassword = this.token.split('_');
-        if (checkNoPassword[0] == 'pass') {
-          this.isLoading = false;
-          this.router.navigate([checkNoPassword[1] + '/change-password']);
-        } else {
-          this.authService.verifyToken(this.token).subscribe(
-            success => {
-              this.isLoading = false;
-              this.router.navigate(['/login'],{queryParams:{info:'verify'}});
-            },
-            error => {
-              this.isLoading = false;
-              console.log("http error => ", error);
-              this.isError = true;
-              this.errorMsg = 'Verification link is expired or invalid. Please enter your email below to get new verification link.';
-            }
-          )
+        if (this.token) {
+          this.isLoading = true;
+          let checkNoPassword = this.token.split('_');
+          if (checkNoPassword[0] == 'pass') {
+            this.isLoading = false;
+            this.router.navigate([checkNoPassword[1] + '/change-password']);
+          } else {
+            this.authService.verifyToken(this.token).subscribe(
+              success => {
+                this.isLoading = false;
+                this.router.navigate(['/login'], {queryParams: {info: 'verify'}});
+              },
+              error => {
+                this.isLoading = false;
+                console.log("http error => ", error);
+                this.isError = true;
+                this.errorMsg = 'Verification link is expired or invalid. Please enter your email below to get new verification link.';
+              }
+            )
+          }
         }
       }
     )

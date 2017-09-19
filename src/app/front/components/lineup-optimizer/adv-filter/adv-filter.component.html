@@ -1,4 +1,5 @@
-<div class="modal fade" id="advance-feature-filters" #settingPopup tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="advance-feature-filters" #settingPopup tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -23,7 +24,7 @@
         <div class="row row30" *ngIf="isLogIn">
           <div class="col-lg-12 text-center yellow-container">
             <a class="btn btn-link btn-link-back" (click)="onBtnSaveAdvFilterValueClicked()"
-               [class.disabled]="!isSettingsUpdated"><img
+               [class.inactive]="!isSettingsUpdated"><img
               src="../../../../../assets/img/save_general_n.png"/> Save
               Settings</a>
             <a class="btn btn-link btn-link-back" (click)="onBtnRestoreDefaultClicked()"><img
@@ -82,8 +83,8 @@
                         <span id="mmsSliderVal">{{salarySettingValue[0]}}-{{salarySettingValue[1]}}</span></h4>
                       <input id="mms" type="text"/>
                       <span
-                        class="slider-range slider-min">{{selectedOperator == 'FanDuel' ? 20000 : 30000}}</span><span
-                      class="slider-range slider-max">{{selectedOperator == 'FanDuel' ? 35000 : 50000}}</span>
+                        class="slider-range slider-min">{{selectedOperator == 'FanDuel' ? lineupOptimizerServiceConst.MLB_MIN_SALARY_FOR_FANDUAL : lineupOptimizerServiceConst.MLB_MIN_SALARY_FOR_DRAFT_KING}}</span><span
+                      class="slider-range slider-max">{{selectedOperator == 'FanDuel' ? lineupOptimizerServiceConst.MLB_MAX_SALARY_FOR_FANDUAL : lineupOptimizerServiceConst.MLB_MAX_SALARY_FOR_DRAFT_KING}}</span>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -343,6 +344,23 @@
         </div>
       </div>
       <!-- /Modal Body -->
+      <div class="subscription-alert-drop-back" *ngIf="showSubscriptionAlert">
+        <div class="subscription-alert">
+          <div class="alert-title">
+            Subscription Required
+          </div>
+          <div class="alert-content">
+            It looks like you do not currently have a subscription.
+            <a (click)="onSubscribeLinkClick()" style="color: #0070ff" data-dismiss="modal">Subscribe</a> today for full access!
+           <!-- It looks like you do not have access to a plan yet. Please
+            <a (click)="onSubscribeLinkClick()" style="color: #0070ff" data-dismiss="modal">subscribe now</a> for full access to
+            RotoPros.-->
+          </div>
+          <div class="alert-footer">
+            <button type="button" class="btn btn-default" (click)="onSubscriptionAlertCloseClick()">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

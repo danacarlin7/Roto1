@@ -1,4 +1,4 @@
-<div class="modal fade" id="advance-feature-filters" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="advance-feature-filters" tabindex="-1" #settingPopup role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -20,7 +20,7 @@
 
       <!-- Modal Body -->
       <div class="modal-body">
-        <div class="row row30" *ngIf="isLogIn">
+        <div class="row row30" *ngIf="false"> <!--*ngIf="isLogIn"-->
           <div class="col-lg-12 text-center yellow-container">
             <a class="btn btn-link btn-link-back" (click)="onBtnSaveAdvFilterValueClicked()"
                [class.disabled]="!isSettingsUpdated"><img
@@ -82,8 +82,8 @@
                         <span id="mmsSliderVal">{{salarySettingValue[0]}}-{{salarySettingValue[1]}}</span></h4>
                       <input id="mms" type="text"/>
                       <span
-                        class="slider-range slider-min">{{selectedOperator == 'FanDuel' ? 20000 : 30000}}</span><span
-                      class="slider-range slider-max">{{selectedOperator == 'FanDuel' ? 35000 : 50000}}</span>
+                        class="slider-range slider-min">{{selectedOperator == 'FanDuel' ? lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_FANDUAL : lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_DRAFT_KING}}</span><span
+                      class="slider-range slider-max">{{selectedOperator == 'FanDuel' ? lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_FANDUAL : lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_DRAFT_KING}}</span>
                     </div>
                   </div>
                   <div class="col-md-6">
