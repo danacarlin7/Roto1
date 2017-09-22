@@ -78,7 +78,7 @@
                   <label class="srOnly">Password</label>
                   <input type="password" name="password" formControlName="password" placeholder="**********">
                   <div class="alert alert-danger my-alert" *ngIf="signUpForm.get('password').errors?.minlength">
-                    Too sort password
+                    Too short password
                   </div>
                   <div class="alert alert-danger my-alert" *ngIf="signUpForm.get('password').errors?.maxlength">
                     Too long password

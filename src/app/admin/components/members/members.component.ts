@@ -56,6 +56,7 @@ export class MembersComponent implements OnInit {
       members => {
         this.allmembers = members.data;
         this.allSearch = members.data;
+        console.log("Memebers => ", this.allSearch);
       },
       error => {
         this.authService.logout();
@@ -142,6 +143,33 @@ export class MembersComponent implements OnInit {
     )
   }
 
+  isVerifying:boolean;
+  verifyingMember:any;
+
+  onVerifyBtnClicked(members) {
+    console.log(members);
+    this.verifyingMember = members;
+    this.isVerifying = true;
+    this.memberService.verifyMemberByApi(members._id).subscribe(
+      response => {
+        if (response.statusCode == 200) {
+          members.is_verified = true;
+        }
+        this.isVerifying = false;
+        this.verifyingMember = null;
+      },
+      error => {
+        this.isVerifying = false;
+        this.verifyingMember = null;
+        console.log("Error in user verification => ", error);
+      }
+    )
+  }
+
+  onRoleChanged() {
+
+  }
+
   onChangePassword(f:any) {
 
   }
@@ -155,7 +183,7 @@ export class MembersComponent implements OnInit {
 })
 export class AddMemberComponent implements OnInit {
 
-  constructor(private authService:AuthService,private memberService:AdminDashboardService, private router:Router) {
+  constructor(private authService:AuthService, private memberService:AdminDashboardService, private router:Router) {
   }
 
   ngOnInit() {

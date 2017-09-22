@@ -151,6 +151,15 @@ export class AdminDashboardService {
       });
   }
 
+  verifyMemberByApi(id) {
+    return this.http.put(environment.api_end_point + 'api/verifyMember/' + id, '', {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.hendleError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   changeProviderStatus(id) {
     return this.http.put(environment.api_end_point + 'api/provider/' + id, '', {headers: this.getHeaders()})
       .map(response => response.json())
