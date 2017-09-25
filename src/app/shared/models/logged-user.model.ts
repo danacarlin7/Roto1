@@ -3,7 +3,7 @@
  */
 
 
-export interface LoggedUser{
+export interface LoggedUser {
   created_at: Date;
   first_name: string;
   last_name: string;
@@ -17,6 +17,7 @@ export interface LoggedUser{
   is_memberspace: boolean;
   is_active: boolean;
   profile_image: string;
+  role: string;
 }
 
 

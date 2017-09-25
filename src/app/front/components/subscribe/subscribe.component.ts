@@ -58,14 +58,15 @@ export class SubscribeComponent implements OnInit {
         this.isLoading = false;
         if (this.authService.loggedUser) {
           if (this.authService.loggedUser.is_memberspace) {
+            // console.log(this.authService.loggedUser.role);
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'dfsportsgods') {
                 this.plans = response.data[i].data;
                 break;
               }
             }
-          }
-          else {
+
+          } else {
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'rotopros') {
                 this.plans = response.data[i].data;
