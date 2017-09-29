@@ -16,13 +16,13 @@
         <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
       </div>
     </div>
-    <div *ngIf="!isLoading && !(filteredPlans && filteredPlans.length)"
+    <div *ngIf="!isLoading && !(filteredPlans && filteredPlans.length > 0)"
          class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
       <div style="text-align: center">
         <h3>No Plans Available !!</h3>
       </div>
     </div>
-    <div *ngIf="!isLoading && filteredPlans && filteredPlans.length" class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
+    <div *ngIf="!isLoading && filteredPlans && filteredPlans.length > 0" class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
       <dfs-single-plan *ngFor="let plan of filteredPlans" [plan]="plan"
                        (editPlan)="editPlanEventHandler($event)"
                        (deletePlan)="deletePlanEventHandler($event)"></dfs-single-plan>
