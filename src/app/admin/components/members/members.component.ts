@@ -166,8 +166,19 @@ export class MembersComponent implements OnInit {
     )
   }
 
-  onRoleChanged() {
+  onRoleChanged(event, id) {
+    this.memberService.changeAnalystStatus(id).subscribe(
+      response => {
+        if (response.statusCode == 200) {
 
+        } else {
+          console.log("error => ", response);
+        }
+      },
+      error => {
+        console.log("error => ", error);
+      }
+    )
   }
 
   onChangePassword(f:any) {

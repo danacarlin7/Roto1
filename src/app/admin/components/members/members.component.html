@@ -37,9 +37,9 @@
             <th>
               Active/Deactive
             </th>
-            <!--<th>
+            <th>
               Is Analyst
-            </th>-->
+            </th>
             <th>
               Action
             </th>
@@ -48,6 +48,9 @@
           <tbody>
           <tr *ngFor="let members of mf.data">
             <td>{{members.first_name}}
+              <md-icon *ngIf="members.role == 'admin'" md-tooltip='Admin' tooltip-position='above'
+                       class='md-24 pull-right member'>star
+              </md-icon>
               <md-icon *ngIf="members.is_memberspace" md-tooltip='Memberspace User' tooltip-position='above'
                        class='md-24 pull-right member'>flag
               </md-icon>
@@ -66,11 +69,12 @@
                 <md-slide-toggle (change)="changeStatus(members._id)"></md-slide-toggle>
               </div>
             </td>
-            <!--<td>
-              <div>
-                <md-slide-toggle (change)="onRoleChanged($event,members._id)" [checked]="members.role == 'analyst'"></md-slide-toggle>
+            <td>
+              <div *ngIf="members.role != 'admin'">
+                <md-slide-toggle (change)="onRoleChanged($event,members._id)"
+                                 [checked]="members.role == 'provider'"></md-slide-toggle>
               </div>
-            </td>-->
+            </td>
             <td class="member-icon">
               <a *ngIf="!members.is_verified" md-tooltip='Verify Email' (click)="sendVerifyEmail(members.email)">
                 <md-icon>email</md-icon>
