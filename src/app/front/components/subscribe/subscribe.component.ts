@@ -57,24 +57,44 @@ export class SubscribeComponent implements OnInit {
       response => {
         this.isLoading = false;
         if (this.authService.loggedUser) {
-          if (this.authService.loggedUser.is_memberspace) {
+          if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user') {
+            for (let i = 0; response.data && response.data.length; i++) {
+              if (response.data[i].group == 'all_access' || response.data[i].group == 'dfsportsgods') {
+                this.plans = this.plans.concat(response.data[i].data);
+              }
+            }
+          }else if(this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user'){
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'dfsportsgods') {
-                this.plans = response.data[i].data;
-                break;
+                this.plans = this.plans.concat(response.data[i].data);
+              }
+            }
+          }else if(!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user'){
+            for (let i = 0; response.data && response.data.length; i++) {
+              if (response.data[i].group == 'all_access' || response.data[i].group == 'rotopros') {
+                this.plans = this.plans.concat(response.data[i].data);
+              }
+            }
+          }else if(!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user'){
+            for (let i = 0; response.data && response.data.length; i++) {
+              if (response.data[i].group == 'rotopros') {
+                this.plans = this.plans.concat(response.data[i].data);
               }
             }
           }
           else {
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'rotopros') {
-                this.plans = response.data[i].data;
-                break;
+                this.plans = this.plans.concat(response.data[i].data);
               }
             }
           }
         } else {
-          this.plans = response.data[0].data;
+          for (let i = 0; response.data && response.data.length; i++) {
+            if (response.data[i].group == 'rotopros') {
+              this.plans = this.plans.concat(response.data[i].data);
+            }
+          }
         }
       }
     );
