@@ -17,6 +17,7 @@ export interface LoggedUser{
   is_memberspace: boolean;
   is_active: boolean;
   profile_image: string;
+  role:string;
 }
 
 
