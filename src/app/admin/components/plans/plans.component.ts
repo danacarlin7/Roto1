@@ -19,6 +19,8 @@ export class PlansComponent {
   isLoading:boolean;
 
   plans:MembershipPlan[];
+  filteredPlans:MembershipPlan[];
+  selectedPlanMode:'live' | 'test' = 'test';
 
   constructor(private membershipService:MembershipPlanService, public dialog:MdDialog, private router:Router) {
 
@@ -34,7 +36,8 @@ export class PlansComponent {
       .subscribe(
         response => {
           if (response.statusCode == 200) {
-            this.plans = (response.data as MembershipPlan[]).filter(currPlan => !currPlan.livemode);
+            this.plans = response.data;
+            this.filteredPlans = this.filterPlan(this.plans, this.selectedPlanMode);
             this.isLoading = false;
           }
           else {
@@ -42,6 +45,20 @@ export class PlansComponent {
           }
         }
       )
+  }
+
+  filterPlan(plans:MembershipPlan[], mode):MembershipPlan[] {
+    let tempPlans = [];
+    if (!plans) {
+      plans = [];
+    }
+    if (mode == 'test') {
+      tempPlans = plans.filter(currPlan => !currPlan.livemode)
+    }
+    else if (mode == 'live') {
+      tempPlans = plans.filter(currPlan => currPlan.livemode)
+    }
+    return tempPlans;
   }
 
   deletePlanEventHandler(plan:MembershipPlan) {
@@ -63,6 +80,12 @@ export class PlansComponent {
   editPlanEventHandler(plan:MembershipPlan) {
     this.membershipService.editPlan = plan;
     this.router.navigate(['/admin/plans/edit']);
+  }
+
+  onPlanModeChanged(event) {
+    console.log(event);
+    console.log("selectedPlanMode => ", this.selectedPlanMode);
+    this.filteredPlans = this.filterPlan(this.plans, this.selectedPlanMode);
   }
 
 }

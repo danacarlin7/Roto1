@@ -1,5 +1,13 @@
 <div class="page-title">
   <h3>Memberships</h3>
+  <md-button-toggle-group [(ngModel)]="selectedPlanMode" (change)="onPlanModeChanged($event)">
+    <md-button-toggle color="accent" [value]="'live'">
+      <h4>Live</h4>
+    </md-button-toggle>
+    <md-button-toggle [value]="'test'">
+      <h4>Test</h4>
+    </md-button-toggle>
+  </md-button-toggle-group>
 </div>
 <div id="main-wrapper">
   <div class="row">
@@ -8,8 +16,14 @@
         <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
       </div>
     </div>
-    <div *ngIf="!isLoading" class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
-      <dfs-single-plan *ngFor="let plan of plans" [plan]="plan"
+    <div *ngIf="!isLoading && !(filteredPlans && filteredPlans.length)"
+         class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
+      <div style="text-align: center">
+        <h3>No Plans Available !!</h3>
+      </div>
+    </div>
+    <div *ngIf="!isLoading && filteredPlans && filteredPlans.length" class="col-lg-6 col-lg-offset-1 col-md-12 plan-list">
+      <dfs-single-plan *ngFor="let plan of filteredPlans" [plan]="plan"
                        (editPlan)="editPlanEventHandler($event)"
                        (deletePlan)="deletePlanEventHandler($event)"></dfs-single-plan>
     </div>
