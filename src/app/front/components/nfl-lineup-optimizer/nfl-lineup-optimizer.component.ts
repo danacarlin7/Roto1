@@ -12,11 +12,12 @@ import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
 import {AdvFilterComponent} from "../lineup-optimizer/adv-filter/adv-filter.component";
 import {AuthService} from "../../../shared/services/auth.service";
+
 /**
  * Created by Hiren on 02-07-2017.
  */
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
   selector: 'rp--nfl-optimizer',
@@ -24,30 +25,30 @@ declare var jQuery:any;
   styleUrls: ['./nfl-lineup-optimizer.component.css']
 })
 export class NFLLineupOptimizerComponent {
-  searchStr:string = '';
-  selectedOperator:string = 'FanDuel';
-  selectedSport:string = 'NFL';
-  selectedSlate:number = 0;
-  selectedGame:number = 0;
-  slates:Slate[];
-  allPlayers:OptimizerPlayer[];
-  players:OptimizerPlayer[];
-  advFilterSettings:AdvFilterSettings;
-  isLoading:boolean;
-  games:Game[];
-  stackingData:{team:string,teamId:number}[];
-  lockedPlayers:number[] = [];
+  searchStr: string = '';
+  selectedOperator: string = 'FanDuel';
+  selectedSport: string = 'NFL';
+  selectedSlate: number = 0;
+  selectedGame: number = 0;
+  slates: Slate[];
+  allPlayers: OptimizerPlayer[];
+  players: OptimizerPlayer[];
+  advFilterSettings: AdvFilterSettings;
+  isLoading: boolean;
+  games: Game[];
+  stackingData: { team: string, teamId: number }[];
+  lockedPlayers: number[] = [];
   todayDate = new Date();
-  isError:boolean;
-  isDataError:boolean;
-  errorMsg:string;
-  errorData:string;
-  advFilterValue:AdvFilterValue;
-  isSavedFiltersApplied:boolean;
+  isError: boolean;
+  isDataError: boolean;
+  errorMsg: string;
+  errorData: string;
+  advFilterValue: AdvFilterValue;
+  isSavedFiltersApplied: boolean;
 
-  @ViewChild('advFilterPopup') advFilterPopup:NFLAdvFilterComponent;
+  @ViewChild('advFilterPopup') advFilterPopup: NFLAdvFilterComponent;
 
-  constructor(private optimizerService:LineupOptimizerService, private router:Router, private authService:AuthService) {
+  constructor(private optimizerService: LineupOptimizerService, private router: Router, private authService: AuthService) {
     this.selectedOperator = this.optimizerService.selectedOperator;
     this.optimizerService.selectedSport = this.selectedSport;
     this.selectedSlate = this.optimizerService.selectedSlate;
@@ -60,7 +61,7 @@ export class NFLLineupOptimizerComponent {
     this.playersListUpdated();
   }
 
-  operatorChanged(name:string) {
+  operatorChanged(name: string) {
     if (this.selectedOperator != name) {
       this.selectedOperator = name;
       this.optimizerService.selectedOperator = name;
@@ -69,9 +70,9 @@ export class NFLLineupOptimizerComponent {
     }
   }
 
-  isSlateChanged:boolean;
+  isSlateChanged: boolean;
 
-  onSlateChanged(event:any) {
+  onSlateChanged(event: any) {
     console.log("selected slate => ", event.target.value);
     this.selectedSlate = event.target.value;
     this.optimizerService.selectedSlate = event.target.value;
@@ -90,11 +91,19 @@ export class NFLLineupOptimizerComponent {
             this.slates = response.data;
             this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
-            this.selectedSlate = this.slates[0].SlateID;
-            this.optimizerService.selectedSlate = this.selectedSlate;
-            this.selectedGame = this.optimizerService.selectedGame = 0;
-            this.isSlateChanged = true;
-            this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
+            if (this.slates && this.slates.length) {
+              this.selectedSlate = this.slates[0].SlateID;
+              this.optimizerService.selectedSlate = this.selectedSlate;
+              this.selectedGame = this.optimizerService.selectedGame = 0;
+              this.isSlateChanged = true;
+              this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
+            } else {
+              this.isLoading = false;
+              this.isError = true;
+              this.errorMsg = "No Slates found !!";
+              this.errorData = '';
+              this.isDataError = true;
+            }
           } else {
             this.isLoading = false;
           }
@@ -121,7 +130,7 @@ export class NFLLineupOptimizerComponent {
     )
   }
 
-  getPlayers(operator:string, sport:string, slateId:number) {
+  getPlayers(operator: string, sport: string, slateId: number) {
     this.isLoading = true;
     this.optimizerService.getPlayers(operator, sport, slateId)
       .subscribe(
@@ -143,7 +152,7 @@ export class NFLLineupOptimizerComponent {
       )
   }
 
-  getFilterSettings(operator:string, sport:string, slateId:number) {
+  getFilterSettings(operator: string, sport: string, slateId: number) {
     this.isLoading = true;
     this.optimizerService.retrieveAdvFilterSettings(operator, sport, slateId)
       .subscribe(
@@ -207,7 +216,7 @@ export class NFLLineupOptimizerComponent {
       )
   }
 
-  getStackingData(sport:string, slateId:number) {
+  getStackingData(sport: string, slateId: number) {
     this.optimizerService.retrieveStackingData(sport, slateId)
       .subscribe(
         response => {
@@ -237,7 +246,7 @@ export class NFLLineupOptimizerComponent {
       )
   }
 
-  selectedGameChanged(event:any) {
+  selectedGameChanged(event: any) {
     this.selectedGame = event.target.value;
     this.optimizerService.selectedGame = event.target.value;
     this.applyFilters();
@@ -245,7 +254,7 @@ export class NFLLineupOptimizerComponent {
 
   applyFilters() {
     console.log("applyFilters method called");
-    let filters:LineupOppFilterCriteria[] = [];
+    let filters: LineupOppFilterCriteria[] = [];
     filters.push(<LineupOppFilterCriteria>{
       filterKey: LineupOppFilterConstants.GAME_TYPE,
       filterValue: this.selectedGame == 0 ? this.games.map(game => game.gameId) : [this.selectedGame],
@@ -341,17 +350,17 @@ export class NFLLineupOptimizerComponent {
     return lineupData;
   }
 
-  prepareMinMaxPlayerFromTeam():any[] {
+  prepareMinMaxPlayerFromTeam(): any[] {
     return this.advFilterPopup.getMinMaxPlayerFromTeam();
   }
 
-  btnExcludePlayerClicked(player:OptimizerPlayer) {
+  btnExcludePlayerClicked(player: OptimizerPlayer) {
     player.isExcluded = true;
     this.unlockPlayer(player);
     this.filterPlayers(this.searchStr);
   }
 
-  onAdvFilterCriteriaChangedEvent(filters:LineupOppFilterCriteria[]) {
+  onAdvFilterCriteriaChangedEvent(filters: LineupOppFilterCriteria[]) {
     this.applyFilters();
   }
 
@@ -360,12 +369,12 @@ export class NFLLineupOptimizerComponent {
     this.filterPlayers(this.searchStr);
   }
 
-  filterPlayers(searchStr:string = "") {
+  filterPlayers(searchStr: string = "") {
     let filters = new LineupPlayerFilter();
     this.players = filters.transform(this.allPlayers, ['FirstName', 'LastName', 'fullName'], searchStr);
   }
 
-  togglePlayerLock(player:OptimizerPlayer) {
+  togglePlayerLock(player: OptimizerPlayer) {
     if (player.isLocked) {
       this.unlockPlayer(player);
     }
@@ -376,21 +385,21 @@ export class NFLLineupOptimizerComponent {
     }
   }
 
-  lockPlayer(player:OptimizerPlayer) {
+  lockPlayer(player: OptimizerPlayer) {
     player.isLocked = true;
     if (this.lockedPlayers && this.lockedPlayers.indexOf(player.PlayerID) == -1) {
       this.lockedPlayers.push(player.PlayerID);
     }
   }
 
-  unlockPlayer(player:OptimizerPlayer) {
+  unlockPlayer(player: OptimizerPlayer) {
     player.isLocked = false;
     if (this.lockedPlayers && this.lockedPlayers.indexOf(player.PlayerID) >= 0) {
       this.lockedPlayers.splice(this.lockedPlayers.indexOf(player.PlayerID), 1);
     }
   }
 
-  onExposureTxtboxBlurEvent(event, player:OptimizerPlayer) {
+  onExposureTxtboxBlurEvent(event, player: OptimizerPlayer) {
     let value = event.target.value;
     if (value > 100) {
       event.target.value = 100;
@@ -420,7 +429,7 @@ export class NFLLineupOptimizerComponent {
     this.initiateData();
   }
 
-  onSaveAdvFilterValueEvent(filterValue:AdvFilterValue) {
+  onSaveAdvFilterValueEvent(filterValue: AdvFilterValue) {
     this.optimizerService.updateAdvFilterValue(filterValue)
       .subscribe(
         response => {

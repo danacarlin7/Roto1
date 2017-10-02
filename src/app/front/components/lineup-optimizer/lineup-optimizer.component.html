@@ -32,8 +32,8 @@
             <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
                   [mdTooltipPosition]="'before'"></span>
             <button class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
-               [disabled]="isLoading || isDataError"
-               (click)="onAdvFilterPopupClick()">Settings</button>
+                    [disabled]="isLoading || isDataError"
+                    (click)="onAdvFilterPopupClick()">Settings</button>
           </span>
         </div>
       </div>
@@ -45,7 +45,7 @@
     <!-- Filters -->
     <section class="my-section table-filtes-container section-gray">
       <div class="row">
-        <div class="col-lg-7 col-md-6">
+        <div class="col-lg-9 col-md-6">
           <div class="row">
             <div class="col-lg-2 col-sm-3 no-padding-right">
               <select class="form-control input-sm" [(ngModel)]="selectedSlate" (change)="onSlateChanged($event)">
@@ -66,33 +66,32 @@
                 </option>
               </select>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3 no-padding-right">
               <!-- == If yo do not need red x, remove this classes "filter-icon filter-icon-x" == -->
               <div class="filter-icon filter-icon-x">
                 <input class="form-control input-sm" (input)="onSearchStrChanged($event)" type="text"
                        placeholder="Search">
               </div>
             </div>
+            <div class="col-sm-3" style="padding-top: 10px">
+              <!--<div style="display: flex;justify-content: flex-start;align-items: center;font-size: 14px">
+                <input id="chkNonStartingPitchers" type="checkbox" style="padding: 0;margin: 0"
+                       (change)="onShowNonStartingPitchersChange($event)"
+                       [(ngModel)]="isShowNonStartingPitchers"/>
+                <label for="chkNonStartingPitchers" style="padding: 0;margin: 0;margin-left: 5px"> Include non-starting pitchers</label>
+              </div>-->
+            </div>
           </div>
         </div>
-        <div class="col-lg-5 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <div class="row">
-            <div class="col-md-5 col-sm-4 no-padding-right">
-              <!-- input class="form-control input-sm" type="text" placeholder="Select Projection"-->
-              <!--<select class="form-control input-sm">
-                <option>Select Projection</option>
-                <option>Projection 1</option>
-                <option>Projection 3</option>
-                <option>Projection 4</option>
-                <option>Projection 5</option>
-              </select>-->
-            </div>
-            <div class="col-sm-3 no-padding-right">
+            <div class="col-sm-5 no-padding-right">
               <input class="form-control input-sm" type="text" disabled value="{{todayDate | date:'dd MMM, yyyy'}}">
             </div>
-            <div class="col-md-4 col-sm-5">
+            <div class="col-md-7 col-sm-7">
               <button class="btn btn-lg btn-yellow-black btn-noradius btn-block"
-                      [class.generate-lineup_btn_disabled]="isLoading || isDataError" [disabled]="isLoading || isDataError" (click)="onBtnGenerateLineupClick()">
+                      [class.generate-lineup_btn_disabled]="isLoading || isDataError"
+                      [disabled]="isLoading || isDataError" (click)="onBtnGenerateLineupClick()">
                 Generate Lineups
               </button>
             </div>

@@ -11,11 +11,12 @@ import {Router} from "@angular/router";
 import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
 import {AuthService} from "../../../shared/services/auth.service";
+
 /**
  * Created by Hiren on 02-07-2017.
  */
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
   selector: 'rp-lineup-optimizer',
@@ -24,31 +25,32 @@ declare var jQuery:any;
 })
 export class LineupOptimizerComponent {
 
-  searchStr:string = '';
-  selectedOperator:string = 'FanDuel';
-  selectedSport:string = 'MLB';
-  selectedSlate:number = 0;
-  selectedGame:number = 0;
-  slates:Slate[];
-  allPlayers:OptimizerPlayer[];
-  players:OptimizerPlayer[];
-  advFilterSettings:AdvFilterSettings;
-  isLoading:boolean;
-  isError:boolean;
-  isDataError:boolean;
-  errorMsg:string;
-  errorData:string;
-  games:Game[];
-  stackingData:{team:string,teamId:number}[];
-  lockedPlayers:number[] = [];
+  searchStr: string = '';
+  selectedOperator: string = 'FanDuel';
+  selectedSport: string = 'MLB';
+  selectedSlate: number = 0;
+  selectedGame: number = 0;
+  slates: Slate[];
+  allPlayers: OptimizerPlayer[];
+  players: OptimizerPlayer[];
+  advFilterSettings: AdvFilterSettings;
+  isLoading: boolean;
+  isError: boolean;
+  isDataError: boolean;
+  errorMsg: string;
+  errorData: string;
+  games: Game[];
+  stackingData: { team: string, teamId: number }[];
+  lockedPlayers: number[] = [];
   todayDate = new Date();
+  isShowNonStartingPitchers: boolean;
 
-  advFilterValue:AdvFilterValue;
-  isSavedFiltersApplied:boolean;
+  advFilterValue: AdvFilterValue;
+  isSavedFiltersApplied: boolean;
 
-  @ViewChild('advFilterPopup') advFilterPopup:AdvFilterComponent;
+  @ViewChild('advFilterPopup') advFilterPopup: AdvFilterComponent;
 
-  constructor(private optimizerService:LineupOptimizerService, private router:Router, private authService:AuthService) {
+  constructor(private optimizerService: LineupOptimizerService, private router: Router, private authService: AuthService) {
     this.selectedOperator = this.optimizerService.selectedOperator;
     this.optimizerService.selectedSport = this.selectedSport;
     this.selectedSlate = this.optimizerService.selectedSlate;
@@ -61,7 +63,7 @@ export class LineupOptimizerComponent {
     this.playersListUpdated();
   }
 
-  operatorChanged(name:string) {
+  operatorChanged(name: string) {
     if (this.selectedOperator != name) {
       this.selectedOperator = name;
       this.optimizerService.selectedOperator = name;
@@ -70,9 +72,9 @@ export class LineupOptimizerComponent {
     }
   }
 
-  isSlateChanged:boolean;
+  isSlateChanged: boolean;
 
-  onSlateChanged(event:any) {
+  onSlateChanged(event: any) {
     console.log("selected slate => ", event.target.value);
     this.selectedSlate = event.target.value;
     this.optimizerService.selectedSlate = event.target.value;
@@ -91,11 +93,19 @@ export class LineupOptimizerComponent {
             this.slates = response.data;
             this.slates = this.slates.filter(slate => slate.Slate != "Arcade Mode");
             console.log("slates => ", this.slates);
-            this.selectedSlate = this.slates[0].SlateID;
-            this.optimizerService.selectedSlate = this.selectedSlate;
-            this.selectedGame = this.optimizerService.selectedGame = 0;
-            this.isSlateChanged = true;
-            this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
+            if (this.slates && this.slates.length) {
+              this.selectedSlate = this.slates[0].SlateID;
+              this.optimizerService.selectedSlate = this.selectedSlate;
+              this.selectedGame = this.optimizerService.selectedGame = 0;
+              this.isSlateChanged = true;
+              this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
+            } else {
+              this.isLoading = false;
+              this.isError = true;
+              this.isDataError = true;
+              this.errorMsg = "No Slates found !!";
+              this.errorData = '';
+            }
           } else {
             this.isLoading = false;
           }
@@ -122,7 +132,7 @@ export class LineupOptimizerComponent {
     )
   }
 
-  getPlayers(operator:string, sport:string, slateId:number) {
+  getPlayers(operator: string, sport: string, slateId: number) {
     this.isLoading = true;
     this.optimizerService.getPlayers(operator, sport, slateId)
       .subscribe(
@@ -144,7 +154,7 @@ export class LineupOptimizerComponent {
       )
   }
 
-  getFilterSettings(operator:string, sport:string, slateId:number) {
+  getFilterSettings(operator: string, sport: string, slateId: number) {
     this.isLoading = true;
     this.optimizerService.retrieveAdvFilterSettings(operator, sport, slateId)
       .subscribe(
@@ -208,7 +218,7 @@ export class LineupOptimizerComponent {
       )
   }
 
-  getStackingData(sport:string, slateId:number) {
+  getStackingData(sport: string, slateId: number) {
     this.optimizerService.retrieveStackingData(sport, slateId)
       .subscribe(
         response => {
@@ -237,7 +247,7 @@ export class LineupOptimizerComponent {
       )
   }
 
-  selectedGameChanged(event:any) {
+  selectedGameChanged(event: any) {
     this.selectedGame = event.target.value;
     this.optimizerService.selectedGame = event.target.value;
     this.applyFilters();
@@ -245,7 +255,7 @@ export class LineupOptimizerComponent {
 
   applyFilters() {
     console.log("applyFilters method called");
-    let filters:LineupOppFilterCriteria[] = [];
+    let filters: LineupOppFilterCriteria[] = [];
     filters.push(<LineupOppFilterCriteria>{
       filterKey: LineupOppFilterConstants.GAME_TYPE,
       filterValue: this.selectedGame == 0 ? this.games.map(game => game.gameId) : [this.selectedGame],
@@ -338,7 +348,7 @@ export class LineupOptimizerComponent {
     return lineupData;
   }
 
-  prepareMinMaxPlayerFromTeam():any[] {
+  prepareMinMaxPlayerFromTeam(): any[] {
     let teams = [];
     if (!this.authService.isSubscriber()) {
       return [];
@@ -348,7 +358,7 @@ export class LineupOptimizerComponent {
     if (stackData && stackData.length) {
       stackData.forEach(
         stackTeam => {
-          let teamFlag:boolean = false;
+          let teamFlag: boolean = false;
           teams.forEach(team => {
             if (stackTeam.name == team.teamName) {
               teamFlag = true;
@@ -369,13 +379,13 @@ export class LineupOptimizerComponent {
     return teams;
   }
 
-  btnExcludePlayerClicked(player:OptimizerPlayer) {
+  btnExcludePlayerClicked(player: OptimizerPlayer) {
     player.isExcluded = true;
     this.unlockPlayer(player);
     this.filterPlayers(this.searchStr);
   }
 
-  onAdvFilterCriteriaChangedEvent(filters:LineupOppFilterCriteria[]) {
+  onAdvFilterCriteriaChangedEvent(filters: LineupOppFilterCriteria[]) {
     this.applyFilters();
   }
 
@@ -384,12 +394,12 @@ export class LineupOptimizerComponent {
     this.filterPlayers(this.searchStr);
   }
 
-  filterPlayers(searchStr:string = "") {
+  filterPlayers(searchStr: string = "") {
     let filters = new LineupPlayerFilter();
     this.players = filters.transform(this.allPlayers, ['FirstName', 'LastName', 'fullName'], searchStr);
   }
 
-  togglePlayerLock(player:OptimizerPlayer) {
+  togglePlayerLock(player: OptimizerPlayer) {
     if (player.isLocked) {
       this.unlockPlayer(player);
     }
@@ -400,21 +410,26 @@ export class LineupOptimizerComponent {
     }
   }
 
-  lockPlayer(player:OptimizerPlayer) {
+  lockPlayer(player: OptimizerPlayer) {
     player.isLocked = true;
     if (this.lockedPlayers && this.lockedPlayers.indexOf(player.PlayerID) == -1) {
       this.lockedPlayers.push(player.PlayerID);
     }
   }
 
-  unlockPlayer(player:OptimizerPlayer) {
+  unlockPlayer(player: OptimizerPlayer) {
     player.isLocked = false;
     if (this.lockedPlayers && this.lockedPlayers.indexOf(player.PlayerID) >= 0) {
       this.lockedPlayers.splice(this.lockedPlayers.indexOf(player.PlayerID), 1);
     }
   }
 
-  onExposureTxtboxBlurEvent(event, player:OptimizerPlayer) {
+  onShowNonStartingPitchersChange(event) {
+    console.log("show var => ", this.isShowNonStartingPitchers);
+    console.log("event => ", event);
+  }
+
+  onExposureTxtboxBlurEvent(event, player: OptimizerPlayer) {
     let value = event.target.value;
     if (value > 100) {
       event.target.value = 100;
@@ -444,7 +459,7 @@ export class LineupOptimizerComponent {
     this.initiateData();
   }
 
-  onSaveAdvFilterValueEvent(filterValue:AdvFilterValue) {
+  onSaveAdvFilterValueEvent(filterValue: AdvFilterValue) {
     this.optimizerService.updateAdvFilterValue(filterValue)
       .subscribe(
         response => {
