@@ -3,6 +3,7 @@ import {LineupOptimizerService} from "../../../services/lineup-optimizer.service
 import {GeneratedLineup, LineupPlayer, UsedPlayer} from "../../../models/generated-lineup.model";
 import {Router} from "@angular/router";
 import {Game} from "../../../models/adv-filter-setting.model";
+import * as moment from "moment";
 /**
  * Created by Hiren on 16-07-2017.
  */
@@ -85,8 +86,16 @@ export class GeneratedLineupsComponent {
     return false;
   }
 
-  getSlateName():string {
-    return this.optimizerService.selectedSlate ? this.optimizerService.activeSlate.Slate : 'All Slates';
+  getSlateName(): string {
+    let slateName = '';
+    let activeSlate = this.optimizerService.activeSlate;
+    slateName += activeSlate.Slate + " - ";
+    slateName += moment(activeSlate.StartTime).format('LLLL');
+    return slateName;
+  }
+
+  getOperatorName(): string {
+    return this.optimizerService.selectedOperator;
   }
 
   getUsedPlayers():UsedPlayer[] {

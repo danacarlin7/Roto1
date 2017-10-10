@@ -157,10 +157,28 @@
             <mfDefaultSorter by="Line">Line</mfDefaultSorter>
           </th>
           <th>
-            Weather
+            <mfDefaultSorter by="Opponent">Opponent</mfDefaultSorter>
           </th>
           <th>
-            <mfDefaultSorter by="Opponent">Opponent</mfDefaultSorter>
+            Min
+          </th>
+          <th>
+            Pts
+          </th>
+          <th>
+            Reb
+          </th>
+          <th>
+            Ast
+          </th>
+          <th>
+            Stl
+          </th>
+          <th>
+            Blk
+          </th>
+          <th>
+            To
           </th>
           <th>Exposure</th>
           <th>
@@ -190,8 +208,31 @@
           <td>{{player.OppPoints}}</td>
           <td>{{player.TotalPoints}}</td>
           <td>{{player.Line}}</td>
-          <td> -</td>
           <td>{{player.Opponent}}</td>
+          <td>
+            <input class="form-control input-sm" [(ngModel)]="player.exposureValue"
+                   (blur)="onExposureTxtboxBlurEvent($event,player)"
+                   type="number" max="100" min="0"
+                   placeholder="100%">
+          </td>
+          <td>
+            -
+          </td>
+          <td>
+            -
+          </td>
+          <td>
+            -
+          </td>
+          <td>
+            -
+          </td>
+          <td>
+            -
+          </td>
+          <td>
+            -
+          </td>
           <td><input class="form-control input-sm" [(ngModel)]="player.exposureValue"
                      (blur)="onExposureTxtboxBlurEvent($event,player)"
                      type="number" max="100" min="0"
@@ -203,7 +244,7 @@
         </tbody>
         <tfoot>
         <tr>
-          <td colspan="16">
+          <td colspan="21">
             <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
           </td>
         </tr>
@@ -211,14 +252,14 @@
       </table>
     </section>
     <!--/ Table -->
-    <rp-nfl-adv-filter [advFilterSettings]="advFilterSettings"
-                       [stackingData]="stackingData"
-                       [advFilterValue]="advFilterValue"
-                       [selectedOperator]="selectedOperator"
-                       #advFilterPopup
-                       (viewRenderedEvent)="onAdvFilterSettingsViewReady()"
-                       (saveAdvFilterValueEvent)="onSaveAdvFilterValueEvent($event)"
-                       (removeAdvFilterValueEvent)="onRemoveAdvFilterValueEvent()"
-                       (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-nfl-adv-filter>
+    <rp-nba-filter [advFilterSettings]="advFilterSettings"
+                   [stackingData]="stackingData"
+                   [advFilterValue]="advFilterValue"
+                   [selectedOperator]="selectedOperator"
+                   #advFilterPopup
+                   (viewRenderedEvent)="onAdvFilterSettingsViewReady()"
+                   (saveAdvFilterValueEvent)="onSaveAdvFilterValueEvent($event)"
+                   (removeAdvFilterValueEvent)="onRemoveAdvFilterValueEvent()"
+                   (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-nba-filter>
   </div>
 </div>

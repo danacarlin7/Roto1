@@ -12,6 +12,8 @@ import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
 import {AdvFilterComponent} from "../lineup-optimizer/adv-filter/adv-filter.component";
 import {AuthService} from "../../../shared/services/auth.service";
+import {Team} from "../../models/team.model";
+import {SelectItem} from "primeng/primeng";
 
 /**
  * Created by Hiren on 02-07-2017.
@@ -45,7 +47,8 @@ export class NFLLineupOptimizerComponent {
   errorData: string;
   advFilterValue: AdvFilterValue;
   isSavedFiltersApplied: boolean;
-
+  teams: SelectItem[] = [];
+  selectedTeams: string[] = [];
   @ViewChild('advFilterPopup') advFilterPopup: NFLAdvFilterComponent;
 
   constructor(private optimizerService: LineupOptimizerService, private router: Router, private authService: AuthService) {
@@ -171,6 +174,7 @@ export class NFLLineupOptimizerComponent {
                         }
                       }
                       this.advFilterSettings = response.data;
+                      this.prepareTeamList();
                       console.log("in retrieve method advFilterValue => ", this.advFilterValue);
                       console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
                       this.games = this.advFilterSettings.games;
@@ -193,6 +197,7 @@ export class NFLLineupOptimizerComponent {
                 this.advFilterSettings = response.data;
                 console.log("in retrieve method advFilterSettings => ", this.advFilterSettings);
                 this.games = this.advFilterSettings.games;
+                this.prepareTeamList();
                 if (this.isSlateChanged) {
                   setTimeout(() => {
                     this.applyFilters();
@@ -300,6 +305,25 @@ export class NFLLineupOptimizerComponent {
       )
   }
 
+  prepareTeamList() {
+    let tempTeams = [];
+    this.advFilterSettings.games.forEach(
+      currGame => {
+        tempTeams.push({label: currGame.homeTeam, value: currGame.homeTeam});
+        tempTeams.push({label: currGame.awayTeam, value: currGame.awayTeam});
+      }
+    );
+    this.teams = tempTeams.sort((n1, n2) => {
+      if (n1.value > n2.value) {
+        return 1;
+      }
+      if (n1.value < n2.value) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
   prepareLineupData() {
     let lineupData = {
       sport: this.selectedSport,
@@ -357,7 +381,7 @@ export class NFLLineupOptimizerComponent {
   btnExcludePlayerClicked(player: OptimizerPlayer) {
     player.isExcluded = true;
     this.unlockPlayer(player);
-    this.filterPlayers(this.searchStr);
+    this.filterPlayers();
   }
 
   onAdvFilterCriteriaChangedEvent(filters: LineupOppFilterCriteria[]) {
@@ -366,17 +390,38 @@ export class NFLLineupOptimizerComponent {
 
   onSearchStrChanged(event) {
     this.searchStr = event.target.value;
-    this.filterPlayers(this.searchStr);
+    this.filterPlayers();
   }
 
-  filterPlayers(searchStr: string = "") {
+  filterPlayers() {
+    this.filterPlayersByName(this.searchStr);
+    this.filterPlayerByTeams(this.selectedTeams);
+  }
+
+  filterPlayersByName(searchStr: string = "") {
     let filters = new LineupPlayerFilter();
     this.players = filters.transform(this.allPlayers, ['FirstName', 'LastName', 'fullName'], searchStr);
+  }
+
+  filterPlayerByTeams(teams: string[]) {
+    let filterData = [];
+    if (teams && teams.length && teams.length != this.teams.length) {
+      for (let i = 0; i < teams.length; i++) {
+        let currTeam = teams[i];
+        for (let j = 0; j < this.players.length; j++) {
+          if (currTeam == this.players[j].Team) {
+            filterData.push(this.players[j]);
+          }
+        }
+      }
+      this.players = filterData;
+    }
   }
 
   togglePlayerLock(player: OptimizerPlayer) {
     if (player.isLocked) {
       this.unlockPlayer(player);
+
     }
     else {
       if (this.lockedPlayers && this.lockedPlayers.length < 6) {
@@ -454,4 +499,9 @@ export class NFLLineupOptimizerComponent {
       this.authService.showSubscriptionAlert();
     }
   }
+
+  onTeamFilterValueChange(event) {
+    this.filterPlayers();
+  }
+
 }

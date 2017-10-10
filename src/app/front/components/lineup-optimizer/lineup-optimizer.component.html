@@ -118,7 +118,25 @@
             <mfDefaultSorter by="Position">Position</mfDefaultSorter>
           </th>
           <th>
-            <mfDefaultSorter by="Team">Team</mfDefaultSorter>
+            <mfDefaultSorter by="Team">
+              Team
+            </mfDefaultSorter>
+            <i class="fa fa-filter"
+               aria-hidden="true"
+               [ngStyle]="{'color':(selectedTeams && selectedTeams.length) ? '#000000':'#999999'}"
+               [md-tooltip]="selectedTeams && selectedTeams.length ? (selectedTeams.length + ' teams selected') : 'filter' "
+               (click)="teamFilterOverlay.toggle($event)"></i>
+            <p-overlayPanel #teamFilterOverlay>
+              <p-listbox [options]="teams"
+                         [(ngModel)]="selectedTeams"
+                         (onChange)="onTeamFilterValueChange($event)"
+                         id="table-filter-listBox"
+                         [metaKeySelection]="false"
+                         multiple="multiple"
+                         checkbox="checkbox"
+                         filter="filter">
+              </p-listbox>
+            </p-overlayPanel>
           </th>
           <th>
             <mfDefaultSorter by="Salary">Salary</mfDefaultSorter>

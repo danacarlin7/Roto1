@@ -26,6 +26,7 @@ section.my-section {
   border-top: none;
   border-bottom: none;
   padding: 15px 10px;
+  white-space:nowrap;
 }
 
 .lineup-table tr td {
@@ -58,7 +59,7 @@ section.my-section {
   display: flex;
   justify-content: center;
   padding: 2px;
-  margin:0 -15px 0 -15px;
+  margin: 0 -15px 0 -15px;
   background-color: rgba(244, 67, 54, 0.17);
 }
 

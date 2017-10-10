@@ -21,8 +21,11 @@
               <!--<li><a routerLink="/lineup-optimizer/nfl">NFL Optimizer</a></li>-->
               <!--</ul>-->
               <!--</li>-->
+              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/nfl-excel-tool">NFL Excel Tool<span class="sr-only">(current)</span></a>
+              </li>-->
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/excel-tool">Excel Tool<span class="sr-only">(current)</span></a>
+                <a routerLink="/mlb-excel-tool">Excel Tool<span class="sr-only">(current)</span></a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/extensions">Extensions</a>
@@ -91,6 +94,7 @@
                      [routerLinkActiveOptions]="{exact: true}">
                   <a routerLink="/lineup-optimizer" (click)="closeMobileMenu()">MLB Optimizer</a>
                   <a routerLink="/lineup-optimizer/nfl" (click)="closeMobileMenu()">NFL Optimizer</a>
+                  <!--<a routerLink="/lineup-optimizer/nba" (click)="closeMobileMenu()">NBA Optimizer</a>-->
                 </div>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
@@ -106,7 +110,7 @@
               <li class="loginBtn" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
               <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signup">Sign Up</a></li>
               <li class="signUpBtn" *ngIf="isLoggedIn">
-                <a style="width: auto" routerLink="{{role == 'user' ? '/user' : '/admin'}}">
+                <a style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
                   Go to Dashboard
                 </a>
               </li>

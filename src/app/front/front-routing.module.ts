@@ -31,6 +31,9 @@ import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl
 import {SubscriptionGuard} from "../shared/services/subscription.guard";
 import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
 import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
+import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.component";
+import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
+import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -55,15 +58,18 @@ const routes:Routes = [
       <Route>{path: 'articles/:id', component: ArticleComponent},
       <Route>{path: 'articles', component: ArticlesComponent},
       <Route>{path: 'basics', component: DFSBasicsComponent},
-      <Route>{path: 'excel-tool', component: ExcelToolComponent},
+      <Route>{path: 'mlb-excel-tool', component: ExcelToolComponent},
+      <Route>{path: 'nfl-excel-tool', component: NFLExcelToolComponent},
       <Route>{path: 'faq', component: FAQComponent},
       <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent},
       <Route>{path: 'provider-public-lineups', component: ProviderPublicComponent},
       <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
       <Route>{path: 'lineup-optimizer/mlb', component: LineupOptimizerComponent},
       <Route>{path: 'lineup-optimizer/nfl', component: NFLLineupOptimizerComponent},
+      <Route>{path: 'lineup-optimizer/nba', component: NBALineupOptimizerComponent},
       <Route>{path: 'mlb-lineups', component: GeneratedLineupsComponent},
       <Route>{path: 'nfl-lineups', component: GeneratedNFLLineupsComponent},
+      <Route>{path: 'nba-lineups', component: GeneratedNBALineupsComponent},
       <Route>{path: 'injuries', component: InjuriesComponent},
       <Route>{path: 'subscribe', component: SubscribeComponent},
       <Route>{path: 'contact-analyzer', component: ContactAnalyzerComponent},

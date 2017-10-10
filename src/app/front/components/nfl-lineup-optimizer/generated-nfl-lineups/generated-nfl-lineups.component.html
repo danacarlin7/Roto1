@@ -4,10 +4,7 @@
   <section class="my-section title-container">
     <div class="row">
       <div class="col-md-12">
-        <h4 class="content-title">{{getSlateName()}}
-          <a style="display: none" class="btn btn-sm" href="#">
-            <img src="../../../../../assets/images/pen.png" alt="edit"/>
-          </a>
+        <h4 class="content-title">{{getOperatorName()}} - {{getSlateName()}}
         </h4>
       </div>
     </div>
@@ -56,6 +53,8 @@
               <p-multiSelect [options]="positions"
                              class="player-position-opt used-player-position-opt"
                              [(ngModel)]="selectedPositions"
+                             [filter]="false"
+                             [showToggleAll]="false"
                              defaultLabel="Select positions"
                              selectedItemsLabel="{0} positions selected"
                              (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>

@@ -1,34 +1,31 @@
 import {Component, ViewChild} from "@angular/core";
 import {Slate} from "../../models/slate.model";
-import {LineupOptimizerService} from "../../services/lineup-optimizer.service";
 import {OptimizerPlayer} from "../../models/player.model";
 import {AdvFilterSettings, Game} from "../../models/adv-filter-setting.model";
-import {LineupOppFilterCriteria} from "../../models/filter-criteria.model";
-import {AdvFilterComponent} from "./adv-filter/adv-filter.component";
-import {LineupOppFilterConstants} from "../../constants/lineup-opp.constants";
-import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
-import {Router} from "@angular/router";
-import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
+import {NFLAdvFilterComponent} from "../nfl-lineup-optimizer/nfl-filters/nfl-filters.component";
+import {LineupOptimizerService} from "../../services/lineup-optimizer.service";
+import {Router} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
+import {LineupOppFilterCriteria} from "../../models/filter-criteria.model";
+import {LineupOppFilterConstants} from "../../constants/lineup-opp.constants";
+import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
+import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
+import {NBAFilterComponent} from "./nba-filter/nba-filter.component";
 import {SelectItem} from "primeng/primeng";
-
-/**
- * Created by Hiren on 02-07-2017.
- */
 
 declare var jQuery: any;
 
 @Component({
-  selector: 'rp-lineup-optimizer',
-  templateUrl: './lineup-optimizer.component.html',
-  styleUrls: ['./lineup-optimizer.component.css']
+  selector: 'rp-nba-lineup-optimizer',
+  templateUrl: './nba-lineup-optimizer.component.html',
+  styleUrls: ['./nba-lineup-optimizer.component.css']
 })
-export class LineupOptimizerComponent {
+export class NBALineupOptimizerComponent {
 
   searchStr: string = '';
   selectedOperator: string = 'FanDuel';
-  selectedSport: string = 'MLB';
+  selectedSport: string = 'NFL';
   selectedSlate: number = 0;
   selectedGame: number = 0;
   slates: Slate[];
@@ -36,22 +33,19 @@ export class LineupOptimizerComponent {
   players: OptimizerPlayer[];
   advFilterSettings: AdvFilterSettings;
   isLoading: boolean;
-  isError: boolean;
-  isDataError: boolean;
-  errorMsg: string;
-  errorData: string;
   games: Game[];
   stackingData: { team: string, teamId: number }[];
   lockedPlayers: number[] = [];
   todayDate = new Date();
-  isShowNonStartingPitchers: boolean;
-  teams: SelectItem[] = [];
-  selectedTeams: string[] = [];
-
+  isError: boolean;
+  isDataError: boolean;
+  errorMsg: string;
+  errorData: string;
   advFilterValue: AdvFilterValue;
   isSavedFiltersApplied: boolean;
-
-  @ViewChild('advFilterPopup') advFilterPopup: AdvFilterComponent;
+  teams: SelectItem[] = [];
+  selectedTeams: string[] = [];
+  @ViewChild('advFilterPopup') advFilterPopup: NBAFilterComponent;
 
   constructor(private optimizerService: LineupOptimizerService, private router: Router, private authService: AuthService) {
     this.selectedOperator = this.optimizerService.selectedOperator;
@@ -105,9 +99,9 @@ export class LineupOptimizerComponent {
             } else {
               this.isLoading = false;
               this.isError = true;
-              this.isDataError = true;
               this.errorMsg = "No Slates found !!";
               this.errorData = '';
+              this.isDataError = true;
             }
           } else {
             this.isLoading = false;
@@ -116,9 +110,9 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
-          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving slates.";
           this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -149,9 +143,9 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
-          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving players.";
           this.errorData = error.message;
+          this.isDataError = true;
           console.log("http error => ", error);
         }
       )
@@ -245,9 +239,10 @@ export class LineupOptimizerComponent {
         error => {
           this.isLoading = false;
           this.isError = true;
-          this.isDataError = true;
           this.errorMsg = "Oops! something went wrong while retrieving staking info.";
           this.errorData = error.message;
+          this.isDataError = true;
+          console.log("http error => ", error);
         }
       )
   }
@@ -283,7 +278,9 @@ export class LineupOptimizerComponent {
     if (activeSlate && activeSlate.length) {
       this.optimizerService.activeSlate = activeSlate[0];
     }
+
     this.optimizerService.filterSettings = this.advFilterSettings;
+
     this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)
       .subscribe(
         response => {
@@ -291,7 +288,7 @@ export class LineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
-            this.router.navigate(['mlb-lineups']);
+            this.router.navigate(['nfl-lineups']);
           }
         },
         error => {
@@ -333,74 +330,48 @@ export class LineupOptimizerComponent {
           return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue, force: currPlayer.isLocked}
         })
     };
-    if (this.authService.isSubscriber()) {
-      if (this.advFilterPopup.variabilityValue) {
-        lineupData['variation'] = this.advFilterPopup.variabilityValue;
-      }
 
-      if (this.advFilterPopup.maxExposureValue != 100) {
-        lineupData['maxExposure'] = this.advFilterPopup.maxExposureValue;
-      }
-
-      if (this.advFilterPopup.noOfUniquePlayersValue != 1) {
-        lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
-      }
-
-      if (this.advFilterPopup.noOfLineupValue != 10) {
-        lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
-      }
-
-      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.MLB_MIN_SALARY_FOR_FANDUAL) {
-        lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
-      }
-
-      if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.MLB_MAX_SALARY_FOR_FANDUAL) {
-        lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
-      }
-
-      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.MLB_MIN_SALARY_FOR_DRAFT_KING) {
-        lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
-      }
-
-      if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.MLB_MAX_SALARY_FOR_DRAFT_KING) {
-        lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
-      }
-
-      lineupData['noBattersVsPitchers'] = this.advFilterPopup.noBattingVsPitchers;
-      lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
+    if (this.advFilterPopup.variabilityValue) {
+      lineupData['variation'] = this.advFilterPopup.variabilityValue;
     }
+
+    if (this.advFilterPopup.maxExposureValue != 100) {
+      lineupData['maxExposure'] = this.advFilterPopup.maxExposureValue;
+    }
+
+    if (this.advFilterPopup.noOfUniquePlayersValue != 1) {
+      lineupData['numberOfUniquePlayers'] = this.advFilterPopup.noOfUniquePlayersValue;
+    }
+
+    if (this.advFilterPopup.noOfLineupValue != 10) {
+      lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
+    }
+
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NFL_MIN_SALARY_FOR_FANDUAL) {
+      lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
+    }
+
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NFL_MAX_SALARY_FOR_FANDUAL) {
+      lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
+    }
+
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NFL_MIN_SALARY_FOR_DRAFT_KING) {
+      lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
+    }
+
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NFL_MAX_SALARY_FOR_DRAFT_KING) {
+      lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
+    }
+
+    lineupData['no_def_vs_opp_players'] = this.advFilterPopup.noDefVsOpp;
+    lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
+    lineupData['stacking'] = this.advFilterPopup.getStakingData();
+    console.info("lineupData => ", lineupData);
     return lineupData;
   }
 
   prepareMinMaxPlayerFromTeam(): any[] {
-    let teams = [];
-    if (!this.authService.isSubscriber()) {
-      return [];
-    }
-    teams = this.advFilterPopup.getMinMaxPlayerFromTeam();
-    let stackData = this.advFilterPopup.getStakingData();
-    if (stackData && stackData.length) {
-      stackData.forEach(
-        stackTeam => {
-          let teamFlag: boolean = false;
-          teams.forEach(team => {
-            if (stackTeam.name == team.teamName) {
-              teamFlag = true;
-              team.minPlayers = stackTeam.players;
-              team.maxPlayers = stackTeam.players;
-              return;
-            }
-          });
-          if (!teamFlag) {
-            teams.push({
-              teamName: stackTeam.name,
-              minPlayers: stackTeam.players,
-              maxPlayers: stackTeam.players
-            })
-          }
-        })
-    }
-    return teams;
+    return this.advFilterPopup.getMinMaxPlayerFromTeam();
   }
 
   btnExcludePlayerClicked(player: OptimizerPlayer) {
@@ -468,11 +439,6 @@ export class LineupOptimizerComponent {
     }
   }
 
-  onShowNonStartingPitchersChange(event) {
-    console.log("show var => ", this.isShowNonStartingPitchers);
-    console.log("event => ", event);
-  }
-
   onExposureTxtboxBlurEvent(event, player: OptimizerPlayer) {
     let value = event.target.value;
     if (value > 100) {
@@ -532,4 +498,5 @@ export class LineupOptimizerComponent {
   onTeamFilterValueChange(event) {
     this.filterPlayers();
   }
+
 }

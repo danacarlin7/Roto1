@@ -161,6 +161,8 @@
                           <h4 class="rangeslider-value">Position:
                           </h4>
                           <p-multiSelect [options]="positions"
+                                         [filter]="false"
+                                         [showToggleAll]="false"
                                          class="player-position-opt"
                                          [(ngModel)]="positionFilterValue"
                                          (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>

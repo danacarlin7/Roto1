@@ -46,6 +46,10 @@ import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl
 import {NFLAdvFilterComponent} from "./components/nfl-lineup-optimizer/nfl-filters/nfl-filters.component";
 import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
 import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
+import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.component";
+import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
+import {NBAFilterComponent} from "./components/nba-lineup-optimizer/nba-filter/nba-filter.component";
+import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -90,7 +94,11 @@ import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/ge
     NFLLineupOptimizerComponent,
     NFLAdvFilterComponent,
     ContactAnalyzerComponent,
-    GeneratedNFLLineupsComponent
+    GeneratedNFLLineupsComponent,
+    NFLExcelToolComponent,
+    NBALineupOptimizerComponent,
+    NBAFilterComponent,
+    GeneratedNBALineupsComponent
   ],
   exports: [
     ProviderComponent,

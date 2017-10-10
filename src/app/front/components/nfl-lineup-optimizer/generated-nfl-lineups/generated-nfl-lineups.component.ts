@@ -4,6 +4,8 @@ import {GeneratedLineup, LineupPlayer, UsedPlayer} from "../../../models/generat
 import {Router} from "@angular/router";
 import {Game} from "../../../models/adv-filter-setting.model";
 import {SelectItem} from "primeng/primeng";
+import {DatePipe} from "@angular/common";
+import * as moment from "moment";
 
 @Component({
   selector: 'rp-generated-lineups',
@@ -12,14 +14,14 @@ import {SelectItem} from "primeng/primeng";
 })
 export class GeneratedNFLLineupsComponent {
 
-  lineups:GeneratedLineup[];
-  usedPlayers:UsedPlayer[];
-  positions:SelectItem[];
-  selectedPositions:any[] = [];
-  activeUsedPlayerTab:'all'|'filter' = 'all';
-  filtardPlayers:UsedPlayer[];
+  lineups: GeneratedLineup[];
+  usedPlayers: UsedPlayer[];
+  positions: SelectItem[];
+  selectedPositions: any[] = [];
+  activeUsedPlayerTab: 'all' | 'filter' = 'all';
+  filtardPlayers: UsedPlayer[];
 
-  constructor(private optimizerService:LineupOptimizerService, private router:Router) {
+  constructor(private optimizerService: LineupOptimizerService, private router: Router) {
     this.positions = [];
     //QB, RB, WR, TE, K, DST
     this.positions.push({label: 'QB', value: 'QB'});
@@ -47,24 +49,24 @@ export class GeneratedNFLLineupsComponent {
     }
   }
 
-  getBattingOrderByPlayerId(id:number):number {
+  getBattingOrderByPlayerId(id: number): number {
     return this.optimizerService.getBattingOrderByPlayerId(id);
   }
 
-  getOpponentNameByPlayerId(id:number):string {
+  getOpponentNameByPlayerId(id: number): string {
     return this.optimizerService.getOpponentByPlayerId(id);
   }
 
-  getHomeTeamByPlayerId(id:number) {
+  getHomeTeamByPlayerId(id: number) {
     return this.optimizerService.getHomeTeamByPlayerId(id);
   }
 
-  getPlayerValueByPlayerId(id:number) {
+  getPlayerValueByPlayerId(id: number) {
     return this.optimizerService.getPlayerValueByPlayerId(id);
   }
 
-  getHomeTeamByAwayTeamName(team:string):string {
-    let games:Game[] = this.optimizerService.filterSettings.games;
+  getHomeTeamByAwayTeamName(team: string): string {
+    let games: Game[] = this.optimizerService.filterSettings.games;
     for (let i = 0; games && games.length > i; i++) {
       if (games[i].awayTeam == team) {
         return games[i].homeTeam;
@@ -73,8 +75,8 @@ export class GeneratedNFLLineupsComponent {
     return '';
   }
 
-  getAwayTeamByHomeTeamName(team:string):string {
-    let games:Game[] = this.optimizerService.filterSettings.games;
+  getAwayTeamByHomeTeamName(team: string): string {
+    let games: Game[] = this.optimizerService.filterSettings.games;
     for (let i = 0; games && games.length > i; i++) {
       if (games[i].homeTeam == team) {
         return games[i].awayTeam;
@@ -83,7 +85,7 @@ export class GeneratedNFLLineupsComponent {
     return '';
   }
 
-  onUsedPlayerTabSelected(tab:any) {
+  onUsedPlayerTabSelected(tab: any) {
     this.activeUsedPlayerTab = tab;
     if (this.activeUsedPlayerTab == 'all') {
       this.selectedPositions = [];
@@ -110,8 +112,8 @@ export class GeneratedNFLLineupsComponent {
     return filterData;
   }
 
-  isAwayTeamPlayer(player:LineupPlayer):boolean {
-    let games:Game[] = this.optimizerService.filterSettings.games;
+  isAwayTeamPlayer(player: LineupPlayer): boolean {
+    let games: Game[] = this.optimizerService.filterSettings.games;
     for (let i = 0; games && games.length > i; i++) {
       if (games[i].awayTeam == player.team) {
         return true;
@@ -120,8 +122,8 @@ export class GeneratedNFLLineupsComponent {
     return false;
   }
 
-  isHomeTeamPlayer(player:LineupPlayer):boolean {
-    let games:Game[] = this.optimizerService.filterSettings.games;
+  isHomeTeamPlayer(player: LineupPlayer): boolean {
+    let games: Game[] = this.optimizerService.filterSettings.games;
     for (let i = 0; games && games.length > i; i++) {
       if (games[i].homeTeam == player.team) {
         return true;
@@ -130,12 +132,20 @@ export class GeneratedNFLLineupsComponent {
     return false;
   }
 
-  getSlateName():string {
-    return this.optimizerService.selectedSlate ? this.optimizerService.activeSlate.Slate : 'All Slates';
+  getSlateName(): string {
+    let slateName = '';
+    let activeSlate = this.optimizerService.activeSlate;
+    slateName += activeSlate.Slate + " - ";
+    slateName += moment(activeSlate.StartTime).format('LLLL');
+    return slateName;
   }
 
-  getUsedPlayers():UsedPlayer[] {
-    let players:UsedPlayer[];
+  getOperatorName(): string {
+    return this.optimizerService.selectedOperator;
+  }
+
+  getUsedPlayers(): UsedPlayer[] {
+    let players: UsedPlayer[];
     switch (this.activeUsedPlayerTab) {
       case 'all':
         players = this.usedPlayers;

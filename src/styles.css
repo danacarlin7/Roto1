@@ -157,7 +157,7 @@ mfDefaultSorter a {
   background-color: #f7f5f5 !important;
 }
 
-.used-player-position-opt .ui-widget-content{
+.used-player-position-opt .ui-widget-content {
   background-color: #f7f5f5 !important;
 }
 
@@ -183,7 +183,6 @@ mfDefaultSorter a {
 .used-player-position-opt .ui-multiselect-item {
   background-color: #f7f5f5 !important;
 }
-
 
 .player-position-opt .ui-multiselect-item.ui-state-highlight {
   background-color: #fff !important;
@@ -296,4 +295,26 @@ mfDefaultSorter a {
   background-color: #f8c534 !important;
   color: #000 !important;
   border: 1px solid #f8c534 !important;
+}
+
+#table-filter-listBox .ui-widget-header {
+  background-color: #FFFFFF;
+}
+
+#table-filter-listBox .ui-state-highlight {
+  background-color: #FFFFFF !important;
+  border: 1px solid #FFFFFF !important;
+  color: #000000;
+}
+
+#table-filter-listBox .ui-listbox-list {
+  max-height: 200px;
+}
+
+#table-filter-listBox .ui-listbox-item {
+  text-align: left !important;
+}
+
+#table-filter-listBox .ui-widget-header {
+  background-color: #ffffff !important;
 }
