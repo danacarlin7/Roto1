@@ -846,7 +846,7 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
 	/* Bower Section Starts */
 
 		.bowerBannerSection1{background: url("../images/extension_new.jpg") no-repeat center top; background-size: cover; padding: 200px 0px 630px;position: relative;}
-    .bowerBannerSection{background: url("../images/info_banner.jpg") no-repeat center top; background-size: cover; padding: 200px 0px 220px;position: relative;}
+    .bowerBannerSection{background: url("../images/info_banner_new.jpg") no-repeat center top; background-size: cover; padding: 200px 0px 220px;position: relative;}
 		.bowerBannerSectionOverlay{position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; background: rgba(0,0,0,0.6);}
 		.bowerBannerHedin{display: flex;justify-content: flex-start;}
 		.bowerBannerHedin h1{margin: 0px;font-size: 33px;line-height: 35px;color: #FFF;display: flex;flex-flow: column wrap;justify-content: flex-start;font-family: 'Open Sans', sans-serif;font-weight: 400;}
