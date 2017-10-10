@@ -11,6 +11,7 @@ production_build:
     - npm install
     - ng build --prod
     - cd /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/RotoProsWeb
+    - rm -rf /var/www/html/RotoProsWeb/dist
     - cp -R /home/gitlab-runner/builds/c30cc313/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
   tags:
     - DFS
