@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  api_end_point:'https://api.dfsportgod.com/',
+  api_end_point:'http://13.57.84.196:3000/',
   token:'',
   role:''
 };
