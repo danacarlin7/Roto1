@@ -10,9 +10,9 @@ production_build:
   script:
     - npm install
     - ng build --prod
-    # - cd /home/gitlab-runner/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
-    # - rm -rf /var/www/html/RotoProsWeb/dist
-    # - cp -R /home/gitlab-runner/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+    - cd /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
+    - rm -rf /var/www/html/RotoProsWeb/dist
+    - cp -R /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
   tags:
     - ROTOPROS
 
@@ -23,8 +23,8 @@ production_dev_build:
   script:
     - npm install
     - ng build --prod
-    # - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
-    # - rm -rf /var/www/html/RotoProsWeb/dist
-    # - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+    - cd /home/ubuntu/builds/03bf9824/0/anonymous-coder/RotoProsWeb/
+    - rm -rf /var/www/html/RotoProsWeb/dist
+    - cp -R /home/ubuntu/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
   tags:
     - RP
