@@ -119,6 +119,22 @@
           </th>
           <th>
             <mfDefaultSorter by="Position">Position</mfDefaultSorter>
+            <i class="fa fa-filter"
+               aria-hidden="true"
+               [ngStyle]="{'color':(positionFilterValue && positionFilterValue.length) ? '#000000':'#999999'}"
+               [md-tooltip]="positionFilterValue && positionFilterValue.length ? (positionFilterValue.length + ' selected') : 'filter' "
+               (click)="posFilterOverlay.toggle($event)"></i>
+            <p-overlayPanel #posFilterOverlay>
+              <p-listbox [options]="positions"
+                         [(ngModel)]="positionFilterValue"
+                         (onChange)="onPlayerPositionFilterChanged($event)"
+                         class="table-filter-listBox"
+                         [metaKeySelection]="false"
+                         multiple="multiple"
+                         checkbox="checkbox"
+                         filter="filter">
+              </p-listbox>
+            </p-overlayPanel>
           </th>
           <th>
             <mfDefaultSorter by="Team">
