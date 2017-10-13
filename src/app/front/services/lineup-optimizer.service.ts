@@ -263,7 +263,7 @@ export class LineupOptimizerService {
 
   filterPlayers(filters:LineupOppFilterCriteria[] = []):OptimizerPlayer[] {
     let players = this.players;
-
+    console.log("No Filter Applied => ",players);
     filters.forEach(
       (currFilter:LineupOppFilterCriteria) => {
         switch (currFilter.filterKey) {
@@ -277,6 +277,7 @@ export class LineupOptimizerService {
                 }
               }
             );
+            console.log("Filter Player Salary => ",players);
             break;
           case LineupOppFilterConstants.PLAYER_VALUE:
             players = players.filter(
@@ -286,6 +287,7 @@ export class LineupOptimizerService {
                 }
               }
             );
+            console.log("Filter Player Value => ",players);
             break;
           case LineupOppFilterConstants.PROJECTION:
             players = players.filter(
@@ -295,6 +297,7 @@ export class LineupOptimizerService {
                 }
               }
             );
+            console.log("Filter Player Projection => ",players);
             break;
           case LineupOppFilterConstants.PLAYER_BATTING_ORDER:
             players = players.filter(
@@ -304,6 +307,7 @@ export class LineupOptimizerService {
                 }
               }
             );
+            console.log("Filter Player Batting Order => ",players);
             break;
           case LineupOppFilterConstants.PLAYER_POSITION:
             players = players.filter(
@@ -319,6 +323,7 @@ export class LineupOptimizerService {
                 return isPlayerHasMatchedPosition;
               }
             );
+            console.log("Filter Player Position => ",players);
             break;
           case LineupOppFilterConstants.GAME_TYPE:
             players = players.filter(
@@ -334,6 +339,7 @@ export class LineupOptimizerService {
                 return isPlayerInSlate;
               }
             );
+            console.log("Filter Player Game Type => ",players);
             break;
           default:
             break;

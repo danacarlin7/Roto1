@@ -51,7 +51,6 @@ export class AdvFilterComponent {
   salaryFilterValue:any[] = [];
   valueFilterValue:any[] = [];
   battingOrderFilterValue:any[] = [];
-  positionFilterValue:any[] = [];
 
   @Input()
   advFilterValue:AdvFilterValue;
@@ -108,33 +107,20 @@ export class AdvFilterComponent {
         this.setGameValues();
         this.setStackingValues();
         this.emitFilterChangeEvent();
-        this.positionFilterValue = this.advFilterValue.positionFilter;
       }, 20);
     }
   }
 
-  positions:SelectItem[];
+
   isLogIn:boolean;
 
   lineupOptimizerServiceConst = LineupOptimizerService;
 
   constructor(private authService:AuthService, private router:Router) {
-    this.positions = [];
-    this.positions.push({label: 'P', value: 'p'});
-    this.positions.push({label: 'C', value: 'c'});
-    this.positions.push({label: '1B', value: '1b'});
-    this.positions.push({label: '2B', value: '2b'});
-    this.positions.push({label: '3B', value: '3b'});
-    this.positions.push({label: 'SS', value: 'ss'});
-    this.positions.push({label: 'OF', value: 'of'});
-
     this.isLogIn = this.authService.isLoggedIn();
   }
 
-  onPlayerPositionFilterChanged(event) {
-    this.emitFilterChangeEvent();
-    console.log("value => ", this.positionFilterValue);
-  }
+
 
   ngAfterViewInit() {
     this.variabilitySlider = jQuery("#Variability");
@@ -519,14 +505,6 @@ export class AdvFilterComponent {
         filterValue: this.valueFilterValue
       });
     }
-    if (this.positionFilterValue && this.positionFilterValue.length) {
-      this.filters.push({
-        filterKey: LineupOppFilterConstants.PLAYER_POSITION,
-        minValue: '',
-        maxValue: '',
-        filterValue: this.positionFilterValue
-      });
-    }
   }
 
   onGameClick(game:Game) {
@@ -616,7 +594,6 @@ export class AdvFilterComponent {
       salaryFilter: this.salaryFilterValue,
       valueFilter: this.valueFilterValue,
       battingOrderFilter: this.battingOrderFilterValue,
-      positionFilter: this.positionFilterValue,
       playerPerTeams: this.getMinMaxPlayerFromTeam(),
       stackingTeams: this.getStakingData()
     };
@@ -682,7 +659,6 @@ export class AdvFilterComponent {
     this.noBattingVsPitchers = false;
     this.emitFilterChangeEvent();
     this.isSettingsUpdated = true;
-    this.positionFilterValue = [];
     this.removeAdvFilterValueEvent.emit(null);
   }
 

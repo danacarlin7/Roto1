@@ -45,6 +45,8 @@ export class NBALineupOptimizerComponent {
   isSavedFiltersApplied: boolean;
   teams: SelectItem[] = [];
   selectedTeams: string[] = [];
+  positionFilterValue: any[] = [];
+  positions: SelectItem[];
   @ViewChild('advFilterPopup') advFilterPopup: NBAFilterComponent;
 
   constructor(private optimizerService: LineupOptimizerService, private router: Router, private authService: AuthService) {
@@ -53,6 +55,24 @@ export class NBALineupOptimizerComponent {
     this.selectedSlate = this.optimizerService.selectedSlate;
     this.selectedGame = this.optimizerService.selectedGame;
     this.searchStr = this.optimizerService.searchStr;
+    this.initPositionFilter();
+  }
+
+
+  initPositionFilter() {
+    this.positions = [];
+    //QB, RB, WR, TE, K, DST
+    this.positions.push({label: 'QB', value: 'QB'});
+    this.positions.push({label: 'RB', value: 'RB'});
+    this.positions.push({label: 'WR', value: 'WR'});
+    this.positions.push({label: 'TE', value: 'TE'});
+    if (this.selectedOperator == 'FanDuel') {
+      this.positions.push({label: 'K', value: 'K'});
+      this.positions.push({label: 'D', value: 'D'});
+    }
+    if (this.selectedOperator == 'DraftKings') {
+      this.positions.push({label: 'DST', value: 'DST'});
+    }
   }
 
   initiateData() {
@@ -78,6 +98,10 @@ export class NBALineupOptimizerComponent {
     this.selectedGame = this.optimizerService.selectedGame = 0;
     this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
     this.isSlateChanged = true;
+  }
+
+  onPlayerPositionFilterChanged(event) {
+    this.applyFilters();
   }
 
   getSlates() {
@@ -167,6 +191,7 @@ export class NBALineupOptimizerComponent {
                         this.advFilterValue = savedFilterResponse.data;
                         if (this.advFilterValue) {
                           this.isSavedFiltersApplied = true;
+                          this.positionFilterValue = this.advFilterValue.positionFilter;
                         }
                       }
                       this.advFilterSettings = response.data;
@@ -262,7 +287,7 @@ export class NBALineupOptimizerComponent {
       maxValue: 0,
       minValue: 0
     });
-    filters = filters.concat(this.advFilterPopup.getFilters());
+    filters = filters.concat(this.getFilters());
     this.optimizerService.applyFilters(filters);
   }
 
@@ -320,11 +345,24 @@ export class NBALineupOptimizerComponent {
     });
   }
 
+  getFilters(): LineupOppFilterCriteria[] {
+    let filters = this.advFilterPopup.getFilters();
+    if (this.positionFilterValue && this.positionFilterValue.length) {
+      filters.push({
+        filterKey: LineupOppFilterConstants.PLAYER_POSITION,
+        minValue: '',
+        maxValue: '',
+        filterValue: this.positionFilterValue
+      });
+    }
+    return filters;
+  }
+
   prepareLineupData() {
     let lineupData = {
       sport: this.selectedSport,
       site: this.selectedOperator,
-      players: this.optimizerService.filterPlayers(this.advFilterPopup.getFilters())
+      players: this.optimizerService.filterPlayers(this.getFilters())
         .filter(currPlayer => !currPlayer.isExcluded)
         .map(currPlayer => {
           return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue, force: currPlayer.isLocked}
@@ -470,6 +508,9 @@ export class NBALineupOptimizerComponent {
   }
 
   onSaveAdvFilterValueEvent(filterValue: AdvFilterValue) {
+    if(filterValue){
+      filterValue['positionFilter'] = this.positionFilterValue;
+    }
     this.optimizerService.updateAdvFilterValue(filterValue)
       .subscribe(
         response => {
@@ -482,6 +523,7 @@ export class NBALineupOptimizerComponent {
   }
 
   onRemoveAdvFilterValueEvent() {
+    this.positionFilterValue = [];
     this.onSaveAdvFilterValueEvent(null);
   }
 

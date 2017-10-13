@@ -156,7 +156,7 @@
                           <span class="slider-range slider-min">0</span><span class="slider-range slider-max">9</span>
                         </div>
                       </div>-->
-                      <div class="col-md-12">
+                     <!-- <div class="col-md-12">
                         <div class="filter-range-container">
                           <h4 class="rangeslider-value">Position:
                           </h4>
@@ -167,7 +167,7 @@
                                          [(ngModel)]="positionFilterValue"
                                          (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>
                         </div>
-                      </div>
+                      </div>-->
 
                     </div>
                   </div>
@@ -253,7 +253,7 @@
                         <p-multiSelect [options]="stack1"
                                        [(ngModel)]="stackingTeam_QB_WR"
                                        class="player-position-opt"
-                                       (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>
+                                       ></p-multiSelect>
                       </td>
                     </tr>
                     <tr>
@@ -265,10 +265,10 @@
                                     [(ngModel)]="selectedStakeTypes"></p-checkbox>
                       </td>
                       <td>
-                        <p-multiSelect [options]="stack3"
+                        <p-multiSelect [options]="stack2"
                                        [(ngModel)]="stackingTeam_QB_WR_TE"
                                        class="player-position-opt"
-                                       (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>
+                                       ></p-multiSelect>
                       </td>
                     </tr>
                     <tr>
@@ -283,7 +283,7 @@
                         <p-multiSelect [options]="stack3"
                                        [(ngModel)]="stackingTeam_QB_TE"
                                        class="player-position-opt"
-                                       (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>
+                                       ></p-multiSelect>
                       </td>
                     </tr>
                     <tr>
@@ -297,7 +297,7 @@
                         <p-multiSelect [options]="stack4"
                                        [(ngModel)]="stackingTeam_RB_D"
                                        class="player-position-opt"
-                                       (onChange)="onPlayerPositionFilterChanged($event)"></p-multiSelect>
+                                       ></p-multiSelect>
                       </td>
                     </tr>
                     </tbody>

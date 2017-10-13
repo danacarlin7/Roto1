@@ -49,7 +49,7 @@ export class NFLAdvFilterComponent {
   salaryFilterValue:any[];
   valueFilterValue:any[];
   battingOrderFilterValue:any[];
-  positionFilterValue:any[];
+  //positionFilterValue:any[];
 
   @ViewChild('settingPopup') settingPopup:ElementRef;
 
@@ -110,41 +110,18 @@ export class NFLAdvFilterComponent {
         this.setGameValues();
         this.setStackingValues();
         this.emitFilterChangeEvent();
-        this.positionFilterValue = this.advFilterValue.positionFilter;
+        //this.positionFilterValue = this.advFilterValue.positionFilter;
       }, 20);
     }
-
-    this.initPositionFilter();
   }
 
-  positions:SelectItem[];
+  //positions:SelectItem[];
   isLogIn:boolean;
 
   lineupOptimizerServiceConst = LineupOptimizerService;
 
   constructor(private authService:AuthService) {
     this.isLogIn = this.authService.isLoggedIn();
-  }
-
-  initPositionFilter() {
-    this.positions = [];
-    //QB, RB, WR, TE, K, DST
-    this.positions.push({label: 'QB', value: 'QB'});
-    this.positions.push({label: 'RB', value: 'RB'});
-    this.positions.push({label: 'WR', value: 'WR'});
-    this.positions.push({label: 'TE', value: 'TE'});
-    if (this.selectedOperator == 'FanDuel') {
-      this.positions.push({label: 'K', value: 'K'});
-      this.positions.push({label: 'D', value: 'D'});
-    }
-    if (this.selectedOperator == 'DraftKings') {
-      this.positions.push({label: 'DST', value: 'DST'});
-    }
-  }
-
-  onPlayerPositionFilterChanged(event) {
-    this.emitFilterChangeEvent();
-    console.log("value => ", this.positionFilterValue);
   }
 
   ngAfterViewInit() {
@@ -510,14 +487,6 @@ export class NFLAdvFilterComponent {
         filterValue: this.valueFilterValue
       });
     }
-    if (this.positionFilterValue && this.positionFilterValue.length) {
-      this.filters.push({
-        filterKey: LineupOppFilterConstants.PLAYER_POSITION,
-        minValue: '',
-        maxValue: '',
-        filterValue: this.positionFilterValue
-      });
-    }
   }
 
   onGameClick(game:Game) {
@@ -599,7 +568,6 @@ export class NFLAdvFilterComponent {
       salaryFilter: this.salaryFilterValue,
       valueFilter: this.valueFilterValue,
       battingOrderFilter: this.battingOrderFilterValue,
-      positionFilter: this.positionFilterValue,
       playerPerTeams: this.getMinMaxPlayerFromTeam(),
       stackingTeams: this.getStakingData()
     };
@@ -653,7 +621,6 @@ export class NFLAdvFilterComponent {
     this.noDefVsOpp = false;
     this.emitFilterChangeEvent();
     this.isSettingsUpdated = true;
-    this.positionFilterValue = [];
     this.removeAdvFilterValueEvent.emit(null);
   }
 

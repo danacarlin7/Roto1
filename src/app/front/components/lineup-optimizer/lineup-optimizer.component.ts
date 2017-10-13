@@ -50,6 +50,8 @@ export class LineupOptimizerComponent {
 
   advFilterValue: AdvFilterValue;
   isSavedFiltersApplied: boolean;
+  positionFilterValue: any[] = [];
+  positions: SelectItem[];
 
   @ViewChild('advFilterPopup') advFilterPopup: AdvFilterComponent;
 
@@ -59,6 +61,15 @@ export class LineupOptimizerComponent {
     this.selectedSlate = this.optimizerService.selectedSlate;
     this.selectedGame = this.optimizerService.selectedGame;
     this.searchStr = this.optimizerService.searchStr;
+
+    this.positions = [];
+    this.positions.push({label: 'P', value: 'p'});
+    this.positions.push({label: 'C', value: 'c'});
+    this.positions.push({label: '1B', value: '1b'});
+    this.positions.push({label: '2B', value: '2b'});
+    this.positions.push({label: '3B', value: '3b'});
+    this.positions.push({label: 'SS', value: 'ss'});
+    this.positions.push({label: 'OF', value: 'of'});
   }
 
   initiateData() {
@@ -84,6 +95,10 @@ export class LineupOptimizerComponent {
     this.selectedGame = this.optimizerService.selectedGame = 0;
     this.getPlayers(this.selectedOperator, this.selectedSport, this.selectedSlate);
     this.isSlateChanged = true;
+  }
+
+  onPlayerPositionFilterChanged(event) {
+    this.applyFilters();
   }
 
   getSlates() {
@@ -173,6 +188,7 @@ export class LineupOptimizerComponent {
                         this.advFilterValue = savedFilterResponse.data;
                         if (this.advFilterValue) {
                           this.isSavedFiltersApplied = true;
+                          this.positionFilterValue = this.advFilterValue.positionFilter;
                         }
                       }
                       this.advFilterSettings = response.data;
@@ -267,7 +283,7 @@ export class LineupOptimizerComponent {
       maxValue: 0,
       minValue: 0
     });
-    filters = filters.concat(this.advFilterPopup.getFilters());
+    filters = filters.concat(this.getFilters());
     this.optimizerService.applyFilters(filters);
   }
 
@@ -323,11 +339,24 @@ export class LineupOptimizerComponent {
     });
   }
 
+  getFilters(): LineupOppFilterCriteria[] {
+    let filters = this.advFilterPopup.getFilters();
+    if (this.positionFilterValue && this.positionFilterValue.length) {
+      filters.push({
+        filterKey: LineupOppFilterConstants.PLAYER_POSITION,
+        minValue: '',
+        maxValue: '',
+        filterValue: this.positionFilterValue
+      });
+    }
+    return filters;
+  }
+
   prepareLineupData() {
     let lineupData = {
       sport: this.selectedSport,
       site: this.selectedOperator,
-      players: this.optimizerService.filterPlayers(this.advFilterPopup.getFilters())
+      players: this.optimizerService.filterPlayers(this.getFilters())
         .filter(currPlayer => !currPlayer.isExcluded)
         .map(currPlayer => {
           return {_id: currPlayer._id, maxExposure: currPlayer.exposureValue, force: currPlayer.isLocked}
@@ -504,6 +533,9 @@ export class LineupOptimizerComponent {
   }
 
   onSaveAdvFilterValueEvent(filterValue: AdvFilterValue) {
+    if(filterValue){
+      filterValue['positionFilter'] = this.positionFilterValue;
+    }
     this.optimizerService.updateAdvFilterValue(filterValue)
       .subscribe(
         response => {
@@ -516,6 +548,7 @@ export class LineupOptimizerComponent {
   }
 
   onRemoveAdvFilterValueEvent() {
+    this.positionFilterValue = [];
     this.onSaveAdvFilterValueEvent(null);
   }
 
