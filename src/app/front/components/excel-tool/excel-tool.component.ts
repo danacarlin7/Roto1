@@ -1,8 +1,10 @@
 import {Component} from "@angular/core";
+
 /**
  * Created by Hiren on 07-07-2017.
  */
 
+declare var fbq: any;
 
 @Component({
   selector: 'rp-excel-tool',
@@ -10,8 +12,12 @@ import {Component} from "@angular/core";
 })
 export class ExcelToolComponent {
 
-  constructor(){
+  constructor() {
 
+  }
+
+  onExcelToolDownloadBtnClicked() {
+    fbq('trackCustom', 'ExcelToolDownload');
   }
 
 }
