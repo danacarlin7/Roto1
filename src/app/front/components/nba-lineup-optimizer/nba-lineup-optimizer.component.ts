@@ -13,8 +13,10 @@ import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {LineupPlayerFilter} from "../../ng-pipes/lineup-opp-filter.pipe";
 import {NBAFilterComponent} from "./nba-filter/nba-filter.component";
 import {SelectItem} from "primeng/primeng";
+import {FacebookPixelEventConstants} from "../../constants/facebook-pixel-event.constants";
 
 declare var jQuery: any;
+declare var fbq: any;
 
 @Component({
   selector: 'rp-nba-lineup-optimizer',
@@ -313,6 +315,7 @@ export class NBALineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
+            fbq('trackCustom', FacebookPixelEventConstants.LINEUP_GENERATED_EVENT, {sport_type: 'NBA'});
             this.router.navigate(['nfl-lineups']);
           }
         },

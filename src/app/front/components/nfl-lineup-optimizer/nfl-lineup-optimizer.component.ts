@@ -14,12 +14,14 @@ import {AdvFilterComponent} from "../lineup-optimizer/adv-filter/adv-filter.comp
 import {AuthService} from "../../../shared/services/auth.service";
 import {Team} from "../../models/team.model";
 import {SelectItem} from "primeng/primeng";
+import {FacebookPixelEventConstants} from "../../constants/facebook-pixel-event.constants";
 
 /**
  * Created by Hiren on 02-07-2017.
  */
 
 declare var jQuery: any;
+declare var fbq: any;
 
 @Component({
   selector: 'rp--nfl-optimizer',
@@ -316,6 +318,7 @@ export class NFLLineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
+            fbq('trackCustom', FacebookPixelEventConstants.LINEUP_GENERATED_EVENT, {sport_type: 'NFL'});
             this.router.navigate(['nfl-lineups']);
           }
         },
