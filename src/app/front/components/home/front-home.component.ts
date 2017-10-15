@@ -246,7 +246,7 @@ export class FrontHomeComponent implements AfterViewInit {
   allNewsRecords:News[] = [];
 
   retrieveNews() {
-    this.frontService.retrieveHomepageNews()
+   /* this.frontService.retrieveHomepageNews()
       .subscribe(
         response => {
           if (response.statusCode == 200) {
@@ -261,7 +261,30 @@ export class FrontHomeComponent implements AfterViewInit {
         error => {
           console.log('http error => ', error);
         }
-      )
+      )*/
+    this.articleService.fetchPosts({categories: 4367, per_page: 5, offset: 0}).subscribe(
+      posts => {
+        this.allNewsRecords = [];
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
+          posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
+          if (posts[j].featured_media)
+            mid.push(posts[j].featured_media);
+          this.allNewsRecords.push(posts[j]);
+        }
+        let mids = mid.join(',');
+        if (mids) {
+          this.articleService.fetchMedia({include: mids}).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
 

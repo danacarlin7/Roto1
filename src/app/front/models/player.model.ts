@@ -1,9 +1,10 @@
 import {Injury} from "./injury.model";
+
 /**
  * Created by Hiren on 01-07-2017.
  */
 
-export interface Player{
+export interface Player {
   player_id: number;
   player_stats_global_id: number;
   player_sports_data_id: string;
@@ -14,11 +15,11 @@ export interface Player{
   player_link: string;
   injury_status: boolean;
   injury: Injury;
-  player_image:string;
+  player_image: string;
 }
 
 
-export interface OptimizerPlayer{
+export interface OptimizerPlayer {
   _id: string;
   PlayerID: number;
   Name: string;
@@ -29,7 +30,7 @@ export interface OptimizerPlayer{
   TeamID: number;
   Team: string;
   BattingOrder?: number;
-  BattingOrderConfirmed:boolean;
+  BattingOrderConfirmed: boolean;
   OpponentID: number;
   Opponent: string;
   Salary: number;
@@ -45,9 +46,9 @@ export interface OptimizerPlayer{
   BatHand: string;
   ThrowHand: string;
   GameID: number;
-  isExcluded:boolean;
-  exposureValue:number;
-  isLocked:boolean;
+  isExcluded: boolean;
+  exposureValue: number;
+  isLocked: boolean;
   SlateIds: number[];
   GameKey: string;
   GameDate: Date;
@@ -60,4 +61,11 @@ export interface OptimizerPlayer{
   WindSpeed?: any;
   OpponentRank: number;
   OpponentPositionRank: number;
+  Minutes: number;
+  NBAPoints: number;
+  Assists: number;
+  Steals: number;
+  BlockedShots: number;
+  Turnovers: number
+  Rebounds:any;
 }

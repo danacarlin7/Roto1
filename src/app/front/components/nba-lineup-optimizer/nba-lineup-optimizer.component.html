@@ -14,7 +14,8 @@
         <div class="col-md-2" style="position: relative">
           <span style="padding-right: 20px">
             <a class="btn btn-gray-black" routerLink="/lineup-optimizer">MLB</a>
-            <a class="btn btn-yellow-black ">NFL</a>
+            <a class="btn btn-gray-black " routerLink="/lineup-optimizer/nfl">NFL</a>
+            <a class="btn btn-yellow-black">NBA</a>
           </span>
         </div>
         <div class="col-md-5 text-right">
@@ -225,29 +226,28 @@
           <td>{{player.TotalPoints}}</td>
           <td>{{player.Line}}</td>
           <td>{{player.Opponent}}</td>
-          <td>
-            <input class="form-control input-sm" [(ngModel)]="player.exposureValue"
-                   (blur)="onExposureTxtboxBlurEvent($event,player)"
-                   type="number" max="100" min="0"
-                   placeholder="100%">
+          <td><input class="form-control input-sm" [(ngModel)]="player.Minutes"
+                     (blur)="onMinutesTxtboxBlurEvent($event,player)"
+                     type="number" max="100" min="0"
+                     placeholder="100%">
           </td>
           <td>
-            -
+            {{player.NBAPoints}}
           </td>
           <td>
-            -
+            0
           </td>
           <td>
-            -
+            {{player.Assists}}
           </td>
           <td>
-            -
+            {{player.Steals}}
           </td>
           <td>
-            -
+            {{player.BlockedShots}}
           </td>
           <td>
-            -
+            {{player.Turnovers}}
           </td>
           <td><input class="form-control input-sm" [(ngModel)]="player.exposureValue"
                      (blur)="onExposureTxtboxBlurEvent($event,player)"
@@ -269,7 +269,6 @@
     </section>
     <!--/ Table -->
     <rp-nba-filter [advFilterSettings]="advFilterSettings"
-                   [stackingData]="stackingData"
                    [advFilterValue]="advFilterValue"
                    [selectedOperator]="selectedOperator"
                    #advFilterPopup

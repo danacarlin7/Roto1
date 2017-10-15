@@ -116,25 +116,28 @@
             </div>
             <div class="ylwTpBxBtm">
               <div class="ylwTpBxBtmBx2Wrap">
-                <div class="news-item item" *ngFor="let news of allNewsRecords">
-                  <img style="width: 100px;margin: 0 auto;" [attr.src]="news?.player?.player_image" alt=""
+                <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(news)" class="news-item item" *ngFor="let news of allNewsRecords">
+                  <img style="margin: 0 auto;"
+                       *ngIf="findMedia(news.featured_media)!=false"
+                       src="{{findMedia(news.featured_media)}}"
+                       alt=""
                        class="img-responsive">
                   <div class="nltstNwsInfoTpWrp">
                     <div class="nltstNwsInfoTp clearfix">
                       <div class="nltstNwsInfoDte">
                           <span class="icnWrapperS"><img src="../../../../assets/images/nDateIcn.png" alt=""
                                                          class="img-responsive"></span>
-                        <i>{{news?.news_date_time | date : 'MMM dd, yyyy'}}</i>
+                        <i>{{news.date | date:'MMM dd, yyyy'}}</i>
                       </div>
                       <div class="nltstNwsInfoTme">
                           <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
                                                          class="img-responsive"></span>
-                        <i>{{news?.news_date_time | date : 'hh:mm a'}}</i>
+                        <i>{{news.date | date : 'hh:mm a'}}</i>
                       </div>
                     </div>
                     <div class="nltstNwsInfoBtm">
-                      <h4>{{news?.news_headline}}</h4>
-                      <p class="news-notes">{{news?.news_notes}}</p>
+                      <h4>{{news.title.rendered}}</h4>
+                      <p class="news-notes">{{news.extract}}</p>
                     </div>
                   </div>
 

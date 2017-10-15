@@ -52,25 +52,7 @@ export class NBAFilterComponent{
 
   filters:LineupOppFilterCriteria[];
 
-  stackingTeam_QB_WR:string[] = [];
-  stackingTeam_QB_WR_TE:string[] = [];
-  stackingTeam_QB_TE:string[] = [];
-  stackingTeam_RB_D:string[] = [];
-
   gamesObj:any = {};
-  private _stackingData:{team:string,teamId:number}[];
-  @Input()
-  set stackingData(value:{team:string,teamId:number}[]) {
-    this._stackingData = value;
-    this.prepareStacks();
-  }
-
-  selectedStakeTypes:string[] = [];
-
-  stack1:SelectItem[] = [];
-  stack2:SelectItem[] = [];
-  stack3:SelectItem[] = [];
-  stack4:SelectItem[] = [];
 
   @Output()
   saveAdvFilterValueEvent:EventEmitter<AdvFilterValue> = new EventEmitter<AdvFilterValue>();
@@ -291,12 +273,12 @@ export class NBAFilterComponent{
       let minSalary:number;
       switch (this.selectedOperator) {
         case 'FanDuel':
-          minSalary = this.lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_FANDUAL;
-          maxSalary = this.lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_FANDUAL;
+          minSalary = this.lineupOptimizerServiceConst.NBA_MIN_SALARY_FOR_FANDUAL;
+          maxSalary = this.lineupOptimizerServiceConst.NBA_MAX_SALARY_FOR_FANDUAL;
           break;
         case 'DraftKings':
-          minSalary = this.lineupOptimizerServiceConst.NFL_MIN_SALARY_FOR_DRAFT_KING;
-          maxSalary = this.lineupOptimizerServiceConst.NFL_MAX_SALARY_FOR_DRAFT_KING;
+          minSalary = this.lineupOptimizerServiceConst.NBA_MIN_SALARY_FOR_DRAFT_KING;
+          maxSalary = this.lineupOptimizerServiceConst.NBA_MAX_SALARY_FOR_DRAFT_KING;
           break;
       }
       this.salarySlider.bootstrapSlider({
@@ -434,18 +416,6 @@ export class NBAFilterComponent{
     return this.filters;
   }
 
-  prepareStacks() {
-    if (this._stackingData) {
-      let teams = this._stackingData.map(currTeam => {
-        return {label: currTeam.team, value: currTeam.team}
-      });
-      this.stack1 = teams;
-      this.stack2 = teams;
-      this.stack3 = teams;
-      this.stack4 = teams;
-    }
-  }
-
   prepareFilters() {
     this.filters = [];
     if (this.projectionFilterValue[0] != this._advFilterSettings.projectionMin || this.projectionFilterValue[0] != this._advFilterSettings.projectionMax) {
@@ -486,29 +456,6 @@ export class NBAFilterComponent{
 
   onGameClick(game:Game) {
     console.log("Game => ", game);
-  }
-
-  getStakingData():any[] {
-    let data = [];
-    this.selectedStakeTypes.forEach(
-      currType => {
-        switch (currType) {
-          case 'QB_WR':
-            data.push({stackType: currType, stackTeams: this.stackingTeam_QB_WR});
-            break;
-          case 'QB_WR_TE':
-            data.push({stackType: currType, stackTeams: this.stackingTeam_QB_WR_TE});
-            break;
-          case 'QB_TE':
-            data.push({stackType: currType, stackTeams: this.stackingTeam_QB_TE});
-            break;
-          case 'RB_D':
-            data.push({stackType: currType, stackTeams: this.stackingTeam_RB_D});
-            break;
-        }
-      }
-    );
-    return data;
   }
 
   getMaxGameValue():number {
@@ -563,8 +510,7 @@ export class NBAFilterComponent{
       salaryFilter: this.salaryFilterValue,
       valueFilter: this.valueFilterValue,
       battingOrderFilter: this.battingOrderFilterValue,
-      playerPerTeams: this.getMinMaxPlayerFromTeam(),
-      stackingTeams: this.getStakingData()
+      playerPerTeams: this.getMinMaxPlayerFromTeam()
     };
     this.saveAdvFilterValueEvent.emit(filterValue);
   }
@@ -612,7 +558,6 @@ export class NBAFilterComponent{
   onBtnRestoreDefaultClicked() {
     this.updateSliders();
     this.resetGames();
-    this.resetStacking();
     this.noDefVsOpp = false;
     this.emitFilterChangeEvent();
     this.isSettingsUpdated = true;
@@ -629,25 +574,5 @@ export class NBAFilterComponent{
       }
     )
   }
-
-  resetStacking() {
-    this.stackingTeam_QB_WR = [];
-    this.stackingTeam_QB_WR_TE = [];
-    this.stackingTeam_QB_TE = [];
-    this.stackingTeam_RB_D = [];
-    this.prepareStacks();
-  }
-
-  onStackingTypeSelect(value:string) {
-    if (this.selectedStakeTypes.indexOf('RB_D') > -1) {
-      this.selectedStakeTypes = [];
-      this.selectedStakeTypes.push('RB_D');
-      this.selectedStakeTypes.push(value);
-    } else {
-      this.selectedStakeTypes = [];
-      this.selectedStakeTypes.push(value);
-    }
-  }
-
 
 }

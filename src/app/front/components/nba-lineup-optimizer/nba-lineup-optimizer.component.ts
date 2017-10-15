@@ -27,7 +27,7 @@ export class NBALineupOptimizerComponent {
 
   searchStr: string = '';
   selectedOperator: string = 'FanDuel';
-  selectedSport: string = 'NFL';
+  selectedSport: string = 'NBA';
   selectedSlate: number = 0;
   selectedGame: number = 0;
   slates: Slate[];
@@ -36,7 +36,6 @@ export class NBALineupOptimizerComponent {
   advFilterSettings: AdvFilterSettings;
   isLoading: boolean;
   games: Game[];
-  stackingData: { team: string, teamId: number }[];
   lockedPlayers: number[] = [];
   todayDate = new Date();
   isError: boolean;
@@ -63,18 +62,11 @@ export class NBALineupOptimizerComponent {
 
   initPositionFilter() {
     this.positions = [];
-    //QB, RB, WR, TE, K, DST
-    this.positions.push({label: 'QB', value: 'QB'});
-    this.positions.push({label: 'RB', value: 'RB'});
-    this.positions.push({label: 'WR', value: 'WR'});
-    this.positions.push({label: 'TE', value: 'TE'});
-    if (this.selectedOperator == 'FanDuel') {
-      this.positions.push({label: 'K', value: 'K'});
-      this.positions.push({label: 'D', value: 'D'});
-    }
-    if (this.selectedOperator == 'DraftKings') {
-      this.positions.push({label: 'DST', value: 'DST'});
-    }
+    this.positions.push({label: 'PG', value: 'PG'});
+    this.positions.push({label: 'SG', value: 'SG'});
+    this.positions.push({label: 'SF', value: 'SF'});
+    this.positions.push({label: 'PF', value: 'PF'});
+    this.positions.push({label: 'C', value: 'C'});
   }
 
   initiateData() {
@@ -108,7 +100,7 @@ export class NBALineupOptimizerComponent {
 
   getSlates() {
     this.isLoading = true;
-    this.optimizerService.retrieveSlates(this.selectedOperator, this.selectedSport)
+    this.optimizerService.retrieveSlates(this.selectedOperator,this.selectedSport,"date_exact=2017-10-17")
       .subscribe(
         response => {
           this.isLoading = false;
@@ -157,14 +149,14 @@ export class NBALineupOptimizerComponent {
 
   getPlayers(operator: string, sport: string, slateId: number) {
     this.isLoading = true;
-    this.optimizerService.getPlayers(operator, sport, slateId)
+    this.optimizerService.getPlayers(operator, sport, slateId,"date_exact=2017-10-17")
       .subscribe(
         response => {
           this.isLoading = false;
           this.allPlayers = response as OptimizerPlayer[];
           this.players = this.allPlayers.map(player => player);
           console.log("No of players => ", this.players.length);
-          this.getStackingData(this.selectedSport, this.selectedSlate);
+          this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
         },
         error => {
           this.isLoading = false;
@@ -179,7 +171,7 @@ export class NBALineupOptimizerComponent {
 
   getFilterSettings(operator: string, sport: string, slateId: number) {
     this.isLoading = true;
-    this.optimizerService.retrieveAdvFilterSettings(operator, sport, slateId)
+    this.optimizerService.retrieveAdvFilterSettings(operator, sport, slateId,"date_exact=2017-10-17")
       .subscribe(
         response => {
           if (response.statusCode == 200) {
@@ -244,36 +236,6 @@ export class NBALineupOptimizerComponent {
       )
   }
 
-  getStackingData(sport: string, slateId: number) {
-    this.optimizerService.retrieveStackingData(sport, slateId)
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.stackingData = response.data;
-            console.log("Stacking data => ", this.stackingData);
-            this.getFilterSettings(this.selectedOperator, this.selectedSport, this.selectedSlate);
-            this.stackingData = this.stackingData.sort((n1, n2) => {
-              if (n1.team > n2.team) {
-                return 1;
-              }
-              if (n1.team < n2.team) {
-                return -1;
-              }
-              return 0;
-            })
-          }
-        },
-        error => {
-          this.isLoading = false;
-          this.isError = true;
-          this.errorMsg = "Oops! something went wrong while retrieving staking info.";
-          this.errorData = error.message;
-          this.isDataError = true;
-          console.log("http error => ", error);
-        }
-      )
-  }
-
   selectedGameChanged(event: any) {
     this.selectedGame = event.target.value;
     this.optimizerService.selectedGame = event.target.value;
@@ -316,7 +278,7 @@ export class NBALineupOptimizerComponent {
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
             fbq('trackCustom', FacebookPixelEventConstants.LINEUP_GENERATED_EVENT, {sport_type: 'NBA'});
-            this.router.navigate(['nfl-lineups']);
+            this.router.navigate(['nba-lineups']);
           }
         },
         error => {
@@ -388,25 +350,24 @@ export class NBALineupOptimizerComponent {
       lineupData['numberOfLineups'] = this.advFilterPopup.noOfLineupValue;
     }
 
-    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NFL_MIN_SALARY_FOR_FANDUAL) {
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NBA_MIN_SALARY_FOR_FANDUAL) {
       lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
     }
 
-    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NFL_MAX_SALARY_FOR_FANDUAL) {
+    if (this.selectedOperator == 'FanDuel' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NBA_MAX_SALARY_FOR_FANDUAL) {
       lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
     }
 
-    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NFL_MIN_SALARY_FOR_DRAFT_KING) {
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[0] != LineupOptimizerService.NBA_MIN_SALARY_FOR_DRAFT_KING) {
       lineupData['minTotalSalary'] = this.advFilterPopup.salarySettingValue[0];
     }
 
-    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NFL_MAX_SALARY_FOR_DRAFT_KING) {
+    if (this.selectedOperator == 'DraftKings' && this.advFilterPopup.salarySettingValue[1] != LineupOptimizerService.NBA_MAX_SALARY_FOR_DRAFT_KING) {
       lineupData['maxTotalSalary'] = this.advFilterPopup.salarySettingValue[1];
     }
 
     lineupData['no_def_vs_opp_players'] = this.advFilterPopup.noDefVsOpp;
     lineupData['minMaxPlayersFromTeam'] = this.prepareMinMaxPlayerFromTeam();
-    lineupData['stacking'] = this.advFilterPopup.getStakingData();
     console.info("lineupData => ", lineupData);
     return lineupData;
   }
@@ -485,6 +446,13 @@ export class NBALineupOptimizerComponent {
     if (value > 100) {
       event.target.value = 100;
       player.exposureValue = 100;
+    }
+  }
+  onMinutesTxtboxBlurEvent(event, player: OptimizerPlayer) {
+    let value = event.target.value;
+    if (value > 100) {
+      event.target.value = 100;
+      player.Minutes = 100;
     }
   }
 

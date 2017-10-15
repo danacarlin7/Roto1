@@ -26,6 +26,10 @@ export class LineupOptimizerService {
   public static NFL_MAX_SALARY_FOR_DRAFT_KING:number = 50000;
   public static NFL_MIN_SALARY_FOR_FANDUAL:number = 30000;
   public static NFL_MAX_SALARY_FOR_FANDUAL:number = 60000;
+  public static NBA_MIN_SALARY_FOR_DRAFT_KING:number = 25000;
+  public static NBA_MAX_SALARY_FOR_DRAFT_KING:number = 50000;
+  public static NBA_MIN_SALARY_FOR_FANDUAL:number = 30000;
+  public static NBA_MAX_SALARY_FOR_FANDUAL:number = 60000;
 
   searchStr:string = '';
   selectedOperator:string = 'FanDuel';
@@ -68,14 +72,14 @@ export class LineupOptimizerService {
     return headers;
   }
 
-  getPlayers(operator:string, sport:string, slateId:number):Observable<OptimizerPlayer[]> {
+  getPlayers(operator:string, sport:string, slateId:number,time:string = null):Observable<OptimizerPlayer[]> {
     return new Observable<OptimizerPlayer[]>(
       observer => {
         /* if (this.players && this.players.length && this.selectedSport == sport) {
          observer.next(this.players);
          }
          else {*/
-        this.retrievePlayers(operator, sport, slateId)
+        this.retrievePlayers(operator, sport, slateId,time)
           .subscribe(
             response => {
               if (response.statusCode == 200) {
@@ -102,8 +106,12 @@ export class LineupOptimizerService {
     ).share();
   }
 
-  retrieveSlates(operator:string, sport:string):Observable<any> {
-    return this.http.get(environment.api_end_point + 'optimizer/slates?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()})
+  retrieveSlates(operator:string, sport:string,time:string = null):Observable<any> {
+    let url = 'optimizer/slates?operator=' + operator + '&sport=' + sport;
+    if(time){
+      url += "&" + time;
+    }
+    return this.http.get(environment.api_end_point + url, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -111,10 +119,13 @@ export class LineupOptimizerService {
       });
   }
 
-  retrievePlayers(operator:string, sport:string, slateId:number):Observable<any> {
+  retrievePlayers(operator:string, sport:string, slateId:number,time:string = null):Observable<any> {
     let url = environment.api_end_point + 'optimizer/playersBySlate?sport=' + sport + '&operator=' + operator;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
+    }
+    if(time){
+      url += "&" + time;
     }
     return this.http.get(url, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
@@ -133,11 +144,14 @@ export class LineupOptimizerService {
       });
   }
 
-  retrieveAdvFilterSettings(operator:string, sport:string, slateId:number):Observable<any> {
+  retrieveAdvFilterSettings(operator:string, sport:string, slateId:number,time:string = null):Observable<any> {
     let url = environment.api_end_point + 'optimizer/filter?sport=' + sport + '&operator=' + operator;
     // let url = environment.api_end_point + 'api/optimizer/newSettings?sport=' + sport + '&operator=' + operator;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
+    }
+    if(time){
+      url += "&" + time;
     }
     return this.http.get(url, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
@@ -148,10 +162,13 @@ export class LineupOptimizerService {
   }
 
 
-  retrieveStackingData(sport:string, slateId:number):Observable<any> {
+  retrieveStackingData(sport:string, slateId:number,time:string = null):Observable<any> {
     let url = environment.api_end_point + 'optimizer/stacking?sport=' + sport;
     if (slateId != 0) {
       url += '&slate_id=' + slateId;
+    }
+    if(time){
+      url += "&" + time;
     }
     return this.http.get(url, {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
