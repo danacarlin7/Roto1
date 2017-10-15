@@ -16,6 +16,7 @@ import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
 import 'rxjs/Rx';
 import {AuthService} from "../../../shared/services/auth.service";
 import {FrontService} from "../../services/front.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-subscribe',
@@ -105,7 +106,7 @@ export class SubscribeComponent implements OnInit {
     localStorage.setItem('selectedPlan', plan.plan_id);
     if (this.authService.isLoggedIn()) {
       var handler = (<any>window).StripeCheckout.configure({
-        key: 'pk_live_ot2q3JGgPLEfvia8StJWO0b7',
+        key: environment.production ?  'pk_live_ot2q3JGgPLEfvia8StJWO0b7' : 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
         locale: 'auto',
         token: (token:any) => {
           // You can access the token ID with `token.id`.
