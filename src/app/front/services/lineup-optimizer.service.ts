@@ -135,8 +135,12 @@ export class LineupOptimizerService {
       });
   }
 
-  generateLineups(data:any, operator:string, sport:string):Observable<any> {
-    return this.http.post(environment.api_end_point + 'optimizer/lineups?sport=' + sport + '&operator=' + operator, JSON.stringify(data), {headers: this.getHeaders()})
+  generateLineups(data:any, operator:string, sport:string,time:string = null):Observable<any> {
+    let url = 'optimizer/lineups?sport=' + sport + '&operator=' + operator;
+    if(time){
+      url += "&" + time;
+    }
+    return this.http.post(environment.api_end_point + url, JSON.stringify(data), {headers: this.getHeaders()})
       .map((reponse:Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());

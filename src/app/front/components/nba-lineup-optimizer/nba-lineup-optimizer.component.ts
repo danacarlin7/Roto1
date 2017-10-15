@@ -270,7 +270,7 @@ export class NBALineupOptimizerComponent {
 
     this.optimizerService.filterSettings = this.advFilterSettings;
 
-    this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport)
+    this.optimizerService.generateLineups(this.prepareLineupData(), this.selectedOperator, this.selectedSport,"date_exact=2017-10-17")
       .subscribe(
         response => {
           if (response.statusCode == 200) {
