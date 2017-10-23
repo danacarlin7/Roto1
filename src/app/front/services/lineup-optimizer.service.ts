@@ -94,7 +94,7 @@ export class LineupOptimizerService {
                   }
                   return currPlayer;
                 });
-                this.players = ArrayUtils.sort(this.players, 'Salary');
+                this.players = ArrayUtils.sort(this.players, 'Salary', true);
                 observer.next(this.players);
               }
             },
