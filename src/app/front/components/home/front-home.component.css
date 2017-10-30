@@ -14,3 +14,7 @@
 .news-item:first-child {
   border-top: none;
 }
+
+.pointer {
+  cursor: pointer;
+}
