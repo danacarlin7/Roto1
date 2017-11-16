@@ -43,6 +43,7 @@ export class SubscribeComponent implements OnInit {
       this.userData = this.authService.retrieveLoggedUserInfo()
         .subscribe(
           response => {
+            console.log('response from subscription in front-header.component');
             if (response.statusCode == 200) {
               this.userData = response.data;
               this.authService.loggedUser = this.userData;
@@ -53,6 +54,7 @@ export class SubscribeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('memberspace status: ' + this.authService.loggedUser.is_memberspace);
     this.isLoading = true;
     this.frontService.getSubscribePlans().subscribe(
       response => {
@@ -65,6 +67,7 @@ export class SubscribeComponent implements OnInit {
               }
             }
           } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
+            console.log(2);
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'dfsportsgods') {
                 this.plans = this.plans.concat(response.data[i].data);
@@ -77,8 +80,9 @@ export class SubscribeComponent implements OnInit {
               }
             }
           } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
-            for (let i = 0; response.data && response.data.length; i++) {
-              if (response.data[i].group == 'rotopros') {
+            // for (let i = 0; response.data && response.data.length; i++) {
+            for (let i = 0; i < response.data.length; i++) {
+              if (response.data[i].group === 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }

@@ -1,6 +1,6 @@
-import {Component, ViewChild, ElementRef} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
-import {LoggedUser} from "../../../shared/models/logged-user.model";
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { AuthService } from '../../../shared/services/auth.service';
+import { LoggedUser } from '../../../shared/models/logged-user.model';
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -15,15 +15,16 @@ export class FrontHeaderComponent {
 
   @ViewChild('profilePic') profilePic:ElementRef;
 
-  isLoggedIn:boolean;
-  profileImagePath:string;
-  role:string;
-  loggedUser:LoggedUser;
+  isLoggedIn: boolean;
+  profileImagePath: string;
+  role: string;
+  loggedUser: LoggedUser;
 
-  constructor(private authService:AuthService) {
+  constructor(private authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.role = this.authService.getUserRole();
     this.loggedUser = this.authService.loggedUser;
+
     if (this.loggedUser) {
       this.profileImagePath = this.loggedUser.profile_image;
     }
@@ -93,16 +94,16 @@ export class FrontHeaderComponent {
   }
 
   removeCookie(name) {
-    document.cookie = name + "=; expires=" + new Date(0).toUTCString() + "; domain=rotopros.com; path=/";
+    document.cookie = name + '=; expires=' + new Date(0).toUTCString() + '; domain=rotopros.com; path=/';
   }
 
   createCookie(name, value, days) {
-    var expires = "";
+    let expires = '';
     if (days) {
-      var date = new Date();
+      const date = new Date();
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
+      expires = '; expires=' + date.toUTCString();
     }
-    document.cookie = name + "=" + value + expires + "; domain=rotopros.com; path=/";
+    document.cookie = name + '=' + value + expires + '; domain=rotopros.com; path=/';
   }
 }

@@ -10,22 +10,23 @@ import {LoggedUser} from "../models/logged-user.model";
 @Injectable()
 export class AuthService {
 
-  private _loggedUser:LoggedUser;
+  private _loggedUser: LoggedUser;
 
-  get loggedUser():LoggedUser {
+  get loggedUser(): LoggedUser {
     return this._loggedUser;
   }
 
-  set loggedUser(value:LoggedUser) {
+  set loggedUser(value: LoggedUser) {
     this._loggedUser = value;
     if (this._loggedUser) {
+      console.log('loggedUser successfully set with logged in user');
       this.loggedUserChangeEvent.emit(this._loggedUser);
     }
   }
 
-  isLoggedInEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
+  isLoggedInEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  loggedUserChangeEvent:EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
+  loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
   constructor(private http:Http) {
 
@@ -45,14 +46,21 @@ export class AuthService {
   }
 
   isSubscriber():boolean {
-    let isSubscribe = false;
     if (this.loggedUser) {
-      if (this.loggedUser.is_subscribe) {
-        isSubscribe = true;
-      }
+      return this.loggedUser.is_subscribe;
     }
-    return isSubscribe;
+    else console.log('not logged in');
   }
+
+  // isSubscriber():boolean {
+  //   let isSubscribe = false;
+  //   if (this.loggedUser) {
+  //     if (this.loggedUser.is_subscribe) {
+  //       isSubscribe = true;
+  //     }
+  //   }
+  //   return isSubscribe;
+  // }
 
   subscriptionAlertEvent:EventEmitter<any> = new EventEmitter<any>();
 
@@ -110,7 +118,7 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()));
   }
 
-  registerNewUser(data:any):Observable<any> {
+  registerNewUser(data: any): Observable<any> {
     return this.http.post(environment.api_end_point + 'signup', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()))

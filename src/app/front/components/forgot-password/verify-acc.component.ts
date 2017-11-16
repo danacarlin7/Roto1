@@ -12,12 +12,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class VerifyAccComponent {
 
-  token:string;
-  isError:boolean;
-  errorMsg:string;
-  isMailSent:boolean;
-  reSendToken:boolean;
-  isLoading:boolean;
+  token: string;
+  isError: boolean;
+  errorMsg: string;
+  isMailSent: boolean;
+  reSendToken: boolean;
+  isLoading: boolean;
 
   constructor(private router:Router, private activatedRoute:ActivatedRoute, private authService:AuthService) {
 
@@ -55,7 +55,7 @@ export class VerifyAccComponent {
     )
   }
 
-  onBtnSubmitClick(email:string) {
+  onBtnSubmitClick(email: string) {
     this.errorMsg = "";
     this.isError = false;
     if (email && this.isValidEMail(email)) {
@@ -63,7 +63,7 @@ export class VerifyAccComponent {
     }
   }
 
-  sendResetPwdLink(email:string) {
+  sendResetPwdLink(email: string) {
     let data = {
       email: email,
       is_excel: false,
@@ -84,7 +84,7 @@ export class VerifyAccComponent {
     )
   }
 
-  isValidEMail(email:string) {
+  isValidEMail(email: string) {
     var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     return !(email != "" && (email.length <= 5 || !EMAIL_REGEXP.test(email)));
   }
