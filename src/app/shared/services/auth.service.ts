@@ -62,7 +62,7 @@ export class AuthService {
   //   return isSubscribe;
   // }
 
-  subscriptionAlertEvent:EventEmitter<any> = new EventEmitter<any>();
+  subscriptionAlertEvent: EventEmitter<any> = new EventEmitter<any>();
 
   showSubscriptionAlert() {
     this.subscriptionAlertEvent.emit(true);
