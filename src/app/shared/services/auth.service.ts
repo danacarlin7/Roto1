@@ -17,6 +17,7 @@ export class AuthService {
   }
 
   set loggedUser(value: LoggedUser) {
+    console.log('hi');
     this._loggedUser = value;
     if (this._loggedUser) {
       console.log('loggedUser successfully set with logged in user');
@@ -28,16 +29,16 @@ export class AuthService {
 
   loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
-  constructor(private http:Http) {
+  constructor(private http: Http) {
 
   }
 
-  getToken():string {
+  getToken(): string {
     return environment.token;
   }
 
-  getHeaders():Headers {
-    let headers = new Headers();
+  getHeaders(): Headers {
+    const headers = new Headers();
     headers.append('content-type', 'application/json');
     if (this.getToken()) {
       headers.append('Authorization', 'Bearer ' + (this.getToken()));
@@ -45,11 +46,17 @@ export class AuthService {
     return headers;
   }
 
-  isSubscriber():boolean {
+  isSubscriber(calledByGuard = false): boolean | Observable<any> {
     if (this.loggedUser) {
       return this.loggedUser.is_subscribe;
+    } else if (calledByGuard && environment.token) {
+      return this.http.get(environment.api_end_point + "api/memberinfo", {headers: this.getHeaders()})
+      .map(response => response.json().data.is_subscribe)
+      .catch(error => Observable.throw(error.json()));
+      //.catch(error => this.showSubscriptionAlert());
+    } else {
+      console.log("not a subscriber");
     }
-    else console.log('not logged in');
   }
 
   // isSubscriber():boolean {
@@ -68,8 +75,8 @@ export class AuthService {
     this.subscriptionAlertEvent.emit(true);
   }
 
-  isLoggedIn():boolean {
-    let login:boolean;
+  isLoggedIn(): boolean {
+    let login: boolean;
     if (environment.token && environment.token.length) {
       login = true;
     } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
@@ -112,7 +119,7 @@ export class AuthService {
     //this.userLoggedInEvent.emit(false);
   }
 
-  retrieveLoggedUserInfo():Observable<any> {
+  retrieveLoggedUserInfo(): Observable<any> {
     return this.http.get(environment.api_end_point + 'api/memberinfo', {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
@@ -155,8 +162,8 @@ export class AuthService {
   }
 
   uploadProfile(fileList) {
-    let file:File = fileList[0];
-    let formData:FormData = new FormData();
+    let file: File = fileList[0];
+    let formData: FormData = new FormData();
     formData.append('uploadFile', file, file.name);
     return this.http.post(environment.api_end_point + 'api/uploadImage', formData, {
       headers: new Headers({

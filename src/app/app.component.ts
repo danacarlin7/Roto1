@@ -12,14 +12,15 @@ declare var jQuery:any;
 })
 export class AppComponent {
 
-  @ViewChild('subscriptionAlert') subscriptionAlert:ElementRef;
+  @ViewChild('subscriptionAlert') subscriptionAlert: ElementRef;
 
-  isLoggedIn:boolean;
+  isLoggedIn: boolean;
 
-  constructor(private authService:AuthService, private router:Router) {
+  constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.authService.subscriptionAlertEvent.subscribe(
       data => {
+        console.log("alert!");
         jQuery(this.subscriptionAlert.nativeElement).modal();
       }
     );

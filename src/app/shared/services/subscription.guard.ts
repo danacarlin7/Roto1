@@ -10,17 +10,17 @@ import {AuthService} from "./auth.service";
 
 @Injectable()
 export class SubscriptionGuard implements CanActivate, CanActivateChild {
-
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log('hi');
-    if (this.authService.isSubscriber()) {
-      return true;
-    }
-    this.authService.showSubscriptionAlert();
-    return false;
+    return this.authService.isSubscriber(true);
+
+    // if (this.authService.isSubscriber(true)) {
+    //   return true;
+    // }
+    // this.authService.showSubscriptionAlert();
+    // return false;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

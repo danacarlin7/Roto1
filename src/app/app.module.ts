@@ -33,7 +33,7 @@ import {RPErrorHandler} from "./error-handler";
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private authService:AuthService) {
+  constructor(private authService: AuthService) {
     if (this.authService.isLoggedIn()) {
       environment.token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
       environment.role = localStorage.getItem('role') ? localStorage.getItem('role') : '';
