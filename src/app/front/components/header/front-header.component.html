@@ -87,6 +87,7 @@
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/news" (click)="closeMobileMenu()">Player News</a>
               </li>
+
               <li *ngIf="loggedUser && loggedUser.is_subscribe" class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
                   [routerLinkActiveOptions]="{exact: true}">
                 <a>Lineup Optimizer<span class="caret"></span></a>
@@ -99,6 +100,13 @@
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/subscribe" (click)="closeMobileMenu()">Plans</a>
+              </li>
+
+              <li id="rss">
+                  <a>Foul Balls</a>
+                  <a href="http://feeds.soundcloud.com/users/soundcloud:users:308749747/sounds.rss">
+                    <i class="fa fa-rss-square" id="rss-link"></i>
+                  </a>
               </li>
               <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/lineups">Lineups</a>
@@ -124,7 +132,7 @@
                   <!--class="img-responsive"/>-->
                    <img
                      #profilePic
-                     [attr.src]="profileImagePath ? 'https://api.dfsportgod.com/images/'+ profileImagePath : '../../../../assets/images/dashboard_profile_img.png'"
+                     [attr.src]="profileImagePath ? 'https://api.dfsportgod.com/images/'+ profileImagePath : '../../../../assets/images/blank-avatar.jpg'"
                      alt=""
                      class="img-responsive"/>
                 </span>
@@ -138,36 +146,6 @@
                   </ul>
                 </div>
               </li>
-
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
-                <!--<a routerLink="" (click)="closeMobileMenu()">Home<span class="sr-only">(current)</span></a>-->
-              <!--</li>-->
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a target="_blank" (click)="closeMobileMenu()" href="http://forum.rotopros.com/">Forums</a>-->
-              <!--</li>-->
-              <!--&lt;!&ndash;<li><a>Products</a></li>&ndash;&gt;-->
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a routerLink="/articles" (click)="closeMobileMenu()">Articles</a>-->
-              <!--</li>-->
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">-->
-                <!--<a target="_blank" href="https://dfsgods.slack.com" (click)="closeMobileMenu()">Slack</a>-->
-              <!--</li>-->
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a routerLink="/news" (click)="closeMobileMenu()">Player News</a>-->
-              <!--</li>-->
-              <!--<li *ngIf="loggedUser && loggedUser.is_subscribe" class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"-->
-                  <!--[routerLinkActiveOptions]="{exact: true}">-->
-                <!--<a>Lineup Optimizer<span class="caret"></span></a>-->
-                <!--<div class="dropdown-content" routerLinkActive="active"-->
-                     <!--[routerLinkActiveOptions]="{exact: true}">-->
-                  <!--<a routerLink="/lineup-optimizer" (click)="closeMobileMenu()">MLB Optimizer</a>-->
-                  <!--<a routerLink="/lineup-optimizer/nfl" (click)="closeMobileMenu()">NFL Optimizer</a>-->
-                  <!--<a routerLink="/lineup-optimizer/nba" (click)="closeMobileMenu()">NBA Optimizer</a>-->
-                <!--</div>-->
-              <!--</li>-->
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">-->
-                <!--<a routerLink="/subscribe" (click)="closeMobileMenu()">Plans</a>-->
-              <!--</li>-->
 
             </ul>
           </div>

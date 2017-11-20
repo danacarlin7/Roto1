@@ -17,10 +17,8 @@ export class AuthService {
   }
 
   set loggedUser(value: LoggedUser) {
-    console.log('hi');
     this._loggedUser = value;
     if (this._loggedUser) {
-      console.log('loggedUser successfully set with logged in user');
       this.loggedUserChangeEvent.emit(this._loggedUser);
     }
   }
@@ -105,6 +103,7 @@ export class AuthService {
   @Output() userLoggedInEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loginWP(data:string):Observable<any> {
+    console.log()
     console.log(data);
     return this.http.post('http://13.56.129.231/dfsauth/nglogin/', data)
       .map(response => response.json())

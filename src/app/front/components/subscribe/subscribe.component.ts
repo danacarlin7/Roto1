@@ -111,7 +111,7 @@ export class SubscribeComponent implements OnInit {
       var handler = (<any>window).StripeCheckout.configure({
         key: environment.production ?  'pk_live_ot2q3JGgPLEfvia8StJWO0b7' : 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
         locale: 'auto',
-        token: (token:any) => {
+        token: (token: any) => {
           // You can access the token ID with `token.id`.
           // Get the token ID to your server-side code for use.
           console.log("token call back => ", token);
@@ -120,7 +120,7 @@ export class SubscribeComponent implements OnInit {
               response => {
                 if (response.statusCode == 200) {
                   console.log("subscribePlan Success => ", response.data);
-                }
+                }``
               }
             );
         }

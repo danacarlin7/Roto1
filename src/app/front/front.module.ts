@@ -50,6 +50,7 @@ import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.
 import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
 import {NBAFilterComponent} from "./components/nba-lineup-optimizer/nba-filter/nba-filter.component";
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
+import {PodcastComponent} from "./components/podcast/podcast.component";
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -98,7 +99,8 @@ import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/ge
     NFLExcelToolComponent,
     NBALineupOptimizerComponent,
     NBAFilterComponent,
-    GeneratedNBALineupsComponent
+    GeneratedNBALineupsComponent,
+    PodcastComponent
   ],
   exports: [
     ProviderComponent,

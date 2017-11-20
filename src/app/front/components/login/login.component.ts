@@ -51,13 +51,13 @@ export class LoginComponent {
         this.redirectUrl = param['redirect'];
         if (param.hasOwnProperty('info')) {
           if (param['info'] == 'pc') {
-            this.msg = 'Your password is successfully updated.'
+            this.msg = 'Your password has successfully been updated.'
           }
           else if (param['info'] == 'verify') {
-            this.msg = 'Your account is successfully verified.'
+            this.msg = 'Your account has successfully been verified.'
           }
           else if (param['info'] == 'signup_success') {
-            this.msg = 'Your account is successfully created. We have sent you a mail with account verification link. Please verify your account.'
+            this.msg = 'Your account has successfully been created. We have sent you an email with an account verification link. Please verify your account.'
           }
         }
       }
@@ -176,7 +176,7 @@ export class LoginComponent {
         }
         else if (error.data == 'userIsNotVerifiedWithNullPWD' || error.data == 'userIsNotVerified') {
           this.isError = true;
-          this.errorMsg = "Your account is not verified.Please check your email for verification link or get the new link.";
+          this.errorMsg = "Your account has not been verified. Please check your email for verification link or get a new link.";
           this.showVerifyLink = true;
         } else {
           this.isError = true;

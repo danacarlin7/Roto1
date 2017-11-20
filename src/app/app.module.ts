@@ -17,7 +17,7 @@ import {RPErrorHandler} from "./error-handler";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
