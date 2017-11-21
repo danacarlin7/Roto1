@@ -16,6 +16,8 @@ declare var jQuery:any;
   styleUrls: ['./front-home.component.css']
 })
 export class FrontHomeComponent implements AfterViewInit {
+  redirected: boolean;
+  redirectedMessage: String;
 
   twitterFeeds:Array<any>;
   facebookFeeds:Array<any>;
@@ -26,9 +28,10 @@ export class FrontHomeComponent implements AfterViewInit {
   baseballArticles:any[];
   media:Object = {};
 
-  constructor(private frontService:FrontService, private articleService:ArticleService, private authService:AuthService, private router:Router) {
-
-  }
+  constructor(private frontService: FrontService,
+              private articleService: ArticleService,
+              private authService: AuthService,
+              private router: Router) {}
 
   ngAfterViewInit() {
     this.frontService.retrieveTwitterFeeds()

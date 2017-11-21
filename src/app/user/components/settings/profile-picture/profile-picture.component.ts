@@ -56,6 +56,7 @@ export class ProfilePictureComponent {
   }
 
   onUploadError(event) {
+    console.log('no, baby');
     console.log(event);
   }
 
@@ -78,6 +79,7 @@ export class ProfilePictureComponent {
   }
 
   onSending(file) {
+    console.log('sending');
     this.filename = file[0].name.split('-');
     this.filename = this.filename[0];
   }
