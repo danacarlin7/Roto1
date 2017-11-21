@@ -19,6 +19,7 @@ export class FrontHeaderComponent {
   profileImagePath: string;
   role: string;
   loggedUser: LoggedUser;
+  windowWidth: number = window.innerWidth;
 
   constructor(private authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();

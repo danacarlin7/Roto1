@@ -120,6 +120,7 @@ export class SubscribeComponent implements OnInit {
               response => {
                 if (response.statusCode == 200) {
                   console.log("subscribePlan Success => ", response.data);
+                  location.replace('/');
                 }``
               }
             );

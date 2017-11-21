@@ -34,6 +34,7 @@ import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/ge
 import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.component";
 import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
+import { PodcastComponent } from './components/podcast/podcast.component';
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -73,6 +74,7 @@ const routes: Routes = [
       { path: "injuries", component: InjuriesComponent },
       { path: "subscribe", component: SubscribeComponent },
       { path: "contact-analyzer", component: ContactAnalyzerComponent },
+      { path: "podcast", component: PodcastComponent },
     ]
   }
 ];
