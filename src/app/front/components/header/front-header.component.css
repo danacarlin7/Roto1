@@ -110,3 +110,21 @@
 .home-profile {
 
 }
+
+#rss {
+  text-align: center;
+}
+
+#rss a {
+  display: inline-block;
+  text-align: center;
+  padding: 0px;
+}
+
+#rss i {
+  color: orange;
+  font-size: 2em;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+

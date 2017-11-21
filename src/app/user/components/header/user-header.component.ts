@@ -12,12 +12,14 @@ declare var jQuery:any;
   styleUrls: ['./user-header.component.css']
 })
 export class UserHeaderComponent {
-  @ViewChild('profilePic') profilePic:ElementRef;
-  loggedUser:LoggedUser;
-  profileImagePath:string;
-  role:string;
+  @ViewChild('profilePic') profilePic: ElementRef;
+  loggedUser: LoggedUser;
+  profileImagePath: string;
+  role: string;
 
-  constructor(private authService:AuthService) {
+  constructor(private authService: AuthService) {
+    console.log('user header rendered');
+
     this.loggedUser = this.authService.loggedUser;
     if (this.loggedUser) {
       this.profileImagePath = this.loggedUser.profile_image;

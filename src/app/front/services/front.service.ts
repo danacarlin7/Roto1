@@ -9,7 +9,7 @@ import {Observable} from "rxjs/Rx";
 
 @Injectable()
 export class FrontService {
-  constructor(private http:Http, private authService:AuthService) {
+  constructor(private http: Http, private authService: AuthService) {
 
   }
 
@@ -17,7 +17,7 @@ export class FrontService {
     return environment.token;
   }
 
-  getHeaders():Headers {
+  getHeaders(): Headers {
     let headers = new Headers();
     headers.append('content-type', 'application/json');
     if (this.getToken()) {
@@ -26,70 +26,72 @@ export class FrontService {
     return headers;
   }
 
-  retrieveNews(sportType:string, timePeriod:string = '30days'):Observable<any> {
+  retrieveNews(sportType:string, timePeriod:string = '30days'): Observable<any> {
+    console.log('hi1');
     return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  retrieveHomepageNews():Observable<any> {
+  retrieveHomepageNews(): Observable<any> {
+    console.log('hi2');
     return this.http.get(environment.api_end_point + 'fetchLatestNews?count=10', {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  retrieveInjuries(sportType:string):Observable<any> {
+  retrieveInjuries(sportType:string): Observable<any> {
     return this.http.get(environment.api_end_point + 'injuries?sport=' + sportType, {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  retrieveDailyLineups(sportType:string, timePeriod:string = 'cyear'):Observable<any> {
+  retrieveDailyLineups(sportType:string, timePeriod:string = 'cyear'): Observable<any> {
     return this.http.get(environment.api_end_point + 'fetchLineup?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  retrieveTwitterFeeds():Observable<any> {
+  retrieveTwitterFeeds(): Observable<any> {
     return this.http.get(environment.api_end_point + 'getTwitterFeeds', {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  retrieveFBFeeds():Observable<any> {
+  retrieveFBFeeds(): Observable<any> {
     return this.http.get(environment.api_end_point + 'getFBPost', {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  retrieveInstaFeeds():Observable<any> {
+  retrieveInstaFeeds(): Observable<any> {
     return this.http.get(environment.api_end_point + 'getInstaPosts', {headers: this.getHeaders()})
-      .map((reponse:Response) => reponse.json())
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
       });
   }
 
-  getSubscribePlans():Observable<any> {
+  getSubscribePlans(): Observable<any> {
     return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
@@ -98,14 +100,14 @@ export class FrontService {
       });
   }
 
-  subscribePlan(token, plan_id):Observable<any> {
+  subscribePlan(token, plan_id): Observable<any> {
     return this.http.post(environment.api_end_point + 'api/subscribe', {token, plan_id}, {headers: this.getHeaders()})
-      .map((response:Response) => response.json());
+      .map((response: Response) => response.json());
   }
 
   unsubscribePlan(subscribe_id, at_period_end) {
     return this.http.put(environment.api_end_point + 'api/unsubscribe/' + subscribe_id, {at_period_end: at_period_end}, {headers: this.getHeaders()})
-      .map((response:Response) => response.json());
+      .map((response: Response) => response.json());
   }
 
   retrieveProvider() {
@@ -117,7 +119,7 @@ export class FrontService {
       });
   }
 
-  handelError(error:any) {
+  handelError(error: any) {
     if (error.statusCode == 401) {
       this.authService.logout();
     }

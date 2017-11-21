@@ -29,7 +29,7 @@
                   </div>
                   <div *ngIf="isUserExist != 0">
                     <div class="alert alert-danger fade in my-alert" *ngIf="isUserExist == 1">
-                      User name is already exist.
+                      User name already exists.
                     </div>
                     <div class="alert alert-success fade in my-alert" *ngIf="isUserExist == 2">
                       User name is available.
@@ -37,7 +37,7 @@
                   </div>
                   <div class="alert alert-danger fade in my-alert"
                        *ngIf="signUpForm.get('userName').touched && signUpForm.get('userName').errors">
-                    User name is required field.
+                    User name is a required field.
                   </div>
                 </div>
 
@@ -47,7 +47,7 @@
                   <input type="text" name="fName" formControlName="fName" placeholder="First Name">
                   <div class="alert alert-danger fade in my-alert"
                        *ngIf="signUpForm.get('fName').touched && signUpForm.get('fName').errors">
-                    First name is required field.
+                    First name is a required field.
                   </div>
                 </div>
                 <div class="form-group">
@@ -55,7 +55,7 @@
                   <input type="text" id="lName" name="lName" formControlName="lName" placeholder="Last Name">
                   <div class="alert alert-danger fade in my-alert"
                        *ngIf="signUpForm.get('lName').touched && signUpForm.get('lName').errors">
-                    Last name is required field.
+                    Last name is a required field.
                   </div>
                 </div>
                 <div class="form-group">
@@ -63,7 +63,7 @@
                   <input type="email" id="eId" name="eId" formControlName="email" placeholder="Email">
                   <div class="alert alert-danger fade in my-alert"
                        *ngIf="signUpForm.get('email').touched && signUpForm.get('email').errors && signUpForm.get('email').errors.required">
-                    Email is required field.
+                    Email is a required field.
                   </div>
                   <div class="alert alert-danger fade in my-alert"
                        *ngIf="signUpForm.get('email').touched && signUpForm.get('email').errors && signUpForm.get('email').errors.incorrectMailFormat">
@@ -78,22 +78,22 @@
                   <label class="srOnly">Password</label>
                   <input type="password" name="password" formControlName="password" placeholder="**********">
                   <div class="alert alert-danger my-alert" *ngIf="signUpForm.get('password').errors?.minlength">
-                    Too short password
+                    Password is too short
                   </div>
                   <div class="alert alert-danger my-alert" *ngIf="signUpForm.get('password').errors?.maxlength">
-                    Too long password
+                    Password is too long
                   </div>
                   <div class="alert alert-danger fade in my-alert"
                        *ngIf="signUpForm.get('password').touched && signUpForm.get('password').errors">
-                    Password is required field.
+                    Password is a required field.
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="srOnly">ConformPassword</label>
+                  <label class="srOnly">Confirm Password</label>
                   <input type="password" name="cPassword" formControlName="confirmPassword" placeholder="**********">
                 </div>
                 <div class="alert alert-danger my-alert" *ngIf="signUpForm.errors?.passwordValidator">
-                  Password not match
+                  Passwords don't match
                 </div>
                 <div class="form-group chkFrmGrp">
                   <input type="checkbox" formControlName="tnc" #tnc>

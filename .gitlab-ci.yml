@@ -22,7 +22,7 @@ production_dev_build:
     - staging
   script:
     - npm install
-    - ng build --prod
+    - ng build --prod --env=dev
     - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
     - rm -rf /var/www/html/RotoProsWeb/dist
     - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/

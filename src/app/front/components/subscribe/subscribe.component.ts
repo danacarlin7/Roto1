@@ -16,6 +16,7 @@ import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
 import 'rxjs/Rx';
 import {AuthService} from "../../../shared/services/auth.service";
 import {FrontService} from "../../services/front.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-subscribe',
@@ -42,6 +43,7 @@ export class SubscribeComponent implements OnInit {
       this.userData = this.authService.retrieveLoggedUserInfo()
         .subscribe(
           response => {
+            console.log('response from subscription in front-header.component');
             if (response.statusCode == 200) {
               this.userData = response.data;
               this.authService.loggedUser = this.userData;
@@ -52,6 +54,7 @@ export class SubscribeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('memberspace status: ' + this.authService.loggedUser.is_memberspace);
     this.isLoading = true;
     this.frontService.getSubscribePlans().subscribe(
       response => {
@@ -63,26 +66,27 @@ export class SubscribeComponent implements OnInit {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          }else if(this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user'){
+          } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
+            console.log(2);
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'dfsportsgods') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          }else if(!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user'){
+          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user') {
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'all_access' || response.data[i].group == 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          }else if(!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user'){
-            for (let i = 0; response.data && response.data.length; i++) {
-              if (response.data[i].group == 'rotopros') {
+          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
+            // for (let i = 0; response.data && response.data.length; i++) {
+            for (let i = 0; i < response.data.length; i++) {
+              if (response.data[i].group === 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          }
-          else {
+          } else {
             for (let i = 0; response.data && response.data.length; i++) {
               if (response.data[i].group == 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
@@ -105,9 +109,9 @@ export class SubscribeComponent implements OnInit {
     localStorage.setItem('selectedPlan', plan.plan_id);
     if (this.authService.isLoggedIn()) {
       var handler = (<any>window).StripeCheckout.configure({
-        key: 'pk_live_ot2q3JGgPLEfvia8StJWO0b7',
+        key: environment.production ?  'pk_live_ot2q3JGgPLEfvia8StJWO0b7' : 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
         locale: 'auto',
-        token: (token:any) => {
+        token: (token: any) => {
           // You can access the token ID with `token.id`.
           // Get the token ID to your server-side code for use.
           console.log("token call back => ", token);
@@ -116,7 +120,8 @@ export class SubscribeComponent implements OnInit {
               response => {
                 if (response.statusCode == 200) {
                   console.log("subscribePlan Success => ", response.data);
-                }
+                  location.replace('/');
+                }``
               }
             );
         }

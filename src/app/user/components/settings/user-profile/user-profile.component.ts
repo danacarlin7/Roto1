@@ -31,6 +31,7 @@ import {environment} from "../../../../../environments/environment";
 export class UserProfileComponent{
   userData: LoggedUser;
   user_name = '';
+
   constructor(private authService:AuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
     this.userData = this.authService.loggedUser;
     this.authService.loggedUserChangeEvent.subscribe(user => {

@@ -34,45 +34,47 @@ import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/ge
 import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.component";
 import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
+import { PodcastComponent } from './components/podcast/podcast.component';
 /**
  * Created by Hiren on 05-06-2017.
  */
-const routes:Routes = [
-  <Route>{
-    path: '',
+const routes: Routes = [
+  {
+    path: "",
     component: FrontMainComponent,
-    data: {title: 'RotoPose - Home'},
+    data: {title: "RotoPose - Home"},
     children: [
-      <Route>{path: '', component: FrontHomeComponent},
-      <Route>{path: 'verify', component: VerifyAccComponent},
-      <Route>{path: ':token/verify', component: VerifyAccComponent},
-      <Route>{path: ':token/change-password', component: ChangePasswordComponent},
-      <Route>{path: 'login', component: LoginComponent},
-      <Route>{path: 'signup', component: SignUpComponent},
-      <Route>{path: 'forgot-password', component: ForgotPasswordComponent},
-      <Route>{path: 'provider-lineup', canActivate: [AuthGuard], component: ProviderLineupComponent},
-      <Route>{path: 'news', component: NewsComponent},
-      <Route>{path: 'market-place', component: MarketPlaceComponent},
-      <Route>{path: 'extensions', component: ExtensionsComponent},
-      <Route>{path: 'lineups', component: DailyLineupComponent},
-      <Route>{path: 'articles/:id', component: ArticleComponent},
-      <Route>{path: 'articles', component: ArticlesComponent},
-      <Route>{path: 'basics', component: DFSBasicsComponent},
-      <Route>{path: 'mlb-excel-tool', component: ExcelToolComponent},
-      <Route>{path: 'nfl-excel-tool', component: NFLExcelToolComponent},
-      <Route>{path: 'faq', component: FAQComponent},
-      <Route>{path: 'provider-lineups', canActivate: [AuthGuard], component: ProviderComponent},
-      <Route>{path: 'provider-public-lineups', component: ProviderPublicComponent},
-      <Route>{path: 'lineup-optimizer', component: LineupOptimizerComponent},
-      <Route>{path: 'lineup-optimizer/mlb', component: LineupOptimizerComponent},
-      <Route>{path: 'lineup-optimizer/nfl', component: NFLLineupOptimizerComponent},
-      <Route>{path: 'lineup-optimizer/nba', component: NBALineupOptimizerComponent},
-      <Route>{path: 'mlb-lineups', component: GeneratedLineupsComponent},
-      <Route>{path: 'nfl-lineups', component: GeneratedNFLLineupsComponent},
-      <Route>{path: 'nba-lineups', component: GeneratedNBALineupsComponent},
-      <Route>{path: 'injuries', component: InjuriesComponent},
-      <Route>{path: 'subscribe', component: SubscribeComponent},
-      <Route>{path: 'contact-analyzer', component: ContactAnalyzerComponent},
+      { path: "", component: FrontHomeComponent },
+      { path: "verify", component: VerifyAccComponent },
+      { path: ":token/verify", component: VerifyAccComponent },
+      { path: ":token/change-password", component: ChangePasswordComponent },
+      { path: "login", component: LoginComponent },
+      { path: "signup", component: SignUpComponent },
+      { path: "forgot-password", component: ForgotPasswordComponent },
+      { path: "provider-lineup", canActivate: [AuthGuard], component: ProviderLineupComponent },
+      { path: "news", component: NewsComponent },
+      { path: "market-place", component: MarketPlaceComponent },
+      { path: "extensions", component: ExtensionsComponent },
+      { path: "lineups", component: DailyLineupComponent },
+      { path: "articles/:id", component: ArticleComponent },
+      { path: "articles", component: ArticlesComponent },
+      { path: "basics", component: DFSBasicsComponent },
+      { path: "mlb-excel-tool", component: ExcelToolComponent },
+      { path: "nfl-excel-tool", component: NFLExcelToolComponent },
+      { path: "faq", component: FAQComponent },
+      { path: "provider-lineups", canActivate: [AuthGuard], component: ProviderComponent},
+      { path: "provider-public-lineups", component: ProviderPublicComponent},
+      { path: "lineup-optimizer", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
+      { path: "lineup-optimizer/mlb", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
+      { path: "lineup-optimizer/nfl", canActivate: [SubscriptionGuard], component: NFLLineupOptimizerComponent },
+      { path: "lineup-optimizer/nba", canActivate: [SubscriptionGuard], component: NBALineupOptimizerComponent },
+      { path: "mlb-lineups", component: GeneratedLineupsComponent },
+      { path: "nfl-lineups", component: GeneratedNFLLineupsComponent },
+      { path: "nba-lineups", component: GeneratedNBALineupsComponent },
+      { path: "injuries", component: InjuriesComponent },
+      { path: "subscribe", component: SubscribeComponent },
+      { path: "contact-analyzer", component: ContactAnalyzerComponent },
+      { path: "podcast", component: PodcastComponent },
     ]
   }
 ];

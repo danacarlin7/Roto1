@@ -10,33 +10,33 @@ import {LoggedUser} from "../models/logged-user.model";
 @Injectable()
 export class AuthService {
 
-  private _loggedUser:LoggedUser;
+  private _loggedUser: LoggedUser;
 
-  get loggedUser():LoggedUser {
+  get loggedUser(): LoggedUser {
     return this._loggedUser;
   }
 
-  set loggedUser(value:LoggedUser) {
+  set loggedUser(value: LoggedUser) {
     this._loggedUser = value;
     if (this._loggedUser) {
       this.loggedUserChangeEvent.emit(this._loggedUser);
     }
   }
 
-  isLoggedInEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
+  isLoggedInEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  loggedUserChangeEvent:EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
+  loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
-  constructor(private http:Http) {
+  constructor(private http: Http) {
 
   }
 
-  getToken():string {
+  getToken(): string {
     return environment.token;
   }
 
-  getHeaders():Headers {
-    let headers = new Headers();
+  getHeaders(): Headers {
+    const headers = new Headers();
     headers.append('content-type', 'application/json');
     if (this.getToken()) {
       headers.append('Authorization', 'Bearer ' + (this.getToken()));
@@ -44,24 +44,37 @@ export class AuthService {
     return headers;
   }
 
-  isSubscriber():boolean {
-    let isSubscribe = false;
+  isSubscriber(calledByGuard = false): boolean | Observable<any> {
     if (this.loggedUser) {
-      if (this.loggedUser.is_subscribe) {
-        isSubscribe = true;
-      }
+      return this.loggedUser.is_subscribe;
+    } else if (calledByGuard && environment.token) {
+      return this.http.get(environment.api_end_point + "api/memberinfo", {headers: this.getHeaders()})
+      .map(response => response.json().data.is_subscribe)
+      .catch(error => Observable.throw(error.json()));
+      //.catch(error => this.showSubscriptionAlert());
+    } else {
+      console.log("not a subscriber");
     }
-    return isSubscribe;
   }
 
-  subscriptionAlertEvent:EventEmitter<any> = new EventEmitter<any>();
+  // isSubscriber():boolean {
+  //   let isSubscribe = false;
+  //   if (this.loggedUser) {
+  //     if (this.loggedUser.is_subscribe) {
+  //       isSubscribe = true;
+  //     }
+  //   }
+  //   return isSubscribe;
+  // }
+
+  subscriptionAlertEvent: EventEmitter<any> = new EventEmitter<any>();
 
   showSubscriptionAlert() {
     this.subscriptionAlertEvent.emit(true);
   }
 
-  isLoggedIn():boolean {
-    let login:boolean;
+  isLoggedIn(): boolean {
+    let login: boolean;
     if (environment.token && environment.token.length) {
       login = true;
     } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
@@ -90,6 +103,7 @@ export class AuthService {
   @Output() userLoggedInEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loginWP(data:string):Observable<any> {
+    console.log()
     console.log(data);
     return this.http.post('http://13.56.129.231/dfsauth/nglogin/', data)
       .map(response => response.json())
@@ -104,13 +118,13 @@ export class AuthService {
     //this.userLoggedInEvent.emit(false);
   }
 
-  retrieveLoggedUserInfo():Observable<any> {
+  retrieveLoggedUserInfo(): Observable<any> {
     return this.http.get(environment.api_end_point + 'api/memberinfo', {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
   }
 
-  registerNewUser(data:any):Observable<any> {
+  registerNewUser(data: any): Observable<any> {
     return this.http.post(environment.api_end_point + 'signup', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()))
@@ -147,8 +161,8 @@ export class AuthService {
   }
 
   uploadProfile(fileList) {
-    let file:File = fileList[0];
-    let formData:FormData = new FormData();
+    let file: File = fileList[0];
+    let formData: FormData = new FormData();
     formData.append('uploadFile', file, file.name);
     return this.http.post(environment.api_end_point + 'api/uploadImage', formData, {
       headers: new Headers({

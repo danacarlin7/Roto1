@@ -12,12 +12,14 @@ import {GeneratedLineupRecords} from "../../models/generated-lineup.model";
 import {AdvFilterValue} from "../../models/adv-filter-value.model";
 import {AuthService} from "../../../shared/services/auth.service";
 import {SelectItem} from "primeng/primeng";
+import {FacebookPixelEventConstants} from "../../constants/facebook-pixel-event.constants";
 
 /**
  * Created by Hiren on 02-07-2017.
  */
 
 declare var jQuery: any;
+declare var fbq: any;
 
 @Component({
   selector: 'rp-lineup-optimizer',
@@ -307,6 +309,7 @@ export class LineupOptimizerComponent {
             this.isLoading = false;
             console.log("GenerateLineup response => ", response);
             this.optimizerService.generatedLineups = response.data as GeneratedLineupRecords;
+            fbq('trackCustom', FacebookPixelEventConstants.LINEUP_GENERATED_EVENT, {sport_type: 'MLB'});
             this.router.navigate(['mlb-lineups']);
           }
         },
@@ -533,7 +536,7 @@ export class LineupOptimizerComponent {
   }
 
   onSaveAdvFilterValueEvent(filterValue: AdvFilterValue) {
-    if(filterValue){
+    if (filterValue) {
       filterValue['positionFilter'] = this.positionFilterValue;
     }
     this.optimizerService.updateAdvFilterValue(filterValue)

@@ -87,7 +87,8 @@
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/news" (click)="closeMobileMenu()">Player News</a>
               </li>
-              <li class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
+
+              <li *ngIf="loggedUser && loggedUser.is_subscribe" class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
                   [routerLinkActiveOptions]="{exact: true}">
                 <a>Lineup Optimizer<span class="caret"></span></a>
                 <div class="dropdown-content" routerLinkActive="active"
@@ -99,6 +100,13 @@
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/subscribe" (click)="closeMobileMenu()">Plans</a>
+              </li>
+
+              <li id="rss">
+                  <a routerLink="/podcast">Foul Balls</a>
+                  <a href="http://feeds.soundcloud.com/users/soundcloud:users:308749747/sounds.rss">
+                    <i class="fa fa-rss-square" id="rss-link"></i>
+                  </a>
               </li>
               <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/lineups">Lineups</a>
@@ -124,7 +132,7 @@
                   <!--class="img-responsive"/>-->
                    <img
                      #profilePic
-                     [attr.src]="profileImagePath ? 'https://api.dfsportgod.com/images/'+ profileImagePath : '../../../../assets/images/dashboard_profile_img.png'"
+                     [attr.src]="profileImagePath ? 'https://api.dfsportgod.com/images/'+ profileImagePath : '../../../../assets/images/blank-avatar.jpg'"
                      alt=""
                      class="img-responsive"/>
                 </span>
@@ -138,6 +146,7 @@
                   </ul>
                 </div>
               </li>
+
             </ul>
           </div>
         </div>

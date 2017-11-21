@@ -135,8 +135,10 @@ export class GeneratedNFLLineupsComponent {
   getSlateName(): string {
     let slateName = '';
     let activeSlate = this.optimizerService.activeSlate;
-    slateName += activeSlate.Slate + " - ";
-    slateName += moment(activeSlate.StartTime).format('LLLL');
+    if(activeSlate){
+      slateName += activeSlate.Slate + " - ";
+      slateName += moment(activeSlate.StartTime).format('LLLL');
+    }
     return slateName;
   }
 

@@ -7,13 +7,13 @@ import {
   TemplateRef,
   ViewChild,
   NgModuleRef
-} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {Overlay} from 'angular2-modal';
+} from "@angular/core";
+import {NgForm} from "@angular/forms";
+import {Subscription} from "rxjs";
+import {Overlay} from "angular2-modal";
 import {overlayConfigFactory} from "angular2-modal";
-import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
-import 'rxjs/Rx';
+import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
+import "rxjs/Rx";
 import {AuthService} from "../../../../shared/services/auth.service";
 import {LoggedUser} from "../../../../shared/models/logged-user.model";
 import {UserDashboardServices} from "../../../services/user-dashboard.service";
@@ -24,18 +24,23 @@ import {environment} from "../../../../../environments/environment";
  */
 
 @Component({
-  selector:'rp-subscriptions',
-  templateUrl:'./subscriptions.component.html',
-  styleUrls:['./subscriptions.component.css']
+  selector: "rp-subscriptions",
+  templateUrl: "./subscriptions.component.html",
+  styleUrls: ["./subscriptions.component.css"]
 })
-export class SubscriptionsComponent{
+export class SubscriptionsComponent implements OnInit {
   userData: LoggedUser;
-  user_name = '';
+  user_name = "";
   unsubscribeOption = "at_period_end";
   selectedPlan;
-  @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef: TemplateRef<any>;
+  @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
 
-  constructor(private authService:AuthService, private router:Router, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal, private dashboardService:UserDashboardServices) {
+  constructor(private authService: AuthService,
+              private router: Router,
+              overlay: Overlay,
+              vcRef: ViewContainerRef,
+              public modal: Modal,
+              private dashboardService: UserDashboardServices) {
     this.userData = this.authService.loggedUser;
     this.authService.loggedUserChangeEvent.subscribe(user => {
       this.userData = user;
@@ -50,6 +55,10 @@ export class SubscriptionsComponent{
     }
   }
 
+  ngOnInit() {
+    console.log(this.userData);
+  }
+
   onBtnUnsubscribeClick(plan) {
     this.unsubscribeOption = "at_period_end";
     this.selectedPlan = plan;
@@ -57,9 +66,10 @@ export class SubscriptionsComponent{
   }
 
   endSubscription(subscribeDialog) {
-    this.dashboardService.unsubscribePlan(this.selectedPlan._id, this.unsubscribeOption == 'at_period_end').subscribe(
+    this.dashboardService.unsubscribePlan(this.selectedPlan.subscription_id, this.unsubscribeOption == "at_period_end").subscribe(
       response => {
         subscribeDialog.close();
+        location.reload();
       }
     );
   }
