@@ -148,6 +148,12 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()));
   }
 
+  updatePasswordFromSettings(data) {
+    return this.http.post(environment.api_end_point + "api/changePassword", data, { headers: this.getHeaders() })
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()));
+  }
+
   userInfo() {
     return this.http.get(environment.api_end_point + 'api/memberinfo', {headers: this.getHeaders()})
       .map(response => response.json())
