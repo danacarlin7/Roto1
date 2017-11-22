@@ -45,6 +45,7 @@ const routes: Routes = [
     data: {title: "RotoPose - Home"},
     children: [
       { path: "", component: FrontHomeComponent },
+      { path: "homeRedirect", component: FrontHomeComponent },
       { path: "verify", component: VerifyAccComponent },
       { path: ":token/verify", component: VerifyAccComponent },
       { path: ":token/change-password", component: ChangePasswordComponent },
@@ -67,7 +68,7 @@ const routes: Routes = [
       { path: "lineup-optimizer", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
       { path: "lineup-optimizer/mlb", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
       { path: "lineup-optimizer/nfl", canActivate: [SubscriptionGuard], component: NFLLineupOptimizerComponent },
-      { path: "lineup-optimizer/nba", canActivate: [SubscriptionGuard], component: NBALineupOptimizerComponent },
+      // { path: "lineup-optimizer/nba", canActivate: [SubscriptionGuard], component: NBALineupOptimizerComponent },
       { path: "mlb-lineups", component: GeneratedLineupsComponent },
       { path: "nfl-lineups", component: GeneratedNFLLineupsComponent },
       { path: "nba-lineups", component: GeneratedNBALineupsComponent },

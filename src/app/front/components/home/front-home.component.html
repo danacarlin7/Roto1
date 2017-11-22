@@ -3,6 +3,11 @@
   <div class="container-fluid">
     <div class="row indexNPrt1Wrapper">
 
+      <!-- this is better done as a directive -->
+      <div class="alert alert-success fade in" *ngIf="redirected">
+        {{ redirectMessage }}
+      </div>
+
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
