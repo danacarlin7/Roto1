@@ -9,7 +9,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 14px;}
 .dashboardHeader .bottomHeader .bottomHeaderNav .mainMenu ul li a{width: 100px;}
 .dashboardHeader .bottomHeader .logoWrapper, header .logoWrapper{max-width: 200px;}
 header .bottomHeader .rightNav > ul > li > a{width: 90px;}
-header .bottomHeader .bottomHeaderNav .mainMenu {	padding-right: 300px;}
+header .bottomHeader .bottomHeaderNav .mainMenu {	padding-right: 270px;}
 }
 @media (max-width:1390px)
 {
@@ -62,7 +62,7 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 
 	.dashboardHeader .bottomHeader .logoWrapper, header .logoWrapper{max-width: 170px;}
 	header .bottomHeader .rightNav > ul > li > a {width: 75px;font-size: 14px;}
-	header .bottomHeader .bottomHeaderNav .mainMenu {padding-right: 290px;}
+	header .bottomHeader .bottomHeaderNav .mainMenu {padding-right: 275px;}
 	.mlbDescItm .mlbDescItmTp {min-height: 225px;}
 	.glossaryVideoSection > div iframe {width: 100%;height: 254px;}
 

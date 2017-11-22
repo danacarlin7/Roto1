@@ -119,7 +119,7 @@
               <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signup">Sign Up</a></li>
               <li class="signUpBtn" *ngIf="isLoggedIn">
                 <a style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
-                  Go to Dashboard
+                  Dashboard
                 </a>
               </li>
               <!--<li class="loginBtn" *ngIf="isLoggedIn"><a (click)="btnLogoutClicked()">Logout</a></li>-->
