@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { AuthService } from '../../../shared/services/auth.service';
 import { LoggedUser } from '../../../shared/models/logged-user.model';
 /**
@@ -12,14 +12,14 @@ declare var jQuery:any;
   styleUrls: ['./front-header.component.css']
 })
 export class FrontHeaderComponent {
-
-  @ViewChild('profilePic') profilePic:ElementRef;
+  @ViewChild('profilePic') profilePic: ElementRef;
 
   isLoggedIn: boolean;
   profileImagePath: string;
   role: string;
   loggedUser: LoggedUser;
-  windowWidth: number = window.innerWidth;
+  headerIsStacked: boolean;
+  headerStackThreshold = 1150;
 
   constructor(private authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -69,6 +69,8 @@ export class FrontHeaderComponent {
   }
 
   ngOnInit() {
+    window.innerWidth <= this.headerStackThreshold ? this.headerIsStacked = true : this.headerIsStacked = false;
+
     if (this.authService.isLoggedIn()) {
       this.authService.retrieveLoggedUserInfo()
         .subscribe(
@@ -106,5 +108,13 @@ export class FrontHeaderComponent {
       expires = '; expires=' + date.toUTCString();
     }
     document.cookie = name + '=' + value + expires + '; domain=rotopros.com; path=/';
+  }
+
+  onResize(event) {
+    if (event.target.innerWidth > this.headerStackThreshold && this.headerIsStacked) {
+      this.headerIsStacked = false;
+    } else if (event.target.innerWidth <= this.headerStackThreshold && !this.headerIsStacked) {
+      this.headerIsStacked = true;
+    }
   }
 }

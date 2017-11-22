@@ -71,6 +71,11 @@
               <span><img src="../../../../assets/images/close_icn.png" alt="" class="img-responsive"/></span>
             </div>
             <ul>
+              <li (window:resize)="onResize($event)">
+                <a *ngIf="headerIsStacked" style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
+                  Dashboard
+                </a>
+              </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="" (click)="closeMobileMenu()">Home<span class="sr-only">(current)</span></a>
               </li>
@@ -118,7 +123,7 @@
               <li class="loginBtn" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
               <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signup">Sign Up</a></li>
               <li class="signUpBtn" *ngIf="isLoggedIn">
-                <a style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
+                <a appMobileHidden style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
                   Dashboard
                 </a>
               </li>
