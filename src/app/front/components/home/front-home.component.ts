@@ -1,7 +1,7 @@
-import { Component, AfterViewInit, OnInit } from "@angular/core";
+import {Component, AfterViewInit} from "@angular/core";
 import {FrontService} from "../../services/front.service";
 import {ArticleService} from "../../services/article.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import {Router} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
 import {News} from "../../models/news.model";
 /**
@@ -15,31 +15,19 @@ declare var jQuery:any;
   templateUrl: './front-home.component.html',
   styleUrls: ['./front-home.component.css']
 })
-export class FrontHomeComponent implements AfterViewInit, OnInit {
-  redirected: boolean;
-  redirectMessage: String;
+export class FrontHomeComponent implements AfterViewInit {
 
-  twitterFeeds: Array<any>;
-  facebookFeeds: Array<any>;
-  instagramFeeds: Array<any>;
+  twitterFeeds:Array<any>;
+  facebookFeeds:Array<any>;
+  instagramFeeds:Array<any>;
 
-  footballArticles: any[];
-  basketballArticles: any[];
-  baseballArticles: any[];
-  media: Object = {};
+  footballArticles:any[];
+  basketballArticles:any[];
+  baseballArticles:any[];
+  media:Object = {};
 
-  constructor(private frontService: FrontService,
-              private articleService: ArticleService,
-              private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) {}
+  constructor(private frontService:FrontService, private articleService:ArticleService, private authService:AuthService, private router:Router) {
 
-  ngOnInit() {
-    console.log(this.route.snapshot);
-    if (this.route.snapshot.params['redirected']) {
-      this.redirected = this.route.snapshot.params['redirected'];
-      this.redirectMessage = this.route.snapshot.params['redirectMessage'];
-    }
   }
 
   ngAfterViewInit() {

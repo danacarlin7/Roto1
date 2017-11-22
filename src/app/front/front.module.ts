@@ -107,7 +107,7 @@ import {PodcastComponent} from "./components/podcast/podcast.component";
     ProviderPublicComponent,
     FrontMainComponent
   ],
-  providers: [FrontService, ArticleService, LineupOptimizerService, PlayerGetService, CompGetService, LineupPostService]
+  providers: [FrontService,ArticleService,LineupOptimizerService, PlayerGetService, CompGetService, LineupPostService]
 })
 export class FrontModule {
 

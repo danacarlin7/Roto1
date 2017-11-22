@@ -103,6 +103,7 @@ export class AuthService {
   @Output() userLoggedInEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loginWP(data:string):Observable<any> {
+    console.log()
     console.log(data);
     return this.http.post('http://13.56.129.231/dfsauth/nglogin/', data)
       .map(response => response.json())
@@ -143,12 +144,6 @@ export class AuthService {
 
   changePassword(data) {
     return this.http.post(environment.api_end_point + 'verifyToken', data)
-      .map(response => response.json())
-      .catch(error => Observable.throw(error.json()));
-  }
-
-  updatePasswordFromSettings(data) {
-    return this.http.post(environment.api_end_point + "api/changePassword", data, { headers: this.getHeaders() })
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()));
   }

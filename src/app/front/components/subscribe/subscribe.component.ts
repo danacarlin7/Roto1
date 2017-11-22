@@ -8,7 +8,7 @@ import {
   ViewChild,
   NgModuleRef
 } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import {Router} from "@angular/router";
 import {Subscription} from 'rxjs';
 import {Overlay} from 'angular2-modal';
 import {overlayConfigFactory} from "angular2-modal";
@@ -37,14 +37,7 @@ export class SubscribeComponent implements OnInit {
 
   @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef:TemplateRef<any>;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private authService: AuthService,
-              private frontService: FrontService,
-              private injector: Injector,
-              overlay: Overlay,
-              vcRef: ViewContainerRef,
-              public modal: Modal) {
+  constructor(private router:Router, private authService:AuthService, private frontService:FrontService, private injector:Injector, overlay:Overlay, vcRef:ViewContainerRef, public modal:Modal) {
     overlay.defaultViewContainer = vcRef;
     if (this.authService.isLoggedIn()) {
       this.userData = this.authService.retrieveLoggedUserInfo()
@@ -127,21 +120,8 @@ export class SubscribeComponent implements OnInit {
               response => {
                 if (response.statusCode == 200) {
                   console.log("subscribePlan Success => ", response.data);
-
-                  this.authService.retrieveLoggedUserInfo()
-                  .subscribe(
-                    response => {
-                      if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                    },
-                    error => {
-                      console.log("http error => ", error);
-                    }
-                  );
-
-                  this.router.navigate([
-                    '/homeRedirect',
-                    { redirected: true, redirectMessage: "You Have Successfully Been Subscribed!" }]);
-                }
+                  location.replace('/');
+                }``
               }
             );
         }

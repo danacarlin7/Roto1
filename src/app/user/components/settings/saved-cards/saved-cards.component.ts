@@ -16,7 +16,7 @@ export class SavedCardsComponent {
   isLoading:boolean;
   defaultCard:string;
 
-  constructor(private dashboardService: UserDashboardServices) {
+  constructor(private dashboardService:UserDashboardServices) {
 
   }
 
@@ -31,7 +31,7 @@ export class SavedCardsComponent {
         response => {
           this.isLoading = false;
           if (response.statusCode == 200) {
-            this.cards = response.data.stripe_cards;
+            this.cards = response.data.cards;
             this.defaultCard = response.data.default_payment_source;
             console.log("cards => ", this.cards);
           }
