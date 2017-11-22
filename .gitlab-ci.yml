@@ -7,8 +7,6 @@ production_build:
   stage: build
   only:
     - master
-  tags:
-    - ROTOPROS
   script:
     - npm install
     - ng build --prod
