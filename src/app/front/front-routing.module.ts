@@ -68,7 +68,7 @@ const routes: Routes = [
       { path: "lineup-optimizer", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
       { path: "lineup-optimizer/mlb", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
       { path: "lineup-optimizer/nfl", canActivate: [SubscriptionGuard], component: NFLLineupOptimizerComponent },
-      { path: "lineup-optimizer/nba", canActivate: [SubscriptionGuard], component: NBALineupOptimizerComponent },
+      // { path: "lineup-optimizer/nba", canActivate: [SubscriptionGuard], component: NBALineupOptimizerComponent },
       { path: "mlb-lineups", component: GeneratedLineupsComponent },
       { path: "nfl-lineups", component: GeneratedNFLLineupsComponent },
       { path: "nba-lineups", component: GeneratedNBALineupsComponent },
