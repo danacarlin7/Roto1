@@ -1,0 +1,120 @@
+import { AfterViewInit, Component, OnInit } from "@angular/core";
+import { AdminDashboardService } from "../services/admin-dashboard.service";
+import { AuthService } from '../../shared/services/auth.service';
+import moment = require('moment');
+import { ActivatedRoute, Data } from '@angular/router';
+
+declare var $:any;
+
+declare interface DataTable {
+  headerRow: string[];
+  dataRows: any;
+}
+
+@Component({
+  selector: "app-members-admin",
+  templateUrl: "./members-admin.component.html",
+  styleUrls: ["./members-admin.component.css"]
+})
+export class MembersAdminComponent implements OnInit, AfterViewInit {
+  private dataTable: DataTable;
+
+  constructor(private route: ActivatedRoute, private authService: AuthService, private adminDashboardService: AdminDashboardService) {}
+
+
+
+  ngOnInit() {
+    this.route.data.subscribe((data: Data) => {
+      console.log(data.members);
+
+      this.dataTable = {
+        headerRow: ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"],
+        dataRows: data.members
+      };
+    });
+    //
+    // this.dataTable = {
+    //   headerRow: ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"],
+    //   footerRow: ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"],
+    //   dataRows: this.route.data.subscribe(data: Data => {
+    //
+    //   })
+    // };
+
+    // this.adminDashboardService.getMembers().subscribe(
+    //   members => {
+    //     console.log("Members => ", members);
+    //
+    //     this.dataTable.dataRows = members.data.map(member => {
+    //       const created_at = moment(member.created_at).format("MMM D, YYYY");
+    //
+    //       return [
+    //         member.first_name + " " + member.last_name,
+    //         member.email,
+    //         member.is_subscribe,
+    //         created_at,
+    //         "Last Subscription",
+    //         "btn-round"
+    //       ];
+    //     });
+
+      //   this.setUpDatatable();
+      // },
+    //   error => {
+    //     // this.router.navigate(["/login"]);
+    //     console.log(error);
+    //     this.authService.logout();
+    //   }
+    // );
+  }
+
+  ngAfterViewInit(){
+    this.setUpDatatable();
+  }
+
+  setUpDatatable() {
+    $("#datatables").DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+      responsive: true,
+      language: {
+      search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+    });
+
+    var table = $("#datatables").DataTable();
+     // Edit record
+    table.on( "click", ".edit", function () {
+      var $tr = $(this).closest("tr");
+
+      var data = table.row($tr).data();
+      alert( "You press on Row: " + data[0] + " " + data[1] + " " + data[2] + "\"s row." );
+    });
+
+    // Delete a record
+    table.on( "click", ".remove", function (e) {
+      var $tr = $(this).closest("tr");
+      table.row($tr).remove().draw();
+      e.preventDefault();
+    });
+
+    //Like record
+    table.on( "click", ".like", function () {
+      alert("You clicked on Like button");
+    });
+  }
+
+  subscribeMember(id: String) {
+
+  }
+
+  unsubscribeMember(id: String) {
+
+  }
+
+  deleteMember(id: String) {
+    console.log(id);
+  }
+
+}
