@@ -4,7 +4,7 @@ import { Overlay } from "angular2-modal";
 import { overlayConfigFactory } from "angular2-modal";
 import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { MembershipPlanService } from "../services/membership-plan.service";
-import moment = require("moment");
+import * as moment from "moment";
 import "../../../assets/newAdmin/js/datetime-moment.js";
 
 declare var $: any;
@@ -19,8 +19,8 @@ export class MembersAdminComponent implements OnInit {
   @ViewChild("unsubscribeTemplateRef") private unsubscribeTemplateRef: TemplateRef<any>;
   @ViewChild("deleteTemplateRef") private deleteTemplateRef: TemplateRef<any>;
 
-  private headerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
-  private allMembers: Object[];
+  public headerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
+  public allMembers: Object[];
 
   private modalData;
   private dialogRef;
