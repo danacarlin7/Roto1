@@ -11,7 +11,6 @@ import { UpgradeComponent }   from "./components/upgrade/upgrade.component";
 import { NgModule } from "@angular/core";
 import { AdminComponent } from "./admin.component";
 import { MembersAdminComponent } from "./members-admin/members-admin.component";
-import { MembersResolver } from './services/members-resolver.service';
 
 export const routes: Routes = [
   {
@@ -30,7 +29,6 @@ export const routes: Routes = [
       {
         path: "members",
         component: MembersAdminComponent
-        // resolve: { members: MembersResolver }
       },
       {
         path: "user",
