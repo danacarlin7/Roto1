@@ -19,7 +19,6 @@ import { UpgradeComponent } from "./components/upgrade/upgrade.component";
 import { SharedModule } from "../shared/shared.module";
 import { MembersAdminComponent } from "./members-admin/members-admin.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
-import { MembersResolver } from "app/paper-admin/services/members-resolver.service";
 import { MembershipPlanService } from './services/membership-plan.service';
 
 @NgModule({
@@ -49,7 +48,6 @@ import { MembershipPlanService } from './services/membership-plan.service';
   ],
   providers: [
     AdminDashboardService,
-    MembersResolver,
     MembershipPlanService
   ],
 })
