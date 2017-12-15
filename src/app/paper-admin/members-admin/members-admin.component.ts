@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
 import { AdminDashboardService } from "../services/admin-dashboard.service";
 import { Overlay } from "angular2-modal";
 import { overlayConfigFactory } from "angular2-modal";
@@ -14,12 +14,13 @@ declare var $: any;
   templateUrl: "./members-admin.component.html",
   styleUrls: ["./members-admin.component.css"]
 })
-export class MembersAdminComponent implements OnInit {
+export class MembersAdminComponent implements OnInit, AfterViewInit {
   @ViewChild("subscribeTemplateRef") private subscribeTemplateRef: TemplateRef<any>;
   @ViewChild("unsubscribeTemplateRef") private unsubscribeTemplateRef: TemplateRef<any>;
   @ViewChild("deleteTemplateRef") private deleteTemplateRef: TemplateRef<any>;
 
   public headerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
+  public footerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
   public allMembers: Object[];
 
   private modalData;
@@ -70,6 +71,10 @@ export class MembersAdminComponent implements OnInit {
     );
   }
 
+  ngAfterViewInit() {
+
+  }
+
   setUpDatatable() {
     if (this.table) {
       this.table.destroy();
@@ -87,10 +92,17 @@ export class MembersAdminComponent implements OnInit {
       },
       "order": [[ 3, "desc" ]]
     });
+
+    const table = this.table;
+
+    for (let i = 0; i < 4; i++) {
+      $(`#column${i}_search`).on( "keyup", function() {
+        table.columns(i).search(this.value).draw();
+      });
+    }
   }
 
   openModal(data: Object, templateRef: TemplateRef<any>) {
-    console.log(data);
     this.modalData = data;
     this.modal.open(templateRef, overlayConfigFactory({isBlocking: false}, BSModalContext)).then(
       dialog => this.dialogRef = dialog

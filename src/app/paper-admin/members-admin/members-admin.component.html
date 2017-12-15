@@ -21,6 +21,14 @@
                                       <th class="disabled-sorting">{{ headerRow[5] }}</th>
                                     </tr>
                                 </thead>
+                                <tfoot>
+                                    <tr>
+                                      <th *ngFor="let i of [0, 1, 2, 3, 4]">
+                                        <input id="column{{i}}_search" type="text" placeholder="Search">
+                                      </th>
+                                      <th></th>
+                                    </tr>
+                                </tfoot>
                                 <tbody>
                                     <tr *ngFor="let member of allMembers" [id]="member.id">
                                         <td>{{member.name}}</td>
