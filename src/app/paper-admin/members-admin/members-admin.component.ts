@@ -5,6 +5,7 @@ import { overlayConfigFactory } from "angular2-modal";
 import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { MembershipPlanService } from "../services/membership-plan.service";
 import * as moment from "moment";
+import { Subscription } from "rxjs/Subscription";
 import "../../../assets/newAdmin/js/datetime-moment.js";
 
 declare var $: any;
@@ -14,7 +15,7 @@ declare var $: any;
   templateUrl: "./members-admin.component.html",
   styleUrls: ["./members-admin.component.css"]
 })
-export class MembersAdminComponent implements OnInit, AfterViewInit {
+export class MembersAdminComponent implements OnInit {
   @ViewChild("subscribeTemplateRef") private subscribeTemplateRef: TemplateRef<any>;
   @ViewChild("unsubscribeTemplateRef") private unsubscribeTemplateRef: TemplateRef<any>;
   @ViewChild("deleteTemplateRef") private deleteTemplateRef: TemplateRef<any>;
@@ -22,6 +23,7 @@ export class MembersAdminComponent implements OnInit, AfterViewInit {
   public headerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
   public footerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
   public allMembers: Object[];
+  private membersSubscription: Subscription;
 
   private modalData;
   private dialogRef;
@@ -39,30 +41,16 @@ export class MembersAdminComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.adminDashboardService.getMembers().subscribe(
-      members => {
-        this.allMembers = members.data.map(member => {
-          let last_active = null;
-
-          const created_at = moment(member.created_at).format("MMM D YYYY");
-          if (member.last_active) {
-            last_active = moment(member.last_active).format("MMM D YYYY");
+    if (Object.keys(this.adminDashboardService.allMembers).length !== 0) {
+      this.setUpData();
+    } else {
+      this.membersSubscription = this.adminDashboardService.allMembersUpdated
+        .subscribe(
+          (membersUpdated: boolean) => {
+            this.setUpData();
           }
-
-          return {
-            name: member.first_name + " " + member.last_name,
-            email: member.email,
-            isSubscribe: member.is_subscribe,
-            createdAt: created_at,
-            lastSubscription: last_active,
-            id: member._id,
-            subscriptions: member.subscriptions.filter(subscription => subscription.is_plan_active === true)
-          };
-        });
-
-        setTimeout(() => this.setUpDatatable(), 0);
-      }
-    );
+        );
+    }
 
     this.membershipPlanService.retrieveMembershipPlans().subscribe(
       plans => {
@@ -71,8 +59,29 @@ export class MembersAdminComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit() {
+  setUpData() {
+    const allMembers = this.adminDashboardService.allMembers;
 
+    this.allMembers = Object.keys(allMembers).map(key => allMembers[key]).map(member => {
+      let last_active = null;
+
+      const created_at = moment(member.created_at).format("MMM D YYYY");
+      if (member.last_active) {
+        last_active = moment(member.last_active).format("MMM D YYYY");
+      }
+
+      return {
+        name: member.name,
+        email: member.email,
+        isSubscribe: member.is_subscribe,
+        createdAt: created_at,
+        lastSubscription: last_active,
+        id: member._id,
+        subscriptions: member.subscriptions.filter(subscription => subscription.is_plan_active === true)
+      };
+    });
+
+    setTimeout(() => this.setUpDatatable(), 0);
   }
 
   setUpDatatable() {

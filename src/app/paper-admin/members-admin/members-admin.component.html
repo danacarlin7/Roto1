@@ -31,7 +31,7 @@
                                 </tfoot>
                                 <tbody>
                                     <tr *ngFor="let member of allMembers" [id]="member.id">
-                                        <td>{{member.name}}</td>
+                                        <td><a [routerLink]="member.id">{{member.name}}</a></td>
                                         <td>{{member.email}}</td>
                                         <td>{{member.isSubscribe}}</td>
                                         <td>{{member.createdAt}}</td>

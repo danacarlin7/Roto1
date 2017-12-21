@@ -1,19 +1,31 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 import {Http, Headers, Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
+import { Subject } from 'rxjs/Subject';
 // import {Analyst} from "../models/provider.model";
 
 @Injectable()
 export class AdminDashboardService {
-  endpoint:string = environment.api_end_point;
+  endpoint: string = environment.api_end_point;
+  allMembers = {};
+  allMembersUpdated = new Subject<boolean>();
 
   // selectedProvider:Analyst;
 
   constructor(private http: Http, private authService: AuthService) {
-
+    this.getMembers().subscribe(
+      members => {
+        members.data.forEach((member) => {
+          member.name = `${member.first_name} ${member.last_name}`;
+          this.allMembers[member._id] = member;
+        });
+        this.allMembersUpdated.next(true);
+      }
+    );
   }
+
 
   getToken():string {
     return environment.token;
@@ -33,7 +45,7 @@ export class AdminDashboardService {
       .map(response => response.json())
       .catch(error => {
         this.handleError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -42,7 +54,7 @@ export class AdminDashboardService {
       .map(response => response.json())
       .catch(error => {
         this.handleError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -51,7 +63,7 @@ export class AdminDashboardService {
       .map(response => response.json())
       .catch(error => {
         this.handleError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -66,7 +78,6 @@ export class AdminDashboardService {
 
 
   deleteMember(id) {
-    console.log("Deleting member with id " + id)
     return this.http.delete(environment.api_end_point + "api/member/" + id, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {

@@ -20,6 +20,7 @@ import { SharedModule } from "../shared/shared.module";
 import { MembersAdminComponent } from "./members-admin/members-admin.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
 import { MembershipPlanService } from './services/membership-plan.service';
+import { MembersDetailComponent } from './members-detail/members-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MembershipPlanService } from './services/membership-plan.service';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    MembersAdminComponent
+    MembersAdminComponent,
+    MembersDetailComponent
   ],
   imports: [
     AdminRoutingModule,
