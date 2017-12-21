@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import {Http, Headers, Response} from "@angular/http";
-import {Observable} from "rxjs/Rx";
-import {AuthService} from "../../shared/services/auth.service";
-import {environment} from "../../../environments/environment";
-import { Subject } from 'rxjs/Subject';
+import { Http, Headers, Response } from "@angular/http";
+import { Observable } from "rxjs/Rx";
+import { AuthService } from "../../shared/services/auth.service";
+import { environment } from "../../../environments/environment";
+import { Subject } from "rxjs/Subject";
 // import {Analyst} from "../models/provider.model";
 
 @Injectable()

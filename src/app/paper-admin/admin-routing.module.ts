@@ -12,6 +12,7 @@ import { NgModule } from "@angular/core";
 import { AdminComponent } from "./admin.component";
 import { MembersAdminComponent } from "./members-admin/members-admin.component";
 import { MembersDetailComponent } from "app/paper-admin/members-detail/members-detail.component";
+import { MembersLoadedResolver } from "./services/members-loaded-resolver.service";
 
 export const routes: Routes = [
   {
@@ -36,7 +37,8 @@ export const routes: Routes = [
           },
           {
             path: ":id",
-            component: MembersDetailComponent
+            component: MembersDetailComponent,
+            resolve: { member: MembersLoadedResolver }
           }
         ]
       },

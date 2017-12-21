@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Data, Params } from '@angular/router';
 import { AdminDashboardService } from '../services/admin-dashboard.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -10,29 +10,16 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MembersDetailComponent implements OnInit {
   private id: string;
-  private member: Object;
+  private member;
   private memberSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private adminDashboardService: AdminDashboardService) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params["id"];
+    this.route.data.subscribe((data: Data) => {
+      this.member = data.member;
     });
 
-    const allMembers = this.adminDashboardService.allMembers;
-
-    if (Object.keys(allMembers).length !== 0) {
-      this.member = allMembers[this.id];
-      console.log(this.member);
-    } else {
-      this.memberSubscription = this.adminDashboardService.allMembersUpdated
-        .subscribe(
-          (membersUpdated) => {
-            this.member = allMembers[this.id];
-            console.log(this.member);
-          }
-        );
-    }
+    console.log(this.member);
   }
 }

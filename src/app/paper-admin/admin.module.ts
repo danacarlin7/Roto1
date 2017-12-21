@@ -21,6 +21,7 @@ import { MembersAdminComponent } from "./members-admin/members-admin.component";
 import { AdminDashboardService } from "./services/admin-dashboard.service";
 import { MembershipPlanService } from './services/membership-plan.service';
 import { MembersDetailComponent } from './members-detail/members-detail.component';
+import { MembersLoadedResolver } from './services/members-loaded-resolver.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { MembersDetailComponent } from './members-detail/members-detail.componen
   ],
   providers: [
     AdminDashboardService,
-    MembershipPlanService
+    MembershipPlanService,
+    MembersLoadedResolver
   ],
 })
 export class AdminModule { }
