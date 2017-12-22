@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Params } from '@angular/router';
 import { AdminDashboardService } from '../services/admin-dashboard.service';
 import { Subscription } from 'rxjs/Subscription';
-import moment = require('moment');
+import * as moment from "moment";
 
 @Component({
   selector: 'app-members-detail',
@@ -11,9 +11,9 @@ import moment = require('moment');
 })
 export class MembersDetailComponent implements OnInit {
   private id: string;
-  private member;
-  private memberKeys;
-  private stripeCharges;
+  public member;
+  public memberKeys;
+  public stripeCharges;
 
   constructor(private route: ActivatedRoute, private adminDashboardService: AdminDashboardService) { }
 

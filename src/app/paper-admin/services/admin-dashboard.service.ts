@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { AuthService } from "../../shared/services/auth.service";
 import { environment } from "../../../environments/environment";
 import { Subject } from "rxjs/Subject";
-import moment = require('moment');
+import * as moment from "moment";
 // import {Analyst} from "../models/provider.model";
 
 @Injectable()
