@@ -4,6 +4,7 @@ import { Observable } from "rxjs/Rx";
 import { AuthService } from "../../shared/services/auth.service";
 import { environment } from "../../../environments/environment";
 import { Subject } from "rxjs/Subject";
+import moment = require('moment');
 // import {Analyst} from "../models/provider.model";
 
 @Injectable()
@@ -18,7 +19,15 @@ export class AdminDashboardService {
     this.getMembers().subscribe(
       members => {
         members.data.forEach((member) => {
-          member.name = `${member.first_name} ${member.last_name}`;
+
+          if (member.last_active) {
+            member.last_active = moment(member.last_active).format("MMM D YYYY");
+          } else {
+            member.last_active = null;
+          }
+          member.full_name = `${member.first_name} ${member.last_name}`;
+          member.created_at = moment(member.created_at).format("MMM D YYYY");
+
           this.allMembers[member._id] = member;
         });
         this.allMembersUpdated.next(true);
@@ -60,6 +69,15 @@ export class AdminDashboardService {
 
   getMembers() {
     return this.http.get(environment.api_end_point + "api/getMembers", {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+  getChargesByMember(id: string) {
+    return this.http.get(environment.api_end_point + `api/getChargesByMember/${id}`, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.handleError(error.json());

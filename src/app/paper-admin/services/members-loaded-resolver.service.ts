@@ -18,7 +18,6 @@ export class MembersLoadedResolver implements Resolve<Object> {
       return this.adminDashboardService.allMembersUpdated
         .map(
           (membersUpdated) => {
-            console.log(allMembers[id]);
             return allMembers[id];
           }
         ).first();

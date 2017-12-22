@@ -62,20 +62,14 @@ export class MembersAdminComponent implements OnInit {
   setUpData() {
     const allMembers = this.adminDashboardService.allMembers;
 
+    // Get all values from allMembers in an array
     this.allMembers = Object.keys(allMembers).map(key => allMembers[key]).map(member => {
-      let last_active = null;
-
-      const created_at = moment(member.created_at).format("MMM D YYYY");
-      if (member.last_active) {
-        last_active = moment(member.last_active).format("MMM D YYYY");
-      }
-
       return {
-        name: member.name,
+        name: member.full_name,
         email: member.email,
         isSubscribe: member.is_subscribe,
-        createdAt: created_at,
-        lastSubscription: last_active,
+        createdAt: member.created_at,
+        lastSubscription: member.last_active,
         id: member._id,
         subscriptions: member.subscriptions.filter(subscription => subscription.is_plan_active === true)
       };
