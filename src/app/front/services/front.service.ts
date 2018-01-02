@@ -27,7 +27,6 @@ export class FrontService {
   }
 
   retrieveNews(sportType:string, timePeriod:string = '30days'): Observable<any> {
-    console.log('hi1');
     return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
@@ -37,7 +36,6 @@ export class FrontService {
   }
 
   retrieveHomepageNews(): Observable<any> {
-    console.log('hi2');
     return this.http.get(environment.api_end_point + 'fetchLatestNews?count=10', {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
@@ -100,8 +98,9 @@ export class FrontService {
       });
   }
 
-  subscribePlan(token, plan_id): Observable<any> {
-    return this.http.post(environment.api_end_point + 'api/subscribe', {token, plan_id}, {headers: this.getHeaders()})
+  subscribePlan(token, plan_id, coupon = ""): Observable<any> {
+    console.log(coupon);
+    return this.http.post(environment.api_end_point + 'api/subscribe', {token, plan_id, coupon}, {headers: this.getHeaders()})
       .map((response: Response) => response.json());
   }
 

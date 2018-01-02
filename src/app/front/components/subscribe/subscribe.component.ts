@@ -25,11 +25,13 @@ import {environment} from "../../../../environments/environment";
 })
 export class SubscribeComponent implements OnInit {
 
-  plans:Array<any> = [];
+  plans: Array<any> = [];
   selectedPlan;
   userData;
+  params = {};
+  coupon = "";
 
-  isLoading:boolean;
+  isLoading: boolean;
 
   unsubscribeOption = "at_period_end";
 
@@ -61,7 +63,6 @@ export class SubscribeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('memberspace status: ' + this.authService.loggedUser.is_memberspace);
     this.isLoading = true;
     this.frontService.getSubscribePlans().subscribe(
       response => {
@@ -107,6 +108,13 @@ export class SubscribeComponent implements OnInit {
             }
           }
         }
+
+        console.log('hiya');
+        console.log(this.route.snapshot.params);
+        if (this.route.snapshot.params["coupon"]) {
+          this.params = this.route.snapshot.params;
+          this.coupon = this.route.snapshot.params["coupon"];
+        }
       }
     );
   }
@@ -122,7 +130,7 @@ export class SubscribeComponent implements OnInit {
           // You can access the token ID with `token.id`.
           // Get the token ID to your server-side code for use.
           console.log("token call back => ", token);
-          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id)
+          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
             .subscribe(
               response => {
                 if (response.statusCode == 200) {
