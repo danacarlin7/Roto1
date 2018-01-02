@@ -13,6 +13,7 @@ import { AdminComponent } from "./admin.component";
 import { MembersAdminComponent } from "./members-admin/members-admin.component";
 import { MembersDetailComponent } from "app/paper-admin/members-detail/members-detail.component";
 import { MembersLoadedResolver } from "./services/members-loaded-resolver.service";
+import { PromotionsComponent } from './promotions/promotions.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,10 @@ export const routes: Routes = [
             resolve: { member: MembersLoadedResolver }
           }
         ]
+      },
+      {
+        path: "promotions",
+        component: PromotionsComponent
       },
       {
         path: "user",

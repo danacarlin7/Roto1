@@ -77,6 +77,7 @@ export class AdminDashboardService {
   }
 
   getChargesByMember(id: string) {
+    console.log(id);
     return this.http.get(environment.api_end_point + `api/getChargesByMember/${id}`, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
