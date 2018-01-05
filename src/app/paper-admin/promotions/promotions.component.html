@@ -45,7 +45,7 @@
           <label for="forever">Repeating</label>
         </div>
         <div *ngIf="duration === 'repeating'">
-          <label>Number of Months Repeating</label>
+          <label>Duration In Months</label>
           <input ngModel type="number" name="durationInMonths" class="form-control" required>
         </div>
       </div>
@@ -74,6 +74,10 @@
       <div class="form-group" id="url">
         <label>Coupon URL</label>
         <input type="text" class="form-control" readonly [value]="url">
+      </div>
+      <div class="form-group" id="testUrl">
+        <label>Coupon URL (Beta)</label>
+        <input type="text" class="form-control" readonly [value]="testUrl">
       </div>
     </div>
   </form>

@@ -110,7 +110,6 @@ export class SubscribeComponent implements OnInit {
         }
 
         if (this.route.snapshot.params["id"]) {
-          console.log('hi');
           this.params = this.route.snapshot.params;
           this.coupon = this.route.snapshot.params["id"];
         }

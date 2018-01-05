@@ -14,6 +14,7 @@ export class PromotionsComponent implements OnInit {
   duration = "once";
   endCriteria = "redeem-by";
   url = "";
+  testUrl = "";
 
   constructor(private adminDashboardService: AdminDashboardService) { }
 
@@ -38,6 +39,7 @@ export class PromotionsComponent implements OnInit {
       response => {
         console.log(response);
         this.url = `https://www.rotopros.com/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
+        this.testUrl = `https://13.57.84.196/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
       }
     );
 
