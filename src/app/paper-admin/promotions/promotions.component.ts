@@ -13,6 +13,7 @@ export class PromotionsComponent implements OnInit {
   couponType = "percentage";
   duration = "once";
   endCriteria = "redeem-by";
+  url = "";
 
   constructor(private adminDashboardService: AdminDashboardService) { }
 
@@ -36,6 +37,7 @@ export class PromotionsComponent implements OnInit {
     this.adminDashboardService.createCoupon(coupon).subscribe(
       response => {
         console.log(response);
+        this.url = `https://www.rotopros.com/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
       }
     );
 

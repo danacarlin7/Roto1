@@ -40,11 +40,11 @@
                   <div class="rp-plan" *ngFor="let plan of plans">
                     <div class="plan-name">{{plan.name}}</div>
                     <div class="plan-price">
-                      <span *ngIf="params.plan_name && params.plan_name === plan.plan_id">
+                      <span *ngIf="params.id">
                         <span class="discount-text" *ngIf="params.discount_type === 'flat'">{{(plan.amount / 100) - params.discount_rate | currency:'USD':true}}</span>
                         <span class="discount-text" *ngIf="params.discount_type === 'percentage'">{{(plan.amount / 100) * (1 - (params.discount_rate / 100)) | currency:'USD':true}}</span>
                       </span>
-                      <span *ngIf="!params.plan_name || params.plan_name !== plan.plan_id">
+                      <span *ngIf="!params.id">
                         <span>{{(plan.amount / 100) | currency:'USD':true}}</span>
                       </span>
                     </div>
