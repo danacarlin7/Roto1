@@ -268,7 +268,7 @@ export class AdminDashboardService {
   }
 
   createCoupon(coupon: Coupon) {
-    return this.http.post(environment.api_end_point + "api/provider", JSON.stringify(coupon), {headers: this.getHeaders()})
+    return this.http.post(environment.api_end_point + "api/coupons", JSON.stringify(coupon), {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.handleError(error.json());

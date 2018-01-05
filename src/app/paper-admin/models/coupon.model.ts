@@ -1,11 +1,11 @@
 export class Coupon {
   public id: string;
   public duration: string;
-  public amount_off: number;
-  public percent_off: number;
-  public redeem_by: Date;
-  public max_redemptions: number;
-  public duration_in_months: number;
+  public duration_in_months?: number;
+  public amount_off?: number;
+  public percent_off?: number;
+  public redeem_by?: Date;
+  public max_redemptions?: number;
 
   constructor(coupon: Object) {
     this.id = coupon["id"];

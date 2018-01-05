@@ -21,9 +21,6 @@ export class PromotionsComponent implements OnInit {
 
   onSubmit() {
     const values = this.couponForm.value;
-    console.log(this.couponForm.value);
-    console.log(this.couponType);
-
     let coupon = { id: values["id"], duration: values["duration"]};
 
     if (this.duration === "repeating") coupon["duration_in_months"] = values["durationInMonths"];
@@ -35,7 +32,12 @@ export class PromotionsComponent implements OnInit {
       : coupon["max_redemptions"] = values["MaxRedemptions"];
 
     coupon = new Coupon(coupon);
-    console.log(coupon);
+
+    this.adminDashboardService.createCoupon(coupon).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
 
 
   }
