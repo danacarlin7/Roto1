@@ -1,5 +1,5 @@
 <div class="card">
-  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <form (ngSubmit)="onSubmit()" #f="ngForm">
     <div class="card-header">
       <h4 class="card-title">
         Create New Coupon
@@ -12,21 +12,21 @@
       </div>
       <div class="form-group">
         <div class="radio">
-          <input [(ngModel)]="couponType" type="radio" name="discount-type" [value]="'percentage'" id="percentage">
+          <input [(ngModel)]="couponType" type="radio" name="discountType" [value]="'percentage'" id="percentage">
           <label for="percentage">Percentage</label>
         </div>
         <div class="radio">
-          <input [(ngModel)]="couponType" type="radio" name="discount-type" [value]="'flat'" id="flat">
+          <input [(ngModel)]="couponType" type="radio" name="discountType" [value]="'flat'" id="flat">
           <label for="flat">Flat</label>
         </div>
       </div>
       <div class="form-group">
         <label>Discount Rate</label>
         <span *ngIf="couponType === 'percentage'">
-          %<input ngModel type="number" placeholder="Enter Percentage Off As Whole Number" name="discount_rate" class="form-control" required>
+          %<input ngModel type="number" placeholder="Enter Percentage Off As Whole Number" name="discountRate" class="form-control" required>
         </span>
         <span *ngIf="couponType === 'flat'">
-          $<input ngModel type="number" placeholder="Enter Amount Off In USD" name="discount_rate" class="form-control" required>
+          $<input ngModel type="number" placeholder="Enter Amount Off In USD" name="discountRate" class="form-control" required>
         </span>
       </div>
       <div class="form-group">
@@ -46,7 +46,7 @@
         </div>
         <div *ngIf="duration === 'repeating'">
           <label>Number of Months Repeating</label>
-          <input ngModel type="number" name="repeating-months" class="form-control">
+          <input ngModel type="number" name="durationInMonths" class="form-control" required>
         </div>
       </div>
       <div class="form-group">
@@ -61,28 +61,16 @@
         </div>
         <div *ngIf="endCriteria === 'redeem-by'">
           <label>Redeem By</label>
-          <input ngModel type="date" name="end-date" class="form-control">
+          <input ngModel type="date" name="endDate" class="form-control" required>
         </div>
         <div *ngIf="endCriteria === 'max-redemptions'">
           <label>Max Redemptions</label>
-          <input ngModel type="number" name="max-redemptions" class="form-control">
+          <input ngModel type="number" name="maxRedemptions" class="form-control" required>
         </div>
       </div>
       <div class="form-group">
-        <input type="submit" class="btn btn-fill btn-info">
+        <input type="submit" [disabled]="!f.valid" class="btn btn-fill btn-info">
       </div>
-        <!--<div class="form-group">-->
-          <!--<label>Amount</label>-->
-          <!--<input type="password" placeholder="Password" class="form-control">-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-          <!--<div class="checkbox">-->
-              <!--<input id="checkbox01" type="checkbox">-->
-              <!--<label for="checkbox01">-->
-                  <!--Subscribe to newsletter-->
-              <!--</label>-->
-          <!--</div>-->
-        <!--</div>-->
     </div>
   </form>
 </div>

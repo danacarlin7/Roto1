@@ -1,24 +1,43 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Coupon } from "../models/coupon.model";
+import { NgForm } from "@angular/forms";
+import { AdminDashboardService } from "../services/admin-dashboard.service";
 
 @Component({
-  selector: 'app-promotions',
-  templateUrl: './promotions.component.html',
-  styleUrls: ['./promotions.component.css']
+  selector: "app-promotions",
+  templateUrl: "./promotions.component.html",
+  styleUrls: ["./promotions.component.css"]
 })
 export class PromotionsComponent implements OnInit {
+  @ViewChild("f") couponForm: NgForm;
   couponType = "percentage";
   duration = "once";
   endCriteria = "redeem-by";
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private adminDashboardService: AdminDashboardService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
-    console.log(form);
+  onSubmit() {
+    const values = this.couponForm.value;
+    console.log(this.couponForm.value);
     console.log(this.couponType);
+
+    let coupon = { id: values["id"], duration: values["duration"]};
+
+    if (this.duration === "repeating") coupon["duration_in_months"] = values["durationInMonths"];
+    this.couponType === "flat"
+      ? coupon["amount_off"] = values["discountRate"]
+      : coupon["percent_off"] = values["discountRate"];
+    this.endCriteria === "redeem-by"
+      ? coupon["redeem_by"] = values["endDate"]
+      : coupon["max_redemptions"] = values["MaxRedemptions"];
+
+    coupon = new Coupon(coupon);
+    console.log(coupon);
+
+
   }
 
 }

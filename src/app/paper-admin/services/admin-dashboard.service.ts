@@ -5,6 +5,8 @@ import { AuthService } from "../../shared/services/auth.service";
 import { environment } from "../../../environments/environment";
 import { Subject } from "rxjs/Subject";
 import * as moment from "moment";
+
+import { Coupon } from "../models/coupon.model";
 // import {Analyst} from "../models/provider.model";
 
 @Injectable()
@@ -263,6 +265,15 @@ export class AdminDashboardService {
     link.setAttribute("href", data);
     link.setAttribute("download", filename);
     link.click();
+  }
+
+  createCoupon(coupon: Coupon) {
+    return this.http.post(environment.api_end_point + "api/provider", JSON.stringify(coupon), {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handleError(error.json());
+        return Observable.throw(error.json())
+      });
   }
 
   handleError(error:any) {
