@@ -39,7 +39,15 @@
                   </div>
                   <div class="rp-plan" *ngFor="let plan of plans">
                     <div class="plan-name">{{plan.name}}</div>
-                    <div class="plan-price">{{(plan.amount / 100) | currency:'USD':true}}</div>
+                    <div class="plan-price">
+                      <span *ngIf="params.id">
+                        <span class="discount-text" *ngIf="params.discount_type === 'flat'">{{(plan.amount / 100) - params.discount_rate | currency:'USD':true}}</span>
+                        <span class="discount-text" *ngIf="params.discount_type === 'percentage'">{{(plan.amount / 100) * (1 - (params.discount_rate / 100)) | currency:'USD':true}}</span>
+                      </span>
+                      <span *ngIf="!params.id">
+                        <span>{{(plan.amount / 100) | currency:'USD':true}}</span>
+                      </span>
+                    </div>
                     <div class="plan-time">{{'/'+plan.interval_count+' '+plan.interval}}</div>
                     <div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>
                     <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe

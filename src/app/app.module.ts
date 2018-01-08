@@ -8,7 +8,7 @@ import {AppComponent} from './app.component';
 import {SharedModule} from "./shared/shared.module";
 import {FrontModule} from "./front/front.module";
 import {UserModule} from "./user/user.module";
-import {AdminModule} from "./admin/admin.module";
+import {AdminModule} from "./new-admin/admin.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AuthService} from "./shared/services/auth.service";
 import {environment} from "../environments/environment";

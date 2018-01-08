@@ -25,11 +25,13 @@ import {environment} from "../../../../environments/environment";
 })
 export class SubscribeComponent implements OnInit {
 
-  plans:Array<any> = [];
+  plans: Array<any> = [];
   selectedPlan;
   userData;
+  params = {};
+  coupon = "";
 
-  isLoading:boolean;
+  isLoading: boolean;
 
   unsubscribeOption = "at_period_end";
 
@@ -61,51 +63,55 @@ export class SubscribeComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('memberspace status: ' + this.authService.loggedUser.is_memberspace);
     this.isLoading = true;
     this.frontService.getSubscribePlans().subscribe(
       response => {
         this.isLoading = false;
         if (this.authService.loggedUser) {
           if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user') {
-            for (let i = 0; response.data && response.data.length; i++) {
+            for (let i = 0; response.data && i < response.data.length; i++) {
               if (response.data[i].group == 'all_access' || response.data[i].group == 'dfsportsgods') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
-            console.log(2);
-            for (let i = 0; response.data && response.data.length; i++) {
+            for (let i = 0; response.data && i < response.data.length; i++) {
               if (response.data[i].group == 'dfsportsgods') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user') {
-            for (let i = 0; response.data && response.data.length; i++) {
+            for (let i = 0; response.data && i < response.data.length; i++) {
+              console.log(response.data[i]);
+              console.log(response.data.length);
               if (response.data[i].group == 'all_access' || response.data[i].group == 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
-            // for (let i = 0; response.data && response.data.length; i++) {
-            for (let i = 0; i < response.data.length; i++) {
+            for (let i = 0; response.data && i < response.data.length; i++) {
               if (response.data[i].group === 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           } else {
-            for (let i = 0; response.data && response.data.length; i++) {
+            for (let i = 0; response.data && i < response.data.length; i++) {
               if (response.data[i].group == 'rotopros') {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           }
         } else {
-          for (let i = 0; response.data && response.data.length; i++) {
+          for (let i = 0; response.data && i < response.data.length; i++) {
             if (response.data[i].group == 'rotopros') {
               this.plans = this.plans.concat(response.data[i].data);
             }
           }
+        }
+
+        if (this.route.snapshot.params["id"]) {
+          this.params = this.route.snapshot.params;
+          this.coupon = this.route.snapshot.params["id"];
         }
       }
     );
@@ -122,7 +128,7 @@ export class SubscribeComponent implements OnInit {
           // You can access the token ID with `token.id`.
           // Get the token ID to your server-side code for use.
           console.log("token call back => ", token);
-          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id)
+          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
             .subscribe(
               response => {
                 if (response.statusCode == 200) {

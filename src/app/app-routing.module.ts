@@ -3,18 +3,26 @@ import {Routes, RouterModule, Route, Data} from '@angular/router';
 import {AppComponent} from "./app.component";
 
 const routes:Routes = [
-  <Route>{
+  {
     path: '',
     loadChildren: 'app/front/front.module#FrontModule'
   },
-  <Route>{
+  {
     path: 'user',
     loadChildren: 'app/user/user.module#UserModule'
   },
-  <Route>{
+  // {
+  //   path: 'admin',
+  //   loadChildren: 'app/old-admin/admin.module#AdminModule'
+  // },
+  {
     path: 'admin',
-    loadChildren: 'app/admin/admin.module#AdminModule'
-  }
+    loadChildren: 'app/new-admin/admin.module#AdminModule'
+  },
+  // {
+  //   path: 'proadmin',
+  //   loadChildren: 'app/proAdmin/admin.module#AdminModule'
+  // },
 ];
 
 @NgModule({
