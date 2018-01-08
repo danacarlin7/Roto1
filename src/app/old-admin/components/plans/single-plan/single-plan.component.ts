@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {MembershipPlan} from "../../../../admin/models/plan.model";
+import {MembershipPlan} from "../../../models/plan.model";
 /**
  * Created by Hiren on 24-05-2017.
  */

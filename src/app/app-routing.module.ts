@@ -13,11 +13,11 @@ const routes:Routes = [
   },
   // {
   //   path: 'admin',
-  //   loadChildren: 'app/admin/admin.module#AdminModule'
+  //   loadChildren: 'app/old-admin/admin.module#AdminModule'
   // },
   {
     path: 'admin',
-    loadChildren: 'app/paper-admin/admin.module#AdminModule'
+    loadChildren: 'app/new-admin/admin.module#AdminModule'
   },
   // {
   //   path: 'proadmin',

@@ -2,9 +2,9 @@ import {Component} from "@angular/core";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {PlanTypeConstants, ExpirationTypeConstant, TimeRangeConstant, SpacificTime} from "../plan-constants";
 import {Router} from "@angular/router";
-import {MembershipPlan} from "../../../../admin/models/plan.model";
+import {MembershipPlan} from "../../../models/plan.model";
 import * as moment from 'moment';
-import {MembershipPlanService} from "../../../../admin/services/membership-plan.service";
+import {MembershipPlanService} from "../../../services/membership-plan.service";
 /**
  * Created by Hiren on 25-05-2017.
  */

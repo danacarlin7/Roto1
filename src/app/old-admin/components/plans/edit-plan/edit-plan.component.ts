@@ -1,9 +1,9 @@
 import {Component, Input} from "@angular/core";
 import {selector} from "rxjs/operator/multicast";
-import {MembershipPlanService} from "../../../../admin/services/membership-plan.service";
+import {MembershipPlanService} from "../../../services/membership-plan.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {PlanTypeConstants, ExpirationTypeConstant, TimeRangeConstant, SpacificTime} from "../plan-constants";
-import {MembershipPlan} from "../../../../admin/models/plan.model";
+import {MembershipPlan} from "../../../models/plan.model";
 import {Router} from "@angular/router";
 import * as moment from 'moment';
 

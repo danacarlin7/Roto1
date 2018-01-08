@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {MdDialog, MdDialogRef} from "@angular/material";
-import {MembershipPlan} from "../../../../admin/models/plan.model";
+import {MembershipPlan} from "../../../models/plan.model";
 /**
  * Created by Hiren on 26-05-2017.
  */
