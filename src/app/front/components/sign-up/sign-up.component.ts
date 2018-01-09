@@ -113,7 +113,7 @@ export class SignUpComponent {
     const data = {
       user_name: formValue.userName,
       phone_number: formValue.phone,
-      email: formValue.email,
+      email: formValue.email.toLowerCase(),
       password: formValue.password,
       first_name: formValue.fName,
       last_name: formValue.lName

@@ -100,7 +100,7 @@ export class LoginComponent {
 
   onSignInBtnClick() {
     let data = {
-      email: this.loginForm.value.email,
+      email: this.loginForm.value.email.toLowerCase(),
       password: this.loginForm.value.password
     };
     this.authService.login(JSON.stringify(data)).subscribe(
