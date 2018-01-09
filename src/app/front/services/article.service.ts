@@ -7,8 +7,8 @@ import {Router} from '@angular/router';
 @Injectable()
 export class ArticleService {
 
-  provider:string = "http://13.56.129.231/wp-json/wp/v2/";
-  customProvider:string = "http://13.56.129.231/dfspostmeta/get/";
+  provider:string = "https://wordpress.rotopros.com/wp-json/wp/v2/";
+  customProvider:string = "https://wordpress.rotopros.com/dfspostmeta/get/";
 
   constructor(private http:Http, private router:Router) {
   }
