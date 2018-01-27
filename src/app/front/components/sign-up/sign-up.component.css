@@ -7,3 +7,22 @@
 .signup-video {
   margin: 35px 0 20px 0;
 }
+
+.fade {
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: height 250ms linear, opacity 500ms linear;
+}
+
+.fade > span {
+  padding: 5px;
+  display: inline-block;
+}
+
+.fade.in {
+  opacity: 1;
+  height: 27px;
+  transition: height 250ms linear, opacity 500ms linear;
+}

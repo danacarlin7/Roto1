@@ -106,7 +106,12 @@ export class LoginComponent {
     this.authService.login(JSON.stringify(data)).subscribe(
       response => {
         if (response.statusCode == 200) {
+          if(response.data.is_partial){
+            this.router.navigate(['/subscribe'],{queryParams:{token:response.data.token,nextStep:true}});
+            return;
+          }
           console.log("login successful => ", response);
+          debugger;
           if (this.loginForm.value.rememberMe) {
             localStorage.setItem('remember', '1');
           }
@@ -163,7 +168,8 @@ export class LoginComponent {
           } else if (response.data.role == 'user' || response.data.role == 'provider') {
             this.router.navigate(['/']);
           }
-        } else {
+        } else
+          {
           console.log("login error from response => ", response);
         }
       },

@@ -40,7 +40,7 @@ export class SignUpComponent {
       email: new FormControl('', [Validators.required, this.mailFormat]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      tnc: new FormControl('', Validators.required)
+      tnc: new FormControl('')
     }, this.passwordValidator)
   }
 
@@ -51,8 +51,6 @@ export class SignUpComponent {
 
   onTxtUserNameBlur() {
     if (this.username == this.signUpForm.value['userName']) {
-      console.log('usrname => ', this.username);
-      console.log('usrname2 => ', this.signUpForm.value['userName']);
       return;
     }
     this.username = this.signUpForm.value['userName'];
@@ -112,28 +110,26 @@ export class SignUpComponent {
     const formValue = this.signUpForm.value;
     const data = {
       user_name: formValue.userName,
-      phone_number: formValue.phone,
       email: formValue.email.toLowerCase(),
       password: formValue.password,
       first_name: formValue.fName,
       last_name: formValue.lName
     };
-    console.log(data);
-
-    this.authService.registerNewUser(data)
+    this.authService.signUPStepOne(data)
       .subscribe(
         response => {
           if (response.statusCode == 200) {
             console.log('sign up successful => ', response);
-            this.authService.registerWP(JSON.stringify(data)).subscribe(
+            /*this.authService.registerWP(JSON.stringify(data)).subscribe(
               success => {
                 console.log('WP user registered.');
               },
               error => {
                 console.log('WP Error => ', error);
               }
-            );
-            this.router.navigate(['/login'],{queryParams:{info:'signup_success'}});
+            );*/
+            let token = response.data.token;
+            this.router.navigate(['/subscribe'],{queryParams:{info:'signup_success',token:token}});
           }
         },
         error => {

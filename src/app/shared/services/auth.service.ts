@@ -128,6 +128,12 @@ export class AuthService {
       .catch(error => Observable.throw(error.json()))
   }
 
+  signUPStepOne(data:any):Observable<any>{
+    return this.http.post(environment.api_end_point + 'signupOne', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()))
+  }
+
   verifyEmail(data:any) {
     return this.http.post(environment.api_end_point + 'getToken', data)
       .map(res => res.json())
