@@ -128,8 +128,8 @@ export class SignUpComponent {
                 console.log('WP Error => ', error);
               }
             );*/
-            let token = response.data.token;
-            this.router.navigate(['/subscribe'],{queryParams:{info:'signup_success',token:token}});
+            this.authService.partialUser = response.data;
+            this.router.navigate(['/subscribe']);
           }
         },
         error => {

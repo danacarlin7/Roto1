@@ -30,9 +30,10 @@ export class SubscribeComponent implements OnInit {
   userData;
   params = {};
   coupon = "";
-  token = "";
+  userToken = "";
+  email = "";
   isLoading: boolean;
-  showPartialSignUpMsg:boolean;
+  showPartialSignUpMsg: boolean;
 
   unsubscribeOption = "at_period_end";
 
@@ -56,20 +57,17 @@ export class SubscribeComponent implements OnInit {
             console.log("response from subscription in front-header.component");
             if (response.statusCode == 200) {
               this.userData = response.data;
+              this.email = this.userData.email;
               this.authService.loggedUser = this.userData;
             }
           }
         );
     }
-    this.route.queryParams.subscribe(
-      (param: Params) => {
-        this.token = param["token"];
-        console.log("new token => ", this.token);
-
-        if(param.hasOwnProperty('nextStep') && param['nextStep'] == "true"){
-          this.showPartialSignUpMsg = true;
-        }
-      });
+    if (this.authService.partialUser) {
+      this.showPartialSignUpMsg = true;
+      this.userToken = this.authService.partialUser.token;
+      this.email = this.authService.partialUser.email;
+    }
   }
 
   ngOnInit() {
@@ -130,7 +128,7 @@ export class SubscribeComponent implements OnInit {
   onBtnSubscribeClick(plan) {
     this.selectedPlan = plan;
     localStorage.setItem("selectedPlan", plan.plan_id);
-    if (this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn() || this.userToken.length) {
       var handler = (<any>window).StripeCheckout.configure({
         key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
         locale: "auto",
@@ -138,28 +136,53 @@ export class SubscribeComponent implements OnInit {
           // You can access the token ID with `token.id`.
           // Get the token ID to your server-side code for use.
           console.log("token call back => ", token);
-          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
-            .subscribe(
-              response => {
-                if (response.statusCode == 200) {
-                  console.log("subscribePlan Success => ", response.data);
+          if(this.authService.isLoggedIn()){
+            this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
+              .subscribe(
+                response => {
+                  if (response.statusCode == 200) {
+                    console.log("subscribePlan Success => ", response.data);
 
-                  this.authService.retrieveLoggedUserInfo()
-                    .subscribe(
-                      response => {
-                        if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                      },
-                      error => {
-                        console.log("http error => ", error);
-                      }
-                    );
+                    this.authService.retrieveLoggedUserInfo()
+                      .subscribe(
+                        response => {
+                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                        },
+                        error => {
+                          console.log("http error => ", error);
+                        }
+                      );
 
-                  this.router.navigate([
-                    "/homeRedirect",
-                    {redirected: true, redirectMessage: "You Have Successfully Been Subscribed!"}]);
+                    this.router.navigate([
+                      "/homeRedirect",
+                      {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
+                  }
                 }
-              }
-            );
+              );
+          }else{
+            this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
+              .subscribe(
+                response => {
+                  if (response.statusCode == 200) {
+                    console.log("subscribePlan Success => ", response.data);
+
+                    this.authService.retrieveLoggedUserInfo()
+                      .subscribe(
+                        response => {
+                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                        },
+                        error => {
+                          console.log("http error => ", error);
+                        }
+                      );
+
+                    this.router.navigate([
+                      "/homeRedirect",
+                      {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
+                  }
+                }
+              );
+          }
         }
       });
 
@@ -167,7 +190,7 @@ export class SubscribeComponent implements OnInit {
         name: this.selectedPlan.name,
         description: this.selectedPlan.interval != "day" ? this.period_text[this.selectedPlan.interval] : "Every " + this.selectedPlan.interval_count + " days",
         amount: this.selectedPlan.amount,
-        email: this.userData.email
+        email: this.email
       });
     } else {
       this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});

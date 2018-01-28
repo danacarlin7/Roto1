@@ -27,6 +27,8 @@ export class AuthService {
 
   loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
+  partialUser:any;
+
   constructor(private http: Http) {
 
   }

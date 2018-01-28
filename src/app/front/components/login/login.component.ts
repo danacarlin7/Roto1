@@ -107,7 +107,8 @@ export class LoginComponent {
       response => {
         if (response.statusCode == 200) {
           if(response.data.is_partial){
-            this.router.navigate(['/subscribe'],{queryParams:{token:response.data.token,nextStep:true}});
+            this.authService.partialUser = response.data;
+            this.router.navigate(['/subscribe']);
             return;
           }
           console.log("login successful => ", response);
