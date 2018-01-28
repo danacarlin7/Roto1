@@ -11,18 +11,10 @@ const routes:Routes = [
     path: 'user',
     loadChildren: 'app/user/user.module#UserModule'
   },
-  // {
-  //   path: 'admin',
-  //   loadChildren: 'app/old-admin/admin.module#AdminModule'
-  // },
   {
     path: 'admin',
     loadChildren: 'app/new-admin/admin.module#AdminModule'
-  },
-  // {
-  //   path: 'proadmin',
-  //   loadChildren: 'app/proAdmin/admin.module#AdminModule'
-  // },
+  }
 ];
 
 @NgModule({

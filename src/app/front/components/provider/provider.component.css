@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:300,400,600,700');
 .lineups-container {
     max-height: 954px;
     overflow-y: auto;
@@ -21,7 +22,6 @@
     Nihad Suljic Style
     Date: 6/11/2017
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:300,400,600,700');
 
 /* Typography */
 a, a:hover, a:focus {
@@ -164,7 +164,7 @@ th>.glyphicon {
 }
 
 td.td-team {
-    padding: 0px !important ; 
+    padding: 0px !important ;
 }
 
 td .pagination {
@@ -195,8 +195,8 @@ td .pagination {
     vertical-align: middle !important ;
 }
 
-.table.df-table>thead>tr>th, .table.df-table>tbody>tr>th, 
-.table.df-table>tfoot>tr>th, .table.df-table>thead>tr>td, 
+.table.df-table>thead>tr>th, .table.df-table>tbody>tr>th,
+.table.df-table>tfoot>tr>th, .table.df-table>thead>tr>td,
 .table.df-table>tbody>tr>td, .table.df-table>tfoot>tr>td {
     padding: 21px 10px;
     vertical-align: middle ;
@@ -373,7 +373,7 @@ Tables
 Navigation Bar
 */
 .closeBtn {
-    display: none ;   
+    display: none ;
 }
 .header-first {
     background-color: #141414;
@@ -705,11 +705,11 @@ Modal
     padding: 8px 11px;
     color: #000;
 }
-.filter-table .pagination>li:last-child>a, .filter-table .pagination>li:last-child>span, 
+.filter-table .pagination>li:last-child>a, .filter-table .pagination>li:last-child>span,
 .filter-table .pagination>li:first-child>a, .filter-table .pagination>li:first-child>span {
     border-radius: 0px ;
 }
-.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, 
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span,
 .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: #eee;
     border-color: #ddd;

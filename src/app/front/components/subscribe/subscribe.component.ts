@@ -7,21 +7,21 @@ import {
   TemplateRef,
   ViewChild,
   NgModuleRef
-} from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
-import {Subscription} from 'rxjs';
-import {Overlay} from 'angular2-modal';
+} from "@angular/core";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {Overlay} from "angular2-modal";
 import {overlayConfigFactory} from "angular2-modal";
-import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
-import 'rxjs/Rx';
+import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
+import "rxjs/Rx";
 import {AuthService} from "../../../shared/services/auth.service";
 import {FrontService} from "../../services/front.service";
 import {environment} from "../../../../environments/environment";
 
 @Component({
-  selector: 'app-subscribe',
-  templateUrl: './subscribe.component.html',
-  styleUrls: ['./subscribe.component.css']
+  selector: "app-subscribe",
+  templateUrl: "./subscribe.component.html",
+  styleUrls: ["./subscribe.component.css"]
 })
 export class SubscribeComponent implements OnInit {
 
@@ -30,14 +30,16 @@ export class SubscribeComponent implements OnInit {
   userData;
   params = {};
   coupon = "";
-
+  userToken = "";
+  email = "";
   isLoading: boolean;
+  showPartialSignUpMsg: boolean;
 
   unsubscribeOption = "at_period_end";
 
-  period_text = {week: 'Weekly', month: 'Monthly', year: 'Yearly', annual: 'Annually'};
+  period_text = {week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually"};
 
-  @ViewChild('unsubscribeTemplateRef') public unsubscribeTemplateRef:TemplateRef<any>;
+  @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -52,13 +54,19 @@ export class SubscribeComponent implements OnInit {
       this.userData = this.authService.retrieveLoggedUserInfo()
         .subscribe(
           response => {
-            console.log('response from subscription in front-header.component');
+            console.log("response from subscription in front-header.component");
             if (response.statusCode == 200) {
               this.userData = response.data;
+              this.email = this.userData.email;
               this.authService.loggedUser = this.userData;
             }
           }
         );
+    }
+    if (this.authService.partialUser) {
+      this.showPartialSignUpMsg = true;
+      this.userToken = this.authService.partialUser.token;
+      this.email = this.authService.partialUser.email;
     }
   }
 
@@ -68,42 +76,42 @@ export class SubscribeComponent implements OnInit {
       response => {
         this.isLoading = false;
         if (this.authService.loggedUser) {
-          if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user') {
+          if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
             for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group == 'all_access' || response.data[i].group == 'dfsportsgods') {
+              if (response.data[i].group == "all_access" || response.data[i].group == "dfsportsgods") {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
+          } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == "user") {
             for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group == 'dfsportsgods') {
+              if (response.data[i].group == "dfsportsgods") {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != 'user') {
+          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
             for (let i = 0; response.data && i < response.data.length; i++) {
               console.log(response.data[i]);
               console.log(response.data.length);
-              if (response.data[i].group == 'all_access' || response.data[i].group == 'rotopros') {
+              if (response.data[i].group == "all_access" || response.data[i].group == "rotopros") {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
-          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == 'user') {
+          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == "user") {
             for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group === 'rotopros') {
+              if (response.data[i].group === "rotopros") {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           } else {
             for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group == 'rotopros') {
+              if (response.data[i].group == "rotopros") {
                 this.plans = this.plans.concat(response.data[i].data);
               }
             }
           }
         } else {
           for (let i = 0; response.data && i < response.data.length; i++) {
-            if (response.data[i].group == 'rotopros') {
+            if (response.data[i].group == "rotopros") {
               this.plans = this.plans.concat(response.data[i].data);
             }
           }
@@ -119,48 +127,73 @@ export class SubscribeComponent implements OnInit {
 
   onBtnSubscribeClick(plan) {
     this.selectedPlan = plan;
-    localStorage.setItem('selectedPlan', plan.plan_id);
-    if (this.authService.isLoggedIn()) {
+    localStorage.setItem("selectedPlan", plan.plan_id);
+    if (this.authService.isLoggedIn() || this.userToken.length) {
       var handler = (<any>window).StripeCheckout.configure({
-        key: environment.production ?  'pk_live_ot2q3JGgPLEfvia8StJWO0b7' : 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
-        locale: 'auto',
+        key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
+        locale: "auto",
         token: (token: any) => {
           // You can access the token ID with `token.id`.
           // Get the token ID to your server-side code for use.
           console.log("token call back => ", token);
-          this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
-            .subscribe(
-              response => {
-                if (response.statusCode == 200) {
-                  console.log("subscribePlan Success => ", response.data);
+          if(this.authService.isLoggedIn()){
+            this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
+              .subscribe(
+                response => {
+                  if (response.statusCode == 200) {
+                    console.log("subscribePlan Success => ", response.data);
 
-                  this.authService.retrieveLoggedUserInfo()
-                  .subscribe(
-                    response => {
-                      if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                    },
-                    error => {
-                      console.log("http error => ", error);
-                    }
-                  );
+                    this.authService.retrieveLoggedUserInfo()
+                      .subscribe(
+                        response => {
+                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                        },
+                        error => {
+                          console.log("http error => ", error);
+                        }
+                      );
 
-                  this.router.navigate([
-                    '/homeRedirect',
-                    { redirected: true, redirectMessage: "You Have Successfully Been Subscribed!" }]);
+                    this.router.navigate([
+                      "/homeRedirect",
+                      {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
+                  }
                 }
-              }
-            );
+              );
+          }else{
+            this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
+              .subscribe(
+                response => {
+                  if (response.statusCode == 200) {
+                    console.log("subscribePlan Success => ", response.data);
+
+                    this.authService.retrieveLoggedUserInfo()
+                      .subscribe(
+                        response => {
+                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                        },
+                        error => {
+                          console.log("http error => ", error);
+                        }
+                      );
+
+                    this.router.navigate([
+                      "/homeRedirect",
+                      {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
+                  }
+                }
+              );
+          }
         }
       });
 
       handler.open({
         name: this.selectedPlan.name,
-        description: this.selectedPlan.interval != 'day' ? this.period_text[this.selectedPlan.interval] : 'Every ' + this.selectedPlan.interval_count + ' days',
+        description: this.selectedPlan.interval != "day" ? this.period_text[this.selectedPlan.interval] : "Every " + this.selectedPlan.interval_count + " days",
         amount: this.selectedPlan.amount,
-        email: this.userData.email
+        email: this.email
       });
     } else {
-      this.router.navigate(['/login'], {queryParams: {redirect: location.pathname}});
+      this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
     }
   }
 
@@ -170,7 +203,7 @@ export class SubscribeComponent implements OnInit {
   }
 
   endSubscription(subscribeDialog) {
-    this.frontService.unsubscribePlan(1, this.unsubscribeOption == 'at_period_end').subscribe(
+    this.frontService.unsubscribePlan(1, this.unsubscribeOption == "at_period_end").subscribe(
       response => {
         subscribeDialog.close();
       }
