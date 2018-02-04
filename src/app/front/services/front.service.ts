@@ -105,6 +105,30 @@ export class FrontService {
       .map((response: Response) => response.json());
   }
 
+  validateCoupon(coupon) {
+  // validateCoupon(coupon): Observable<any> {
+    console.log(coupon);
+    return this.http.post(environment.api_end_point + "validateCoupon", {coupon}, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
+  validateCouponAdvance(coupon) {
+    console.log(coupon);
+    return this.http.post(environment.api_end_point + "api/validateCouponAdvance", {coupon}, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
+
   signUpStepTwo(token, plan_id, coupon = ""): Observable<any> {
     let headers = new Headers();
     headers.append("content-type", "application/json");

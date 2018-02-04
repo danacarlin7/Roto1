@@ -35,11 +35,14 @@ export class SubscribeComponent implements OnInit {
   isLoading: boolean;
   showPartialSignUpMsg: boolean;
 
+  errorMsg: any;
+
   unsubscribeOption = "at_period_end";
 
   period_text = {week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually"};
 
   @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
+  @ViewChild('couponTemplateRef') public couponTemplateRef:TemplateRef<any>;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -125,76 +128,122 @@ export class SubscribeComponent implements OnInit {
     );
   }
 
-  onBtnSubscribeClick(plan) {
+  couponClicked(plan) {
     this.selectedPlan = plan;
-    localStorage.setItem("selectedPlan", plan.plan_id);
-    if (this.authService.isLoggedIn() || this.userToken.length) {
-      var handler = (<any>window).StripeCheckout.configure({
-        key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
-        locale: "auto",
-        token: (token: any) => {
-          // You can access the token ID with `token.id`.
-          // Get the token ID to your server-side code for use.
-          console.log("token call back => ", token);
-          if(this.authService.isLoggedIn()){
-            this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
-              .subscribe(
-                response => {
-                  if (response.statusCode == 200) {
-                    console.log("subscribePlan Success => ", response.data);
+    this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+  }
 
-                    this.authService.retrieveLoggedUserInfo()
-                      .subscribe(
-                        response => {
-                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                        },
-                        error => {
-                          console.log("http error => ", error);
-                        }
-                      );
-
-                    this.router.navigate([
-                      "/homeRedirect",
-                      {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
-                  }
-                }
-              );
-          }else{
-            this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
-              .subscribe(
-                response => {
-                  if (response.statusCode == 200) {
-                    console.log("subscribePlan Success => ", response.data);
-
-                    this.authService.retrieveLoggedUserInfo()
-                      .subscribe(
-                        response => {
-                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                        },
-                        error => {
-                          console.log("http error => ", error);
-                        }
-                      );
-
-                    this.router.navigate([
-                      "/homeRedirect",
-                      {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
-                  }
-                }
-              );
+  checkCoupon(coupon, couponDialog , callback) {
+    let that = this;
+    console.log(coupon);
+    if ((this.authService.isLoggedIn() || this.userToken.length) && coupon) {
+      this.frontService.validateCouponAdvance(coupon)
+        .subscribe(
+          response => {
+            if (response.statusCode === 200) {
+                that.errorMsg = "";
+                console.log("validateCouponAdvance Success => ", response.data);
+                // couponDialog.close();
+                callback(coupon);
+            } else {
+                that.errorMsg = "Invalid Coupon!!!";
+            }
           }
-        }
-      });
-
-      handler.open({
-        name: this.selectedPlan.name,
-        description: this.selectedPlan.interval != "day" ? this.period_text[this.selectedPlan.interval] : "Every " + this.selectedPlan.interval_count + " days",
-        amount: this.selectedPlan.amount,
-        email: this.email
-      });
+        );
+    } else if (coupon) {
+      this.frontService.validateCoupon(coupon)
+        .subscribe(
+          response => {
+            if (response.statusCode === 200) {
+              that.errorMsg = "";
+              console.log("validateCoupon Success => ", response.data);
+              callback(coupon);
+            } else {
+              that.errorMsg = "Invalid Coupon!!!";
+            }
+          }
+        );
     } else {
-      this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+      callback(false);
     }
+  }
+
+  onBtnSubscribeClick(couponDialog , coupon) {
+    // this.selectedPlan = plan;
+    let that = this;
+    console.log(coupon);
+    this.checkCoupon(coupon, couponDialog, function(resp){
+      couponDialog.close();
+      localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
+      if (that.authService.isLoggedIn() || that.userToken.length) {
+        var handler = (<any>window).StripeCheckout.configure({
+          key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
+          locale: "auto",
+          token: (token: any) => {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            console.log("token call back => ", token);
+            if(that.authService.isLoggedIn()){
+              that.coupon = resp ? resp : "";
+              that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
+                .subscribe(
+                  response => {
+                    if (response.statusCode == 200) {
+                      console.log("subscribePlan Success => ", response.data);
+
+                      that.authService.retrieveLoggedUserInfo()
+                        .subscribe(
+                          response => {
+                            if (response.statusCode == 200) that.authService.loggedUser = response.data;
+                          },
+                          error => {
+                            console.log("http error => ", error);
+                          }
+                        );
+
+                      that.router.navigate([
+                        "/homeRedirect",
+                        {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
+                    }
+                  }
+                );
+            }else{
+              that.frontService.signUpStepTwo(token.id, that.selectedPlan.plan_id, that.coupon)
+                .subscribe(
+                  response => {
+                    if (response.statusCode == 200) {
+                      console.log("subscribePlan Success => ", response.data);
+
+                      that.authService.retrieveLoggedUserInfo()
+                        .subscribe(
+                          response => {
+                            if (response.statusCode == 200) that.authService.loggedUser = response.data;
+                          },
+                          error => {
+                            console.log("http error => ", error);
+                          }
+                        );
+
+                      that.router.navigate([
+                        "/homeRedirect",
+                        {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
+                    }
+                  }
+                );
+            }
+          }
+        });
+
+        handler.open({
+          name: that.selectedPlan.name,
+          description: that.selectedPlan.interval != "day" ? that.period_text[that.selectedPlan.interval] : "Every " + that.selectedPlan.interval_count + " days",
+          amount: that.selectedPlan.amount,
+          email: that.email
+        });
+      } else {
+        that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+      }
+    })
   }
 
   onBtnUnsubscribeClick(plan) {
