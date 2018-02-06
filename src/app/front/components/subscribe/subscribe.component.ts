@@ -168,6 +168,55 @@ export class SubscribeComponent implements OnInit {
     }
   }
 
+  //
+  // onBtnSubscribeClickOld(plan) {
+  //   this.selectedPlan = plan;
+  //   localStorage.setItem('selectedPlan', plan.plan_id);
+  //   if (this.authService.isLoggedIn()) {
+  //     var handler = (<any>window).StripeCheckout.configure({
+  //       key: environment.production ?  'pk_live_ot2q3JGgPLEfvia8StJWO0b7' : 'pk_test_A5XmrDsft5PHHvkxOKISsUR7',
+  //       locale: 'auto',
+  //       token: (token: any) => {
+  //         // You can access the token ID with `token.id`.
+  //         // Get the token ID to your server-side code for use.
+  //         console.log("token call back => ", token);
+  //         this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
+  //           .subscribe(
+  //             response => {
+  //               if (response.statusCode == 200) {
+  //                 console.log("subscribePlan Success => ", response.data);
+  //
+  //                 this.authService.retrieveLoggedUserInfo()
+  //                 .subscribe(
+  //                   response => {
+  //                     if (response.statusCode == 200) this.authService.loggedUser = response.data;
+  //                   },
+  //                   error => {
+  //                     console.log("http error => ", error);
+  //                   }
+  //                 );
+  //
+  //                 this.router.navigate([
+  //                   '/homeRedirect',
+  //                   { redirected: true, redirectMessage: "You Have Successfully Been Subscribed!" }]);
+  //               }
+  //             }
+  //           );
+  //       }
+  //     });
+  //
+  //     handler.open({
+  //       name: this.selectedPlan.name,
+  //       description: this.selectedPlan.interval != 'day' ? this.period_text[this.selectedPlan.interval] : 'Every ' + this.selectedPlan.interval_count + ' days',
+  //       amount: this.selectedPlan.amount,
+  //       email: this.userData.email
+  //     });
+  //   } else {
+  //     this.router.navigate(['/login'], {queryParams: {redirect: location.pathname}});
+  //   }
+  // }
+
+
   onBtnSubscribeClick(couponDialog , coupon) {
     // this.selectedPlan = plan;
     let that = this;
@@ -183,8 +232,8 @@ export class SubscribeComponent implements OnInit {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
             console.log("token call back => ", token);
+            that.coupon = resp ? resp : "";
             if(that.authService.isLoggedIn()){
-              that.coupon = resp ? resp : "";
               that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
                 .subscribe(
                   response => {
