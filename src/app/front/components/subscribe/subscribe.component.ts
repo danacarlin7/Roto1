@@ -70,6 +70,7 @@ export class SubscribeComponent implements OnInit {
       this.showPartialSignUpMsg = true;
       this.userToken = this.authService.partialUser.token;
       this.email = this.authService.partialUser.email;
+      console.log(this.userToken);
     }
   }
 
@@ -136,7 +137,8 @@ export class SubscribeComponent implements OnInit {
   checkCoupon(coupon, couponDialog , callback) {
     let that = this;
     console.log(coupon);
-    if ((this.authService.isLoggedIn() || this.userToken.length) && coupon) {
+    if (this.authService.isLoggedIn() && coupon) {
+
       this.frontService.validateCouponAdvance(coupon)
         .subscribe(
           response => {
@@ -144,10 +146,13 @@ export class SubscribeComponent implements OnInit {
                 that.errorMsg = "";
                 console.log("validateCouponAdvance Success => ", response.data);
                 // couponDialog.close();
-                callback(coupon);
-            } else {
-                that.errorMsg = "Invalid Coupon!!!";
+                callback(true, coupon);
             }
+          },
+          error => {
+            console.log("http error => ", error);
+            that.errorMsg  = error.data ? error.data : "Error"
+            callback(false, error.data)
           }
         );
     } else if (coupon) {
@@ -157,14 +162,17 @@ export class SubscribeComponent implements OnInit {
             if (response.statusCode === 200) {
               that.errorMsg = "";
               console.log("validateCoupon Success => ", response.data);
-              callback(coupon);
-            } else {
-              that.errorMsg = "Invalid Coupon!!!";
+              callback(true, coupon);
             }
+          },
+          error => {
+            console.log("http error => ", error);
+            that.errorMsg  = error.data ? error.data : "Error"
+            callback(false, error.data)
           }
         );
     } else {
-      callback(false);
+      callback(true,"empty");
     }
   }
 
@@ -216,81 +224,84 @@ export class SubscribeComponent implements OnInit {
   //   }
   // }
 
-
   onBtnSubscribeClick(couponDialog , coupon) {
     // this.selectedPlan = plan;
     let that = this;
     console.log(coupon);
-    this.checkCoupon(coupon, couponDialog, function(resp){
-      couponDialog.close();
-      localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
-      if (that.authService.isLoggedIn() || that.userToken.length) {
-        var handler = (<any>window).StripeCheckout.configure({
-          key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
-          locale: "auto",
-          token: (token: any) => {
-            // You can access the token ID with `token.id`.
-            // Get the token ID to your server-side code for use.
-            console.log("token call back => ", token);
-            that.coupon = resp ? resp : "";
-            if(that.authService.isLoggedIn()){
-              that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
-                .subscribe(
-                  response => {
-                    if (response.statusCode == 200) {
-                      console.log("subscribePlan Success => ", response.data);
+    this.checkCoupon(coupon, couponDialog, function(status, resp){
+      console.log(that.userToken.length);
+      if(status){
+        couponDialog.close();
+        localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
+        if (that.authService.isLoggedIn() || that.userToken.length) {
+          var handler = (<any>window).StripeCheckout.configure({
+            key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
+            locale: "auto",
+            token: (token: any) => {
+              // You can access the token ID with `token.id`.
+              // Get the token ID to your server-side code for use.
+              console.log("token call back => ", token);
+              that.coupon = resp != "empty" && status ? resp : "";
+              if(that.authService.isLoggedIn()){
+                that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
+                  .subscribe(
+                    response => {
+                      if (response.statusCode == 200) {
+                        console.log("subscribePlan Success => ", response.data);
 
-                      that.authService.retrieveLoggedUserInfo()
-                        .subscribe(
-                          response => {
-                            if (response.statusCode == 200) that.authService.loggedUser = response.data;
-                          },
-                          error => {
-                            console.log("http error => ", error);
-                          }
-                        );
+                        that.authService.retrieveLoggedUserInfo()
+                          .subscribe(
+                            response => {
+                              if (response.statusCode == 200) that.authService.loggedUser = response.data;
+                            },
+                            error => {
+                              console.log("http error => ", error);
+                            }
+                          );
 
-                      that.router.navigate([
-                        "/homeRedirect",
-                        {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
+                        that.router.navigate([
+                          "/homeRedirect",
+                          {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
+                      }
                     }
-                  }
-                );
-            }else{
-              that.frontService.signUpStepTwo(token.id, that.selectedPlan.plan_id, that.coupon)
-                .subscribe(
-                  response => {
-                    if (response.statusCode == 200) {
-                      console.log("subscribePlan Success => ", response.data);
+                  );
+              }else{
+                console.log("i am here", that.coupon);
+                that.frontService.signUpStepTwo(token.id, that.selectedPlan.plan_id, that.coupon)
+                  .subscribe(
+                    response => {
+                      if (response.statusCode == 200) {
+                        console.log("subscribePlan Success => ", response.data);
 
-                      that.authService.retrieveLoggedUserInfo()
-                        .subscribe(
-                          response => {
-                            if (response.statusCode == 200) that.authService.loggedUser = response.data;
-                          },
-                          error => {
-                            console.log("http error => ", error);
-                          }
-                        );
+                        that.authService.retrieveLoggedUserInfo()
+                          .subscribe(
+                            response => {
+                              if (response.statusCode == 200) that.authService.loggedUser = response.data;
+                            },
+                            error => {
+                              console.log("http error => ", error);
+                            }
+                          );
 
-                      that.router.navigate([
-                        "/homeRedirect",
-                        {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
+                        that.router.navigate([
+                          "/homeRedirect",
+                          {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
+                      }
                     }
-                  }
-                );
+                  );
+              }
             }
-          }
-        });
+          });
 
-        handler.open({
-          name: that.selectedPlan.name,
-          description: that.selectedPlan.interval != "day" ? that.period_text[that.selectedPlan.interval] : "Every " + that.selectedPlan.interval_count + " days",
-          amount: that.selectedPlan.amount,
-          email: that.email
-        });
-      } else {
-        that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+          handler.open({
+            name: that.selectedPlan.name,
+            description: that.selectedPlan.interval != "day" ? that.period_text[that.selectedPlan.interval] : "Every " + that.selectedPlan.interval_count + " days",
+            amount: that.selectedPlan.amount,
+            email: that.email
+          });
+        } else {
+          that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+        }
       }
     })
   }
