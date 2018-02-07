@@ -3,6 +3,7 @@ import {Http, Headers, Response} from "@angular/http";
 import {AuthService} from "../../shared/services/auth.service";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs/Rx";
+
 /**
  * Created by Hiren on 28-06-2017.
  */
@@ -13,21 +14,21 @@ export class FrontService {
 
   }
 
-  getToken():string {
+  getToken(): string {
     return environment.token;
   }
 
   getHeaders(): Headers {
     let headers = new Headers();
-    headers.append('content-type', 'application/json');
+    headers.append("content-type", "application/json");
     if (this.getToken()) {
-      headers.append('Authorization', 'Bearer ' + this.getToken());
+      headers.append("Authorization", "Bearer " + this.getToken());
     }
     return headers;
   }
 
-  retrieveNews(sportType:string, timePeriod:string = '30days'): Observable<any> {
-    return this.http.get(environment.api_end_point + 'fetchNews?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
+  retrieveNews(sportType: string, timePeriod: string = "30days"): Observable<any> {
+    return this.http.get(environment.api_end_point + "fetchNews?sport=" + sportType + "&since=" + timePeriod, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -36,7 +37,7 @@ export class FrontService {
   }
 
   retrieveHomepageNews(): Observable<any> {
-    return this.http.get(environment.api_end_point + 'fetchLatestNews?count=10', {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + "fetchLatestNews?count=10", {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -44,8 +45,8 @@ export class FrontService {
       });
   }
 
-  retrieveInjuries(sportType:string): Observable<any> {
-    return this.http.get(environment.api_end_point + 'injuries?sport=' + sportType, {headers: this.getHeaders()})
+  retrieveInjuries(sportType: string): Observable<any> {
+    return this.http.get(environment.api_end_point + "injuries?sport=" + sportType, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -53,8 +54,8 @@ export class FrontService {
       });
   }
 
-  retrieveDailyLineups(sportType:string, timePeriod:string = 'cyear'): Observable<any> {
-    return this.http.get(environment.api_end_point + 'fetchLineup?sport=' + sportType + '&since=' + timePeriod, {headers: this.getHeaders()})
+  retrieveDailyLineups(sportType: string, timePeriod: string = "cyear"): Observable<any> {
+    return this.http.get(environment.api_end_point + "fetchLineup?sport=" + sportType + "&since=" + timePeriod, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -63,7 +64,7 @@ export class FrontService {
   }
 
   retrieveTwitterFeeds(): Observable<any> {
-    return this.http.get(environment.api_end_point + 'getTwitterFeeds', {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + "getTwitterFeeds", {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -72,7 +73,7 @@ export class FrontService {
   }
 
   retrieveFBFeeds(): Observable<any> {
-    return this.http.get(environment.api_end_point + 'getFBPost', {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + "getFBPost", {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -81,7 +82,7 @@ export class FrontService {
   }
 
   retrieveInstaFeeds(): Observable<any> {
-    return this.http.get(environment.api_end_point + 'getInstaPosts', {headers: this.getHeaders()})
+    return this.http.get(environment.api_end_point + "getInstaPosts", {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
@@ -100,12 +101,45 @@ export class FrontService {
 
   subscribePlan(token, plan_id, coupon = ""): Observable<any> {
     console.log(coupon);
-    return this.http.post(environment.api_end_point + 'api/subscribe', {token, plan_id, coupon}, {headers: this.getHeaders()})
+    return this.http.post(environment.api_end_point + "api/subscribe", {token, plan_id, coupon}, {headers: this.getHeaders()})
+      .map((response: Response) => response.json());
+  }
+
+  validateCoupon(coupon) {
+  // validateCoupon(coupon): Observable<any> {
+    console.log(coupon);
+    return this.http.post(environment.api_end_point + "validateCoupon", {coupon}, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
+  validateCouponAdvance(coupon) {
+    console.log(coupon);
+    return this.http.post(environment.api_end_point + "api/validateCouponAdvance", {coupon}, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+
+
+  signUpStepTwo(token, plan_id, coupon = ""): Observable<any> {
+    let headers = new Headers();
+    headers.append("content-type", "application/json");
+    headers.append("Authorization", "Bearer " + this.authService.partialUser.token);
+
+    return this.http.post(environment.api_end_point + "api/signupTwo", {token, plan_id, coupon}, {headers: headers})
       .map((response: Response) => response.json());
   }
 
   unsubscribePlan(subscribe_id, at_period_end) {
-    return this.http.put(environment.api_end_point + 'api/unsubscribe/' + subscribe_id, {at_period_end: at_period_end}, {headers: this.getHeaders()})
+    return this.http.put(environment.api_end_point + "api/unsubscribe/" + subscribe_id, {at_period_end: at_period_end}, {headers: this.getHeaders()})
       .map((response: Response) => response.json());
   }
 

@@ -27,6 +27,8 @@ export class AuthService {
 
   loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
 
+  partialUser:any;
+
   constructor(private http: Http) {
 
   }
@@ -124,6 +126,12 @@ export class AuthService {
 
   registerNewUser(data: any): Observable<any> {
     return this.http.post(environment.api_end_point + 'signup', data)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()))
+  }
+
+  signUPStepOne(data:any):Observable<any>{
+    return this.http.post(environment.api_end_point + 'signupOne', data)
       .map(response => response.json())
       .catch(error => Observable.throw(error.json()))
   }
