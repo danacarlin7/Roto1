@@ -191,8 +191,9 @@ export class ArticlesComponent implements OnInit {
   }
 
   switchToSingle(post) {
-    this.activeSingle = post;
-    //this.router.navigate(['articles',post.id])
+    console.log(post.id);
+    // this.activeSingle = post;
+    this.router.navigate(['articles',post.id])
   }
 
   goBackToTab() {
