@@ -49,7 +49,7 @@
                       </span>
                     </div>
                     <div class="plan-time">{{'/'+plan.interval_count+' '+plan.interval}}</div>
-                    <div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>
+                    <div class="plan-trial-period" *ngIf="params.trial_period_days">{{'('+plan.trial_period_days+'-days free trial)'}}</div>
                     <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
                     </button> -->
                     <button class="btn-subscribe btn-lg btn-primary" (click)="couponClicked(plan)">Subscribe
