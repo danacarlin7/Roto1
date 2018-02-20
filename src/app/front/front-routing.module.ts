@@ -29,6 +29,8 @@ import {MarketPlaceComponent} from "./components/market-place/market-place.compo
 import {ExtensionsComponent} from "./components/extensions/extensions.component";
 import {NFLLineupOptimizerComponent} from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
 import {SubscriptionGuard} from "../shared/services/subscription.guard";
+import {SubscriptionNewGuard} from "../shared/services/subscription-new.guard";
+
 import {ContactAnalyzerComponent} from "./components/contact-analyzer/contact-analyzer.component";
 import {GeneratedNFLLineupsComponent} from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
 import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.component";
@@ -57,7 +59,7 @@ const routes: Routes = [
       { path: "market-place", component: MarketPlaceComponent },
       { path: "extensions", component: ExtensionsComponent },
       { path: "lineups", component: DailyLineupComponent },
-      { path: "articles/:id", component: ArticleComponent },
+      { path: "articles/:id", canActivate: [SubscriptionNewGuard],component: ArticleComponent },
       { path: "articles", component: ArticlesComponent },
       { path: "basics", component: DFSBasicsComponent },
       { path: "mlb-excel-tool", component: ExcelToolComponent },

@@ -14,6 +14,7 @@ import { TabViewComponent } from "./components/tab-view/tab-view.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SharedPrimeNGComponents } from "./prime-ng-components";
 import { SubscriptionGuard } from "./services/subscription.guard";
+import { SubscriptionNewGuard } from "./services/subscription-new.guard";
 import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.directive";
 /**
  * Created by Hiren on 04-06-2017.
@@ -55,7 +56,7 @@ export class SharedModule {
   static forRoot() {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, AuthGuard, SubscriptionGuard]
+      providers: [AuthService, AuthGuard, SubscriptionGuard, SubscriptionNewGuard]
     };
   }
 }

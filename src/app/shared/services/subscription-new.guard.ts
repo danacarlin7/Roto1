@@ -9,27 +9,27 @@ import {
 import {AuthService} from "./auth.service";
 
 @Injectable()
-export class SubscriptionGuard implements CanActivate, CanActivateChild {
+export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.authService.isSubscriber(true);
+    if (this.authService.isLoggedIn()) {
+      if (this.authService.isSubscriber(true)) {
+        return true;
+      } else {
+        this.router.navigate(['/subscribe'], {queryParams: {redirect: state.url}});
+        return false;
+      }
+    } else {
+      this.router.navigate(['/login'], {queryParams: {redirect: state.url}});
+      return false;
+    }
 
-    // if (this.authService.isSubscriber(true)) {
-    //   return true;
-    // }
-    // this.authService.showSubscriptionAlert();
-    // return false;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.canActivate(route, state);
   }
 
-
-  // canActivateSubscriber(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-  //   this.router.navigate(['/login']});
-  //   return false;
-  // }
 }
