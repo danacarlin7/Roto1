@@ -25,7 +25,7 @@
                 <a routerLink="/nfl-excel-tool">NFL Excel Tool<span class="sr-only">(current)</span></a>
               </li>-->
 
-              
+
               <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/mlb-excel-tool">Excel Tool<span class="sr-only">(current)</span></a>
               </li>
@@ -83,9 +83,9 @@
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a routerLink="" (click)="closeMobileMenu()">Home<span class="sr-only">(current)</span></a>
               </li>
-              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+              <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a target="_blank" (click)="closeMobileMenu()" href="http://forum.rotopros.com/">Forums</a>
-              </li>
+              </li> -->
               <!--<li><a>Products</a></li>-->
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/articles" (click)="closeMobileMenu()">Articles</a>
@@ -93,9 +93,9 @@
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a target="_blank" href="https://dfsgods.slack.com" (click)="closeMobileMenu()">Rotopros Chat</a>
               </li>
-              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+              <!-- <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/news" (click)="closeMobileMenu()">Player News</a>
-              </li>
+              </li> -->
 
               <li *ngIf="loggedUser && loggedUser.is_subscribe" class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
                   [routerLinkActiveOptions]="{exact: true}">
