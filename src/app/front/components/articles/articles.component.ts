@@ -11,6 +11,7 @@ import {ArticleService} from "../../services/article.service";
 export class ArticlesComponent implements OnInit {
 
   constructor(private authService:AuthService, private activatedRoute:ActivatedRoute, private router:Router, private articleService:ArticleService) {
+    localStorage.setItem('free', "0");
   }
 
   category:any;
@@ -165,6 +166,12 @@ export class ArticlesComponent implements OnInit {
   }
 
   onTabChanged(cat) {
+    console.log(cat);
+    if(cat.slug == "free-article"){
+      localStorage.setItem('free', "1");
+    } else {
+      localStorage.setItem('free', "0");
+    }
     if (cat == 'trending' || this.subTrendingTabs.indexOf(cat) != -1) {
       if (cat == 'trending') {
         this.activeTab = cat;

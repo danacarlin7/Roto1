@@ -97,16 +97,17 @@
                 <a routerLink="/news" (click)="closeMobileMenu()">Player News</a>
               </li> -->
 
-              <li *ngIf="loggedUser && loggedUser.is_subscribe" class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
+              <!-- <li *ngIf="loggedUser && loggedUser.is_subscribe" class="lineup-dropdown lineup-menu-full-view" routerLinkActive="active"
                   [routerLinkActiveOptions]="{exact: true}">
                 <a>Lineup Optimizer<span class="caret"></span></a>
                 <div class="dropdown-content" routerLinkActive="active"
                      [routerLinkActiveOptions]="{exact: true}">
                   <a routerLink="/lineup-optimizer" (click)="closeMobileMenu()">MLB Optimizer</a>
                   <a routerLink="/lineup-optimizer/nfl" (click)="closeMobileMenu()">NFL Optimizer</a>
-                  <!--<a routerLink="/lineup-optimizer/nba" (click)="closeMobileMenu()">NBA Optimizer</a>-->
                 </div>
-              </li>
+              </li> -->
+              <!--<a routerLink="/lineup-optimizer/nba" (click)="closeMobileMenu()">NBA Optimizer</a>-->
+
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/subscribe" (click)="closeMobileMenu()">Plans</a>
               </li>

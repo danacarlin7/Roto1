@@ -134,45 +134,45 @@ export class SubscribeComponent implements OnInit {
     this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
   }
 
-  checkCoupon(coupon, couponDialog , callback) {
+  checkCoupon(coupon, couponDialog , amount ,callback) {
     let that = this;
     console.log(coupon);
     if (this.authService.isLoggedIn() && coupon) {
 
-      this.frontService.validateCouponAdvance(coupon)
+      this.frontService.validateCouponAdvance(coupon, amount)
         .subscribe(
           response => {
             if (response.statusCode === 200) {
                 that.errorMsg = "";
                 console.log("validateCouponAdvance Success => ", response.data);
                 // couponDialog.close();
-                callback(true, coupon);
+                callback(true, coupon, response.data.amount);
             }
           },
           error => {
             console.log("http error => ", error);
             that.errorMsg  = error.data ? error.data : "Error"
-            callback(false, error.data)
+            callback(false, error.data, false)
           }
         );
     } else if (coupon) {
-      this.frontService.validateCoupon(coupon)
+      this.frontService.validateCoupon(coupon, amount)
         .subscribe(
           response => {
             if (response.statusCode === 200) {
               that.errorMsg = "";
               console.log("validateCoupon Success => ", response.data);
-              callback(true, coupon);
+              callback(true, coupon, response.data.amount);
             }
           },
           error => {
             console.log("http error => ", error);
             that.errorMsg  = error.data ? error.data : "Error"
-            callback(false, error.data)
+            callback(false, error.data, false)
           }
         );
     } else {
-      callback(true,"empty");
+      callback(true,"empty", amount);
     }
   }
 
@@ -228,8 +228,8 @@ export class SubscribeComponent implements OnInit {
     // this.selectedPlan = plan;
     let that = this;
     console.log(coupon);
-    this.checkCoupon(coupon, couponDialog, function(status, resp){
-      console.log(that.userToken.length);
+    this.checkCoupon(coupon, couponDialog, that.selectedPlan.amount , function(status, resp, finalAmount){
+      console.log(that.userToken.length, finalAmount);
       if(status){
         couponDialog.close();
         localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
@@ -295,9 +295,11 @@ export class SubscribeComponent implements OnInit {
 
           handler.open({
             name: that.selectedPlan.name,
-            description: that.selectedPlan.interval != "day" ? that.period_text[that.selectedPlan.interval] : "Every " + that.selectedPlan.interval_count + " days",
-            amount: that.selectedPlan.amount,
+            description: resp != "empty" && status ? "Your Coupon Code Has Been Applied" : that.selectedPlan.interval != "day" ? that.period_text[that.selectedPlan.interval] : "Every " + that.selectedPlan.interval_count + " days",
+            amount: finalAmount,
             email: that.email
+            // panelLabel: status ? "Amount After Discount" : "Pay"
+            // image: "http://13.57.84.196/assets/images/logo.png"
           });
         } else {
           that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});

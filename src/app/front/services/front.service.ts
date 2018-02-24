@@ -105,10 +105,10 @@ export class FrontService {
       .map((response: Response) => response.json());
   }
 
-  validateCoupon(coupon) {
+  validateCoupon(coupon, amount) {
   // validateCoupon(coupon): Observable<any> {
     console.log(coupon);
-    return this.http.post(environment.api_end_point + "validateCoupon", {coupon}, {headers: this.getHeaders()})
+    return this.http.post(environment.api_end_point + "validateCoupon", {coupon, amount}, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
@@ -117,9 +117,9 @@ export class FrontService {
   }
 
 
-  validateCouponAdvance(coupon) {
+  validateCouponAdvance(coupon, amount) {
     console.log(coupon);
-    return this.http.post(environment.api_end_point + "api/validateCouponAdvance", {coupon}, {headers: this.getHeaders()})
+    return this.http.post(environment.api_end_point + "api/validateCouponAdvance", {coupon, amount}, {headers: this.getHeaders()})
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());

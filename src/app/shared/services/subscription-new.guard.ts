@@ -14,7 +14,9 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isLoggedIn()) {
+    if(localStorage.getItem('free') == "1"){
+      return true;
+    } else if (this.authService.isLoggedIn()) {
       if (this.authService.isSubscriber(true)) {
         return true;
       } else {
