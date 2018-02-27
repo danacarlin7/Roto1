@@ -9,7 +9,6 @@
 /node_modules
 
 # IDEs and editors
-/.idea
 .project
 .classpath
 .c9/
@@ -40,3 +39,30 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+
+.idea
+.vscode
+morgan.log
+
+# Built #
+/__build__/
+/__server_build__/
+/typings/
+/tsd_typings/
+/dist-server/
+/compiled/
+
+# Node #
+/npm-debug.log.*
+
+# Webpack #
+webpack.records.json
+
+# Angular #
+*.ngfactory.ts
+*.css.shim.ts
+*.ngsummary.json
+*.metadata.json
+*.shim.ngstyle.ts
