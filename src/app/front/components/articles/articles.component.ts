@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {AuthService} from "../../../shared/services/auth.service";
-import {ArticleService} from "../../services/article.service";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from "../../../shared/services/auth.service";
+import { ArticleService } from "../../services/article.service";
 
 @Component({
   selector: 'app-articles',
@@ -10,21 +10,21 @@ import {ArticleService} from "../../services/article.service";
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private authService:AuthService, private activatedRoute:ActivatedRoute, private router:Router, private articleService:ArticleService) {
+  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private articleService: ArticleService) {
     localStorage.setItem('free', "0");
   }
 
-  category:any;
-  categories:Array<any>;
-  posts:Object = {};
-  media:Object = {};
-  hot:Array<any> = [];
-  featured:Array<any> = [];
-  top:Array<any> = [];
-  newest:Array<any> = [];
-  recent:Array<any> = [];
-  week:Array<any> = [];
-  subTrendingTabs:Array<any> = ['week', 'hot', 'featured', 'top', 'recent', 'newest'];
+  category: any;
+  categories: Array<any>;
+  posts: Object = {};
+  media: Object = {};
+  hot: Array<any> = [];
+  featured: Array<any> = [];
+  top: Array<any> = [];
+  newest: Array<any> = [];
+  recent: Array<any> = [];
+  week: Array<any> = [];
+  subTrendingTabs: Array<any> = ['week', 'hot', 'featured', 'top', 'recent', 'newest'];
   subTrendingTabsLabels = {
     week: "Article of the Week",
     hot: "Today’s Hot Topics!",
@@ -33,14 +33,18 @@ export class ArticlesComponent implements OnInit {
     recent: "Recent",
     newest: "Newest"
   };
-  activeTab:any;
-  subActiveTab:any;
-  tmpActiveTab:any;
-  tmpSubActiveTab:any;
-  activeSingle:any = null;
-  isLoading:boolean = false;
+  activeTab: any;
+  subActiveTab: any;
+  tmpActiveTab: any;
+  tmpSubActiveTab: any;
+  activeSingle: any = null;
+  isLoading: boolean = false;
 
-  related:Object = {};
+  related: Object = {};
+
+  isStatus: any;
+  isSubscribeError: any;
+  isLoginError: any;
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(
@@ -82,7 +86,7 @@ export class ArticlesComponent implements OnInit {
     );
   }
 
-  private getIndexOfCategory = (catid:number) => {
+  private getIndexOfCategory = (catid: number) => {
     return this.categories.findIndex((category, index) => {
       return category.id === catid;
     });
@@ -92,7 +96,7 @@ export class ArticlesComponent implements OnInit {
   fetchPostsByCat(category) {
     let catid = category.id;
     this.isLoading = true;
-    this.articleService.fetchPosts({categories: category['id'], per_page: 5, offset: category['loaded']}).subscribe(
+    this.articleService.fetchPosts({ categories: category['id'], per_page: 5, offset: category['loaded'] }).subscribe(
       posts => {
         this.categories[this.getIndexOfCategory(catid)].loaded += posts.length;
         let mid = [];
@@ -104,7 +108,7 @@ export class ArticlesComponent implements OnInit {
         }
         let mids = mid.join(',');
         if (mids) {
-          this.articleService.fetchMedia({include: mids}).subscribe(
+          this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
                 let image = images[k];
@@ -118,9 +122,9 @@ export class ArticlesComponent implements OnInit {
     );
   }
 
-  fetchPostsByType(key:string) {
+  fetchPostsByType(key: string) {
     let cid = this.related[key].join(',');
-    this.articleService.fetchPosts({include: cid}).subscribe(
+    this.articleService.fetchPosts({ include: cid }).subscribe(
       posts => {
         let mid = [];
         for (let j = 0; j < posts.length; j++) {
@@ -133,7 +137,7 @@ export class ArticlesComponent implements OnInit {
         //   console.log(posts);
         let mids = mid.join(',');
         if (mids) {
-          this.articleService.fetchMedia({include: mids}).subscribe(
+          this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
                 let image = images[k];
@@ -146,7 +150,7 @@ export class ArticlesComponent implements OnInit {
     );
   }
 
-  encodeHtml(extract:string) {
+  encodeHtml(extract: string) {
     extract = extract.replace(/<[^>]+>/gm, '');
     let txt = document.createElement("textarea");
     txt.innerHTML = extract;
@@ -156,18 +160,18 @@ export class ArticlesComponent implements OnInit {
     return extract;
   }
 
-  hasPosts(id:number) {
+  hasPosts(id: number) {
     return (this.posts && this.posts[id]);
   }
 
-  findMedia(id:number) {
+  findMedia(id: number) {
     if (!id || !this.media) return false;
     return this.media[id];
   }
 
   onTabChanged(cat) {
     console.log(cat);
-    if(cat.slug == "free-article"){
+    if (cat.slug == "free-article") {
       localStorage.setItem('free', "1");
     } else {
       localStorage.setItem('free', "0");
@@ -199,9 +203,32 @@ export class ArticlesComponent implements OnInit {
 
   switchToSingle(post) {
     console.log(post.id);
-    // this.activeSingle = post;
-    this.router.navigate(['articles',post.id])
+
+
+    if (!this.authService.isLoggedIn()) {
+      this.isStatus = false;
+      this.isLoginError = true;
+      this.isSubscribeError = false;
+
+      $("#openModel").click();
+
+    } else if (this.authService.isLoggedIn() && this.authService.isSubscriber(true)) {
+      this.isStatus = true;
+      this.isLoginError = false;
+      this.isSubscribeError = false;
+      console.log(this.isStatus);
+      // this.activeSingle = post;
+      this.router.navigate(['articles', post.id])
+
+    } else {
+      this.isStatus = false;
+      this.isLoginError = false;
+      this.isSubscribeError = true;
+
+      $("#openModel").click();
+    }
   }
+
 
   goBackToTab() {
     this.activeSingle = null;

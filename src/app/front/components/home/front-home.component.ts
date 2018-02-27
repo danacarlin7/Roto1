@@ -28,6 +28,11 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   baseballArticles: any[];
   media: Object = {};
 
+  activeSingle:any;
+  isStatus : any;
+  isSubscribeError: any;
+  isLoginError: any;
+
   constructor(private frontService: FrontService,
               private articleService: ArticleService,
               private authService: AuthService,
@@ -248,11 +253,6 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   navigateToArticles(id) {
     this.router.navigate(['/articles'], {queryParams: {tab: id}});
   }
-
-  activeSingle:any;
-  isStatus : any;
-  isSubscribeError: any;
-  isLoginError: any;
 
   switchToSingle(post, isArticle) {
     if(isArticle) {
