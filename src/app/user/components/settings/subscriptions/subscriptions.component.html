@@ -7,7 +7,17 @@
       </div>
       <div class="row">
         <div class="col-sm-2 field-name">Amount</div>
-        <div class="col-sm-12 col-md-10 field-value">${{plan.plan_amount/100}}</div>
+<!--'red': !plan.current_paid_status  -->
+        <div class="col-sm-12 col-md-10 field-value" [ngClass]="{'green': plan.current_paid_status }"  *ngIf="!plan.current_discount">${{plan.plan_amount/100}}</div>
+        <div class="col-sm-12 col-md-10 field-value" [ngClass]="{'green': plan.current_paid_status }"  *ngIf="plan.current_discount">${{plan.current_total/100}}</div>
+      </div>
+      <div class="row" *ngIf="plan.current_discount">
+        <div class="col-sm-2 field-name">Discount</div>
+        <div class="col-sm-12 col-md-4 field-value">${{plan.current_discount/100}}</div>
+      </div>
+      <div class="row" *ngIf="plan.current_discount">
+        <div class="col-sm-2 field-name">Plan Amount</div>
+        <div class="col-sm-12 col-md-4 field-value">${{plan.current_subtotal/100}}</div>
       </div>
       <div class="row">
         <div class="col-sm-2 field-name">Subscription</div>

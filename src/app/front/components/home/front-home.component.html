@@ -121,7 +121,7 @@
             </div>
             <div class="ylwTpBxBtm">
               <div class="ylwTpBxBtmBx2Wrap">
-                <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(news)" class="news-item item pointer" *ngFor="let news of allNewsRecords">
+                <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(news, false)" class="news-item item pointer" *ngFor="let news of allNewsRecords">
                   <img style="margin: 0 auto;"
                        *ngIf="findMedia(news.featured_media)!=false"
                        src="{{findMedia(news.featured_media)}}"
@@ -197,7 +197,7 @@
               <p><img src="../../../../assets/images/baseball.png" alt="" class="img-responsive"></p>
             </div>
             <div class="owl-carousel owl-theme midSlider midSlider1">
-              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article, true)" class="item pointer"
                    *ngFor="let article of baseballArticles">
                 <img style="width: 264px;height:186px;"
                      [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
@@ -217,7 +217,7 @@
               <p><img src="../../../../assets/images/football.png" alt="" class="img-responsive"></p>
             </div>
             <div class="owl-carousel owl-theme midSlider midSlider2">
-              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" class="item pointer"
                    *ngFor="let article of footballArticles">
                 <img style="width: 264px;height:186px;"
                      [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/football.jpg'"
@@ -237,7 +237,7 @@
               <p><img src="../../../../assets/images/basketball.png" alt="" class="img-responsive"></p>
             </div>
             <div class="owl-carousel owl-theme midSlider midSlider3">
-              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article, true)" class="item pointer"
                    *ngFor="let article of basketballArticles">
                 <img style="width: 264px;height:186px;"
                      [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
@@ -360,7 +360,7 @@
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="mPlaceDWrap">
                   <div class="mPlaceWrap">
-                    <div class="mPlaceItm article-details">
+                    <div class="mPlaceItm article-details" *ngIf="isStatus">
                       <div class="mPlaceTp">
                         <div class="mPlaceInfoWrap">
                           <h3>{{activeSingle.title.rendered}}</h3>
@@ -368,6 +368,18 @@
                         </div>
                       </div>
                     </div>
+                    <div *ngIf="isLoginError">
+                      <div class="alert alert-warning fade in center">
+                        Please <a [routerLink]="'/login'" data-dismiss="modal"> login </a>to see content of this article.
+                      </div>
+                    </div>
+
+                    <div *ngIf="isSubscribeError">
+                      <div class="alert alert-warning fade in center">
+                        Please <a [routerLink]="'/subscribe'" data-dismiss="modal"> subcribe </a>to see content of this article.
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>

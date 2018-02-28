@@ -28,6 +28,11 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   baseballArticles: any[];
   media: Object = {};
 
+  activeSingle:any;
+  isStatus : any;
+  isSubscribeError: any;
+  isLoginError: any;
+
   constructor(private frontService: FrontService,
               private articleService: ArticleService,
               private authService: AuthService,
@@ -249,9 +254,27 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/articles'], {queryParams: {tab: id}});
   }
 
-  activeSingle:any;
-
-  switchToSingle(post) {
+  switchToSingle(post, isArticle) {
+    if(isArticle) {
+      if(!this.authService.isLoggedIn()){
+        this.isStatus = false;
+        this.isLoginError = true;
+        this.isSubscribeError = false;
+      } else if(this.authService.isLoggedIn() && this.authService.isSubscriber(true)){
+        this.isStatus = true;
+        this.isLoginError = false;
+        this.isSubscribeError = false;
+      } else {
+        this.isStatus = false;
+        this.isLoginError = false;
+        this.isSubscribeError = true;
+      }
+    } else{
+      this.isStatus = true;
+      this.isLoginError = false;
+      this.isSubscribeError = false;
+    }
+    console.log(this.isStatus);
     this.activeSingle = post;
   }
 
