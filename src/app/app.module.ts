@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthService } from "./shared/services/auth.service";
 import { environment } from "../environments/environment";
 import { RPErrorHandler } from "./error-handler";
-
+import {TransferHttpCacheModule} from '@nguniversal/common';
 
 // import { CuppaOAuthModule } from 'ng2-social-login';
 
@@ -31,7 +31,8 @@ import { RPErrorHandler } from "./error-handler";
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
+    BrowserModule.withServerTransition({appId: 'RotoPros'}),
     BrowserAnimationsModule,
     FrontModule,
     UserModule,
@@ -40,6 +41,7 @@ import { RPErrorHandler } from "./error-handler";
     SharedModule.forRoot(),
     AppRoutingModule,
     // MetaModule.forRoot()
+    TransferHttpCacheModule
   ],
   providers: [{ provide: ErrorHandler, useClass: RPErrorHandler }],
   bootstrap: [AppComponent]
