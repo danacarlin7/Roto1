@@ -202,16 +202,21 @@ export class ArticlesComponent implements OnInit {
   }
 
   switchToSingle(post) {
-    console.log(post.id);
+    console.log(post);
 
 
     if (!this.authService.isLoggedIn()) {
-      this.isStatus = false;
-      this.isLoginError = true;
-      this.isSubscribeError = false;
-
-      $("#openModel").click();
-
+      if(localStorage.getItem('free') == "1"){
+        this.isStatus = true;
+        this.isLoginError = false;
+        this.isSubscribeError = false;
+        this.router.navigate(['articles', post.id])
+      } else {
+        this.isStatus = false;
+        this.isLoginError = true;
+        this.isSubscribeError = false;
+        $("#openModel").click();
+      }
     } else if (this.authService.isLoggedIn() && this.authService.isSubscriber(true)) {
       this.isStatus = true;
       this.isLoginError = false;
