@@ -1,3 +1,6 @@
+:host{
+  background-color: #f8c534;
+}
 .rp-plan-container {
   display: flex;
   flex-direction: column;
