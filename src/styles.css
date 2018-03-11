@@ -318,3 +318,11 @@ mfDefaultSorter a {
 .table-filter-listBox .ui-widget-header {
   background-color: #ffffff !important;
 }
+
+.loginDetails .loginDetailsWrapper {
+  display: block;
+}
+
+.loginDetails .loginDetailsWrapper .loginRghtWrapper {
+  width: 100%;
+}
