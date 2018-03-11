@@ -1,40 +1,41 @@
-<div>
-  <img class="img-responsive plans-cover-img" src="../../../../assets/images/TropheeMoney.jpg">
-</div>
-<h1 class="page-heading">All Access Packages</h1>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4 col-lg-3 col-lg-offset-2 col-sm-5 "
-         [class.col-md-offset-1]="i % 2 == 0"
-         [class.col-md-offset-2]="i % 2 != 0"
-         [class.col-sm-offset-1]="i % 2 == 0"
-         *ngFor="let plan of plans;let i = index">
-      <div class="rp-plan">
-        <div class="plan-name">{{plan.name}}</div>
-        <div class="plan-price-container">
-          <div class="plan-price">
+<div style="background-color: #f8c534">
+  <div>
+    <img class="img-responsive plans-cover-img" src="../../../../assets/images/TropheeMoney.jpg">
+  </div>
+  <h1 class="page-heading">All Access Packages</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-lg-3 col-lg-offset-2 col-sm-5 "
+           [class.col-md-offset-1]="i % 2 == 0"
+           [class.col-md-offset-2]="i % 2 != 0"
+           [class.col-sm-offset-1]="i % 2 == 0"
+           *ngFor="let plan of plans;let i = index">
+        <div class="rp-plan">
+          <div class="plan-name">{{plan.name}}</div>
+          <div class="plan-price-container">
+            <div class="plan-price">
                       <span *ngIf="params.id">
                         <span class="discount-text" *ngIf="params.discount_type === 'flat'">{{(plan.amount / 100) - params.discount_rate | currency:'USD':true}}</span>
                       <span class="discount-text" *ngIf="params.discount_type === 'percentage'">{{(plan.amount / 100) * (1 - (params.discount_rate / 100)) | currency:'USD':true}}</span>
                       </span>
-            <span *ngIf="!params.id">
+              <span *ngIf="!params.id">
                         <span>{{(plan.amount / 100) | currency:'USD':true}}/</span>
                       </span>
+            </div>
+            <div class="plan-time">{{plan.interval_count+' '+plan.interval}}</div>
           </div>
-          <div class="plan-time">{{plan.interval_count+' '+plan.interval}}</div>
+          <div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>
+          <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
+          </button> -->
+          <button class="btn-subscribe btn-lg btn-primary" (click)="couponClicked(plan)">Subscribe
+          </button>
+          <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
+          </button> -->
         </div>
-        <div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>
-        <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
-        </button> -->
-        <button class="btn-subscribe btn-lg btn-primary" (click)="couponClicked(plan)">Subscribe
-        </button>
-        <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
-        </button> -->
       </div>
     </div>
   </div>
 </div>
-
 <template #couponTemplateRef let-couponDialog="dialogRef">
   <div class="downloadModal">
     <div class="modal-header">
