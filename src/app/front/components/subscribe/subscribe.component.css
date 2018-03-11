@@ -8,12 +8,13 @@
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #cccccc;
+  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fafafa;
+  background-color: #000;
   transition: 300ms;
+  color:#f8c534;
 }
 
 .rp-plan:hover{
@@ -28,19 +29,54 @@
 
 .plan-price {
   font-size: 30px;
-  margin: 10px;
+  margin: 10px 1px;
 }
 
 .plan-time {
   font-size: 18px;
-  margin: 10px;
+  margin: 10px 1px;
+  text-transform: uppercase;
 }
 
 .plan-trial-period{
   font-size: 14px;
-  margin: 0 10px 10px 10px;
+  margin: 0 10px 35px 10px;
 }
 
 .discount-text {
   color: #36bc77;
+}
+
+.plans-cover-img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.page-heading{
+  text-align: center;
+  padding-bottom: 20px;
+  color:#000;
+}
+
+.btn-subscribe{
+  background: #f8c534;
+  color: #000 !important;
+  border: 1px solid #ffffff !important;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.btn-subscribe:hover,.btn-subscribe:active,.btn-subscribe:focus{
+  background: transparent;
+  border: 1px solid #f8c534 !important;
+  color: #f8c534 !important;
+}
+
+.plan-price-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 10px 0px 10px;
 }
