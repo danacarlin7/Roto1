@@ -91,12 +91,39 @@ export class FrontService {
   }
 
   getSubscribePlans(): Observable<any> {
-    return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
+    let plans = [
+      {
+        name: "All Access Monthly Rate",
+        trial_period_days: null,
+        plan_id: "RotoPros_All_Access_Analyst_Lineups_Yearly",
+        plan_type: "Subscription",
+        amount: 2999,
+        currency: "usd",
+        interval: "year",
+        interval_count: 1
+      },
+      {
+        name: "All Access Yearly Rate",
+        trial_period_days: null,
+        plan_id: "RotoPros_All_Access_Analyst_Lineups_Month",
+        plan_type: "Subscription",
+        amount: 24999,
+        currency: "usd",
+        interval: "month",
+        interval_count: 1
+      }
+    ];
+    return new Observable(observer => {
+      observer.next(plans);
+      observer.complete();
+    });
+    /*return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
+      .do(response => console.log("plans => ",JSON.stringify(response.json())))
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
-      });
+      });*/
   }
 
   subscribePlan(token, plan_id, coupon = ""): Observable<any> {
@@ -106,7 +133,7 @@ export class FrontService {
   }
 
   validateCoupon(coupon, amount) {
-  // validateCoupon(coupon): Observable<any> {
+    // validateCoupon(coupon): Observable<any> {
     console.log(coupon);
     return this.http.post(environment.api_end_point + "validateCoupon", {coupon, amount}, {headers: this.getHeaders()})
       .map(response => response.json())
@@ -126,7 +153,6 @@ export class FrontService {
         return Observable.throw(error.json())
       });
   }
-
 
 
   signUpStepTwo(token, plan_id, coupon = ""): Observable<any> {
