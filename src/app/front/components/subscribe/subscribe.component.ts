@@ -130,8 +130,12 @@ export class SubscribeComponent implements OnInit {
   }
 
   couponClicked(plan) {
-    this.selectedPlan = plan;
-    this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+    if(this.authService.isLoggedIn()){
+      this.selectedPlan = plan;
+      this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+    } else {
+      this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+    }
   }
 
   checkCoupon(coupon, couponDialog , amount ,callback) {
