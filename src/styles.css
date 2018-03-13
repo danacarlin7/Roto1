@@ -319,10 +319,10 @@ mfDefaultSorter a {
   background-color: #ffffff !important;
 }
 
-.loginDetails .loginDetailsWrapper {
+rp-sign-up .loginDetails .loginDetailsWrapper {
   display: block;
 }
 
-.loginDetails .loginDetailsWrapper .loginRghtWrapper {
+.loginDetails .loginDetailsWrapper .signupRghtWrapper {
   width: 100%;
 }

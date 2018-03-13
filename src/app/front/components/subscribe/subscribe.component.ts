@@ -79,7 +79,8 @@ export class SubscribeComponent implements OnInit {
     this.frontService.getSubscribePlans().subscribe(
       response => {
         this.isLoading = false;
-        if (this.authService.loggedUser) {
+        this.plans = response;
+        /*if (this.authService.loggedUser) {
           if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
             for (let i = 0; response.data && i < response.data.length; i++) {
               if (response.data[i].group == "all_access" || response.data[i].group == "dfsportsgods") {
@@ -119,7 +120,7 @@ export class SubscribeComponent implements OnInit {
               this.plans = this.plans.concat(response.data[i].data);
             }
           }
-        }
+        }*/
 
         if (this.route.snapshot.params["id"]) {
           this.params = this.route.snapshot.params;
@@ -134,7 +135,7 @@ export class SubscribeComponent implements OnInit {
       this.selectedPlan = plan;
       this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
     } else {
-      this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+      this.router.navigate(["/signup"], {queryParams: {redirect: location.pathname}});
     }
   }
 
@@ -155,7 +156,7 @@ export class SubscribeComponent implements OnInit {
           },
           error => {
             console.log("http error => ", error);
-            that.errorMsg  = error.data ? error.data : "Error"
+            that.errorMsg  = error.data ? error.data : "Error";
             callback(false, error.data, false)
           }
         );
@@ -171,7 +172,7 @@ export class SubscribeComponent implements OnInit {
           },
           error => {
             console.log("http error => ", error);
-            that.errorMsg  = error.data ? error.data : "Error"
+            that.errorMsg  = error.data ? error.data : "Error";
             callback(false, error.data, false)
           }
         );

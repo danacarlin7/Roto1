@@ -54,6 +54,7 @@
 .plan-name {
   font-size: 22px;
   margin: 10px;
+  min-height: 54px;
 }
 
 .plan-price {
@@ -111,10 +112,30 @@
 }
 
 .sub-title-txt{
+
 }
+
 .sub-title-txt a{
   text-decoration: underline !important;
 }
+
 .sub-title-txt a:hover{
  color: #000000 !important;
+}
+
+.loginDetails{
+  background-image: url("../../../../assets/images/stadium_small_yellow.jpg");
+  background-position: center bottom;
+  background-size: cover;
+  background-blend-mode: screen;
+  position: relative;
+}
+
+.loginDetails-overlay{
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:rgba(248, 197, 52, 0);
 }
