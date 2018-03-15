@@ -1,3 +1,6 @@
+:host{
+  background-color: #f8c534;
+}
 .rp-plan-container {
   display: flex;
   flex-direction: column;
@@ -8,12 +11,13 @@
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #cccccc;
+  border: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fafafa;
+  background-color: #000;
   transition: 300ms;
+  color:#f8c534;
 }
 
 .rp-plan:hover{
@@ -28,19 +32,99 @@
 
 .plan-price {
   font-size: 30px;
-  margin: 10px;
+  margin: 10px 1px;
 }
 
 .plan-time {
   font-size: 18px;
-  margin: 10px;
+  margin: 10px 1px;
+  text-transform: uppercase;
 }
 
 .plan-trial-period{
   font-size: 14px;
-  margin: 0 10px 10px 10px;
+  margin: 0 10px 35px 10px;
 }
 
 .discount-text {
   color: #36bc77;
 }
+
+.plans-cover-img{
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  background-color: #ffffff;
+  object-position: top center;
+}
+.cover-img-text{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0);
+  color: #f8c534;
+  font-size: 32px;
+}
+
+.page-heading{
+  text-align: center;
+  padding-bottom: 20px;
+  color:#000;
+}
+
+.btn-subscribe{
+  background: #f8c534;
+  color: #000 !important;
+  border: 1px solid #ffffff !important;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.btn-subscribe:hover,.btn-subscribe:active,.btn-subscribe:focus{
+  background: transparent;
+  border: 1px solid #f8c534 !important;
+  color: #f8c534 !important;
+}
+
+.plan-price-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 10px 20px 10px;
+}
+
+.plan-features-heading{
+  text-align: center;
+  color: #0f0f0f;
+  margin-top: 20px;
+}
+
+.feature-item-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.feature-item .item-text{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.feature-item .item-img{
+  height:150px;
+  margin-bottom: 15px;
+  border:1px solid;
+}
+.feature-list{
+  padding: 0 0 0 20px;
+  margin-bottom: 30px;
+  list-style: disc;
+}
+.feature-list li {
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 18px;
+}
+

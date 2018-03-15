@@ -1,75 +1,97 @@
-<!-- Login Page Starts -->
-<section class="loginDetails">
-  <div class="container">
+<div style="background-color: #f8c534">
+  <div style="position: relative">
+    <img class="img-responsive plans-cover-img" src="../../../../assets/images/TropheeMoney.jpg">
+    <div class="cover-img-text">Get The Access. Win Cash.</div>
+  </div>
+  <h1 class="page-heading">All Access Packages</h1>
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-7 col-lg-7">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/RpRcXAlSXio?rel=0" frameborder="0" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-5 col-lg-5">
-        <div class="loginDetailsWrapper" style="width: 100%">
-          <!--<div class="loginLftWrapper">
-            &lt;!&ndash;<img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive"/>&ndash;&gt;
-          </div>-->
-          <div class="loginRghtWrapper signupRghtWrapper" style="width: 100%">
-            <div class="mainTab">
-              <div class="tab">
-                <ul>
-                  <li style="width: 100%">
-                    <a href="#VIPPackages " class="tablinks active">All Access Packages</a>
-                  </li>
-                </ul>
-              </div>
-              <div id="VIPPackages" class="tabcontent" style="display:block;min-height: 400px">
-                <div class="rp-plan-container">
-                  <div *ngIf="showPartialSignUpMsg">
-                    Please Complete your sign up process by subscribing to any of RotoPros plans.
-                    <br><br>
-                  </div>
-                  <div class="common-loader" *ngIf="isLoading">
-                    <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
-                  </div>
-                  <div style="display: flex;justify-content: center;align-items: center" *ngIf="!plans || !plans.length">
-                    <span>No Package Found</span>
-                  </div>
-                  <div class="rp-plan" *ngFor="let plan of plans">
-                    <div class="plan-name">{{plan.name}}</div>
-                    <div class="plan-price">
+      <div class="col-md-4 col-lg-3 col-lg-offset-2 col-sm-5 "
+           [class.col-md-offset-1]="i % 2 == 0"
+           [class.col-md-offset-2]="i % 2 != 0"
+           [class.col-sm-offset-1]="i % 2 == 0"
+           *ngFor="let plan of plans;let i = index">
+        <div class="rp-plan">
+          <div class="plan-name">{{plan.name}}</div>
+          <div class="plan-price-container">
+            <div class="plan-price">
                       <span *ngIf="params.id">
                         <span class="discount-text" *ngIf="params.discount_type === 'flat'">{{(plan.amount / 100) - params.discount_rate | currency:'USD':true}}</span>
                       <span class="discount-text" *ngIf="params.discount_type === 'percentage'">{{(plan.amount / 100) * (1 - (params.discount_rate / 100)) | currency:'USD':true}}</span>
                       </span>
-                      <span *ngIf="!params.id">
-                        <span>{{(plan.amount / 100) | currency:'USD':true}}</span>
+              <span *ngIf="!params.id">
+                        <span>{{(plan.amount / 100) | currency:'USD':true}}/</span>
                       </span>
-                    </div>
-                    <div class="plan-time">{{'/'+plan.interval_count+' '+plan.interval}}</div>
-                    <div class="plan-trial-period" *ngIf="params.trial_period_days">{{'('+plan.trial_period_days+'-days free trial)'}}</div>
-                    <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
-                    </button> -->
-                    <button class="btn-subscribe btn-lg btn-primary" (click)="couponClicked(plan)">Subscribe
-                    </button>
-                    <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
-                    </button> -->
-
-
-                  </div>
-                </div>
-              </div>
+            </div>
+            <div class="plan-time">{{plan.interval_count+' '+plan.interval}}</div>
+          </div>
+          <!--<div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>-->
+          <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
+          </button> -->
+          <button class="btn-subscribe btn-lg btn-primary" (click)="couponClicked(plan)">Subscribe
+          </button>
+          <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
+          </button> -->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="plan-features-heading">Why You Should Become A Member</h1>
+      </div>
+      <div class="col-sm-12">
+        <div class="feature-item-container">
+          <div class="feature-item">
+            <div class="item-img"></div>
+            <div class="item-text">
+              Daily Skeleton Lineups
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="item-img"></div>
+            <div class="item-text">
+              24/7 Members Only Stack Chat
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="item-img"></div>
+            <div class="item-text">
+              Premium Articles
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="item-img"></div>
+            <div class="item-text">
+              Coaching From Our Pros
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="item-img"></div>
+            <div class="item-text">
+              Pre and Post Lock Live Stream Analysis
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="plan-features-heading">Premium Features</h1>
+      </div>
+      <div class="col-sm-12">
+        <ul class="feature-list">
+          <li>Daily Skeleton lineups(2 empty spots)</li>
+          <li>24/7 Slack chat room with around clock interaction with RotoPros coaches and community members</li>
+          <li>Unique DFS content for following sports: NFL, NBA, MLB, NHL, Soccer, MMA, PGA</li>
+          <li>Personalized coaching from top DraftKings and FanDule players</li>
+          <li>Podcasts and live shows that give insight to DFS success</li>
+          <li>Relevant news updates and Breaking news</li>
+          <li>MLB player projections</li>
+        </ul>
+      </div>
+    </div>
   </div>
-</section>
-<!-- Login Page Ends -->
-
+</div>
 <template #couponTemplateRef let-couponDialog="dialogRef">
   <div class="downloadModal">
     <div class="modal-header">
@@ -96,7 +118,7 @@
 
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" (click)="onBtnSubscribeClick(couponDialog, couponCode.value);"><span
-       area-hidden="true"></span> Apply
+        area-hidden="true"></span> Apply
       </button>
       <button type="button" class="btn btn-default" (click)="onBtnSubscribeClick(couponDialog, false);">Skip</button>
     </div>

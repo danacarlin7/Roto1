@@ -5,55 +5,66 @@ import {FormGroup, FormControl, Validators, AbstractControl} from "@angular/form
 import {UserDashboardServices} from "../../../user/services/user-dashboard.service";
 import {environment} from "../../../../environments/environment";
 import {FrontService} from "../../services/front.service";
+
 /**
  * Created by Hiren on 07-06-2017.
  */
 
 @Component({
-  selector: 'rp-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  selector: "rp-sign-up",
+  templateUrl: "./sign-up.component.html",
+  styleUrls: ["./sign-up.component.css"]
 })
 export class SignUpComponent {
 
   signUpForm: FormGroup;
   signUpErrors: string;
-  username = '';
+  username = "";
   username_error = 0;
   isUserExist: number = 0;
   checkingUserName: boolean;
 
-  @ViewChild('signUpError') signUpErrorRef: ElementRef;
+  plans: Array<any> = [];
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private renderer: Renderer2,
-    private dashboardService: UserDashboardServices,
-    private frontService: FrontService
-  ) {
+  @ViewChild("signUpError") signUpErrorRef: ElementRef;
+
+  constructor(private authService: AuthService,
+              private router: Router,
+              private renderer: Renderer2,
+              private dashboardService: UserDashboardServices,
+              private frontService: FrontService) {
     this.signUpForm = new FormGroup({
-      userName: new FormControl('', Validators.required),
-      fName: new FormControl('', Validators.required),
-      lName: new FormControl('', Validators.required),
-      phone: new FormControl(''),
-      email: new FormControl('', [Validators.required, this.mailFormat]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
-      tnc: new FormControl('')
+      userName: new FormControl("", Validators.required),
+      fName: new FormControl("", Validators.required),
+      lName: new FormControl("", Validators.required),
+      phone: new FormControl(""),
+      email: new FormControl("", [Validators.required, this.mailFormat]),
+      password: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
+      confirmPassword: new FormControl("", [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
+      tnc: new FormControl("")
     }, this.passwordValidator)
   }
 
   ngOnInit() {
-
+    this.frontService.getSubscribePlans().subscribe(
+      response => {
+        this.plans = response;
+        /*for (let i = 0; response.data && i < response.data.length; i++) {
+          if (response.data[i].group == "rotopros") {
+            this.plans = this.plans.concat(response.data[i].data);
+          }
+        }
+        this.plans = this.plans.slice(0, Math.min(2, this.plans.length));*/
+      }
+    );
   }
 
 
   onTxtUserNameBlur() {
-    if (this.username == this.signUpForm.value['userName']) {
+    if (this.username == this.signUpForm.value["userName"]) {
       return;
     }
-    this.username = this.signUpForm.value['userName'];
+    this.username = this.signUpForm.value["userName"];
     if (this.username && this.username.trim().length) {
       this.checkUserName(this.username);
     } else {
@@ -61,7 +72,7 @@ export class SignUpComponent {
     }
   }
 
-  checkUserName(name:string) {
+  checkUserName(name: string) {
     this.checkingUserName = true;
     this.dashboardService.checkUserName(name)
       .subscribe(
@@ -77,25 +88,25 @@ export class SignUpComponent {
         },
         error => {
           this.checkingUserName = false;
-          console.log('username check error => ', error);
+          console.log("username check error => ", error);
         }
       )
   }
 
-  mailFormat(control:AbstractControl) {
+  mailFormat(control: AbstractControl) {
 
     const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
 
-    if (control.value != '' && (control.value.length <= 5 || !EMAIL_REGEXP.test(control.value))) {
-      return {'incorrectMailFormat': true};
+    if (control.value != "" && (control.value.length <= 5 || !EMAIL_REGEXP.test(control.value))) {
+      return {"incorrectMailFormat": true};
     }
 
     return null;
   }
 
   passwordValidator(fc: AbstractControl) {
-    const pwd1: AbstractControl = fc.get('password');
-    const pwd2: AbstractControl = fc.get('confirmPassword');
+    const pwd1: AbstractControl = fc.get("password");
+    const pwd2: AbstractControl = fc.get("confirmPassword");
     if (pwd1.dirty && pwd2.dirty && (pwd1.value != pwd2.value)) {
       return {
         passwordValidator: {
@@ -119,7 +130,7 @@ export class SignUpComponent {
       .subscribe(
         response => {
           if (response.statusCode == 200) {
-            console.log('sign up successful => ', response);
+            console.log("sign up successful => ", response);
             /*this.authService.registerWP(JSON.stringify(data)).subscribe(
               success => {
                 console.log('WP user registered.');
@@ -129,7 +140,7 @@ export class SignUpComponent {
               }
             );*/
             this.authService.partialUser = response.data;
-            this.router.navigate(['/subscribe']);
+            this.router.navigate(["/subscribe"]);
           }
         },
         error => {
