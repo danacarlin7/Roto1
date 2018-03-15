@@ -109,7 +109,7 @@
               <!--<a routerLink="/lineup-optimizer/nba" (click)="closeMobileMenu()">NBA Optimizer</a>-->
 
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/subscribe" (click)="closeMobileMenu()">Plans</a>
+                <a (click)="closeMobileMenu();onPlansClick()" style="cursor: pointer">Plans</a>
               </li>
 
               <li id="rss">
