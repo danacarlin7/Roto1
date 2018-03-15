@@ -45,6 +45,13 @@ export class ArticleService {
       .catch(error => Observable.throw(error.json()))
   }
 
+  fetchCategory(id: number): Observable<any> {
+    var endpoint = this.provider + 'categories/' + id;
+    return this.http.get(endpoint)
+      .map(response => response.json())
+      .catch(error => Observable.throw(error.json()))
+  }
+
   fetchMedia(args:Object): Observable<Array<any>> {
     var query = [] ;
     for(var key in args)
