@@ -35,7 +35,9 @@ export class FrontService {
         return Observable.throw(error.json())
       });
   }
-
+ retrieveSpecificNews(sportType: number): Observable<any> {
+    return this.http.get("http://wordpress.rotopros.com/wp-json/wp/v2/posts?tags=" + sportType);
+  }
   retrieveHomepageNews(): Observable<any> {
     return this.http.get(environment.api_end_point + "fetchLatestNews?count=10", {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
