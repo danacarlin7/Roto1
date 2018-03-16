@@ -63,13 +63,14 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active">
-                    <div class="no-news-msg" *ngIf="!newsRecords || !newsRecords.length">No news available !!</div>
+                    <div class="no-news-msg" *ngIf="!newsRecords || !newsRecords.length">Currently no news available</div>
                     <div class="newsItmWrap">
                       <div class="newsItm" *ngFor="let news of newsRecords | paginate: {
                                                       itemsPerPage: 10,
                                                       currentPage: currentPage}">
                         <div class="newsItmTp">
                           <div class="newsItmNameWrap">
+                              <div [innerHTML]="news.content.rendered"></div>
                             <div class="newsItmName">
                               <span class="newsImg">
                                 <img [attr.src]="news?.player?.player_image" alt=""
