@@ -98,7 +98,7 @@ export class FrontService {
         plan_type: "Subscription",
         amount: 2999,
         currency: "usd",
-        interval: "year",
+        interval: "month",
         interval_count: 1
       },
       {
@@ -108,7 +108,7 @@ export class FrontService {
         plan_type: "Subscription",
         amount: 24999,
         currency: "usd",
-        interval: "month",
+        interval: "year",
         interval_count: 1
       }
     ];
