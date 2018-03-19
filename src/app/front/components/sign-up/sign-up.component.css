@@ -52,14 +52,20 @@
 }
 
 .plan-name {
-  font-size: 22px;
+  font-size: 24px;
   margin: 10px;
   min-height: 54px;
+  text-align: center;
 }
 
 .plan-price {
   font-size: 30px;
   margin: 10px 1px;
+}
+
+@media (max-width: 1199px) {
+  .rp-plan {padding: 0}
+  .plan-price {font-size: 24px;}
 }
 
 .plan-time {

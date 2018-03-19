@@ -37,6 +37,7 @@ import {NFLExcelToolComponent} from "./components/excel-tool-nfl/nfl-excel-tool.
 import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 import { PodcastComponent } from './components/podcast/podcast.component';
+import {PlanComponent} from "./components/plan/plan.component";
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -76,6 +77,7 @@ const routes: Routes = [
       { path: "nba-lineups", component: GeneratedNBALineupsComponent },
       { path: "injuries", component: InjuriesComponent },
       { path: "subscribe", component: SubscribeComponent },
+      { path: "plans", component: PlanComponent },
       { path: "contact-analyzer", component: ContactAnalyzerComponent },
       { path: "podcast", component: PodcastComponent },
     ]

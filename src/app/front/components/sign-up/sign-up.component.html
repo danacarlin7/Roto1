@@ -13,7 +13,7 @@
                   <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt=""
                                                      class="img-responsive"/></span><span>Sign Up</span></h3>
                   <!-- <p>Signup for a free account today.</p> -->
-                  <p class="sub-title-txt"><a routerLink="/subscribe">Explore out plans in details</a> or sign up below. </p>
+                  <p class="sub-title-txt"><a routerLink="/subscribe" style="color: #999">Explore out plans in details</a> or sign up below. </p>
                   <div #signUpError>
                     <div class="alert alert-danger fade " [class.in]="signUpErrors">
                       <span>{{signUpErrors}}</span>
@@ -122,6 +122,8 @@
                 <div class="col-sm-12">
                   <h2 class="page-heading">All Access Packages</h2>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6" *ngFor="let plan of plans;let i = index">
                   <div class="rp-plan">
                     <div class="plan-name">{{plan.name}}</div>

@@ -1,18 +1,21 @@
-import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
-import { AuthService } from '../../../shared/services/auth.service';
-import { LoggedUser } from '../../../shared/models/logged-user.model';
+import {Component, ViewChild, ElementRef, HostListener} from "@angular/core";
+import {AuthService} from "../../../shared/services/auth.service";
+import {LoggedUser} from "../../../shared/models/logged-user.model";
+import {Router} from "@angular/router";
+
 /**
  * Created by Hiren on 05-06-2017.
  */
 
-declare var jQuery:any;
+declare var jQuery: any;
+
 @Component({
-  selector: 'rp-front-header',
-  templateUrl: './front-header.component.html',
-  styleUrls: ['./front-header.component.css']
+  selector: "rp-front-header",
+  templateUrl: "./front-header.component.html",
+  styleUrls: ["./front-header.component.css"]
 })
 export class FrontHeaderComponent {
-  @ViewChild('profilePic') profilePic: ElementRef;
+  @ViewChild("profilePic") profilePic: ElementRef;
 
   isLoggedIn: boolean;
   profileImagePath: string;
@@ -21,7 +24,7 @@ export class FrontHeaderComponent {
   headerIsStacked: boolean;
   headerStackThreshold = 1150;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.role = this.authService.getUserRole();
     this.loggedUser = this.authService.loggedUser;
@@ -34,7 +37,7 @@ export class FrontHeaderComponent {
         this.loggedUser = user;
         this.profileImagePath = this.loggedUser.profile_image;
         if (this.profileImagePath) {
-          jQuery(this.profilePic.nativeElement).attr("src", 'https://api.dfsportgod.com/images/' + this.profileImagePath);
+          jQuery(this.profilePic.nativeElement).attr("src", "https://api.dfsportgod.com/images/" + this.profileImagePath);
         }
       }
     );
@@ -47,7 +50,7 @@ export class FrontHeaderComponent {
   }
 
   ngAfterViewInit() {
-    jQuery('.menuToggle').click(function () {
+    jQuery(".menuToggle").click(function () {
       jQuery(".mainMenu").addClass("tglMnu");
     });
 
@@ -91,23 +94,23 @@ export class FrontHeaderComponent {
 
   logoutUser() {
     this.authService.logout();
-    this.removeCookie('dfs_wp_user');
-    this.removeCookie('dfs_wp_email');
-    this.createCookie('dfs_wp_logout', 1, 1);
+    this.removeCookie("dfs_wp_user");
+    this.removeCookie("dfs_wp_email");
+    this.createCookie("dfs_wp_logout", 1, 1);
   }
 
   removeCookie(name) {
-    document.cookie = name + '=; expires=' + new Date(0).toUTCString() + '; domain=rotopros.com; path=/';
+    document.cookie = name + "=; expires=" + new Date(0).toUTCString() + "; domain=rotopros.com; path=/";
   }
 
   createCookie(name, value, days) {
-    let expires = '';
+    let expires = "";
     if (days) {
       const date = new Date();
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = '; expires=' + date.toUTCString();
+      expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + '=' + value + expires + '; domain=rotopros.com; path=/';
+    document.cookie = name + "=" + value + expires + "; domain=rotopros.com; path=/";
   }
 
   onResize(event) {
@@ -115,6 +118,14 @@ export class FrontHeaderComponent {
       this.headerIsStacked = false;
     } else if (event.target.innerWidth <= this.headerStackThreshold && !this.headerIsStacked) {
       this.headerIsStacked = true;
+    }
+  }
+
+  onPlansClick() {
+    if (this.isLoggedIn) {
+      this.router.navigate(["/subscribe"]);
+    } else {
+      this.router.navigate(["/plans"]);
     }
   }
 }

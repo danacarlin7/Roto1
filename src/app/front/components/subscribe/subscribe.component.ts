@@ -42,7 +42,7 @@ export class SubscribeComponent implements OnInit {
   period_text = {week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually"};
 
   @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
-  @ViewChild('couponTemplateRef') public couponTemplateRef:TemplateRef<any>;
+  @ViewChild("couponTemplateRef") public couponTemplateRef: TemplateRef<any>;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -79,8 +79,7 @@ export class SubscribeComponent implements OnInit {
     this.frontService.getSubscribePlans().subscribe(
       response => {
         this.isLoading = false;
-        this.plans = response;
-        /*if (this.authService.loggedUser) {
+        if (this.authService.loggedUser) {
           if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
             for (let i = 0; response.data && i < response.data.length; i++) {
               if (response.data[i].group == "all_access" || response.data[i].group == "dfsportsgods") {
@@ -120,7 +119,7 @@ export class SubscribeComponent implements OnInit {
               this.plans = this.plans.concat(response.data[i].data);
             }
           }
-        }*/
+        }
 
         if (this.route.snapshot.params["id"]) {
           this.params = this.route.snapshot.params;
@@ -131,7 +130,7 @@ export class SubscribeComponent implements OnInit {
   }
 
   couponClicked(plan) {
-    if(this.authService.isLoggedIn()){
+    if (this.authService.isLoggedIn() || this.authService.partialUser) {
       this.selectedPlan = plan;
       this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
     } else {
@@ -139,7 +138,7 @@ export class SubscribeComponent implements OnInit {
     }
   }
 
-  checkCoupon(coupon, couponDialog , amount ,callback) {
+  checkCoupon(coupon, couponDialog, amount, callback) {
     let that = this;
     console.log(coupon);
     if (this.authService.isLoggedIn() && coupon) {
@@ -148,15 +147,15 @@ export class SubscribeComponent implements OnInit {
         .subscribe(
           response => {
             if (response.statusCode === 200) {
-                that.errorMsg = "";
-                console.log("validateCouponAdvance Success => ", response.data);
-                // couponDialog.close();
-                callback(true, coupon, response.data.amount);
+              that.errorMsg = "";
+              console.log("validateCouponAdvance Success => ", response.data);
+              // couponDialog.close();
+              callback(true, coupon, response.data.amount);
             }
           },
           error => {
             console.log("http error => ", error);
-            that.errorMsg  = error.data ? error.data : "Error";
+            that.errorMsg = error.data ? error.data : "Error";
             callback(false, error.data, false)
           }
         );
@@ -172,12 +171,12 @@ export class SubscribeComponent implements OnInit {
           },
           error => {
             console.log("http error => ", error);
-            that.errorMsg  = error.data ? error.data : "Error";
+            that.errorMsg = error.data ? error.data : "Error";
             callback(false, error.data, false)
           }
         );
     } else {
-      callback(true,"empty", amount);
+      callback(true, "empty", amount);
     }
   }
 
@@ -229,13 +228,13 @@ export class SubscribeComponent implements OnInit {
   //   }
   // }
 
-  onBtnSubscribeClick(couponDialog , coupon) {
+  onBtnSubscribeClick(couponDialog, coupon) {
     // this.selectedPlan = plan;
     let that = this;
     console.log(coupon);
-    this.checkCoupon(coupon, couponDialog, that.selectedPlan.amount , function(status, resp, finalAmount){
+    this.checkCoupon(coupon, couponDialog, that.selectedPlan.amount, function (status, resp, finalAmount) {
       console.log(that.userToken.length, finalAmount);
-      if(status){
+      if (status) {
         couponDialog.close();
         localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
         if (that.authService.isLoggedIn() || that.userToken.length) {
@@ -247,7 +246,7 @@ export class SubscribeComponent implements OnInit {
               // Get the token ID to your server-side code for use.
               console.log("token call back => ", token);
               that.coupon = resp != "empty" && status ? resp : "";
-              if(that.authService.isLoggedIn()){
+              if (that.authService.isLoggedIn()) {
                 that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
                   .subscribe(
                     response => {
@@ -270,7 +269,7 @@ export class SubscribeComponent implements OnInit {
                       }
                     }
                   );
-              }else{
+              } else {
                 console.log("i am here", that.coupon);
                 that.frontService.signUpStepTwo(token.id, that.selectedPlan.plan_id, that.coupon)
                   .subscribe(
@@ -290,7 +289,10 @@ export class SubscribeComponent implements OnInit {
 
                         that.router.navigate([
                           "/homeRedirect",
-                          {redirected: true, redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."}]);
+                          {
+                            redirected: true,
+                            redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
+                          }]);
                       }
                     }
                   );
@@ -307,7 +309,9 @@ export class SubscribeComponent implements OnInit {
             // image: "http://13.57.84.196/assets/images/logo.png"
           });
         } else {
-          that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+          setTimeout(() => {
+            that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
+          }, 100)
         }
       }
     })

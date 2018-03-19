@@ -89,9 +89,8 @@ export class FrontService {
         return Observable.throw(error.json())
       });
   }
-
-  getSubscribePlans(): Observable<any> {
-    let plans = [
+  getDummyPlans():any[]{
+    return [
       {
         name: "All Access Monthly Rate",
         trial_period_days: null,
@@ -99,7 +98,7 @@ export class FrontService {
         plan_type: "Subscription",
         amount: 2999,
         currency: "usd",
-        interval: "year",
+        interval: "month",
         interval_count: 1
       },
       {
@@ -109,21 +108,19 @@ export class FrontService {
         plan_type: "Subscription",
         amount: 24999,
         currency: "usd",
-        interval: "month",
+        interval: "year",
         interval_count: 1
       }
     ];
-    return new Observable(observer => {
-      observer.next(plans);
-      observer.complete();
-    });
-    /*return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
+  }
+  getSubscribePlans(): Observable<any> {
+    return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
       .do(response => console.log("plans => ",JSON.stringify(response.json())))
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())
-      });*/
+      });
   }
 
   subscribePlan(token, plan_id, coupon = ""): Observable<any> {

@@ -46,17 +46,7 @@ export class SignUpComponent {
   }
 
   ngOnInit() {
-    this.frontService.getSubscribePlans().subscribe(
-      response => {
-        this.plans = response;
-        /*for (let i = 0; response.data && i < response.data.length; i++) {
-          if (response.data[i].group == "rotopros") {
-            this.plans = this.plans.concat(response.data[i].data);
-          }
-        }
-        this.plans = this.plans.slice(0, Math.min(2, this.plans.length));*/
-      }
-    );
+    this.plans = this.frontService.getDummyPlans();
   }
 
 
