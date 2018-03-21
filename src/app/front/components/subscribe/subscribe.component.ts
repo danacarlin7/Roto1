@@ -71,6 +71,28 @@ export class SubscribeComponent implements OnInit {
       this.userToken = this.authService.partialUser.token;
       this.email = this.authService.partialUser.email;
       console.log(this.userToken);
+
+      // FB Pixel : Lead
+      const script = document.createElement('script');
+      script.innerHTML = `!function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('track', 'Lead', {
+        content_name: `+this.authService.partialUser.email+`,
+        content_category: 'Lead'
+      });`;
+
+      document.head.appendChild(script);
+
+      const noscript = document.createElement('noscript');
+      script.innerHTML = `<img height="1" width="1"
+           src="https://www.facebook.com/tr?id=863624127129002&ev=Lead&noscript=1"/>`;
+      document.head.appendChild(noscript);
     }
   }
 
@@ -236,6 +258,7 @@ export class SubscribeComponent implements OnInit {
       console.log(that.userToken.length, finalAmount);
       if (status) {
         couponDialog.close();
+
         localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
         if (that.authService.isLoggedIn() || that.userToken.length) {
           var handler = (<any>window).StripeCheckout.configure({
@@ -246,12 +269,74 @@ export class SubscribeComponent implements OnInit {
               // Get the token ID to your server-side code for use.
               console.log("token call back => ", token);
               that.coupon = resp != "empty" && status ? resp : "";
+
+              // FB Pixel : InitiateCheckout
+              const script = document.createElement('script');
+              script.innerHTML = `!function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window,document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('track', 'InitiateCheckout', {
+                content_ids: [`+that.selectedPlan.plan_id+`],
+                content_name: `+that.selectedPlan.name+`,
+                content_category: 'Subscription',
+                content_type: 'product',
+                value: `+that.selectedPlan.amount+`,
+                currency: 'USD'
+              });`;
+
+              document.head.appendChild(script);
+
+              const noscript = document.createElement('noscript');
+              script.innerHTML = `<img height="1" width="1"
+                   src="https://www.facebook.com/tr?id=863624127129002&ev=InitiateCheckout&noscript=1"/>`;
+              document.head.appendChild(noscript);
+
+              // fbq('track', 'Purchase', {
+              //   content_ids: [that.selectedPlan.plan_id],
+              //   content_name: that.selectedPlan.name,
+              //   content_category: 'Subscription',
+              //   content_type: 'product',
+              //   value: that.selectedPlan.amount,
+              //   currency: 'USD'
+              // })
+
               if (that.authService.isLoggedIn()) {
                 that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
                   .subscribe(
                     response => {
                       if (response.statusCode == 200) {
                         console.log("subscribePlan Success => ", response.data);
+
+                        // FB Pixel : Purchase
+                        const script = document.createElement('script');
+                        script.innerHTML = `!function(f,b,e,v,n,t,s)
+                        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                          n.queue=[];t=b.createElement(e);t.async=!0;
+                          t.src=v;s=b.getElementsByTagName(e)[0];
+                          s.parentNode.insertBefore(t,s)}(window,document,'script',
+                          'https://connect.facebook.net/en_US/fbevents.js');
+                        fbq('track', 'Purchase', {
+                          content_ids: [`+that.selectedPlan.plan_id+`],
+                          content_name: `+that.selectedPlan.name+`,
+                          content_category: 'Subscription',
+                          content_type: 'product',
+                          value: `+that.selectedPlan.amount+`,
+                          currency: 'USD'
+                        });`;
+
+                        document.head.appendChild(script);
+
+                        const noscript = document.createElement('noscript');
+                        script.innerHTML = `<img height="1" width="1"
+                             src="https://www.facebook.com/tr?id=863624127129002&ev=Purchase&noscript=1"/>`;
+                        document.head.appendChild(noscript);
 
                         that.authService.retrieveLoggedUserInfo()
                           .subscribe(
@@ -276,6 +361,32 @@ export class SubscribeComponent implements OnInit {
                     response => {
                       if (response.statusCode == 200) {
                         console.log("subscribePlan Success => ", response.data);
+
+                        // FB Pixel : Purchase
+                        const script = document.createElement('script');
+                        script.innerHTML = `!function(f,b,e,v,n,t,s)
+                        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                          n.queue=[];t=b.createElement(e);t.async=!0;
+                          t.src=v;s=b.getElementsByTagName(e)[0];
+                          s.parentNode.insertBefore(t,s)}(window,document,'script',
+                          'https://connect.facebook.net/en_US/fbevents.js');
+                        fbq('track', 'Purchase', {
+                          content_ids: [`+that.selectedPlan.plan_id+`],
+                          content_name: `+that.selectedPlan.name+`,
+                          content_category: 'Subscription',
+                          content_type: 'product',
+                          value: `+that.selectedPlan.amount+`,
+                          currency: 'USD'
+                        });`;
+
+                        document.head.appendChild(script);
+
+                        const noscript = document.createElement('noscript');
+                        script.innerHTML = `<img height="1" width="1"
+                             src="https://www.facebook.com/tr?id=863624127129002&ev=Purchase&noscript=1"/>`;
+                        document.head.appendChild(noscript);
 
                         that.authService.retrieveLoggedUserInfo()
                           .subscribe(
@@ -308,6 +419,7 @@ export class SubscribeComponent implements OnInit {
             // panelLabel: status ? "Amount After Discount" : "Pay"
             // image: "http://13.57.84.196/assets/images/logo.png"
           });
+
         } else {
           setTimeout(() => {
             that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
