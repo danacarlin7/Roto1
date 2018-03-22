@@ -131,7 +131,7 @@ export class SignUpComponent {
             );*/
 
             // FB Pixel : Lead
-            const script = document.createElement('script');
+            let script = document.createElement('script');
             script.innerHTML = `!function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -141,14 +141,14 @@ export class SignUpComponent {
               s.parentNode.insertBefore(t,s)}(window,document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
             fbq('track', 'CompleteRegistration', {
-              content_name: `+response.data.email+`,
+              content_name: '`+response.data.email+`',
               content_category: 'Registration'
             });`;
 
             document.head.appendChild(script);
 
-            const noscript = document.createElement('noscript');
-            script.innerHTML = `<img height="1" width="1"
+            let noscript = document.createElement('noscript');
+            noscript.innerHTML = `<img height="1" width="1"
                  src="https://www.facebook.com/tr?id=863624127129002&ev=CompleteRegistration&noscript=1"/>`;
             document.head.appendChild(noscript);
 
