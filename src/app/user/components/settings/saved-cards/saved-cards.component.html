@@ -3,9 +3,23 @@
     <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
   </div>
 
+
+
+
   <div class="row">
-    <div class="col-sm-offset-11 col-sm-1">
-      <button type="button" class="btn btn-primary my-btn" (click)="onCardAddBtnClicked()">Add</button>
+
+    <div class="col-sm-10" *ngIf="isSuccess === false">
+      <!-- <div class="alert alert-success fade in" *ngIf="isSuccess">
+        {{ responseMessage }}
+      </div> -->
+      <div class="alert alert-warning fade in" >
+        {{ responseMessage }}
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary my-btn" (click)="onCardAddBtnClicked()" *ngIf="!isCard">Add</button>
+      <button type="button" class="btn btn-primary my-btn" (click)="onCardRmvBtnClicked()" *ngIf="isCard">Remove</button>
     </div>
     <div class="col-xs-12">
       &nbsp;
@@ -21,7 +35,7 @@
       &nbsp;
     </div>
 
-    <button type="button" *ngIf="card" class="btn btn-primary my-btn col-xs-2 col-xs-offset-5" (click)="addCard()">Add Card</button>
+    <button type="button" *ngIf="isCard" class="btn btn-primary my-btn col-xs-2 col-xs-offset-5" (click)="addCard()">Add Card</button>
 
     <div class="col-xs-12">
       &nbsp;
@@ -31,20 +45,22 @@
 
 
 
+
+
   <div class="cards-container row">
 
     <div class="card payment-card col-xs-6" style="background:#d2270c85" *ngFor="let card of cards">
-      <!-- <div class="card-actions">
-        <button  (click)="onCardRemoveBtnClicked(card)" [class.active]="true"><md-icon>delete</md-icon></button>
-        <span (click)="onCardDefaultBtnClicked(card)" [md-tooltip]="card.card_id == defaultCard ? 'Default card' : 'Set as default card for future payments'" [class.active]="true"><md-icon>{{card.card_id == defaultCard ? 'star' : 'star_border'}}</md-icon></span>
-        <span (click)="onCardDefaultBtnClicked(card)"><md-icon>close</md-icon></span>
+
+      <!-- <div>
+        <span [md-tooltip]="card.card_id == defaultCard ? 'Default card' : 'Set as default card for future payments'" [class.active]="true"><md-icon>{{card.card_id == defaultCard ? 'star' : 'star_border'}}</md-icon></span>
+        <span  ><md-icon>close</md-icon></span>
       </div> -->
       <div class="card-actions">
         <span (click)="onCardDefaultBtnClicked(card)"
               [md-tooltip]="card.card_id == defaultCard ? 'Default card' : 'Set as default card for future payments'"
-              [class.active]="card.card_id == defaultCard"><md-icon>{{card.card_id == defaultCard ? 'star' : 'star_border'}}</md-icon></span>
+              [class.active]="true"><md-icon>{{card.card_id == defaultCard ? 'star' : 'star_border'}}</md-icon></span>
         <span (click)="onCardRemoveBtnClicked(card)"
-              md-tooltip="Remove card"><md-icon>clear</md-icon></span>
+              md-tooltip="Remove card" [class.active]="true"><md-icon>clear</md-icon></span>
       </div>
 
       <div class="bank-name" title="bank">{{card.brand}}</div>
@@ -64,6 +80,7 @@
           </div>
         </div>
       </div>
+
       <div class="lines-down"></div>
       <div class="lines-up"></div>
 

@@ -16,7 +16,10 @@ export class SavedCardsComponent {
   cards:PaymentCard[];
   isLoading:boolean;
   defaultCard:string;
+  isCard: boolean;
   card: any;
+  responseMessage: any;
+  isSuccess: boolean;
   // Create a Stripe client.
   stripe = (<any>window).Stripe('pk_test_A5XmrDsft5PHHvkxOKISsUR7');
 
@@ -24,32 +27,44 @@ export class SavedCardsComponent {
 
   }
 
+
   ngOnInit() {
     this.getSavedCards();
   }
 
   getSavedCards() {
     this.isLoading = true;
+    this.isCard = false;
+    this.isSuccess = true;
     this.dashboardService.getSavedCards()
       .subscribe(
         response => {
           this.isLoading = false;
           if (response.statusCode == 200) {
             this.cards = response.data.stripe_cards;
+
             this.defaultCard = response.data.default_payment_source;
             console.log("cards => ", this.cards);
+            if(!this.cards.length) {
+              this.isSuccess = false;
+              this.responseMessage = "You don't have any card!!!";
+            }
           }
           else {
-
+            this.isSuccess = false;
+            this.responseMessage = "Server error";
           }
         },
         error => {
           this.isLoading = false;
+          this.isSuccess = false;
+          this.responseMessage = error;
         }
       )
   }
 
   onCardDefaultBtnClicked(card:PaymentCard) {
+    console.log("default click");
     if (card.card_id != this.defaultCard) {
       this.dashboardService.updateDefaultPaymentCard(card.card_id)
         .subscribe(
@@ -80,9 +95,14 @@ export class SavedCardsComponent {
       )
   }
 
+  onCardRmvBtnClicked(){
+    this.card.destroy('#card-element');
+    this.isCard = false;
+    this.isSuccess = true;
+  }
+
+
   onCardAddBtnClicked() {
-
-
 
     // Create an instance of Elements.
     var elements = this.stripe.elements();
@@ -107,11 +127,12 @@ export class SavedCardsComponent {
     };
 
     // Create an instance of the card Element.
-    this.card = elements.create('card', {style: style});
+    this.card = elements.create('card', {hidePostalCode: true, style: style});
 
     // Add an instance of the card Element into the `card-element` <div>.
     this.card.mount('#card-element');
 
+    this.isCard = true;
     // Handle real-time validation errors from the card Element.
     // this.card.addEventListener('change', function(event) {
     //   var displayError = document.getElementById('card-errors');
@@ -234,12 +255,16 @@ export class SavedCardsComponent {
             .subscribe(
               response => {
                 if (response.statusCode == 200) {
-                  that.card = "";
+                  that.card.destroy('#card-element');
+                  that.isSuccess = true;
                   that.getSavedCards();
                 }
               },
               error => {
                 console.log("Http error => ", error);
+
+                that.isSuccess = false;
+                that.responseMessage = error.message;
               }
             )
         }
