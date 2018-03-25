@@ -8,15 +8,15 @@ import {
   ViewChild,
   NgModuleRef
 } from "@angular/core";
-import { ActivatedRoute, Params, Router } from "@angular/router";
-import { Subscription } from "rxjs";
-import { Overlay } from "angular2-modal";
-import { overlayConfigFactory } from "angular2-modal";
-import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {Overlay} from "angular2-modal";
+import {overlayConfigFactory} from "angular2-modal";
+import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
 import "rxjs/Rx";
-import { AuthService } from "../../../shared/services/auth.service";
-import { FrontService } from "../../services/front.service";
-import { environment } from "../../../../environments/environment";
+import {AuthService} from "../../../shared/services/auth.service";
+import {FrontService} from "../../services/front.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: "app-subscribe",
@@ -40,19 +40,19 @@ export class SubscribeComponent implements OnInit {
 
   unsubscribeOption = "at_period_end";
 
-  period_text = { week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually" };
+  period_text = {week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually"};
 
   @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
   @ViewChild("couponTemplateRef") public couponTemplateRef: TemplateRef<any>;
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    private frontService: FrontService,
-    private injector: Injector,
-    overlay: Overlay,
-    vcRef: ViewContainerRef,
-    public modal: Modal) {
+              private route: ActivatedRoute,
+              private authService: AuthService,
+              private frontService: FrontService,
+              private injector: Injector,
+              overlay: Overlay,
+              vcRef: ViewContainerRef,
+              public modal: Modal) {
 
     // console.log($("rotohead"));
 
@@ -60,14 +60,14 @@ export class SubscribeComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       this.userData = this.authService.retrieveLoggedUserInfo()
         .subscribe(
-        response => {
-          console.log("response from subscription in front-header.component");
-          if (response.statusCode == 200) {
-            this.userData = response.data;
-            this.email = this.userData.email;
-            this.authService.loggedUser = this.userData;
+          response => {
+            console.log("response from subscription in front-header.component");
+            if (response.statusCode == 200) {
+              this.userData = response.data;
+              this.email = this.userData.email;
+              this.authService.loggedUser = this.userData;
+            }
           }
-        }
         );
     }
     if (this.authService.partialUser) {
@@ -79,7 +79,7 @@ export class SubscribeComponent implements OnInit {
       // that.addPixelEvent('InitiateCheckout', that.selectedPlan);
 
       // FB Pixel : Lead
-      let script = document.createElement('script');
+      let script = document.createElement("script");
       script.innerHTML = `!function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -89,13 +89,13 @@ export class SubscribeComponent implements OnInit {
         s.parentNode.insertBefore(t,s)}(window,document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
       fbq('track', 'Lead', {
-        content_name: '`+ this.authService.partialUser.email + `',
+        content_name: '` + this.authService.partialUser.email + `',
         content_category: 'Lead',
       });`;
 
       document.head.appendChild(script);
 
-      let noscript = document.createElement('noscript');
+      let noscript = document.createElement("noscript");
       noscript.innerHTML = `<img height="1" width="1"
            src="https://www.facebook.com/tr?id=863624127129002&ev=Lead&noscript=1"/>`;
       document.head.appendChild(noscript);
@@ -161,9 +161,9 @@ export class SubscribeComponent implements OnInit {
   couponClicked(plan) {
     if (this.authService.isLoggedIn() || this.authService.partialUser) {
       this.selectedPlan = plan;
-      this.modal.open(this.couponTemplateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext));
+      this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
     } else {
-      this.router.navigate(["/signup"], { queryParams: { redirect: location.pathname } });
+      this.router.navigate(["/signup"], {queryParams: {redirect: location.pathname}});
     }
   }
 
@@ -174,35 +174,35 @@ export class SubscribeComponent implements OnInit {
 
       this.frontService.validateCouponAdvance(coupon, amount)
         .subscribe(
-        response => {
-          if (response.statusCode === 200) {
-            that.errorMsg = "";
-            console.log("validateCouponAdvance Success => ", response.data);
-            // couponDialog.close();
-            callback(true, coupon, response.data.amount);
+          response => {
+            if (response.statusCode === 200) {
+              that.errorMsg = "";
+              console.log("validateCouponAdvance Success => ", response.data);
+              // couponDialog.close();
+              callback(true, coupon, response.data.amount);
+            }
+          },
+          error => {
+            console.log("http error => ", error);
+            that.errorMsg = error.data ? error.data : "Error";
+            callback(false, error.data, false)
           }
-        },
-        error => {
-          console.log("http error => ", error);
-          that.errorMsg = error.data ? error.data : "Error";
-          callback(false, error.data, false)
-        }
         );
     } else if (coupon) {
       this.frontService.validateCoupon(coupon, amount)
         .subscribe(
-        response => {
-          if (response.statusCode === 200) {
-            that.errorMsg = "";
-            console.log("validateCoupon Success => ", response.data);
-            callback(true, coupon, response.data.amount);
+          response => {
+            if (response.statusCode === 200) {
+              that.errorMsg = "";
+              console.log("validateCoupon Success => ", response.data);
+              callback(true, coupon, response.data.amount);
+            }
+          },
+          error => {
+            console.log("http error => ", error);
+            that.errorMsg = error.data ? error.data : "Error";
+            callback(false, error.data, false)
           }
-        },
-        error => {
-          console.log("http error => ", error);
-          that.errorMsg = error.data ? error.data : "Error";
-          callback(false, error.data, false)
-        }
         );
     } else {
       callback(true, "empty", amount);
@@ -260,7 +260,7 @@ export class SubscribeComponent implements OnInit {
   addPixelEvent(eventName, data) {
     console.log("adding pixel event " + eventName);
 
-    let script = document.createElement('script');
+    let script = document.createElement("script");
     script.innerHTML = `!function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -269,21 +269,21 @@ export class SubscribeComponent implements OnInit {
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window,document,'script',
       'https://connect.facebook.net/en_US/fbevents.js')
-      fbq('track', '`+ eventName +`', {
-        content_ids: ['`+ data.plan_id +`'],
-        content_name: '`+ data.name +`',
+      fbq('track', '` + eventName + `', {
+        content_ids: ['` + data.plan_id + `'],
+        content_name: '` + data.name + `',
         content_category: 'Subscription',
         content_type: 'product',
-        value: `+ data.amount +`,
+        value: ` + data.amount + `,
         currency: 'USD'
       });`;
     console.log(script);
     document.head.appendChild(script);
 
 
-    let noscript = document.createElement('noscript');
+    let noscript = document.createElement("noscript");
     noscript.innerHTML = `<img height="1" width="1"
-         src="https://www.facebook.com/tr?id=863624127129002&ev=`+ eventName +`&noscript=1"/>`;
+         src="https://www.facebook.com/tr?id=863624127129002&ev=` + eventName + `&noscript=1"/>`;
     document.head.appendChild(noscript);
   }
 
@@ -333,7 +333,6 @@ export class SubscribeComponent implements OnInit {
                       this.errorMsg = "You have already subscribed to this plan";
                       jQuery("html, body").animate({scrollTop: 0});
                     }
-                  }
                   );
               } else {
                 console.log("i am here", this.coupon);
@@ -360,8 +359,8 @@ export class SubscribeComponent implements OnInit {
                             redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
                           }]);
                       }
+
                     }
-                  }
                   );
               }
             }
@@ -376,10 +375,22 @@ export class SubscribeComponent implements OnInit {
             // image: "http://13.57.84.196/assets/images/logo.png"
           });
 
-        } else {
-          setTimeout(() => {
-            this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
-          }, 100)
+        }
+
+        else {
+          setTimeout(
+            () => {
+              this
+                .router
+                .navigate(["/login"], {
+                  queryParams: {
+                    redirect: location
+
+                      .pathname
+                  }
+                })
+              ;
+            }, 100)
         }
       }
     })
@@ -387,7 +398,7 @@ export class SubscribeComponent implements OnInit {
 
   onBtnUnsubscribeClick(plan) {
     this.unsubscribeOption = "at_period_end";
-    this.modal.open(this.unsubscribeTemplateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext));
+    this.modal.open(this.unsubscribeTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
   }
 
   endSubscription(subscribeDialog) {
