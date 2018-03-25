@@ -9,4 +9,6 @@ export interface PaymentCard {
   country:string;
   last4:string;
   _id:string;
+  exp_month : number;
+  exp_year : number;
 }

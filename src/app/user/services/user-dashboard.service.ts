@@ -218,6 +218,17 @@ export class UserDashboardServices {
       });
   }
 
+  addPaymentCard(token:string):Observable<any> {
+    return this.http.post(environment.api_end_point + 'api/member/cards', {
+      source: token
+    }, {headers: this.getHeaders()})
+      .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   removePaymentCard(cardId:string):Observable<any> {
     return this.http.delete(environment.api_end_point + 'api/member/cards', {
       headers: this.getHeaders(), body: JSON.stringify({
@@ -238,5 +249,3 @@ export class UserDashboardServices {
   }
 
 }
-
-
