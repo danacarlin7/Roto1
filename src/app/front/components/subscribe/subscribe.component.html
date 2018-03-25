@@ -1,4 +1,8 @@
 <!-- Login Page Starts -->
+<div class="alert alert-danger fade in redirect-msg alert-dismissible" *ngIf="isError">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  {{ errorMsg }}
+</div>
 <section class="loginDetails">
   <div class="container">
     <div class="row">
@@ -56,8 +60,6 @@
                     </button>
                     <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
                     </button> -->
-
-
                   </div>
                 </div>
               </div>

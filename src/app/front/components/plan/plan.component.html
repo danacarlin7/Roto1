@@ -24,10 +24,11 @@
           <!--<div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>-->
           <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
           </button> -->
-          <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
+          <button *ngIf="!isLogin" class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
           </button>
           <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
           </button> -->
+
         </div>
       </div>
     </div>
