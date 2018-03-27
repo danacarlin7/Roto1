@@ -23,6 +23,8 @@ export class SavedCardsComponent {
   // Create a Stripe client.
   stripe = (<any>window).Stripe('pk_test_A5XmrDsft5PHHvkxOKISsUR7');
 
+  cardColor = ['#0cd2c985','#d2270c85','#ffc440','#ff40df6e', '#4fd20c85']
+
   constructor(private dashboardService: UserDashboardServices) {
 
   }
@@ -31,6 +33,10 @@ export class SavedCardsComponent {
   ngOnInit() {
     this.getSavedCards();
   }
+
+  // getCardColor(){
+  //   console.log("here", this.cardColor[Math.floor(Math.random()*this.cardColor.length)], Math.floor(Math.random()*this.cardColor.length));
+  // }
 
   getSavedCards() {
     this.isLoading = true;

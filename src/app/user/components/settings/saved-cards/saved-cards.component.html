@@ -35,7 +35,7 @@
       &nbsp;
     </div>
 
-    <button type="button" *ngIf="isCard" class="btn btn-primary my-btn col-xs-2 col-xs-offset-5" (click)="addCard()">Add Card</button>
+    <button type="button" *ngIf="isCard" class="btn btn-primary my-btn col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-5" (click)="addCard()">Add Card</button>
 
     <div class="col-xs-12">
       &nbsp;
@@ -49,8 +49,7 @@
 
   <div class="cards-container row">
 
-    <div class="card payment-card col-xs-6" style="background:#d2270c85" *ngFor="let card of cards">
-
+    <div class="card payment-card col-xs-6"  [ngStyle]="{'background': cardColor[i] ? cardColor[i] : ''}" *ngFor="let card of cards; let i = index" >
       <!-- <div>
         <span [md-tooltip]="card.card_id == defaultCard ? 'Default card' : 'Set as default card for future payments'" [class.active]="true"><md-icon>{{card.card_id == defaultCard ? 'star' : 'star_border'}}</md-icon></span>
         <span  ><md-icon>close</md-icon></span>
@@ -75,7 +74,7 @@
         <div class="exp-date-wrapper">
           <div class="left-label">EXPIRES END</div>
           <div class="exp-date">
-            <div class="date">{{card.exp_month || 12}}/{{card.exp_year || 2030}}</div>
+            <div class="date">{{card.exp_month}}/{{card.exp_year}}</div>
             <div class="upper-labels">MONTH / YEAR</div>
           </div>
         </div>
