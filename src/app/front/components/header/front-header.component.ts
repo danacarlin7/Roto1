@@ -122,7 +122,7 @@ export class FrontHeaderComponent {
   }
 
   onPlansClick() {
-    if (this.isLoggedIn) {
+    if (this.isLoggedIn && this.authService.partialUser) {
       this.router.navigate(["/subscribe"]);
     } else {
       this.router.navigate(["/plans"]);

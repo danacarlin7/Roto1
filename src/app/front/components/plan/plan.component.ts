@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {FrontService} from "../../services/front.service";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: "rp-plan-component",
@@ -10,8 +11,11 @@ import {FrontService} from "../../services/front.service";
 export class PlanComponent {
   plans;
 
-  constructor(private router: Router, private frontService: FrontService) {
+  isLogin: boolean;
+
+  constructor(private router: Router, private frontService: FrontService, private authService: AuthService) {
     this.plans = this.frontService.getDummyPlans();
+    this.isLogin = this.authService.isLoggedIn();
   }
 
   onBtnSubscribeClick() {

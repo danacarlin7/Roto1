@@ -35,6 +35,7 @@ export class SubscribeComponent implements OnInit {
   isLoading: boolean;
   showPartialSignUpMsg: boolean;
 
+  isError: boolean;
   errorMsg: any;
 
   unsubscribeOption = "at_period_end";
@@ -52,6 +53,9 @@ export class SubscribeComponent implements OnInit {
               overlay: Overlay,
               vcRef: ViewContainerRef,
               public modal: Modal) {
+
+    // console.log($("rotohead"));
+
     overlay.defaultViewContainer = vcRef;
     if (this.authService.isLoggedIn()) {
       this.userData = this.authService.retrieveLoggedUserInfo()
@@ -71,6 +75,31 @@ export class SubscribeComponent implements OnInit {
       this.userToken = this.authService.partialUser.token;
       this.email = this.authService.partialUser.email;
       console.log(this.userToken);
+
+      // that.addPixelEvent('InitiateCheckout', that.selectedPlan);
+
+      // FB Pixel : Lead
+      let script = document.createElement("script");
+      script.innerHTML = `!function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('track', 'Lead', {
+        content_name: '` + this.authService.partialUser.email + `',
+        content_category: 'Lead',
+      });`;
+
+      document.head.appendChild(script);
+
+      let noscript = document.createElement("noscript");
+      noscript.innerHTML = `<img height="1" width="1"
+           src="https://www.facebook.com/tr?id=863624127129002&ev=Lead&noscript=1"/>`;
+      document.head.appendChild(noscript);
+
     }
   }
 
@@ -228,72 +257,109 @@ export class SubscribeComponent implements OnInit {
   //   }
   // }
 
+  addPixelEvent(eventName, data) {
+    console.log("adding pixel event " + eventName);
+
+    let script = document.createElement("script");
+    script.innerHTML = `!function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js')
+      fbq('track', '` + eventName + `', {
+        content_ids: ['` + data.plan_id + `'],
+        content_name: '` + data.name + `',
+        content_category: 'Subscription',
+        content_type: 'product',
+        value: ` + data.amount + `,
+        currency: 'USD'
+      });`;
+    console.log(script);
+    document.head.appendChild(script);
+
+
+    let noscript = document.createElement("noscript");
+    noscript.innerHTML = `<img height="1" width="1"
+         src="https://www.facebook.com/tr?id=863624127129002&ev=` + eventName + `&noscript=1"/>`;
+    document.head.appendChild(noscript);
+  }
+
+
   onBtnSubscribeClick(couponDialog, coupon) {
     // this.selectedPlan = plan;
-    let that = this;
     console.log(coupon);
-    this.checkCoupon(coupon, couponDialog, that.selectedPlan.amount, function (status, resp, finalAmount) {
-      console.log(that.userToken.length, finalAmount);
+    this.checkCoupon(coupon, couponDialog, this.selectedPlan.amount, (status, resp, finalAmount) => {
+      console.log(this.userToken.length, finalAmount);
       if (status) {
         couponDialog.close();
-        localStorage.setItem("selectedPlan", that.selectedPlan.plan_id);
-        if (that.authService.isLoggedIn() || that.userToken.length) {
-          var handler = (<any>window).StripeCheckout.configure({
+        localStorage.setItem("selectedPlan", this.selectedPlan.plan_id);
+        if (this.authService.isLoggedIn() || this.userToken.length) {
+          let handler = (<any>window).StripeCheckout.configure({
             key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
             locale: "auto",
             token: (token: any) => {
               // You can access the token ID with `token.id`.
               // Get the token ID to your server-side code for use.
               console.log("token call back => ", token);
-              that.coupon = resp != "empty" && status ? resp : "";
-              if (that.authService.isLoggedIn()) {
-                that.frontService.subscribePlan(token.id, that.selectedPlan.plan_id, that.coupon)
+              this.coupon = resp != "empty" && status ? resp : "";
+              if (this.authService.isLoggedIn()) {
+                this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
                   .subscribe(
                     response => {
                       if (response.statusCode == 200) {
                         console.log("subscribePlan Success => ", response.data);
 
-                        that.authService.retrieveLoggedUserInfo()
+                        this.authService.retrieveLoggedUserInfo()
                           .subscribe(
                             response => {
-                              if (response.statusCode == 200) that.authService.loggedUser = response.data;
+                              if (response.statusCode == 200) this.authService.loggedUser = response.data;
                             },
                             error => {
                               console.log("http error => ", error);
                             }
                           );
 
-                        that.router.navigate([
+                        this.router.navigate([
                           "/homeRedirect",
                           {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
                       }
+                      this.authService.partialUser = null;
+                    },
+                    error => {
+                      this.isError = true;
+                      this.errorMsg = "You have already subscribed to this plan";
+                      jQuery("html, body").animate({scrollTop: 0});
                     }
                   );
               } else {
-                console.log("i am here", that.coupon);
-                that.frontService.signUpStepTwo(token.id, that.selectedPlan.plan_id, that.coupon)
+                console.log("i am here", this.coupon);
+                this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
                   .subscribe(
                     response => {
                       if (response.statusCode == 200) {
                         console.log("subscribePlan Success => ", response.data);
 
-                        that.authService.retrieveLoggedUserInfo()
+                        this.authService.retrieveLoggedUserInfo()
                           .subscribe(
                             response => {
-                              if (response.statusCode == 200) that.authService.loggedUser = response.data;
+                              if (response.statusCode == 200) this.authService.loggedUser = response.data;
                             },
                             error => {
                               console.log("http error => ", error);
                             }
                           );
 
-                        that.router.navigate([
+                        this.router.navigate([
                           "/homeRedirect",
                           {
                             redirected: true,
                             redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
                           }]);
                       }
+
                     }
                   );
               }
@@ -301,17 +367,30 @@ export class SubscribeComponent implements OnInit {
           });
 
           handler.open({
-            name: that.selectedPlan.name,
-            description: resp != "empty" && status ? "Your Coupon Code Has Been Applied" : that.selectedPlan.interval != "day" ? that.period_text[that.selectedPlan.interval] : "Every " + that.selectedPlan.interval_count + " days",
+            name: this.selectedPlan.name,
+            description: resp != "empty" && status ? "Your Coupon Code Has Been Applied" : this.selectedPlan.interval != "day" ? this.period_text[this.selectedPlan.interval] : "Every " + this.selectedPlan.interval_count + " days",
             amount: finalAmount,
-            email: that.email
+            email: this.email
             // panelLabel: status ? "Amount After Discount" : "Pay"
             // image: "http://13.57.84.196/assets/images/logo.png"
           });
-        } else {
-          setTimeout(() => {
-            that.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
-          }, 100)
+
+        }
+
+        else {
+          setTimeout(
+            () => {
+              this
+                .router
+                .navigate(["/login"], {
+                  queryParams: {
+                    redirect: location
+
+                      .pathname
+                  }
+                })
+              ;
+            }, 100)
         }
       }
     })

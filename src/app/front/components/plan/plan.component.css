@@ -64,7 +64,7 @@
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
-  color: #f8c534;
+  color: #000000;
   font-size: 32px;
 }
 
@@ -79,6 +79,7 @@
   color: #000 !important;
   border: 1px solid #ffffff !important;
   margin-bottom: 15px;
+  margin-top: 20px;
   font-weight: 600;
 }
 
@@ -92,7 +93,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px 10px 20px 10px;
+  margin: 15px 10px 0 10px;
 }
 
 .plan-features-heading {
