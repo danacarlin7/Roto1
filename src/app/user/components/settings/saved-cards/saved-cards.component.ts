@@ -21,7 +21,8 @@ export class SavedCardsComponent {
   responseMessage: any;
   isSuccess: boolean;
   // Create a Stripe client.
-  stripe = (<any>window).Stripe('pk_test_A5XmrDsft5PHHvkxOKISsUR7');
+
+  stripe = (<any>window).Stripe(environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7");
 
   cardColor = ['#0cd2c985','#d2270c85','#ffc440','#ff40df6e', '#4fd20c85']
 
