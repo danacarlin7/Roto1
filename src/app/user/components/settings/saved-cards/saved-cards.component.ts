@@ -251,7 +251,9 @@ export class SavedCardsComponent {
     let that = this;
     this.stripe.createToken(this.card).then(function(result) {
         if (result.error) {
-          // console.log(result.error);
+          console.log(result.error);
+          that.isSuccess = false;
+          that.responseMessage = result.error.message;
           // Inform the user if there was an error.
           // var errorElement = document.getElementById('card-errors');
           // errorElement.textContent = result.error.message;
