@@ -76,7 +76,7 @@ const routes: Routes = [
       { path: "nfl-lineups", component: GeneratedNFLLineupsComponent },
       { path: "nba-lineups", component: GeneratedNBALineupsComponent },
       { path: "injuries", component: InjuriesComponent },
-      { path: "subscribe",canActivate: [AuthGuard],component: SubscribeComponent },
+      { path: "subscribe", component: SubscribeComponent },
       { path: "plans", component: PlanComponent },
       { path: "contact-analyzer", component: ContactAnalyzerComponent },
       { path: "podcast", component: PodcastComponent },
