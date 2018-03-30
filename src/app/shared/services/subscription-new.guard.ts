@@ -12,6 +12,10 @@ import { ArticleService } from "../../front/services/article.service";
 @Injectable()
 export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
   constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute, private articleService: ArticleService) {
+    if(localStorage.getItem('reloadOn') === "1"){
+      localStorage.setItem('free', "0");
+      localStorage.setItem('reloadOn', "0");
+    }
   }
 
   checkArticle(id, callback){
@@ -47,7 +51,7 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
     // console.log(route.params.id);
     let that = this;
     console.log('local'+ localStorage.getItem('free'));
-    if(localStorage.getItem('free') == "1" && localStorage.getItem('reloadOn') !== "1"){
+    if(localStorage.getItem('free') == "1"){
       return true;
     } else if (this.authService.isLoggedIn()) {
       if (this.authService.isSubscriber(true)) {
@@ -62,8 +66,8 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
         console.log("check article", resp);
         if(resp){
           localStorage.setItem('free', "1");
-          localStorage.setItem('reloadOn', "1");
           that.router.navigate(['/articles/'+route.params.id]);
+          localStorage.setItem('reloadOn', "1");
           return true;
         } else {
           localStorage.setItem('free', "0");
