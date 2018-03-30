@@ -25,10 +25,10 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
             let isFree = false;
 
             for (let value of response.categories) {
-              console.log(value);
+              console.log(value, responses);
               cat_cnt++;
 
-              if(value === responses.id){
+              if(value === responses[0].id){
                 isFree = true;
               }
 
