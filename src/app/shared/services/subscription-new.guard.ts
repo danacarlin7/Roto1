@@ -22,16 +22,20 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
         this.articleService.fetchFreeCategory().subscribe(
           responses => {
             let cat_cnt = 0;
+            let isFree = false;
+
             for (let value of response.categories) {
               console.log(value);
               cat_cnt++;
-              if(value === responses.id)
-                callback(true);
-              else {
-                if(response.categories.length == cat_cnt)
-                  callback(false);
+
+              if(value === responses.id){
+                isFree = true;
               }
+
+              if(response.categories.length == cat_cnt)
+                callback(isFree);
             }
+
           }
         );
 
