@@ -19,19 +19,26 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
       response => {
         // this.article = response;
         // console.log(response.categories[0]);
-        this.articleService.fetchCategory(response.categories[0]).subscribe(
+        this.articleService.fetchFreeCategory().subscribe(
           responses => {
-            if (responses.slug == "free-article") {
-              // localStorage.setItem('free', "1");
-              console.log("responses.slug",responses.slug);
-              callback(true);
-            } else {
-              // localStorage.setItem('free', "0");
-              // this.router.navigate(['/login'], {queryParams: {redirect: state.url}});
-              callback(false);
+            let cat_cnt = 0;
+            let isFree = false;
+
+            for (let value of response.categories) {
+              console.log(value, responses);
+              cat_cnt++;
+
+              if(value === responses[0].id){
+                isFree = true;
+              }
+
+              if(response.categories.length == cat_cnt)
+                callback(isFree);
             }
+
           }
         );
+
       }
     );
   }
@@ -39,6 +46,7 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // console.log(route.params.id);
     let that = this;
+    console.log('local'+ localStorage.getItem('free'));
     if(localStorage.getItem('free') == "1"){
       return true;
     } else if (this.authService.isLoggedIn()) {
@@ -49,8 +57,9 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
         return false;
       }
     } else {
-
+      console.log("else here", route.params.id);
       this.checkArticle(route.params.id, function(resp){
+        console.log("check article", resp);
         if(resp){
           localStorage.setItem('free', "1");
           that.router.navigate(['/articles/'+route.params.id]);
