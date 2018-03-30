@@ -47,7 +47,7 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
     // console.log(route.params.id);
     let that = this;
     console.log('local'+ localStorage.getItem('free'));
-    if(localStorage.getItem('free') == "1"){
+    if(localStorage.getItem('free') == "1" && localStorage.getItem('reloadOn') !== "1"){
       return true;
     } else if (this.authService.isLoggedIn()) {
       if (this.authService.isSubscriber(true)) {
@@ -62,6 +62,7 @@ export class SubscriptionNewGuard implements CanActivate, CanActivateChild {
         console.log("check article", resp);
         if(resp){
           localStorage.setItem('free', "1");
+          localStorage.setItem('reloadOn', "1");
           that.router.navigate(['/articles/'+route.params.id]);
           return true;
         } else {
