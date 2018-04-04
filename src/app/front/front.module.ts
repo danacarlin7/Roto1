@@ -52,6 +52,8 @@ import {NBAFilterComponent} from "./components/nba-lineup-optimizer/nba-filter/n
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 import {PodcastComponent} from "./components/podcast/podcast.component";
 import {PlanComponent} from "./components/plan/plan.component";
+import {VideoComponent} from "./components/video/video.component";
+
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -102,7 +104,8 @@ import {PlanComponent} from "./components/plan/plan.component";
     NBAFilterComponent,
     GeneratedNBALineupsComponent,
     PodcastComponent,
-    PlanComponent
+    PlanComponent,
+    VideoComponent
   ],
   exports: [
     ProviderComponent,

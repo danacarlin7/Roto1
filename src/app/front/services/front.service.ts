@@ -175,6 +175,15 @@ export class FrontService {
       });
   }
 
+  retrieveVideos(): Observable<any> {
+    return this.http.get(environment.api_end_point + "getVideos", {headers: this.getHeaders()})
+      .map((reponse: Response) => reponse.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
   handelError(error: any) {
     if (error.statusCode == 401) {
       this.authService.logout();
