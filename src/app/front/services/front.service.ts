@@ -175,8 +175,12 @@ export class FrontService {
       });
   }
 
-  retrieveVideos(): Observable<any> {
-    return this.http.get(environment.api_end_point + "getVideos", {headers: this.getHeaders()})
+  retrieveVideos(status = false): Observable<any> {
+    let link = "getVideos";
+    if(status)
+      link = "getVideos?live=true";
+
+    return this.http.get(environment.api_end_point + link, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());

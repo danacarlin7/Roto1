@@ -54,6 +54,12 @@ import {PodcastComponent} from "./components/podcast/podcast.component";
 import {PlanComponent} from "./components/plan/plan.component";
 import {VideoComponent} from "./components/video/video.component";
 
+
+// import {VgCoreModule} from 'videogular2/core';
+// import {VgControlsModule} from 'videogular2/controls';
+// import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+// import {VgBufferingModule} from 'videogular2/buffering';
+
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -63,6 +69,10 @@ import {VideoComponent} from "./components/video/video.component";
     FrontRoutingModule,
     InfiniteScrollModule,
     SharedModule,
+    // VgCoreModule,
+    // VgControlsModule,
+    // VgOverlayPlayModule,
+    // VgBufferingModule
   ],
   declarations: [
     FrontMainComponent,
