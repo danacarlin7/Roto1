@@ -1,0 +1,46 @@
+<section class="sectionHedin">
+  <div class="container ">
+    <div class="common-loader" *ngIf="isLoading">
+      <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
+        <div class="lineupHedin">
+          <h1>Videos</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="newsSection">
+  <div class="container">
+    <div class="row">
+
+
+
+      <div class="row" *ngIf="liveRecords.length == 0" style="margin:50px;">
+        <div class="col-sm-12 text-center">
+          <h3>There is no live video available at the moment.</h3>
+        </div>
+      </div>
+
+
+      <div class="col-xs-12 col-md-8 col-md-offset-2" *ngFor="let video of liveRecords;let i = index">
+        <h4>{{video.title}}</h4>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" [src]="video.url" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-8 col-md-offset-2" *ngFor="let video of videoRecords;let i = index">
+        <h4>{{video.title}}</h4>
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" [src]="video.url" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
