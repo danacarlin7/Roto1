@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NewsTabs, NewsTabConstants } from "../../constants/menu.constants";
 import { Router, ActivatedRoute } from "@angular/router";
 import { FrontService } from "../../services/front.service";
@@ -13,7 +13,7 @@ import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.css']
 })
-export class VideoComponent {
+export class VideoComponent implements OnInit, AfterViewInit {
 
   PRIORITY_ALL: number = 0;
   PRIORITY_URGENT: number = 1;
@@ -31,6 +31,31 @@ export class VideoComponent {
 
   ngOnInit() {
     this.getData();
+  }
+
+  ngAfterViewInit() {
+    // viewChild is set after the view has been initialized
+    console.log("view init");
+    $(document).ready(function() {
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+          $('#back-to-top').fadeIn();
+        } else {
+          $('#back-to-top').fadeOut();
+        }
+      });
+      // scroll body to 0px on click
+      $('#back-to-top').click(function() {
+        // $('#back-to-top').tooltip('hide');
+        $('body,html').animate({
+          scrollTop: 0
+        }, 800);
+        return false;
+      });
+
+      // $('#back-to-top').tooltip('show');
+
+    });
   }
 
   // onNewsTabChanged(tabName:{value:string,label:string}) {
