@@ -1,0 +1,72 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.payment-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  height: 120px;
+  width: 230px;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid #ededed;
+  background: #efefef; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(#efefef, #fefefe); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#efefef, #fefefe); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#efefef, #fefefe); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#efefef, #fefefe); /* Standard syntax (must be last) */
+}
+
+.payment-card .brand {
+  margin-top: 5px;
+  font-size: 36px;
+  opacity: 0.3;
+}
+
+.payment-card .number {
+  padding-left: 12px;
+  font-size: 18px;
+}
+
+.payment-card .country {
+  padding-left: 12px;
+  font-size: 16px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #e9e9e9; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(rgba(159, 159, 159, 0.4), rgba(254, 254, 254, 0)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(159, 159, 159, 0.4), rgba(254, 254, 254, 0)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(159, 159, 159, 0.4), rgba(254, 254, 254, 0)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(159, 159, 159, 0.4), rgba(254, 254, 254, 0)); /* Standard syntax (must be last) */
+}
+
+.payment-card:hover .card-actions {
+  visibility: visible;
+}
+
+.card-actions span {
+  visibility: hidden;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.card-actions .active {
+  visibility: visible;
+}
+
+.payment-card:hover .card-actions span {
+  visibility: visible;
+}

@@ -1,0 +1,35 @@
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ArticleService} from "../../services/article.service";
+
+@Component({
+  selector: 'app-article',
+  templateUrl: './article.component.html',
+  styleUrls: ['./article.component.css']
+})
+export class ArticleComponent implements OnInit {
+
+  constructor(private activatedR:ActivatedRoute,private router:Router , private articleService:ArticleService) {
+  }
+
+  id:any;
+  article:any;
+  category:any;
+
+  ngOnInit() {
+    this.activatedR.params.subscribe(
+      params => {
+        this.id = +params['id'];
+        this.articleService.fetchPost(this.id).subscribe(
+          response => {
+            this.article = response;
+          }
+        );
+      }
+    );
+  }
+
+  btnBackClick(){
+    this.router.navigate(['/articles'])
+  }
+}

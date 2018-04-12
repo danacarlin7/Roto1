@@ -1,0 +1,30 @@
+stages:
+  - build
+  - dev_build
+  - notify_failure
+
+production_build:
+  stage: build
+  only:
+    - master
+  script:
+    - npm install
+    - ng build --prod
+    - cd /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
+    - rm -rf /var/www/html/RotoProsWeb/dist
+    - cp -R /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+  tags:
+    - ROTOPROS
+
+production_dev_build:
+  stage: dev_build
+  only:
+    - staging
+  script:
+    - npm install
+    - ng build --prod --env=dev
+    - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
+    - rm -rf /var/www/html/RotoProsWeb/dist
+    - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+  tags:
+    - RP

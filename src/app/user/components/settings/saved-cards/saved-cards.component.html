@@ -1,0 +1,19 @@
+<div>
+  <div class="common-loader" *ngIf="isLoading">
+    <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+  </div>
+  <div class="cards-container">
+    <div class="payment-card" *ngFor="let card of cards">
+      <div class="card-actions">
+        <span (click)="onCardDefaultBtnClicked(card)"
+              [md-tooltip]="card.card_id == defaultCard ? 'Default card' : 'Set as default card for future payments'"
+              [class.active]="card.card_id == defaultCard"><md-icon>{{card.card_id == defaultCard ? 'star' : 'star_border'}}</md-icon></span>
+        <span (click)="onCardRemoveBtnClicked(card)"
+              md-tooltip="Remove card"><md-icon>clear</md-icon></span>
+      </div>
+      <div class="brand" style="align-self: flex-end">{{card.brand}}</div>
+      <div class="number">XXXX XXXX XXXX {{card.last4}}</div>
+      <div class="country">{{card.country}}</div>
+    </div>
+  </div>
+</div>

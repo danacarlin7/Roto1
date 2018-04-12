@@ -1,0 +1,130 @@
+<!-- Login Page Starts -->
+<section class="loginDetails">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="loginDetailsWrapper">
+          <div class="loginLftWrapper">
+            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive"/>
+          </div>
+          <div class="loginRghtWrapper signupRghtWrapper">
+            <div class="formWrapper">
+
+              <h3><span class="licnWrapper"><img src="../../../../assets/images/login_title_icn.png" alt=""
+                                                 class="img-responsive"/></span><span>Sign Up</span></h3>
+              <p>Signup for a free account today.</p>
+              <div #signUpError>
+                <div class="alert alert-danger fade in" *ngIf="signUpErrors">
+                  {{signUpErrors}}
+                </div>
+              </div>
+              <form [formGroup]="signUpForm">
+                <div class="form-group">
+                  <label class="srOnly">User Name</label>
+                  <input type="text" #userName name="userName" formControlName="userName" placeholder="User Name"
+                         (blur)="onTxtUserNameBlur()">
+                  <div class="chk-username-loader" *ngIf="checkingUserName">
+                    <md-progress-spinner mode="indeterminate" color="accent"
+                                         style="width: 25px;height: 50px;margin-right: 10px"></md-progress-spinner>
+                  </div>
+                  <div *ngIf="isUserExist != 0">
+                    <div class="alert alert-danger fade in my-alert" *ngIf="isUserExist == 1">
+                      User name already exists.
+                    </div>
+                    <div class="alert alert-success fade in my-alert" *ngIf="isUserExist == 2">
+                      User name is available.
+                    </div>
+                  </div>
+                  <div class="alert alert-danger fade in my-alert"
+                       *ngIf="signUpForm.get('userName').touched && signUpForm.get('userName').errors">
+                    User name is a required field.
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label class="srOnly">First Name</label>
+                  <input type="text" name="fName" formControlName="fName" placeholder="First Name">
+                  <div class="alert alert-danger fade in my-alert"
+                       *ngIf="signUpForm.get('fName').touched && signUpForm.get('fName').errors">
+                    First name is a required field.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lName" class="srOnly">Last Name</label>
+                  <input type="text" id="lName" name="lName" formControlName="lName" placeholder="Last Name">
+                  <div class="alert alert-danger fade in my-alert"
+                       *ngIf="signUpForm.get('lName').touched && signUpForm.get('lName').errors">
+                    Last name is a required field.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="eId" class="srOnly">Email</label>
+                  <input type="email" id="eId" name="eId" formControlName="email" placeholder="Email">
+                  <div class="alert alert-danger fade in my-alert"
+                       *ngIf="signUpForm.get('email').touched && signUpForm.get('email').errors && signUpForm.get('email').errors.required">
+                    Email is a required field.
+                  </div>
+                  <div class="alert alert-danger fade in my-alert"
+                       *ngIf="signUpForm.get('email').touched && signUpForm.get('email').errors && signUpForm.get('email').errors.incorrectMailFormat">
+                    Invalid email address.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="srOnly">Phone</label>
+                  <input type="text" name="phone" formControlName="phone" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                  <label class="srOnly">Password</label>
+                  <input type="password" name="password" formControlName="password" placeholder="**********">
+                  <div class="alert alert-danger my-alert" *ngIf="signUpForm.get('password').errors?.minlength">
+                    Password is too short
+                  </div>
+                  <div class="alert alert-danger my-alert" *ngIf="signUpForm.get('password').errors?.maxlength">
+                    Password is too long
+                  </div>
+                  <div class="alert alert-danger fade in my-alert"
+                       *ngIf="signUpForm.get('password').touched && signUpForm.get('password').errors">
+                    Password is a required field.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="srOnly">Confirm Password</label>
+                  <input type="password" name="cPassword" formControlName="confirmPassword" placeholder="**********">
+                </div>
+                <div class="alert alert-danger my-alert" *ngIf="signUpForm.errors?.passwordValidator">
+                  Passwords don't match
+                </div>
+                <div class="form-group chkFrmGrp">
+                  <input type="checkbox" formControlName="tnc" #tnc>
+                  <label class="">I Accept the <a href="javascript:void(0)" class="lred">Terms and Conditions</a> of the
+                    website</label>
+                </div>
+                <input type="button" value="Sign Up" class="formBtn" (click)="onBtnSignUpClicked()"
+                       [disabled]="!signUpForm.valid || !tnc.checked">
+              </form>
+              <!--<pre>
+              {{signUpForm.valid | json}}
+              {{signUpForm.value | json}}
+              {{signUpForm.errors | json}}
+              {{signUpForm.get('email').errors | json}}
+            </pre>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row signup-video">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/RpRcXAlSXio?rel=0" frameborder="0"
+                allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+</section>
+<!-- Login Page Ends -->

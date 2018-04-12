@@ -1,0 +1,89 @@
+<section class="sectionHedin">
+  <div class="container-fluid ">
+    <div class="common-loader" *ngIf="isLoading">
+      <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
+        <div class="lineupHedin">
+          <h1>Daily Lineups for {{todayDate | date:'dd MMM, yyyy'}}</h1>
+        </div>
+        <div class="dTabs">
+          <!-- Nav tabs -->
+          <rp-tab-view [tabs]="lineupTabs"
+                       [activeTab]="activeTab"
+                       (tabChanged)="onLineupTabChanged($event)"></rp-tab-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="lineupSection">
+  <div class="container">
+    <div class="row lineupWrapper">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="dTabs">
+
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="DLineup">
+
+              <div class="lineupItmWrap">
+                <div class="lineupItm" *ngFor="let currLineup of lineupRecords">
+                  <div class="lineupTeamName">
+                    <div class="lineUpTeamNameWraper">
+                      <div class="lineUpTeamNameWrap" *ngIf="currLineup.first_team.logo_url">
+                        <img [attr.src]="currLineup.first_team.logo_url" alt="" class="img-responsive"/>
+                      </div>
+                      <p class="teamName">{{currLineup.first_team.name}}</p>
+                    </div>
+                    <div class="lineUpTeamNameWraper">
+                      <div class="lineUpTeamNameWrap" *ngIf="currLineup.second_team.logo_url">
+                        <img [attr.src]="currLineup.second_team.logo_url" alt="" class="img-responsive"/>
+                      </div>
+                      <p class="teamName">{{currLineup.second_team.name}}</p>
+                    </div>
+                    <div class="lineupMatchTime">
+                      <p>{{currLineup.game_time | date:'h:m a'}}</p>
+                    </div>
+                  </div>
+                  <div class="lineupPlayerName">
+                    <ul class="lineupPlayerWrap">
+                      <li *ngFor="let currPlayer of currLineup.first_team.lineup_players">
+                        <span>{{currPlayer.player_position}}</span>
+                        {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                      </li>
+                    </ul>
+                    <ul class="lineupPlayerWrap">
+                      <li *ngFor="let currPlayer of currLineup.second_team.lineup_players">
+                        <span>{{currPlayer.player_position}}</span>
+                        {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="pagination">
+                 <ul>
+                   <li><a href="javascript:void(0)"><span aria-hidden="true">&laquo;</span></a></li>
+                   <li class="active"><a href="javascript:void(0)">1</a></li>
+                   <li><a href="javascript:void(0)">2</a></li>
+                   <li><a href="javascript:void(0)">3</a></li>
+                   <li><a href="javascript:void(0)">...</a></li>
+                   <li><a href="javascript:void(0)">29</a></li>
+                   <li><a href="javascript:void(0)">30</a></li>
+                   <li><a href="javascript:void(0)"><span aria-hidden="true">&raquo;</span></a></li>
+                 </ul>
+               </div>-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
