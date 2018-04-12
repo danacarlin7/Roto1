@@ -1,0 +1,598 @@
+<!-- BoPrt1 Starts -->
+<html>
+
+<head>
+  <link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" media="screen">
+
+</head>
+
+<body>
+<section class="indexNPrt1">
+  <div class="container-fluid">
+    <div class="row indexNPrt1Wrapper">
+
+      <!-- this is better done as a directive -->
+      <div class="alert alert-success fade in" *ngIf="redirected">
+        {{ redirectMessage }}
+      </div>
+
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="../../../../assets/images/new_banner.jpg" alt="...">
+            <div class="carousel-caption container">
+              <div class="bannerTopTxt" style="margin-top:-8em; ">
+                <h1>
+                  <!-- <p>Daily Fantasy</p>
+                  <p><span class="white">SPORTS</span> <span class="ylw">Analysis</span></p> -->
+                  <p><span class="ylw">Where Fantasy Becomes Reality</span></p>
+                </h1>
+                <!-- <p>
+                  <span>Premium Tools To Dominate</span>
+                  <span>Daily Fantasy Sports</span>
+                </p> -->
+                <a routerLink="/signup">Sign Up</a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="../../../../assets/images/new_banner_1.jpg" alt="...">
+            <div class="carousel-caption container">
+              <div class="bannerTopTxt" style="margin-top:-8em; ">
+                <h1>
+                  <!-- <p>Daily Fantasy</p>
+                  <p><span class="white">SPORTS</span> <span class="ylw">Analysis</span></p> -->
+                  <p><span class="ylw">Where Fantasy Becomes Reality</span></p>
+                </h1>
+                <!-- <p>
+                  <span>Premium Tools To Dominate</span>
+                  <span>Daily Fantasy Sports</span>
+                </p> -->
+                <a routerLink="/signup">Sign Up</a>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="../../../../assets/images/new_banner_2.jpg" alt="...">
+            <div class="carousel-caption container">
+              <div class="bannerTopTxt"  style="margin-top:-8em; ">
+                <h1>
+                  <!-- <p>Daily Fantasy</p>
+                  <p><span class="white">SPORTS</span> <span class="ylw">Analysis</span></p> -->
+                  <p><span class="ylw">Where Fantasy Becomes Reality</span></p>
+                </h1>
+                <!-- <p>
+                  <span>Premium Tools To Dominate</span>
+                  <span>Daily Fantasy Sports</span>
+                </p> -->
+                <a routerLink="/signup">Sign Up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Controls -->
+        <div class="tpCntrl">
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <i class="icnWrapper"><img src="../../../../assets/images/newLftArow.png" alt="" class="img-responsive"></i><span>Previous</span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <i class="icnWrapper">Next</i><span><img src="../../../../assets/images/newRghtArow.png" alt=""
+                                                     class="img-responsive"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- BoPrt1 Ends -->
+
+<!-- Match Details Starts -->
+
+<section class="indexNPrt2" style="padding:2em 1em; margin:0.5em 0.5em">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3.5">
+        <div class="indexNPrt2Lft">
+          <!--advertisement-->
+          <!-- <div class="ylwTpBxInfoWrap">
+            <div class="ylwTpBx clearfix"src/app/front/components/home/front-home.component.css>
+              <h3>Advertisement <span><img src="../../../../assets/images/blkArow.png"></span></h3>
+              <p><img src="../../../../assets/images/rght_icn1.png" alt="" class="img-responsive"></p>
+            </div>
+
+            <div class="ylwTpBxBtm">
+              <div class="ylwTpBxBtmBx">
+                <img src="../../../../assets/images/newIimg1.png" alt="" class="img-responsive">
+                <div class="ylwTpBxBtmBxInfo">
+                  <p>Sed ut perspiciatis unde omnis iste </p>
+                  <a href="javascript:void(0)" class="nRdMor">Read More <span><img src="../../../../assets/images/blkArow.png"></span></a>
+                  <a href="javascript:void(0)" class="nSinUp">Sign Up</a>
+                </div>
+              </div>
+              <div class="ylwTpBxBtmBx">
+                <img src="../../../../assets/images/newIimg1.png" alt="" class="img-responsive">
+                <div class="ylwTpBxBtmBxInfo">
+                  <p>Sed ut perspiciatis unde omnis iste </p>
+                  <a href="javascript:void(0)" class="nRdMor">Read More <span><img src="../../../../assets/images/blkArow.png"></span></a>
+                  <a href="javascript:void(0)" class="nSinUp">Sign Up</a>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <!-- Right Column -->
+          <div class="ylwTpBxInfoWrap">
+            <!-- Title -->
+            <div routerLink="/news" class="ylwTpBx clearfix pointer">
+              <h3>Latest News</h3>
+              <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
+            </div>
+            <!-- Navigation tabs
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                <a role="tab" data-toggle="tab">NBA</a>
+              </li>
+              <li role="presentation">
+                <a role="tab" data-toggle="tab">NFL
+                <!-- <a href="#nFb" aria-controls="nFb" role="tab" data-toggle="tab"> -->
+                  <!-- <img src="../../../../assets/images/facebook_icn.png" alt=""> --
+                </a>
+              </li>
+              <li role="presentation">
+                <a role="tab" data-toggle="tab">MLB
+                <!-- <a href="#nInsta" aria-controls="nInsta" role="tab" data-toggle="tab">
+                  <img src="../../../../assets/images/insta_icn.png" alt=""> --
+                </a>
+              </li>
+            </ul>
+            -->
+            <!-- Injury Content -->
+            <div class="ylwTpBxBtm" style="height:auto;  overflow:scroll;">
+              <div class="ylwTpBxBtmBx2Wrap">
+                <div data-toggle="modal"
+                 data-target="#myModal2"
+                 (click)="switchToSingle(news)"
+                 class="news-item item pointer"
+                 *ngFor="let news of allNewsRecords">
+                  <img style="margin: 0 auto;"
+                    *ngIf="findMedia(news.featured_media)!=false"
+                    src="{{findMedia(news.featured_media)}}"
+                    alt=""
+                    class="img-responsive">
+                  <div class="nltstNwsInfoTpWrp">
+                    <div class="nltstNwsInfoTp clearfix">
+                      <div class="nltstNwsInfoDte">
+                        <span class="icnWrapperS">
+                          <img src="../../../../assets/images/nDateIcn.png" alt="" class="img-responsive">
+                        </span>
+                        <i>{{news.date | date:'MMM dd, yyyy'}}</i>
+                      </div>
+                      <div class="nltstNwsInfoTme">
+                        <span class="icnWrapperS">
+                          <img src="../../../../assets/images/nclck_icn.png" alt="" class="img-responsive">
+                        </span>
+                        <i>{{news.date | date : 'hh:mm a'}}</i>
+                      </div>
+                    </div>
+                    <div class="nltstNwsInfoBtm">
+                      <h4>{{news.title.rendered}}</h4>
+                      <p class="news-notes">{{news.extract}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--<div class="ylwTpBxInfoWrap">
+            <div class="ylwTpBx clearfix">
+              <h3 routerLink="/news">Latest News<span><img src="../../../../assets/images/blkArow.png"></span></h3>
+              <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
+            </div>
+            <div class="ylwTpBxBtm">
+              <div class="ylwTpBxBtmSlidr">
+                <div class="owl-carousel owl-theme nSlider nSlider1">
+                  <div class="item" *ngFor="let news of allNewsRecords">
+                    <img style="width: 100px;margin: 0 auto;" [attr.src]="news?.player?.player_image" alt=""
+                         class="img-responsive">
+                    <div class="nltstNwsInfoTpWrp">
+                      <div class="nltstNwsInfoTp clearfix">
+                        <div class="nltstNwsInfoDte">
+                          <span class="icnWrapperS"><img src="../../../../assets/images/nDateIcn.png" alt=""
+                                                         class="img-responsive"></span>
+                          <i>{{news?.news_date_time | date : 'MMM dd, yyyy'}}</i>
+                        </div>
+                        <div class="nltstNwsInfoTme">
+                          <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
+                                                         class="img-responsive"></span>
+                          <i>{{news?.news_date_time | date : 'hh:mm a'}}</i>
+                        </div>
+                      </div>
+                      <div class="nltstNwsInfoBtm">
+                        <h4>{{news?.news_headline}}</h4>
+                        <p class="news-notes">{{news?.news_notes}}</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>-->
+        </div>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+        <div class="indexNPrt2Mid" >
+
+          <div class = "row">
+            <div class = "col-xs-5 col-sm-5 col-md-5 col-lg-5">
+              <div class="indexNPrt2MidSlider">
+            <div class="ylwTpBx wlwTpBx clearfix pointer">
+              <h4 (click)="navigateToArticles(19)">Daily Fantasy Basketball</h4>
+              <p><img src="../../../../assets/images/basketball.png" alt="" class="img-responsive"></p>
+            </div>
+            <div class="owl-carousel owl-theme midSlider midSlider1">
+              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                   *ngFor="let article of basketballArticles">
+                <img style="margin: 0 auto"
+                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                     alt="" class="img-responsive">
+                <div class="nltstNwsInfoTpWrp">
+                  <h4><a>{{article.title.rendered}}</a></h4>
+                  <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                </div>
+                <div class="nltstNwsInfoTpWrp">
+                  <h6><a>{{article.title.rendered}}</a></h6>
+                </div>
+                <div class="nltstNwsInfoTpWrp">
+                  <h6><a>{{article.title.rendered}}</a></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
+              <div class = "col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="indexNPrt2MidSlider">
+                  <div class="ylwTpBx wlwTpBx clearfix pointer">
+                    <h4 (click)="navigateToArticles(17)">Daily Fantasy Baseball</h4>
+                    <p><img src="../../../../assets/images/baseball.png" alt="" class="img-responsive"></p>
+                  </div>
+                  <div class="owl-carousel owl-theme midSlider midSlider1">
+                    <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                         *ngFor="let article of baseballArticles">
+                      <img style="margin: 0 auto"
+                           [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                           alt="" class="img-responsive">
+                      <div class="nltstNwsInfoTpWrp">
+                        <h4><a>{{article.title.rendered}}</a></h4>
+                        <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                      </div>
+                      <div class="nltstNwsInfoTpWrp">
+                        <h6><a>{{article.title.rendered}}</a></h6>
+                      </div>
+                      <div class="nltstNwsInfoTpWrp">
+                        <h6><a>{{article.title.rendered}}</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </div>
+              <div class = "row">
+                <div class = "col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                  <div class="indexNPrt2MidSlider">
+                    <div class="ylwTpBx wlwTpBx clearfix pointer">
+                      <h4 (click)="navigateToArticles(16)">Daily Fantasy Football</h4>
+                      <p><img src="../../../../assets/images/football.png" alt="" class="img-responsive"></p>
+                    </div>
+                    <div class="owl-carousel owl-theme midSlider midSlider1">
+                      <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                           *ngFor="let article of footballArticles">
+                        <img style="margin: 0 auto"
+                             [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/football.jpg'"
+                             alt="" class="img-responsive">
+                        <div class="nltstNwsInfoTpWrp">
+                          <h4><a>{{article.title.rendered}}</a></h4>
+                        </div>
+                          <div class="nltstNwsInfoTpWrp">
+                            <h6><a>{{article.title.rendered}}</a></h6>
+                          </div>
+                          <div class="nltstNwsInfoTpWrp">
+                            <h6><a>{{article.title.rendered}}</a></h6>
+                          </div>
+                          <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class = "col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                  <div class="indexNPrt2MidSlider">
+                    <div class="ylwTpBx wlwTpBx clearfix pointer">
+                      <h4 (click)="navigateToArticles(18)">Daily Fantasy Hockey</h4>
+                      <p><img src="../../../../assets/images/football.png" alt='' class="img-responsive"></p>
+                    </div>
+                    <div class="owl-carousel owl-theme midSlider midSlider1">
+                      <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                           *ngFor="let article of hockeyArticles">
+                        <img style="margin: 0 auto"
+                             [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                             alt="" class="img-responsive">
+                        <div class="nltstNwsInfoTpWrp">
+                          <h4><a>{{article.title.rendered}}</a></h4>
+                          <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                        </div>
+                        <div class="nltstNwsInfoTpWrp">
+                          <h6><a>{{article.title.rendered}}</a></h6>
+                        </div>
+                        <div class="nltstNwsInfoTpWrp">
+                          <h6><a>{{article.title.rendered}}</a></h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                  </div>
+
+          <div class = "row">
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="indexNPrt2MidSlider">
+                  <div class="ylwTpBx wlwTpBx clearfix pointer">
+                    <h4 (click)="navigateToArticles(18)">Daily Fantasy Soccer</h4>
+                    <p><img src="../../../../assets/images/football.png" alt='' class="img-responsive"></p>
+                  </div>
+                  <div class="owl-carousel owl-theme midSlider midSlider1">
+                    <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                         *ngFor="let article of soccerArticles">
+                      <img style="margin: 0 auto"
+                           [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                           alt="" class="img-responsive">
+
+                      <div class="nltstNwsInfoTpWrp">
+                        <h4><a>{{article.title.rendered}}</a></h4>
+                        <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                      </div>
+                      <div class="nltstNwsInfoTpWrp">
+                        <h6><a>{{article.title.rendered}}</a></h6>
+                      </div>
+                      <div class="nltstNwsInfoTpWrp">
+                        <h6><a>{{article.title.rendered}}</a></h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+
+              <div class="indexNPrt2MidSlider">
+                <div class="ylwTpBx wlwTpBx clearfix pointer">
+                  <h4 (click)="navigateToArticles(18)">Daily Fantasy Golf</h4>
+                  <p><img src="../../../../assets/images/football.png" alt='' class="img-responsive"></p>
+                </div>
+                <div class="owl-carousel owl-theme midSlider midSlider1">
+                  <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                       *ngFor="let article of golfArticles">
+                    <img style="margin: 0 auto"
+                         [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                         alt="" class="img-responsive">
+                    <div class="nltstNwsInfoTpWrp">
+                      <h4><a>{{article.title.rendered}}</a></h4>
+                      <!--<p>{{article.extract?.slice(0,15)}}...</p>-->
+                    </div>
+                    <div class="nltstNwsInfoTpWrp">
+                      <h6><a>{{article.title.rendered}}</a></h6>
+                    </div>
+                    <div class="nltstNwsInfoTpWrp">
+                      <h6><a>{{article.title.rendered}}</a></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class = "row">
+            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+              <div class="indexNPrt2MidSlider">
+                <div class="ylwTpBx wlwTpBx clearfix pointer">
+                  <h4 (click)="navigateToArticles(18)">Daily Fantasy MMA</h4>
+                  <p><img src="../../../../assets/images/football.png" alt='' class="img-responsive"></p>
+                </div>
+                <div class="owl-carousel owl-theme midSlider midSlider1">
+                  <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                       *ngFor="let article of mmaArticles">
+                    <img style="margin: 0 auto"
+                         [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                         alt="" class="img-responsive">
+                    <div class="nltstNwsInfoTpWrp">
+                      <h4><a>{{article.title.rendered}}</a></h4>
+                      <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                    </div>
+                    <div class="nltstNwsInfoTpWrp">
+                      <h6><a>{{article.title.rendered}}</a></h6>
+                    </div>
+                    <div class="nltstNwsInfoTpWrp">
+                      <h6><a>{{article.title.rendered}}</a></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+          <div class="indexNPrt2MidSlider">
+
+            <div class="ylwTpBx wlwTpBx clearfix pointer">
+              <h4 (click)="navigateToArticles(18)">Daily Fantasy Racing</h4>
+              <p><img src="../../../../assets/images/football.png" alt='' class="img-responsive"></p>
+            </div>
+            <div class="owl-carousel owl-theme midSlider midSlider1">
+              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article)" class="item pointer"
+                   *ngFor="let article of nascarArticles">
+                <img style="margin: 0 auto"
+                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                     alt="" class="img-responsive">
+                <div class="nltstNwsInfoTpWrp">
+                  <h4><a>{{article.title.rendered}}</a></h4>
+                  <!-- <p>{{article.extract?.slice(0,15)}}...</p>-->
+                 </div>
+                <div class="nltstNwsInfoTpWrp">
+                  <h6><a>{{article.title.rendered}}</a></h6>
+                </div>
+                <div class="nltstNwsInfoTpWrp">
+                  <h6><a>{{article.title.rendered}}</a></h6>
+                </div>
+               </div>
+             </div>
+           </div>
+              </div>
+          </div>
+          </div>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3.5">
+         <div class="indexNPrt2Rght">
+           <div class="ylwTpBx clearfix">
+             <h3 routerLink="/news">Twitter Feed</h3>
+             <p><img src="../../../../assets/images/twitter_icn.png" alt="" class="img-absolute"></p>
+           </div>
+           <a class="twitter-timeline" data-width="200" data-height="500" data-theme="dark" data-link-color="#FAB81E" href="https://twitter.com/RotoProsDFS?ref_src=twsrc%5Etfw">Tweets by RotoProsDFS</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+           <!-- Nav tabs -->
+           <!--
+          <ul class="nav nav-tabs" role="tablist">
+            <!--<li role="presentation" class="active"><a href="#nTwtr" aria-controls="nTwtr" role="tab"
+                                                      data-toggle="tab"><img
+              src="" alt=""></a></li>--
+            <li role="presentation"><a href="#nFb" aria-controls="nFb" role="tab" data-toggle="tab"><img
+              src="../../../../assets/images/facebook_icn.png" alt=""></a></li>
+            <li role="presentation"><a href="#nInsta" aria-controls="nInsta" role="tab" data-toggle="tab"><img
+              src="../../../../assets/images/insta_icn.png" alt=""></a></li>
+          </ul>
+
+
+          <!-- Tab panes -->
+           <!--
+         <div class="tab-content" style="height:1700px;">
+
+           <div class="nSocialTbWrap">
+                <div class="nSocialTbBx" *ngFor="let tweet of twitterFeeds">
+                  <img
+                    [attr.src]="tweet?.user?.profile_banner_url ? tweet?.user?.profile_banner_url : '../../../../assets/images/twitter-befault.jpg'"
+                    alt="" class="img-responsive social-feed-img"/>
+                  <div class="nSocialTbBxInfo">
+                    <div class="nSocialTbBxInfoTp clearfix">
+                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.name}}</span><i><img
+                        src="../../../../assets/images/twitter_icn.png"></i></a>
+                      <div class="nltstNwsInfoTme">
+                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
+                                                       class="img-responsive"></span>
+                        <i>{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</i>
+                      </div>
+                    </div>
+                    <p>{{tweet?.text?.slice(0,150)}}...</p>
+                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
+                      src="../../../../assets/images/blkArow.png"></span></a>
+                  </div>
+                </div>
+           </div>
+
+            <div role="tabpanel" class="tab-pane" id="nFb">
+              <div class="nSocialTbWrap">
+                <div class="nSocialTbBx" *ngFor="let tweet of facebookFeeds">
+                  <img
+                    [attr.src]="tweet?.attachments?.data[0]?.media?.image?.src ? tweet?.attachments?.data[0]?.media?.image?.src :'../../../../assets/images/f-default.jpg'"
+                    alt="" class="img-responsive social-feed-img"/>
+                  <div class="nSocialTbBxInfo">
+                    <div class="nSocialTbBxInfoTp clearfix">
+                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.message}}</span><i><img
+                        src="../../../../assets/images/facebook_icn.png"></i></a>
+                      <div class="nltstNwsInfoTme">
+                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
+                                                       class="img-responsive"></span>
+                        <i>{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</i>
+                      </div>
+                    </div>
+                    <p>{{tweet?.text?.slice(0,150)}}...</p>
+                    <a href="{{tweet?.attachments?.data[0]?.url}}" target="_blank" class="nRdMor">Read More <span><img
+                      src="../../../../assets/images/blkArow.png"></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nInsta">
+              <div class="nSocialTbWrap">
+                <div class="nSocialTbBx" *ngFor="let tweet of instagramFeeds">
+                  <img
+                    [attr.src]="tweet?.images?.thumbnail?.url ? tweet?.images?.thumbnail?.url :'../../../../assets/images/f-default.jpg'"
+                    alt="" class="img-responsive social-feed-img"/>
+                  <div class="nSocialTbBxInfo">
+                    <div class="nSocialTbBxInfoTp clearfix">
+                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.full_name}}</span><i><img
+                        src="../../../../assets/images/insta_icn.png"></i></a>
+                      <!--<div class="nltstNwsInfoTme">
+                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
+                                                       class="img-responsive"></span>
+                        <i>{{tweet.created_time |date:'dd MMM, yyyy h:m a'}}</i>
+                      </div>--
+                    </div>
+                    <p>{{tweet?.caption?.slice(0,150)}}...</p>
+                    <a href="{{tweet?.link}}" class="nRdMor" target="_blank">Read More <span><img
+                      src="../../../../assets/images/blkArow.png"></span></a>
+                  </div>
+                </div>-->
+              </div>
+            </div>
+          </div>
+
+        </div>
+           </div>
+
+
+</section>
+
+
+</body>
+<!-- Match Details End -->
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 0">
+        <section class="articleSection mPlaceDSection" style="padding: 0;margin: 0;background: none"
+                 *ngIf="activeSingle">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="mPlaceDWrap">
+                  <div class="mPlaceWrap">
+                    <div class="mPlaceItm article-details">
+                      <div class="mPlaceTp">
+                        <div class="mPlaceInfoWrap">
+                          <h3>{{activeSingle.title.rendered}}</h3>
+                          <div class="article_content" [innerHTML]="activeSingle.content.rendered"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </div>
+      <div class="modal-footer">
+       <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</html>
