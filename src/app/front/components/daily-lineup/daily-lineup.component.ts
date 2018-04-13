@@ -19,7 +19,7 @@ export class DailyLineupComponent {
   lineupTabs = NewsTabs;
   lineupTabConstants = NewsTabConstants;
 
-  activeTab:string = this.lineupTabConstants.NBA;
+  activeTab:string = this.lineupTabConstants.MLB;
 
   lineupRecords:LineupRecord[] = [];
   isLoading:boolean;
