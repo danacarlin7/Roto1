@@ -25,6 +25,7 @@ import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
+import {SortGridPipe} from "./ng-pipes/custom-filter.pipe";
 
 import {PlayerGetService} from './services/fetchPlayers';
 import {CompGetService} from './services/fetchCompositions';
@@ -97,6 +98,7 @@ import {VideoComponent} from "./components/video/video.component";
     ProviderComponent,
     ProviderPublicComponent,
     LineupPlayerFilter,
+    SortGridPipe,
     InjuriesComponent,
     ChangePasswordComponent,
     GeneratedLineupsComponent,
