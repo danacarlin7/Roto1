@@ -3,7 +3,8 @@
  */
 
 export interface LineupRecord{
-  game_time:Date;
+  game_time:string;
+  game_date:Date;
   first_team:TeamInfo;
   second_team:TeamInfo;
 }
@@ -17,6 +18,7 @@ export interface TeamInfo{
 export interface Lineup {
   _id:string;
   game_date:Date;
+  game_time:string;
   game_id:string;
   sport:string;
   team_id:string;
@@ -53,4 +55,3 @@ export interface LineupData {
   player_stats_global_id:number;
   player_id:number;
 }
-

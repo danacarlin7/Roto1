@@ -54,7 +54,7 @@ export class FrontService {
       });
   }
 
-  retrieveDailyLineups(sportType: string, timePeriod: string = "cyear"): Observable<any> {
+  retrieveDailyLineups(sportType: string, timePeriod: string = "today"): Observable<any> {
     return this.http.get(environment.api_end_point + "fetchLineup?sport=" + sportType + "&since=" + timePeriod, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {

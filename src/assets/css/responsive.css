@@ -119,12 +119,12 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 
 @media (max-width:1110px) {
 	.dashboardHeader .bottomHeader .logoWrapper {max-width: 140px;}
+	.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchDate p{font-size: 18px;line-height: 20px;}
 }
 
 }
 @media (max-width:991px)
 {
-
 	header .bottomHeader .navbar-default .navbar-toggle {border: 0px;margin-right: 2px;margin-top: 11px;}
 	header .bottomHeader .navbar-default .navbar-toggle .icon-bar {width: 28px;height: 3px;border-radius: 1px;background-color: #FFF;}
 	header .bottomHeader .navbar-default .navbar-toggle:hover, header .bottomHeader .navbar-default .navbar-toggle:focus{background: transparent;}
@@ -387,7 +387,6 @@ header .bottomHeader .bottomHeaderNav .mainMenu ul li a {font-size: 12px;}
 	header .bottomHeader .rightNav > ul > li > a{font-size: 13px;color: #FFF;line-height: 19px;width: 80px;}
 	header .bottomHeader .rightNav > ul > .searchBtn a {padding: 6.5px 10px !important;}
 	header .bottomHeader .rightNav{width: 216px;}
-
 
 
 	.articleDetails .articleLftPtrn{display: none;}

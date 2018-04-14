@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
         <div class="lineupHedin">
-          <h1>Daily Lineups for {{todayDate | date:'dd MMM, yyyy'}}</h1>
+          <h1>Daily Lineups</h1>
         </div>
         <!-- <div class="dTabs"> -->
           <!-- Nav tabs -->
@@ -31,23 +31,60 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="DLineup">
 
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a (click)="getData('MLB', 'today')"
+                     role="tab"
+                     data-toggle="tab"
+                     aria-controls="All">Today
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a href="#Urgent"
+                     (click)="getData('MLB', 'yesterday')"
+                     role="tab"
+                     data-toggle="tab"
+                     aria-controls="Urgent">Yesterday
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a (click)="getData('MLB', '7days')"
+                     href="#Important"
+                     aria-controls="Important"
+                     role="tab"
+                     data-toggle="tab">Last 7 Days</a>
+                </li>
+                <li role="presentation">
+                  <a (click)="getData('MLB', 'cmonth')"
+                     href="#Noteworthy"
+                     aria-controls="Noteworthy"
+                     role="tab"
+                     data-toggle="tab">This Month</a>
+                </li>
+              </ul>
+
               <div class="lineupItmWrap">
-                <div class="lineupItm" *ngFor="let currLineup of lineupRecords">
+                <div class="lineupItm" *ngFor="let currLineup of lineupRecords | sortgrid: '-game_date'">
                   <div class="lineupTeamName">
                     <div class="lineUpTeamNameWraper">
-                      <div class="lineUpTeamNameWrap" *ngIf="currLineup.first_team.logo_url">
+                      <div class="lineUpTeamNameWrap">
+                        <p class="teamName">{{currLineup.first_team.name}}</p>
                         <img [attr.src]="currLineup.first_team.logo_url" alt="" class="img-responsive"/>
                       </div>
-                      <p class="teamName">{{currLineup.first_team.name}}</p>
+
                     </div>
                     <div class="lineUpTeamNameWraper">
-                      <div class="lineUpTeamNameWrap" *ngIf="currLineup.second_team.logo_url">
-                        <img [attr.src]="currLineup.second_team.logo_url" alt="" class="img-responsive"/>
+                      <div class="lineUpTeamNameWrap">
+                        <p class="teamName">{{currLineup.second_team.name}}</p>
+                        <img [attr.src]="currLineup.second_team.logo_url" alt="" class="img-responsive" />
                       </div>
-                      <p class="teamName">{{currLineup.second_team.name}}</p>
+
                     </div>
                     <div class="lineupMatchTime">
-                      <p>{{currLineup.game_time | date:'h:m a'}}</p>
+                      <p>{{currLineup.game_time}}</p>
+                    </div>
+                    <div class="lineupMatchDate" *ngIf="activeFilter !== 'today'">
+                      <p>{{currLineup.game_date | date:'EEE, MMM d, y'}}</p>
                     </div>
                   </div>
                   <div class="lineupPlayerName">
@@ -64,6 +101,9 @@
                       </li>
                     </ul>
                   </div>
+                </div>
+                <div class="col-sm-12 text-center" *ngIf="!isLoading">
+                  <h3 *ngIf="lineupRecords.length == 0">There is no lineups for Today.</h3>
                 </div>
               </div>
 
