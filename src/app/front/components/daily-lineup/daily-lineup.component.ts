@@ -73,10 +73,10 @@ export class DailyLineupComponent {
   prepareLineupRecords(data:any[]) {
     this.lineupRecords = [];
 
-    data.forEach(
-      currData => {
-        let firstTeam:Lineup = currData.data[0];
-        let secondTeam:Lineup = currData.data[1];
+    data.forEach(currData => {
+        console.log("data", currData);
+        let firstTeam:Lineup = currData.data[0] ? currData.data[0] : false;
+        let secondTeam:Lineup = currData.data[1] ?  currData.data[1] : false;
 
         this.lineupRecords.push(<LineupRecord>{
           game_time: firstTeam.game_time,
