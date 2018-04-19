@@ -64,7 +64,7 @@
               </ul>
 
               <div class="lineupItmWrap">
-                <div class="lineupItm" *ngFor="let currLineup of lineupRecords | sortgrid: '-game_date'">
+                <div class="lineupItm" *ngFor="let currLineup of lineupRecords | sortgrid: 'sort_date'">
                   <div class="lineupTeamName">
                     <div class="lineUpTeamNameWraper">
                       <div class="lineUpTeamNameWrap">
@@ -89,12 +89,18 @@
                   </div>
                   <div class="lineupPlayerName">
                     <ul class="lineupPlayerWrap">
+                      <li *ngIf="currLineup.first_team.lineup_players.length == 1">
+                        <span style="width: 125px;color: #7373d6;">Lineup Pending...</span>
+                      </li>
                       <li *ngFor="let currPlayer of currLineup.first_team.lineup_players">
                         <span>{{currPlayer.player_position}}</span>
                         {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
                       </li>
                     </ul>
                     <ul class="lineupPlayerWrap">
+                      <li *ngIf="currLineup.second_team.lineup_players.length == 1">
+                        <span style="width: 125px;color: #7373d6;">Lineup Pending...</span>
+                      </li>
                       <li *ngFor="let currPlayer of currLineup.second_team.lineup_players">
                         <span>{{currPlayer.player_position}}</span>
                         {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
