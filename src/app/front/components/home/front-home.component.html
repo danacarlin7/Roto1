@@ -115,7 +115,7 @@
           </div>-->
 
           <div class="ylwTpBxInfoWrap">
-            <div routerLink="/news" class="ylwTpBx clearfix pointer">
+            <div class="ylwTpBx clearfix pointer">
               <h3>Latest News <span><img src="../../../../assets/images/blkArow.png"></span></h3>
               <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
             </div>
@@ -253,7 +253,7 @@
         </div>
         <div class="indexNPrt2Rght">
           <div class="ylwTpBx clearfix">
-            <h3 routerLink="/news">Social Feeds<span><img src="../../../../assets/images/blkArow.png"></span></h3>
+            <h3>Social Feeds<span><img src="../../../../assets/images/blkArow.png"></span></h3>
             <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
           </div>
 
@@ -278,7 +278,7 @@
                     alt="" class="img-responsive social-feed-img"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.name}}</span><i><img
+                      <a href="https://twitter.com/{{tweet?.user?.screen_name}}" target="_blank"><span class="icnWrapperS">{{tweet?.user.name}}</span><i><img
                         src="../../../../assets/images/twitter_icn.png"></i></a>
                       <div class="nltstNwsInfoTme">
                         <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
@@ -287,7 +287,7 @@
                       </div>
                     </div>
                     <p>{{tweet?.text?.slice(0,150)}}...</p>
-                    <a href="javascript:void(0)" class="nRdMor">Read More <span><img
+                    <a href="{{tweet?.entities?.urls[0]?.url}}" target="_blank" class="nRdMor">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>
                 </div>
@@ -324,7 +324,7 @@
                     alt="" class="img-responsive social-feed-img"/>
                   <div class="nSocialTbBxInfo">
                     <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.user.full_name}}</span><i><img
+                      <a href="https://www.instagram.com/{{tweet?.user?.username}}" target="_blank"><span class="icnWrapperS">{{tweet?.user.full_name}}</span><i><img
                         src="../../../../assets/images/insta_icn.png"></i></a>
                       <!--<div class="nltstNwsInfoTme">
                         <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""

@@ -38,6 +38,9 @@ import {NBALineupOptimizerComponent} from "./components/nba-lineup-optimizer/nba
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 import { PodcastComponent } from './components/podcast/podcast.component';
 import {PlanComponent} from "./components/plan/plan.component";
+import {VideoComponent} from "./components/video/video.component";
+
+
 /**
  * Created by Hiren on 05-06-2017.
  */
@@ -76,8 +79,9 @@ const routes: Routes = [
       { path: "nfl-lineups", component: GeneratedNFLLineupsComponent },
       { path: "nba-lineups", component: GeneratedNBALineupsComponent },
       { path: "injuries", component: InjuriesComponent },
-      { path: "subscribe",canActivate: [AuthGuard],component: SubscribeComponent },
+      { path: "subscribe", component: SubscribeComponent },
       { path: "plans", component: PlanComponent },
+      { path: "videos", component: VideoComponent },
       { path: "contact-analyzer", component: ContactAnalyzerComponent },
       { path: "podcast", component: PodcastComponent },
     ]

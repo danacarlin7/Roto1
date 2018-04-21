@@ -3,7 +3,9 @@
  */
 
 export interface LineupRecord{
-  game_time:Date;
+  game_time:string;
+  game_date:Date;
+  sort_date: Date;
   first_team:TeamInfo;
   second_team:TeamInfo;
 }
@@ -11,12 +13,14 @@ export interface LineupRecord{
 export interface TeamInfo{
   name:string;
   logo_url:string;
-  lineup_players:LineupData[];
+  lineup_players:any[];
 }
 
 export interface Lineup {
   _id:string;
   game_date:Date;
+  sort_date:Date;
+  game_time:string;
   game_id:string;
   sport:string;
   team_id:string;
@@ -28,7 +32,7 @@ export interface Lineup {
   team_name:string;
   team_nickname:string;
   team_players:any[];
-  team_lineups:TeamLineup[];
+  team_lineups:any[];
   updated_at:Date;
   created_at:Date;
   __v:number;
@@ -37,11 +41,11 @@ export interface Lineup {
   team_city:string;
 }
 
-export interface TeamLineup {
-  lineup_data:LineupData[];
-  lineup_no:number;
-  _id:string;
-}
+// export interface TeamLineup {
+//   lineup_data:LineupData[];
+//   lineup_no:number;
+//   _id:string;
+// }
 
 export interface LineupData {
   _id:string;
@@ -53,4 +57,3 @@ export interface LineupData {
   player_stats_global_id:number;
   player_id:number;
 }
-

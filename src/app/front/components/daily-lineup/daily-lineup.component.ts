@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {NewsTabs, NewsTabConstants} from "../../constants/menu.constants";
 import {Router, ActivatedRoute} from "@angular/router";
 import {FrontService} from "../../services/front.service";
-import {Lineup, LineupRecord, TeamInfo, TeamLineup, LineupData} from "../../models/lineup.model";
+import {Lineup, LineupRecord, TeamInfo, LineupData} from "../../models/lineup.model";
 /**
  * Created by Hiren on 01-07-2017.
  */
@@ -19,7 +19,8 @@ export class DailyLineupComponent {
   lineupTabs = NewsTabs;
   lineupTabConstants = NewsTabConstants;
 
-  activeTab:string = this.lineupTabConstants.NBA;
+  activeTab:string = this.lineupTabConstants.MLB;
+  activeFilter = 'today';
 
   lineupRecords:LineupRecord[] = [];
   isLoading:boolean;
@@ -31,7 +32,7 @@ export class DailyLineupComponent {
     this.activeRoute.queryParams.subscribe(
       params => {
         if (params.hasOwnProperty('tab')) {
-          this.getData(params['tab']);
+          this.getData(params['tab'], 'today');
           this.activeTab = params['tab'];
         }
         else {
@@ -47,15 +48,16 @@ export class DailyLineupComponent {
   }
 
 
-  getData(tabName:string) {
+  getData(tabName:string, timePeriod:string) {
     this.isLoading = true;
-    this.frontService.retrieveDailyLineups(tabName)
+    this.activeFilter = timePeriod;
+    this.frontService.retrieveDailyLineups(tabName, timePeriod)
       .subscribe(
         response => {
           if (response.statusCode == 200) {
             let data:Array<any> = response.data;
             this.prepareLineupRecords(data);
-            console.log("lineup records data => ", data);
+            // console.log("lineup records data => ", data);
           } else {
             console.log('response error => ', response);
           }
@@ -70,24 +72,28 @@ export class DailyLineupComponent {
 
   prepareLineupRecords(data:any[]) {
     this.lineupRecords = [];
-    data.forEach(
-      currData => {
-        let firstTeam:Lineup = currData.data[0];
-        let secondTeam:Lineup = currData.data[1];
+
+    data.forEach(currData => {
+        // console.log("data", currData);
+        let firstTeam:Lineup = currData.data[0] ? currData.data[0] : false;
+        let secondTeam:Lineup = currData.data[1] ?  currData.data[1] : false;
+
         this.lineupRecords.push(<LineupRecord>{
-          game_time: firstTeam.game_date,
+          game_time: firstTeam.game_time,
+          game_date: firstTeam.game_date,
+          sort_date: firstTeam.sort_date,
           first_team: <TeamInfo>{
-            name: firstTeam ? firstTeam.team_name : '',
+            name: firstTeam.team_code ? firstTeam.team_code : firstTeam.team_name ? firstTeam.team_name : '',
             logo_url: firstTeam ? firstTeam.team_wikipedia_logo_url : '',
-            lineup_players: firstTeam ? firstTeam.team_lineups[0].lineup_data : [],
+            lineup_players: firstTeam ? firstTeam.team_lineups : [],
           },
           second_team: <TeamInfo>{
-            name: secondTeam ? secondTeam.team_name : '',
+            name: secondTeam.team_code ? secondTeam.team_code : secondTeam.team_name ? secondTeam.team_name : '',
             logo_url: secondTeam ? secondTeam.team_wikipedia_logo_url : '',
-            lineup_players: secondTeam ? secondTeam.team_lineups[0].lineup_data : [],
+            lineup_players: secondTeam ? secondTeam.team_lineups : [],
           }
         })
       });
-    console.log("this.lineupRecords => ", this.lineupRecords);
+    // console.log("this.lineupRecords => ", this.lineupRecords);
   }
 }

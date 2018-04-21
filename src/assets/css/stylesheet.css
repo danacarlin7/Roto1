@@ -615,15 +615,17 @@ section{padding: 100px 0px;}
 		.lineupSection{background: #f2f4f8;padding: 40px 0px;}
 		.lineupSection .dTabs .lineupItmWrap{display: flex;flex-flow: row wrap;justify-content: space-between;}
 		.lineupSection .lineupItmWrap .lineupItm{ background: #FFF;box-shadow: 0px 0px 16px rgba(0,0,0,0.14);width: 48%;margin-bottom: 40px;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName{display: flex;flex-flow: row wrap;align-items: flex-start;justify-content: space-between; position: relative;padding: 20px 20px 5px;}
+		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName{display: flex;flex-flow: row wrap;align-items: flex-start;justify-content: space-between; position: relative;padding: 20px 20px 5px;background-image: linear-gradient(to right bottom, #f3f075, #f1e477, #eed979, #e9ce7b, #e2c47e);}
 		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWraper:nth-child(2) .lineUpTeamNameWrap{float: right;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap{height: 100px;width: 100px;display: flex;justify-content: center;align-items: center;border: 1px solid #d9d8d8;border-radius: 2px;}
+		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap{height: 100px;width: 100px;display: flex;justify-content: center;align-items: center;border-radius: 2px; display: flex;flex-direction: column-reverse;}
 		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .teamName{font-size: 16px;line-height: 30px;padding: 0px;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap img{width: auto;}
+		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineUpTeamNameWrap img{margin-left: 5px;margin-top: -4px;width: 50px;height: 50px;}
 		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime{position: absolute;top: 50%;transform: translate(-50%,-50%);left: 50%;}
 		.lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchTime p{font-size: 30px;line-height: 30px;padding: 0px;font-family: 'Roboto', sans-serif;font-weight: 300;color: #000;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName{background: #f8c534;padding: 30px 20px 40px;display: flex;justify-content: space-between;}
-		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li{font-size: 16px;line-height: 37px;color: #FFF;font-family: 'Roboto', sans-serif;font-weight: 400;}
+    .lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchDate{position: absolute;top: 85%;transform: translate(-50%,-50%);left: 50%;}
+    .lineupSection .lineupItmWrap .lineupItm .lineupTeamName .lineupMatchDate p{font-size: 25px;line-height: 30px;padding: 0px;font-family: 'Roboto', sans-serif;font-weight: 300;color: #000;}
+    .lineupSection .lineupItmWrap .lineupItm .lineupPlayerName{background: #ffffff;padding: 30px 20px 40px;display: flex;justify-content: space-between;}
+		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li{font-size: 16px;line-height: 37px;color: #192944;font-family: 'Roboto', sans-serif;font-weight: 400;}
 		.lineupSection .lineupItmWrap .lineupItm .lineupPlayerName .lineupPlayerWrap li span{color: #262626; margin-right: 20px;width: 20px;display: inline-block;}
 		.lineupSection .pagination{ justify-content: center;}
 

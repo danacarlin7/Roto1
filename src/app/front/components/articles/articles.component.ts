@@ -11,7 +11,7 @@ import { ArticleService } from "../../services/article.service";
 export class ArticlesComponent implements OnInit {
 
   constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private articleService: ArticleService) {
-    localStorage.setItem('free', "0");
+    // localStorage.setItem('free', "0");
   }
 
   category: any;

@@ -21,7 +21,10 @@ export class SavedCardsComponent {
   responseMessage: any;
   isSuccess: boolean;
   // Create a Stripe client.
-  stripe = (<any>window).Stripe('pk_test_A5XmrDsft5PHHvkxOKISsUR7');
+
+  stripe = (<any>window).Stripe(environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7");
+
+  cardColor = ['#0cd2c985','#d2270c85','#ffc440','#ff40df6e', '#4fd20c85']
 
   constructor(private dashboardService: UserDashboardServices) {
 
@@ -31,6 +34,10 @@ export class SavedCardsComponent {
   ngOnInit() {
     this.getSavedCards();
   }
+
+  // getCardColor(){
+  //   console.log("here", this.cardColor[Math.floor(Math.random()*this.cardColor.length)], Math.floor(Math.random()*this.cardColor.length));
+  // }
 
   getSavedCards() {
     this.isLoading = true;
@@ -244,7 +251,9 @@ export class SavedCardsComponent {
     let that = this;
     this.stripe.createToken(this.card).then(function(result) {
         if (result.error) {
-          // console.log(result.error);
+          console.log(result.error);
+          that.isSuccess = false;
+          that.responseMessage = result.error.message;
           // Inform the user if there was an error.
           // var errorElement = document.getElementById('card-errors');
           // errorElement.textContent = result.error.message;
