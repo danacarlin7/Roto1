@@ -19,7 +19,19 @@
   cursor: pointer;
 }
 
-.redirect-msg{
+.redirect-msg {
   font-size: 20px;
   padding: 18px 18px;
 }
+@media (min-width: 768px) {
+  .indexNPrt2Rght {
+    height: calc(100vh - 100px);
+    overflow: hidden;
+  }
+
+  .indexNPrt2Rght .tab-content {
+    height: calc(100% - 155px);
+    overflow: auto;
+  }
+}
+

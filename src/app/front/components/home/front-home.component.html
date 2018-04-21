@@ -332,7 +332,7 @@
                         <i>{{tweet.created_time |date:'dd MMM, yyyy h:m a'}}</i>
                       </div>-->
                     </div>
-                    <p>{{tweet?.caption?.slice(0,150)}}...</p>
+                    <p>{{tweet?.caption?.text?.slice(0,150)}}...</p>
                     <a href="{{tweet?.link}}" class="nRdMor" target="_blank">Read More <span><img
                       src="../../../../assets/images/blkArow.png"></span></a>
                   </div>
