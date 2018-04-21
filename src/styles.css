@@ -326,3 +326,10 @@ rp-sign-up .loginDetails .loginDetailsWrapper {
 .loginDetails .loginDetailsWrapper .signupRghtWrapper {
   width: 100%;
 }
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img {
+  line-height: 1;
+  height: calc(100vh - 85px);
+  object-fit: cover;
+  object-position: center;
+}

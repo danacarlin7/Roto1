@@ -1,19 +1,20 @@
-import { Component, AfterViewInit, OnInit } from "@angular/core";
+import {Component, AfterViewInit, OnInit} from "@angular/core";
 import {FrontService} from "../../services/front.service";
 import {ArticleService} from "../../services/article.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
 import {News} from "../../models/news.model";
+
 /**
  * Created by Hiren on 06-06-2017.
  */
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
-  selector: 'rp-front-home',
-  templateUrl: './front-home.component.html',
-  styleUrls: ['./front-home.component.css']
+  selector: "rp-front-home",
+  templateUrl: "./front-home.component.html",
+  styleUrls: ["./front-home.component.css"]
 })
 export class FrontHomeComponent implements AfterViewInit, OnInit {
   redirected: boolean;
@@ -28,8 +29,8 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   baseballArticles: any[];
   media: Object = {};
 
-  activeSingle:any;
-  isStatus : any;
+  activeSingle: any;
+  isStatus: any;
   isSubscribeError: any;
   isLoginError: any;
 
@@ -37,13 +38,14 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
               private articleService: ArticleService,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     console.log(this.route.snapshot);
-    if (this.route.snapshot.params['redirected']) {
-      this.redirected = this.route.snapshot.params['redirected'];
-      this.redirectMessage = this.route.snapshot.params['redirectMessage'];
+    if (this.route.snapshot.params["redirected"]) {
+      this.redirected = this.route.snapshot.params["redirected"];
+      this.redirectMessage = this.route.snapshot.params["redirectMessage"];
     }
   }
 
@@ -53,7 +55,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         response => {
           if (response.statusCode == 200) {
             console.log(response.data);
-            let feeds:Array<any> = response.data;
+            let feeds: Array<any> = response.data;
             if (feeds && feeds.length) {
               this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
               console.log("tweets => ", this.twitterFeeds);
@@ -69,7 +71,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       .subscribe(
         response => {
           if (response.statusCode == 200) {
-            let feeds:Array<any> = response.data;
+            let feeds: Array<any> = response.data;
             if (feeds && feeds.length) {
               this.facebookFeeds = feeds.splice(0, Math.min(5, feeds.length));
               console.log("fb posts => ", this.facebookFeeds);
@@ -85,7 +87,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       .subscribe(
         response => {
           if (response.statusCode == 200) {
-            let feeds:Array<any> = response.data.data;
+            let feeds: Array<any> = response.data.data;
             if (feeds && feeds.length) {
               this.instagramFeeds = feeds.splice(0, Math.min(5, feeds.length));
               console.log("instagram posts => ", this.instagramFeeds);
@@ -102,12 +104,15 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.retrieveBasketBallArticles();
     this.retrieveFootballArticles();
     this.retrieveNews();
+    if(jQuery(window).width() > 767){
+      this.initSocialFeed();
+    }
   }
 
 
   renderBaseballArticles() {
     setTimeout(() => {
-      jQuery('.midSlider1').owlCarousel({
+      jQuery(".midSlider1").owlCarousel({
         items: 1,
         margin: 20,
         nav: true,
@@ -125,14 +130,14 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         }
       });
 
-      jQuery(".midSlider1 .owl-prev").html('<i class="icnWrapperS"><img src="../../../../assets/images/blkArowLft.png" alt="" class="img-responsive"></i><span>Previous</span>');
-      jQuery(".midSlider1 .owl-next").html('<i class="icnWrapperS">Next</i><span><img src="../../../../assets/images/blkArow.png" alt="" class="img-responsive"></span>');
+      jQuery(".midSlider1 .owl-prev").html("<i class=\"icnWrapperS\"><img src=\"../../../../assets/images/blkArowLft.png\" alt=\"\" class=\"img-responsive\"></i><span>Previous</span>");
+      jQuery(".midSlider1 .owl-next").html("<i class=\"icnWrapperS\">Next</i><span><img src=\"../../../../assets/images/blkArow.png\" alt=\"\" class=\"img-responsive\"></span>");
     }, 10);
   }
 
   renderBasketballArticles() {
     setTimeout(() => {
-      jQuery('.midSlider3').owlCarousel({
+      jQuery(".midSlider3").owlCarousel({
         items: 1,
         margin: 20,
         nav: true,
@@ -150,14 +155,14 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         }
       });
 
-      jQuery(".midSlider3 .owl-prev").html('<i class="icnWrapperS"><img src="../../../../assets/images/blkArowLft.png" alt="" class="img-responsive"></i><span>Previous</span>');
-      jQuery(".midSlider3 .owl-next").html('<i class="icnWrapperS">Next</i><span><img src="../../../../assets/images/blkArow.png" alt="" class="img-responsive"></span>');
+      jQuery(".midSlider3 .owl-prev").html("<i class=\"icnWrapperS\"><img src=\"../../../../assets/images/blkArowLft.png\" alt=\"\" class=\"img-responsive\"></i><span>Previous</span>");
+      jQuery(".midSlider3 .owl-next").html("<i class=\"icnWrapperS\">Next</i><span><img src=\"../../../../assets/images/blkArow.png\" alt=\"\" class=\"img-responsive\"></span>");
     }, 10);
   }
 
   renderFootballArticles() {
     setTimeout(() => {
-      jQuery('.midSlider2').owlCarousel({
+      jQuery(".midSlider2").owlCarousel({
         items: 1,
         margin: 20,
         nav: true,
@@ -175,8 +180,8 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         }
       });
 
-      jQuery(".midSlider2 .owl-prev").html('<i class="icnWrapperS"><img src="../../../../assets/images/blkArowLft.png" alt="" class="img-responsive"></i><span>Previous</span>');
-      jQuery(".midSlider2 .owl-next").html('<i class="icnWrapperS">Next</i><span><img src="../../../../assets/images/blkArow.png" alt="" class="img-responsive"></span>');
+      jQuery(".midSlider2 .owl-prev").html("<i class=\"icnWrapperS\"><img src=\"../../../../assets/images/blkArowLft.png\" alt=\"\" class=\"img-responsive\"></i><span>Previous</span>");
+      jQuery(".midSlider2 .owl-next").html("<i class=\"icnWrapperS\">Next</i><span><img src=\"../../../../assets/images/blkArow.png\" alt=\"\" class=\"img-responsive\"></span>");
     }, 10);
   }
 
@@ -192,7 +197,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.getArticlesByGameId(16);
   }
 
-  getArticlesByGameId(id:any) {
+  getArticlesByGameId(id: any) {
     let catid = id;
     let articlesList = [];
     this.articleService.fetchPosts({categories: catid, per_page: 10, offset: 0}).subscribe(
@@ -220,7 +225,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
           this.renderFootballArticles();
           console.log("footballArticles => ", this.footballArticles);
         }
-        let mids = mid.join(',');
+        let mids = mid.join(",");
         if (mids) {
           this.articleService.fetchMedia({include: mids}).subscribe(
             images => {
@@ -235,32 +240,32 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     );
   }
 
-  encodeHtml(extract:string) {
-    extract = extract.replace(/<[^>]+>/gm, '');
+  encodeHtml(extract: string) {
+    extract = extract.replace(/<[^>]+>/gm, "");
     let txt = document.createElement("textarea");
     txt.innerHTML = extract;
     extract = txt.value;
     if (extract.length > 250)
-      extract = extract.substring(0, 250) + ' ...';
+      extract = extract.substring(0, 250) + " ...";
     return extract;
   }
 
-  findMedia(id:number) {
+  findMedia(id: number) {
     if (!id || !this.media) return false;
     return this.media[id];
   }
 
   navigateToArticles(id) {
-    this.router.navigate(['/articles'], {queryParams: {tab: id}});
+    this.router.navigate(["/articles"], {queryParams: {tab: id}});
   }
 
   switchToSingle(post, isArticle) {
-    if(isArticle) {
-      if(!this.authService.isLoggedIn()){
+    if (isArticle) {
+      if (!this.authService.isLoggedIn()) {
         this.isStatus = false;
         this.isLoginError = true;
         this.isSubscribeError = false;
-      } else if(this.authService.isLoggedIn() && this.authService.isSubscriber(true)){
+      } else if (this.authService.isLoggedIn() && this.authService.isSubscriber(true)) {
         this.isStatus = true;
         this.isLoginError = false;
         this.isSubscribeError = false;
@@ -269,7 +274,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         this.isLoginError = false;
         this.isSubscribeError = true;
       }
-    } else{
+    } else {
       this.isStatus = true;
       this.isLoginError = false;
       this.isSubscribeError = false;
@@ -278,25 +283,25 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.activeSingle = post;
   }
 
-  allNewsRecords:News[] = [];
+  allNewsRecords: News[] = [];
 
   retrieveNews() {
-   /* this.frontService.retrieveHomepageNews()
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            let data:Array<any> = response.data;
-            let tempNews = data.map(currData => currData['news'][0]);
-            this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
-            //this.renderNews();
-          } else {
-            console.log('response error => ', response);
-          }
-        },
-        error => {
-          console.log('http error => ', error);
-        }
-      )*/
+    /* this.frontService.retrieveHomepageNews()
+       .subscribe(
+         response => {
+           if (response.statusCode == 200) {
+             let data:Array<any> = response.data;
+             let tempNews = data.map(currData => currData['news'][0]);
+             this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
+             //this.renderNews();
+           } else {
+             console.log('response error => ', response);
+           }
+         },
+         error => {
+           console.log('http error => ', error);
+         }
+       )*/
     this.articleService.fetchPosts({categories: 4367, per_page: 5, offset: 0}).subscribe(
       posts => {
         this.allNewsRecords = [];
@@ -307,7 +312,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
             mid.push(posts[j].featured_media);
           this.allNewsRecords.push(posts[j]);
         }
-        let mids = mid.join(',');
+        let mids = mid.join(",");
         if (mids) {
           this.articleService.fetchMedia({include: mids}).subscribe(
             images => {
@@ -325,7 +330,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   renderNews() {
     setTimeout(() => {
-      jQuery('.nSlider1').owlCarousel({
+      jQuery(".nSlider1").owlCarousel({
         items: 1,
         margin: 0,
         nav: true,
@@ -335,9 +340,42 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         autoplayHoverPause: true
       });
 
-      jQuery(".nSlider1 .owl-prev").html('<i class="icnWrapperS"><img src="../../../../assets/images/blkArowLft.png" alt="" class="img-responsive"></i><span>Previous</span>');
-      jQuery(".nSlider1 .owl-next").html('<i class="icnWrapperS">Next</i><span><img src="../../../../assets/images/blkArow.png" alt="" class="img-responsive"></span>');
+      jQuery(".nSlider1 .owl-prev").html("<i class=\"icnWrapperS\"><img src=\"../../../../assets/images/blkArowLft.png\" alt=\"\" class=\"img-responsive\"></i><span>Previous</span>");
+      jQuery(".nSlider1 .owl-next").html("<i class=\"icnWrapperS\">Next</i><span><img src=\"../../../../assets/images/blkArow.png\" alt=\"\" class=\"img-responsive\"></span>");
     }, 10);
   }
 
+  initSocialFeed() {
+    let sfDivRef = jQuery(".indexNPrt2Rght");
+    let footerRef = jQuery("#footer");
+    let sfTop = sfDivRef.offset().top;
+    let footerTop = footerRef.offset().top;
+    setTimeout(() => {this.updateSFDivPos(sfDivRef,footerRef,sfTop,footerTop);},1000);
+    jQuery(window).scroll(() => {
+      this.updateSFDivPos(sfDivRef,footerRef,sfTop,footerTop);
+    });
+    jQuery(window).resize(() => {
+      footerTop = footerRef.offset().top;
+      sfTop = sfDivRef.offset().top;
+    });
+  }
+  updateSFDivPos(sfDivRef,footerRef,sfTop,footerTop){
+    let sfLeft = sfDivRef.offset().left;
+    let currPos = sfTop - jQuery(window).scrollTop();
+    footerTop = footerRef.offset().top;
+    let footerCurrPos = footerTop - jQuery(window).scrollTop();
+    if (currPos <= 92) {
+      let width = sfDivRef.width();
+      sfDivRef.css("width", width + "px");
+      sfDivRef.css("position", "fixed");
+      sfDivRef.css("left", sfLeft + "px");
+      if (footerCurrPos <= $(window).height()) {
+        sfDivRef.css("top", 92 - ($(window).height() - footerCurrPos) + "px");
+      } else {
+        sfDivRef.css("top", "92px");
+      }
+    } else {
+      sfDivRef.removeAttr("style");
+    }
+  }
 }
