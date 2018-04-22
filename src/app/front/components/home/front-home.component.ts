@@ -27,6 +27,9 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   footballArticles: any[];
   basketballArticles: any[];
   baseballArticles: any[];
+  mmaArticles: any[];
+  golfArticles: any[];
+  nascarArticles: any[];
   nhlArticles: any[];
   media: Object = {};
 
@@ -56,6 +59,9 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.retrieveBasketBallArticles();
     this.retrieveFootballArticles();
     this.retrieveNHLArticles();
+    this.retrieveMMAArticles();
+    this.retrieveGolfArticles();
+    this.retrieveNascarArticles();
     this.retrieveNews();
     if (jQuery(window).width() > 767) {
       this.initSocialFeed();
@@ -197,6 +203,19 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.getArticlesByGameId(17);
   }
 
+  retrieveMMAArticles() {
+    this.getArticlesByGameId(4137);
+  }
+
+  retrieveGolfArticles() {
+    this.getArticlesByGameId(21);
+  }
+
+  retrieveNascarArticles() {
+    this.getArticlesByGameId(22);
+  }
+  // 4137
+
   retrieveBasketBallArticles() {
     this.getArticlesByGameId(19);
   }
@@ -241,6 +260,19 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
           this.nhlArticles = articlesList;
           //this.renderFootballArticles();
           console.log("nhlArticles => ", this.nhlArticles);
+        }
+        if (id == 4137) {
+          this.mmaArticles = articlesList;
+          //this.renderFootballArticles();
+          console.log("mmaArticles => ", this.mmaArticles);
+        }
+        if (id == 22) {
+          this.nascarArticles = articlesList;
+          //this.renderFootballArticles();
+        }
+        if (id == 21) {
+          this.golfArticles = articlesList;
+          //this.renderFootballArticles();
         }
         let mids = mid.join(",");
         if (mids) {

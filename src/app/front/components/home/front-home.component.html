@@ -1,15 +1,15 @@
 <!-- BoPrt1 Starts -->
-<section class="indexNPrt1">
+<!--<section class="indexNPrt1">
   <div class="container-fluid">
     <div class="row indexNPrt1Wrapper">
 
-      <!-- this is better done as a directive -->
+      &lt;!&ndash; this is better done as a directive &ndash;&gt;
       <div class="alert alert-success fade in redirect-msg" *ngIf="redirected">
         {{ redirectMessage }}
       </div>
 
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Wrapper for slides -->
+        &lt;!&ndash; Wrapper for slides &ndash;&gt;
         <div class="carousel-inner" role="listbox">
           <div class="item active">
             <img src="../../../../assets/images/new_banner.jpg" alt="...">
@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <!-- Controls -->
+        &lt;!&ndash; Controls &ndash;&gt;
         <div class="tpCntrl">
           <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
             <i class="icnWrapper"><img src="../../../../assets/images/newLftArow.png" alt="" class="img-responsive"></i><span>Previous</span>
@@ -78,7 +78,7 @@
 
     </div>
   </div>
-</section>
+</section>-->
 <!-- BoPrt1 Ends -->
 
 <!-- Match Details Starts -->
@@ -200,7 +200,7 @@
                   <div class="name">MLB Articles</div>
                 </div>
                 <div class="sport-content">
-                  <div class="single-article" *ngFor="let article of baseballArticles;let i = index;">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of baseballArticles;let i = index;">
                     <div class="article-with-thumb" *ngIf="i == 0">
                       <div class="article-img">
                         <img
@@ -222,7 +222,7 @@
                   <div class="name">NFL Articles</div>
                 </div>
                 <div class="sport-content">
-                  <div class="single-article" *ngFor="let article of footballArticles;let i = index;">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of footballArticles;let i = index;">
                     <div class="article-with-thumb" *ngIf="i == 0">
                       <div class="article-img">
                         <img
@@ -246,7 +246,7 @@
                   <div class="name">NBA Articles</div>
                 </div>
                 <div class="sport-content">
-                  <div class="single-article" *ngFor="let article of basketballArticles;let i = index;">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of basketballArticles;let i = index;">
                     <div class="article-with-thumb" *ngIf="i == 0">
                       <div class="article-img">
                         <img
@@ -268,7 +268,7 @@
                   <div class="name">NHL Articles</div>
                 </div>
                 <div class="sport-content">
-                  <div class="single-article" *ngFor="let article of nhlArticles;let i = index;">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nhlArticles;let i = index;">
                     <div class="article-with-thumb" *ngIf="i == 0">
                       <div class="article-img">
                         <img
@@ -285,7 +285,76 @@
               </div>
             </div>
           </div>
-
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">MMA Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of mmaArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title">{{article.title.rendered}}</div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0">{{article.title.rendered.trim()}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">Nascar Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nascarArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title">{{article.title.rendered}}</div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0">{{article.title.rendered.trim()}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">PGA Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of golfArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title">{{article.title.rendered}}</div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0">{{article.title.rendered.trim()}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- <div class="indexNPrt2MidSlider">
              <div class="ylwTpBx wlwTpBx clearfix pointer">
                <h3 (click)="navigateToArticles(17)">Daily Fantasy Baseball<span><img

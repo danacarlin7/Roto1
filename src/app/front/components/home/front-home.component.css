@@ -157,7 +157,11 @@
   margin-right: 0;
 }
 
-.ylwTpBxInfoWrap,.indexNPrt2Lft,.indexNPrt2Mid,.indexNPrt2Rght{
+.ylwTpBxInfoWrap, .indexNPrt2Lft, .indexNPrt2Mid, .indexNPrt2Rght {
   width: 100%;
   float: none;
+}
+
+section.indexNPrt2 {
+  padding-top: 22px;
 }
