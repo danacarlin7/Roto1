@@ -93,7 +93,10 @@
                 <a routerLink="/articles" (click)="closeMobileMenu()">Articles</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a href="#" (click)="closeMobileMenu()">RotoPros Live</a>
+                <a routerLink="/videos" (click)="closeMobileMenu()">RotoPros Live</a>
+              </li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/lineups" (click)="closeMobileMenu()">Daily MLB Lineups</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a target="_blank" href="https://dfsgods.slack.com" (click)="closeMobileMenu()">Rotopros Chat</a>

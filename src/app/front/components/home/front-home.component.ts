@@ -27,6 +27,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   footballArticles: any[];
   basketballArticles: any[];
   baseballArticles: any[];
+  nhlArticles: any[];
   media: Object = {};
 
   activeSingle: any;
@@ -50,6 +51,22 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+    this.retrieveSocialFeeds();
+    this.retrieveBaseballArticles();
+    this.retrieveBasketBallArticles();
+    this.retrieveFootballArticles();
+    this.retrieveNHLArticles();
+    this.retrieveNews();
+    if (jQuery(window).width() > 767) {
+      this.initSocialFeed();
+      this.initNewsFeed();
+    }
+    setInterval(() => {
+      this.retrieveSocialFeeds();
+    }, 60000)
+  }
+
+  retrieveSocialFeeds() {
     this.frontService.retrieveTwitterFeeds()
       .subscribe(
         response => {
@@ -98,15 +115,6 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
           console.log("http error => ", error);
         }
       );
-
-
-    this.retrieveBaseballArticles();
-    this.retrieveBasketBallArticles();
-    this.retrieveFootballArticles();
-    this.retrieveNews();
-    if(jQuery(window).width() > 767){
-      this.initSocialFeed();
-    }
   }
 
 
@@ -197,10 +205,14 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.getArticlesByGameId(16);
   }
 
+  retrieveNHLArticles() {
+    this.getArticlesByGameId(18);
+  }
+
   getArticlesByGameId(id: any) {
     let catid = id;
     let articlesList = [];
-    this.articleService.fetchPosts({categories: catid, per_page: 10, offset: 0}).subscribe(
+    this.articleService.fetchPosts({categories: catid, per_page: 5, offset: 0}).subscribe(
       posts => {
         let mid = [];
         for (let j = 0; j < posts.length; j++) {
@@ -212,18 +224,23 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
         if (id == 17) {
           this.baseballArticles = articlesList;
-          this.renderBaseballArticles();
+          //this.renderBaseballArticles();
           console.log("baseballArticles => ", this.baseballArticles);
         }
         if (id == 19) {
           this.basketballArticles = articlesList;
-          this.renderBasketballArticles();
+          //this.renderBasketballArticles();
           console.log("basketballArticles => ", this.basketballArticles);
         }
         if (id == 16) {
           this.footballArticles = articlesList;
-          this.renderFootballArticles();
+          //this.renderFootballArticles();
           console.log("footballArticles => ", this.footballArticles);
+        }
+        if (id == 18) {
+          this.nhlArticles = articlesList;
+          //this.renderFootballArticles();
+          console.log("nhlArticles => ", this.nhlArticles);
         }
         let mids = mid.join(",");
         if (mids) {
@@ -302,7 +319,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
            console.log('http error => ', error);
          }
        )*/
-    this.articleService.fetchPosts({categories: 4367, per_page: 5, offset: 0}).subscribe(
+    this.articleService.fetchPosts({categories: 4367, per_page: 10, offset: 0}).subscribe(
       posts => {
         this.allNewsRecords = [];
         let mid = [];
@@ -350,23 +367,47 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     let footerRef = jQuery("#footer");
     let sfTop = sfDivRef.offset().top;
     let footerTop = footerRef.offset().top;
-    setTimeout(() => {this.updateSFDivPos(sfDivRef,footerRef,sfTop,footerTop);},1000);
+    setTimeout(() => {
+      this.updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop);
+    }, 1000);
     jQuery(window).scroll(() => {
-      this.updateSFDivPos(sfDivRef,footerRef,sfTop,footerTop);
+      this.updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop);
     });
     jQuery(window).resize(() => {
       footerTop = footerRef.offset().top;
       sfTop = sfDivRef.offset().top;
     });
   }
-  updateSFDivPos(sfDivRef,footerRef,sfTop,footerTop){
+
+  initNewsFeed() {
+    let sfDivRef = jQuery(".indexNPrt2Lft .ylwTpBxInfoWrap");
+    let footerRef = jQuery("#footer");
+    let sfTop = sfDivRef.offset().top;
+    let footerTop = footerRef.offset().top;
+    setTimeout(() => {
+      this.updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop);
+    }, 1000);
+    jQuery(window).scroll(() => {
+      this.updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop);
+    });
+    jQuery(window).resize(() => {
+      footerTop = footerRef.offset().top;
+      sfTop = sfDivRef.offset().top;
+    });
+  }
+
+  updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop) {
+    let midDivHeight = jQuery(".indexNPrt2Mid")[0].clientHeight;
+    if (midDivHeight <= sfDivRef[0].clientHeight) {
+      return;
+    }
     let sfLeft = sfDivRef.offset().left;
     let currPos = sfTop - jQuery(window).scrollTop();
     footerTop = footerRef.offset().top;
     let footerCurrPos = footerTop - jQuery(window).scrollTop();
     if (currPos <= 92) {
-      let width = sfDivRef.width();
-      sfDivRef.css("width", width + "px");
+      let divWidth = sfDivRef[0].clientWidth;
+      sfDivRef.css("width", divWidth + "px");
       sfDivRef.css("position", "fixed");
       sfDivRef.css("left", sfLeft + "px");
       if (footerCurrPos <= $(window).height()) {
