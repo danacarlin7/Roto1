@@ -87,7 +87,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
             console.log(currData.id);
             console.log(currData.snippet.title);
 
-            let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?controls=0&showinfo=0&rel=0';
+            let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
             currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
             currData.title = currData.snippet.title;
             return currData;
@@ -116,7 +116,7 @@ export class VideoComponent implements OnInit, AfterViewInit {
             console.log(currData.id);
             console.log(currData.snippet.title);
 
-            let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?controls=0&showinfo=0&rel=0';
+            let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
             currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
             currData.title = currData.snippet.title;
             return currData;

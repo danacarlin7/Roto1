@@ -1018,3 +1018,9 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
 	.indexNPrt2Rght .nav > li > a{height: 60px; position: relative; margin: 0px; opacity: 0.3;}
 	.indexNPrt2Rght .nav-tabs > li.active > a, .indexNPrt2Rght .nav-tabs > li.active > a:focus, .indexNPrt2Rght .nav-tabs > li.active > a:hover{opacity: 0.7; border: 0px; border-radius: 0px;}
 	.indexNPrt2Rght .nav > li > a:hover, .indexNPrt2Rght .nav > li > a:focus{opacity: 0.7;}
+
+  .pitcher {
+    display: inline-block;
+    font-size: 15px;
+    color: #0f2da9;
+  }
