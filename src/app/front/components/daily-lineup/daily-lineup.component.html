@@ -1,12 +1,16 @@
 <section class="sectionHedin">
-  <div class="container-fluid ">
+  <!-- <div class="container-fluid "> -->
+  <div class="container">
+
     <div class="common-loader" *ngIf="isLoading">
       <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
         <div class="lineupHedin">
-          <h1>Daily Lineups</h1>
+          <h1 style="display: inline-block;">Daily Lineups -</h1>
+
+          <span style="padding-left: 5px;">MLB starting lineups updated live as they are released.</span>
         </div>
         <!-- <div class="dTabs"> -->
           <!-- Nav tabs -->
@@ -47,7 +51,7 @@
                      aria-controls="Urgent">Yesterday
                   </a>
                 </li>
-                <li role="presentation">
+                <!-- <li role="presentation">
                   <a (click)="getData('MLB', '7days')"
                      href="#Important"
                      aria-controls="Important"
@@ -60,7 +64,7 @@
                      aria-controls="Noteworthy"
                      role="tab"
                      data-toggle="tab">This Month</a>
-                </li>
+                </li> -->
               </ul>
 
               <div class="lineupItmWrap">
@@ -93,17 +97,39 @@
                         <span style="width: 125px;color: #7373d6;">Lineup Pending...</span>
                       </li>
                       <li *ngFor="let currPlayer of currLineup.first_team.lineup_players">
-                        <span>{{currPlayer.player_position}}</span>
-                        {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                        <div *ngIf="currPlayer.player_position !== 'P'">
+                          <span>{{currPlayer.player_position}}</span>
+                          {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                        </div>
                       </li>
+
+                      <li>
+                        <div class="col-xs-12">&nbsp;</div>
+                      </li>
+
+                      <li *ngFor="let currPlayer of currLineup.first_team.lineup_players">
+                        <div *ngIf="currPlayer.player_position === 'P'">
+                          <div style="display: inline-block;">{{currLineup.first_team.name}}:</div>
+                          <p class="pitcher"> {{currPlayer.player_first_name+' '+currPlayer.player_last_name}} </p>
+                        </div>
+                      </li>
+                      <li *ngFor="let currPlayer of currLineup.second_team.lineup_players">
+                        <div *ngIf="currPlayer.player_position === 'P'">
+                          <div style="display: inline-block;">{{currLineup.second_team.name}}:</div>
+                          <p class="pitcher"> {{currPlayer.player_first_name+' '+currPlayer.player_last_name}} </p>
+                        </div>
+                      </li>
+
                     </ul>
                     <ul class="lineupPlayerWrap">
                       <li *ngIf="currLineup.second_team.lineup_players.length == 1">
                         <span style="width: 125px;color: #7373d6;">Lineup Pending...</span>
                       </li>
                       <li *ngFor="let currPlayer of currLineup.second_team.lineup_players">
-                        <span>{{currPlayer.player_position}}</span>
-                        {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                        <div *ngIf="currPlayer.player_position !== 'P'">
+                          <span>{{currPlayer.player_position}}</span>
+                          {{currPlayer.player_first_name+' '+currPlayer.player_last_name}}
+                        </div>
                       </li>
                     </ul>
                   </div>
