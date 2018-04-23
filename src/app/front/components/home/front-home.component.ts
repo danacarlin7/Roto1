@@ -1,7 +1,7 @@
-import { Component, AfterViewInit, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, AfterViewInit, OnInit, ViewEncapsulation, OnDestroy } from "@angular/core";
 import {FrontService} from "../../services/front.service";
 import {ArticleService} from "../../services/article.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import {AuthService} from "../../../shared/services/auth.service";
 import {News} from "../../models/news.model";
 
@@ -17,9 +17,10 @@ declare var jQuery: any;
   styleUrls: ["./front-home.component.css"]//,
   // encapsulation: ViewEncapsulation.Emulated
 })
-export class FrontHomeComponent implements AfterViewInit, OnInit {
+export class FrontHomeComponent implements AfterViewInit, OnInit, OnDestroy  {
   redirected: boolean;
   redirectMessage: String;
+  private twitter: any;
 
   twitterFeeds: Array<any>;
   facebookFeeds: Array<any>;
@@ -39,7 +40,9 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
               private articleService: ArticleService,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+    this.initTwitterWidget();
+  }
 
   ngOnInit() {
     console.log(this.route.snapshot);
@@ -502,5 +505,36 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
+  initTwitterWidget() {
+    this.twitter = this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        (<any>window).twttr = (function (d, s, id) {
+          let js: any, fjs = d.getElementsByTagName(s)[0],
+            t = (<any>window).twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+
+          t._e = [];
+          t.ready = function (f: any) {
+            t._e.push(f);
+          };
+
+          return t;
+        }(document, "script", "twitter-wjs"));
+
+        if ((<any>window).twttr.ready())
+          (<any>window).twttr.widgets.load();
+
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.twitter.unsubscribe();
+  }
+
 
 }
