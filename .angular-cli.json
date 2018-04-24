@@ -22,7 +22,6 @@
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/primeng/resources/primeng.min.css",
         "../node_modules/c3/c3.min.css",
-         "../node_modules/videogular2/fonts/videogular.css",
         "assets/css/graph.css",
         "assets/css/bootstrap.min.css",
         "assets/css/stylesheet.css",
