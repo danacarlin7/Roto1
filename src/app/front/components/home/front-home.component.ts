@@ -273,6 +273,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         if (id == 21) {
           this.golfArticles = articlesList;
           //this.renderFootballArticles();
+          console.log("golfArticles => ", this.golfArticles);
         }
         let mids = mid.join(",");
         if (mids) {
