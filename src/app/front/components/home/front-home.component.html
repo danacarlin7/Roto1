@@ -331,7 +331,31 @@
               </div>
             </div>
           </div>
+
+
           <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">Soccer Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of soccerArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="col-md-6">
               <div class="sport-article">
                 <div class="sport-name">
