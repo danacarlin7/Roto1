@@ -74,9 +74,11 @@ export class DailyLineupComponent {
     this.lineupRecords = [];
 
     data.forEach(currData => {
-        // console.log("data", currData);
+
         let firstTeam:Lineup = !currData.data[0] ? false : !currData.data[1] ? false : currData.data[0].team_is_home == 1 ? currData.data[1] :  currData.data[0];
         let secondTeam:Lineup = !currData.data[1] ? false : !currData.data[0] ? false : currData.data[1].team_is_home == 1 ? currData.data[1] :  currData.data[0];
+
+        console.log("data", firstTeam);
 
         this.lineupRecords.push(<LineupRecord>{
           game_time: firstTeam.game_time,
@@ -86,11 +88,13 @@ export class DailyLineupComponent {
             name: firstTeam.team_code ? firstTeam.team_code : firstTeam.team_name ? firstTeam.team_name : '',
             logo_url: firstTeam ? firstTeam.team_wikipedia_logo_url : '',
             lineup_players: firstTeam ? firstTeam.team_lineups : [],
+            pitcher: firstTeam.starting_pitcher ? firstTeam.starting_pitcher : false
           },
           second_team: <TeamInfo>{
             name: secondTeam.team_code ? secondTeam.team_code : secondTeam.team_name ? secondTeam.team_name : '',
             logo_url: secondTeam ? secondTeam.team_wikipedia_logo_url : '',
             lineup_players: secondTeam ? secondTeam.team_lineups : [],
+            pitcher: secondTeam.starting_pitcher ? secondTeam.starting_pitcher : false
           }
         })
       });

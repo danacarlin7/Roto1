@@ -14,6 +14,7 @@ export interface TeamInfo{
   name:string;
   logo_url:string;
   lineup_players:any[];
+  pitcher:any;
 }
 
 export interface Lineup {
@@ -39,6 +40,7 @@ export interface Lineup {
   team_wikipedia_logo_url:string;
   team_wikipedia_word_mark_url:string;
   team_city:string;
+  starting_pitcher: any;
 }
 
 // export interface TeamLineup {
