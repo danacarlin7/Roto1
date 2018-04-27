@@ -51,6 +51,26 @@ export class FrontHomeComponent implements AfterViewInit, OnInit, OnDestroy  {
       this.redirectMessage = this.route.snapshot.params["redirectMessage"];
       window.scrollTo(0, 0);
     }
+    this.router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        (<any>window).twttr = (function (d, s, id) {
+          let js: any, fjs = d.getElementsByTagName(s)[0],
+            t = (<any>window).twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+
+          t._e = [];
+          t.ready = function (f: any) {
+            t._e.push(f);
+          };
+
+          return t;
+        }(document, "script", "twitter-wjs"));
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -291,7 +311,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit, OnDestroy  {
     setTimeout(() => {
       jQuery(".midSlider1").owlCarousel({
         items: 1,
-        margin:20,
+        margin: 20,
         responsive: {
           0: {
             items: 1
