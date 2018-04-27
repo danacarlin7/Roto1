@@ -55,6 +55,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
+    // console.log("here i am");
     this.retrieveSocialFeeds();
     this.retrieveBaseballArticles();
     this.retrieveBasketBallArticles();
@@ -406,10 +407,12 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   initSocialFeed() {
+    // console.log('initSocialFeed')
     let sfDivRef = jQuery(".indexNPrt2Rght");
     let footerRef = jQuery("#footer");
     let sfTop = sfDivRef.offset().top;
     let footerTop = footerRef.offset().top;
+    console.log(sfDivRef, footerRef, sfTop, footerTop);
     setTimeout(() => {
       this.updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop);
     }, 1000);
