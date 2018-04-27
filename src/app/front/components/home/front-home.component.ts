@@ -31,6 +31,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   golfArticles: any[];
   nascarArticles: any[];
   nhlArticles: any[];
+  soccerArticles: any[];
   media: Object = {};
 
   activeSingle: any;
@@ -62,6 +63,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.retrieveMMAArticles();
     this.retrieveGolfArticles();
     this.retrieveNascarArticles();
+    this.retrieveSoccerArticles();
     this.retrieveNews();
     if (jQuery(window).width() > 767) {
       this.initSocialFeed();
@@ -228,6 +230,10 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.getArticlesByGameId(18);
   }
 
+  retrieveSoccerArticles(){
+    this.getArticlesByGameId(20);
+  }
+
   getArticlesByGameId(id: any) {
     let catid = id;
     let articlesList = [];
@@ -274,6 +280,10 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
           this.golfArticles = articlesList;
           //this.renderFootballArticles();
           console.log("golfArticles => ", this.golfArticles);
+        }
+        if (id == 20) {
+          this.soccerArticles = articlesList;
+          console.log("soccerArticles => ", this.soccerArticles);
         }
         let mids = mid.join(",");
         if (mids) {
