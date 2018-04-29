@@ -54,7 +54,7 @@ export class FrontService {
       });
   }
 
-  retrieveDailyLineups(sportType: string, timePeriod: string = "cyear"): Observable<any> {
+  retrieveDailyLineups(sportType: string, timePeriod: string = "today"): Observable<any> {
     return this.http.get(environment.api_end_point + "fetchLineup?sport=" + sportType + "&since=" + timePeriod, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
@@ -169,6 +169,19 @@ export class FrontService {
   retrieveProvider() {
     return this.http.get(environment.api_end_point + "providers", {headers: this.getHeaders()})
       .map(response => response.json())
+      .catch(error => {
+        this.handelError(error.json());
+        return Observable.throw(error.json())
+      });
+  }
+
+  retrieveVideos(status = false): Observable<any> {
+    let link = "getVideos";
+    if(status)
+      link = "getVideos?live=true";
+
+    return this.http.get(environment.api_end_point + link, {headers: this.getHeaders()})
+      .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
         return Observable.throw(error.json())

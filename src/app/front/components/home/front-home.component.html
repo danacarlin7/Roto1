@@ -1,15 +1,15 @@
 <!-- BoPrt1 Starts -->
-<section class="indexNPrt1">
+<!--<section class="indexNPrt1">
   <div class="container-fluid">
     <div class="row indexNPrt1Wrapper">
 
-      <!-- this is better done as a directive -->
+      &lt;!&ndash; this is better done as a directive &ndash;&gt;
       <div class="alert alert-success fade in redirect-msg" *ngIf="redirected">
         {{ redirectMessage }}
       </div>
 
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Wrapper for slides -->
+        &lt;!&ndash; Wrapper for slides &ndash;&gt;
         <div class="carousel-inner" role="listbox">
           <div class="item active">
             <img src="../../../../assets/images/new_banner.jpg" alt="...">
@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <!-- Controls -->
+        &lt;!&ndash; Controls &ndash;&gt;
         <div class="tpCntrl">
           <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
             <i class="icnWrapper"><img src="../../../../assets/images/newLftArow.png" alt="" class="img-responsive"></i><span>Previous</span>
@@ -78,14 +78,14 @@
 
     </div>
   </div>
-</section>
+</section>-->
 <!-- BoPrt1 Ends -->
 
 <!-- Match Details Starts -->
 <section class="indexNPrt2">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="col-md-3">
         <div class="indexNPrt2Lft">
           <!--advertisement-->
           <!--<div class="ylwTpBxInfoWrap">
@@ -115,20 +115,21 @@
           </div>-->
 
           <div class="ylwTpBxInfoWrap">
-            <div class="ylwTpBx clearfix pointer">
+            <div class="ylwTpBx clearfix">
               <h3>Latest News <span><img src="../../../../assets/images/blkArow.png"></span></h3>
-              <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
+              <!-- <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p> -->
             </div>
             <div class="ylwTpBxBtm">
               <div class="ylwTpBxBtmBx2Wrap">
-                <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(news, false)" class="news-item item pointer" *ngFor="let news of allNewsRecords">
-                  <img style="margin: 0 auto;"
+                <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(news, false)"
+                     class="news-item item pointer" *ngFor="let news of allNewsRecords">
+                  <!--<img style="margin: 0 auto;"
                        *ngIf="findMedia(news.featured_media)!=false"
                        src="{{findMedia(news.featured_media)}}"
                        alt=""
-                       class="img-responsive">
+                       class="img-responsive">-->
                   <div class="nltstNwsInfoTpWrp">
-                    <div class="nltstNwsInfoTp clearfix">
+                    <!--<div class="nltstNwsInfoTp clearfix">
                       <div class="nltstNwsInfoDte">
                           <span class="icnWrapperS"><img src="../../../../assets/images/nDateIcn.png" alt=""
                                                          class="img-responsive"></span>
@@ -139,10 +140,11 @@
                                                          class="img-responsive"></span>
                         <i>{{news.date | date : 'hh:mm a'}}</i>
                       </div>
-                    </div>
+                    </div>-->
                     <div class="nltstNwsInfoBtm">
-                      <h4>{{news.title.rendered}}</h4>
-                      <p class="news-notes">{{news.extract}}</p>
+                      <!--<h4>{{news.title.rendered}}</h4>-->
+                      <h6>{{news.title.rendered}}</h6>
+                      <!--<p class="news-notes">{{news.p tract}}</p>-->
                     </div>
                   </div>
 
@@ -188,158 +190,260 @@
 
           </div>-->
         </div>
+      </div>
+      <div class="col-md-6">
         <div class="indexNPrt2Mid">
-
-          <div class="indexNPrt2MidSlider">
-            <div class="ylwTpBx wlwTpBx clearfix pointer">
-              <h3 (click)="navigateToArticles(17)">Daily Fantasy Baseball<span><img
-                src="../../../../assets/images/blkArow.png"></span></h3>
-              <p><img src="../../../../assets/images/baseball.png" alt="" class="img-responsive"></p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">MLB Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of baseballArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="owl-carousel owl-theme midSlider midSlider1">
-              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article, true)" class="item pointer"
-                   *ngFor="let article of baseballArticles">
-                <img style="width: 264px;height:186px;"
-                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
-                     alt="" class="img-responsive">
-                <div class="nltstNwsInfoTpWrp">
-                  <h4><a>{{article.title.rendered}}</a></h4>
-                  <p class="news-notes">{{article.extract?.slice(0,150)}}...</p>
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">NFL Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of footballArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">NBA Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of basketballArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">NHL Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nhlArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">MMA Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of mmaArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">Nascar Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nascarArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="indexNPrt2MidSlider">
-            <div class="ylwTpBx wlwTpBx clearfix pointer">
-              <h3 (click)="navigateToArticles(16)">Daily Fantasy Football<span><img
-                src="../../../../assets/images/blkArow.png"></span></h3>
-              <p><img src="../../../../assets/images/football.png" alt="" class="img-responsive"></p>
-            </div>
-            <div class="owl-carousel owl-theme midSlider midSlider2">
-              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" class="item pointer"
-                   *ngFor="let article of footballArticles">
-                <img style="width: 264px;height:186px;"
-                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/football.jpg'"
-                     alt="" class="img-responsive">
-                <div class="nltstNwsInfoTpWrp">
-                  <h4><a>{{article.title.rendered}}</a></h4>
-                  <p class="news-notes">{{article.extract?.slice(0,150)}}...</p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="indexNPrt2MidSlider">
-            <div class="ylwTpBx wlwTpBx clearfix pointer">
-              <h3 (click)="navigateToArticles(19)">Daily Fantasy Basketball<span><img
-                src="../../../../assets/images/blkArow.png"></span></h3>
-              <p><img src="../../../../assets/images/basketball.png" alt="" class="img-responsive"></p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">Soccer Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of soccerArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="owl-carousel owl-theme midSlider midSlider3">
-              <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article, true)" class="item pointer"
-                   *ngFor="let article of basketballArticles">
-                <img style="width: 264px;height:186px;"
-                     [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
-                     alt="" class="img-responsive">
-                <div class="nltstNwsInfoTpWrp">
-                  <h4><a>{{article.title.rendered}}</a></h4>
-                  <p>{{article.extract?.slice(0,150)}}...</p>
+            <div class="col-md-6">
+              <div class="sport-article">
+                <div class="sport-name">
+                  <div class="name">PGA Articles</div>
+                </div>
+                <div class="sport-content">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of golfArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- <div class="indexNPrt2MidSlider">
+             <div class="ylwTpBx wlwTpBx clearfix pointer">
+               <h3 (click)="navigateToArticles(17)">Daily Fantasy Baseball<span><img
+                 src="../../../../assets/images/blkArow.png"></span></h3>
+               <p><img src="../../../../assets/images/baseball.png" alt="" class="img-responsive"></p>
+             </div>
+             <div class="owl-carousel owl-theme midSlider midSlider1">
+               <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article, true)" class="item pointer"
+                    *ngFor="let article of baseballArticles">
+                 <img style="width: 264px;height:186px;"
+                      [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                      alt="" class="img-responsive">
+                 <div class="nltstNwsInfoTpWrp">
+                   <h4><a>{{article.title.rendered}}</a></h4>
+                   <p class="news-notes">{{article.extract?.slice(0,150)}}...</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           <div class="indexNPrt2MidSlider">
+             <div class="ylwTpBx wlwTpBx clearfix pointer">
+               <h3 (click)="navigateToArticles(16)">Daily Fantasy Football<span><img
+                 src="../../../../assets/images/blkArow.png"></span></h3>
+               <p><img src="../../../../assets/images/football.png" alt="" class="img-responsive"></p>
+             </div>
+             <div class="owl-carousel owl-theme midSlider midSlider2">
+               <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" class="item pointer"
+                    *ngFor="let article of footballArticles">
+                 <img style="width: 264px;height:186px;"
+                      [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/football.jpg'"
+                      alt="" class="img-responsive">
+                 <div class="nltstNwsInfoTpWrp">
+                   <h4><a>{{article.title.rendered}}</a></h4>
+                   <p class="news-notes">{{article.extract?.slice(0,150)}}...</p>
+                 </div>
+               </div>
+             </div>
+           </div>
+
+           <div class="indexNPrt2MidSlider">
+             <div class="ylwTpBx wlwTpBx clearfix pointer">
+               <h3 (click)="navigateToArticles(19)">Daily Fantasy Basketball<span><img
+                 src="../../../../assets/images/blkArow.png"></span></h3>
+               <p><img src="../../../../assets/images/basketball.png" alt="" class="img-responsive"></p>
+             </div>
+             <div class="owl-carousel owl-theme midSlider midSlider3">
+               <div data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article, true)" class="item pointer"
+                    *ngFor="let article of basketballArticles">
+                 <img style="width: 264px;height:186px;"
+                      [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/Basketball.jpg'"
+                      alt="" class="img-responsive">
+                 <div class="nltstNwsInfoTpWrp">
+                   <h4><a>{{article.title.rendered}}</a></h4>
+                   <p>{{article.extract?.slice(0,150)}}...</p>
+                 </div>
+               </div>
+             </div>
+           </div>-->
 
         </div>
+      </div>
+      <div class="col-md-3" id="twt-timeline">
         <div class="indexNPrt2Rght">
-          <div class="ylwTpBx clearfix">
-            <h3>Social Feeds<span><img src="../../../../assets/images/blkArow.png"></span></h3>
-            <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
-          </div>
-
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#nTwtr" aria-controls="nTwtr" role="tab"
-                                                      data-toggle="tab"><img
-              src="../../../../assets/images/twitter_icn.png" alt=""></a></li>
-            <li role="presentation"><a href="#nFb" aria-controls="nFb" role="tab" data-toggle="tab"><img
-              src="../../../../assets/images/facebook_icn.png" alt=""></a></li>
-            <li role="presentation"><a href="#nInsta" aria-controls="nInsta" role="tab" data-toggle="tab"><img
-              src="../../../../assets/images/insta_icn.png" alt=""></a></li>
-          </ul>
-
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="nTwtr">
-              <div class="nSocialTbWrap">
-                <div class="nSocialTbBx" *ngFor="let tweet of twitterFeeds">
-                  <img
-                    [attr.src]="tweet?.user?.profile_banner_url ? tweet?.user?.profile_banner_url : '../../../../assets/images/twitter-befault.jpg'"
-                    alt="" class="img-responsive social-feed-img"/>
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="https://twitter.com/{{tweet?.user?.screen_name}}" target="_blank"><span class="icnWrapperS">{{tweet?.user.name}}</span><i><img
-                        src="../../../../assets/images/twitter_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</i>
-                      </div>
-                    </div>
-                    <p>{{tweet?.text?.slice(0,150)}}...</p>
-                    <a href="{{tweet?.entities?.urls[0]?.url}}" target="_blank" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="nFb">
-              <div class="nSocialTbWrap">
-                <div class="nSocialTbBx" *ngFor="let tweet of facebookFeeds">
-                  <img
-                    [attr.src]="tweet?.attachments?.data[0]?.media?.image?.src ? tweet?.attachments?.data[0]?.media?.image?.src :'../../../../assets/images/f-default.jpg'"
-                    alt="" class="img-responsive social-feed-img"/>
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="javascript:void(0)"><span class="icnWrapperS">{{tweet?.message}}</span><i><img
-                        src="../../../../assets/images/facebook_icn.png"></i></a>
-                      <div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>{{tweet.created_at |date:'dd MMM, yyyy h:m a'}}</i>
-                      </div>
-                    </div>
-                    <p>{{tweet?.text?.slice(0,150)}}...</p>
-                    <a href="{{tweet?.attachments?.data[0]?.url}}" target="_blank" class="nRdMor">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="nInsta">
-              <div class="nSocialTbWrap">
-                <div class="nSocialTbBx" *ngFor="let tweet of instagramFeeds">
-                  <img
-                    [attr.src]="tweet?.images?.thumbnail?.url ? tweet?.images?.thumbnail?.url :'../../../../assets/images/f-default.jpg'"
-                    alt="" class="img-responsive social-feed-img"/>
-                  <div class="nSocialTbBxInfo">
-                    <div class="nSocialTbBxInfoTp clearfix">
-                      <a href="https://www.instagram.com/{{tweet?.user?.username}}" target="_blank"><span class="icnWrapperS">{{tweet?.user.full_name}}</span><i><img
-                        src="../../../../assets/images/insta_icn.png"></i></a>
-                      <!--<div class="nltstNwsInfoTme">
-                        <span class="icnWrapperS"><img src="../../../../assets/images/nclck_icn.png" alt=""
-                                                       class="img-responsive"></span>
-                        <i>{{tweet.created_time |date:'dd MMM, yyyy h:m a'}}</i>
-                      </div>-->
-                    </div>
-                    <p>{{tweet?.caption?.text?.slice(0,150)}}...</p>
-                    <a href="{{tweet?.link}}" class="nRdMor" target="_blank">Read More <span><img
-                      src="../../../../assets/images/blkArow.png"></span></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a class="twitter-timeline" data-width= "100%" data-height= "100%" data-theme="dark" data-chrome="nofooter" data-link-color="#FAB81E" href="https://twitter.com/RotoProsDFS?ref_src=twsrc%5Etfw">Tweets by RotoProsDFS</a>
         </div>
       </div>
     </div>
@@ -370,13 +474,15 @@
                     </div>
                     <div *ngIf="isLoginError">
                       <div class="alert alert-warning fade in center">
-                        Please <a [routerLink]="'/login'" data-dismiss="modal"> login </a>to see content of this article.
+                        Please <a [routerLink]="'/login'" data-dismiss="modal"> login </a>to see content of this
+                        article.
                       </div>
                     </div>
 
                     <div *ngIf="isSubscribeError">
                       <div class="alert alert-warning fade in center">
-                        Please <a [routerLink]="'/subscribe'" data-dismiss="modal"> subcribe </a>to see content of this article.
+                        Please <a [routerLink]="'/subscribe'" data-dismiss="modal"> subcribe </a>to see content of this
+                        article.
                       </div>
                     </div>
 

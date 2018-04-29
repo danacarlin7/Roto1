@@ -64,6 +64,21 @@ export class ArticlesComponent implements OnInit {
           }
         }
         this.categories = categories;
+
+        this.categories.push({
+          'count': 20,
+          'description': '',
+          'id': 20,
+          'link': 'https://wordpress.rotopros.com/category/soccer/',
+          'loaded': 5,
+          'meta': [],
+          'name': 'Soccer',
+          'parent': 0,
+          'slug': 'soccer',
+          'taxonomy': 'category'
+        });
+
+        console.log(this.categories);
         for (let i = 0; i < this.categories.length; i++) {
           this.categories[i]['loaded'] = 0;
           let category = this.categories[i];

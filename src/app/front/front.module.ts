@@ -25,6 +25,7 @@ import {ExcelToolComponent} from "./components/excel-tool/excel-tool.component";
 import {FAQComponent} from "./components/faq/faq.component";
 import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
+import {SortGridPipe} from "./ng-pipes/custom-filter.pipe";
 
 import {PlayerGetService} from './services/fetchPlayers';
 import {CompGetService} from './services/fetchCompositions';
@@ -52,6 +53,14 @@ import {NBAFilterComponent} from "./components/nba-lineup-optimizer/nba-filter/n
 import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 import {PodcastComponent} from "./components/podcast/podcast.component";
 import {PlanComponent} from "./components/plan/plan.component";
+import {VideoComponent} from "./components/video/video.component";
+
+
+// import {VgCoreModule} from 'videogular2/core';
+// import {VgControlsModule} from 'videogular2/controls';
+// import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+// import {VgBufferingModule} from 'videogular2/buffering';
+
 /**
  * Created by Hiren on 04-06-2017.
  */
@@ -61,6 +70,10 @@ import {PlanComponent} from "./components/plan/plan.component";
     FrontRoutingModule,
     InfiniteScrollModule,
     SharedModule,
+    // VgCoreModule,
+    // VgControlsModule,
+    // VgOverlayPlayModule,
+    // VgBufferingModule
   ],
   declarations: [
     FrontMainComponent,
@@ -85,6 +98,7 @@ import {PlanComponent} from "./components/plan/plan.component";
     ProviderComponent,
     ProviderPublicComponent,
     LineupPlayerFilter,
+    SortGridPipe,
     InjuriesComponent,
     ChangePasswordComponent,
     GeneratedLineupsComponent,
@@ -102,7 +116,8 @@ import {PlanComponent} from "./components/plan/plan.component";
     NBAFilterComponent,
     GeneratedNBALineupsComponent,
     PodcastComponent,
-    PlanComponent
+    PlanComponent,
+    VideoComponent
   ],
   exports: [
     ProviderComponent,

@@ -112,7 +112,6 @@ export class LoginComponent {
             return;
           }
           console.log("login successful => ", response);
-          debugger;
           if (this.loginForm.value.rememberMe) {
             localStorage.setItem('remember', '1');
           }

@@ -1,3 +1,4 @@
+<div class="header-margin"></div>
 <header>
   <div class="topHeader">
     <div class="container-fluid">
@@ -76,7 +77,8 @@
             </div>
             <ul>
               <li (window:resize)="onResize($event)">
-                <a *ngIf="headerIsStacked && loggedUser" style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
+                <a *ngIf="headerIsStacked && loggedUser" style="width: auto"
+                   routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
                   Dashboard
                 </a>
               </li>
@@ -89,6 +91,12 @@
               <!--<li><a>Products</a></li>-->
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
                 <a routerLink="/articles" (click)="closeMobileMenu()">Articles</a>
+              </li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/videos" (click)="closeMobileMenu()">RotoPros Live</a>
+              </li>
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+                <a routerLink="/lineups" (click)="closeMobileMenu()">Daily MLB Lineups</a>
               </li>
               <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a target="_blank" href="https://dfsgods.slack.com" (click)="closeMobileMenu()">Rotopros Chat</a>
@@ -113,14 +121,12 @@
               </li>
 
               <li id="rss">
-                  <a routerLink="/podcast">Foul Balls</a>
-                  <a href="http://feeds.soundcloud.com/users/soundcloud:users:308749747/sounds.rss">
-                    <i class="fa fa-rss-square" id="rss-link"></i>
-                  </a>
+                <a routerLink="/podcast">Foul Balls</a>
+                <!-- <a href="http://feeds.soundcloud.com/users/soundcloud:users:308749747/sounds.rss">
+                  <i class="fa fa-rss-square" id="rss-link"></i>
+                </a> -->
               </li>
-              <!--<li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a routerLink="/lineups">Lineups</a>
-              </li>-->
+
             </ul>
           </div>
           <div class="rightNav">
@@ -128,7 +134,8 @@
               <li class="loginBtn" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
               <li class="signUpBtn" *ngIf="!isLoggedIn"><a routerLink="/signup">Sign Up</a></li>
               <li class="signUpBtn" *ngIf="isLoggedIn">
-                <a appMobileHidden style="width: auto" routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
+                <a appMobileHidden style="width: auto"
+                   routerLink="{{(role == 'user' || role == 'provider')? '/user' : '/admin'}}">
                   Dashboard
                 </a>
               </li>
