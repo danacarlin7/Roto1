@@ -82,6 +82,9 @@ export class ArticlesComponent implements OnInit {
         for (let i = 0; i < this.categories.length; i++) {
           this.categories[i]['loaded'] = 0;
           let category = this.categories[i];
+          if(category.id == 20 )
+            this.categories[i]['loaded'] = 2;          
+
           if (i == 0) {
             this.activeTab = category.id;
             this.subActiveTab = '';

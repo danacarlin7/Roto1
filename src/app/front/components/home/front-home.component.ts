@@ -279,13 +279,13 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   retrieveSoccerArticles() {
-    this.getArticlesByGameId(20);
+    this.getArticlesByGameId(20, 2);
   }
 
-  getArticlesByGameId(id: any) {
+  getArticlesByGameId(id: any, offset_cnt = 0) {
     let catid = id;
     let articlesList = [];
-    this.articleService.fetchPosts({ categories: catid, per_page: 5, offset: 0 }).subscribe(
+    this.articleService.fetchPosts({ categories: catid, per_page: 5, offset: offset_cnt }).subscribe(
       posts => {
         let mid = [];
         for (let j = 0; j < posts.length; j++) {
