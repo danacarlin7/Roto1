@@ -84,8 +84,8 @@ export class VideoComponent implements OnInit, AfterViewInit {
 
 
           this.videoRecords = data.map(currData => {
-            console.log(currData.id);
-            console.log(currData.snippet.title);
+            // console.log(currData.id);
+            // console.log(currData.snippet.title);
 
             let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
             currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
@@ -113,8 +113,8 @@ export class VideoComponent implements OnInit, AfterViewInit {
           let data: Array<any> = response.data;
 
           this.liveRecords = data.map(currData => {
-            console.log(currData.id);
-            console.log(currData.snippet.title);
+            // console.log(currData.id);
+            // console.log(currData.snippet.title);
 
             let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
             currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);

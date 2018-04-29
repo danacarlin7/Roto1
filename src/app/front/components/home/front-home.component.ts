@@ -1,9 +1,9 @@
-import {Component, AfterViewInit, OnInit} from "@angular/core";
-import {FrontService} from "../../services/front.service";
-import {ArticleService} from "../../services/article.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../../shared/services/auth.service";
-import {News} from "../../models/news.model";
+import { Component, AfterViewInit, OnInit } from "@angular/core";
+import { FrontService } from "../../services/front.service";
+import { ArticleService } from "../../services/article.service";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
+import { AuthService } from "../../../shared/services/auth.service";
+import { News } from "../../models/news.model";
 
 /**
  * Created by Hiren on 06-06-2017.
@@ -40,10 +40,10 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   isLoginError: any;
 
   constructor(private frontService: FrontService,
-              private articleService: ArticleService,
-              private authService: AuthService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private articleService: ArticleService,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -52,11 +52,56 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       this.redirected = this.route.snapshot.params["redirected"];
       this.redirectMessage = this.route.snapshot.params["redirectMessage"];
     }
+    // let loaded = false;
+    // this.router.events.subscribe(val => {
+    //   if (val instanceof NavigationEnd) {
+    //     if (val.url == '/' && !loaded) {
+    //       console.log("home twt");
+    //       loaded = true;
+    //       (<any>window).twttr = (function(d, s, id) {
+    //         let js: any, fjs = d.getElementsByTagName(s)[0],
+    //           t = (<any>window).twttr || {};
+    //         if (d.getElementById(id)) return t;
+    //         js = d.createElement(s);
+    //         js.id = id;
+    //         js.src = "https://platform.twitter.com/widgets.js";
+    //         fjs.parentNode.insertBefore(js, fjs);
+    //
+    //         t._e = [];
+    //         t.ready = function(f: any) {
+    //           t._e.push(f);
+    //         };
+    //
+    //         return t;
+    //       }(document, "script", "twitter-wjs"));
+    //     }
+    //   }
+    // });
+
   }
 
   ngAfterViewInit() {
     // console.log("here i am");
-    this.retrieveSocialFeeds();
+    setTimeout(function() {
+      (<any>window).twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = (<any>window).twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+    (<any>window).twttr.widgets.load(); }, 100);
+
+    // this.retrieveSocialFeeds();
     this.retrieveBaseballArticles();
     this.retrieveBasketBallArticles();
     this.retrieveFootballArticles();
@@ -70,9 +115,11 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       this.initSocialFeed();
       this.initNewsFeed();
     }
-    setInterval(() => {
-      this.retrieveSocialFeeds();
-    }, 60000)
+    // setInterval(() => {
+    //   this.retrieveSocialFeeds();
+    // }, 60000);
+
+
   }
 
   retrieveSocialFeeds() {
@@ -80,11 +127,11 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       .subscribe(
         response => {
           if (response.statusCode == 200) {
-            console.log(response.data);
+            // console.log(response.data);
             let feeds: Array<any> = response.data;
             if (feeds && feeds.length) {
               this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
-              console.log("tweets => ", this.twitterFeeds);
+              // console.log("tweets => ", this.twitterFeeds);
             }
           }
         },
@@ -93,37 +140,37 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         }
       );
 
-    this.frontService.retrieveFBFeeds()
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            let feeds: Array<any> = response.data;
-            if (feeds && feeds.length) {
-              this.facebookFeeds = feeds.splice(0, Math.min(5, feeds.length));
-              console.log("fb posts => ", this.facebookFeeds);
-            }
-          }
-        },
-        error => {
-          console.log("http error => ", error);
-        }
-      );
-
-    this.frontService.retrieveInstaFeeds()
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            let feeds: Array<any> = response.data.data;
-            if (feeds && feeds.length) {
-              this.instagramFeeds = feeds.splice(0, Math.min(5, feeds.length));
-              console.log("instagram posts => ", this.instagramFeeds);
-            }
-          }
-        },
-        error => {
-          console.log("http error => ", error);
-        }
-      );
+    // this.frontService.retrieveFBFeeds()
+    //   .subscribe(
+    //     response => {
+    //       if (response.statusCode == 200) {
+    //         let feeds: Array<any> = response.data;
+    //         if (feeds && feeds.length) {
+    //           this.facebookFeeds = feeds.splice(0, Math.min(5, feeds.length));
+    //           // console.log("fb posts => ", this.facebookFeeds);
+    //         }
+    //       }
+    //     },
+    //     error => {
+    //       console.log("http error => ", error);
+    //     }
+    //   );
+    //
+    // this.frontService.retrieveInstaFeeds()
+    //   .subscribe(
+    //     response => {
+    //       if (response.statusCode == 200) {
+    //         let feeds: Array<any> = response.data.data;
+    //         if (feeds && feeds.length) {
+    //           this.instagramFeeds = feeds.splice(0, Math.min(5, feeds.length));
+    //           // console.log("instagram posts => ", this.instagramFeeds);
+    //         }
+    //       }
+    //     },
+    //     error => {
+    //       console.log("http error => ", error);
+    //     }
+    //   );
   }
 
 
@@ -231,14 +278,14 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.getArticlesByGameId(18);
   }
 
-  retrieveSoccerArticles(){
+  retrieveSoccerArticles() {
     this.getArticlesByGameId(20);
   }
 
   getArticlesByGameId(id: any) {
     let catid = id;
     let articlesList = [];
-    this.articleService.fetchPosts({categories: catid, per_page: 5, offset: 0}).subscribe(
+    this.articleService.fetchPosts({ categories: catid, per_page: 5, offset: 0 }).subscribe(
       posts => {
         let mid = [];
         for (let j = 0; j < posts.length; j++) {
@@ -251,27 +298,27 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         if (id == 17) {
           this.baseballArticles = articlesList;
           //this.renderBaseballArticles();
-          console.log("baseballArticles => ", this.baseballArticles);
+          // console.log("baseballArticles => ", this.baseballArticles);
         }
         if (id == 19) {
           this.basketballArticles = articlesList;
           //this.renderBasketballArticles();
-          console.log("basketballArticles => ", this.basketballArticles);
+          // console.log("basketballArticles => ", this.basketballArticles);
         }
         if (id == 16) {
           this.footballArticles = articlesList;
           //this.renderFootballArticles();
-          console.log("footballArticles => ", this.footballArticles);
+          // console.log("footballArticles => ", this.footballArticles);
         }
         if (id == 18) {
           this.nhlArticles = articlesList;
           //this.renderFootballArticles();
-          console.log("nhlArticles => ", this.nhlArticles);
+          // console.log("nhlArticles => ", this.nhlArticles);
         }
         if (id == 4137) {
           this.mmaArticles = articlesList;
           //this.renderFootballArticles();
-          console.log("mmaArticles => ", this.mmaArticles);
+          // console.log("mmaArticles => ", this.mmaArticles);
         }
         if (id == 22) {
           this.nascarArticles = articlesList;
@@ -280,15 +327,15 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         if (id == 21) {
           this.golfArticles = articlesList;
           //this.renderFootballArticles();
-          console.log("golfArticles => ", this.golfArticles);
+          // console.log("golfArticles => ", this.golfArticles);
         }
         if (id == 20) {
           this.soccerArticles = articlesList;
-          console.log("soccerArticles => ", this.soccerArticles);
+          // console.log("soccerArticles => ", this.soccerArticles);
         }
         let mids = mid.join(",");
         if (mids) {
-          this.articleService.fetchMedia({include: mids}).subscribe(
+          this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
                 let image = images[k];
@@ -317,7 +364,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   navigateToArticles(id) {
-    this.router.navigate(["/articles"], {queryParams: {tab: id}});
+    this.router.navigate(["/articles"], { queryParams: { tab: id } });
   }
 
   switchToSingle(post, isArticle) {
@@ -363,7 +410,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
            console.log('http error => ', error);
          }
        )*/
-    this.articleService.fetchPosts({categories: 4367, per_page: 10, offset: 0}).subscribe(
+    this.articleService.fetchPosts({ categories: 4367, per_page: 10, offset: 0 }).subscribe(
       posts => {
         this.allNewsRecords = [];
         let mid = [];
@@ -375,7 +422,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         }
         let mids = mid.join(",");
         if (mids) {
-          this.articleService.fetchMedia({include: mids}).subscribe(
+          this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
                 let image = images[k];
@@ -407,12 +454,12 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   initSocialFeed() {
-    // console.log('initSocialFeed')
+    console.log('initSocialFeed')
     let sfDivRef = jQuery(".indexNPrt2Rght");
     let footerRef = jQuery("#footer");
     let sfTop = sfDivRef.offset().top;
     let footerTop = footerRef.offset().top;
-    console.log(sfDivRef, footerRef, sfTop, footerTop);
+    // console.log(sfDivRef, footerRef, sfTop, footerTop);
     setTimeout(() => {
       this.updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop);
     }, 1000);
@@ -443,26 +490,29 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop) {
-    let midDivHeight = jQuery(".indexNPrt2Mid")[0].clientHeight;
-    if (midDivHeight <= sfDivRef[0].clientHeight) {
-      return;
-    }
-    let sfLeft = sfDivRef.offset().left;
-    let currPos = sfTop - jQuery(window).scrollTop();
-    footerTop = footerRef.offset().top;
-    let footerCurrPos = footerTop - jQuery(window).scrollTop();
-    if (currPos <= 92) {
-      let divWidth = sfDivRef[0].clientWidth;
-      sfDivRef.css("width", divWidth + "px");
-      sfDivRef.css("position", "fixed");
-      sfDivRef.css("left", sfLeft + "px");
-      if (footerCurrPos <= $(window).height()) {
-        sfDivRef.css("top", 92 - ($(window).height() - footerCurrPos) + "px");
-      } else {
-        sfDivRef.css("top", "92px");
+    // console.log("update",sfDivRef, footerRef, sfTop, footerTop);
+    if(jQuery(".indexNPrt2Mid")[0]){
+      let midDivHeight = jQuery(".indexNPrt2Mid")[0].clientHeight;
+      if (midDivHeight <= sfDivRef[0].clientHeight) {
+        return;
       }
-    } else {
-      sfDivRef.removeAttr("style");
+      let sfLeft = sfDivRef.offset().left;
+      let currPos = sfTop - jQuery(window).scrollTop();
+      footerTop = footerRef.offset().top;
+      let footerCurrPos = footerTop - jQuery(window).scrollTop();
+      if (currPos <= 92) {
+        let divWidth = sfDivRef[0].clientWidth;
+        sfDivRef.css("width", divWidth + "px");
+        sfDivRef.css("position", "fixed");
+        sfDivRef.css("left", sfLeft + "px");
+        if (footerCurrPos <= $(window).height()) {
+          sfDivRef.css("top", 92 - ($(window).height() - footerCurrPos) + "px");
+        } else {
+          sfDivRef.css("top", "92px");
+        }
+      } else {
+        sfDivRef.removeAttr("style");
+      }
     }
   }
 }
