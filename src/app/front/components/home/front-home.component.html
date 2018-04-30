@@ -193,6 +193,99 @@
       </div>
       <div class="col-md-6">
         <div class="indexNPrt2Mid">
+
+
+
+
+
+         <div class="row">
+           <div class="col-md-6">
+             <div class="sport-article sport-article-featured">
+                 <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:0:1;let i = index;">
+                   <div class="sport-name">
+                     <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
+                   </div>
+
+                   <div class="sport-content">
+                   <!-- <div class="article-with-thumb" *ngIf="i == 0">
+                     <div class="article-img">
+                       <img
+                         [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                     </div>
+                     <div class="article-details">
+                       <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                       <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                     </div>
+                   </div>
+                   <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div> -->
+                   <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
+                   <div class="nltstNwsInfoTpWrp">
+                     <div class="col-xs-12"> &nbsp;</div>
+                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-6">
+             <div class="sport-article sport-article-featured">
+                 <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:1:2;let i = index;">
+                   <div class="sport-name">
+                     <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
+                   </div>
+
+                   <div class="sport-content">
+                   <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
+                   <div class="nltstNwsInfoTpWrp">
+                     <div class="col-xs-12"> &nbsp;</div>
+                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <div class="row">
+           <div class="col-md-6">
+             <div class="sport-article sport-article-featured">
+                 <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:2:3;let i = index;">
+                   <div class="sport-name">
+                     <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
+                   </div>
+
+                   <div class="sport-content">
+                   <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
+                   <div class="nltstNwsInfoTpWrp">
+                     <div class="col-xs-12"> &nbsp;</div>
+                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="col-md-6">
+             <div class="sport-article sport-article-featured">
+                 <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:3:4;let i = index;">
+                   <div class="sport-name">
+                     <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
+                   </div>
+                   <div class="sport-content">
+                   <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
+                   <div class="nltstNwsInfoTpWrp">
+                     <div class="col-xs-12"> &nbsp;</div>
+                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
           <div class="row">
             <div class="col-md-6">
               <div class="sport-article">
@@ -331,8 +424,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row">
             <div class="col-md-6">
               <div class="sport-article">
@@ -379,6 +470,8 @@
               </div>
             </div>
           </div>
+
+
           <!-- <div class="indexNPrt2MidSlider">
              <div class="ylwTpBx wlwTpBx clearfix pointer">
                <h3 (click)="navigateToArticles(17)">Daily Fantasy Baseball<span><img

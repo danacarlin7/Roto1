@@ -24,6 +24,12 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   facebookFeeds: Array<any>;
   instagramFeeds: Array<any>;
 
+  featured: Array<any> = [];
+  top: Array<any> = [];
+  newest: Array<any> = [];
+  recent: Array<any> = [];
+  related: Object = {};
+
   footballArticles: any[];
   basketballArticles: any[];
   baseballArticles: any[];
@@ -52,36 +58,9 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       this.redirected = this.route.snapshot.params["redirected"];
       this.redirectMessage = this.route.snapshot.params["redirectMessage"];
     }
-    // let loaded = false;
-    // this.router.events.subscribe(val => {
-    //   if (val instanceof NavigationEnd) {
-    //     if (val.url == '/' && !loaded) {
-    //       console.log("home twt");
-    //       loaded = true;
-    //       (<any>window).twttr = (function(d, s, id) {
-    //         let js: any, fjs = d.getElementsByTagName(s)[0],
-    //           t = (<any>window).twttr || {};
-    //         if (d.getElementById(id)) return t;
-    //         js = d.createElement(s);
-    //         js.id = id;
-    //         js.src = "https://platform.twitter.com/widgets.js";
-    //         fjs.parentNode.insertBefore(js, fjs);
-    //
-    //         t._e = [];
-    //         t.ready = function(f: any) {
-    //           t._e.push(f);
-    //         };
-    //
-    //         return t;
-    //       }(document, "script", "twitter-wjs"));
-    //     }
-    //   }
-    // });
-
   }
 
   ngAfterViewInit() {
-    // console.log("here i am");
     setTimeout(function() {
       (<any>window).twttr = (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0],
@@ -101,6 +80,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     }(document, "script", "twitter-wjs"));
     (<any>window).twttr.widgets.load(); }, 100);
 
+    this.retrieveFeatured();
     // this.retrieveSocialFeeds();
     this.retrieveBaseballArticles();
     this.retrieveBasketBallArticles();
@@ -121,6 +101,49 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
 
   }
+
+  retrieveFeatured(){
+    this.articleService.fetchRelated().subscribe(
+      ids => {
+        this.related = ids;
+        // console.log(this.related);
+        // for (let key in ids) {
+        this.fetchPostsByType('featured');
+        // }
+      }
+    );
+  }
+
+  fetchPostsByType(key: string) {
+    let cid = this.related[key].join(',');
+    this.articleService.fetchPosts({ include: cid }).subscribe(
+      posts => {
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
+          posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
+          if (posts[j].featured_media)
+            mid.push(posts[j].featured_media);
+        }
+        this[key] = posts;
+        console.log(posts);
+        this.featured = posts;
+        // if(key=='week')
+        //   console.log(posts);
+        let mids = mid.join(',');
+        if (mids) {
+          this.articleService.fetchMedia({ include: mids }).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+      }
+    );
+  }
+
 
   retrieveSocialFeeds() {
     this.frontService.retrieveTwitterFeeds()
