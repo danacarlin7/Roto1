@@ -279,7 +279,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   retrieveSoccerArticles() {
-    this.getArticlesByGameId(20, 2);
+    this.getArticlesByGameId(20);
   }
 
   getArticlesByGameId(id: any, offset_cnt = 0) {
