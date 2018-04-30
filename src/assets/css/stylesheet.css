@@ -1024,3 +1024,8 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
     font-size: 15px;
     color: #0f2da9;
   }
+
+  .sport-article-featured{
+    min-height: 380px !important;
+    max-height: 380px !important;
+  }
