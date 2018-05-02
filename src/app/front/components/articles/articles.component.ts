@@ -11,7 +11,7 @@ import { ArticleService } from "../../services/article.service";
 export class ArticlesComponent implements OnInit {
 
   constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router, private articleService: ArticleService) {
-    // localStorage.setItem('free', "0");
+    localStorage.setItem('free', "0");
   }
 
   category: any;
@@ -234,14 +234,11 @@ export class ArticlesComponent implements OnInit {
         this.isSubscribeError = false;
         $("#openModel").click();
       }
-    } else if (this.authService.isLoggedIn() && this.authService.isSubscriber(true)) {
-      this.isStatus = true;
-      this.isLoginError = false;
-      this.isSubscribeError = false;
-      console.log(this.isStatus);
-      // this.activeSingle = post;
-      this.router.navigate(['articles', post.id])
-
+    } else if (this.authService.isLoggedIn() && (localStorage.getItem('free') == "1" || this.authService.isSubscriber(true))) {
+        this.isStatus = true;
+        this.isLoginError = false;
+        this.isSubscribeError = false;
+        this.router.navigate(['articles', post.id])
     } else {
       this.isStatus = false;
       this.isLoginError = false;
