@@ -85,7 +85,7 @@
 <section class="indexNPrt2">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3" style="padding-left: 10px;">
         <div class="indexNPrt2Lft">
           <!--advertisement-->
           <!--<div class="ylwTpBxInfoWrap">
@@ -113,6 +113,7 @@
               </div>
             </div>
           </div>-->
+
 
           <div class="ylwTpBxInfoWrap">
             <div class="ylwTpBx clearfix">
@@ -153,6 +154,9 @@
             </div>
           </div>
 
+
+
+
           <!--<div class="ylwTpBxInfoWrap">
             <div class="ylwTpBx clearfix">
               <h3 routerLink="/news">Latest News<span><img src="../../../../assets/images/blkArow.png"></span></h3>
@@ -190,23 +194,34 @@
 
           </div>-->
         </div>
-      </div>
-      <div class="col-md-6">
+        </div>
+
+
+
+      <div class="col-md-6" style="padding-left: 10px; padding-right: 10px">
+
         <div class="indexNPrt2Mid">
 
 
 
+          <div class="ylwTpBx clearfix">
+            <h3>Featured Articles</h3>
+            <!-- <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p> -->
+          </div>
+
+          <div class="featuredSection">
 
 
-         <div class="row">
+            <div class="row">
            <div class="col-md-6">
              <div class="sport-article sport-article-featured">
                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:0:1;let i = index;">
-                   <div class="sport-name">
-                     <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
-                   </div>
 
-                   <div class="sport-content">
+
+                   <div class="sport-content" style="position: relative;">
+                     <div class="sport-name2" style="position: absolute; top: 90px; width:100%;">
+                       <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
+                     </div>
                    <!-- <div class="article-with-thumb" *ngIf="i == 0">
                      <div class="article-img">
                        <img
@@ -219,29 +234,25 @@
                    </div>
                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div> -->
                    <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
-                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
-                   <div class="nltstNwsInfoTpWrp">
-                     <div class="col-xs-12"> &nbsp;</div>
-                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
-                   </div>
-                 </div>
+                        alt="" class="img-responsive" style="min-height:150px;max-height:150px; padding: 0px">
+                     <!--<div class="nltstNwsInfoTpWrp">
+                       <div class="col-xs-12"> &nbsp;</div>
+                       <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
+                     </div>
+                   </div>-->
                </div>
+                 </div>
              </div>
            </div>
            <div class="col-md-6">
              <div class="sport-article sport-article-featured">
                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:1:2;let i = index;">
-                   <div class="sport-name">
-                     <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
+                   <div class="sport-content" style="position: relative;">
+                     <div class="sport-name2" style="position: absolute; width:100%; top: 90px;">
+                     <div class="name" style="width:100%">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
                    </div>
-
-                   <div class="sport-content">
                    <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
-                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
-                   <div class="nltstNwsInfoTpWrp">
-                     <div class="col-xs-12"> &nbsp;</div>
-                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
-                   </div>
+                        alt="" class="img-responsive" style="min-height: 150px;max-height:150px">
                  </div>
                </div>
              </div>
@@ -249,47 +260,52 @@
          </div>
 
          <div class="row">
-           <div class="col-md-6">
+           <div class="col-md-6 ">
              <div class="sport-article sport-article-featured">
                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:2:3;let i = index;">
-                   <div class="sport-name">
+                   <div class="sport-content" style="position: relative;">
+                     <div class="sport-name2" style="position: absolute; width:100%; top: 90px;">
                      <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
                    </div>
-
-                   <div class="sport-content">
-                   <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
-                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
-                   <div class="nltstNwsInfoTpWrp">
-                     <div class="col-xs-12"> &nbsp;</div>
-                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
                    </div>
+
+                   <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
+                        alt="" class="img-responsive" style="min-height:150px;max-height:150px">
                  </div>
                </div>
              </div>
-           </div>
            <div class="col-md-6">
              <div class="sport-article sport-article-featured">
                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of featured | slice:3:4;let i = index;">
-                   <div class="sport-name">
+                   <div class="sport-content" style="position: relative;">
+                     <div class="sport-name2" style="position: absolute; width:100%; top: 90px;">
                      <div class="name">{{article.title.rendered?.slice(0,45)}}{{article.title.rendered.length > 45 ? '...' : ''}}</div>
                    </div>
                    <div class="sport-content">
                    <img [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'"
-                        alt="" class="img-responsive" style="min-height:250px;max-height:250px">
-                   <div class="nltstNwsInfoTpWrp">
-                     <div class="col-xs-12"> &nbsp;</div>
-                     <p class="news-notes">{{article.extract?.slice(0,100)}}...</p>
-                   </div>
+                        alt="" class="img-responsive" style="min-height:150px; max-height:150px">
+
                  </div>
                </div>
              </div>
            </div>
          </div>
+          </div>
+          </div>
 
-          <div class="row">
+
+
+            <!-- <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p> -->
+<div class="individualSports" style="padding-top: 20px">
+ <!-- <div class="ylwTpBx2 clearfix">
+    <h3>Articles by Sport</h3>
+    <!-- <p><img src="../../../../assets/images/rght_icn3.png" alt="" class="img-responsive"></p>
+  </div> -->
+          <div class="row no-gutters">
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+
+                <div class="sport-name1">
                   <div class="name">MLB Articles</div>
                 </div>
                 <div class="sport-content">
@@ -310,8 +326,8 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">NFL Articles</div>
                 </div>
                 <div class="sport-content">
@@ -332,10 +348,10 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row no-gutters">
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">NBA Articles</div>
                 </div>
                 <div class="sport-content">
@@ -356,8 +372,8 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">NHL Articles</div>
                 </div>
                 <div class="sport-content">
@@ -378,10 +394,10 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row no-gutters">
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">MMA Articles</div>
                 </div>
                 <div class="sport-content">
@@ -402,8 +418,8 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">Nascar Articles</div>
                 </div>
                 <div class="sport-content">
@@ -424,10 +440,10 @@
               </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row no-gutters">
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">Soccer Articles</div>
                 </div>
                 <div class="sport-content">
@@ -448,8 +464,8 @@
               </div>
             </div>
             <div class="col-md-6">
-              <div class="sport-article">
-                <div class="sport-name">
+              <div class="sport-article1">
+                <div class="sport-name1">
                   <div class="name">PGA Articles</div>
                 </div>
                 <div class="sport-content">
@@ -471,7 +487,7 @@
             </div>
           </div>
 
-
+</div>
           <!-- <div class="indexNPrt2MidSlider">
              <div class="ylwTpBx wlwTpBx clearfix pointer">
                <h3 (click)="navigateToArticles(17)">Daily Fantasy Baseball<span><img
@@ -534,7 +550,7 @@
 
         </div>
       </div>
-      <div class="col-md-3" id="twt-timeline">
+      <div class="col-md-3" style="padding-right: 10px" id="twt-timeline">
         <div class="indexNPrt2Rght">
           <a class="twitter-timeline" data-width= "100%" data-height= "100%" data-theme="dark" data-chrome="nofooter" data-link-color="#FAB81E" href="https://twitter.com/RotoProsDFS?ref_src=twsrc%5Etfw">Tweets by RotoProsDFS</a>
         </div>
