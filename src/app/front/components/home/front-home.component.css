@@ -40,8 +40,7 @@
   }
 
   .indexNPrt2Lft .ylwTpBxInfoWrap {
-    height: calc(100vh - 100px);
-    overflow: hidden;
+
   }
 
   .indexNPrt2Lft .ylwTpBxInfoWrap .ylwTpBxBtm {
@@ -51,18 +50,21 @@
 }
 
 .indexNPrt2Lft .nltstNwsInfoTpWrp {
-  padding: 0 5px 0 20px;
+  padding-top: 0;
+  padding-right: 5px;
+  padding-left: 20px;
+  padding-bottom: 0;
 }
 
 .nltstNwsInfoBtm h6 {
   margin: 0 0 10px 0;
-  color: #163eff;
+  color: black;
   padding-left: 14px;
 }
 
 .nltstNwsInfoBtm h6::before {
   content: '\F0A4';
-  color: #163eff;
+  color: #f8c534;
   font-family: FontAwesome, 'sans-serif';
   margin-left: -15px;
   position: relative;
@@ -77,18 +79,53 @@
   background-color: #ffffff;
   color: #0f0f0f;
   margin-bottom: 15px;
+  min-height: 320px;
+  max-height: 320px;
+
+}
+.sport-article1 {
+  background-color: #ffffff;
+  color: #0f0f0f;
+  margin-bottom: 15px;
+  min-height: 320px;
+  max-height: 320px;
+  border-style: solid;
+  border-width: 10px;
+  border-color: whitesmoke;
+
+
+}
+.sport-article:hover .sport-name2{
+  text-decoration: underline;
+  opacity: 1.0;
 }
 
 .sport-article .sport-name {
   font-size: 18px;
   font-weight: 900;
-  padding: 10px;
+  padding: 0px;
+  border-bottom: 1px solid #dddddd;
+  background-color: #f8c534;
+}
+.sport-article1 .sport-name1 {
+  font-size: 18px;
+  font-weight: 900;
+  padding: 0px;
   border-bottom: 1px solid #dddddd;
   background-color: #f8c534;
 }
 
+.sport-article .sport-name2 {
+  font-size: 18px;
+  font-weight: 900;
+  padding: 0px;
+  opacity: 0.80;
+  border-bottom: 1px solid #dddddd;
+  background-color: #f8c534;
+
+}
 .sport-article .sport-content {
-  padding: 10px;
+  padding: 0px;
 }
 
 .single-article {
@@ -155,6 +192,7 @@
 
 .indexNPrt2Mid {
   margin-right: 0;
+  padding: 0px;
 }
 
 .ylwTpBxInfoWrap, .indexNPrt2Lft, .indexNPrt2Mid, .indexNPrt2Rght {
@@ -165,3 +203,18 @@
 section.indexNPrt2 {
   padding-top: 22px;
 }
+
+.featuredSection{
+  border-style: solid;
+  border-radius: 5px;
+  border-bottom: none;
+  border-width: 10px;
+  border-color: #000000;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  background: #000000;
+}
+
+
