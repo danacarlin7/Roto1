@@ -160,3 +160,11 @@ header {
     height: 65px;
   }
 }
+
+.bottomHeader{
+
+  border-bottom-color: #f8c534;
+  border-bottom-width: 10px;
+  border-bottom-style: double;
+}
+
