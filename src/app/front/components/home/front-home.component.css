@@ -60,6 +60,7 @@
 .nltstNwsInfoBtm h6 {
   margin: 0 0 10px 0;
   color: #163eff;
+  font-weight: 500;
   padding-left: 14px;
 }
 
@@ -115,7 +116,7 @@
   padding: 0px;
   border-bottom: 1px solid #dddddd;
   background-color: #f8c534;
-  text-align: center;
+
 }
 
 .sport-article .sport-name2 {
