@@ -40,7 +40,8 @@
   }
 
   .indexNPrt2Lft .ylwTpBxInfoWrap {
-
+    height: calc(100vh - 100px);
+    overflow: hidden;
   }
 
   .indexNPrt2Lft .ylwTpBxInfoWrap .ylwTpBxBtm {
@@ -58,13 +59,13 @@
 
 .nltstNwsInfoBtm h6 {
   margin: 0 0 10px 0;
-  color: black;
+  color: #163eff;
   padding-left: 14px;
 }
 
 .nltstNwsInfoBtm h6::before {
   content: '\F0A4';
-  color: #f8c534;
+  color: #163eff;
   font-family: FontAwesome, 'sans-serif';
   margin-left: -15px;
   position: relative;
@@ -78,7 +79,7 @@
 .sport-article {
   background-color: #ffffff;
   color: #0f0f0f;
-  margin-bottom: 15px;
+  margin-bottom: 2px;
   min-height: 320px;
   max-height: 320px;
 
@@ -92,6 +93,7 @@
   border-style: solid;
   border-width: 10px;
   border-color: whitesmoke;
+  overflow: scroll;
 
 
 }
@@ -127,6 +129,7 @@
 }
 .sport-article .sport-content {
   padding: 0px;
+  overflow: hidden;
 }
 
 .single-article {
@@ -208,7 +211,7 @@ section.indexNPrt2 {
 .featuredSection{
   border-style: solid;
   border-radius: 5px;
-  border-bottom: none;
+
   border-width: 10px;
   border-color: #000000;
   padding-left: 0px;
