@@ -6,7 +6,7 @@ import { SidebarModule } from "./components/sidebar/sidebar.module";
 import { FooterModule } from "./components/shared/footer/footer.module";
 import { NavbarModule} from "./components/shared/navbar/navbar.module";
 import { FixedPluginModule} from "./components/shared/fixedplugin/fixedplugin.module";
-import { NguiMapModule} from "@ngui/map";
+// import { NguiMapModule} from "@ngui/map";
 
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { UserComponent } from "./components/user/user.component";
@@ -46,7 +46,7 @@ import { PromotionsComponent } from "./promotions/promotions.component";
     NavbarModule,
     FooterModule,
     FixedPluginModule,
-    NguiMapModule.forRoot({apiUrl: "https://maps.google.com/maps/api/js?key=AIzaSyBr-tgUtpm8cyjYVQDrjs8YpZH7zBNWPuY"}),
+    // NguiMapModule.forRoot({apiUrl: "https://maps.google.com/maps/api/js?key=AIzaSyBr-tgUtpm8cyjYVQDrjs8YpZH7zBNWPuY"}),
   ],
   exports: [
     AdminComponent

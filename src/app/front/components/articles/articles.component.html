@@ -198,7 +198,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="All">
-                    <div class="mPlaceWrap" infinite-scroll debounce [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScroll(category)">
+                    <div class="mPlaceWrap" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" debounce (scrolled)="onScroll(category)">
                       <div class="mPlaceItm" *ngFor="let post of posts[category.id]" (click)="switchToSingle(post)">
                         <div class="mPlaceTp">
                           <div class="mPlaceImgWrap">

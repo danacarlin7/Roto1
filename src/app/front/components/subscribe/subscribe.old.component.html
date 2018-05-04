@@ -70,27 +70,20 @@
 </section>
 <!-- Login Page Ends -->
 
-<template #couponTemplateRef let-couponDialog="dialogRef">
+<ng-template #couponTemplateRef let-couponDialog="dialogRef">
   <div class="downloadModal">
     <div class="modal-header">
       <button type="button" class="close" (click)="couponDialog.close(true)"><span aria-hidden="true">&times;</span>
       </button>
       <h1 class="modal-title" style="font-size: 26px" id="myModalLabel">Enter Your Coupon</h1>
     </div>
-    <div class="modal-body" style="margin: -10px 0px 40px;
-    padding: 10px;">
-      <div class="alert alert-danger fade in" *ngIf="errorMsg" style="    padding: 10px;
-    text-align: center;
-    margin: 15px 20px;">
+    <div class="modal-body" style="margin: -10px 0px 40px;padding: 10px;">
+      <div class="alert alert-danger fade in" *ngIf="errorMsg" style="    padding: 10px;text-align: center;margin: 15px 20px;">
         {{errorMsg }}
       </div>
       <div class="form-group form-group col-xs-4 col-xs-offset-4">
         <label class="srOnly">Coupon Code</label>
-        <input type="text"
-               class="col-xs-12"
-               name="cId"
-               placeholder="Code"
-               #couponCode style="height: 36px;">
+        <input type="text" class="col-xs-12" name="cId" placeholder="Code" #couponCode style="height: 36px;">
       </div>
     </div>
 
@@ -101,10 +94,10 @@
       <button type="button" class="btn btn-default" (click)="onBtnSubscribeClick(couponDialog, false);">Skip</button>
     </div>
   </div>
-</template>
+  </ng-template>
 
 
-<!-- <ng-template #content let-c="close" let-d="dismiss">
+  <!-- <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Enter Coupon Code</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">

@@ -17,7 +17,8 @@ import {DailyLineupComponent} from "./components/daily-lineup/daily-lineup.compo
 import {LineupOptimizerComponent} from "./components/lineup-optimizer/lineup-optimizer.component";
 import {ArticleService} from "./services/article.service";
 import {ArticleComponent} from "./components/article/article.component";
-import {InfiniteScrollModule} from "angular2-infinite-scroll/angular2-infinite-scroll";
+// import {InfiniteScrollModule} from "angular2-infinite-scroll/angular2-infinite-scroll";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import {LineupOptimizerService} from "./services/lineup-optimizer.service";
 import {ForgotPasswordComponent} from "./components/forgot-password/forgot-password.component";
 import {DFSBasicsComponent} from "./components/dfs-basics/dfs-basics.component";
@@ -54,6 +55,7 @@ import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/ge
 import {PodcastComponent} from "./components/podcast/podcast.component";
 import {PlanComponent} from "./components/plan/plan.component";
 import {VideoComponent} from "./components/video/video.component";
+
 
 
 // import {VgCoreModule} from 'videogular2/core';

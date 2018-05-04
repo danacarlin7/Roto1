@@ -1,7 +1,8 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
+// import { HttpModule } from "@angular/http";
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthService } from "./services/auth.service";
 import { CommonModule } from "@angular/common";
@@ -9,7 +10,9 @@ import { SharedMaterialComponents } from "./material-components";
 import { AuthGuard } from "./services/auth.guard";
 import { DataTableModule } from "angular2-datatable";
 import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
-import { ModalModule } from "angular2-modal/esm/index";
+// import { ModalModule } from "angular2-modal/esm/index";
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { TabViewComponent } from "./components/tab-view/tab-view.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SharedPrimeNGComponents } from "./prime-ng-components";
@@ -29,11 +32,12 @@ import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     SharedMaterialComponents,
     SharedPrimeNGComponents,
     DataTableModule,
     ModalModule.forRoot(),
+    BootstrapModalModule,
     DropzoneModule.forChild(),
     NgxPaginationModule,
   ],
@@ -41,7 +45,7 @@ import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     SharedMaterialComponents,
     SharedPrimeNGComponents,
     DataTableModule,

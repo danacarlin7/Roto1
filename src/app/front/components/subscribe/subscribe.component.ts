@@ -10,9 +10,12 @@ import {
 } from "@angular/core";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs";
-import {Overlay} from "angular2-modal";
-import {overlayConfigFactory} from "angular2-modal";
-import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
+import { Overlay } from 'ngx-modialog';
+import { Modal } from 'ngx-modialog/plugins/bootstrap';
+
+// import {Overlay} from "angular2-modal";
+// import {overlayConfigFactory} from "angular2-modal";
+// import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
 import "rxjs/Rx";
 import {AuthService} from "../../../shared/services/auth.service";
 import {FrontService} from "../../services/front.service";
@@ -42,8 +45,8 @@ export class SubscribeComponent implements OnInit {
 
   period_text = {week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually"};
 
-  @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
-  @ViewChild("couponTemplateRef") public couponTemplateRef: TemplateRef<any>;
+  // @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
+  // @ViewChild("couponTemplateRef") public couponTemplateRef: TemplateRef<any>;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -161,7 +164,30 @@ export class SubscribeComponent implements OnInit {
   couponClicked(plan) {
     if (this.authService.isLoggedIn() || this.authService.partialUser) {
       this.selectedPlan = plan;
-      this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+      // this.modal.open(this.couponTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+
+      const dialogRef = this.modal.alert()
+        .size('lg')
+        .showClose(true)
+        .title('Enter Your Coupon')
+        .body(`
+              <div class="alert alert-danger fade in" *ngIf="errorMsg" style="padding: 10px;text-align: center;margin: 15px 20px;">
+                {{errorMsg }}
+              </div>
+              <div class="form-group form-group col-xs-4 col-xs-offset-4">
+                <label class="srOnly">Coupon Code</label>
+                <input type="text"
+                       class="col-xs-12"
+                       name="cId"
+                       placeholder="Code"
+                       #couponCode style="height: 36px;">
+              </div>
+              <button type="button" class="btn btn-primary" (click)="onBtnSubscribeClick(couponDialog, couponCode.value);"><span
+                area-hidden="true"></span> Apply
+              </button>
+              <button type="button" class="btn btn-default" (click)="onBtnSubscribeClick(couponDialog, false);">Skip</button>`)
+        .open();
+
     } else {
       this.router.navigate(["/signup"], {queryParams: {redirect: location.pathname}});
     }
@@ -396,10 +422,31 @@ export class SubscribeComponent implements OnInit {
     })
   }
 
-  onBtnUnsubscribeClick(plan) {
-    this.unsubscribeOption = "at_period_end";
-    this.modal.open(this.unsubscribeTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
-  }
+  // onBtnUnsubscribeClick(plan) {
+  //   this.unsubscribeOption = "at_period_end";
+  //   // this.modal.open(this.unsubscribeTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+  //   const dialogRef = this.modal.alert()
+  //     .size('lg')
+  //     .showClose(true)
+  //     .title('Enter Your Coupon')
+  //     .body(`
+  //           <div class="alert alert-danger fade in" *ngIf="errorMsg" style="padding: 10px;text-align: center;margin: 15px 20px;">
+  //             {{errorMsg }}
+  //           </div>
+  //           <div class="form-group form-group col-xs-4 col-xs-offset-4">
+  //             <label class="srOnly">Coupon Code</label>
+  //             <input type="text"
+  //                    class="col-xs-12"
+  //                    name="cId"
+  //                    placeholder="Code"
+  //                    #couponCode style="height: 36px;">
+  //           </div>
+  //           <button type="button" class="btn btn-primary" (click)="onBtnSubscribeClick(couponDialog, couponCode.value);"><span
+  //             area-hidden="true"></span> Apply
+  //           </button>
+  //           <button type="button" class="btn btn-default" (click)="onBtnSubscribeClick(couponDialog, false);">Skip</button>`)
+  //     .open();
+  // }
 
   endSubscription(subscribeDialog) {
     this.frontService.unsubscribePlan(1, this.unsubscribeOption == "at_period_end").subscribe(

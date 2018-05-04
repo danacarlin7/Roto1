@@ -37,9 +37,9 @@
                                         <td>{{member.createdAt}}</td>
                                         <td>{{member.lastSubscription}}</td>
                                         <td>
-                                            <button class="btn btn-simple btn-info btn-icon like" (click)="openModal(member, subscribeTemplateRef)"><i class="ti-heart"></i></button>
-                                            <button class="btn btn-simple btn-warning btn-icon edit" (click)="openModal(member, unsubscribeTemplateRef)"><i class="ti-pencil-alt"></i></button>
-                                            <button class="btn btn-simple btn-danger btn-icon remove" (click)="openModal(member, deleteTemplateRef)"><i class="ti-close"></i></button>
+                                            <button class="btn btn-simple btn-info btn-icon like" (click)="openModal1(member)"><i class="ti-heart"></i></button>
+                                            <button class="btn btn-simple btn-warning btn-icon edit" (click)="openModal2(member, unsubscribeTemplateRef)"><i class="ti-pencil-alt"></i></button>
+                                            <button class="btn btn-simple btn-danger btn-icon remove" (click)="openModal3(member, deleteTemplateRef)"><i class="ti-close"></i></button>
                                         </td>
 
                                     </tr>
@@ -56,8 +56,8 @@
         <!-- end row -->
     </div>
 </div>
-
-<template #subscribeTemplateRef>
+<!-- 
+<ng-template #subscribeTemplateRef>
   <div id="subscribeModal">
     <div class="modal-body">
       <h1 class="modal-title text-center">Subscribe Member</h1>
@@ -82,9 +82,9 @@
 
     </div>
   </div>
-</template>
+</ng-template> -->
 
-<template #unsubscribeTemplateRef>
+<!-- <ng-template #unsubscribeTemplateRef>
   <div id="unsubscribeModal">
     <div class="modal-body">
       <h1 class="modal-title text-center">Unsubscribe Member</h1>
@@ -100,9 +100,9 @@
 
     </div>
   </div>
-</template>
+</ng-template> -->
 
-<template #deleteTemplateRef>
+<!-- <ng-template #deleteTemplateRef>
   <div id="deleteModal">
     <div class="modal-body">
       <h1 class="modal-title text-center">Delete User</h1>
@@ -110,4 +110,4 @@
       <button type="button" class="btn btn-danger btn-fill btn-wd text-center" (click)="deleteUser(modalData.id)">Confirm</button>
     </div>
   </div>
-</template>
+</ng-template> -->

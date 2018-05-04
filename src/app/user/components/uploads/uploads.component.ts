@@ -4,9 +4,11 @@ import {UserDashboardServices} from "../../services/user-dashboard.service";
 import {FilterService} from "../../services/filter.service";
 import {ContestHistory} from "../../models/contest";
 import {AuthService} from "../../../shared/services/auth.service";
-import {Overlay} from 'angular2-modal';
-import {overlayConfigFactory} from "angular2-modal";
-import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
+// import {Overlay} from 'angular2-modal';
+// import {overlayConfigFactory} from "angular2-modal";
+// import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
+import { Overlay } from 'ngx-modialog';
+import { Modal } from 'ngx-modialog/plugins/bootstrap';
 import {UploadsService} from "../../services/uploads.service";
 import {environment} from "../../../../environments/environment";
 /**
@@ -53,9 +55,9 @@ export class UploadsComponent {
   isLoading:boolean;
   isRestricted:boolean;
 
-  @ViewChild('downloadTemplateRef') public downloadTemplateRef:TemplateRef<any>;
-  @ViewChild('deleteTemplateRef') public deleteTemplateRef:TemplateRef<any>;
-  @ViewChild('fanDualInfo') public fanDualInfo:TemplateRef<any>;
+  // @ViewChild('downloadTemplateRef') public downloadTemplateRef:TemplateRef<any>;
+  // @ViewChild('deleteTemplateRef') public deleteTemplateRef:TemplateRef<any>;
+  // @ViewChild('fanDualInfo') public fanDualInfo:TemplateRef<any>;
 
   ngOnInit() {
     this.getUploads();
@@ -115,16 +117,58 @@ export class UploadsComponent {
 
   onTableRowClicked(history:ContestHistory) {
     this.selectedHistory = history;
-    this.modal.open(this.downloadTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext))
+    // this.modal.open(this.downloadTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext))
+    const dialogRef = this.modal.alert()
+      .size('lg')
+      .showClose(true)
+      .title('{{ selectedHistory.original_name }}')
+      .body(`
+        <div class="row">
+          <div class="col-xs-4">File Size</div>
+          <div class="col-xs-8">{{ getFileSize(selectedHistory.size) }} KB</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Uploaded On</div>
+          <div class="col-xs-8">{{ selectedHistory.created_at | date: 'dd MMM yyyy h:m a' }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4">Records Created</div>
+          <div class="col-xs-8">{{ selectedHistory.imported | number }}</div>
+        </div>
+
+        <button type="button" class="btn btn-primary" (click)="downloadClick();"><span
+          class="glyphicon glyphicon-download-alt" area-hidden="true"></span> Download
+        </button>
+        <button type="button" class="btn btn-danger" (click)="deleteHistoryClicked(downloadDialog);"><span
+          class="glyphicon glyphicon-trash" area-hidden="true"></span> Delete File
+        </button>
+        <button type="button" class="btn btn-default" (click)="downloadDialog.close(true)">Close</button>
+        `)
+      .open();
   }
 
   onFandualInfoClicked() {
-    this.modal.open(this.fanDualInfo, overlayConfigFactory({isBlocking: false}, BSModalContext));
+    // this.modal.open(this.fanDualInfo, overlayConfigFactory({isBlocking: false}, BSModalContext));
   }
 
   deleteHistoryClicked(downloadDialog) {
     this.mainDialog = downloadDialog;
-    this.modal.open(this.deleteTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+    // this.modal.open(this.deleteTemplateRef, overlayConfigFactory({isBlocking: false}, BSModalContext));
+
+    const dialogRef = this.modal.alert()
+      .size('lg')
+      .showClose(true)
+      .title('Are you sure?')
+      .body(`
+        <p>Deleting an entity history file will remove all associated results imported from this file.</p>
+        <p>Are you sure you want to delete <strong>{{ selectedHistory.original_name }}</strong>?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="confirmDeleteClicked(deleteDialog);"><span
+            class="glyphicon glyphicon-trash" area-hidden="true"></span> Confirm Delete
+          </button>
+          <button type="button" class="btn btn-default" (click)="deleteDialog.close(true)">Close</button>
+        </div>`)
+      .open();
   }
 
   confirmDeleteClicked(deleteDialog) {

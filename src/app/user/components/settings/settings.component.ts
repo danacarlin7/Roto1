@@ -10,9 +10,9 @@ import {
 } from "@angular/core";
 import {NgForm} from "@angular/forms";
 import {Subscription} from "rxjs";
-import {Overlay} from "angular2-modal";
-import {overlayConfigFactory} from "angular2-modal";
-import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
+// import {Overlay} from "angular2-modal";
+// import {overlayConfigFactory} from "angular2-modal";
+// import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
 import "rxjs/Rx";
 import {AuthService} from "../../../shared/services/auth.service";
 import {LoggedUser} from "../../../shared/models/logged-user.model";
@@ -59,9 +59,9 @@ export class SettingsComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private router: Router,
-              overlay: Overlay,
-              vcRef: ViewContainerRef,
-              public modal: Modal,
+              // overlay: Overlay,
+              // vcRef: ViewContainerRef,
+              // public modal: Modal,
               private dashboardService: UserDashboardServices) {}
 
 

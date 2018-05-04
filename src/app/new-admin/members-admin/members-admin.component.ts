@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
 import { AdminDashboardService } from "../services/admin-dashboard.service";
-import { Overlay } from "angular2-modal";
-import { overlayConfigFactory } from "angular2-modal";
-import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
+// import { Overlay } from "angular2-modal";
+// import { overlayConfigFactory } from "angular2-modal";
+// import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
+import { Overlay } from 'ngx-modialog';
+import { Modal } from 'ngx-modialog/plugins/bootstrap';
+
 import { MembershipPlanService } from "../services/membership-plan.service";
 import * as moment from "moment";
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from "rxjs";
 import "../../../assets/newAdmin/js/datetime-moment.js";
 
 declare var $: any;
@@ -16,9 +19,9 @@ declare var $: any;
   styleUrls: ["./members-admin.component.css"]
 })
 export class MembersAdminComponent implements OnInit {
-  @ViewChild("subscribeTemplateRef") private subscribeTemplateRef: TemplateRef<any>;
-  @ViewChild("unsubscribeTemplateRef") private unsubscribeTemplateRef: TemplateRef<any>;
-  @ViewChild("deleteTemplateRef") private deleteTemplateRef: TemplateRef<any>;
+  // @ViewChild("subscribeTemplateRef") private subscribeTemplateRef: TemplateRef<any>;
+  // @ViewChild("unsubscribeTemplateRef") private unsubscribeTemplateRef: TemplateRef<any>;
+  // @ViewChild("deleteTemplateRef") private deleteTemplateRef: TemplateRef<any>;
 
   public headerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
   public footerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
@@ -105,45 +108,110 @@ export class MembersAdminComponent implements OnInit {
     }
   }
 
-  openModal(data: Object, templateRef: TemplateRef<any>) {
+  openModal1(data: Object) {
     this.modalData = data;
-    this.modal.open(templateRef, overlayConfigFactory({isBlocking: false}, BSModalContext)).then(
-      dialog => this.dialogRef = dialog
-    );
+
+    const dialogRef = this.modal.alert()
+      .size('lg')
+      .showClose(true)
+      .title('Subscribe Member')
+      .body(`
+        <div *ngIf="modalData.isSubscribe">
+          <h2>{{ modalData.name }} is already subscribed to:</h2>
+          <div *ngFor="let plan of modalData.subscriptions">
+            <p>{{ plan.plan_id }}</p>
+          </div>
+        </div>
+
+        <div *ngIf="!modalData.isSubscribe">
+          plans here
+          <form #subscribeForm="ngForm" (ngSubmit)="subscribeMember(subscribeForm)">
+            <div *ngFor="let plan of subscriptionPlans">
+              <input name="planID" type="radio" [id]="plan._id" [value]="plan._id" ngModel>
+              <label [for]="plan._id">{{ plan.plan_id }}</label>
+            </div>
+            <button type="submit" class="subscribe-button btn btn-primary btn-fill btn-wd text-center">Subscribe</button>
+          </form>
+        </div>`)
+      .open();
+
+    // this.modal.open(templateRef, overlayConfigFactory({isBlocking: false}, BSModalContext)).then(
+    //   dialog => this.dialogRef = dialog
+    // );
   }
 
-  subscribeMember(form) {
-    console.log(form.value.planID);
-    console.log(this.modalData.id);
-    console.log(typeof this.modalData.createdAt);
+  openModal2(data: Object) {
+    this.modalData = data;
+
+
+    const dialogRef = this.modal.alert()
+      .size('lg')
+      .showClose(true)
+      .title('Unsubscribe Member')
+      .body(`
+        <h3>Subscriptions for {{ modalData.name }}</h3>
+        <form #unsubscribeForm="ngForm" (ngSubmit)="unsubscribeMember(unsubscribeForm, modalData.id)">
+          <div *ngFor="let plan of modalData.subscriptions">
+            <input ngModel type="radio" name="planID" [id]="plan.subscription_id" [value]="plan.subscription_id">
+            <label [for]="plan.subscription_id">{{ plan.plan_id }}</label>
+          </div>
+          <button type="submit" class="subscribe-button btn btn-warning btn-fill btn-wd text-center">Unsubscribe</button>
+        </form>`)
+      .open();
+    // this.modal.open(templateRef, overlayConfigFactory({isBlocking: false}, BSModalContext)).then(
+    //   dialog => this.dialogRef = dialog
+    // );
   }
 
-  unsubscribeMember(form) {
-    this.adminDashboardService.unsubscribePlan(form.value.planID, false, this.modalData.id).subscribe(
-      response => {
-        console.log(response);
-          alert(response.message);
-          this.dialogRef.close(true);
-      }
-    );
+  openModal3(data: Object) {
+    this.modalData = data;
+
+    const dialogRef = this.modal.alert()
+      .size('lg')
+      .showClose(true)
+      .title('Unsubscribe Member')
+      .body(`
+        <h1 class="modal-title text-center">Delete User</h1>
+        <h3>Are you sure you want to delete user {{ modalData.name }}</h3><br>
+        <button type="button" class="btn btn-danger btn-fill btn-wd text-center" (click)="deleteUser(modalData.id)">Confirm</button>`)
+      .open();
+    // this.modal.open(templateRef, overlayConfigFactory({isBlocking: false}, BSModalContext)).then(
+    //   dialog => this.dialogRef = dialog
+    // );
   }
 
-  deleteUser(id: String) {
-    this.adminDashboardService.deleteMember(id).subscribe(
-      response => {
-        console.log(response);
-        alert(response.message);
-        this.dialogRef.close(true);
+  // subscribeMember(form) {
+  //   console.log(form.value.planID);
+  //   console.log(this.modalData.id);
+  //   console.log(typeof this.modalData.createdAt);
+  // }
+  //
+  // unsubscribeMember(form) {
+  //   this.adminDashboardService.unsubscribePlan(form.value.planID, false, this.modalData.id).subscribe(
+  //     response => {
+  //       console.log(response);
+  //         alert(response.message);
+  //         this.dialogRef.close(true);
+  //     }
+  //   );
+  // }
 
-        const $tr = $(`#${id}`);
-        this.table.row($tr).remove().draw();
-      },
-      error => {
-        console.log(error);
-        alert(error.message);
-      }
-    );
-  }
+  // deleteUser(id: String) {
+  //   this.adminDashboardService.deleteMember(id).subscribe(
+  //     response => {
+  //       console.log(response);
+  //       alert(response.message);
+  //       this.dialogRef.close(true);
+  //
+  //       const $tr = $(`#${id}`);
+  //       this.table.row($tr).remove().draw();
+  //     },
+  //     error => {
+  //       console.log(error);
+  //       alert(error.message);
+  //     }
+  //   );
+  // }
 
   downloadMembers() {
     if (!this.allMembers) {

@@ -2,20 +2,22 @@ import { Injectable } from '@angular/core';
 import {CanActivate} from '@angular/router';
 import {AuthService} from "../../shared/services/auth.service";
 import {Router} from '@angular/router';
-import {Http, Headers, Response} from '@angular/http';
+// import {Http, Headers, Response} from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class CompGetService {
-  constructor(private auth:AuthService, private http:Http, private router:Router) {
+  constructor(private auth:AuthService, private http:HttpClient, private router:Router) {
   }
 
   getToken():string {
     return environment.token;
   }
 
-  getHeaders():Headers {
-    let headers = new Headers();
+  getHeaders():HttpHeaders {
+    let headers = new HttpHeaders();
     headers.append('content-type', 'application/json');
     if (this.getToken()) {
       headers.append('Authorization', 'Bearer ' + this.getToken());
@@ -31,8 +33,8 @@ export class CompGetService {
     }
   }
 
-  getCompositions(operator, sport) {
-    sport = sport.toUpperCase();
-    return this.http.get(environment.api_end_point + 'api/compositions?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()});
-  }
+  // getCompositions(operator, sport) {
+  //   sport = sport.toUpperCase();
+  //   return this.http.get(environment.api_end_point + 'api/compositions?operator=' + operator + '&sport=' + sport, {headers: this.getHeaders()});
+  // }
 };

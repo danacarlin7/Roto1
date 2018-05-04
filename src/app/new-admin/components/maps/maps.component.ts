@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 
-declare var google: any;
+// declare var google: any;
 
 @Component({
     moduleId: module.id,

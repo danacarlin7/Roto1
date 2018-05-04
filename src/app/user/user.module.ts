@@ -24,8 +24,8 @@ import {DashboardStaticsComponent} from "./components/dashboard/dashboard-static
 import {DashboardTopWinsComponent} from "./components/dashboard/dashboard-top-wins/dashboard-top-wins.component";
 import {UploadsService} from "./services/uploads.service";
 import {UploadsComponent} from "./components/uploads/uploads.component";
-import {ModalModule} from 'angular2-modal';
-import {BootstrapModalModule} from 'angular2-modal/plugins/bootstrap';
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import {DropzoneModule} from "ngx-dropzone-wrapper/dist/index";
 import {SettingsComponent} from "./components/settings/settings.component";
 import {UpdatePasswordComponent} from "./components/settings/update-password/update-password.component";
@@ -40,6 +40,7 @@ import {SavedCardsComponent} from "./components/settings/saved-cards/saved-cards
 @NgModule({
   imports: [
     UserRoutingModule,
+    ModalModule.forRoot(),
     BootstrapModalModule,
     SharedModule
   ],
