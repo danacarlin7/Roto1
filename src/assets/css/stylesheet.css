@@ -288,8 +288,8 @@ section{padding: 100px 0px;}
 /* Login Page Starts */
 	.loginDetails{background: url("../images/login_banner.jpg");background-repeat: no-repeat;background-size: cover;}
 	.loginDetails .loginDetailsWrapper{display: flex;flex-flow: row wrap;justify-content: flex-end;align-items: center;}
-	.loginDetails .loginDetailsWrapper .loginRghtWrapper{background: rgba(255,255,255,0.4);padding: 30px;width: 48.5%;z-index: 10;}
-	.loginDetails .loginDetailsWrapper .loginLftWrapper{position: absolute;top: 50%;left: -63px;transform: translate(0,-50%);z-index: 9;}
+	.loginDetails .loginDetailsWrapper .loginRghtWrapper{background: rgba(255,255,255,0.4);padding: 30px;width: 48.5%;z-index: 1;}
+	.loginDetails .loginDetailsWrapper .loginLftWrapper{position: absolute;top: 50%;left: -63px;transform: translate(0,-50%);z-index: 1;}
 	.loginDetails .formWrapper{background: #FFF;padding: 40px;}
 	.loginDetails .formWrapper h3{font-size: 38px;line-height: 28px;margin-bottom: 12px;font-family: 'Roboto Condensed', sans-serif;font-weight: 700;color: #000;display: flex;flex-flow: row wrap;align-items: center;margin-top: 0px;}
 	.loginDetails .formWrapper h3 .licnWrapper{margin-right: 10px;}
