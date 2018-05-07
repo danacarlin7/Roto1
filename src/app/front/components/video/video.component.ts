@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { NewsTabs, NewsTabConstants } from "../../constants/menu.constants";
 import { Router, ActivatedRoute } from "@angular/router";
-import { FrontService } from "../../services/front.service";
+// import { FrontService } from "../../services/front.service";
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
 // import {News} from "../../models/news.model";
 /**
@@ -26,7 +26,9 @@ export class VideoComponent implements OnInit, AfterViewInit {
   liveRecords: any = [];
   isLoading: boolean;
 
-  constructor(private router: Router, private activeRoute: ActivatedRoute, private videoService: FrontService, private sanitizer: DomSanitizer) {
+  constructor(private router: Router, private activeRoute: ActivatedRoute,
+    // private videoService: FrontService, 
+    private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -76,65 +78,65 @@ export class VideoComponent implements OnInit, AfterViewInit {
   getData() {
     this.isLoading = true;
     let that = this;
-    this.videoService.retrieveVideos().subscribe(
-      response => {
-        if (response.statusCode == 200) {
-          let data: Array<any> = response.data;
-
-
-
-          this.videoRecords = data.map(currData => {
-            // console.log(currData.id);
-            // console.log(currData.snippet.title);
-
-            let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
-            currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-            currData.title = currData.snippet.title;
-            return currData;
-          });
-
-          // this.videoRecords = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-
-          console.log("records => ", this.videoRecords);
-        } else {
-          console.log('response error => ', response);
-        }
-        this.isLoading = false;
-      },
-      error => {
-        this.isLoading = false;
-        console.log('http error => ', error);
-      }
-    )
-
-    this.videoService.retrieveVideos(true).subscribe(
-      response => {
-        if (response.statusCode == 200) {
-          let data: Array<any> = response.data;
-
-          this.liveRecords = data.map(currData => {
-            // console.log(currData.id);
-            // console.log(currData.snippet.title);
-
-            let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
-            currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-            currData.title = currData.snippet.title;
-            return currData;
-          });
-
-          // this.videoRecords = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
-
-          console.log("records => ", this.liveRecords);
-        } else {
-          console.log('response error => ', response);
-        }
-        // this.isLoading = false;
-      },
-      error => {
-        // this.isLoading = false;
-        console.log('http error => ', error);
-      }
-    )
+    // this.videoService.retrieveVideos().subscribe(
+    //   response => {
+    //     if (response.statusCode == 200) {
+    //       let data: Array<any> = response.data;
+    //
+    //
+    //
+    //       this.videoRecords = data.map(currData => {
+    //         // console.log(currData.id);
+    //         // console.log(currData.snippet.title);
+    //
+    //         let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
+    //         currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
+    //         currData.title = currData.snippet.title;
+    //         return currData;
+    //       });
+    //
+    //       // this.videoRecords = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
+    //
+    //       console.log("records => ", this.videoRecords);
+    //     } else {
+    //       console.log('response error => ', response);
+    //     }
+    //     this.isLoading = false;
+    //   },
+    //   error => {
+    //     this.isLoading = false;
+    //     console.log('http error => ', error);
+    //   }
+    // )
+    //
+    // this.videoService.retrieveVideos(true).subscribe(
+    //   response => {
+    //     if (response.statusCode == 200) {
+    //       let data: Array<any> = response.data;
+    //
+    //       this.liveRecords = data.map(currData => {
+    //         // console.log(currData.id);
+    //         // console.log(currData.snippet.title);
+    //
+    //         let dangerousVideoUrl = '//www.youtube.com/embed/' + currData.id + '?rel=0&modestbranding=1&controls=1&showinfo=0';
+    //         currData.url = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
+    //         currData.title = currData.snippet.title;
+    //         return currData;
+    //       });
+    //
+    //       // this.videoRecords = that.sanitizer.bypassSecurityTrustResourceUrl(dangerousVideoUrl);
+    //
+    //       console.log("records => ", this.liveRecords);
+    //     } else {
+    //       console.log('response error => ', response);
+    //     }
+    //     // this.isLoading = false;
+    //   },
+    //   error => {
+    //     // this.isLoading = false;
+    //     console.log('http error => ', error);
+    //   }
+    // )
   }
 
 }

@@ -1,6 +1,6 @@
-import {Component, Input} from "@angular/core";
-import {OpponentData} from "../../../models/opponent-data.model";
-import {FilterService} from "../../../services/filter.service";
+import { Component, Input } from "@angular/core";
+import { OpponentData } from "../../../models/opponent-data.model";
+// import { FilterService } from "../../../services/filter.service";
 
 @Component({
   selector: 'rp-opponents-list',
@@ -9,13 +9,15 @@ import {FilterService} from "../../../services/filter.service";
 })
 export class OpponentListComponent {
 
-  @Input() records:OpponentData[];
+  @Input() records: OpponentData[];
 
-  constructor(public filterService:FilterService) {
+  constructor(
+    // public filterService: FilterService
+  ) {
 
   }
 
-  getDataStyle(data:any, key:string):Object {
+  getDataStyle(data: any, key: string): Object {
     let styleObj;
     switch (data.title) {
       case 'Total won':
@@ -23,7 +25,7 @@ export class OpponentListComponent {
       case 'Net profit/loss':
       case 'ITM':
       case 'net':
-        styleObj = data[key] < 0 ? {'color': 'red'} : {};
+        styleObj = data[key] < 0 ? { 'color': 'red' } : {};
         break;
       default:
         styleObj = {};

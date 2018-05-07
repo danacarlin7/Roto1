@@ -1,8 +1,8 @@
-import {Component, Output, EventEmitter} from "@angular/core";
-import {FormGroup, FormControl, Validators} from "@angular/forms";
-import {AuthService} from "../../../shared/services/auth.service";
-import {Router, ActivatedRoute, Params} from "@angular/router";
-import {environment} from "../../../../environments/environment";
+import { Component, Output, EventEmitter } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AuthService } from "../../../shared/new-services/auth.service";
+import { Router, ActivatedRoute, Params } from "@angular/router";
+import { environment } from "../../../../environments/environment";
 // import { AuthService } from 'ng2-social-login/src/app/cuppaOAuth/auth.service';
 /**
  * Created by Hiren on 07-06-2017.
@@ -15,13 +15,13 @@ import {environment} from "../../../../environments/environment";
 })
 export class LoginComponent {
 
-  loginForm:FormGroup;
-  redirectUrl:string;
-  msg:string;
+  loginForm: FormGroup;
+  redirectUrl: string;
+  msg: string;
 
-  isError:boolean;
-  errorMsg:string;
-  showVerifyLink:boolean;
+  isError: boolean;
+  errorMsg: string;
+  showVerifyLink: boolean;
 
 
   private authServerBaseUrl = 'http://localhost:4000';
@@ -44,10 +44,10 @@ export class LoginComponent {
     }
   };
 
-  constructor(private activatedRoute:ActivatedRoute, private authService:AuthService, private router:Router) {
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private router: Router) {
     console.log('in Login constructor');
     this.activatedRoute.queryParams.subscribe(
-      (param:Params) => {
+      (param: Params) => {
         this.redirectUrl = param['redirect'];
         if (param.hasOwnProperty('info')) {
           if (param['info'] == 'pc') {
@@ -103,77 +103,78 @@ export class LoginComponent {
       email: this.loginForm.value.email.toLowerCase(),
       password: this.loginForm.value.password
     };
-    this.authService.login(JSON.stringify(data)).subscribe(
-      response => {
-        if (response.statusCode == 200) {
-          if(response.data.is_partial){
-            this.authService.partialUser = response.data;
-            this.router.navigate(['/subscribe']);
-            return;
-          }
-          console.log("login successful => ", response);
-          if (this.loginForm.value.rememberMe) {
-            localStorage.setItem('remember', '1');
-          }
-          localStorage.setItem('data', JSON.stringify(response.data));
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('role', response.data.role);
 
-          environment.token = response.data.token;
-          environment.role = response.data.role;
-          // this.authService.userLoggedInEvent.emit(true);
-          // localStorage.setItem('token', JSON.stringify(response.data));
-          this.authService.userInfo().subscribe(
-            user => {
-              console.log("user details => ", user);
-              //     localStorage.setItem('user', JSON.stringify(user.data));
-              this.authService.loginWP(JSON.stringify(data)).subscribe(
-                response => {
-                  if (response.uid) {
-                    let uid = response.uid;
-                    this.removeCookie('dfs_wp_logout');
-                    this.createCookie('dfs_wp_user', uid, 1);
-                    this.createCookie('dfs_wp_email', user.data.email, 1);
-                  } else {
-                    console.log(response);
-                  }
-                }
-              );
-            }
-          );
 
-          this.authService.retrieveLoggedUserInfo()
-            .subscribe(
-              response => {
-                if (response.statusCode == 200) {
-                  this.authService.loggedUser = response.data;
-                }
-                else {
-
-                }
-              },
-              error => {
-                console.log("http error => ", error);
-              }
-            );
-
-          console.log('this.redirectUrl => ', this.redirectUrl);
-          this.authService.isLoggedInEvent.emit(true);
-          if (this.redirectUrl && this.redirectUrl.length) {
-            this.router.navigateByUrl(this.redirectUrl);
-            this.redirectUrl = "";
-          }
-          else if (response.data.role == 'admin') {
-            this.router.navigate(['/admin']);
-          } else if (response.data.role == 'user' || response.data.role == 'provider') {
-            this.router.navigate(['/']);
-          }
-        } else
-          {
-          console.log("login error from response => ", response);
-        }
-      },
-      error => {
+    this.authService.login(JSON.stringify(data))
+      .subscribe(response => {
+        console.log(response);
+        // if (response.statusCode == 200) {
+        //   if (response.data.is_partial) {
+        //     this.authService.partialUser = response.data;
+        //     this.router.navigate(['/subscribe']);
+        //     return;
+        //   }
+        //   console.log("login successful => ", response);
+        //   if (this.loginForm.value.rememberMe) {
+        //     localStorage.setItem('remember', '1');
+        //   }
+        //   localStorage.setItem('data', JSON.stringify(response.data));
+        //   localStorage.setItem('token', response.data.token);
+        //   localStorage.setItem('role', response.data.role);
+        //
+        //   // environment.token = response.data.token;
+        //   // environment.role = response.data.role;
+        //   // // this.authService.userLoggedInEvent.emit(true);
+        //   // // localStorage.setItem('token', JSON.stringify(response.data));
+        //   // this.authService.retrieveLoggedUserInfo().subscribe(
+        //   //   user => {
+        //   //     console.log("user details => ", user);
+        //   //     //     localStorage.setItem('user', JSON.stringify(user.data));
+        //   //     this.authService.loginWP(JSON.stringify(data)).subscribe(
+        //   //       response => {
+        //   //         if (response.uid) {
+        //   //           let uid = response.uid;
+        //   //           this.removeCookie('dfs_wp_logout');
+        //   //           this.createCookie('dfs_wp_user', uid, 1);
+        //   //           this.createCookie('dfs_wp_email', user.data.email, 1);
+        //   //         } else {
+        //   //           console.log(response);
+        //   //         }
+        //   //       }
+        //   //     );
+        //   //   }
+        //   // );
+        //   //
+        //   // this.authService.retrieveLoggedUserInfo()
+        //   //   .subscribe(
+        //   //   response => {
+        //   //     if (response.statusCode == 200) {
+        //   //       this.authService.loggedUser = response.data;
+        //   //     }
+        //   //     else {
+        //   //
+        //   //     }
+        //   //   },
+        //   //   error => {
+        //   //     console.log("http error => ", error);
+        //   //   }
+        //   //   );
+        //   //
+        //   // console.log('this.redirectUrl => ', this.redirectUrl);
+        //   // this.authService.isLoggedInEvent.emit(true);
+        //   // if (this.redirectUrl && this.redirectUrl.length) {
+        //   //   this.router.navigateByUrl(this.redirectUrl);
+        //   //   this.redirectUrl = "";
+        //   // }
+        //   // else if (response.data.role == 'admin') {
+        //   //   this.router.navigate(['/admin']);
+        //   // } else if (response.data.role == 'user' || response.data.role == 'provider') {
+        //   //   this.router.navigate(['/']);
+        //   // }
+        // } else {
+        //   console.log("login error from response => ", response);
+        // }
+      }, error => {
         console.log("login error => ", error);
         this.msg = '';
         if (error.data == 'userNotFound') {

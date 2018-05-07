@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {Router, ActivatedRoute} from "@angular/router";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 import * as c3 from "c3";
 import * as moment from 'moment';
-import {GraphData} from "../../models/graph-data.model";
-import {GraphTabs, GraphTabConstants} from "../../constants/menu.constants";
-import {FilterCriteria} from "../../models/filter-criteria.model";
-import {FilterService} from "../../services/filter.service";
-import {UserDashboardServices} from "../../services/user-dashboard.service";
+import { GraphData } from "../../models/graph-data.model";
+import { GraphTabs, GraphTabConstants } from "../../constants/menu.constants";
+import { FilterCriteria } from "../../models/filter-criteria.model";
+// import { FilterService } from "../../services/filter.service";
+// import { UserDashboardServices } from "../../services/user-dashboard.service";
 /**
  * Created by Hiren on 17-06-2017.
  */
@@ -17,64 +17,65 @@ import {UserDashboardServices} from "../../services/user-dashboard.service";
   styleUrls: ['./graph.component.css']
 })
 export class GraphComponent {
-  @ViewChild('chartAnchor') chartAnchor:ElementRef;
+  @ViewChild('chartAnchor') chartAnchor: ElementRef;
 
-  graphData:GraphData;
+  graphData: GraphData;
   graphTabs = GraphTabs;
   graphTabConstants = GraphTabConstants;
-  chartTitle:string = '';
-  c3Chart:any;
-  activeTab:string = this.graphTabConstants.PROFIT;
+  chartTitle: string = '';
+  c3Chart: any;
+  activeTab: string = this.graphTabConstants.PROFIT;
 
-  filters:FilterCriteria[];
-  filterSettings:any;
-  isLoading:boolean;
-  filterEventSubscription:any;
+  filters: FilterCriteria[];
+  filterSettings: any;
+  isLoading: boolean;
+  filterEventSubscription: any;
 
-  constructor(private router:Router,
-              private activatdRoute:ActivatedRoute,
-              private dashboardService:UserDashboardServices,
-              private filterService:FilterService,) {
-    this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(
-      filters => {
-        this.getData(this.filterService.activeGraphTab, filters);
-        this.filters = filters;
-      }
-    );
-    this.filters = this.filterService.filters;
-    this.filterService.getFilterSettings()
-      .subscribe(settings => {
-        this.filterSettings = settings;
-        console.log("filters => ", this.filterSettings);
-      });
+  constructor(private router: Router,
+    private activatdRoute: ActivatedRoute,
+    // private dashboardService: UserDashboardServices,
+    // private filterService: FilterService,
+  ) {
+    // this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(
+    //   filters => {
+    //     this.getData(this.filterService.activeGraphTab, filters);
+    //     this.filters = filters;
+    //   }
+    // );
+    // this.filters = this.filterService.filters;
+    // this.filterService.getFilterSettings()
+    //   .subscribe(settings => {
+    //     this.filterSettings = settings;
+    //     console.log("filters => ", this.filterSettings);
+    //   });
   }
 
   ngOnInit() {
-    this.filterService.activeGraphTab = GraphTabConstants.PROFIT;
-    this.activeTab = this.filterService.activeGraphTab;
-    this.activatdRoute.queryParams.subscribe(
-      params => {
-        if (params.hasOwnProperty('tab')) {
-          this.getData(params['tab'], this.filterService.filters);
-          this.activeTab = this.filterService.activeGraphTab = params['tab'];
-        }
-        else {
-          this.router.navigate(['/user/graphs'], {queryParams: {tab: this.activeTab}})
-        }
-      }
-    )
+    // this.filterService.activeGraphTab = GraphTabConstants.PROFIT;
+    // this.activeTab = this.filterService.activeGraphTab;
+    // this.activatdRoute.queryParams.subscribe(
+    //   params => {
+    //     if (params.hasOwnProperty('tab')) {
+    //       this.getData(params['tab'], this.filterService.filters);
+    //       this.activeTab = this.filterService.activeGraphTab = params['tab'];
+    //     }
+    //     else {
+    //       this.router.navigate(['/user/graphs'], { queryParams: { tab: this.activeTab } })
+    //     }
+    //   }
+    // )
   }
 
-  getData(tabName, filters:FilterCriteria[] = null) {
+  getData(tabName, filters: FilterCriteria[] = null) {
     this.isLoading = true;
-    this.dashboardService.retrieveGraphData(tabName, filters)
-      .subscribe(
-        data => {
-          this.graphData = data.data;
-          this.prepareChart();
-          this.isLoading = false;
-        }
-      )
+    // this.dashboardService.retrieveGraphData(tabName, filters)
+    //   .subscribe(
+    //   data => {
+    //     this.graphData = data.data;
+    //     this.prepareChart();
+    //     this.isLoading = false;
+    //   }
+    //   )
   }
 
   prepareChart() {
@@ -161,8 +162,8 @@ export class GraphComponent {
         y: {
           show: true,
           lines: [
-            {value: this.graphData.high, class: 'gridMax', text: 'Max'},
-            {value: this.graphData.low, class: 'gridMin', text: 'Min'}
+            { value: this.graphData.high, class: 'gridMax', text: 'Max' },
+            { value: this.graphData.low, class: 'gridMin', text: 'Min' }
           ]
         }
       }
@@ -317,7 +318,7 @@ export class GraphComponent {
     );
   }
 
-  prepareXSeries(results:Array<any>):Array<any> {
+  prepareXSeries(results: Array<any>): Array<any> {
     let xSeries = [];
     results.forEach(result => {
       xSeries.push(result[0] * 1000);
@@ -325,7 +326,7 @@ export class GraphComponent {
     return xSeries;
   }
 
-  prepareDataSeries(results:Array<any>):Array<any> {
+  prepareDataSeries(results: Array<any>): Array<any> {
     let dataSeries = [];
     results.forEach(result => {
       dataSeries.push(result[1]);
@@ -333,24 +334,24 @@ export class GraphComponent {
     return dataSeries;
   }
 
-  onGraphTabChanged(tabName:{value:string,label:string}) {
+  onGraphTabChanged(tabName: { value: string, label: string }) {
     this.activeTab = tabName.value;
-    this.router.navigate(['/user/graphs'], {queryParams: {tab: tabName.value}})
+    this.router.navigate(['/user/graphs'], { queryParams: { tab: tabName.value } })
   }
 
-  onAddFilterEventHandler(filter:FilterCriteria) {
-    this.filterService.addFilter(filter);
+  onAddFilterEventHandler(filter: FilterCriteria) {
+    // this.filterService.addFilter(filter);
   }
 
-  onRemoveFilterEvent(filter:FilterCriteria) {
-    this.filterService.removeFilter(filter);
+  onRemoveFilterEvent(filter: FilterCriteria) {
+    // this.filterService.removeFilter(filter);
   }
 
-  onRemoveAllFiltersEvent(filters:FilterCriteria[]) {
-    this.filterService.clearFilter();
+  onRemoveAllFiltersEvent(filters: FilterCriteria[]) {
+    // this.filterService.clearFilter();
   }
 
   ngOnDestroy() {
-    this.filterEventSubscription.unsubscribe();
+    // this.filterEventSubscription.unsubscribe();
   }
 }

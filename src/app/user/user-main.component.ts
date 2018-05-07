@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {AuthService} from "../shared/services/auth.service";
+import {AuthService} from "../shared/new-services/auth.service";
 import {Router, NavigationEnd} from "@angular/router";
 
 

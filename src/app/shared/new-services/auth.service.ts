@@ -1,147 +1,346 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { LoggedUser } from "../models/logged-user.model";
+import { environment } from "../../../environments/environment";
+import { Login } from "../models/login";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  private _loggedUser: LoggedUser;
+  private apiUrl;
+  private appUrl;
+  private wpUrl;
+
+
+  get loggedUser(): LoggedUser {
+    return this._loggedUser;
+  }
+
+  set loggedUser(value: LoggedUser) {
+    this._loggedUser = value;
+    if (this._loggedUser) {
+      this.loggedUserChangeEvent.emit(this._loggedUser);
+    }
+  }
+
+  isLoggedInEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  loggedUserChangeEvent: EventEmitter<LoggedUser> = new EventEmitter<LoggedUser>();
+
+  partialUser: any;
+
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.api_end_point + 'api/';
+    this.appUrl = environment.api_end_point;
+    this.wpUrl = 'http://13.56.129.231/dfsauth';
+  }
+
+  getToken(): string {
+    return environment.token;
+  }
+
+  // getHeaders(): Observable<any> {
+  //   if(this.getToken()){
+  //     httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.getToken()));
+  //   }
+  //   return httpOptions;
+  // }
+
+  // getHeaders(): HttpHeaders {
+  //   const headers = new HttpHeaders();
+  //   headers.append('content-type', 'application/json');
+  //   if (this.getToken()) {
+  //     headers.append('Authorization', 'Bearer ' + (this.getToken()));
+  //   }
+  //   return headers;
+  // }
+
+  isSubscriber(calledByGuard = false): boolean | Observable<any> {
+    if (this.loggedUser) {
+      return this.loggedUser.is_subscribe;
+    } else if (calledByGuard && environment.token) {
+      return this.http.get<any>(this.apiUrl + 'memberinfo', httpOptions)
+        .pipe(
+        tap(member => this.log(`fetched member`)),
+        catchError(this.handleError('memberinfo', {}))
+        );
+    } else {
+      console.log("not a subscriber");
+    }
+  }
+
+  isSubscribers(): boolean {
+    let isSubscribe = false;
+    if (this.loggedUser) {
+      if (this.loggedUser.is_subscribe) {
+        isSubscribe = true;
+      }
+    }
+    return isSubscribe;
+  }
+
+  subscriptionAlertEvent: EventEmitter<any> = new EventEmitter<any>();
+
+  showSubscriptionAlert() {
+    this.subscriptionAlertEvent.emit(true);
+  }
+
+  isLoggedIn(): boolean {
+    let login: boolean;
+    if (environment.token && environment.token.length) {
+      login = true;
+    } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
+      login = true;
+    }
+    console.log("isLogin", login);
+    return login;
+  }
+
+  getUserRole(): string {
+    let role: string;
+    if (environment.role) {
+      role = environment.role;
+    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('data')).role.length) {
+      role = JSON.parse(localStorage.getItem('data')).role;
+    }
+    return role;
+  }
+
+  login(data: string): Observable<Login> {
+    return this.http.post<Login>(this.appUrl + 'authenticate', data, httpOptions).pipe(
+      tap((user: Login) => this.log(`user login =${user}`)),
+      catchError(this.handleError<Login>('login'))
+    );
+  }
+
+  @Output() userLoggedInEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  loginWP(data: string): Observable<any> {
+    return this.http.post<any>(this.wpUrl, data).pipe(
+      tap((user: any) => this.log(`user wp login =${user}`)),
+      catchError(this.handleError<any>('wp authenticate'))
+    );
+  }
+
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = '';
+    //this.userLoggedInEvent.emit(false);
+  }
+
+  retrieveLoggedUserInfo(): Observable<any> {
+    return this.http.get(this.apiUrl + 'memberinfo', httpOptions)
+      .pipe(
+      tap(member => this.log(`fetched member`)),
+      catchError(this.handleError<any>('memberinfo', {}))
+      );
+  }
+
+  registerNewUser(data: any): Observable<any> {
+    return this.http.post<any>(this.appUrl + 'signup', data).pipe(
+      tap((user: any) => this.log(`user signup =${user}`)),
+      catchError(this.handleError<any>('signup'))
+    );
+  }
+
+  signUPStepOne(data: any): Observable<any> {
+    return this.http.post<any>(this.appUrl + 'signupOne', data).pipe(
+      tap((user: any) => this.log(`user signup one =${user}`)),
+      catchError(this.handleError<any>('signupOne'))
+    );
+  }
+
+  verifyEmail(data: any) {
+    return this.http.post<any>(this.appUrl + 'getToken', data).pipe(
+      tap((user: any) => this.log(`getToken =${user}`)),
+      catchError(this.handleError<any>('getToken'))
+    );
+  }
+
+  verifyToken(token): Observable<any> {
+    return this.http.post<any>(this.appUrl + 'verifyToken', { token: token }).pipe(
+      tap((token: any) => this.log(`verifyToken =${token}`)),
+      catchError(this.handleError<any>('verifyToken'))
+    );
+  }
+
+  changePassword(data): Observable<any> {
+    return this.http.post<any>(this.appUrl + 'verifyToken', data).pipe(
+      tap((pwd: any) => this.log(`changePassword =${pwd}`)),
+      catchError(this.handleError<any>('changePassword'))
+    );
+  }
+
+  updatePasswordFromSettings(data): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'changePassword', data, httpOptions).pipe(
+      tap((user: any) => this.log(`user changePassword =${user}`)),
+      catchError(this.handleError<any>('changePassword'))
+    );
+  }
+
+  // userInfo() {
+  //   return this.http.get(environment.api_end_point + 'api/memberinfo', { headers: this.getHeaders() })
+  //     .map(response => response.json())
+  //     .catch(error => Observable.throw(error.json()));
+  // }
+  //   //
+  //   // registerWP(data: string): Observable<any> {
+  //   //   return this.http.post('http://13.56.129.231/dfsauth/register/', data)
+  //   //     .map(response => response.json())
+  //   //     .catch(error => Observable.throw(error.json()));
+  //   // }
+  //   //
+  //   // uploadProfile(fileList) {
+  //   //   let file: File = fileList[0];
+  //   //   let formData: FormData = new FormData();
+  //   //   formData.append('uploadFile', file, file.name);
+  //   //   return this.http.post(environment.api_end_point + 'api/uploadImage', formData, {
+  //   //     headers: new Headers({
+  //   //       'Content-Type': 'multipart/form-data',
+  //   //       'Accept': 'application/json',
+  //   //       'Authorization': 'Bearer ' + this.getToken()
+  //   //     })
+  //   //   })
+  //   //     .map(res => res.json())
+  //   //     .catch(error => Observable.throw(error.json()));
+  //   // }
+  //
+  //
+  //   /** products from the server */
+  //   retrieveProducts(): Observable<any> {
+  //     return this.http.get(this.apiUrl + 'getCustomerProducts')
+  //      .pipe(
+  //        tap(prod => this.log(`fetched prod`)),
+  //        catchError(this.handleError('getProducts', []))
+  //      );
+  //   }
+  //
+  //   /** GET products from the server */
+  //   // getProducts (): Observable<RootObject> {
+  //   //   return this.http.get<RootObject>(this.apiUrl)
+  //   //     .pipe(
+  //   //       tap(prod => this.log(`fetched products`)),
+  //   //       catchError(this.handleError('getproducts', []))
+  //   //     );
+  //   // }
+  //
+  //   /** GET products by id. Return `undefined` when id not found */
+  //   // getProducts404<Data>(id: number): Observable<RootObject> {
+  //   //   const url = `${this.apiUrl}/?id=${id}`;
+  //   //   return this.http.get<RootObject>(url)
+  //   //     .pipe(
+  //   //       map(products => products[0]), // returns a {0|1} element array
+  //   //       tap(h => {
+  //   //         const outcome = h ? `fetched` : `did not find`;
+  //   //         this.log(`${outcome} products id=${id}`);
+  //   //       }),
+  //   //       catchError(this.handleError<RootObject>(`getProducts id=${id}`))
+  //   //     );
+  //   // }
+  //
+  //   /** GET product by id. Will 404 if id not found */
+  //   // getProduct(id: number): Observable<RootObject> {
+  //   //   const url = `${this.apiUrl}/${id}`;
+  //   //   return this.http.get<RootObject>(url).pipe(
+  //   //     tap(_ => this.log(`fetched product id=${id}`)),
+  //   //     catchError(this.handleError<RootObject>(`getProduct id=${id}`))
+  //   //   );
+  //   // }
+  //
+  //   /* GET product whose name contains search term */
+  //   // searchProducts(term: string): Observable<RootObject[]> {
+  //   //   if (!term.trim()) {
+  //   //     // if not search term, return empty hero array.
+  //   //     return of([]);
+  //   //   }
+  //   //   return this.http.get<RootObject[]>(`api/heroes/?name=${term}`).pipe(
+  //   //     tap(_ => this.log(`found product matching "${term}"`)),
+  //   //     catchError(this.handleError<Hero[]>('searchProduct', []))
+  //   //   );
+  //   // }
+  //
+  //
+  //   //////// Save methods //////////
+  //
+  //   /** POST: add a new enquiry to the server */
+  //   saveEnquiry (enquiry: string): Observable<any> {
+  //     return this.http.post<any>(this.apiUrl + 'saveEnquiry', enquiry, httpOptions).pipe(
+  //       tap((enquiry: any) => this.log(`added enquiry  id=${enquiry.id}`)),
+  //       catchError(this.handleError<any>('addEnquiry'))
+  //     );
+  //   }
+  //
+  //   /** DELETE: delete the hero from the server */
+  //   // deleteHero (hero: Hero | number): Observable<Hero> {
+  //   //   const id = typeof hero === 'number' ? hero : hero.id;
+  //   //   const url = `${this.heroesUrl}/${id}`;
+  //   //
+  //   //   return this.http.delete<Hero>(url, httpOptions).pipe(
+  //   //     tap(_ => this.log(`deleted hero id=${id}`)),
+  //   //     catchError(this.handleError<Hero>('deleteHero'))
+  //   //   );
+  //   // }
+  //
+  //   /** PUT: update the hero on the server */
+  //   // updateHero (hero: Hero): Observable<any> {
+  //   //   return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
+  //   //     tap(_ => this.log(`updated hero id=${hero.id}`)),
+  //   //     catchError(this.handleError<any>('updateHero'))
+  //   //   );
+  //   // }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param RootObject - optional value to return as the observable RootObject
+   */
+  // private handleError<T>(operation = 'operation', RootObject?: T) {
+  //   return (error: any): Observable<T> => {
+  //
+  //     // TODO: send the error to remote logging infrastructure
+  //     console.error(error); // log to console instead
+  //
+  //     // TODO: better job of transforming error for user consumption
+  //     this.log(`${operation} failed: ${error.message}`);
+  //
+  //     // Let the app keep running by returning an empty RootObject.
+  //     // return of(RootObject as T);
+  //     return throwError(error.error);
+  //   };
+  // }
+
+  private handleError<T>(operation = 'operation', RootObject?: T) {
+    return (error: HttpErrorResponse): Observable<T> => {
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.error(`Backend returned code ${error.status}`);
+        // `body was: ${error.error.message}`);
+        this.log(error.error);
+      }
+      // return an observable with a user-facing error message
+      return throwError(error.error);
+    };
+  };
+  /** Log a HeroService message with the MessageService */
+  private log(message: any) {
+    console.table(message);
+    // this.messageService.add('api service: ' + message);
+  }
+
 }
-
-
-// 
-// import { Injectable, Inject, Optional } from '@angular/core';
-// import { APP_BASE_HREF } from '@angular/common';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-//
-// import { Observable, of } from 'rxjs';
-// import { catchError, map, tap } from 'rxjs/operators';
-//
-// import { MessageService } from './message.service';
-// import { environment } from "../../../environments/environment";
-//
-// const httpOptions = {
-//   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-// };
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ApiService {
-//   private apiUrl = environment.api;
-//
-//   constructor(
-//     private http: HttpClient,
-//     private messageService: MessageService,
-//     @Optional() @Inject(APP_BASE_HREF) origin: string) {
-//     this.apiUrl = environment.api;
-//   }
-//
-//   /** products from the server */
-//   retrieveProducts(): Observable<any> {
-//     return this.http.get(this.apiUrl + 'getCustomerProducts')
-//      .pipe(
-//        tap(prod => this.log(`fetched prod`)),
-//        catchError(this.handleError('getProducts', []))
-//      );
-//   }
-//
-//   /** GET products from the server */
-//   // getProducts (): Observable<RootObject> {
-//   //   return this.http.get<RootObject>(this.apiUrl)
-//   //     .pipe(
-//   //       tap(prod => this.log(`fetched products`)),
-//   //       catchError(this.handleError('getproducts', []))
-//   //     );
-//   // }
-//
-//   /** GET products by id. Return `undefined` when id not found */
-//   // getProducts404<Data>(id: number): Observable<RootObject> {
-//   //   const url = `${this.apiUrl}/?id=${id}`;
-//   //   return this.http.get<RootObject>(url)
-//   //     .pipe(
-//   //       map(products => products[0]), // returns a {0|1} element array
-//   //       tap(h => {
-//   //         const outcome = h ? `fetched` : `did not find`;
-//   //         this.log(`${outcome} products id=${id}`);
-//   //       }),
-//   //       catchError(this.handleError<RootObject>(`getProducts id=${id}`))
-//   //     );
-//   // }
-//
-//   /** GET product by id. Will 404 if id not found */
-//   // getProduct(id: number): Observable<RootObject> {
-//   //   const url = `${this.apiUrl}/${id}`;
-//   //   return this.http.get<RootObject>(url).pipe(
-//   //     tap(_ => this.log(`fetched product id=${id}`)),
-//   //     catchError(this.handleError<RootObject>(`getProduct id=${id}`))
-//   //   );
-//   // }
-//
-//   /* GET product whose name contains search term */
-//   // searchProducts(term: string): Observable<RootObject[]> {
-//   //   if (!term.trim()) {
-//   //     // if not search term, return empty hero array.
-//   //     return of([]);
-//   //   }
-//   //   return this.http.get<RootObject[]>(`api/heroes/?name=${term}`).pipe(
-//   //     tap(_ => this.log(`found product matching "${term}"`)),
-//   //     catchError(this.handleError<Hero[]>('searchProduct', []))
-//   //   );
-//   // }
-//
-//
-//   //////// Save methods //////////
-//
-//   /** POST: add a new enquiry to the server */
-//   saveEnquiry (enquiry: string): Observable<any> {
-//     return this.http.post<any>(this.apiUrl + 'saveEnquiry', enquiry, httpOptions).pipe(
-//       tap((enquiry: any) => this.log(`added enquiry  id=${enquiry.id}`)),
-//       catchError(this.handleError<any>('addEnquiry'))
-//     );
-//   }
-//
-//   /** DELETE: delete the hero from the server */
-//   // deleteHero (hero: Hero | number): Observable<Hero> {
-//   //   const id = typeof hero === 'number' ? hero : hero.id;
-//   //   const url = `${this.heroesUrl}/${id}`;
-//   //
-//   //   return this.http.delete<Hero>(url, httpOptions).pipe(
-//   //     tap(_ => this.log(`deleted hero id=${id}`)),
-//   //     catchError(this.handleError<Hero>('deleteHero'))
-//   //   );
-//   // }
-//
-//   /** PUT: update the hero on the server */
-//   // updateHero (hero: Hero): Observable<any> {
-//   //   return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
-//   //     tap(_ => this.log(`updated hero id=${hero.id}`)),
-//   //     catchError(this.handleError<any>('updateHero'))
-//   //   );
-//   // }
-//
-//   /**
-//    * Handle Http operation that failed.
-//    * Let the app continue.
-//    * @param operation - name of the operation that failed
-//    * @param RootObject - optional value to return as the observable RootObject
-//    */
-//   private handleError<T>(operation = 'operation', RootObject?: T) {
-//     return (error: any): Observable<T> => {
-//
-//       // TODO: send the error to remote logging infrastructure
-//       console.error(error); // log to console instead
-//
-//       // TODO: better job of transforming error for user consumption
-//       this.log(`${operation} failed: ${error.message}`);
-//
-//       // Let the app keep running by returning an empty RootObject.
-//       return of(RootObject as T);
-//     };
-//   }
-//
-//   /** Log a HeroService message with the MessageService */
-//   private log(message: string) {
-//     this.messageService.add('api service: ' + message);
-//   }
-// }

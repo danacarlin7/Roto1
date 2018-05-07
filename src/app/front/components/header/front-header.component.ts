@@ -1,7 +1,7 @@
-import {Component, ViewChild, ElementRef, HostListener} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
-import {LoggedUser} from "../../../shared/models/logged-user.model";
-import {Router} from "@angular/router";
+import { Component, ViewChild, ElementRef, HostListener } from "@angular/core";
+import { AuthService } from "../../../shared/new-services/auth.service";
+import { LoggedUser } from "../../../shared/models/logged-user.model";
+import { Router } from "@angular/router";
 
 /**
  * Created by Hiren on 05-06-2017.
@@ -50,11 +50,11 @@ export class FrontHeaderComponent {
   }
 
   ngAfterViewInit() {
-    jQuery(".menuToggle").click(function () {
+    jQuery(".menuToggle").click(function() {
       jQuery(".mainMenu").addClass("tglMnu");
     });
 
-    jQuery(".closeBtn").click(function (e) {
+    jQuery(".closeBtn").click(function(e) {
       e.preventDefault();
       jQuery(this).parent().removeClass("tglMnu");
     });
@@ -77,17 +77,17 @@ export class FrontHeaderComponent {
     if (this.authService.isLoggedIn()) {
       this.authService.retrieveLoggedUserInfo()
         .subscribe(
-          response => {
-            if (response.statusCode == 200) {
-              this.authService.loggedUser = response.data;
-            }
-            else {
-
-            }
-          },
-          error => {
-            console.log("http error => ", error);
+        response => {
+          if (response.statusCode == 200) {
+            this.authService.loggedUser = response.data;
           }
+          else {
+
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+        }
         )
     }
   }

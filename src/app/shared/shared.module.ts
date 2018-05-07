@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 // import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthService } from "./services/auth.service";
+// import { AuthService } from "./services/auth.service";
 import { CommonModule } from "@angular/common";
 import { SharedMaterialComponents } from "./material-components";
-import { AuthGuard } from "./services/auth.guard";
-import { DataTableModule } from "angular2-datatable";
+// import { AuthGuard } from "./services/auth.guard";
+// import { DataTableModule } from "angular2-datatable";
 import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 // import { ModalModule } from "angular2-modal/esm/index";
 import { ModalModule } from 'ngx-modialog';
@@ -16,8 +16,8 @@ import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { TabViewComponent } from "./components/tab-view/tab-view.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SharedPrimeNGComponents } from "./prime-ng-components";
-import { SubscriptionGuard } from "./services/subscription.guard";
-import { SubscriptionNewGuard } from "./services/subscription-new.guard";
+// import { SubscriptionGuard } from "./services/subscription.guard";
+// import { SubscriptionNewGuard } from "./services/subscription-new.guard";
 import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.directive";
 /**
  * Created by Hiren on 04-06-2017.
@@ -35,10 +35,10 @@ import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.
     HttpClientModule,
     SharedMaterialComponents,
     SharedPrimeNGComponents,
-    DataTableModule,
+    // DataTableModule,
     ModalModule.forRoot(),
     BootstrapModalModule,
-    DropzoneModule.forChild(),
+    DropzoneModule,
     NgxPaginationModule,
   ],
   exports: [
@@ -48,7 +48,7 @@ import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.
     HttpClientModule,
     SharedMaterialComponents,
     SharedPrimeNGComponents,
-    DataTableModule,
+    // DataTableModule,
     ModalModule,
     DropzoneModule,
     TabViewComponent,
@@ -60,7 +60,9 @@ export class SharedModule {
   static forRoot() {
     return {
       ngModule: SharedModule,
-      providers: [AuthService, AuthGuard, SubscriptionGuard, SubscriptionNewGuard]
+      providers: [
+        // AuthService, AuthGuard, SubscriptionGuard, SubscriptionNewGuard
+      ]
     };
   }
 }

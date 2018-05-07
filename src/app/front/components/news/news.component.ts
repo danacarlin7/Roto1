@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
-import {NewsTabs, NewsTabConstants} from "../../constants/menu.constants";
-import {Router, ActivatedRoute} from "@angular/router";
-import {FrontService} from "../../services/front.service";
-import {News} from "../../models/news.model";
+import { Component } from "@angular/core";
+import { NewsTabs, NewsTabConstants } from "../../constants/menu.constants";
+import { Router, ActivatedRoute } from "@angular/router";
+// import { FrontService } from "../../services/front.service";
+import { News } from "../../models/news.model";
 /**
  * Created by Hiren on 28-06-2017.
  */
@@ -14,23 +14,25 @@ import {News} from "../../models/news.model";
 })
 export class NewsComponent {
 
-  PRIORITY_ALL:number = 0;
-  PRIORITY_URGENT:number = 1;
-  PRIORITY_VERY_URGENT:number = 2;
-  PRIORITY_IMPORTANT:number = 3;
-  PRIORITY_VERY_IMPORTANT:number = 4;
-  PRIORITY_NOTE_WORTHY:number = 5;
+  PRIORITY_ALL: number = 0;
+  PRIORITY_URGENT: number = 1;
+  PRIORITY_VERY_URGENT: number = 2;
+  PRIORITY_IMPORTANT: number = 3;
+  PRIORITY_VERY_IMPORTANT: number = 4;
+  PRIORITY_NOTE_WORTHY: number = 5;
 
   newsTabs = NewsTabs;
   newsTabConstants = NewsTabConstants;
-  currentPage:number;
-  activeTab:string = this.newsTabConstants.NBA;
-  newsPriority:number = 0;
-  allNewsRecords:News[] = [];
-  newsRecords:News[] = [];
-  isLoading:boolean;
+  currentPage: number;
+  activeTab: string = this.newsTabConstants.NBA;
+  newsPriority: number = 0;
+  allNewsRecords: News[] = [];
+  newsRecords: News[] = [];
+  isLoading: boolean;
 
-  constructor(private router:Router, private activeRoute:ActivatedRoute, private newsService:FrontService) {
+  constructor(private router: Router, private activeRoute: ActivatedRoute,
+    // private newsService: FrontService
+  ) {
   }
 
   ngOnInit() {
@@ -41,23 +43,23 @@ export class NewsComponent {
           this.activeTab = params['tab'];
         }
         else {
-          this.router.navigate(['/news'], {queryParams: {tab: this.activeTab}})
+          this.router.navigate(['/news'], { queryParams: { tab: this.activeTab } })
         }
       }
     )
   }
 
-  onNewsTabChanged(tabName:{value:string,label:string}) {
+  onNewsTabChanged(tabName: { value: string, label: string }) {
     this.activeTab = tabName.value;
-    this.router.navigate(['/news'], {queryParams: {tab: tabName.value}})
+    this.router.navigate(['/news'], { queryParams: { tab: tabName.value } })
   }
 
-  onNewsPriorityChanged(priority:number) {
+  onNewsPriorityChanged(priority: number) {
     this.filterNews(priority);
   }
 
 
-  filterNews(priority:number) {
+  filterNews(priority: number) {
     switch (priority) {
       case this.PRIORITY_ALL:
         this.newsRecords = this.allNewsRecords;
@@ -83,26 +85,26 @@ export class NewsComponent {
     }
   }
 
-  getData(tabName:string) {
+  getData(tabName: string) {
     this.isLoading = true;
-    this.newsService.retrieveNews(tabName)
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            let data:Array<any> = response.data;
-            this.allNewsRecords = data.map(currData => currData['news'][0]);
-            this.filterNews(this.newsPriority);
-            console.log("records => ", this.newsRecords);
-          } else {
-            console.log('response error => ', response);
-          }
-          this.isLoading = false;
-        },
-        error => {
-          this.isLoading = false;
-          console.log('http error => ', error);
-        }
-      )
+    // this.newsService.retrieveNews(tabName)
+    //   .subscribe(
+    //   response => {
+    //     if (response.statusCode == 200) {
+    //       let data: Array<any> = response.data;
+    //       this.allNewsRecords = data.map(currData => currData['news'][0]);
+    //       this.filterNews(this.newsPriority);
+    //       console.log("records => ", this.newsRecords);
+    //     } else {
+    //       console.log('response error => ', response);
+    //     }
+    //     this.isLoading = false;
+    //   },
+    //   error => {
+    //     this.isLoading = false;
+    //     console.log('http error => ', error);
+    //   }
+    //   )
   }
 
 }

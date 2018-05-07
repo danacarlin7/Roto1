@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 import * as moment from "moment";
 import {ContestData} from "../../../models/contest";
-import {FilterService} from "../../../services/filter.service";
+// import {FilterService} from "../../../services/filter.service";
 /**
  * Created by Hiren on 29-04-2017.
  */
@@ -16,18 +16,20 @@ export class ContestListComponent {
 
   @Input() records:ContestData[];
 
-  constructor(public filterService:FilterService) {
-    this.tabName = this.filterService.activeCohortTab;
+  constructor(
+    // public filterService:FilterService
+  ) {
+    // this.tabName = this.filterService.activeCohortTab;
   }
 
   getTitleField():string {
     let name = '';
-    if (this.records && this.records.length && this.records[0].hasOwnProperty(this.filterService.activeCohortTab)) {
-      name = this.filterService.activeCohortTab;
-    }
-    else {
-      name = 'group';
-    }
+    // if (this.records && this.records.length && this.records[0].hasOwnProperty(this.filterService.activeCohortTab)) {
+    //   name = this.filterService.activeCohortTab;
+    // }
+    // else {
+    //   name = 'group';
+    // }
     return name
   }
 

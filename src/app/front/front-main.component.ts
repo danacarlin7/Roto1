@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {AuthService} from "../shared/services/auth.service";
-import {Router} from "@angular/router";
+import { Component } from "@angular/core";
+// import { AuthService } from "../shared/new-services/auth.service";
+import { Router } from "@angular/router";
 
 /**
  * Created by Hiren on 04-06-2017.
@@ -15,7 +15,9 @@ declare var jQuery: any;
 })
 export class FrontMainComponent {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    // private authService: AuthService,
+    private router: Router) {
 
   }
 
@@ -26,9 +28,9 @@ export class FrontMainComponent {
     jQuery(window).scroll(() => {
       this.updateScrollTopBtnPos();
     });
-    $(".scroll-top-btn").click(() => {
-      let body = $("html, body");
-      body.stop().animate({scrollTop: 0}, 500, "swing");
+    jQuery(".scroll-top-btn").click(() => {
+      let body = jQuery("html, body");
+      body.stop().animate({ scrollTop: 0 }, 500, "swing");
     });
   }
 

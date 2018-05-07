@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {FormGroup, Validators, FormControl, AbstractControl} from "@angular/forms";
-import {AuthService} from "../../../shared/services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component } from "@angular/core";
+import { FormGroup, Validators, FormControl, AbstractControl } from "@angular/forms";
+import { AuthService } from "../../../shared/new-services/auth.service";
+import { ActivatedRoute, Router } from "@angular/router";
 /**
  * Created by Hiren on 15-07-2017.
  */
@@ -13,12 +13,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ChangePasswordComponent {
 
-  changePasswordForm:FormGroup;
-  token:string;
-  isError:boolean;
-  errorMsg:string;
+  changePasswordForm: FormGroup;
+  token: string;
+  isError: boolean;
+  errorMsg: string;
 
-  constructor(private authService:AuthService, private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.changePasswordForm = new FormGroup({
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])
@@ -34,9 +34,9 @@ export class ChangePasswordComponent {
     )
   }
 
-  passwordValidator(fc:AbstractControl) {
-    let pwd1:AbstractControl = fc.get('password');
-    let pwd2:AbstractControl = fc.get('confirmPassword');
+  passwordValidator(fc: AbstractControl) {
+    let pwd1: AbstractControl = fc.get('password');
+    let pwd2: AbstractControl = fc.get('confirmPassword');
     if (pwd1.dirty && pwd2.dirty && (pwd1.value != pwd2.value)) {
       return {
         passwordValidator: {
@@ -56,16 +56,16 @@ export class ChangePasswordComponent {
     this.isError = false;
     this.authService.changePassword(data)
       .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.router.navigate(['/login'], {queryParams: {info: 'pc'}});
-          }
-        },
-        error => {
-          this.isError = true;
-          this.errorMsg = error.message;
-          console.log("http error => ", error);
+      response => {
+        if (response.statusCode == 200) {
+          this.router.navigate(['/login'], { queryParams: { info: 'pc' } });
         }
+      },
+      error => {
+        this.isError = true;
+        this.errorMsg = error.message;
+        console.log("http error => ", error);
+      }
       )
   }
 

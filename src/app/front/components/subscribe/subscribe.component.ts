@@ -8,8 +8,8 @@ import {
   ViewChild,
   NgModuleRef
 } from "@angular/core";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import { ActivatedRoute, Params, Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { Overlay } from 'ngx-modialog';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
@@ -17,9 +17,9 @@ import { Modal } from 'ngx-modialog/plugins/bootstrap';
 // import {overlayConfigFactory} from "angular2-modal";
 // import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
 import "rxjs/Rx";
-import {AuthService} from "../../../shared/services/auth.service";
-import {FrontService} from "../../services/front.service";
-import {environment} from "../../../../environments/environment";
+import { AuthService } from "../../../shared/new-services/auth.service";
+// import { FrontService } from "../../services/front.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
   selector: "app-subscribe",
@@ -43,34 +43,35 @@ export class SubscribeComponent implements OnInit {
 
   unsubscribeOption = "at_period_end";
 
-  period_text = {week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually"};
+  period_text = { week: "Weekly", month: "Monthly", year: "Yearly", annual: "Annually" };
 
   // @ViewChild("unsubscribeTemplateRef") public unsubscribeTemplateRef: TemplateRef<any>;
   // @ViewChild("couponTemplateRef") public couponTemplateRef: TemplateRef<any>;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
-              private authService: AuthService,
-              private frontService: FrontService,
-              private injector: Injector,
-              overlay: Overlay,
-              vcRef: ViewContainerRef,
-              public modal: Modal) {
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    // private frontService: FrontService,
+    private injector: Injector,
+    overlay: Overlay,
+    vcRef: ViewContainerRef,
+    public modal: Modal) {
 
     // console.log($("rotohead"));
 
-    overlay.defaultViewContainer = vcRef;
+    // overlay.defaultViewContainer = vcRef;
+    // modal.overlay.defaultViewContainer = vcRef;
     if (this.authService.isLoggedIn()) {
       this.userData = this.authService.retrieveLoggedUserInfo()
         .subscribe(
-          response => {
-            console.log("response from subscription in front-header.component");
-            if (response.statusCode == 200) {
-              this.userData = response.data;
-              this.email = this.userData.email;
-              this.authService.loggedUser = this.userData;
-            }
+        response => {
+          console.log("response from subscription in front-header.component");
+          if (response.statusCode == 200) {
+            this.userData = response.data;
+            this.email = this.userData.email;
+            this.authService.loggedUser = this.userData;
           }
+        }
         );
     }
     if (this.authService.partialUser) {
@@ -108,57 +109,57 @@ export class SubscribeComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.frontService.getSubscribePlans().subscribe(
-      response => {
-        this.isLoading = false;
-        if (this.authService.loggedUser) {
-          if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
-            for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group == "all_access" || response.data[i].group == "dfsportsgods") {
-                this.plans = this.plans.concat(response.data[i].data);
-              }
-            }
-          } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == "user") {
-            for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group == "dfsportsgods") {
-                this.plans = this.plans.concat(response.data[i].data);
-              }
-            }
-          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
-            for (let i = 0; response.data && i < response.data.length; i++) {
-              console.log(response.data[i]);
-              console.log(response.data.length);
-              if (response.data[i].group == "all_access" || response.data[i].group == "rotopros") {
-                this.plans = this.plans.concat(response.data[i].data);
-              }
-            }
-          } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == "user") {
-            for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group === "rotopros") {
-                this.plans = this.plans.concat(response.data[i].data);
-              }
-            }
-          } else {
-            for (let i = 0; response.data && i < response.data.length; i++) {
-              if (response.data[i].group == "rotopros") {
-                this.plans = this.plans.concat(response.data[i].data);
-              }
-            }
-          }
-        } else {
-          for (let i = 0; response.data && i < response.data.length; i++) {
-            if (response.data[i].group == "rotopros") {
-              this.plans = this.plans.concat(response.data[i].data);
-            }
-          }
-        }
-
-        if (this.route.snapshot.params["id"]) {
-          this.params = this.route.snapshot.params;
-          this.coupon = this.route.snapshot.params["id"];
-        }
-      }
-    );
+    // this.frontService.getSubscribePlans().subscribe(
+    //   response => {
+    //     this.isLoading = false;
+    //     if (this.authService.loggedUser) {
+    //       if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
+    //         for (let i = 0; response.data && i < response.data.length; i++) {
+    //           if (response.data[i].group == "all_access" || response.data[i].group == "dfsportsgods") {
+    //             this.plans = this.plans.concat(response.data[i].data);
+    //           }
+    //         }
+    //       } else if (this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == "user") {
+    //         for (let i = 0; response.data && i < response.data.length; i++) {
+    //           if (response.data[i].group == "dfsportsgods") {
+    //             this.plans = this.plans.concat(response.data[i].data);
+    //           }
+    //         }
+    //       } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role != "user") {
+    //         for (let i = 0; response.data && i < response.data.length; i++) {
+    //           console.log(response.data[i]);
+    //           console.log(response.data.length);
+    //           if (response.data[i].group == "all_access" || response.data[i].group == "rotopros") {
+    //             this.plans = this.plans.concat(response.data[i].data);
+    //           }
+    //         }
+    //       } else if (!this.authService.loggedUser.is_memberspace && this.authService.loggedUser.role == "user") {
+    //         for (let i = 0; response.data && i < response.data.length; i++) {
+    //           if (response.data[i].group === "rotopros") {
+    //             this.plans = this.plans.concat(response.data[i].data);
+    //           }
+    //         }
+    //       } else {
+    //         for (let i = 0; response.data && i < response.data.length; i++) {
+    //           if (response.data[i].group == "rotopros") {
+    //             this.plans = this.plans.concat(response.data[i].data);
+    //           }
+    //         }
+    //       }
+    //     } else {
+    //       for (let i = 0; response.data && i < response.data.length; i++) {
+    //         if (response.data[i].group == "rotopros") {
+    //           this.plans = this.plans.concat(response.data[i].data);
+    //         }
+    //       }
+    //     }
+    //
+    //     if (this.route.snapshot.params["id"]) {
+    //       this.params = this.route.snapshot.params;
+    //       this.coupon = this.route.snapshot.params["id"];
+    //     }
+    //   }
+    // );
   }
 
   couponClicked(plan) {
@@ -189,7 +190,7 @@ export class SubscribeComponent implements OnInit {
         .open();
 
     } else {
-      this.router.navigate(["/signup"], {queryParams: {redirect: location.pathname}});
+      this.router.navigate(["/signup"], { queryParams: { redirect: location.pathname } });
     }
   }
 
@@ -198,38 +199,38 @@ export class SubscribeComponent implements OnInit {
     console.log(coupon);
     if (this.authService.isLoggedIn() && coupon) {
 
-      this.frontService.validateCouponAdvance(coupon, amount)
-        .subscribe(
-          response => {
-            if (response.statusCode === 200) {
-              that.errorMsg = "";
-              console.log("validateCouponAdvance Success => ", response.data);
-              // couponDialog.close();
-              callback(true, coupon, response.data.amount);
-            }
-          },
-          error => {
-            console.log("http error => ", error);
-            that.errorMsg = error.data ? error.data : "Error";
-            callback(false, error.data, false)
-          }
-        );
+      // this.frontService.validateCouponAdvance(coupon, amount)
+      //   .subscribe(
+      //   response => {
+      //     if (response.statusCode === 200) {
+      //       that.errorMsg = "";
+      //       console.log("validateCouponAdvance Success => ", response.data);
+      //       // couponDialog.close();
+      //       callback(true, coupon, response.data.amount);
+      //     }
+      //   },
+      //   error => {
+      //     console.log("http error => ", error);
+      //     that.errorMsg = error.data ? error.data : "Error";
+      //     callback(false, error.data, false)
+      //   }
+      //   );
     } else if (coupon) {
-      this.frontService.validateCoupon(coupon, amount)
-        .subscribe(
-          response => {
-            if (response.statusCode === 200) {
-              that.errorMsg = "";
-              console.log("validateCoupon Success => ", response.data);
-              callback(true, coupon, response.data.amount);
-            }
-          },
-          error => {
-            console.log("http error => ", error);
-            that.errorMsg = error.data ? error.data : "Error";
-            callback(false, error.data, false)
-          }
-        );
+      // this.frontService.validateCoupon(coupon, amount)
+      //   .subscribe(
+      //   response => {
+      //     if (response.statusCode === 200) {
+      //       that.errorMsg = "";
+      //       console.log("validateCoupon Success => ", response.data);
+      //       callback(true, coupon, response.data.amount);
+      //     }
+      //   },
+      //   error => {
+      //     console.log("http error => ", error);
+      //     that.errorMsg = error.data ? error.data : "Error";
+      //     callback(false, error.data, false)
+      //   }
+      //   );
     } else {
       callback(true, "empty", amount);
     }
@@ -332,62 +333,63 @@ export class SubscribeComponent implements OnInit {
               console.log("token call back => ", token);
               this.coupon = resp != "empty" && status ? resp : "";
               if (this.authService.isLoggedIn()) {
-                this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
-                  .subscribe(
-                    response => {
-                      if (response.statusCode == 200) {
-                        console.log("subscribePlan Success => ", response.data);
-
-                        this.authService.retrieveLoggedUserInfo()
-                          .subscribe(
-                            response => {
-                              if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                            },
-                            error => {
-                              console.log("http error => ", error);
-                            }
-                          );
-
-                        this.router.navigate([
-                          "/homeRedirect",
-                          {redirected: true, redirectMessage: "You Have been Successfully Subscribed!"}]);
-                      }
-                      this.authService.partialUser = null;
-                    },
-                    error => {
-                      this.isError = true;
-                      this.errorMsg = "You have already subscribed to this plan";
-                      jQuery("html, body").animate({scrollTop: 0});
-                    }
-                  );
+                  console.log("i am here", this.coupon);
+                // this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
+                //   .subscribe(
+                //   response => {
+                //     if (response.statusCode == 200) {
+                //       console.log("subscribePlan Success => ", response.data);
+                //
+                //       this.authService.retrieveLoggedUserInfo()
+                //         .subscribe(
+                //         response => {
+                //           if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                //         },
+                //         error => {
+                //           console.log("http error => ", error);
+                //         }
+                //         );
+                //
+                //       this.router.navigate([
+                //         "/homeRedirect",
+                //         { redirected: true, redirectMessage: "You Have been Successfully Subscribed!" }]);
+                //     }
+                //     this.authService.partialUser = null;
+                //   },
+                //   error => {
+                //     this.isError = true;
+                //     this.errorMsg = "You have already subscribed to this plan";
+                //     jQuery("html, body").animate({ scrollTop: 0 });
+                //   }
+                //   );
               } else {
                 console.log("i am here", this.coupon);
-                this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
-                  .subscribe(
-                    response => {
-                      if (response.statusCode == 200) {
-                        console.log("subscribePlan Success => ", response.data);
-
-                        this.authService.retrieveLoggedUserInfo()
-                          .subscribe(
-                            response => {
-                              if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                            },
-                            error => {
-                              console.log("http error => ", error);
-                            }
-                          );
-
-                        this.router.navigate([
-                          "/homeRedirect",
-                          {
-                            redirected: true,
-                            redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
-                          }]);
-                      }
-
-                    }
-                  );
+                // this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
+                //   .subscribe(
+                //   response => {
+                //     if (response.statusCode == 200) {
+                //       console.log("subscribePlan Success => ", response.data);
+                //
+                //       this.authService.retrieveLoggedUserInfo()
+                //         .subscribe(
+                //         response => {
+                //           if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                //         },
+                //         error => {
+                //           console.log("http error => ", error);
+                //         }
+                //         );
+                //
+                //       this.router.navigate([
+                //         "/homeRedirect",
+                //         {
+                //           redirected: true,
+                //           redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
+                //         }]);
+                //     }
+                //
+                //   }
+                //   );
               }
             }
           });
@@ -415,7 +417,7 @@ export class SubscribeComponent implements OnInit {
                       .pathname
                   }
                 })
-              ;
+                ;
             }, 100)
         }
       }
@@ -449,10 +451,10 @@ export class SubscribeComponent implements OnInit {
   // }
 
   endSubscription(subscribeDialog) {
-    this.frontService.unsubscribePlan(1, this.unsubscribeOption == "at_period_end").subscribe(
-      response => {
-        subscribeDialog.close();
-      }
-    );
+    // this.frontService.unsubscribePlan(1, this.unsubscribeOption == "at_period_end").subscribe(
+    //   response => {
+    //     subscribeDialog.close();
+    //   }
+    // );
   }
 }

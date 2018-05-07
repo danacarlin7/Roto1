@@ -18,10 +18,10 @@ import { NotificationsComponent } from "./components/notifications/notifications
 import { UpgradeComponent } from "./components/upgrade/upgrade.component";
 import { SharedModule } from "../shared/shared.module";
 import { MembersAdminComponent } from "./members-admin/members-admin.component";
-import { AdminDashboardService } from "./services/admin-dashboard.service";
-import { MembershipPlanService } from "./services/membership-plan.service";
+// import { AdminDashboardService } from "./services/admin-dashboard.service";
+// import { MembershipPlanService } from "./services/membership-plan.service";
 import { MembersDetailComponent } from "./members-detail/members-detail.component";
-import { MembersLoadedResolver } from "./services/members-loaded-resolver.service";
+// import { MembersLoadedResolver } from "./services/members-loaded-resolver.service";
 import { PromotionsComponent } from "./promotions/promotions.component";
 
 @NgModule({
@@ -52,9 +52,9 @@ import { PromotionsComponent } from "./promotions/promotions.component";
     AdminComponent
   ],
   providers: [
-    AdminDashboardService,
-    MembershipPlanService,
-    MembersLoadedResolver
+    // AdminDashboardService,
+    // MembershipPlanService,
+    // MembersLoadedResolver
   ],
 })
 export class AdminModule { }

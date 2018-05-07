@@ -1,12 +1,12 @@
-<div class="my-body">
+<!-- <div class="my-body">
   <div id="my-progress-bar" *ngIf="isLoading">
     <md-progress-bar mode="query" color="accent"></md-progress-bar>
   </div>
-  <div class="container-fluid container-main my-common-class">
+  <div class="container-fluid container-main my-common-class"> -->
 
     <!-- Title -->
 
-    <section class="my-section title-container">
+    <!-- <section class="my-section title-container">
       <div class="row">
         <div class="col-md-5">
           <h4 class="content-title">NFL Lineup Optimizer</h4>
@@ -14,9 +14,9 @@
         <div class="col-md-2" style="position: relative">
           <span style="padding-right: 20px">
             <a class="btn btn-gray-black" routerLink="/lineup-optimizer">MLB</a>
-            <a class="btn btn-yellow-black ">NFL</a>
+            <a class="btn btn-yellow-black ">NFL</a> -->
             <!--<a class="btn btn-gray-black" routerLink="/lineup-optimizer/nba">NBA</a>-->
-          </span>
+          <!-- </span>
         </div>
         <div class="col-md-5 text-right">
           <span style="padding-right: 20px">
@@ -30,7 +30,7 @@
                [class.btn-yellow-black]="selectedOperator == 'FanDuel'">FanDuel</a>
           </span>
           <span class="setting-btn">
-            <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" md-tooltip="Saved filters applied"
+            <span id="active-filter-dot" *ngIf="isSavedFiltersApplied" matTooltip="Saved filters applied"
                   [mdTooltipPosition]="'before'"></span>
             <button class="btn btn-gray-black" [class.active]="isSavedFiltersApplied"
                     [disabled]="isLoading || isDataError"
@@ -38,20 +38,20 @@
           </span>
         </div>
       </div>
-    </section>
+    </section> -->
     <!--/ Title -->
-    <section class="error-container" *ngIf="isError">
-      <span class="error-msg" [md-tooltip]="errorData">{{errorMsg}}</span>
-    </section>
+    <!-- <section class="error-container" *ngIf="isError">
+      <span class="error-msg" [matTooltip]="errorData">{{errorMsg}}</span>
+    </section> -->
     <!-- Filters -->
-    <section class="my-section table-filtes-container section-gray">
+    <!-- <section class="my-section table-filtes-container section-gray">
       <div class="row">
         <div class="col-lg-7 col-md-6">
           <div class="row">
             <div class="col-lg-2 col-sm-3 no-padding-right">
-              <select class="form-control input-sm" [(ngModel)]="selectedSlate" (change)="onSlateChanged($event)">
+              <select class="form-control input-sm" [(ngModel)]="selectedSlate" (change)="onSlateChanged($event)"> -->
                 <!--<option [value]="0">All Slates</option>-->
-                <option *ngFor="let slate of slates" [value]="slate.SlateID">
+                <!-- <option *ngFor="let slate of slates" [value]="slate.SlateID">
                   {{slate.StartTime | date:'h:mm a EEE, MMM d'}}
                   {{' - '+slate.NumberOfGames+' Games - '}}
                   {{slate.Slate}}
@@ -78,7 +78,7 @@
         </div>
         <div class="col-lg-5 col-md-6">
           <div class="row">
-            <div class="col-md-5 col-sm-4 no-padding-right">
+            <div class="col-md-5 col-sm-4 no-padding-right"> -->
               <!-- input class="form-control input-sm" type="text" placeholder="Select Projection"-->
               <!--<select class="form-control input-sm">
                 <option>Select Projection</option>
@@ -87,7 +87,7 @@
                 <option>Projection 4</option>
                 <option>Projection 5</option>
               </select>-->
-            </div>
+            <!-- </div>
             <div class="col-sm-3 no-padding-right">
               <input class="form-control input-sm" type="text" disabled value="{{todayDate | date:'dd MMM, yyyy'}}">
             </div>
@@ -102,11 +102,11 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!--/ Filters -->
 
     <!-- Table -->
-    <section class="my-section table-container table-responsive" style="padding: 0;">
+    <!-- <section class="my-section table-container table-responsive" style="padding: 0;">
       <table class="table main-table table-striped td-center lineup-table" [mfData]="players" #records="mfDataTable"
              [mfRowsOnPage]="10">
         <thead>
@@ -123,7 +123,7 @@
             <i class="fa fa-filter"
                aria-hidden="true"
                [ngStyle]="{'color':(positionFilterValue && positionFilterValue.length) ? '#000000':'#999999'}"
-               [md-tooltip]="positionFilterValue && positionFilterValue.length ? (positionFilterValue.length + ' selected') : 'filter' "
+               [matTooltip]="positionFilterValue && positionFilterValue.length ? (positionFilterValue.length + ' selected') : 'filter' "
                (click)="posFilterOverlay.toggle($event)"></i>
             <p-overlayPanel #posFilterOverlay>
               <p-listbox [options]="positions"
@@ -144,7 +144,7 @@
             <i class="fa fa-filter"
                aria-hidden="true"
                [ngStyle]="{'color':(selectedTeams && selectedTeams.length) ? '#000000':'#999999'}"
-               [md-tooltip]="selectedTeams && selectedTeams.length ? (selectedTeams.length + ' teams selected') : 'filter' "
+               [matTooltip]="selectedTeams && selectedTeams.length ? (selectedTeams.length + ' teams selected') : 'filter' "
                (click)="teamFilterOverlay.toggle($event)"></i>
             <p-overlayPanel #teamFilterOverlay>
               <p-listbox [options]="teams"
@@ -191,10 +191,10 @@
         <tbody>
         <tr *ngFor="let player of records.data">
           <td class="text-center" (click)="togglePlayerLock(player)">
-            <img *ngIf="player.isLocked" src="../../../../assets/img/Key.png" md-tooltip="Locked"/>
+            <img *ngIf="player.isLocked" src="../../../../assets/img/Key.png" matTooltip="Locked"/>
             <img *ngIf="!player.isLocked"
                  [ngStyle]="{'opacity': (lockedPlayers?.length >= 6)? '0.5' : '1'}"
-                 src="../../../../assets/img/unlock.png" md-tooltip="Unlocked"/>
+                 src="../../../../assets/img/unlock.png" matTooltip="Unlocked"/>
           </td>
           <td><img src="../../../../assets/img/x-red.png"
                    (click)="btnExcludePlayerClicked(player)"
@@ -226,9 +226,9 @@
         </tr>
         </tfoot>
       </table>
-    </section>
+    </section> -->
     <!--/ Table -->
-    <rp-nfl-adv-filter [advFilterSettings]="advFilterSettings"
+    <!-- <rp-nfl-adv-filter [advFilterSettings]="advFilterSettings"
                        [stackingData]="stackingData"
                        [advFilterValue]="advFilterValue"
                        [selectedOperator]="selectedOperator"
@@ -238,4 +238,4 @@
                        (removeAdvFilterValueEvent)="onRemoveAdvFilterValueEvent()"
                        (filterCriteriaChanged)="onAdvFilterCriteriaChangedEvent($event)"></rp-nfl-adv-filter>
   </div>
-</div>
+</div> -->

@@ -6,7 +6,7 @@ import {OverviewComponent} from "./components/overview/overview.component";
 import {CohortComponent} from "./components/cohort/cohort.component";
 import {ContestComponent} from "./components/contest/contest.component";
 import {OpponentComponent} from "./components/opponent/opponent.component";
-import {AuthGuard} from "../shared/services/auth.guard";
+import {AuthGuard} from "../shared/new-services/auth.guard";
 import {GraphComponent} from "./components/graph/graph.component";
 import {UploadsComponent} from "./components/uploads/uploads.component";
 import {SettingsComponent} from "./components/settings/settings.component";

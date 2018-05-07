@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Coupon } from "../models/coupon.model";
 import { NgForm } from "@angular/forms";
-import { AdminDashboardService } from "../services/admin-dashboard.service";
+// import { AdminDashboardService } from "../services/admin-dashboard.service";
 
 @Component({
   selector: "app-promotions",
@@ -16,7 +16,9 @@ export class PromotionsComponent implements OnInit {
   url = "";
   testUrl = "";
 
-  constructor(private adminDashboardService: AdminDashboardService) { }
+  constructor(
+    // private adminDashboardService: AdminDashboardService
+  ) { }
 
   ngOnInit() {
   }
@@ -35,13 +37,13 @@ export class PromotionsComponent implements OnInit {
 
     coupon = new Coupon(coupon);
 
-    this.adminDashboardService.createCoupon(coupon).subscribe(
-      response => {
-        console.log(response);
-        this.url = `https://www.rotopros.com/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
-        this.testUrl = `13.57.84.196/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
-      }
-    );
+    // this.adminDashboardService.createCoupon(coupon).subscribe(
+    //   response => {
+    //     console.log(response);
+    //     this.url = `https://www.rotopros.com/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
+    //     this.testUrl = `13.57.84.196/subscribe;id=${coupon.id};discount_type=${this.couponType};discount_rate=${values["discountRate"]}`;
+    //   }
+    // );
   }
 
 }

@@ -1,28 +1,28 @@
 import {
-  MdButtonModule, MdCardModule, MdProgressSpinnerModule, MdIconModule,
-  MdSlideToggleModule, MdTooltipModule, MdMenuModule, MdInputModule, MdSelectModule, MdRadioModule, MdDialogModule,
-  MdDatepickerModule, MdNativeDateModule, MdListModule, MdProgressBarModule, MdButtonToggleModule
+  MatButtonModule, MatCardModule, MatProgressSpinnerModule, MatIconModule,
+  MatSlideToggleModule, MatTooltipModule, MatMenuModule, MatInputModule, MatSelectModule, MatRadioModule, MatDialogModule,
+  MatDatepickerModule, MatNativeDateModule, MatListModule, MatProgressBarModule, MatButtonToggleModule
 } from "@angular/material";
 /**
  * Created by Hiren on 11-06-2017.
  */
 
 export const SharedMaterialComponents = [
-  MdProgressSpinnerModule,
-  MdButtonModule,
-  MdCardModule,
-  MdIconModule,
-  MdSlideToggleModule,
-  MdTooltipModule,
-  MdMenuModule,
-  MdInputModule,
-  MdSelectModule,
-  MdRadioModule,
-  MdSlideToggleModule,
-  MdDialogModule,
-  MdDatepickerModule,
-  MdNativeDateModule,
-  MdListModule,
-  MdProgressBarModule,
-  MdButtonToggleModule
+  MatProgressSpinnerModule,
+  MatButtonModule,
+  MatCardModule,
+  MatIconModule,
+  MatSlideToggleModule,
+  MatTooltipModule,
+  MatMenuModule,
+  MatInputModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatSlideToggleModule,
+  MatDialogModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatListModule,
+  MatProgressBarModule,
+  MatButtonToggleModule
 ];

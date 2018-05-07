@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../../../shared/services/auth.service";
+import { AuthService } from "../../../../shared/new-services/auth.service";
 import { Router } from "@angular/router";
 /**
  * Created by Hiren on 27-07-2017.
@@ -24,17 +24,25 @@ export class UpdatePasswordComponent {
       new_password: values.newPassword
     };
 
-    this.authService.updatePasswordFromSettings(passwordData).subscribe(
-      response => {
-        if (response.statusCode === 200) {
-          this.responseMessage = response.message;
+    this.authService.updatePasswordFromSettings(passwordData)
+      .subscribe(obj => {
+        if (obj.statusCode === 200) {
+          this.responseMessage = obj.message;
           this.isSuccess = true;
         }
-      },
-      error => {
-        this.isSuccess = false;
-        this.responseMessage = error.message
-      }
-    );
+      });
+
+    // this.authService.updatePasswordFromSettings(passwordData).subscribe(
+    //   response => {
+    //     if (response.statusCode === 200) {
+    //       this.responseMessage = response.message;
+    //       this.isSuccess = true;
+    //     }
+    //   },
+    //   error => {
+    //     this.isSuccess = false;
+    //     this.responseMessage = error.message
+    //   }
+    // );
   }
 }

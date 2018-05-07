@@ -8,8 +8,8 @@ import {
   ViewChild,
   NgModuleRef
 } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {Subscription} from 'rxjs';
+import { NgForm } from '@angular/forms';
+// import { Subscription } from 'rxjs';
 // import {Overlay} from 'angular2-modal';
 // import {overlayConfigFactory} from "angular2-modal";
 // import {Modal, BSModalContext} from 'angular2-modal/plugins/bootstrap';
@@ -17,11 +17,11 @@ import {Subscription} from 'rxjs';
 // import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
 import 'rxjs/Rx';
-import {AuthService} from "../../../../shared/services/auth.service";
-import {LoggedUser} from "../../../../shared/models/logged-user.model";
-import {UserDashboardServices} from "../../../services/user-dashboard.service";
-import {Router} from "@angular/router";
-import {environment} from "../../../../../environments/environment";
+import { AuthService } from "../../../../shared/new-services/auth.service";
+import { LoggedUser } from "../../../../shared/models/logged-user.model";
+// import { UserDashboardServices } from "../../../services/user-dashboard.service";
+import { Router } from "@angular/router";
+import { environment } from "../../../../../environments/environment";
 /**
  * Created by Hiren on 30-07-2017.
  */
@@ -41,20 +41,22 @@ export class ProfilePictureComponent {
     acceptedFiles: 'image/*',
     paramName: 'file',
     autoReset: 500,
-    headers: {'Authorization': 'Bearer ' + environment.token}
+    headers: { 'Authorization': 'Bearer ' + environment.token }
   };
 
-  constructor(private authService:AuthService, private router:Router, private dashboardService:UserDashboardServices) {
+  constructor(private authService: AuthService, private router: Router,
+    // private dashboardService: UserDashboardServices
+  ) {
 
   }
 
   fileUploadEvent(event) {
-    let fileList:FileList = event.target.files;
+    let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
-      this.authService.uploadProfile(fileList).subscribe(
-        data => console.log('success'),
-        error => console.log(error)
-      );
+      // this.authService.uploadProfile(fileList).subscribe(
+      //   data => console.log('success'),
+      //   error => console.log(error)
+      // );
     }
   }
 
@@ -67,17 +69,17 @@ export class ProfilePictureComponent {
     console.log("Profile Pic updated");
     this.authService.retrieveLoggedUserInfo()
       .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.authService.loggedUser = response.data;
-          }
-          else {
-
-          }
-        },
-        error => {
-          console.log("http error => ", error);
+      response => {
+        if (response.statusCode == 200) {
+          this.authService.loggedUser = response.data;
         }
+        else {
+
+        }
+      },
+      error => {
+        console.log("http error => ", error);
+      }
       );
   }
 

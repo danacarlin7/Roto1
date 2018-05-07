@@ -1,9 +1,9 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
-import {AuthService} from "./shared/services/auth.service";
-import {Router} from "@angular/router";
-import {environment} from "../environments/environment";
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { AuthService } from "./shared/new-services/auth.service";
+import { Router } from "@angular/router";
+import { environment } from "../environments/environment";
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
   selector: 'app-root',

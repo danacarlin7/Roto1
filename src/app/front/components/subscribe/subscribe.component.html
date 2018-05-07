@@ -36,7 +36,7 @@
                     <br><br>
                   </div>
                   <div class="common-loader" *ngIf="isLoading">
-                    <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+                    <mat-progress-spinner mode="indeterminate" color="accent" diameter="50" style="width: 50px;height: 50px"></mat-progress-spinner>
                   </div>
                   <div style="display: flex;justify-content: center;align-items: center" *ngIf="!plans || !plans.length">
                     <span>No Package Found</span>

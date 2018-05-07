@@ -1,11 +1,11 @@
-import {Component, ElementRef, ViewChild} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
-import {LoggedUser} from "../../../shared/models/logged-user.model";
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import { AuthService } from "../../../shared/new-services/auth.service";
+import { LoggedUser } from "../../../shared/models/logged-user.model";
 /**
  * Created by Hiren on 11-06-2017.
  */
 
-declare var jQuery:any;
+declare var jQuery: any;
 @Component({
   selector: 'rp-user-header',
   templateUrl: './user-header.component.html',
@@ -37,12 +37,12 @@ export class UserHeaderComponent {
     );
   }
 
-  ngAfterViewInit(){
-    jQuery('.menuToggle').click(function(){
+  ngAfterViewInit() {
+    jQuery('.menuToggle').click(function() {
       jQuery(".mainMenu").addClass("tglMnu");
     });
 
-    jQuery(".closeBtn").click(function(e){
+    jQuery(".closeBtn").click(function(e) {
       e.preventDefault();
       jQuery(this).parent().removeClass("tglMnu");
     });

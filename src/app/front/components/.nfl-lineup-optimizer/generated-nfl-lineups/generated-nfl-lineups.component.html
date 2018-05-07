@@ -39,7 +39,7 @@
               <button type="button"
                       (click)="activeUsedPlayerTab = 'filter'"
                       [class.active]="activeUsedPlayerTab == 'filter'"
-                      md-tooltip="Filter by position"
+                      matTooltip="Filter by position"
                       class="btn btn-lg btn-grayl-grayl"><i class="fa fa-filter" aria-hidden="true"></i>
               </button>
             </div>
@@ -104,7 +104,7 @@
               <td>{{player.fullName}}</td>
               <!--<td>{{getBattingOrderByPlayerId(player.id)}}
                 <span class="light-dot"
-                      [md-tooltip]="player.battingOrderConfirmed ? ' Player in starting lineup with confirmed batting order ': ' projected batting order for player'"
+                      [matTooltip]="player.battingOrderConfirmed ? ' Player in starting lineup with confirmed batting order ': ' projected batting order for player'"
                       [class.yellow-dot]="!player.battingOrderConfirmed"
                       [class.green-dot]="player.battingOrderConfirmed"></span></td>-->
               <td *ngIf="isAwayTeamPlayer(player)"><b>{{player.team}}</b>@{{getHomeTeamByAwayTeamName(player.team)}}

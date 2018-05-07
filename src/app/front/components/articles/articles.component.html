@@ -214,7 +214,7 @@
                         </div>
                       </div>
                       <div class="loading text-center" *ngIf="isLoading" style="display: flex;justify-content: center">
-                        <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+                        <mat-progress-spinner mode="indeterminate" color="accent" diameter="50"></mat-progress-spinner>
                       </div>
                       <div class="text-center load-more-block" *ngIf="false && category.loaded<category.count">
                         <button class="btn btn-info btn-load-more" (click)="loadMorePosts(category)">Load More ...

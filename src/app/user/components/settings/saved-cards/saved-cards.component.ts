@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {UserDashboardServices} from "../../../services/user-dashboard.service";
-import {PaymentCard} from "../../../models/payment-card.model";
+import { Component } from "@angular/core";
+// import { UserDashboardServices } from "../../../services/user-dashboard.service";
+import { PaymentCard } from "../../../models/payment-card.model";
 import { environment } from "../../../../../environments/environment";
 /**
  * Created by Hiren on 01-08-2017.
@@ -13,9 +13,9 @@ import { environment } from "../../../../../environments/environment";
 })
 export class SavedCardsComponent {
 
-  cards:PaymentCard[];
-  isLoading:boolean;
-  defaultCard:string;
+  cards: PaymentCard[];
+  isLoading: boolean;
+  defaultCard: string;
   isCard: boolean;
   card: any;
   responseMessage: any;
@@ -24,9 +24,11 @@ export class SavedCardsComponent {
 
   stripe = (<any>window).Stripe(environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7");
 
-  cardColor = ['#0cd2c985','#d2270c85','#ffc440','#ff40df6e', '#4fd20c85']
+  cardColor = ['#0cd2c985', '#d2270c85', '#ffc440', '#ff40df6e', '#4fd20c85']
 
-  constructor(private dashboardService: UserDashboardServices) {
+  constructor(
+    // private dashboardService: UserDashboardServices
+  ) {
 
   }
 
@@ -43,66 +45,66 @@ export class SavedCardsComponent {
     this.isLoading = true;
     this.isCard = false;
     this.isSuccess = true;
-    this.dashboardService.getSavedCards()
-      .subscribe(
-        response => {
-          this.isLoading = false;
-          if (response.statusCode == 200) {
-            this.cards = response.data.stripe_cards;
-
-            this.defaultCard = response.data.default_payment_source;
-            console.log("cards => ", this.cards);
-            if(!this.cards.length) {
-              this.isSuccess = false;
-              this.responseMessage = "You don't have any card!!!";
-            }
-          }
-          else {
-            this.isSuccess = false;
-            this.responseMessage = "Server error";
-          }
-        },
-        error => {
-          this.isLoading = false;
-          this.isSuccess = false;
-          this.responseMessage = error;
-        }
-      )
+    // this.dashboardService.getSavedCards()
+    //   .subscribe(
+    //   response => {
+    //     this.isLoading = false;
+    //     if (response.statusCode == 200) {
+    //       this.cards = response.data.stripe_cards;
+    //
+    //       this.defaultCard = response.data.default_payment_source;
+    //       console.log("cards => ", this.cards);
+    //       if (!this.cards.length) {
+    //         this.isSuccess = false;
+    //         this.responseMessage = "You don't have any card!!!";
+    //       }
+    //     }
+    //     else {
+    //       this.isSuccess = false;
+    //       this.responseMessage = "Server error";
+    //     }
+    //   },
+    //   error => {
+    //     this.isLoading = false;
+    //     this.isSuccess = false;
+    //     this.responseMessage = error;
+    //   }
+    //   )
   }
 
-  onCardDefaultBtnClicked(card:PaymentCard) {
+  onCardDefaultBtnClicked(card: PaymentCard) {
     console.log("default click");
     if (card.card_id != this.defaultCard) {
-      this.dashboardService.updateDefaultPaymentCard(card.card_id)
-        .subscribe(
-          response => {
-            if (response.statusCode == 200) {
-              this.defaultCard = card.card_id;
-            }
-          },
-          error => {
-            console.log("Http error => ", error);
-          }
-        )
+      // this.dashboardService.updateDefaultPaymentCard(card.card_id)
+      //   .subscribe(
+      //   response => {
+      //     if (response.statusCode == 200) {
+      //       this.defaultCard = card.card_id;
+      //     }
+      //   },
+      //   error => {
+      //     console.log("Http error => ", error);
+      //   }
+      //   )
     }
   }
 
-  onCardRemoveBtnClicked(card:PaymentCard) {
+  onCardRemoveBtnClicked(card: PaymentCard) {
     console.log("remove clicked");
-    this.dashboardService.removePaymentCard(card.card_id)
-      .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.getSavedCards();
-          }
-        },
-        error => {
-          console.log("Http error => ", error);
-        }
-      )
+    // this.dashboardService.removePaymentCard(card.card_id)
+    //   .subscribe(
+    //   response => {
+    //     if (response.statusCode == 200) {
+    //       this.getSavedCards();
+    //     }
+    //   },
+    //   error => {
+    //     console.log("Http error => ", error);
+    //   }
+    //   )
   }
 
-  onCardRmvBtnClicked(){
+  onCardRmvBtnClicked() {
     this.card.destroy('#card-element');
     this.isCard = false;
     this.isSuccess = true;
@@ -134,7 +136,7 @@ export class SavedCardsComponent {
     };
 
     // Create an instance of the card Element.
-    this.card = elements.create('card', {hidePostalCode: true, style: style});
+    this.card = elements.create('card', { hidePostalCode: true, style: style });
 
     // Add an instance of the card Element into the `card-element` <div>.
     this.card.mount('#card-element');
@@ -246,38 +248,38 @@ export class SavedCardsComponent {
     // });
   }
 
-  addCard(){
+  addCard() {
     console.log(this.card);
     let that = this;
     this.stripe.createToken(this.card).then(function(result) {
-        if (result.error) {
-          console.log(result.error);
-          that.isSuccess = false;
-          that.responseMessage = result.error.message;
-          // Inform the user if there was an error.
-          // var errorElement = document.getElementById('card-errors');
-          // errorElement.textContent = result.error.message;
-        } else {
-          // Send the token to your server.
-          console.log(result.token);
-          that.dashboardService.addPaymentCard(result.token.id)
-            .subscribe(
-              response => {
-                if (response.statusCode == 200) {
-                  that.card.destroy('#card-element');
-                  that.isSuccess = true;
-                  that.getSavedCards();
-                }
-              },
-              error => {
-                console.log("Http error => ", error);
-
-                that.isSuccess = false;
-                that.responseMessage = error.message;
-              }
-            )
-        }
-      });
+      if (result.error) {
+        console.log(result.error);
+        that.isSuccess = false;
+        that.responseMessage = result.error.message;
+        // Inform the user if there was an error.
+        // var errorElement = document.getElementById('card-errors');
+        // errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server.
+        console.log(result.token);
+        // that.dashboardService.addPaymentCard(result.token.id)
+        //   .subscribe(
+        //   response => {
+        //     if (response.statusCode == 200) {
+        //       that.card.destroy('#card-element');
+        //       that.isSuccess = true;
+        //       that.getSavedCards();
+        //     }
+        //   },
+        //   error => {
+        //     console.log("Http error => ", error);
+        //
+        //     that.isSuccess = false;
+        //     that.responseMessage = error.message;
+        //   }
+        //   )
+      }
+    });
   }
 
 }

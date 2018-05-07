@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
-import { AdminDashboardService } from "../services/admin-dashboard.service";
+// import { AdminDashboardService } from "../services/admin-dashboard.service";
 // import { Overlay } from "angular2-modal";
 // import { overlayConfigFactory } from "angular2-modal";
 // import { Modal, BSModalContext } from "angular2-modal/plugins/bootstrap";
 import { Overlay } from 'ngx-modialog';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
-import { MembershipPlanService } from "../services/membership-plan.service";
+// import { MembershipPlanService } from "../services/membership-plan.service";
 import * as moment from "moment";
-import { Subscription } from "rxjs";
+// import { Subscription } from "rxjs";
 import "../../../assets/newAdmin/js/datetime-moment.js";
 
 declare var $: any;
@@ -26,7 +26,7 @@ export class MembersAdminComponent implements OnInit {
   public headerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
   public footerRow = ["Name", "Email", "Is Subscribed", "Created On", "Last Subscription", "Actions"];
   public allMembers: Object[];
-  private membersSubscription: Subscription;
+  // private membersSubscription: Subscription;
 
   private modalData;
   private dialogRef;
@@ -34,51 +34,51 @@ export class MembersAdminComponent implements OnInit {
   private subscriptionPlans: Object[];
 
   constructor(
-    private adminDashboardService: AdminDashboardService,
-    private membershipPlanService: MembershipPlanService,
+    // private adminDashboardService: AdminDashboardService,
+    // private membershipPlanService: MembershipPlanService,
     private modal: Modal,
     private vcRef: ViewContainerRef,
     private overlay: Overlay
   ) {
-    modal.overlay.defaultViewContainer = vcRef;
+    // modal.overlay.defaultViewContainer = vcRef;
   }
 
   ngOnInit() {
-    if (Object.keys(this.adminDashboardService.allMembers).length !== 0) {
-      this.setUpData();
-    } else {
-      this.membersSubscription = this.adminDashboardService.allMembersUpdated
-        .subscribe(
-          (membersUpdated: boolean) => {
-            this.setUpData();
-          }
-        );
-    }
-
-    this.membershipPlanService.retrieveMembershipPlans().subscribe(
-      plans => {
-        this.subscriptionPlans = [plans.data[1], plans.data[2]];
-      }
-    );
+    // if (Object.keys(this.adminDashboardService.allMembers).length !== 0) {
+    //   this.setUpData();
+    // } else {
+    //   this.membersSubscription = this.adminDashboardService.allMembersUpdated
+    //     .subscribe(
+    //     (membersUpdated: boolean) => {
+    //       this.setUpData();
+    //     }
+    //     );
+    // }
+    //
+    // this.membershipPlanService.retrieveMembershipPlans().subscribe(
+    //   plans => {
+    //     this.subscriptionPlans = [plans.data[1], plans.data[2]];
+    //   }
+    // );
   }
 
   setUpData() {
-    const allMembers = this.adminDashboardService.allMembers;
-
-    // Get all values from allMembers in an array
-    this.allMembers = Object.keys(allMembers).map(key => allMembers[key]).map(member => {
-      return {
-        name: member.full_name,
-        email: member.email,
-        isSubscribe: member.is_subscribe,
-        createdAt: member.created_at,
-        lastSubscription: member.last_active,
-        id: member._id,
-        subscriptions: member.subscriptions.filter(subscription => subscription.is_plan_active === true)
-      };
-    });
-
-    setTimeout(() => this.setUpDatatable(), 0);
+    // const allMembers = this.adminDashboardService.allMembers;
+    //
+    // // Get all values from allMembers in an array
+    // this.allMembers = Object.keys(allMembers).map(key => allMembers[key]).map(member => {
+    //   return {
+    //     name: member.full_name,
+    //     email: member.email,
+    //     isSubscribe: member.is_subscribe,
+    //     createdAt: member.created_at,
+    //     lastSubscription: member.last_active,
+    //     id: member._id,
+    //     subscriptions: member.subscriptions.filter(subscription => subscription.is_plan_active === true)
+    //   };
+    // });
+    //
+    // setTimeout(() => this.setUpDatatable(), 0);
   }
 
   setUpDatatable() {
@@ -93,16 +93,16 @@ export class MembersAdminComponent implements OnInit {
       "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
       responsive: true,
       language: {
-      search: "_INPUT_",
+        search: "_INPUT_",
         searchPlaceholder: "Search records",
       },
-      "order": [[ 3, "desc" ]]
+      "order": [[3, "desc"]]
     });
 
     const table = this.table;
 
     for (let i = 0; i < 4; i++) {
-      $(`#column${i}_search`).on( "keyup", function() {
+      $(`#column${i}_search`).on("keyup", function() {
         table.columns(i).search(this.value).draw();
       });
     }
@@ -219,7 +219,7 @@ export class MembersAdminComponent implements OnInit {
       return;
     }
 
-    this.adminDashboardService.downloadCSV(this.allMembers, "allMembers.csv");
+    // this.adminDashboardService.downloadCSV(this.allMembers, "allMembers.csv");
   }
 
 }

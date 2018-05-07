@@ -1,5 +1,5 @@
-import {ErrorHandler} from '@angular/core';
-import {AuthService} from "./shared/services/auth.service";
+import { ErrorHandler } from '@angular/core';
+import { AuthService } from "./shared/new-services/auth.service";
 
 export class RPErrorHandler implements ErrorHandler {
   handleError(error) {

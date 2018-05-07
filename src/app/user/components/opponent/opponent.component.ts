@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
-import {OpponentData} from "../../models/opponent-data.model";
-import {FilterCriteria} from "../../models/filter-criteria.model";
-import {AuthService} from "../../../shared/services/auth.service";
-import {FilterService} from "../../services/filter.service";
-import {UserDashboardServices} from "../../services/user-dashboard.service";
+import { Component } from "@angular/core";
+import { OpponentData } from "../../models/opponent-data.model";
+import { FilterCriteria } from "../../models/filter-criteria.model";
+// import { AuthService } from "../../../shared/new-services/auth.service";
+// import { FilterService } from "../../services/filter.service";
+// import { UserDashboardServices } from "../../services/user-dashboard.service";
 /**
  * Created by Hiren on 12-06-2017.
  */
@@ -14,24 +14,27 @@ import {UserDashboardServices} from "../../services/user-dashboard.service";
   styleUrls: ['./opponent.component.css']
 })
 export class OpponentComponent {
-  records:OpponentData[];
-  isLoading:boolean;
-  filters:FilterCriteria[];
-  filterSettings:any;
-  filterEventSubscription:any;
+  records: OpponentData[];
+  isLoading: boolean;
+  filters: FilterCriteria[];
+  filterSettings: any;
+  filterEventSubscription: any;
 
-  constructor(private authService:AuthService, private filterService:FilterService, private dashboardService:UserDashboardServices) {
-    this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(
-      filters => {
-        this.getData(filters);
-        this.filters = filters;
-      }
-    );
-    this.filters = this.filterService.filters;
-    this.filterService.getFilterSettings()
-      .subscribe(settings => {
-        this.filterSettings = settings
-      });
+  constructor(
+    // private authService: AuthService
+     // private filterService: FilterService, private dashboardService: UserDashboardServices
+   ) {
+    // this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(
+    //   filters => {
+    //     this.getData(filters);
+    //     this.filters = filters;
+    //   }
+    // );
+    // this.filters = this.filterService.filters;
+    // this.filterService.getFilterSettings()
+    //   .subscribe(settings => {
+    //     this.filterSettings = settings
+    //   });
   }
 
   ngOnInit() {
@@ -39,30 +42,30 @@ export class OpponentComponent {
     this.getData(this.filters);
   }
 
-  getData(filters:FilterCriteria[] = null) {
+  getData(filters: FilterCriteria[] = null) {
     console.log("onInit Opponent");
     this.isLoading = true;
-    this.dashboardService.retrieveOpponentsData(filters)
-      .subscribe(
-        data => {
-          if (data.statusCode == 200) {
-            if (data.data) {
-              this.records = data.data as OpponentData[];
-            }
-            this.isLoading = false;
-          }
-        });
+    // this.dashboardService.retrieveOpponentsData(filters)
+    //   .subscribe(
+    //   data => {
+    //     if (data.statusCode == 200) {
+    //       if (data.data) {
+    //         this.records = data.data as OpponentData[];
+    //       }
+    //       this.isLoading = false;
+    //     }
+    //   });
   }
 
-  onAddFilterEventHandler(filter:FilterCriteria) {
-    this.filterService.addFilter(filter);
+  onAddFilterEventHandler(filter: FilterCriteria) {
+    // this.filterService.addFilter(filter);
   }
 
-  onRemoveFilterEvent(filter:FilterCriteria) {
-    this.filterService.removeFilter(filter);
+  onRemoveFilterEvent(filter: FilterCriteria) {
+    // this.filterService.removeFilter(filter);
   }
 
-  onRemoveAllFiltersEvent(filters:FilterCriteria[]) {
-    this.filterService.clearFilter();
+  onRemoveAllFiltersEvent(filters: FilterCriteria[]) {
+    // this.filterService.clearFilter();
   }
 }

@@ -11,7 +11,7 @@ import { FrontModule } from "./front/front.module";
 import { UserModule } from "./user/user.module";
 import { AdminModule } from "./new-admin/admin.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthService } from "./shared/services/auth.service";
+import { AuthService } from "./shared/new-services/auth.service";
 import { environment } from "../environments/environment";
 import { RPErrorHandler } from "./error-handler";
 

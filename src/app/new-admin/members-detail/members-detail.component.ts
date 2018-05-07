@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Params } from '@angular/router';
-import { AdminDashboardService } from '../services/admin-dashboard.service';
+// import { AdminDashboardService } from '../services/admin-dashboard.service';
 import { Subscription } from 'rxjs';
 import * as moment from "moment";
 
@@ -15,7 +15,9 @@ export class MembersDetailComponent implements OnInit {
   public memberKeys;
   public stripeCharges;
 
-  constructor(private route: ActivatedRoute, private adminDashboardService: AdminDashboardService) { }
+  constructor(private route: ActivatedRoute,
+    // private adminDashboardService: AdminDashboardService
+  ) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: Data) => {
@@ -39,18 +41,18 @@ export class MembersDetailComponent implements OnInit {
 
       this.memberKeys = Object.keys(this.member);
 
-      this.adminDashboardService.getChargesByMember(this.member.customer_id).subscribe(stripeData => {
-        this.stripeCharges = stripeData.charges.data;
-
-        this.stripeCharges.forEach(charge => {
-          charge.created = moment.unix(charge.created).format("MMM D YYYY");
-
-          const amount = charge.amount.toString();
-          charge.amount = `$${amount.slice(0, amount.length - 2)}.${amount.slice(-2)}`;
-        });
-
-        console.log(this.stripeCharges);
-      });
+      // this.adminDashboardService.getChargesByMember(this.member.customer_id).subscribe(stripeData => {
+      //   this.stripeCharges = stripeData.charges.data;
+      //
+      //   this.stripeCharges.forEach(charge => {
+      //     charge.created = moment.unix(charge.created).format("MMM D YYYY");
+      //
+      //     const amount = charge.amount.toString();
+      //     charge.amount = `$${amount.slice(0, amount.length - 2)}.${amount.slice(-2)}`;
+      //   });
+      //
+      //   console.log(this.stripeCharges);
+      // });
     });
   }
 }

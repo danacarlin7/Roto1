@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component } from "@angular/core";
+import { AuthService } from "../../../shared/new-services/auth.service";
+import { ActivatedRoute, Router } from "@angular/router";
 /**
  * Created by Hiren on 24-07-2017.
  */
@@ -19,7 +19,7 @@ export class VerifyAccComponent {
   reSendToken: boolean;
   isLoading: boolean;
 
-  constructor(private router:Router, private activatedRoute:ActivatedRoute, private authService:AuthService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {
 
   }
 
@@ -40,7 +40,7 @@ export class VerifyAccComponent {
             this.authService.verifyToken(this.token).subscribe(
               success => {
                 this.isLoading = false;
-                this.router.navigate(['/login'], {queryParams: {info: 'verify'}});
+                this.router.navigate(['/login'], { queryParams: { info: 'verify' } });
               },
               error => {
                 this.isLoading = false;

@@ -1,7 +1,7 @@
-<section class="sectionHedin">
+<!-- <section class="sectionHedin">
   <div class="container ">
     <div class="common-loader" *ngIf="isLoading">
-      <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+      <mat-progress-spinner mode="indeterminate" color="accent" diameter="50"></mat-progress-spinner>
     </div>
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sidePad">
@@ -19,48 +19,13 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="dTabs">
-          <!-- Nav tabs -->
           <rp-tab-view [tabs]="newsTabs"
                        [activeTab]="activeTab"
                        (tabChanged)="onNewsTabChanged($event)"></rp-tab-view>
-          <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="NFL">
 
               <div class="dTabs dTabsInner">
-                <!-- Nav tabs -->
-                <!--<ul class="nav nav-tabs" role="tablist">-->
-                  <!--<li role="presentation" class="active">-->
-                    <!--<a (click)="onNewsPriorityChanged(PRIORITY_ALL)"-->
-                       <!--role="tab"-->
-                       <!--data-toggle="tab"-->
-                       <!--aria-controls="All">All-->
-                    <!--</a>-->
-                  <!--</li>-->
-                  <!--<li role="presentation">-->
-                    <!--<a href="#Urgent"-->
-                       <!--(click)="onNewsPriorityChanged(PRIORITY_URGENT)"-->
-                       <!--role="tab"-->
-                       <!--data-toggle="tab"-->
-                       <!--aria-controls="Urgent">Urgent-->
-                    <!--</a>-->
-                  <!--</li>-->
-                  <!--<li role="presentation">-->
-                    <!--<a (click)="onNewsPriorityChanged(PRIORITY_IMPORTANT)"-->
-                       <!--href="#Important"-->
-                       <!--aria-controls="Important"-->
-                       <!--role="tab"-->
-                       <!--data-toggle="tab">Important</a>-->
-                  <!--</li>-->
-                  <!--<li role="presentation">-->
-                    <!--<a (click)="onNewsPriorityChanged(PRIORITY_NOTE_WORTHY)"-->
-                       <!--href="#Noteworthy"-->
-                       <!--aria-controls="Noteworthy"-->
-                       <!--role="tab"-->
-                       <!--data-toggle="tab">Notewort</a>-->
-                  <!--</li>-->
-                <!--</ul>-->
-                <!-- Tab panes -->
                 <div class="tab-content">
                   <div class="tab-pane active">
                     <div class="no-news-msg" *ngIf="!allInjuriesRecords || !allInjuriesRecords.length">No data available !!</div>
@@ -89,27 +54,11 @@
                             <p style="text-align: justify">{{inj?.injury_notes}}</p>
                             <h5 *ngIf="inj.injury_analysis">Analysis</h5>
                             <p *ngIf="inj.injury_analysis" style="text-align: justify">{{inj?.injury_analysis}}</p>
-                            <!--<i class="newsReprtr">As reported by RotoGrinders Player Projections</i>-->
                           </div>
                         </div>
                         <div class="newsItmBtm">
                           <div class="newsItmBtmLft">
-                            <!--<div class="newsItmBtmLft1">-->
-                              <!--&lt;!&ndash;<span class="icnWrapperS"><img src="../../../../assets/images/news_icn1.png" alt=""&ndash;&gt;-->
-                                                             <!--&lt;!&ndash;class="img-responsive"/></span><span class="txtWrapper">86.14 Proj</span>&ndash;&gt;-->
-                            <!--</div>-->
-                            <!--<div class="newsItmBtmLft2">-->
-                              <!--<span class="txtWrapper">10.90 pt/$</span>-->
-                            <!--</div>-->
-                            <!--<div class="newsItmBtmLft3">-->
-                              <!--<div class="">-->
-                                <!--<span class="txtWrapper">$7,900</span>-->
-                              <!--</div>-->
-                              <!--<div class="">-->
-                                <!--<span class="icnWrapperS"><img src="../../../../assets/images/contests_icn1.png" alt=""-->
-                                                               <!--class="img-responsive"/></span><span class="txtWrapper">93.72 Proj</span>-->
-                              <!--</div>-->
-                            <!--</div>-->
+
                             <div class="newsItmBtmLft4" *ngIf="inj.injury.return_date">
                               <span class="injury-data">Return Date: </span>
                               <span class="txtWrapper">{{inj?.injury?.return_date}}</span>
@@ -120,8 +69,6 @@
                             </div>
                           </div>
                           <div class="newsItmBtmRght">
-                            <!--<span class="icnWrapperS"><img src="../../../../assets/images/news_icn2.png" alt=""-->
-                                                           <!--class="img-responsive"/></span>-->
                             <span class="txtWrapper injury-status">{{inj?.injury?.status}}</span>
                           </div>
                         </div>
@@ -143,4 +90,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

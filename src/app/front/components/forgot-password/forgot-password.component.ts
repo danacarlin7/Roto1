@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {AuthService} from "../../../shared/services/auth.service";
+import { Component } from "@angular/core";
+import { AuthService } from "../../../shared/new-services/auth.service";
 /**
  * Created by Hiren on 06-07-2017.
  */
@@ -12,15 +12,15 @@ import {AuthService} from "../../../shared/services/auth.service";
 })
 export class ForgotPasswordComponent {
 
-  isError:boolean;
-  errorMsg:string;
-  isMailSent:boolean;
+  isError: boolean;
+  errorMsg: string;
+  isMailSent: boolean;
 
-  constructor(private authService:AuthService) {
+  constructor(private authService: AuthService) {
 
   }
 
-  onBtnSubmitClick(email:string) {
+  onBtnSubmitClick(email: string) {
     this.errorMsg = "";
     this.isError = false;
     if (email && this.isValidEMail(email)) {
@@ -28,7 +28,7 @@ export class ForgotPasswordComponent {
     }
   }
 
-  sendResetPwdLink(email:string) {
+  sendResetPwdLink(email: string) {
     let data = {
       email: email,
       is_excel: false,
@@ -49,7 +49,7 @@ export class ForgotPasswordComponent {
     )
   }
 
-  isValidEMail(email:string) {
+  isValidEMail(email: string) {
     var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     return !(email != "" && (email.length <= 5 || !EMAIL_REGEXP.test(email)));
   }
