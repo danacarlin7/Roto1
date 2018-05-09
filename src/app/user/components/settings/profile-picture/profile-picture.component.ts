@@ -22,6 +22,7 @@ import { LoggedUser } from "../../../../shared/models/logged-user.model";
 // import { UserDashboardServices } from "../../../services/user-dashboard.service";
 import { Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
+import { User } from "../../../../shared/models/user";
 /**
  * Created by Hiren on 30-07-2017.
  */
@@ -34,6 +35,8 @@ import { environment } from "../../../../../environments/environment";
 export class ProfilePictureComponent {
 
   filename;
+  userResp: User;
+  
   configUpload = {
     // Change this to your upload POST address:
     server: 'https://api.dfsportgod.com/api/uploadImage',
@@ -68,19 +71,15 @@ export class ProfilePictureComponent {
   onUploadSuccess(event) {
     console.log("Profile Pic updated");
     this.authService.retrieveLoggedUserInfo()
-      .subscribe(
-      response => {
-        if (response.statusCode == 200) {
-          this.authService.loggedUser = response.data;
-        }
-        else {
-
-        }
-      },
-      error => {
+      .subscribe(response => {
+        this.userResp = response;
+        console.log(this.userResp);
+        // if (response.statusCode == 200) {
+        //   this.authService.loggedUser = response.data;
+        // }
+      },error => {
         console.log("http error => ", error);
-      }
-      );
+      });
   }
 
   onSending(file) {

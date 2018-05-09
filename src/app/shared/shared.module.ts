@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 // import { AuthService } from "./services/auth.service";
 import { CommonModule } from "@angular/common";
 import { SharedMaterialComponents } from "./material-components";
-// import { AuthGuard } from "./services/auth.guard";
+import { AuthGuard } from "./new-services/auth.guard";
 // import { DataTableModule } from "angular2-datatable";
 import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 // import { ModalModule } from "angular2-modal/esm/index";
@@ -16,8 +16,8 @@ import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { TabViewComponent } from "./components/tab-view/tab-view.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { SharedPrimeNGComponents } from "./prime-ng-components";
-// import { SubscriptionGuard } from "./services/subscription.guard";
-// import { SubscriptionNewGuard } from "./services/subscription-new.guard";
+import { SubscriptionGuard } from "./new-services/subscription.guard";
+import { SubscriptionNewGuard } from "./new-services/subscription-new.guard";
 import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.directive";
 /**
  * Created by Hiren on 04-06-2017.
@@ -61,7 +61,10 @@ export class SharedModule {
     return {
       ngModule: SharedModule,
       providers: [
-        // AuthService, AuthGuard, SubscriptionGuard, SubscriptionNewGuard
+        // AuthService,
+        AuthGuard,
+        SubscriptionGuard,
+        SubscriptionNewGuard
       ]
     };
   }

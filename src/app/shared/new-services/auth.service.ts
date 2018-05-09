@@ -5,7 +5,10 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LoggedUser } from "../models/logged-user.model";
 import { environment } from "../../../environments/environment";
+
 import { Login } from "../models/login";
+import { User } from "../models/user";
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -46,7 +49,7 @@ export class AuthService {
   }
 
   getToken(): string {
-    return environment.token;
+    return localStorage.getItem('token') ? localStorage.getItem('token') : environment.token;
   }
 
   // getHeaders(): Observable<any> {
@@ -69,11 +72,10 @@ export class AuthService {
     if (this.loggedUser) {
       return this.loggedUser.is_subscribe;
     } else if (calledByGuard && environment.token) {
-      return this.http.get<any>(this.apiUrl + 'memberinfo', httpOptions)
-        .pipe(
-        tap(member => this.log(`fetched member`)),
-        catchError(this.handleError('memberinfo', {}))
-        );
+      return this.http.get<any>(this.apiUrl + 'memberinfo', httpOptions).pipe(
+        tap(member => console.log('fetched member',member)),
+        catchError(this.handleError('memberinfo'))
+      );
     } else {
       console.log("not a subscriber");
     }
@@ -117,8 +119,9 @@ export class AuthService {
   }
 
   login(data: string): Observable<Login> {
+    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.post<Login>(this.appUrl + 'authenticate', data, httpOptions).pipe(
-      tap((user: Login) => this.log(`user login =${user}`)),
+      tap((user: any) => console.log(`user login = ${user.message}`)),
       catchError(this.handleError<Login>('login'))
     );
   }
@@ -127,8 +130,8 @@ export class AuthService {
 
   loginWP(data: string): Observable<any> {
     return this.http.post<any>(this.wpUrl, data).pipe(
-      tap((user: any) => this.log(`user wp login =${user}`)),
-      catchError(this.handleError<any>('wp authenticate'))
+      tap((user: any) => console.log('user wp login',user.message)),
+      catchError(this.handleError<any>('loginWP'))
     );
   }
 
@@ -139,53 +142,59 @@ export class AuthService {
     //this.userLoggedInEvent.emit(false);
   }
 
-  retrieveLoggedUserInfo(): Observable<any> {
-    return this.http.get(this.apiUrl + 'memberinfo', httpOptions)
-      .pipe(
-      tap(member => this.log(`fetched member`)),
-      catchError(this.handleError<any>('memberinfo', {}))
-      );
+  retrieveLoggedUserInfo(): Observable<User> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.getToken()));
+    return this.http.get<User>(this.apiUrl + 'memberinfo', httpOptions).pipe(
+      tap((member: User) =>  console.log(`fetched member = ${member.message}`)),
+      catchError(this.handleError<User>('retrieveLoggedUserInfo'))
+    );
   }
 
   registerNewUser(data: any): Observable<any> {
-    return this.http.post<any>(this.appUrl + 'signup', data).pipe(
-      tap((user: any) => this.log(`user signup =${user}`)),
-      catchError(this.handleError<any>('signup'))
+    httpOptions.headers = httpOptions.headers.delete('Authorization');
+    return this.http.post<any>(this.appUrl + 'signup', data, httpOptions).pipe(
+      tap((user: any) =>  console.log(`user signup = ${user.message}`)),
+      catchError(this.handleError<any>('registerNewUser'))
     );
   }
 
   signUPStepOne(data: any): Observable<any> {
-    return this.http.post<any>(this.appUrl + 'signupOne', data).pipe(
-      tap((user: any) => this.log(`user signup one =${user}`)),
-      catchError(this.handleError<any>('signupOne'))
+    httpOptions.headers = httpOptions.headers.delete('Authorization');
+    return this.http.post<any>(this.appUrl + 'signupOne', data, httpOptions).pipe(
+      tap((user: any) => console.log(`user signup one = ${user}`)),
+      catchError(this.handleError<any>('signUPStepOne'))
     );
   }
 
   verifyEmail(data: any) {
-    return this.http.post<any>(this.appUrl + 'getToken', data).pipe(
-      tap((user: any) => this.log(`getToken =${user}`)),
+    httpOptions.headers = httpOptions.headers.delete('Authorization');
+    return this.http.post<any>(this.appUrl + 'getToken', data, httpOptions).pipe(
+      tap((token: any) => console.log(`getToken = ${token}`)),
       catchError(this.handleError<any>('getToken'))
     );
   }
 
   verifyToken(token): Observable<any> {
-    return this.http.post<any>(this.appUrl + 'verifyToken', { token: token }).pipe(
-      tap((token: any) => this.log(`verifyToken =${token}`)),
+    httpOptions.headers = httpOptions.headers.delete('Authorization');
+    return this.http.post<any>(this.appUrl + 'verifyToken', { token: token }, httpOptions).pipe(
+      tap((token: any) => console.log(`verifyToken = ${token}`)),
       catchError(this.handleError<any>('verifyToken'))
     );
   }
 
   changePassword(data): Observable<any> {
-    return this.http.post<any>(this.appUrl + 'verifyToken', data).pipe(
-      tap((pwd: any) => this.log(`changePassword =${pwd}`)),
+    httpOptions.headers = httpOptions.headers.delete('Authorization');
+    return this.http.post<any>(this.appUrl + 'verifyToken', data, httpOptions).pipe(
+      tap((pwd: any) => console.log(`user changePassword = ${pwd}`)),
       catchError(this.handleError<any>('changePassword'))
     );
   }
 
   updatePasswordFromSettings(data): Observable<any> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.getToken()));
     return this.http.post<any>(this.apiUrl + 'changePassword', data, httpOptions).pipe(
-      tap((user: any) => this.log(`user changePassword =${user}`)),
-      catchError(this.handleError<any>('changePassword'))
+      tap((user: any) => console.log(`user changePassword = ${user}`)),
+      catchError(this.handleError<any>('updatePasswordFromSettings'))
     );
   }
 
@@ -201,22 +210,23 @@ export class AuthService {
   //   //     .catch(error => Observable.throw(error.json()));
   //   // }
   //   //
-  //   // uploadProfile(fileList) {
-  //   //   let file: File = fileList[0];
-  //   //   let formData: FormData = new FormData();
-  //   //   formData.append('uploadFile', file, file.name);
-  //   //   return this.http.post(environment.api_end_point + 'api/uploadImage', formData, {
-  //   //     headers: new Headers({
-  //   //       'Content-Type': 'multipart/form-data',
-  //   //       'Accept': 'application/json',
-  //   //       'Authorization': 'Bearer ' + this.getToken()
-  //   //     })
-  //   //   })
-  //   //     .map(res => res.json())
-  //   //     .catch(error => Observable.throw(error.json()));
-  //   // }
-  //
-  //
+  uploadProfile(fileList) {
+    let file: File = fileList[0];
+    let formData: FormData = new FormData();
+    formData.append('uploadFile', file, file.name);
+
+    return this.http.post<any>(this.apiUrl + 'uploadImage', formData, {
+        headers: new HttpHeaders({
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + this.getToken()
+        })
+      }).pipe(
+      tap((res: any) => console.log(`image upload = ${res}`)),
+      catchError(this.handleError<any>('uploadProfile'))
+    );  
+  }
+
   //   /** products from the server */
   //   retrieveProducts(): Observable<any> {
   //     return this.http.get(this.apiUrl + 'getCustomerProducts')
@@ -237,15 +247,15 @@ export class AuthService {
   //
   //   /** GET products by id. Return `undefined` when id not found */
   //   // getProducts404<Data>(id: number): Observable<RootObject> {
-  //   //   const url = `${this.apiUrl}/?id=${id}`;
+  //   //   const url = `${this.apiUrl}/?id= ${id}`;
   //   //   return this.http.get<RootObject>(url)
   //   //     .pipe(
   //   //       map(products => products[0]), // returns a {0|1} element array
   //   //       tap(h => {
   //   //         const outcome = h ? `fetched` : `did not find`;
-  //   //         this.log(`${outcome} products id=${id}`);
+  //   //         this.log(`${outcome} products id= ${id}`);
   //   //       }),
-  //   //       catchError(this.handleError<RootObject>(`getProducts id=${id}`))
+  //   //       catchError(this.handleError<RootObject>(`getProducts id= ${id}`))
   //   //     );
   //   // }
   //
@@ -253,8 +263,8 @@ export class AuthService {
   //   // getProduct(id: number): Observable<RootObject> {
   //   //   const url = `${this.apiUrl}/${id}`;
   //   //   return this.http.get<RootObject>(url).pipe(
-  //   //     tap(_ => this.log(`fetched product id=${id}`)),
-  //   //     catchError(this.handleError<RootObject>(`getProduct id=${id}`))
+  //   //     tap(_ => this.log(`fetched product id= ${id}`)),
+  //   //     catchError(this.handleError<RootObject>(`getProduct id= ${id}`))
   //   //   );
   //   // }
   //
@@ -264,7 +274,7 @@ export class AuthService {
   //   //     // if not search term, return empty hero array.
   //   //     return of([]);
   //   //   }
-  //   //   return this.http.get<RootObject[]>(`api/heroes/?name=${term}`).pipe(
+  //   //   return this.http.get<RootObject[]>(`api/heroes/?name= ${term}`).pipe(
   //   //     tap(_ => this.log(`found product matching "${term}"`)),
   //   //     catchError(this.handleError<Hero[]>('searchProduct', []))
   //   //   );
@@ -276,7 +286,7 @@ export class AuthService {
   //   /** POST: add a new enquiry to the server */
   //   saveEnquiry (enquiry: string): Observable<any> {
   //     return this.http.post<any>(this.apiUrl + 'saveEnquiry', enquiry, httpOptions).pipe(
-  //       tap((enquiry: any) => this.log(`added enquiry  id=${enquiry.id}`)),
+  //       tap((enquiry: any) => this.log(`added enquiry  id= ${enquiry.id}`)),
   //       catchError(this.handleError<any>('addEnquiry'))
   //     );
   //   }
@@ -287,7 +297,7 @@ export class AuthService {
   //   //   const url = `${this.heroesUrl}/${id}`;
   //   //
   //   //   return this.http.delete<Hero>(url, httpOptions).pipe(
-  //   //     tap(_ => this.log(`deleted hero id=${id}`)),
+  //   //     tap(_ => this.log(`deleted hero id= ${id}`)),
   //   //     catchError(this.handleError<Hero>('deleteHero'))
   //   //   );
   //   // }
@@ -295,31 +305,10 @@ export class AuthService {
   //   /** PUT: update the hero on the server */
   //   // updateHero (hero: Hero): Observable<any> {
   //   //   return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
-  //   //     tap(_ => this.log(`updated hero id=${hero.id}`)),
+  //   //     tap(_ => this.log(`updated hero id= ${hero.id}`)),
   //   //     catchError(this.handleError<any>('updateHero'))
   //   //   );
   //   // }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param RootObject - optional value to return as the observable RootObject
-   */
-  // private handleError<T>(operation = 'operation', RootObject?: T) {
-  //   return (error: any): Observable<T> => {
-  //
-  //     // TODO: send the error to remote logging infrastructure
-  //     console.error(error); // log to console instead
-  //
-  //     // TODO: better job of transforming error for user consumption
-  //     this.log(`${operation} failed: ${error.message}`);
-  //
-  //     // Let the app keep running by returning an empty RootObject.
-  //     // return of(RootObject as T);
-  //     return throwError(error.error);
-  //   };
-  // }
 
   private handleError<T>(operation = 'operation', RootObject?: T) {
     return (error: HttpErrorResponse): Observable<T> => {

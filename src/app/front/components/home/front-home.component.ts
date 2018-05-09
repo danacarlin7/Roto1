@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
 // import { FrontService } from "../../services/front.service";
-// import { ArticleService } from "../../services/article.service";
+import { ArticleService } from "../../new-services/article.service";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { News } from "../../models/news.model";
@@ -47,7 +47,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   constructor(
     // private frontService: FrontService,
-    // private articleService: ArticleService,
+    private articleService: ArticleService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute) {
@@ -107,49 +107,49 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   retrieveFeatured() {
-    // this.articleService.fetchRelated().subscribe(
-    //   ids => {
-    //     this.related = ids;
-    //     // console.log(this.related);
-    //     // for (let key in ids) {
-    //     this.fetchPostsByType('featured');
-    //     // }
-    //   }
-    // );
+    this.articleService.fetchRelated().subscribe(
+      ids => {
+        this.related = ids;
+        // console.log(this.related);
+        // for (let key in ids) {
+        this.fetchPostsByType('featured');
+        // }
+      }
+    );
   }
 
   fetchPostsByType(key: string) {
     let cid = this.related[key].join(',');
-    // this.articleService.fetchPosts({ include: cid }).subscribe(
-    //   posts => {
-    //     let mid = [];
-    //     for (let j = 0; j < posts.length; j++) {
-    //       posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
-    //       if (posts[j].featured_media)
-    //         mid.push(posts[j].featured_media);
-    //     }
-    //     this[key] = posts;
-    //     console.log(posts);
-    //     this.featured = posts;
-    //     // if(key=='week')
-    //     //   console.log(posts);
-    //     let mids = mid.join(',');
-    //     if (mids) {
-    //       this.articleService.fetchMedia({ include: mids }).subscribe(
-    //         images => {
-    //           for (let k = 0; k < images.length; k++) {
-    //             let image = images[k];
-    //             this.media[image.id] = image.source_url;
-    //           }
-    //         }
-    //       );
-    //     }
-    //   }
-    // );
+    this.articleService.fetchPosts({ include: cid }).subscribe(
+      posts => {
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
+          posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
+          if (posts[j].featured_media)
+            mid.push(posts[j].featured_media);
+        }
+        this[key] = posts;
+        console.log(posts);
+        this.featured = posts;
+        // if(key=='week')
+        //   console.log(posts);
+        let mids = mid.join(',');
+        if (mids) {
+          this.articleService.fetchMedia({ include: mids }).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
-
-  retrieveSocialFeeds() {
+  /* social feeds */
+  // retrieveSocialFeeds() {
     // this.frontService.retrieveTwitterFeeds()
     //   .subscribe(
     //   response => {
@@ -166,7 +166,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     //     console.log("http error => ", error);
     //   }
     //   );
-
+    //
     // this.frontService.retrieveFBFeeds()
     //   .subscribe(
     //     response => {
@@ -198,7 +198,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     //       console.log("http error => ", error);
     //     }
     //   );
-  }
+  // }
 
 
   renderBaseballArticles() {
@@ -312,67 +312,67 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   getArticlesByGameId(id: any, offset_cnt = 0) {
     let catid = id;
     let articlesList = [];
-    // this.articleService.fetchPosts({ categories: catid, per_page: 5, offset: offset_cnt }).subscribe(
-    //   posts => {
-    //     let mid = [];
-    //     for (let j = 0; j < posts.length; j++) {
-    //       posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
-    //       if (posts[j].featured_media)
-    //         mid.push(posts[j].featured_media);
-    //       articlesList.push(posts[j]);
-    //     }
-    //
-    //     if (id == 17) {
-    //       this.baseballArticles = articlesList;
-    //       //this.renderBaseballArticles();
-    //       // console.log("baseballArticles => ", this.baseballArticles);
-    //     }
-    //     if (id == 19) {
-    //       this.basketballArticles = articlesList;
-    //       //this.renderBasketballArticles();
-    //       // console.log("basketballArticles => ", this.basketballArticles);
-    //     }
-    //     if (id == 16) {
-    //       this.footballArticles = articlesList;
-    //       //this.renderFootballArticles();
-    //       // console.log("footballArticles => ", this.footballArticles);
-    //     }
-    //     if (id == 18) {
-    //       this.nhlArticles = articlesList;
-    //       //this.renderFootballArticles();
-    //       // console.log("nhlArticles => ", this.nhlArticles);
-    //     }
-    //     if (id == 4137) {
-    //       this.mmaArticles = articlesList;
-    //       //this.renderFootballArticles();
-    //       // console.log("mmaArticles => ", this.mmaArticles);
-    //     }
-    //     if (id == 22) {
-    //       this.nascarArticles = articlesList;
-    //       //this.renderFootballArticles();
-    //     }
-    //     if (id == 21) {
-    //       this.golfArticles = articlesList;
-    //       //this.renderFootballArticles();
-    //       // console.log("golfArticles => ", this.golfArticles);
-    //     }
-    //     if (id == 20) {
-    //       this.soccerArticles = articlesList;
-    //       // console.log("soccerArticles => ", this.soccerArticles);
-    //     }
-    //     let mids = mid.join(",");
-    //     if (mids) {
-    //       this.articleService.fetchMedia({ include: mids }).subscribe(
-    //         images => {
-    //           for (let k = 0; k < images.length; k++) {
-    //             let image = images[k];
-    //             this.media[image.id] = image.source_url;
-    //           }
-    //         }
-    //       );
-    //     }
-    //   }
-    // );
+    this.articleService.fetchPosts({ categories: catid, per_page: 5, offset: offset_cnt }).subscribe(
+      posts => {
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
+          posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
+          if (posts[j].featured_media)
+            mid.push(posts[j].featured_media);
+          articlesList.push(posts[j]);
+        }
+
+        if (id == 17) {
+          this.baseballArticles = articlesList;
+          //this.renderBaseballArticles();
+          // console.log("baseballArticles => ", this.baseballArticles);
+        }
+        if (id == 19) {
+          this.basketballArticles = articlesList;
+          //this.renderBasketballArticles();
+          // console.log("basketballArticles => ", this.basketballArticles);
+        }
+        if (id == 16) {
+          this.footballArticles = articlesList;
+          //this.renderFootballArticles();
+          // console.log("footballArticles => ", this.footballArticles);
+        }
+        if (id == 18) {
+          this.nhlArticles = articlesList;
+          //this.renderFootballArticles();
+          // console.log("nhlArticles => ", this.nhlArticles);
+        }
+        if (id == 4137) {
+          this.mmaArticles = articlesList;
+          //this.renderFootballArticles();
+          // console.log("mmaArticles => ", this.mmaArticles);
+        }
+        if (id == 22) {
+          this.nascarArticles = articlesList;
+          //this.renderFootballArticles();
+        }
+        if (id == 21) {
+          this.golfArticles = articlesList;
+          //this.renderFootballArticles();
+          // console.log("golfArticles => ", this.golfArticles);
+        }
+        if (id == 20) {
+          this.soccerArticles = articlesList;
+          // console.log("soccerArticles => ", this.soccerArticles);
+        }
+        let mids = mid.join(",");
+        if (mids) {
+          this.articleService.fetchMedia({ include: mids }).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
   encodeHtml(extract: string) {

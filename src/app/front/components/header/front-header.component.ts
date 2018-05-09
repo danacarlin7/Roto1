@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, HostListener } from "@angular/core";
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { LoggedUser } from "../../../shared/models/logged-user.model";
 import { Router } from "@angular/router";
+import { User } from "../../../shared/models/user";
 
 /**
  * Created by Hiren on 05-06-2017.
@@ -17,6 +18,7 @@ declare var jQuery: any;
 export class FrontHeaderComponent {
   @ViewChild("profilePic") profilePic: ElementRef;
 
+  userResp: User;
   isLoggedIn: boolean;
   profileImagePath: string;
   role: string;
@@ -76,19 +78,15 @@ export class FrontHeaderComponent {
 
     if (this.authService.isLoggedIn()) {
       this.authService.retrieveLoggedUserInfo()
-        .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.authService.loggedUser = response.data;
-          }
-          else {
-
-          }
-        },
-        error => {
+        .subscribe(response => {
+          this.userResp = response;
+          console.log(this.userResp);
+          // if (response.statusCode == 200) {
+          //   this.authService.loggedUser = response.data;
+          // }
+        },error => {
           console.log("http error => ", error);
-        }
-        )
+        });
     }
   }
 

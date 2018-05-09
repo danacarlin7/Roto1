@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from "../../../shared/new-services/auth.service";
-// import { ArticleService } from "../../services/article.service";
+import { ArticleService } from "../../new-services/article.service";
+
+import { CategoryData } from "../../models/category-data";
+import { PostData } from "../../models/post-data";
 
 declare var jQuery: any;
 
@@ -14,13 +17,14 @@ declare var jQuery: any;
 export class ArticlesComponent implements OnInit {
 
   constructor(private authService: AuthService, private activatedRoute: ActivatedRoute, private router: Router,
-    // private articleService: ArticleService
+    private articleService: ArticleService
   ) {
     localStorage.setItem('free', "0");
   }
 
   category: any;
-  categories: Array<any>;
+  categories: Array<CategoryData>;
+  postsResp: Array<PostData>;
   posts: Object = {};
   media: Object = {};
   hot: Array<any> = [];
@@ -60,52 +64,71 @@ export class ArticlesComponent implements OnInit {
       }
     );
 
-    // this.articleService.fetchCategories().subscribe(
-    //   categories => {
-    //     for (let i = 0; i < categories.length; i++) {
-    //       if (categories[i].id == 1) {
-    //         categories.splice(i, 1);
-    //         break;
-    //       }
-    //     }
-    //     this.categories = categories;
-    //
-    //     this.categories.push({
-    //       'count': 20,
-    //       'description': '',
-    //       'id': 20,
-    //       'link': 'https://wordpress.rotopros.com/category/soccer/',
-    //       'loaded': 5,
-    //       'meta': [],
-    //       'name': 'Soccer',
-    //       'parent': 0,
-    //       'slug': 'soccer',
-    //       'taxonomy': 'category'
-    //     });
-    //
-    //     console.log(this.categories);
-    //     for (let i = 0; i < this.categories.length; i++) {
-    //       this.categories[i]['loaded'] = 0;
-    //       let category = this.categories[i];
-    //       // if(category.id == 20 )
-    //       //   this.categories[i]['loaded'] = 2;
-    //       if (i == 0) {
-    //         this.activeTab = category.id;
-    //         this.subActiveTab = '';
-    //       }
-    //       this.posts[category.id] = [];
-    //       this.fetchPostsByCat(category);
-    //     }
-    //   }
-    // );
-    // this.articleService.fetchRelated().subscribe(
-    //   ids => {
-    //     this.related = ids;
-    //     for (let key in ids) {
-    //       this.fetchPostsByType(key);
-    //     }
-    //   }
-    // );
+    this.articleService.fetchCategories().subscribe(
+      categories => {
+        this.categories = categories;
+        for (let i = 0; i < this.categories.length; i++) {
+          if (this.categories[i].id == 1) {
+            this.categories.splice(i, 1);
+            break;
+          }
+        }
+
+        this.categories.push({
+          'id': 20,
+          'count': 20,
+          'description': '',
+          'link': 'https://wordpress.rotopros.com/category/soccer/',
+          'name': 'Soccer',
+          'loaded': 5,
+          'meta': [],
+          'slug': 'soccer',
+          'taxonomy': 'category',
+          'parent': 0,
+          '_links': {
+            "self": [{
+              "href": "https:\/\/wordpress.rotopros.com\/wp-json\/wp\/v2\/categories\/20"
+            }],
+            "collection": [{
+              "href": "https:\/\/wordpress.rotopros.com\/wp-json\/wp\/v2\/categories"
+            }],
+            "about": [{
+              "href": "https:\/\/wordpress.rotopros.com\/wp-json\/wp\/v2\/taxonomies\/category"
+            }],
+            "wp:post_type": [{
+              "href": "https:\/\/wordpress.rotopros.com\/wp-json\/wp\/v2\/posts?categories=20"
+            }],
+            "curies": [{
+              "name": "wp",
+              "href": "https:\/\/api.w.org\/{rel}",
+              "templated": true
+            }]
+          }
+        });
+
+        console.log(this.categories);
+        for (let i = 0; i < this.categories.length; i++) {
+          this.categories[i]['loaded'] = 0;
+          let category = this.categories[i];
+          // if(category.id == 20 )
+          //   this.categories[i]['loaded'] = 2;
+          if (i == 0) {
+            this.activeTab = category.id;
+            this.subActiveTab = '';
+          }
+          this.posts[category.id] = [];
+          this.fetchPostsByCat(category);
+        }
+      }
+    );
+    this.articleService.fetchRelated().subscribe(
+      ids => {
+        this.related = ids;
+        for (let key in ids) {
+          this.fetchPostsByType(key);
+        }
+      }
+    );
   }
 
   private getIndexOfCategory = (catid: number) => {
@@ -118,58 +141,60 @@ export class ArticlesComponent implements OnInit {
   fetchPostsByCat(category) {
     let catid = category.id;
     this.isLoading = true;
-    // this.articleService.fetchPosts({ categories: category['id'], per_page: 5, offset: category['loaded'] }).subscribe(
-    //   posts => {
-    //     this.categories[this.getIndexOfCategory(catid)].loaded += posts.length;
-    //     let mid = [];
-    //     for (let j = 0; j < posts.length; j++) {
-    //       posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
-    //       if (posts[j].featured_media)
-    //         mid.push(posts[j].featured_media);
-    //       this.posts[catid].push(posts[j]);
-    //     }
-    //     let mids = mid.join(',');
-    //     if (mids) {
-    //       this.articleService.fetchMedia({ include: mids }).subscribe(
-    //         images => {
-    //           for (let k = 0; k < images.length; k++) {
-    //             let image = images[k];
-    //             this.media[image.id] = image.source_url;
-    //           }
-    //         }
-    //       );
-    //     }
-    //     this.isLoading = false;
-    //   }
-    // );
+    this.articleService.fetchPosts({ categories: category['id'], per_page: 5, offset: category['loaded'] }).subscribe(
+      posts => {
+        this.postsResp = posts;
+        this.categories[this.getIndexOfCategory(catid)].loaded += this.postsResp.length;
+        let mid = [];
+        for (let j = 0; j < this.postsResp.length; j++) {
+          this.postsResp[j].extract = this.encodeHtml(this.postsResp[j].excerpt.rendered);
+          if (this.postsResp[j].featured_media)
+            mid.push(this.postsResp[j].featured_media);
+          this.posts[catid].push(this.postsResp[j]);
+        }
+        let mids = mid.join(',');
+        if (mids) {
+          this.articleService.fetchMedia({ include: mids }).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+        this.isLoading = false;
+      }
+    );
   }
 
   fetchPostsByType(key: string) {
     let cid = this.related[key].join(',');
-    // this.articleService.fetchPosts({ include: cid }).subscribe(
-    //   posts => {
-    //     let mid = [];
-    //     for (let j = 0; j < posts.length; j++) {
-    //       posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
-    //       if (posts[j].featured_media)
-    //         mid.push(posts[j].featured_media);
-    //     }
-    //     this[key] = posts;
-    //     // if(key=='week')
-    //     //   console.log(posts);
-    //     let mids = mid.join(',');
-    //     if (mids) {
-    //       this.articleService.fetchMedia({ include: mids }).subscribe(
-    //         images => {
-    //           for (let k = 0; k < images.length; k++) {
-    //             let image = images[k];
-    //             this.media[image.id] = image.source_url;
-    //           }
-    //         }
-    //       );
-    //     }
-    //   }
-    // );
+    this.articleService.fetchPosts({ include: cid }).subscribe(
+      posts => {
+        let mid = [];
+
+        for (let j = 0; j < posts.length; j++) {
+          posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
+          if (posts[j].featured_media)
+            mid.push(posts[j].featured_media);
+        }
+        this[key] = posts;
+        // if(key=='week')
+        //   console.log(posts);
+        let mids = mid.join(',');
+        if (mids) {
+          this.articleService.fetchMedia({ include: mids }).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
   encodeHtml(extract: string) {
@@ -228,7 +253,7 @@ export class ArticlesComponent implements OnInit {
 
 
     if (!this.authService.isLoggedIn()) {
-      if(localStorage.getItem('free') == "1"){
+      if (localStorage.getItem('free') == "1") {
         this.isStatus = true;
         this.isLoginError = false;
         this.isSubscribeError = false;
@@ -240,10 +265,10 @@ export class ArticlesComponent implements OnInit {
         jQuery("#openModel").click();
       }
     } else if (this.authService.isLoggedIn() && (localStorage.getItem('free') == "1" || this.authService.isSubscriber(true))) {
-        this.isStatus = true;
-        this.isLoginError = false;
-        this.isSubscribeError = false;
-        this.router.navigate(['articles', post.id])
+      this.isStatus = true;
+      this.isLoginError = false;
+      this.isSubscribeError = false;
+      this.router.navigate(['articles', post.id])
     } else {
       this.isStatus = false;
       this.isLoginError = false;

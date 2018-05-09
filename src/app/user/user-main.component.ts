@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
-import {AuthService} from "../shared/new-services/auth.service";
-import {Router, NavigationEnd} from "@angular/router";
-
+import { Component } from "@angular/core";
+import { AuthService } from "../shared/new-services/auth.service";
+import { Router, NavigationEnd } from "@angular/router";
+import { User } from "../shared/models/user";
 
 
 /**
@@ -14,25 +14,21 @@ import {Router, NavigationEnd} from "@angular/router";
   styleUrls: ['./user-main.component.css']
 })
 export class UserMainComponent {
-
-  constructor(private authService: AuthService, private router: Router) {
-
-  }
+  userResp: User;
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.authService.retrieveLoggedUserInfo()
       .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            this.authService.loggedUser = response.data;
-          }
-          else {
-
-          }
-        },
-        error => {
-          console.log("http error => ", error);
-        }
+      response => {
+        this.userResp = response;
+        console.log(this.userResp);
+        // if (response.statusCode == 200) {
+        //   this.authService.loggedUser = response.data;
+        // }
+      }, error => {
+        console.log("http error => ", error);
+      }
       )
   }
 

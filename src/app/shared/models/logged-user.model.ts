@@ -9,7 +9,7 @@ export interface LoggedUser{
   last_name: string;
   email: string;
   user_name: string;
-  updated_at: Date;
+  // updated_at: Date;
   created_short_date: string;
   subscriptions: Subscription[];
   mobile: string;

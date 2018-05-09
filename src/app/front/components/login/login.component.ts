@@ -3,6 +3,9 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { environment } from "../../../../environments/environment";
+import { Login } from "../../../shared/models/login";
+import { User } from "../../../shared/models/user";
+
 // import { AuthService } from 'ng2-social-login/src/app/cuppaOAuth/auth.service';
 /**
  * Created by Hiren on 07-06-2017.
@@ -14,6 +17,9 @@ import { environment } from "../../../../environments/environment";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  loginResp: Login;
+  userResp: User;
 
   loginForm: FormGroup;
   redirectUrl: string;
@@ -107,73 +113,70 @@ export class LoginComponent {
 
     this.authService.login(JSON.stringify(data))
       .subscribe(response => {
-        console.log(response);
-        // if (response.statusCode == 200) {
-        //   if (response.data.is_partial) {
-        //     this.authService.partialUser = response.data;
-        //     this.router.navigate(['/subscribe']);
-        //     return;
-        //   }
-        //   console.log("login successful => ", response);
-        //   if (this.loginForm.value.rememberMe) {
-        //     localStorage.setItem('remember', '1');
-        //   }
-        //   localStorage.setItem('data', JSON.stringify(response.data));
-        //   localStorage.setItem('token', response.data.token);
-        //   localStorage.setItem('role', response.data.role);
-        //
-        //   // environment.token = response.data.token;
-        //   // environment.role = response.data.role;
-        //   // // this.authService.userLoggedInEvent.emit(true);
-        //   // // localStorage.setItem('token', JSON.stringify(response.data));
-        //   // this.authService.retrieveLoggedUserInfo().subscribe(
-        //   //   user => {
-        //   //     console.log("user details => ", user);
-        //   //     //     localStorage.setItem('user', JSON.stringify(user.data));
-        //   //     this.authService.loginWP(JSON.stringify(data)).subscribe(
-        //   //       response => {
-        //   //         if (response.uid) {
-        //   //           let uid = response.uid;
-        //   //           this.removeCookie('dfs_wp_logout');
-        //   //           this.createCookie('dfs_wp_user', uid, 1);
-        //   //           this.createCookie('dfs_wp_email', user.data.email, 1);
-        //   //         } else {
-        //   //           console.log(response);
-        //   //         }
-        //   //       }
-        //   //     );
-        //   //   }
-        //   // );
-        //   //
-        //   // this.authService.retrieveLoggedUserInfo()
-        //   //   .subscribe(
-        //   //   response => {
-        //   //     if (response.statusCode == 200) {
-        //   //       this.authService.loggedUser = response.data;
-        //   //     }
-        //   //     else {
-        //   //
-        //   //     }
-        //   //   },
-        //   //   error => {
-        //   //     console.log("http error => ", error);
-        //   //   }
-        //   //   );
-        //   //
-        //   // console.log('this.redirectUrl => ', this.redirectUrl);
-        //   // this.authService.isLoggedInEvent.emit(true);
-        //   // if (this.redirectUrl && this.redirectUrl.length) {
-        //   //   this.router.navigateByUrl(this.redirectUrl);
-        //   //   this.redirectUrl = "";
-        //   // }
-        //   // else if (response.data.role == 'admin') {
-        //   //   this.router.navigate(['/admin']);
-        //   // } else if (response.data.role == 'user' || response.data.role == 'provider') {
-        //   //   this.router.navigate(['/']);
-        //   // }
-        // } else {
-        //   console.log("login error from response => ", response);
-        // }
+
+        this.loginResp = response;
+
+        if (this.loginResp.statusCode == 200) {
+          if (this.loginResp.data.is_partial) {
+            this.authService.partialUser = this.loginResp.data;
+            this.router.navigate(['/subscribe']);
+            return;
+          }
+          console.log("login successful => ", this.loginResp);
+          if (this.loginForm.value.rememberMe) {
+            localStorage.setItem('remember', '1');
+          }
+          localStorage.setItem('data', JSON.stringify(this.loginResp.data));
+          localStorage.setItem('token', this.loginResp.data.token);
+          localStorage.setItem('role', this.loginResp.data.role);
+
+          environment.token = this.loginResp.data.token;
+          environment.role = this.loginResp.data.role;
+
+          /* WP Login */
+
+          // this.authService.retrieveLoggedUserInfo().subscribe(
+          //   user => {
+          //     console.log("user details => ", user);
+          //     //     localStorage.setItem('user', JSON.stringify(user.data));
+          //     this.authService.loginWP(JSON.stringify(data)).subscribe(
+          //       response => {
+          //         if (response.uid) {
+          //           let uid = response.uid;
+          //           this.removeCookie('dfs_wp_logout');
+          //           this.createCookie('dfs_wp_user', uid, 1);
+          //           this.createCookie('dfs_wp_email', user.data.email, 1);
+          //         } else {
+          //           console.log(response);
+          //         }
+          //       }
+          //     );
+          //   }
+          // );
+
+          this.authService.retrieveLoggedUserInfo()
+          .subscribe(response => {
+              this.userResp = response;
+              console.log(this.userResp);
+              if (response.statusCode == 200)
+                this.authService.loggedUser = this.userResp.data;
+          },error => {
+              console.log("http error => ", error);
+          });
+          // console.log('this.redirectUrl => ', this.redirectUrl);
+          this.authService.isLoggedInEvent.emit(true);
+
+          if (this.redirectUrl && this.redirectUrl.length) {
+            this.router.navigateByUrl(this.redirectUrl);
+            this.redirectUrl = "";
+          } else if (response.data.role == 'user' || response.data.role == 'provider') {
+            this.router.navigate(['/']);
+          } else if (response.data.role == 'admin') {
+            this.router.navigate(['/admin']);
+          }
+        } else {
+          console.log("login error from response => ", response);
+        }
       }, error => {
         console.log("login error => ", error);
         this.msg = '';
