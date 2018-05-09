@@ -81,8 +81,8 @@
   background-color: #ffffff;
   color: #0f0f0f;
   margin-bottom: 2px;
-  min-height: 320px;
-  max-height: 320px;
+  /* min-height: 320px;
+  max-height: 320px; */
 
 }
 .sport-article1 {
@@ -118,6 +118,9 @@
 }
 
 .sport-article .sport-name2 {
+  position: absolute;
+  top: 120px;
+  width:99.5%;
   font-size: 18px;
   font-weight: 900;
   padding: 0px;
@@ -126,10 +129,17 @@
   background-color: #f8c534;
 
 }
+.sport-article .article-image {
+  object-fit: cover;
+  height: 150px !important;
+  object-position: 0% 0%;
+}
+
 .sport-article1 .sport-content {
   padding: 10px;
   padding-top: 0px;
   overflow: hidden;
+  position: relative;
 }
 
 
