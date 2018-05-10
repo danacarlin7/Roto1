@@ -355,6 +355,25 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         if (id == 20) {
           this.soccerArticles = articlesList;
           // console.log("soccerArticles => ", this.soccerArticles);
+          setTimeout(()=>{
+            let ht1 = Math.max(jQuery('#nflContent').height(), jQuery('#mlbContent').height());
+            jQuery('#mlbContent').height(ht1);
+            jQuery('#nflContent').height(ht1);
+
+            let ht2 = Math.max(jQuery('#nbaContent').height(), jQuery('#nhlContent').height());
+            jQuery('#nbaContent').height(ht2);
+            jQuery('#nhlContent').height(ht2);
+
+            let ht3 = Math.max(jQuery('#mmaContent').height(), jQuery('#nascarContent').height());
+            jQuery('#mmaContent').height(ht3);
+            jQuery('#nascarContent').height(ht3);
+
+            let ht4 = Math.max(jQuery('soccerContent').height(), jQuery('#pgaContent').height());
+            jQuery('#soccerContent').height(ht4);
+            jQuery('#pgaContent').height(ht4);
+
+          },500);
+
         }
         let mids = mid.join(",");
         if (mids) {
@@ -538,4 +557,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       }
     }
   }
+
+
+
 }

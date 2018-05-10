@@ -60,6 +60,7 @@
 .nltstNwsInfoBtm h6 {
   margin: 0 0 10px 0;
   color: #163eff;
+  font-weight: 500;
   padding-left: 14px;
 }
 
@@ -80,20 +81,17 @@
   background-color: #ffffff;
   color: #0f0f0f;
   margin-bottom: 2px;
-  min-height: 320px;
-  max-height: 320px;
+  /* min-height: 320px;
+  max-height: 320px; */
 
 }
 .sport-article1 {
   background-color: #ffffff;
   color: #0f0f0f;
   margin-bottom: 15px;
-  min-height: 320px;
-  max-height: 320px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: whitesmoke;
+  margin:15px;
   overflow: scroll;
+  padding: 0px;
 
 
 }
@@ -112,13 +110,17 @@
 .sport-article1 .sport-name1 {
   font-size: 18px;
   font-weight: 900;
-  padding: 0px;
+  padding: 10px;
   border-bottom: 1px solid #dddddd;
   background-color: #f8c534;
-  text-align: center;
+  margin-bottom: 10px;
+
 }
 
 .sport-article .sport-name2 {
+  position: absolute;
+  top: 120px;
+  width:99.5%;
   font-size: 18px;
   font-weight: 900;
   padding: 0px;
@@ -127,9 +129,20 @@
   background-color: #f8c534;
 
 }
-.sport-article .sport-content {
-  padding: 0px;;
+.sport-article .article-image {
+  object-fit: cover;
+  height: 150px !important;
+  object-position: 0% 0%;
 }
+
+.sport-article1 .sport-content {
+  padding: 10px;
+  padding-top: 0px;
+  overflow: hidden;
+  position: relative;
+}
+
+
 
 .single-article {
 
@@ -146,6 +159,7 @@
   min-width: 100px;
   width: 100px;
   border: 1px solid #dddddd;
+  padding: 0px;
 }
 
 .article-with-thumb .article-img img {
@@ -156,7 +170,7 @@
 }
 
 .article-with-thumb .article-details {
-  padding: 0 5px;
+  padding: 5px 5px;
 }
 
 .article-with-thumb .article-details .article-title {
@@ -210,6 +224,7 @@ section.indexNPrt2 {
 .featuredSection{
   border-style: solid;
   border-radius: 5px;
+
   border-width: 10px;
   border-color: #000000;
   padding-left: 0px;
@@ -218,5 +233,3 @@ section.indexNPrt2 {
   margin-bottom: 0px;
   background: #000000;
 }
-
-
