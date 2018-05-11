@@ -1042,7 +1042,7 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
   .sport-article-featured{
     min-height: 150px !important;
     max-height: 150px !important;
-    width: available;
+    /* width: available; */
     padding: 0px;
     margin: 0px;
     border-style: solid;
@@ -1057,10 +1057,8 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
   }
 .sport-name2{
   padding: 0px;
-  min-height:60px;
+  min-height:30px;
   max-height:60px;
-  position:
-
 }
 
 .sport-name1{
@@ -1082,4 +1080,3 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
   padding-left: 0;
 }
 }
-
