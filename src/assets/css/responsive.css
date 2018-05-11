@@ -2945,7 +2945,11 @@
   .container {
     width: 1200px;
   }
-  .sport-article .sport-name2 {
+  
+}
+
+@media screen and (min-width: 1300px) {
+ .sport-article .sport-name2 {
     top: 120px !important;
   }
 }
