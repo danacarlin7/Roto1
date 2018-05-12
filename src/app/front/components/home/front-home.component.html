@@ -205,7 +205,7 @@
 
           <div class="ylwTpBx clearfix" style="float:none; padding-top: 0px; padding-bottom: 0px;padding-right:0px">
             <h3 style="padding-top: 25px; padding-bottom: 25px"> Featured Articles</h3>
-              <img src="../../../../assets/images/RP_Logo1.png" style= "min-height: max-content; max-width: max-content; float: right; padding-top:15px"/>
+              <img src="../../../../assets/images/RP_Logo1.png" style= "width: 100px; height:64px;min-height: max-content; max-width: max-content; float: right; padding-top:15px"/>
           <!-- </div> -->
 
           <!-- <div class="ylwTpBx clearfix" style="float:none;">
@@ -578,6 +578,9 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body" style="padding: 0">
+        <div class="loading text-center" *ngIf="!activeSingle" style="display: flex;justify-content: center" >
+          <md-progress-spinner mode="indeterminate" color="accent" style="width: 50px;height: 50px"></md-progress-spinner>
+        </div>
         <section class="articleSection mPlaceDSection" style="padding: 0;margin: 0;background: none"
                  *ngIf="activeSingle">
           <div class="container-fluid">
