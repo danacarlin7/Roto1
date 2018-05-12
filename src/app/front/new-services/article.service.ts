@@ -45,7 +45,7 @@ export class ArticleService {
     var queryStr = query.join('&');
 
     return this.http.get<PostData[]>(this.wpUrl + 'posts?' + queryStr).pipe(
-      tap((post: PostData[]) =>  console.log(`fetched post = ${ typeof post === "object" && post !== null}`)),
+      tap((post: PostData[]) =>  {}),
       catchError(this.handleError<PostData[]>('fetchPosts'))
     );
   }
@@ -78,14 +78,14 @@ export class ArticleService {
     var queryStr = query.join('&');
 
     return this.http.get<any>(this.wpUrl + 'media?' + queryStr).pipe(
-      tap((media: any) =>  console.log(`fetch Media = ${typeof media === "object" && media !== null}`)),
+      tap((media: any) =>  {}),
       catchError(this.handleError<any>('fetchMedia'))
     );
   }
 
   fetchRelated(): Observable <any> {
     return this.http.get<any>(this.wpUrlCustom).pipe(
-      tap((related: any) =>  console.log(`fetch related = ${typeof related === "object" && related !== null}`)),
+      tap((related: any) => {}),
       catchError(this.handleError<any>('fetchRelated'))
     );
   }

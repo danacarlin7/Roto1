@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit } from "@angular/core";
-// import { FrontService } from "../../services/front.service";
+import { FrontService } from "../../new-services/front.service";
 import { ArticleService } from "../../new-services/article.service";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { AuthService } from "../../../shared/new-services/auth.service";
@@ -44,9 +44,10 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   isStatus: any;
   isSubscribeError: any;
   isLoginError: any;
+  allNewsRecords: any[];
 
   constructor(
-    // private frontService: FrontService,
+    private frontService: FrontService,
     private articleService: ArticleService,
     private authService: AuthService,
     private router: Router,
@@ -54,7 +55,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot);
+    // console.log(this.route.snapshot);
     if (this.route.snapshot.params["redirected"]) {
       this.redirected = this.route.snapshot.params["redirected"];
       this.redirectMessage = this.route.snapshot.params["redirectMessage"];
@@ -129,7 +130,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
             mid.push(posts[j].featured_media);
         }
         this[key] = posts;
-        console.log(posts);
+        // console.log(posts);
         this.featured = posts;
         // if(key=='week')
         //   console.log(posts);
@@ -359,6 +360,24 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         if (id == 20) {
           this.soccerArticles = articlesList;
           // console.log("soccerArticles => ", this.soccerArticles);
+          setTimeout(()=>{
+            let ht1 = Math.max(jQuery('#nflContent').height(), jQuery('#mlbContent').height());
+            jQuery('#mlbContent').height(ht1);
+            jQuery('#nflContent').height(ht1);
+
+            let ht2 = Math.max(jQuery('#nbaContent').height(), jQuery('#nhlContent').height());
+            jQuery('#nbaContent').height(ht2);
+            jQuery('#nhlContent').height(ht2);
+
+            let ht3 = Math.max(jQuery('#mmaContent').height(), jQuery('#nascarContent').height());
+            jQuery('#mmaContent').height(ht3);
+            jQuery('#nascarContent').height(ht3);
+
+            let ht4 = Math.max(jQuery('soccerContent').height(), jQuery('#pgaContent').height());
+            jQuery('#soccerContent').height(ht4);
+            jQuery('#pgaContent').height(ht4);
+
+          },500);
         }
         let mids = mid.join(",");
         if (mids) {
@@ -418,48 +437,50 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.activeSingle = post;
   }
 
-  allNewsRecords: News[] = [];
+
+
 
   retrieveNews() {
-    /* this.frontService.retrieveHomepageNews()
-       .subscribe(
-         response => {
-           if (response.statusCode == 200) {
-             let data:Array<any> = response.data;
-             let tempNews = data.map(currData => currData['news'][0]);
-             this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
-             //this.renderNews();
-           } else {
+     this.frontService.retrieveNews({sport: 'MLB' , since: '30days'})
+       .subscribe(async response => {
+           // if (response.statusCode == 200) {
+           //   let data:Array<any> = response.data;
+           //   let tempNews = data.map(currData => currData['news'][0]);
+           //   this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
+           //   //this.renderNews();
+           // } else {
              console.log('response error => ', response);
-           }
+           // }
          },
          error => {
            console.log('http error => ', error);
          }
-       )*/
-    // this.articleService.fetchPosts({ categories: 4367, per_page: 10, offset: 0 }).subscribe(
-    //   posts => {
-    //     this.allNewsRecords = [];
-    //     let mid = [];
-    //     for (let j = 0; j < posts.length; j++) {
-    //       posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
-    //       if (posts[j].featured_media)
-    //         mid.push(posts[j].featured_media);
-    //       this.allNewsRecords.push(posts[j]);
-    //     }
-    //     let mids = mid.join(",");
-    //     if (mids) {
-    //       this.articleService.fetchMedia({ include: mids }).subscribe(
-    //         images => {
-    //           for (let k = 0; k < images.length; k++) {
-    //             let image = images[k];
-    //             this.media[image.id] = image.source_url;
-    //           }
-    //         }
-    //       );
-    //     }
-    //   }
-    // );
+       )
+    this.articleService.fetchPosts({ categories: 4367, per_page: 10, offset: 0 }).subscribe(
+      posts => {
+        // console.log(posts);
+        this.allNewsRecords = [];
+        let mid = [];
+        for (let j = 0; j < posts.length; j++) {
+          posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
+          if (posts[j].featured_media)
+            mid.push(posts[j].featured_media);
+          // console.log(posts[j]);
+          this.allNewsRecords.push(posts[j]);
+        }
+        let mids = mid.join(",");
+        if (mids) {
+          this.articleService.fetchMedia({ include: mids }).subscribe(
+            images => {
+              for (let k = 0; k < images.length; k++) {
+                let image = images[k];
+                this.media[image.id] = image.source_url;
+              }
+            }
+          );
+        }
+      }
+    );
   }
 
 
@@ -481,7 +502,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   initSocialFeed() {
-    console.log('initSocialFeed')
+    // console.log('initSocialFeed')
     let sfDivRef = jQuery(".indexNPrt2Rght");
     let footerRef = jQuery("#footer");
     let sfTop = sfDivRef.offset().top;

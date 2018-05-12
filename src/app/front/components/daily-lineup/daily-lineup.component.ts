@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NewsTabs, NewsTabConstants } from "../../constants/menu.constants";
 import { Router, ActivatedRoute } from "@angular/router";
-// import { FrontService } from "../../services/front.service";
+import { FrontService } from "../../new-services/front.service";
 import { Lineup, LineupRecord, TeamInfo, LineupData } from "../../models/lineup.model";
 /**
  * Created by Hiren on 01-07-2017.
@@ -25,10 +25,7 @@ export class DailyLineupComponent {
   lineupRecords: LineupRecord[] = [];
   isLoading: boolean;
 
-  constructor(private router: Router, private activeRoute: ActivatedRoute,
-    // private frontService: FrontService
-  ) {
-  }
+  constructor(private router: Router, private activeRoute: ActivatedRoute, private frontService: FrontService) {}
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe(
@@ -53,23 +50,23 @@ export class DailyLineupComponent {
   getData(tabName: string, timePeriod: string) {
     this.isLoading = true;
     this.activeFilter = timePeriod;
-    // this.frontService.retrieveDailyLineups(tabName, timePeriod)
-    //   .subscribe(
-    //   response => {
-    //     if (response.statusCode == 200) {
-    //       let data: Array<any> = response.data;
-    //       this.prepareLineupRecords(data);
-    //       // console.log("lineup records data => ", data);
-    //     } else {
-    //       console.log('response error => ', response);
-    //     }
-    //     this.isLoading = false;
-    //   },
-    //   error => {
-    //     this.isLoading = false;
-    //     console.log('http error => ', error);
-    //   }
-    //   )
+    this.frontService.retrieveDailyLineups({sport : tabName, since : timePeriod})
+      .subscribe(
+      response => {
+        if (response.statusCode == 200) {
+          let data: Array<any> = response.data;
+          this.prepareLineupRecords(data);
+          // console.log("lineup records data => ", data);
+        } else {
+          console.log('response error => ', response);
+        }
+        this.isLoading = false;
+      },
+      error => {
+        this.isLoading = false;
+        console.log('http error => ', error);
+      }
+      )
   }
 
   prepareLineupRecords(data: any[]) {
