@@ -187,12 +187,13 @@
                   <li role="presentation" (click)="onTabChanged(subtab)" [class.active]="subActiveTab == subtab" *ngFor="let subtab of subTrendingTabs;">
                     <a role="tab" data-toggle="tab">{{ subTrendingTabsLabels[subtab] }}</a></li>
                 </ul>
+                <!--
                 <ul *ngIf="activeTab !='trending'" class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active"><a aria-controls="All" role="tab" data-toggle="tab">All</a></li>
                   <li role="presentation"><a aria-controls="Urgent" role="tab" data-toggle="tab">Urgent</a></li>
                   <li role="presentation"><a aria-controls="Important" role="tab" data-toggle="tab">Important</a>
                   </li>
-                  <li role="presentation"><a aria-controls="Noteworthy" role="tab" data-toggle="tab">Notewort</a>
+                  <li role="presentation"><a aria-controls="Noteworthy" role="tab" data-toggle="tab">Noteworthy</a>
                   </li>
                 </ul>
                 <!-- Tab panes -->

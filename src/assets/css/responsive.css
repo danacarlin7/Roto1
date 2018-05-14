@@ -2358,7 +2358,7 @@
     font-size: 14px;
   }
   .sport-name2 {
-    min-height: 45px !important;
+    min-height: 50px !important;
   }
 }
 
@@ -2945,12 +2945,13 @@
   .container {
     width: 1200px;
   }
-  
+
 }
 
 @media screen and (min-width: 1300px) {
  .sport-article .sport-name2 {
-    top: 120px !important;
+    top: 100px !important;
+
   }
 }
 
