@@ -145,6 +145,7 @@
 
 
 
+
 .single-article {
 
 }
@@ -237,6 +238,5 @@ section.indexNPrt2 {
 #signup2{
   float:none;
   padding-top: 0px;
-  padding-bottom: 0px;
-  padding-right:0px
+  padding-bottom: 0px;padding-right:0px
 }
