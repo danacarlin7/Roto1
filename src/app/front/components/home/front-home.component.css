@@ -98,6 +98,7 @@
 .sport-article:hover .sport-name2{
   text-decoration: underline;
   opacity: 1.0;
+  cursor: pointer;
 }
 
 .sport-article .sport-name {
@@ -141,6 +142,7 @@
   overflow: hidden;
   position: relative;
 }
+
 
 
 
@@ -232,4 +234,9 @@ section.indexNPrt2 {
   padding-bottom: 0px;
   margin-bottom: 0px;
   background: #000000;
+}
+#signup2{
+  float:none;
+  padding-top: 0px;
+  padding-bottom: 0px;padding-right:0px
 }
