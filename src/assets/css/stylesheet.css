@@ -1057,9 +1057,9 @@ font-size: 15px;line-height: 23px;width: 100px;text-align: center;padding: 6px;}
   }
 .sport-name2{
   padding: 0px;
-  min-height:60px;
-  max-height:60px;
-  position:
+  min-height:50px;
+  max-height:50px;
+  position:absolute;
 
 }
 

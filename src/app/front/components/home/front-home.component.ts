@@ -4,6 +4,7 @@ import { ArticleService } from "../../services/article.service";
 import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { AuthService } from "../../../shared/services/auth.service";
 import { News } from "../../models/news.model";
+import { SubscriptionNewGuard } from "../../../shared/services/subscription-new.guard";
 
 /**
  * Created by Hiren on 06-06-2017.
@@ -49,7 +50,8 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     private articleService: ArticleService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private guard :SubscriptionNewGuard) {
   }
 
   ngOnInit() {
@@ -77,8 +79,9 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         };
 
         return t;
-    }(document, "script", "twitter-wjs"));
-    (<any>window).twttr.widgets.load(); }, 100);
+      }(document, "script", "twitter-wjs"));
+      (<any>window).twttr.widgets.load();
+    }, 100);
 
     this.retrieveFeatured();
     // this.retrieveSocialFeeds();
@@ -102,7 +105,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   }
 
-  retrieveFeatured(){
+  retrieveFeatured() {
     this.articleService.fetchRelated().subscribe(
       ids => {
         this.related = ids;
@@ -148,19 +151,19 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   retrieveSocialFeeds() {
     this.frontService.retrieveTwitterFeeds()
       .subscribe(
-        response => {
-          if (response.statusCode == 200) {
-            // console.log(response.data);
-            let feeds: Array<any> = response.data;
-            if (feeds && feeds.length) {
-              this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
-              // console.log("tweets => ", this.twitterFeeds);
-            }
+      response => {
+        if (response.statusCode == 200) {
+          // console.log(response.data);
+          let feeds: Array<any> = response.data;
+          if (feeds && feeds.length) {
+            this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
+            // console.log("tweets => ", this.twitterFeeds);
           }
-        },
-        error => {
-          console.log("http error => ", error);
         }
+      },
+      error => {
+        console.log("http error => ", error);
+      }
       );
 
     // this.frontService.retrieveFBFeeds()
@@ -355,6 +358,25 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         if (id == 20) {
           this.soccerArticles = articlesList;
           // console.log("soccerArticles => ", this.soccerArticles);
+          setTimeout(() => {
+            let ht1 = Math.max(jQuery('#nflContent').height(), jQuery('#mlbContent').height());
+            jQuery('#mlbContent').height(ht1);
+            jQuery('#nflContent').height(ht1);
+
+            let ht2 = Math.max(jQuery('#nbaContent').height(), jQuery('#nhlContent').height());
+            jQuery('#nbaContent').height(ht2);
+            jQuery('#nhlContent').height(ht2);
+
+            let ht3 = Math.max(jQuery('#mmaContent').height(), jQuery('#nascarContent').height());
+            jQuery('#mmaContent').height(ht3);
+            jQuery('#nascarContent').height(ht3);
+
+            let ht4 = Math.max(jQuery('soccerContent').height(), jQuery('#pgaContent').height());
+            jQuery('#soccerContent').height(ht4);
+            jQuery('#pgaContent').height(ht4);
+
+          }, 500);
+
         }
         let mids = mid.join(",");
         if (mids) {
@@ -391,27 +413,50 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   switchToSingle(post, isArticle) {
+
+    let that = this;
+    that.activeSingle = false;
     if (isArticle) {
       if (!this.authService.isLoggedIn()) {
-        this.isStatus = false;
-        this.isLoginError = true;
-        this.isSubscribeError = false;
+        this.authService.checkArticleVisibility(post.id, function(resp){
+          console.log(post.id,resp);
+            if(!resp){
+              that.isStatus = false;
+              that.isLoginError = true;
+              that.isSubscribeError = false;
+            } else {
+              that.isStatus = true;
+              that.isLoginError = false;
+              that.isSubscribeError = false;
+            }
+            setTimeout(()=>{
+              that.activeSingle = post;
+            },500);
+        });
       } else if (this.authService.isLoggedIn() && this.authService.isSubscriber(true)) {
         this.isStatus = true;
         this.isLoginError = false;
         this.isSubscribeError = false;
+        setTimeout(()=>{
+          that.activeSingle = post;
+        },500);
       } else {
         this.isStatus = false;
         this.isLoginError = false;
         this.isSubscribeError = true;
+        setTimeout(()=>{
+          that.activeSingle = post;
+        },500);
       }
     } else {
       this.isStatus = true;
       this.isLoginError = false;
       this.isSubscribeError = false;
+
+      setTimeout(()=>{
+        that.activeSingle = post;
+      },500);
     }
-    console.log(this.isStatus);
-    this.activeSingle = post;
   }
 
   allNewsRecords: News[] = [];
@@ -514,7 +559,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop) {
     // console.log("update",sfDivRef, footerRef, sfTop, footerTop);
-    if(jQuery(".indexNPrt2Mid")[0]){
+    if (jQuery(".indexNPrt2Mid")[0]) {
       let midDivHeight = jQuery(".indexNPrt2Mid")[0].clientHeight;
       if (midDivHeight <= sfDivRef[0].clientHeight) {
         return;
@@ -538,4 +583,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       }
     }
   }
+
+
+
 }
