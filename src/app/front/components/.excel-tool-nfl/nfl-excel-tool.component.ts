@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
 /**
  * Created by Hiren on 28-09-2017.
  */

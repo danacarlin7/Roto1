@@ -1,10 +1,9 @@
+/* core */
 import { Component } from "@angular/core";
-import { AuthService } from "../../../shared/new-services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
-/**
- * Created by Hiren on 24-07-2017.
- */
 
+/* services */
+import { AuthService } from "../../../shared/new-services/auth.service";
 
 @Component({
   selector: 'rp-verify-acc',

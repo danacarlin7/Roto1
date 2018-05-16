@@ -1,11 +1,13 @@
+/* core */
 import { Component } from "@angular/core";
 import { NewsTabs, NewsTabConstants } from "../../constants/menu.constants";
 import { Router, ActivatedRoute } from "@angular/router";
+
+/* services */
 import { FrontService } from "../../new-services/front.service";
+
+/* models */
 import { Lineup, LineupRecord, TeamInfo, LineupData } from "../../models/lineup.model";
-/**
- * Created by Hiren on 01-07-2017.
- */
 
 @Component({
   selector: 'rp-daily-lineup',
@@ -25,7 +27,7 @@ export class DailyLineupComponent {
   lineupRecords: LineupRecord[] = [];
   isLoading: boolean;
 
-  constructor(private router: Router, private activeRoute: ActivatedRoute, private frontService: FrontService) {}
+  constructor(private router: Router, private activeRoute: ActivatedRoute, private frontService: FrontService) { }
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe(
@@ -50,7 +52,7 @@ export class DailyLineupComponent {
   getData(tabName: string, timePeriod: string) {
     this.isLoading = true;
     this.activeFilter = timePeriod;
-    this.frontService.retrieveDailyLineups({sport : tabName, since : timePeriod})
+    this.frontService.retrieveDailyLineups({ sport: tabName, since: timePeriod })
       .subscribe(
       response => {
         if (response.statusCode == 200) {

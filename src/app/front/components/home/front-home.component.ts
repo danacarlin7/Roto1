@@ -1,14 +1,16 @@
+/* core */
 import { Component, AfterViewInit, OnInit } from "@angular/core";
+import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
+
+/* services */
 import { FrontService } from "../../new-services/front.service";
 import { ArticleService } from "../../new-services/article.service";
-import { ActivatedRoute, Router, NavigationEnd } from "@angular/router";
 import { AuthService } from "../../../shared/new-services/auth.service";
+
+/* models */
 import { News } from "../../models/news.model";
 
-/**
- * Created by Hiren on 06-06-2017.
- */
-
+/* variables */
 declare var jQuery: any;
 
 @Component({
@@ -441,21 +443,21 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
 
   retrieveNews() {
-     this.frontService.retrieveNews({sport: 'MLB' , since: '30days'})
-       .subscribe(async response => {
-           // if (response.statusCode == 200) {
-           //   let data:Array<any> = response.data;
-           //   let tempNews = data.map(currData => currData['news'][0]);
-           //   this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
-           //   //this.renderNews();
-           // } else {
-             console.log('response error => ', response);
-           // }
-         },
-         error => {
-           console.log('http error => ', error);
-         }
-       )
+     // this.frontService.retrieveNews({sport: 'MLB' , since: '30days'})
+     //   .subscribe(async response => {
+     //       // if (response.statusCode == 200) {
+     //       //   let data:Array<any> = response.data;
+     //       //   let tempNews = data.map(currData => currData['news'][0]);
+     //       //   this.allNewsRecords = tempNews.slice(0, Math.max(this.allNewsRecords.length, 5));
+     //       //   //this.renderNews();
+     //       // } else {
+     //         console.log('response error => ', response);
+     //       // }
+     //     },
+     //     error => {
+     //       console.log('http error => ', error);
+     //     }
+     //   )
     this.articleService.fetchPosts({ categories: 4367, per_page: 10, offset: 0 }).subscribe(
       posts => {
         // console.log(posts);

@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {FacebookPixelEventConstants} from "../../constants/facebook-pixel-event.constants";
+import { Component } from "@angular/core";
+import { FacebookPixelEventConstants } from "../../constants/facebook-pixel-event.constants";
 
 /**
  * Created by Hiren on 07-07-2017.
@@ -18,7 +18,7 @@ export class ExcelToolComponent {
   }
 
   onExcelToolDownloadBtnClicked() {
-    fbq('trackCustom', FacebookPixelEventConstants.EXCEL_TOOL_DOWNLOAD_EVENT,{sport_type:'MLB'});
+    fbq('trackCustom', FacebookPixelEventConstants.EXCEL_TOOL_DOWNLOAD_EVENT, { sport_type: 'MLB' });
   }
 
 }

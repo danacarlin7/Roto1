@@ -1,10 +1,16 @@
+/* core */
 import { Injectable } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
+/* libs */
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
+/* env */
 import { environment } from "../../../environments/environment";
 
+/* models */
 import { CategoryData } from "../models/category-data";
 import { PostData } from "../models/post-data";
 

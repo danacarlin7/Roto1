@@ -1,16 +1,13 @@
-import {Component} from "@angular/core";
-/**
- * Created by Hiren on 07-07-2017.
- */
+import { Component } from "@angular/core";
 
-declare var jQuery:any;
+declare var jQuery: any;
 
 @Component({
   selector: 'rp-faq',
   templateUrl: './faq.component.html'
 })
 export class FAQComponent {
-  activeFAQ:string;
+  activeFAQ: string;
 
   constructor() {
 

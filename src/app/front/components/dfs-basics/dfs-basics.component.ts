@@ -1,7 +1,4 @@
-import {Component} from "@angular/core";
-/**
- * Created by Hiren on 06-07-2017.
- */
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'rp-dfs-basics',

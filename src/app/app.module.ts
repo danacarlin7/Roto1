@@ -1,32 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
+/* core */
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-// import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
+/* modules */
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { SharedModule } from "./shared/shared.module";
 import { FrontModule } from "./front/front.module";
 import { UserModule } from "./user/user.module";
 import { AdminModule } from "./new-admin/admin.module";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthService } from "./shared/new-services/auth.service";
+
+/* env */
 import { environment } from "../environments/environment";
+
+/* component */
 import { RPErrorHandler } from "./error-handler";
+import { AppComponent } from './app.component';
 
+/* services */
+import { AuthService } from "./shared/new-services/auth.service";
 
-
-// import { CuppaOAuthModule } from 'ng2-social-login';
-
-// const metaConfig: MetaConfig = {
-//   //Append a title suffix such as a site name to all titles
-//   //Defaults to false
-//   useTitleSuffix: true,
-//   defaults: {
-//     title: 'RotoPros - Daily Fantasy Sports Expert Advice & Tools'
-//   }
-// };
 
 @NgModule({
   declarations: [
@@ -39,10 +35,8 @@ import { RPErrorHandler } from "./error-handler";
     UserModule,
     AdminModule,
     HttpClientModule,
-    // CuppaOAuthModule,
     SharedModule.forRoot(),
     AppRoutingModule,
-    // MetaModule.forRoot()
   ],
   providers: [{ provide: ErrorHandler, useClass: RPErrorHandler }],
   bootstrap: [AppComponent]

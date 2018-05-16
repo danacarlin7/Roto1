@@ -1,8 +1,4 @@
-import {Component} from "@angular/core";
-/**
- * Created by Hiren on 05-06-2017.
- */
-
+import { Component } from "@angular/core";
 
 @Component({
   selector: 'rp-front-footer',

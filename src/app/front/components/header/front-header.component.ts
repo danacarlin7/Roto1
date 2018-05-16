@@ -1,13 +1,15 @@
+/* core */
 import { Component, ViewChild, ElementRef, HostListener } from "@angular/core";
-import { AuthService } from "../../../shared/new-services/auth.service";
-import { LoggedUser } from "../../../shared/models/logged-user.model";
 import { Router } from "@angular/router";
+
+/* services */
+import { AuthService } from "../../../shared/new-services/auth.service";
+
+/* models */
+import { LoggedUser } from "../../../shared/models/logged-user.model";
 import { User } from "../../../shared/models/user";
 
-/**
- * Created by Hiren on 05-06-2017.
- */
-
+/* variables */
 declare var jQuery: any;
 
 @Component({
@@ -84,7 +86,7 @@ export class FrontHeaderComponent {
           // if (response.statusCode == 200) {
           //   this.authService.loggedUser = response.data;
           // }
-        },error => {
+        }, error => {
           console.log("http error => ", error);
         });
     }

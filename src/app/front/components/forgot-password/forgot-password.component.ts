@@ -1,8 +1,8 @@
+/* core */
 import { Component } from "@angular/core";
+
+/* services */
 import { AuthService } from "../../../shared/new-services/auth.service";
-/**
- * Created by Hiren on 06-07-2017.
- */
 
 
 @Component({

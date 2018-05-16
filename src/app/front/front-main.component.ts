@@ -1,11 +1,8 @@
+/* core */
 import { Component } from "@angular/core";
-// import { AuthService } from "../shared/new-services/auth.service";
 import { Router } from "@angular/router";
 
-/**
- * Created by Hiren on 04-06-2017.
- */
-
+/* variables */
 declare var jQuery: any;
 
 @Component({
@@ -15,11 +12,7 @@ declare var jQuery: any;
 })
 export class FrontMainComponent {
 
-  constructor(
-    // private authService: AuthService,
-    private router: Router) {
-
-  }
+  constructor(private router: Router) {}
 
   ngAfterViewInit() {
     setTimeout(() => {

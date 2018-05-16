@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { NewsTabs, NewsTabConstants } from "../../constants/menu.constants";
 import { Router, ActivatedRoute } from "@angular/router";
-// import { FrontService } from "../../services/front.service";
+import { FrontService } from "../../new-services/front.service";
 import { News } from "../../models/news.model";
 /**
  * Created by Hiren on 28-06-2017.
@@ -30,10 +30,7 @@ export class NewsComponent {
   newsRecords: News[] = [];
   isLoading: boolean;
 
-  constructor(private router: Router, private activeRoute: ActivatedRoute,
-    // private newsService: FrontService
-  ) {
-  }
+  constructor(private router: Router, private activeRoute: ActivatedRoute,private newsService: FrontService) {}
 
   ngOnInit() {
     this.activeRoute.queryParams.subscribe(
@@ -87,24 +84,23 @@ export class NewsComponent {
 
   getData(tabName: string) {
     this.isLoading = true;
-    // this.newsService.retrieveNews(tabName)
-    //   .subscribe(
-    //   response => {
-    //     if (response.statusCode == 200) {
-    //       let data: Array<any> = response.data;
-    //       this.allNewsRecords = data.map(currData => currData['news'][0]);
-    //       this.filterNews(this.newsPriority);
-    //       console.log("records => ", this.newsRecords);
-    //     } else {
-    //       console.log('response error => ', response);
-    //     }
-    //     this.isLoading = false;
-    //   },
-    //   error => {
-    //     this.isLoading = false;
-    //     console.log('http error => ', error);
-    //   }
-    //   )
+    this.newsService.retrieveNews(tabName)
+      .subscribe(
+      response => {
+        if (response.statusCode == 200) {
+          let data: Array<any> = response.data;
+          this.allNewsRecords = data.map(currData => currData['news'][0]);
+          this.filterNews(this.newsPriority);
+          console.log("records => ", this.newsRecords);
+        } else {
+          console.log('response error => ', response);
+        }
+        this.isLoading = false;
+      },
+      error => {
+        this.isLoading = false;
+        console.log('http error => ', error);
+      });
   }
 
 }

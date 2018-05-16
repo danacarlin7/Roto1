@@ -1,15 +1,17 @@
+/* cors */
 import { Component, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { AuthService } from "../../../shared/new-services/auth.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
+
+/* services */
+import { AuthService } from "../../../shared/new-services/auth.service";
+
+/* env */
 import { environment } from "../../../../environments/environment";
+
+/* models */
 import { Login } from "../../../shared/models/login";
 import { User } from "../../../shared/models/user";
-
-// import { AuthService } from 'ng2-social-login/src/app/cuppaOAuth/auth.service';
-/**
- * Created by Hiren on 07-06-2017.
- */
 
 @Component({
   selector: 'rp-login',
@@ -155,14 +157,14 @@ export class LoginComponent {
           // );
 
           this.authService.retrieveLoggedUserInfo()
-          .subscribe(response => {
+            .subscribe(response => {
               this.userResp = response;
               console.log(this.userResp);
               if (response.statusCode == 200)
                 this.authService.loggedUser = this.userResp.data;
-          },error => {
+            }, error => {
               console.log("http error => ", error);
-          });
+            });
           // console.log('this.redirectUrl => ', this.redirectUrl);
           this.authService.isLoggedInEvent.emit(true);
 

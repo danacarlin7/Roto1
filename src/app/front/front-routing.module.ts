@@ -1,44 +1,51 @@
+/* core */
+import { NgModel } from "@angular/forms/forms";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes, Route } from "@angular/router";
+
+/* services */
+import { AuthGuard } from "../shared/new-services/auth.guard";
+import { SubscriptionGuard } from "../shared/new-services/subscription.guard";
+import { SubscriptionNewGuard } from "../shared/new-services/subscription-new.guard";
+
+/* components */
 import { FrontMainComponent } from "./front-main.component";
 import { FrontHomeComponent } from "./components/home/front-home.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
-import { NewsComponent } from "./components/news/news.component";
-import { TestComponent } from "./components/test/test.component";
-// import { ProviderLineupComponent } from "./components/provider-lineup/provider-lineup.component";
 import { DailyLineupComponent } from "./components/daily-lineup/daily-lineup.component";
 import { ArticlesComponent } from "./components/articles/articles.component";
-// import { LineupOptimizerComponent } from "./components/lineup-optimizer/lineup-optimizer.component";
-import { AuthGuard } from "../shared/new-services/auth.guard";
 import { ForgotPasswordComponent } from "./components/forgot-password/forgot-password.component";
 import { DFSBasicsComponent } from "./components/dfs-basics/dfs-basics.component";
-import { ExcelToolComponent } from "./components/excel-tool/excel-tool.component";
 import { FAQComponent } from "./components/faq/faq.component";
-
-// import { ProviderComponent } from "./components/provider/provider.component";
-// import { ProviderPublicComponent } from "./components/provider-public/public.component";
-
-// import { InjuriesComponent } from "./components/injuries/injuries.component";
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { ArticleComponent } from "./components/article/article.component";
-// import { GeneratedLineupsComponent } from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
 import { SubscribeComponent } from "./components/subscribe/subscribe.component";
 import { VerifyAccComponent } from "./components/forgot-password/verify-acc.component";
-// import { MarketPlaceComponent } from "./components/market-place/market-place.component";
-import { ExtensionsComponent } from "./components/extensions/extensions.component";
-// import { NFLLineupOptimizerComponent } from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
-import { SubscriptionGuard } from "../shared/new-services/subscription.guard";
-import { SubscriptionNewGuard } from "../shared/new-services/subscription-new.guard";
 
-import { ContactAnalyzerComponent } from "./components/contact-analyzer/contact-analyzer.component";
-// import { GeneratedNFLLineupsComponent } from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
-import { NFLExcelToolComponent } from "./components/excel-tool-nfl/nfl-excel-tool.component";
-// import { NBALineupOptimizerComponent } from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
-// import { GeneratedNBALineupsComponent } from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
 import { PodcastComponent } from './components/podcast/podcast.component';
 import { PlanComponent } from "./components/plan/plan.component";
 import { VideoComponent } from "./components/video/video.component";
+
+/* Not in USE */
+// import { ExcelToolComponent } from "./components/excel-tool/excel-tool.component";
+// import { ExtensionsComponent } from "./components/extensions/extensions.component";
+// import { ContactAnalyzerComponent } from "./components/contact-analyzer/contact-analyzer.component";
+// import { NFLExcelToolComponent } from "./components/excel-tool-nfl/nfl-excel-tool.component";
+// import { NewsComponent } from "./components/news/news.component";
+// import { TestComponent } from "./components/test/test.component";
+// import { ProviderLineupComponent } from "./components/provider-lineup/provider-lineup.component";
+// import { LineupOptimizerComponent } from "./components/lineup-optimizer/lineup-optimizer.component";
+// import { ProviderComponent } from "./components/provider/provider.component";
+// import { ProviderPublicComponent } from "./components/provider-public/public.component";
+// import { InjuriesComponent } from "./components/injuries/injuries.component";
+// import { GeneratedLineupsComponent } from "./components/lineup-optimizer/generated-lineups/generated-lineups.component";
+// import { MarketPlaceComponent } from "./components/market-place/market-place.component";
+// import { NFLLineupOptimizerComponent } from "./components/nfl-lineup-optimizer/nfl-lineup-optimizer.component";
+// import { GeneratedNFLLineupsComponent } from "./components/nfl-lineup-optimizer/generated-nfl-lineups/generated-nfl-lineups.component";
+// import { NBALineupOptimizerComponent } from "./components/nba-lineup-optimizer/nba-lineup-optimizer.component";
+// import { GeneratedNBALineupsComponent } from "./components/nba-lineup-optimizer/generated-nba-linups/generated-nba-lineups.component";
+
 
 
 /**
@@ -58,17 +65,23 @@ const routes: Routes = [
       { path: "login", component: LoginComponent },
       { path: "signup", component: SignUpComponent },
       { path: "forgot-password", component: ForgotPasswordComponent },
-      // { path: "provider-lineup", canActivate: [AuthGuard], component: ProviderLineupComponent },
-      { path: "news", component: NewsComponent },
-      // { path: "market-place", component: MarketPlaceComponent },
-      { path: "extensions", component: ExtensionsComponent },
       { path: "lineups", component: DailyLineupComponent },
       { path: "articles/:id", canActivate: [SubscriptionNewGuard], component: ArticleComponent },
       { path: "articles", component: ArticlesComponent },
       { path: "basics", component: DFSBasicsComponent },
-      { path: "mlb-excel-tool", component: ExcelToolComponent },
-      { path: "nfl-excel-tool", component: NFLExcelToolComponent },
       { path: "faq", component: FAQComponent },
+      { path: "subscribe", component: SubscribeComponent },
+      { path: "plans", component: PlanComponent },
+      { path: "videos", component: VideoComponent },
+      { path: "podcast", component: PodcastComponent },
+
+      /* Not in USE */
+      // { path: "news", component: NewsComponent },
+      // { path: "provider-lineup", canActivate: [AuthGuard], component: ProviderLineupComponent },
+      // { path: "market-place", component: MarketPlaceComponent },
+      // { path: "extensions", component: ExtensionsComponent },
+      // { path: "mlb-excel-tool", component: ExcelToolComponent },
+      // { path: "nfl-excel-tool", component: NFLExcelToolComponent },
       // { path: "provider-lineups", canActivate: [AuthGuard], component: ProviderComponent },
       // { path: "provider-public-lineups", component: ProviderPublicComponent },
       // { path: "lineup-optimizer", canActivate: [SubscriptionGuard], component: LineupOptimizerComponent },
@@ -79,11 +92,7 @@ const routes: Routes = [
       // { path: "nfl-lineups", component: GeneratedNFLLineupsComponent },
       // { path: "nba-lineups", component: GeneratedNBALineupsComponent },
       // { path: "injuries", component: InjuriesComponent },
-      { path: "subscribe", component: SubscribeComponent },
-      { path: "plans", component: PlanComponent },
-      { path: "videos", component: VideoComponent },
-      { path: "contact-analyzer", component: ContactAnalyzerComponent },
-      { path: "podcast", component: PodcastComponent },
+      // { path: "contact-analyzer", component: ContactAnalyzerComponent },
     ]
   }
 ];

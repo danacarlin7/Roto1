@@ -1,14 +1,15 @@
+/* core */
 import { Component, ViewChild, ElementRef, Renderer2 } from "@angular/core";
-import { AuthService } from "../../../shared/new-services/auth.service";
 import { Router } from "@angular/router";
 import { FormGroup, FormControl, Validators, AbstractControl } from "@angular/forms";
-// import { UserDashboardServices } from "../../../user/services/user-dashboard.service";
-import { environment } from "../../../../environments/environment";
-// import { FrontService } from "../../services/front.service";
 
-/**
- * Created by Hiren on 07-06-2017.
- */
+/* env */
+import { environment } from "../../../../environments/environment";
+
+/* services */
+import { AuthService } from "../../../shared/new-services/auth.service";
+import { FrontService } from "../../new-services/front.service";
+// import { UserDashboardServices } from "../../../user/services/user-dashboard.service";
 
 @Component({
   selector: "rp-sign-up",
@@ -32,7 +33,7 @@ export class SignUpComponent {
     private router: Router,
     private renderer: Renderer2,
     // private dashboardService: UserDashboardServices,
-    // private frontService: FrontService
+    private frontService: FrontService
   ) {
     this.signUpForm = new FormGroup({
       userName: new FormControl("", Validators.required),
@@ -47,7 +48,7 @@ export class SignUpComponent {
   }
 
   ngOnInit() {
-    // this.plans = this.frontService.getDummyPlans();
+    this.plans = this.frontService.getDummyPlans();
   }
 
 

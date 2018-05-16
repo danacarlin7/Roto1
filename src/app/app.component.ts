@@ -1,8 +1,14 @@
+/* core */
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { AuthService } from "./shared/new-services/auth.service";
 import { Router } from "@angular/router";
+
+/* env */
 import { environment } from "../environments/environment";
 
+/* services */
+import { AuthService } from "./shared/new-services/auth.service";
+
+/* variables */
 declare var jQuery: any;
 
 @Component({

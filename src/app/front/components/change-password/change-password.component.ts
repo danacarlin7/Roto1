@@ -1,10 +1,10 @@
+/* core */
 import { Component } from "@angular/core";
 import { FormGroup, Validators, FormControl, AbstractControl } from "@angular/forms";
-import { AuthService } from "../../../shared/new-services/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
-/**
- * Created by Hiren on 15-07-2017.
- */
+
+/* services */
+import { AuthService } from "../../../shared/new-services/auth.service";
 
 @Component({
   selector: 'rp-change-password',

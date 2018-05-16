@@ -1,11 +1,16 @@
+/* core */
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+
+/* services */
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { ArticleService } from "../../new-services/article.service";
 
+/* models */
 import { CategoryData } from "../../models/category-data";
 import { PostData } from "../../models/post-data";
 
+/* variables */
 declare var jQuery: any;
 
 

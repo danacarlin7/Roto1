@@ -1,24 +1,21 @@
+/* core */
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-// import { HttpModule } from "@angular/http";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-// import { AuthService } from "./services/auth.service";
 import { CommonModule } from "@angular/common";
+
 import { SharedMaterialComponents } from "./material-components";
+import { TabViewComponent } from "./components/tab-view/tab-view.component";
+
 import { AuthGuard } from "./new-services/auth.guard";
-// import { DataTableModule } from "angular2-datatable";
+
+/* libs */
 import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
-// import { ModalModule } from "angular2-modal/esm/index";
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
-import { TabViewComponent } from "./components/tab-view/tab-view.component";
 import { NgxPaginationModule } from "ngx-pagination";
-import { SharedPrimeNGComponents } from "./prime-ng-components";
-import { SubscriptionGuard } from "./new-services/subscription.guard";
-import { SubscriptionNewGuard } from "./new-services/subscription-new.guard";
-import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.directive";
 /**
  * Created by Hiren on 04-06-2017.
  */

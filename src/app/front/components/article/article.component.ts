@@ -1,7 +1,12 @@
+/* core */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticleService } from "../../new-services/article.service";
 import { Meta } from '@angular/platform-browser';
+
+/* services */
+import { ArticleService } from "../../new-services/article.service";
+
+/* models */
 import { CategoryData } from "../../models/category-data";
 import { PostData } from "../../models/post-data";
 

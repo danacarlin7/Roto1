@@ -1,15 +1,26 @@
+/* core */
 import { Injectable } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
+/* libs */
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
+/* env */
 import { environment } from "../../../environments/environment";
+
+/* services */
 import { AuthService } from "../../shared/new-services/auth.service";
 
 // import { CategoryData } from "../models/category-data";
 // import { PostData } from "../models/post-data";
 
 const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
+const httpOptionsCustom = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
@@ -36,8 +47,6 @@ export class FrontService {
       query.push(`${key}=${args[key]}`);
     let queryStr = query.join('&');
 
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
-
     return this.http.get<any>(this.appUrl + "fetchNews?" + queryStr, httpOptions).pipe(
       tap((news: any) => console.log(`news = ${news.length}`)),
       catchError(this.handleError<any>('retrieveNews'))
@@ -45,7 +54,6 @@ export class FrontService {
   }
 
   retrieveHomepageNews(): Observable<any> {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "fetchLatestNews?count=10", httpOptions).pipe(
       tap((news: any) => {}),
       catchError(this.handleError<any>('retrieveHomepageNews'))
@@ -53,7 +61,6 @@ export class FrontService {
   }
 
   retrieveInjuries(sportType: string): Observable<any> {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "injuries?sport="+ sportType, httpOptions).pipe(
       tap((injuries: any) => {}),
       catchError(this.handleError<any>('retrieveHomepageNews'))
@@ -69,8 +76,6 @@ export class FrontService {
       query.push(`${key}=${args[key]}`);
     let queryStr = query.join('&');
 
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
-
     return this.http.get<any>(this.appUrl + "fetchLineup"+ httpOptions, httpOptions).pipe(
       tap((injuries: any) => {}),
       catchError(this.handleError<any>('retrieveHomepageNews'))
@@ -78,7 +83,6 @@ export class FrontService {
   }
 
   retrieveTwitterFeeds(): Observable<any> {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "getTwitterFeeds", httpOptions).pipe(
       tap((feeds: any) => {}),
       catchError(this.handleError<any>('retrieveTwitterFeeds'))
@@ -86,7 +90,6 @@ export class FrontService {
   }
 
   retrieveFBFeeds(): Observable<any> {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "getFBPost", httpOptions).pipe(
       tap((feeds: any) => {}),
       catchError(this.handleError<any>('retrieveFBFeeds'))
@@ -94,7 +97,6 @@ export class FrontService {
   }
 
   retrieveInstaFeeds(): Observable<any> {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "getInstaPosts", httpOptions).pipe(
       tap((feeds: any) => {}),
       catchError(this.handleError<any>('retrieveInstaFeeds'))
@@ -127,7 +129,6 @@ export class FrontService {
   }
 
   getSubscribePlans(): Observable<any> {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "plans", httpOptions).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('getSubscribePlans'))
@@ -136,8 +137,8 @@ export class FrontService {
 
   subscribePlan(token, plan_id, coupon = ""): Observable<any> {
     console.log(coupon);
-    httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
-    return this.http.post<any>(this.apiUrl + "subscribe", {token, plan_id, coupon}, httpOptions).pipe(
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+    return this.http.post<any>(this.apiUrl + "subscribe", {token, plan_id, coupon}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('subscribePlan'))
     );
@@ -146,7 +147,6 @@ export class FrontService {
   validateCoupon(coupon, amount) {
     // validateCoupon(coupon): Observable<any> {
     console.log(coupon);
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.post<any>(this.appUrl + "validateCoupon", {coupon, amount}, httpOptions).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('subscribePlan'))
@@ -156,8 +156,8 @@ export class FrontService {
 
   validateCouponAdvance(coupon, amount) {
     console.log(coupon);
-    httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
-    return this.http.post<any>(this.apiUrl + "validateCouponAdvance", {coupon, amount}, httpOptions).pipe(
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+    return this.http.post<any>(this.apiUrl + "validateCouponAdvance", {coupon, amount}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('subscribePlan'))
     );
@@ -165,24 +165,22 @@ export class FrontService {
 
 
   signUpStepTwo(token, plan_id, coupon = ""): Observable<any> {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json', "Authorization": "Bearer " + this.authService.partialUser.token });
-
-    return this.http.post<any>(this.apiUrl + "signupTwo", {token, plan_id, coupon}, httpOptions).pipe(
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.partialUser.token);
+    return this.http.post<any>(this.apiUrl + "signupTwo", {token, plan_id, coupon}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('signUpStepTwo'))
     );
   }
 
   unsubscribePlan(subscribe_id, at_period_end): Observable<any> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
-    return this.http.post<any>(this.apiUrl + "unsubscribe/"+ subscribe_id, {at_period_end: at_period_end}, httpOptions).pipe(
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+    return this.http.post<any>(this.apiUrl + "unsubscribe/"+ subscribe_id, {at_period_end: at_period_end}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('unsubscribePlan'))
     );
   }
 
   retrieveProvider() {
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + "providers", httpOptions).pipe(
       tap((providers: any) => {}),
       catchError(this.handleError<any>('retrieveProvider'))
@@ -194,7 +192,6 @@ export class FrontService {
     if(status)
       link = "getVideos?live=true";
 
-    httpOptions.headers = httpOptions.headers.delete('Authorization');
     return this.http.get<any>(this.appUrl + link, httpOptions).pipe(
       tap((videos: any) => {}),
       catchError(this.handleError<any>('retrieveVideos'))

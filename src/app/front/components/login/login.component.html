@@ -5,7 +5,7 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="loginDetailsWrapper">
           <div class="loginLftWrapper">
-            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive"/>
+            <img src="../../../../assets/images/login_lft_img.png" alt="" class="img-responsive" />
           </div>
           <div class="loginRghtWrapper">
             <div class="formWrapper">
@@ -22,17 +22,11 @@
               <form [formGroup]="loginForm">
                 <div class="form-group">
                   <label class="srOnly">Email</label>
-                  <input type="email"
-                         name="eId"
-                         placeholder="Email"
-                         formControlName="email">
+                  <input type="email" name="eId" placeholder="Email" formControlName="email">
                 </div>
                 <div class="form-group">
                   <label class="srOnly">Password</label>
-                  <input type="password"
-                         name="cPassword"
-                         placeholder="**********"
-                         formControlName="password">
+                  <input type="password" name="cPassword" placeholder="**********" formControlName="password">
                 </div>
                 <div class="form-group rmbrFrgtPswd">
                   <div class="rmembrPswd">
@@ -43,8 +37,7 @@
                   <a routerLink="/forgot-password" class="frgtPsswd">Forgot my Password?</a>
                 </div>
 
-                <input type="submit" value="Login" (click)="onSignInBtnClick()" class="formBtn"
-                       [disabled]="!loginForm.valid">
+                <input type="submit" value="Login" (click)="onSignInBtnClick()" class="formBtn" [disabled]="!loginForm.valid">
               </form>
               <!--<p class="otherSigninPara">You can also <a href="javascript:void(0)" class="lred">sign up here or</a> sign-->
               <!--in by:</p>-->

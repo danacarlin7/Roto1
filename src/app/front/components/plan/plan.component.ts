@@ -1,6 +1,9 @@
+/* cors */
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-// import { FrontService } from "../../services/front.service";
+
+/* services */
+import { FrontService } from "../../new-services/front.service";
 import { AuthService } from "../../../shared/new-services/auth.service";
 
 @Component({
@@ -14,9 +17,9 @@ export class PlanComponent {
   isLogin: boolean;
 
   constructor(private router: Router,
-    // private frontService: FrontService,
+    private frontService: FrontService,
     private authService: AuthService) {
-    // this.plans = this.frontService.getDummyPlans();
+    this.plans = this.frontService.getDummyPlans();
     this.isLogin = this.authService.isLoggedIn();
   }
 

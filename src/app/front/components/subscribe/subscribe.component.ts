@@ -1,3 +1,4 @@
+/* core */
 import {
   Component,
   OnInit,
@@ -10,16 +11,25 @@ import {
 } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+
 import { Overlay } from 'ngx-modialog';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
 // import {Overlay} from "angular2-modal";
 // import {overlayConfigFactory} from "angular2-modal";
 // import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
-import "rxjs/Rx";
+// import "rxjs/Rx";
+
+
+/* services */
 import { AuthService } from "../../../shared/new-services/auth.service";
-// import { FrontService } from "../../services/front.service";
+import { FrontService } from "../../new-services/front.service";
+
+/* env */
 import { environment } from "../../../../environments/environment";
+
+/* variables */
+declare var jQuery: any;
 
 @Component({
   selector: "app-subscribe",
@@ -51,7 +61,7 @@ export class SubscribeComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    // private frontService: FrontService,
+    private frontService: FrontService,
     private injector: Injector,
     overlay: Overlay,
     vcRef: ViewContainerRef,
@@ -199,38 +209,36 @@ export class SubscribeComponent implements OnInit {
     console.log(coupon);
     if (this.authService.isLoggedIn() && coupon) {
 
-      // this.frontService.validateCouponAdvance(coupon, amount)
-      //   .subscribe(
-      //   response => {
-      //     if (response.statusCode === 200) {
-      //       that.errorMsg = "";
-      //       console.log("validateCouponAdvance Success => ", response.data);
-      //       // couponDialog.close();
-      //       callback(true, coupon, response.data.amount);
-      //     }
-      //   },
-      //   error => {
-      //     console.log("http error => ", error);
-      //     that.errorMsg = error.data ? error.data : "Error";
-      //     callback(false, error.data, false)
-      //   }
-      //   );
+      this.frontService.validateCouponAdvance(coupon, amount)
+        .subscribe(
+        response => {
+          if (response.statusCode === 200) {
+            that.errorMsg = "";
+            console.log("validateCouponAdvance Success => ", response.data);
+            // couponDialog.close();
+            callback(true, coupon, response.data.amount);
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+          that.errorMsg = error.data ? error.data : "Error";
+          callback(false, error.data, false)
+        });
     } else if (coupon) {
-      // this.frontService.validateCoupon(coupon, amount)
-      //   .subscribe(
-      //   response => {
-      //     if (response.statusCode === 200) {
-      //       that.errorMsg = "";
-      //       console.log("validateCoupon Success => ", response.data);
-      //       callback(true, coupon, response.data.amount);
-      //     }
-      //   },
-      //   error => {
-      //     console.log("http error => ", error);
-      //     that.errorMsg = error.data ? error.data : "Error";
-      //     callback(false, error.data, false)
-      //   }
-      //   );
+      this.frontService.validateCoupon(coupon, amount)
+        .subscribe(
+        response => {
+          if (response.statusCode === 200) {
+            that.errorMsg = "";
+            console.log("validateCoupon Success => ", response.data);
+            callback(true, coupon, response.data.amount);
+          }
+        },
+        error => {
+          console.log("http error => ", error);
+          that.errorMsg = error.data ? error.data : "Error";
+          callback(false, error.data, false)
+        });
     } else {
       callback(true, "empty", amount);
     }
@@ -333,63 +341,60 @@ export class SubscribeComponent implements OnInit {
               console.log("token call back => ", token);
               this.coupon = resp != "empty" && status ? resp : "";
               if (this.authService.isLoggedIn()) {
-                  console.log("i am here", this.coupon);
-                // this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon)
-                //   .subscribe(
-                //   response => {
-                //     if (response.statusCode == 200) {
-                //       console.log("subscribePlan Success => ", response.data);
-                //
-                //       this.authService.retrieveLoggedUserInfo()
-                //         .subscribe(
-                //         response => {
-                //           if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                //         },
-                //         error => {
-                //           console.log("http error => ", error);
-                //         }
-                //         );
-                //
-                //       this.router.navigate([
-                //         "/homeRedirect",
-                //         { redirected: true, redirectMessage: "You Have been Successfully Subscribed!" }]);
-                //     }
-                //     this.authService.partialUser = null;
-                //   },
-                //   error => {
-                //     this.isError = true;
-                //     this.errorMsg = "You have already subscribed to this plan";
-                //     jQuery("html, body").animate({ scrollTop: 0 });
-                //   }
-                //   );
+                console.log("i am here", this.coupon);
+                this.frontService.subscribePlan(token.id, this.selectedPlan.plan_id, this.coupon).subscribe(
+                  response => {
+                    if (response.statusCode == 200) {
+                      console.log("subscribePlan Success => ", response.data);
+
+                      this.authService.retrieveLoggedUserInfo()
+                        .subscribe(
+                        response => {
+                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                        },
+                        error => {
+                          console.log("http error => ", error);
+                        }
+                        );
+
+                      this.router.navigate([
+                        "/homeRedirect",
+                        { redirected: true, redirectMessage: "You Have been Successfully Subscribed!" }]);
+                    }
+                    this.authService.partialUser = null;
+                  },
+                  error => {
+                    this.isError = true;
+                    this.errorMsg = "You have already subscribed to this plan";
+                    jQuery("html, body").animate({ scrollTop: 0 });
+                  });
               } else {
                 console.log("i am here", this.coupon);
-                // this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
-                //   .subscribe(
-                //   response => {
-                //     if (response.statusCode == 200) {
-                //       console.log("subscribePlan Success => ", response.data);
-                //
-                //       this.authService.retrieveLoggedUserInfo()
-                //         .subscribe(
-                //         response => {
-                //           if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                //         },
-                //         error => {
-                //           console.log("http error => ", error);
-                //         }
-                //         );
-                //
-                //       this.router.navigate([
-                //         "/homeRedirect",
-                //         {
-                //           redirected: true,
-                //           redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
-                //         }]);
-                //     }
-                //
-                //   }
-                //   );
+                this.frontService.signUpStepTwo(token.id, this.selectedPlan.plan_id, this.coupon)
+                  .subscribe(
+                  response => {
+                    if (response.statusCode == 200) {
+                      console.log("subscribePlan Success => ", response.data);
+
+                      this.authService.retrieveLoggedUserInfo()
+                        .subscribe(
+                        response => {
+                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                        },
+                        error => {
+                          console.log("http error => ", error);
+                        }
+                        );
+
+                      this.router.navigate([
+                        "/homeRedirect",
+                        {
+                          redirected: true,
+                          redirectMessage: "You Have been Successfully Subscribed! We have sent you a verification mail to your registered email address."
+                        }]);
+                    }
+
+                  });
               }
             }
           });
@@ -451,10 +456,10 @@ export class SubscribeComponent implements OnInit {
   // }
 
   endSubscription(subscribeDialog) {
-    // this.frontService.unsubscribePlan(1, this.unsubscribeOption == "at_period_end").subscribe(
-    //   response => {
-    //     subscribeDialog.close();
-    //   }
-    // );
+    this.frontService.unsubscribePlan(1, this.unsubscribeOption == "at_period_end").subscribe(
+      response => {
+        subscribeDialog.close();
+      }
+    );
   }
 }
