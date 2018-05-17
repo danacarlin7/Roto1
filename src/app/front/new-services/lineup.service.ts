@@ -182,7 +182,8 @@ export class LineupService {
   // }
   //
   // updateAdvFilterValue(filterValue: AdvFilterValue): Observable < any > {
-  //   httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+  //   httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
+
   //   return this.http.post<any>(this.apiUrl + 'optimizer/settings', filterValue ? filterValue : [], httpOptionsCustom).pipe(
   //     tap((datas: any) => {}),
   //     catchError(this.handleError<any>('updateAdvFilterValue'))
@@ -190,7 +191,8 @@ export class LineupService {
   // }
   //
   // retrieveSavedAdvFilterValue(): Observable <any> {
-  //   httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+  //   httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
+
   //   return this.http.post<any>(this.apiUrl + 'optimizer/settings', httpOptionsCustom).pipe(
   //     tap((datas: any) => {}),
   //     catchError(this.handleError<any>('retrieveSavedAdvFilterValue'))

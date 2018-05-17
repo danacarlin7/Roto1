@@ -1,43 +1,43 @@
-import {FilterCriteria} from "../models/filter-criteria.model";
+import { FilterCriteria } from "../models/filter-criteria.model";
 import * as moment from 'moment';
 /**
  * Created by Hiren on 03-05-2017.
  */
 
 export class FilterSettingsConstants {
-  public static HERO_ENTRIES:string = 'hero_entries';
-  public static WEEKDAY_FILTER:string = 'weekday_filter';
-  public static CONTEST_SIZES:string = 'contest_sizes';
-  public static SITES:string = 'sites';
-  public static SPORTS:string = 'sports';
-  public static MAX_ENTRIES:string = 'max_entries';
-  public static FEES:string = 'fees';
-  public static SEASONS:string = 'seasons';
-  public static SINCE_FILTER:string = 'since_filter';
-  public static CATEGORIES:string = 'categories';
+  public static HERO_ENTRIES: string = 'hero_entries';
+  public static WEEKDAY_FILTER: string = 'weekday_filter';
+  public static CONTEST_SIZES: string = 'contest_sizes';
+  public static SITES: string = 'sites';
+  public static SPORTS: string = 'sports';
+  public static MAX_ENTRIES: string = 'max_entries';
+  public static FEES: string = 'fees';
+  public static SEASONS: string = 'seasons';
+  public static SINCE_FILTER: string = 'since_filter';
+  public static CATEGORIES: string = 'categories';
 }
 
 export class FilterKeyConstants {
-  public static TITLE:string = 'title';
-  public static SITE:string = 'site';
-  public static SPORT:string = 'sport';
-  public static SEASON:string = 'season';
-  public static CONTEST_TYPE:string = 'category';
-  public static TIME_PERIOD:string = 'since';
-  public static WEEK_DAY:string = 'weekday';
-  public static DATE_FROM:string = 'date_from';
-  public static DATE_TO:string = 'date_to';
-  public static DATE_EXACT:string = 'date_exact';
-  public static FEE:string = 'fee';
-  public static FREE_ROLL:string = 'free_roll';
-  public static NO_OF_CONTEST_ENTRIES:string = 'hero_entries';
-  public static MAX_CONTEST_ENTRIES:string = 'max_entries';
-  public static RANGE_OF_TOTAL_ENTRIES:string = 'size_range';
-  public static EXACT_NO_OF_ENTRIES:string = 'size_exact';
-  public static OPPONENT_NAME:string = 'opponent_name';
+  public static TITLE: string = 'title';
+  public static SITE: string = 'site';
+  public static SPORT: string = 'sport';
+  public static SEASON: string = 'season';
+  public static CONTEST_TYPE: string = 'category';
+  public static TIME_PERIOD: string = 'since';
+  public static WEEK_DAY: string = 'weekday';
+  public static DATE_FROM: string = 'date_from';
+  public static DATE_TO: string = 'date_to';
+  public static DATE_EXACT: string = 'date_exact';
+  public static FEE: string = 'fee';
+  public static FREE_ROLL: string = 'free_roll';
+  public static NO_OF_CONTEST_ENTRIES: string = 'hero_entries';
+  public static MAX_CONTEST_ENTRIES: string = 'max_entries';
+  public static RANGE_OF_TOTAL_ENTRIES: string = 'size_range';
+  public static EXACT_NO_OF_ENTRIES: string = 'size_exact';
+  public static OPPONENT_NAME: string = 'opponent_name';
 
-  public static getFilterNameByKey(key:string):string {
-    let name:string;
+  public static getFilterNameByKey(key: string): string {
+    let name: string;
     switch (key) {
       case FilterKeyConstants.TITLE:
         name = 'Contest title search';
@@ -94,14 +94,14 @@ export class FilterKeyConstants {
     return name;
   }
 
-  public static getFilterDisplayValue(filter:FilterCriteria,filterSettings:any):string {
-    let displayValue:string;
+  public static getFilterDisplayValue(filter: FilterCriteria, filterSettings: any): string {
+    let displayValue: string;
     switch (filter.key) {
       case FilterKeyConstants.TITLE:
         displayValue = filter.value;
         break;
       case FilterKeyConstants.SITE:
-        let site:Array<any> = filterSettings[FilterSettingsConstants.SITES];
+        let site: Array<any> = filterSettings[FilterSettingsConstants.SITES];
         site.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -109,7 +109,7 @@ export class FilterKeyConstants {
         });
         break;
       case FilterKeyConstants.SPORT:
-        let sports:Array<any> = filterSettings[FilterSettingsConstants.SPORTS];
+        let sports: Array<any> = filterSettings[FilterSettingsConstants.SPORTS];
         sports.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -117,7 +117,7 @@ export class FilterKeyConstants {
         });
         break;
       case FilterKeyConstants.SEASON:
-        let data:Array<any> = filterSettings[FilterSettingsConstants.SEASONS];
+        let data: Array<any> = filterSettings[FilterSettingsConstants.SEASONS];
         data.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -125,7 +125,7 @@ export class FilterKeyConstants {
         });
         break;
       case FilterKeyConstants.CONTEST_TYPE:
-        let contestType:Array<any> = filterSettings[FilterSettingsConstants.CATEGORIES];
+        let contestType: Array<any> = filterSettings[FilterSettingsConstants.CATEGORIES];
         contestType.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -133,7 +133,7 @@ export class FilterKeyConstants {
         });
         break;
       case FilterKeyConstants.TIME_PERIOD:
-        let timeData:Array<any> = filterSettings[FilterSettingsConstants.SINCE_FILTER];
+        let timeData: Array<any> = filterSettings[FilterSettingsConstants.SINCE_FILTER];
         timeData.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -141,7 +141,7 @@ export class FilterKeyConstants {
         });
         break;
       case FilterKeyConstants.WEEK_DAY:
-        let weekData:Array<any> = filterSettings[FilterSettingsConstants.WEEKDAY_FILTER];
+        let weekData: Array<any> = filterSettings[FilterSettingsConstants.WEEKDAY_FILTER];
         weekData.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -154,7 +154,7 @@ export class FilterKeyConstants {
         displayValue = moment(filter.value).format('DD/MM/YYYY');
         break;
       case FilterKeyConstants.FEE:
-        let feeData:Array<any> = filterSettings[FilterSettingsConstants.FEES];
+        let feeData: Array<any> = filterSettings[FilterSettingsConstants.FEES];
         if (!filter.value.min) {
           let minValue = 'up to';
           let maxValue = "";
@@ -199,10 +199,10 @@ export class FilterKeyConstants {
         }
         break;
       case FilterKeyConstants.NO_OF_CONTEST_ENTRIES:
-        let heroData:Array<any> = filterSettings[FilterSettingsConstants.HERO_ENTRIES];
+        let heroData: Array<any> = filterSettings[FilterSettingsConstants.HERO_ENTRIES];
         if (!filter.value.min_contest) {
           let minValue = 'up to';
-          let maxValue:string = '';
+          let maxValue: string = '';
           heroData.forEach(currData => {
             if (currData[0] == filter.value.max_contest) {
               maxValue = currData[1];
@@ -211,7 +211,7 @@ export class FilterKeyConstants {
           displayValue = minValue + " " + maxValue;
         }
         else if (!filter.value.max_contest) {
-          let minValue:string = '';
+          let minValue: string = '';
           heroData.forEach(currData => {
             if (currData[0] == filter.value.min_contest) {
               minValue = currData[1];
@@ -220,13 +220,13 @@ export class FilterKeyConstants {
           let maxValue = 'or higher';
           displayValue = minValue + " " + maxValue;
         } else {
-          let minValue:string = '';
+          let minValue: string = '';
           heroData.forEach(currData => {
             if (currData[0] == filter.value.min_contest) {
               minValue = currData[1];
             }
           });
-          let maxValue:string = '';
+          let maxValue: string = '';
           heroData.forEach(currData => {
             if (currData[0] == filter.value.max_contest) {
               maxValue = currData[1];
@@ -236,7 +236,7 @@ export class FilterKeyConstants {
         }
         break;
       case FilterKeyConstants.MAX_CONTEST_ENTRIES:
-        let maxData:Array<any> = filterSettings[FilterSettingsConstants.MAX_ENTRIES];
+        let maxData: Array<any> = filterSettings[FilterSettingsConstants.MAX_ENTRIES];
         maxData.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -244,7 +244,7 @@ export class FilterKeyConstants {
         });
         break;
       case FilterKeyConstants.RANGE_OF_TOTAL_ENTRIES:
-        let rangeData:Array<any> = filterSettings[FilterSettingsConstants.CONTEST_SIZES];
+        let rangeData: Array<any> = filterSettings[FilterSettingsConstants.CONTEST_SIZES];
         rangeData.forEach(currData => {
           if (currData[0] == filter.value) {
             displayValue = currData[1];
@@ -261,5 +261,3 @@ export class FilterKeyConstants {
     return displayValue;
   }
 }
-
-

@@ -3,8 +3,8 @@ import { ContestTabs, ContestTabConstants } from "../../constants/menu.constants
 import { ContestData } from "../../models/contest";
 import { FilterCriteria } from "../../models/filter-criteria.model";
 import { Router, ActivatedRoute } from "@angular/router";
-// import { FilterService } from "../../services/filter.service";
-// import { UserDashboardServices } from "../../services/user-dashboard.service";
+// import { FilterService } from "../../new-services/filter.service";
+// import { UserService } from "../../new-services/user.service";
 /**
  * Created by Hiren on 11-06-2017.
  */
@@ -28,7 +28,7 @@ export class ContestComponent {
   filterEventSubscription: any;
 
   constructor(private router: Router,
-    // private dashboardService: UserDashboardServices,
+    // private dashboardService: UserService,
     private activeRoute: ActivatedRoute,
     // private filterService: FilterService
   ) {

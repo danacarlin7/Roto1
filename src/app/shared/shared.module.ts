@@ -6,19 +6,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from "@angular/common";
 
+/* components */
 import { SharedMaterialComponents } from "./material-components";
+import { SharedPrimeNGComponents } from "./prime-ng-components";
 import { TabViewComponent } from "./components/tab-view/tab-view.component";
+import { MobileHiddenDirective } from "./components/mobile-hidden/mobile-hidden.directive";
 
+
+/* services */
 import { AuthGuard } from "./new-services/auth.guard";
+import { SubscriptionNewGuard } from "./new-services/subscription-new.guard";
+import { SubscriptionGuard } from "./new-services/subscription.guard";
+
 
 /* libs */
 import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
-/**
- * Created by Hiren on 04-06-2017.
- */
 
 @NgModule({
   declarations: [
@@ -32,7 +37,6 @@ import { NgxPaginationModule } from "ngx-pagination";
     HttpClientModule,
     SharedMaterialComponents,
     SharedPrimeNGComponents,
-    // DataTableModule,
     ModalModule.forRoot(),
     BootstrapModalModule,
     DropzoneModule,

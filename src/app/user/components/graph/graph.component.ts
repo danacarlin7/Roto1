@@ -6,7 +6,7 @@ import { GraphData } from "../../models/graph-data.model";
 import { GraphTabs, GraphTabConstants } from "../../constants/menu.constants";
 import { FilterCriteria } from "../../models/filter-criteria.model";
 // import { FilterService } from "../../services/filter.service";
-// import { UserDashboardServices } from "../../services/user-dashboard.service";
+// import { UserService } from "../../new-services/user.service";
 /**
  * Created by Hiren on 17-06-2017.
  */
@@ -33,7 +33,7 @@ export class GraphComponent {
 
   constructor(private router: Router,
     private activatdRoute: ActivatedRoute,
-    // private dashboardService: UserDashboardServices,
+    // private dashboardService: UserService,
     // private filterService: FilterService,
   ) {
     // this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(

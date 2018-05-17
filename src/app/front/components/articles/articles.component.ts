@@ -295,6 +295,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   onScroll(category) {
+    console.log(category)
     this.loadMorePosts(category);
   }
 }

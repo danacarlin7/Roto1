@@ -16,12 +16,10 @@ import { Subscription } from 'rxjs';
 import 'rxjs/Rx';
 import { AuthService } from "../../../../shared/new-services/auth.service";
 import { LoggedUser } from "../../../../shared/models/logged-user.model";
-// import { UserDashboardServices } from "../../../services/user-dashboard.service";
+// import { UserService } from "../../../new-services/user.service";
 import { Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
-/**
- * Created by Hiren on 27-07-2017.
- */
+
 
 @Component({
   selector: 'rp-user-profile',
@@ -33,7 +31,7 @@ export class UserProfileComponent {
   user_name = '';
 
   constructor(private authService: AuthService, private router: Router,
-    // private dashboardService: UserDashboardServices
+    // private dashboardService: UserService
   ) {
     this.userData = this.authService.loggedUser;
     this.authService.loggedUserChangeEvent.subscribe(user => {

@@ -9,7 +9,7 @@ import { environment } from "../../../../environments/environment";
 /* services */
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { FrontService } from "../../new-services/front.service";
-// import { UserDashboardServices } from "../../../user/services/user-dashboard.service";
+import { UserService } from "../../../user/new-services/user.service";
 
 @Component({
   selector: "rp-sign-up",
@@ -32,7 +32,7 @@ export class SignUpComponent {
   constructor(private authService: AuthService,
     private router: Router,
     private renderer: Renderer2,
-    // private dashboardService: UserDashboardServices,
+    private dashboardService: UserService,
     private frontService: FrontService
   ) {
     this.signUpForm = new FormGroup({
@@ -66,24 +66,22 @@ export class SignUpComponent {
 
   checkUserName(name: string) {
     this.checkingUserName = true;
-    // this.dashboardService.checkUserName(name)
-    //   .subscribe(
-    //   response => {
-    //     this.checkingUserName = false;
-    //     if (response.statusCode == 200) {
-    //       if (response.data) {
-    //         this.isUserExist = 2;
-    //       } else {
-    //         this.isUserExist = 1;
-    //       }
-    //     }
-    //   },
-    //   error => {
-    //     this.checkingUserName = false;
-    //     console.log("username check error => ", error);
-    //   }
-    //   )
-  }
+    this.dashboardService.checkUserName(name)
+      .subscribe(response => {
+        this.checkingUserName = false;
+        if (response.statusCode == 200) {
+          if (response.data) {
+            this.isUserExist = 2;
+          } else {
+            this.isUserExist = 1;
+          }
+        }
+      },
+      error => {
+        this.checkingUserName = false;
+        console.log("username check error => ", error);
+      });
+    }
 
   mailFormat(control: AbstractControl) {
 

@@ -8,8 +8,8 @@ import { UserDashboardComponent } from "./components/dashboard/user-dashboard.co
 import { OverviewComponent } from "./components/overview/overview.component";
 import { FilterComponent } from "./components/filters/filter.component";
 import { AppliedFiltersComponent } from "./components/filters/applied-filters/applied-filter.component";
-// import {UserDashboardServices} from "./services/user-dashboard.service";
-// import {FilterService} from "./services/filter.service";
+// import {UserService} from "./new-services/user.service";
+// import {FilterService} from "./new-services/filter.service";
 import { OverviewlistComponent } from "./components/overview/overview-list/overview-list.component";
 // import {AuthService} from "../shared/services/auth.service";
 import { CohortComponent } from './components/cohort/cohort.component';

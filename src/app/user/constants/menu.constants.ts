@@ -14,14 +14,14 @@ export const CohortTabConstants = {
   WEEKDAY: 'weekday'
 };
 
-export const CohortTabs:{value:string,label:string}[] = [
-  {value: CohortTabConstants.SITE, label: 'SITE'},
-  {value: CohortTabConstants.SPORT, label: 'SPORT'},
-  {value: CohortTabConstants.SIZE, label: 'SIZE'},
-  {value: CohortTabConstants.FEE, label: 'FEE'},
-  {value: CohortTabConstants.YEAR, label: 'YEAR'},
-  {value: CohortTabConstants.MONTH, label: 'MONTH'},
-  {value: CohortTabConstants.WEEKDAY, label: 'WEEKDAY'}
+export const CohortTabs: { value: string, label: string }[] = [
+  { value: CohortTabConstants.SITE, label: 'SITE' },
+  { value: CohortTabConstants.SPORT, label: 'SPORT' },
+  { value: CohortTabConstants.SIZE, label: 'SIZE' },
+  { value: CohortTabConstants.FEE, label: 'FEE' },
+  { value: CohortTabConstants.YEAR, label: 'YEAR' },
+  { value: CohortTabConstants.MONTH, label: 'MONTH' },
+  { value: CohortTabConstants.WEEKDAY, label: 'WEEKDAY' }
 ];
 
 export const ContestTabConstants = {
@@ -29,9 +29,9 @@ export const ContestTabConstants = {
   ENTRIES: 'entry'
 };
 
-export const ContestTabs:{value:string,label:string}[] = [
-  {value: ContestTabConstants.CONTESTS, label: 'CONTESTS'},
-  {value: ContestTabConstants.ENTRIES, label: 'ENTRIES'}
+export const ContestTabs: { value: string, label: string }[] = [
+  { value: ContestTabConstants.CONTESTS, label: 'CONTESTS' },
+  { value: ContestTabConstants.ENTRIES, label: 'ENTRIES' }
 ];
 
 export const GraphTabConstants = {
@@ -41,8 +41,8 @@ export const GraphTabConstants = {
   CATEGORY: 'category'
 };
 
-export const GraphTabs:{value:string,label:string}[] = [
-  {value: GraphTabConstants.PROFIT, label: 'PROFIT'},
-  {value: GraphTabConstants.SITE, label: 'BY SITE'},
-  {value: GraphTabConstants.SPORT, label: 'BY SPORT'}
+export const GraphTabs: { value: string, label: string }[] = [
+  { value: GraphTabConstants.PROFIT, label: 'PROFIT' },
+  { value: GraphTabConstants.SITE, label: 'BY SITE' },
+  { value: GraphTabConstants.SPORT, label: 'BY SPORT' }
 ];

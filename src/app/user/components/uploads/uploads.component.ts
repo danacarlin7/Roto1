@@ -1,7 +1,7 @@
 import { Component, ViewChild, TemplateRef, ViewContainerRef, ChangeDetectorRef } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-// import { UserDashboardServices } from "../../services/user-dashboard.service";
-// import { FilterService } from "../../services/filter.service";
+// import { UserService } from "../../new-services/user.service";
+// import { FilterService } from "../../new-services/filter.service";
 import { ContestHistory } from "../../models/contest";
 import { AuthService } from "../../../shared/new-services/auth.service";
 // import {Overlay} from 'angular2-modal';
@@ -26,7 +26,7 @@ export class UploadsComponent {
   constructor(private router: Router,
     private activatdRoute: ActivatedRoute,
     // private uploadService: UploadsService,
-    // private dashboardService: UserDashboardServices,
+    // private dashboardService: UserService,
     private authservice: AuthService,
     private overlay: Overlay,
     private vcRef: ViewContainerRef,

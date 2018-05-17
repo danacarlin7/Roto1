@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  // api_end_point: "http://13.57.84.196:3000/",
-  api_end_point: 'http://localhost:3000/',
+  api_end_point: "http://rotopros-api.rotopros.886088cd.svc.dockerapp.io:3000/",
+  // api_end_point: 'http://localhost:3000/',
   token: "",
   role: ""
 };

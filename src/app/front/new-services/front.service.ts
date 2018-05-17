@@ -76,7 +76,7 @@ export class FrontService {
       query.push(`${key}=${args[key]}`);
     let queryStr = query.join('&');
 
-    return this.http.get<any>(this.appUrl + "fetchLineup"+ httpOptions, httpOptions).pipe(
+    return this.http.get<any>(this.appUrl + "fetchLineup?"+ queryStr, httpOptions).pipe(
       tap((injuries: any) => {}),
       catchError(this.handleError<any>('retrieveHomepageNews'))
     );
@@ -137,7 +137,8 @@ export class FrontService {
 
   subscribePlan(token, plan_id, coupon = ""): Observable<any> {
     console.log(coupon);
-    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
+
     return this.http.post<any>(this.apiUrl + "subscribe", {token, plan_id, coupon}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('subscribePlan'))
@@ -156,7 +157,8 @@ export class FrontService {
 
   validateCouponAdvance(coupon, amount) {
     console.log(coupon);
-    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
+
     return this.http.post<any>(this.apiUrl + "validateCouponAdvance", {coupon, amount}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('subscribePlan'))
@@ -173,7 +175,8 @@ export class FrontService {
   }
 
   unsubscribePlan(subscribe_id, at_period_end): Observable<any> {
-    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + (this.authService.getToken()));
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.getToken());
+
     return this.http.post<any>(this.apiUrl + "unsubscribe/"+ subscribe_id, {at_period_end: at_period_end}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('unsubscribePlan'))

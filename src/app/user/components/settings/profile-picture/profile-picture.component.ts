@@ -19,7 +19,7 @@ import { NgForm } from '@angular/forms';
 import 'rxjs/Rx';
 import { AuthService } from "../../../../shared/new-services/auth.service";
 import { LoggedUser } from "../../../../shared/models/logged-user.model";
-// import { UserDashboardServices } from "../../../services/user-dashboard.service";
+// import { UserService } from "../../../new-services/user.service";
 import { Router } from "@angular/router";
 import { environment } from "../../../../../environments/environment";
 import { User } from "../../../../shared/models/user";
@@ -36,7 +36,7 @@ export class ProfilePictureComponent {
 
   filename;
   userResp: User;
-  
+
   configUpload = {
     // Change this to your upload POST address:
     server: 'https://api.dfsportgod.com/api/uploadImage',
@@ -48,7 +48,7 @@ export class ProfilePictureComponent {
   };
 
   constructor(private authService: AuthService, private router: Router,
-    // private dashboardService: UserDashboardServices
+    // private dashboardService: UserService
   ) {
 
   }

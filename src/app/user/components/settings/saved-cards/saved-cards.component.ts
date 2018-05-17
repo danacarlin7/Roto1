@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-// import { UserDashboardServices } from "../../../services/user-dashboard.service";
+// import { UserService } from "../../../new-services/user.service";
 import { PaymentCard } from "../../../models/payment-card.model";
 import { environment } from "../../../../../environments/environment";
 /**
@@ -27,7 +27,7 @@ export class SavedCardsComponent {
   cardColor = ['#0cd2c985', '#d2270c85', '#ffc440', '#ff40df6e', '#4fd20c85']
 
   constructor(
-    // private dashboardService: UserDashboardServices
+    // private dashboardService: UserService
   ) {
 
   }

@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import { DashboardFilter } from "../../models/dashboard-filter.model";
 import { UserContestData } from "../../models/user-contest-data.model";
 import { ContestTopWin } from "../../models/contest";
-// import { UserDashboardServices } from "../../services/user-dashboard.service";
+// import { UserService } from "../../new-services/user.service";
 import * as moment from "moment";
 import * as c3 from "c3";
 /**
@@ -36,7 +36,7 @@ export class UserDashboardComponent {
   public lineChartType: string = 'line';
 
   constructor(
-    // private dashboardService: UserDashboardServices
+    // private dashboardService: UserService
   ) {
 
   }

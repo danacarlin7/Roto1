@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FilterCriteria } from '../../models/filter-criteria.model';
 import { CohortData } from '../../models/cohort-data.model';
-// import { FilterService } from '../../services/filter.service';
-// import { UserDashboardServices } from '../../services/user-dashboard.service';
+// import { FilterService } from '../../new-services/filter.service';
+// import { UserService } from '../../new-services/user.service';
 import { CohortTabConstants, CohortTabs } from "../../constants/menu.constants";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -26,7 +26,7 @@ export class CohortComponent {
   filterEventSubscription: any;
 
   constructor(private router: Router, private activeRoute: ActivatedRoute,
-     // private filterService: FilterService, private dashboardService: UserDashboardServices
+     // private filterService: FilterService, private dashboardService: UserService
    ) {
     // this.filterEventSubscription = this.filterService.filtersChangedEvent.subscribe(
     //   filters => {

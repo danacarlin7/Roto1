@@ -16,7 +16,7 @@ import { NgForm } from "@angular/forms";
 import "rxjs/Rx";
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { LoggedUser } from "../../../shared/models/logged-user.model";
-// import {UserDashboardServices} from "../../services/user-dashboard.service";
+// import {UserService} from "../../new-services/user.service";
 import { Router } from "@angular/router";
 import { environment } from "../../../../environments/environment";
 
@@ -62,7 +62,7 @@ export class SettingsComponent implements OnInit {
     // overlay: Overlay,
     // vcRef: ViewContainerRef,
     // public modal: Modal,
-    // private dashboardService: UserDashboardServices
+    // private dashboardService: UserService
   ) { }
 
 
