@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Enter Coupon Code</h1>
+
+<div mat-dialog-content>
+  <!-- <mat-form-field> -->
+    <mat-error *ngIf="datas.errorMsg">{{datas.errorMsg}}</mat-error>
+  <!-- </mat-form-field> -->
+
+  <mat-form-field>
+    <input matInput placeholder="Coupon Code" [(ngModel)]="data.animal" cdkFocusInitial>
+  </mat-form-field>
+  <!-- <mat-form-field> -->
+    <!-- matInput placeholder="Enter your email" [formControl]="email" required -->
+    <!-- <input matInput [(ngModel)]="data.animal" name="cId" placeholder="Coupon Code" cdkFocusInitial>
+    <mat-error *ngIf="!errorMsg">sdsdsd</mat-error>
+  </mat-form-field> -->
+</div>
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onBtnSubscribeClick(false);">Skip</button>
+  <button mat-raised-button color="primary" (click)="onBtnSubscribeClick(data.animal);">Apply</button>
+</div>

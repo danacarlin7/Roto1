@@ -21,5 +21,5 @@ export const SharedMaterialComponents = [
   MatNativeDateModule,
   MatListModule,
   MatProgressBarModule,
-  MatButtonToggleModule
+  MatButtonToggleModule,
 ];

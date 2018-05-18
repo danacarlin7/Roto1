@@ -30,11 +30,12 @@ import { ForgotPasswordComponent } from "./components/forgot-password/forgot-pas
 import { DFSBasicsComponent } from "./components/dfs-basics/dfs-basics.component";
 import { FAQComponent } from "./components/faq/faq.component";
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
-import { SubscribeComponent } from "./components/subscribe/subscribe.component";
+import { SubscribeComponent, DialogOverviewExampleDialog } from "./components/subscribe/subscribe.component";
 import { VerifyAccComponent } from "./components/forgot-password/verify-acc.component";
 import { PodcastComponent } from "./components/podcast/podcast.component";
 import { PlanComponent } from "./components/plan/plan.component";
 import { VideoComponent } from "./components/video/video.component";
+
 
 /* Not in USE */
 // import {FrontService} from "./services/front.service";
@@ -94,11 +95,13 @@ import { VideoComponent } from "./components/video/video.component";
     SortGridPipe,
     ChangePasswordComponent,
     SubscribeComponent,
+    DialogOverviewExampleDialog,
     VerifyAccComponent,
     PodcastComponent,
     PlanComponent,
     VideoComponent
   ],
+  entryComponents: [DialogOverviewExampleDialog],
   exports: [
     FrontMainComponent
   ],
