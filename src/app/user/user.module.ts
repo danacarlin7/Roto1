@@ -13,7 +13,7 @@ import { AppliedFiltersComponent } from "./components/filters/applied-filters/ap
 import { OverviewlistComponent } from "./components/overview/overview-list/overview-list.component";
 // import {AuthService} from "../shared/services/auth.service";
 import { CohortComponent } from './components/cohort/cohort.component';
-import { GraphComponent } from './components/graph/graph.component';
+// import { GraphComponent } from './components/graph/graph.component';
 import { CohortListComponent } from './components/cohort/cohort-list/cohort-list.component';
 import { ContestComponent } from "./components/contest/contest.component";
 import { ContestListComponent } from "./components/contest/contest-list/contest-list.component";
@@ -26,7 +26,7 @@ import { DashboardTopWinsComponent } from "./components/dashboard/dashboard-top-
 import { UploadsComponent } from "./components/uploads/uploads.component";
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
-import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
+// import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { UpdatePasswordComponent } from "./components/settings/update-password/update-password.component";
 import { UserProfileComponent } from "./components/settings/user-profile/user-profile.component";
@@ -43,7 +43,7 @@ import { SavedCardsComponent } from "./components/settings/saved-cards/saved-car
     ModalModule.forRoot(),
     BootstrapModalModule,
     SharedModule,
-    DropzoneModule
+    // DropzoneModule
   ],
   declarations: [
     UserMainComponent,
@@ -64,7 +64,7 @@ import { SavedCardsComponent } from "./components/settings/saved-cards/saved-car
     DashboardFilterComponent,
     DashboardStaticsComponent,
     DashboardTopWinsComponent,
-    GraphComponent,
+    // GraphComponent,
     UploadsComponent,
     SettingsComponent,
     UpdatePasswordComponent,

@@ -1,35 +1,34 @@
 ### STAGE 1: Build ###
-FROM node:9.3.0-alpine as builder
 
-COPY package.json ./
+FROM node:8-alpine as builder
+
+COPY package.json package-lock.json ./
 
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 
 ## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm i
-RUN mkdir /web
-RUN cp -R ./node_modules ./web
+RUN npm i && mkdir /web && cp -R ./node_modules ./web
 
 WORKDIR /web
 
 COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
-RUN $(npm bin)/ng build --prod --build-optimizer
+RUN $(npm bin)/npm run deploy
 
 ### STAGE 2: Setup ###
 
-FROM nginx:1.13.8-alpine
+FROM nginx:1.13.3-alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY site.conf /etc/nginx/conf.d/default.conf
+## Copy our default nginx config
+COPY nginx/default.conf /etc/nginx/conf.d/
+
+## Remove default nginx website
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /web/dist /usr/share/nginx/html/
+## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
+COPY --from=builder /web/dist /usr/share/nginx/html
 
-RUN touch /var/run/nginx.pid && \
-  chown -R nginx:nginx /var/run/nginx.pid && \
-  chown -R nginx:nginx /var/cache/nginx && \
-  chown -R nginx:nginx /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
 
-USER nginx
+CMD [ "nodemon", "dist/server.js" ]

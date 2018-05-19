@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular.io-example": {
+    "roto-pros-web": {
       "root": "",
       "projectType": "application",
       "architect": {
@@ -30,7 +30,6 @@
             "styles": [
               "node_modules/font-awesome/css/font-awesome.min.css",
               "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/c3/c3.min.css",
               "src/assets/css/graph.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/stylesheet.css",
@@ -44,7 +43,6 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/c3/c3.min.js",
               "src/assets/js/jquery.js",
               "node_modules/moment/min/moment.min.js",
               "src/assets/js/bootstrap.min.js",
@@ -54,11 +52,10 @@
               "src/assets/js/function.js",
               "src/assets/js/bootstrap-slider.min.js",
               "src/assets/js/main.js",
-
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
               "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
-              "src/assets/newAdmin/js/datetime-moment.js"
+              "src/assets/js/admin/datetime-moment.js"
             ]
           },
           "configurations": {
@@ -84,18 +81,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular.io-example:build"
+            "browserTarget": "roto-pros-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular.io-example:build:production"
+              "browserTarget": "roto-pros-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular.io-example:build"
+            "browserTarget": "roto-pros-web:build"
           }
         },
         "test": {
@@ -107,6 +104,9 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
+              {
+                "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+              },
               "src/styles.css"
             ],
             "assets": [
@@ -145,7 +145,7 @@
         }
       }
     },
-    "angular.io-example-e2e": {
+    "roto-pros-web-e2e": {
       "root": "",
       "projectType": "application",
       "cli": {},
@@ -155,7 +155,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "angular.io-example:serve"
+            "devServerTarget": "roto-pros-web:serve"
           }
         },
         "lint": {

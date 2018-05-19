@@ -1,5 +1,6 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
-import { APP_BASE_HREF } from '@angular/common';
+import { Injectable, EventEmitter, Output, PLATFORM_ID, Inject } from '@angular/core';
+import { APP_BASE_HREF, isPlatformBrowser, isPlatformServer } from '@angular/common';
+
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -8,6 +9,8 @@ import { environment } from "../../../environments/environment";
 
 import { Login } from "../models/login";
 import { User } from "../models/user";
+
+import { ArticleService } from "../../front/new-services/article.service";
 
 
 const httpOptions = {
@@ -42,14 +45,23 @@ export class AuthService {
 
   partialUser: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private articleService: ArticleService,
+    @Inject(PLATFORM_ID) private platformId: any) {
     this.apiUrl = environment.api_end_point + 'api/';
     this.appUrl = environment.api_end_point;
     this.wpUrl = 'http://13.56.129.231/dfsauth';
   }
 
+
   getToken(): string {
-    return localStorage.getItem('token') ? localStorage.getItem('token') : environment.token;
+
+     if (isPlatformBrowser(this.platformId)) {
+         // Client-only code: use localStorage
+        return localStorage.getItem('token') ? localStorage.getItem('token') : environment.token;
+     }
+     if (isPlatformServer(this.platformId)) {
+         // Server-only code: do nothing
+     }
   }
 
   // getHeaders(): Observable<any> {
@@ -67,6 +79,54 @@ export class AuthService {
   //   }
   //   return headers;
   // }
+
+  checkArticle(id, callback) {
+   this.articleService.fetchPost(id).subscribe(
+     response => {
+       // this.article = response;
+       // console.log(response.categories[0]);
+       this.articleService.fetchFreeCategory().subscribe(
+         responses => {
+           let cat_cnt = 0;
+           let isFree = false;
+
+           for (let value of response.categories) {
+             console.log(value, responses);
+             cat_cnt++;
+
+             if (value === responses[0].id) {
+               isFree = true;
+             }
+
+             if (response.categories.length == cat_cnt)
+               callback(isFree);
+           }
+
+         }
+       );
+
+     }
+   );
+ }
+
+ checkArticleVisibility(id, callback){
+   if (this.isLoggedIn()) {
+     callback(this.isSubscriber(true) ? true : false);
+   } else {
+     console.log("else here", id);
+     let status;
+     this.checkArticle(id, function(resp) {
+       console.log("check article", resp);
+       if (resp) {
+         status = true;
+       } else {
+         status = false;
+       }
+       callback(status);
+     });
+   }
+ }
+
 
   isSubscriber(calledByGuard = false): boolean | Observable<any> {
     if (this.loggedUser) {
@@ -101,8 +161,13 @@ export class AuthService {
     let login: boolean;
     if (environment.token && environment.token.length) {
       login = true;
-    } else if (localStorage.getItem('token') && localStorage.getItem('token').length) {
-      login = true;
+    } else if (isPlatformBrowser(this.platformId)) {
+        // Client-only code: use localStorage
+        if(localStorage.getItem('token') && localStorage.getItem('token').length) {
+          login = true;
+        }
+    } else if (isPlatformServer(this.platformId)) {
+        // Server-only code: do nothing
     }
     console.log("isLogin", login);
     return login;
@@ -111,9 +176,14 @@ export class AuthService {
   getUserRole(): string {
     let role: string;
     if (environment.role) {
-      role = environment.role;
-    } else if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('data')).role.length) {
-      role = JSON.parse(localStorage.getItem('data')).role;
+        role = environment.role;
+    } else if (isPlatformBrowser(this.platformId)) {
+        // localStorage will be available: we can use it.
+        if (localStorage.getItem('data') && JSON.parse(localStorage.getItem('data')).role.length) {
+          role = JSON.parse(localStorage.getItem('data')).role;
+        }
+    } else if (isPlatformServer(this.platformId)) {
+        // localStorage will be null.
     }
     return role;
   }
@@ -136,9 +206,16 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = '';
+    if (isPlatformBrowser(this.platformId)) {
+        // localStorage will be available: we can use it.
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = '';
+    }
+    if (isPlatformServer(this.platformId)) {
+        // localStorage will be null.
+    }
+
     //this.userLoggedInEvent.emit(false);
   }
 
@@ -224,7 +301,7 @@ export class AuthService {
       }).pipe(
       tap((res: any) => console.log(`image upload = ${res}`)),
       catchError(this.handleError<any>('uploadProfile'))
-    );  
+    );
   }
 
   //   /** products from the server */

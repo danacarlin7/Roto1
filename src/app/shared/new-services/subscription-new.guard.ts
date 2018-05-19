@@ -14,34 +14,8 @@ export class SubscriptionNewGuard implements CanActivate {
     }
   }
 
-  checkArticle(id, callback) {
-    this.articleService.fetchPost(id).subscribe(
-      response => {
-        // this.article = response;
-        // console.log(response.categories[0]);
-        this.articleService.fetchFreeCategory().
-          subscribe(responses => {
-            let cat_cnt = 0;
-            let isFree = false;
-
-            for (let value of response.categories) {
-              console.log(value, responses);
-              cat_cnt++;
-
-              if (value === responses[0].id) {
-                isFree = true;
-              }
-
-              if (response.categories.length == cat_cnt)
-                callback(isFree);
-            }
-          }
-          );
-      }
-    );
-  }
-
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    // console.log(route.params.id);
     let that = this;
     console.log('local' + localStorage.getItem('free'));
     if (localStorage.getItem('free') == "1") {
@@ -55,7 +29,7 @@ export class SubscriptionNewGuard implements CanActivate {
       }
     } else {
       console.log("else here", route.params.id);
-      this.checkArticle(route.params.id, function(resp) {
+      this.authService.checkArticle(route.params.id, function(resp) {
         console.log("check article", resp);
         if (resp) {
           localStorage.setItem('free', "1");
@@ -88,12 +62,15 @@ export class SubscriptionNewGuard implements CanActivate {
       //     );
       //   }
       // );
-      //
+
       // return true;
+
     }
+
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.canActivate(route, state);
   }
+
 }

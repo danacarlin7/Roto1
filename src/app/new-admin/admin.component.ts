@@ -7,8 +7,8 @@ declare var $:any;
   templateUrl: "./admin.component.html",
   styleUrls: [
     // "../proAdmin/assets/css/paper-dashboard.css",
-    "../../assets/newAdmin/css/paper-dashboard.css",
-    "../../assets/newAdmin/css/themify-icons.css",
+    "../../assets/css/admin/paper-dashboard.css",
+    "../../assets/css/admin/themify-icons.css",
     "./admin.component.css"
   ],
   encapsulation: ViewEncapsulation.None
