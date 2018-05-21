@@ -13,7 +13,7 @@ import { AppliedFiltersComponent } from "./components/filters/applied-filters/ap
 import { OverviewlistComponent } from "./components/overview/overview-list/overview-list.component";
 // import {AuthService} from "../shared/services/auth.service";
 import { CohortComponent } from './components/cohort/cohort.component';
-// import { GraphComponent } from './components/graph/graph.component';
+import { GraphComponent } from './components/graph/graph.component';
 import { CohortListComponent } from './components/cohort/cohort-list/cohort-list.component';
 import { ContestComponent } from "./components/contest/contest.component";
 import { ContestListComponent } from "./components/contest/contest-list/contest-list.component";
@@ -64,7 +64,7 @@ import { SavedCardsComponent } from "./components/settings/saved-cards/saved-car
     DashboardFilterComponent,
     DashboardStaticsComponent,
     DashboardTopWinsComponent,
-    // GraphComponent,
+    GraphComponent,
     UploadsComponent,
     SettingsComponent,
     UpdatePasswordComponent,

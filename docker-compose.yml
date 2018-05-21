@@ -6,4 +6,4 @@ services:
       dockerfile: web.dockerfile
     image: 'rotopros-web'
     ports:
-      - '80:4000'
+      - '4000:4000'

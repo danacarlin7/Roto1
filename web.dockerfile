@@ -1,34 +1,47 @@
 ### STAGE 1: Build ###
 
-FROM node:8-alpine as builder
+FROM node:8.11.2
 
-COPY package.json package-lock.json ./
+# use changes to package.json to force Docker not to use the cache
+# when we change our application's nodejs dependencies:
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p /opt/web && cp -a /tmp/node_modules /opt/web/
 
-RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
+# From here we load our application's code in, therefore the previous docker
+# "layer" thats been cached will be used if possible
+WORKDIR /opt/web
+ADD . /opt/web
 
-## Storing node modules on a separate layer will prevent unnecessary npm installs at each build
-RUN npm i && mkdir /web && cp -R ./node_modules ./web
-
-WORKDIR /web
+#RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
 
 COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
-RUN $(npm bin)/npm run deploy
+RUN npm run deploy
 
 ### STAGE 2: Setup ###
 
-FROM nginx:1.13.3-alpine
+#FROM nginx:latest
 
-## Copy our default nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/
+#COPY nginx.conf /etc/nginx/nginx.conf
+#COPY site.conf /etc/nginx/conf.d/default.conf
+#RUN rm -rf /usr/share/nginx/html/*
 
-## Remove default nginx website
-RUN rm -rf /usr/share/nginx/html/*
+#RUN cp -a /opt/web/dist /usr/share/nginx/html/
 
-## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /web/dist /usr/share/nginx/html
+#RUN touch /var/run/nginx.pid && \
+#  chown -R nginx:nginx /var/run/nginx.pid && \
+#  chown -R nginx:nginx /var/cache/nginx && \
+#  chown -R nginx:nginx /usr/share/nginx/html
 
-CMD ["nginx", "-g", "daemon off;"]
+#USER nginx
 
-CMD [ "nodemon", "dist/server.js" ]
+#RUN cd /usr/share/nginx/html
+
+#CMD [ "nodemon", "dist/server.js" ]
+
+# Expose API port to the outside
+EXPOSE 4000
+
+CMD ["node", "dist/server.js"]
