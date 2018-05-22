@@ -19,7 +19,7 @@ export class FrontService {
   }
 
   getHeaders(): Headers {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append("content-type", "application/json");
     if (this.getToken()) {
       headers.append("Authorization", "Bearer " + this.getToken());
@@ -32,7 +32,7 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -41,7 +41,7 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -50,7 +50,7 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -59,7 +59,7 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -68,7 +68,7 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -77,7 +77,7 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -86,10 +86,10 @@ export class FrontService {
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
-  getDummyPlans():any[]{
+  getDummyPlans(): any[]{
     return [
       {
         name: "All Access Monthly Rate",
@@ -100,7 +100,36 @@ export class FrontService {
         currency: "usd",
         interval: "month",
         interval_count: 1
+      }
+    ];
+  }
+
+  getDummyPlans2():any[]{
+    return[
+      {
+        name: "All Access Yearly Rate",
+        trial_period_days: null,
+        plan_id: "RotoPros_All_Access_Analyst_Lineups_Month",
+        plan_type: "Subscription",
+        amount: 24999,
+        currency: "usd",
+        interval: "year",
+        interval_count: 1
       },
+      {
+        name: "All Access Monthly Rate",
+        trial_period_days: null,
+        plan_id: "RotoPros_All_Access_Analyst_Lineups_Yearly",
+        plan_type: "Subscription",
+        amount: 2999,
+        currency: "usd",
+        interval: "month",
+        interval_count: 1
+      }
+    ];
+  }
+  getDummyPlans1():any[]{
+    return[
       {
         name: "All Access Yearly Rate",
         trial_period_days: null,
@@ -115,11 +144,11 @@ export class FrontService {
   }
   getSubscribePlans(): Observable<any> {
     return this.http.get(environment.api_end_point + "plans", {headers: this.getHeaders()})
-      .do(response => console.log("plans => ",JSON.stringify(response.json())))
+      .do(response => console.log("plans => ", JSON.stringify(response.json())))
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -136,7 +165,7 @@ export class FrontService {
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
@@ -147,13 +176,13 @@ export class FrontService {
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
 
   signUpStepTwo(token, plan_id, coupon = ""): Observable<any> {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append("content-type", "application/json");
     headers.append("Authorization", "Bearer " + this.authService.partialUser.token);
 
@@ -171,20 +200,20 @@ export class FrontService {
       .map(response => response.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
   retrieveVideos(status = false): Observable<any> {
     let link = "getVideos";
-    if(status)
+    if (status)
       link = "getVideos?live=true";
 
     return this.http.get(environment.api_end_point + link, {headers: this.getHeaders()})
       .map((reponse: Response) => reponse.json())
       .catch(error => {
         this.handelError(error.json());
-        return Observable.throw(error.json())
+        return Observable.throw(error.json());
       });
   }
 
