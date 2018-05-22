@@ -153,3 +153,41 @@
   top: 2px;
 }
 
+.midButton {
+  align-content: center;
+  margin-bottom: 25%;
+  margin-top:25%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000000;
+  transition: 300ms;
+  color: #f8c534;
+}
+.midButton p{
+  color:#f8c534;
+  align-content: center;
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.midButton button{
+  background: #F8C534;
+  color: #000000;
+  font-weight: bold;
+  font-size: x-large;
+  border-radius: 3px;
+  padding: auto;
+  border: 1px solid #ffffff;
+  margin-bottom: 15px;
+}
+
+.midButton button:hover, .midButton button:active, .midButton button:focus {
+  background: transparent;
+  border: 1px solid #f8c534 !important;
+  color: #f8c534 !important;
+}

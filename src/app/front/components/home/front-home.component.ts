@@ -51,7 +51,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private guard :SubscriptionNewGuard) {
+    private guard : SubscriptionNewGuard) {
   }
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   ngAfterViewInit() {
     setTimeout(function() {
       (<any>window).twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
+        let js, fjs = d.getElementsByTagName(s)[0],
           t = (<any>window).twttr || {};
         if (d.getElementById(id)) return t;
         js = d.createElement(s);
@@ -105,23 +105,25 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   }
 
+
+
   retrieveFeatured() {
     this.articleService.fetchRelated().subscribe(
       ids => {
         this.related = ids;
         // console.log(this.related);
         // for (let key in ids) {
-        this.fetchPostsByType('featured');
+        this.fetchPostsByType("featured");
         // }
       }
     );
   }
 
   fetchPostsByType(key: string) {
-    let cid = this.related[key].join(',');
+    const cid = this.related[key].join(",");
     this.articleService.fetchPosts({ include: cid }).subscribe(
       posts => {
-        let mid = [];
+        const mid = [];
         for (let j = 0; j < posts.length; j++) {
           posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
           if (posts[j].featured_media)
@@ -132,12 +134,12 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
         this.featured = posts;
         // if(key=='week')
         //   console.log(posts);
-        let mids = mid.join(',');
+        const mids = mid.join(",");
         if (mids) {
           this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
-                let image = images[k];
+                const image = images[k];
                 this.media[image.id] = image.source_url;
               }
             }
@@ -154,7 +156,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       response => {
         if (response.statusCode == 200) {
           // console.log(response.data);
-          let feeds: Array<any> = response.data;
+          const feeds: Array<any> = response.data;
           if (feeds && feeds.length) {
             this.twitterFeeds = feeds.splice(0, Math.min(5, feeds.length));
             // console.log("tweets => ", this.twitterFeeds);
@@ -309,11 +311,11 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   getArticlesByGameId(id: any, offset_cnt = 0) {
-    let catid = id;
-    let articlesList = [];
+    const catid = id;
+    const articlesList = [];
     this.articleService.fetchPosts({ categories: catid, per_page: 5, offset: offset_cnt }).subscribe(
       posts => {
-        let mid = [];
+        const mid = [];
         for (let j = 0; j < posts.length; j++) {
           posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
           if (posts[j].featured_media)
@@ -359,31 +361,31 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
           this.soccerArticles = articlesList;
           // console.log("soccerArticles => ", this.soccerArticles);
           setTimeout(() => {
-            let ht1 = Math.max(jQuery('#nflContent').height(), jQuery('#mlbContent').height());
-            jQuery('#mlbContent').height(ht1);
-            jQuery('#nflContent').height(ht1);
+            const ht1 = Math.max(jQuery("#nflContent").height(), jQuery("#mlbContent").height());
+            jQuery("#mlbContent").height(ht1);
+            jQuery("#nflContent").height(ht1);
 
-            let ht2 = Math.max(jQuery('#nbaContent').height(), jQuery('#nhlContent').height());
-            jQuery('#nbaContent').height(ht2);
-            jQuery('#nhlContent').height(ht2);
+            const ht2 = Math.max(jQuery("#nbaContent").height(), jQuery("#nhlContent").height());
+            jQuery("#nbaContent").height(ht2);
+            jQuery("#nhlContent").height(ht2);
 
-            let ht3 = Math.max(jQuery('#mmaContent').height(), jQuery('#nascarContent').height());
-            jQuery('#mmaContent').height(ht3);
-            jQuery('#nascarContent').height(ht3);
+            const ht3 = Math.max(jQuery("#mmaContent").height(), jQuery("#nascarContent").height());
+            jQuery("#mmaContent").height(ht3);
+            jQuery("#nascarContent").height(ht3);
 
-            let ht4 = Math.max(jQuery('soccerContent').height(), jQuery('#pgaContent').height());
-            jQuery('#soccerContent').height(ht4);
-            jQuery('#pgaContent').height(ht4);
+            const ht4 = Math.max(jQuery("soccerContent").height(), jQuery("#pgaContent").height());
+            jQuery("#soccerContent").height(ht4);
+            jQuery("#pgaContent").height(ht4);
 
           }, 500);
 
         }
-        let mids = mid.join(",");
+        const mids = mid.join(",");
         if (mids) {
           this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
-                let image = images[k];
+                const image = images[k];
                 this.media[image.id] = image.source_url;
               }
             }
@@ -395,7 +397,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   encodeHtml(extract: string) {
     extract = extract.replace(/<[^>]+>/gm, "");
-    let txt = document.createElement("textarea");
+    const txt = document.createElement("textarea");
     txt.innerHTML = extract;
     extract = txt.value;
     if (extract.length > 250)
@@ -414,13 +416,13 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
 
   switchToSingle(post, isArticle) {
 
-    let that = this;
+    const that = this;
     that.activeSingle = false;
     if (isArticle) {
       if (!this.authService.isLoggedIn()) {
         this.authService.checkArticleVisibility(post.id, function(resp){
-          console.log(post.id,resp);
-            if(!resp){
+          console.log(post.id, resp);
+            if (!resp){
               that.isStatus = false;
               that.isLoginError = true;
               that.isSubscribeError = false;
@@ -429,33 +431,33 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
               that.isLoginError = false;
               that.isSubscribeError = false;
             }
-            setTimeout(()=>{
+            setTimeout(() => {
               that.activeSingle = post;
-            },500);
+            }, 500);
         });
       } else if (this.authService.isLoggedIn() && this.authService.isSubscriber(true)) {
         this.isStatus = true;
         this.isLoginError = false;
         this.isSubscribeError = false;
-        setTimeout(()=>{
+        setTimeout(() => {
           that.activeSingle = post;
-        },500);
+        }, 500);
       } else {
         this.isStatus = false;
         this.isLoginError = false;
         this.isSubscribeError = true;
-        setTimeout(()=>{
+        setTimeout(() => {
           that.activeSingle = post;
-        },500);
+        }, 500);
       }
     } else {
       this.isStatus = true;
       this.isLoginError = false;
       this.isSubscribeError = false;
 
-      setTimeout(()=>{
+      setTimeout(() => {
         that.activeSingle = post;
-      },500);
+      }, 500);
     }
   }
 
@@ -481,19 +483,19 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
     this.articleService.fetchPosts({ categories: 4367, per_page: 10, offset: 0 }).subscribe(
       posts => {
         this.allNewsRecords = [];
-        let mid = [];
+        const mid = [];
         for (let j = 0; j < posts.length; j++) {
           posts[j].extract = this.encodeHtml(posts[j].excerpt.rendered);
           if (posts[j].featured_media)
             mid.push(posts[j].featured_media);
           this.allNewsRecords.push(posts[j]);
         }
-        let mids = mid.join(",");
+        const mids = mid.join(",");
         if (mids) {
           this.articleService.fetchMedia({ include: mids }).subscribe(
             images => {
               for (let k = 0; k < images.length; k++) {
-                let image = images[k];
+                const image = images[k];
                 this.media[image.id] = image.source_url;
               }
             }
@@ -522,9 +524,9 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   initSocialFeed() {
-    console.log('initSocialFeed')
-    let sfDivRef = jQuery(".indexNPrt2Rght");
-    let footerRef = jQuery("#footer");
+    console.log("initSocialFeed");
+    const sfDivRef = jQuery(".indexNPrt2Rght");
+    const footerRef = jQuery("#footer");
     let sfTop = sfDivRef.offset().top;
     let footerTop = footerRef.offset().top;
     // console.log(sfDivRef, footerRef, sfTop, footerTop);
@@ -541,8 +543,8 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   }
 
   initNewsFeed() {
-    let sfDivRef = jQuery(".indexNPrt2Lft .ylwTpBxInfoWrap");
-    let footerRef = jQuery("#footer");
+    const sfDivRef = jQuery(".indexNPrt2Lft .ylwTpBxInfoWrap");
+    const footerRef = jQuery("#footer");
     let sfTop = sfDivRef.offset().top;
     let footerTop = footerRef.offset().top;
     setTimeout(() => {
@@ -560,16 +562,16 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
   updateSFDivPos(sfDivRef, footerRef, sfTop, footerTop) {
     // console.log("update",sfDivRef, footerRef, sfTop, footerTop);
     if (jQuery(".indexNPrt2Mid")[0]) {
-      let midDivHeight = jQuery(".indexNPrt2Mid")[0].clientHeight;
+      const midDivHeight = jQuery(".indexNPrt2Mid")[0].clientHeight;
       if (midDivHeight <= sfDivRef[0].clientHeight) {
         return;
       }
-      let sfLeft = sfDivRef.offset().left;
-      let currPos = sfTop - jQuery(window).scrollTop();
+      const sfLeft = sfDivRef.offset().left;
+      const currPos = sfTop - jQuery(window).scrollTop();
       footerTop = footerRef.offset().top;
-      let footerCurrPos = footerTop - jQuery(window).scrollTop();
+      const footerCurrPos = footerTop - jQuery(window).scrollTop();
       if (currPos <= 92) {
-        let divWidth = sfDivRef[0].clientWidth;
+        const divWidth = sfDivRef[0].clientWidth;
         sfDivRef.css("width", divWidth + "px");
         sfDivRef.css("position", "fixed");
         sfDivRef.css("left", sfLeft + "px");
@@ -583,6 +585,7 @@ export class FrontHomeComponent implements AfterViewInit, OnInit {
       }
     }
   }
+
 
 
 

@@ -6,11 +6,40 @@
   <h1 class="page-heading">All Access Packages</h1>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-4 col-lg-3 col-lg-offset-2 col-sm-5 "
-           [class.col-md-offset-1]="i % 2 == 0"
-           [class.col-md-offset-2]="i % 2 != 0"
-           [class.col-sm-offset-1]="i % 2 == 0"
-           *ngFor="let plan of plans;let i = index">
+      <div class="col-md-4 col-lg-3 col-lg-offset-1 col-sm-4 "
+
+           *ngFor="let plan of plans;">
+        <div class="rp-plan">
+          <div class="plan-name">{{plan.name}}</div>
+          <div class="plan-price-container">
+            <div class="plan-price">
+              <span>
+                <span>{{(plan.amount / 100) | currency:'USD':true}}/</span>
+              </span>
+            </div>
+            <div class="plan-time">{{plan.interval}}</div>
+          </div>
+          <!--<div class="plan-trial-period">{{'('+plan.trial_period_days+'-days free trial)'}}</div>-->
+          <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Subscribe
+          </button> -->
+          (7 DAY FREE TRIAL)
+          <button *ngIf="!isLogin" class="btn-subscribe btn-lg btn-primary" (click)="onBtnSubscribeClick(plan)">Start Your Free Trial
+          </button>
+          <p style="font-size: x-small;padding:2px; color:#f8c534;">** You will automatically be charged for the listed rate at the end of your 7 day trial </p>
+          <!-- <button class="btn-subscribe btn-lg btn-primary" (click)="open(content, plan)">Subscribe
+          </button> -->
+
+        </div>
+      </div>
+      <div class= "col-lg-offset-1 col-md-2 col-lg-2 col-md-offset-1 col-sm-4">
+        <div class="midButton">
+          <p style="padding-bottom: 2px;"> First Month Free</p>
+          <p style=" padding-top: 2px; padding-bottom: 10px;"> $0 </p>
+          <button *ngIf="!isLogin" style="padding-top: 1px;"(click)="onBtnSubscribeClick(plan)">Find Out More</button>
+        </div>
+        </div>
+      <div class="col-md-4 col-lg-3 col-lg-offset-1 col-md-offset-1 col-sm-4 "
+           *ngFor="let plan of plans;">
         <div class="rp-plan">
           <div class="plan-name">{{plan.name}}</div>
           <div class="plan-price-container">
