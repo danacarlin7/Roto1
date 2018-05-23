@@ -74,7 +74,7 @@
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="assets/fonts/fontawesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-  <style>
+  <!-- <style>
     .startup-loader {
       display: flex;
       position: absolute;
@@ -85,7 +85,7 @@
       left: 0;
       bottom: 0;
     }
-  </style>
+  </style> -->
   <script src="https://checkout.stripe.com/checkout.js"></script>
   <!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->
   <script src="https://js.stripe.com/v3/"></script>
@@ -105,7 +105,9 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <app-root>
-
+  <div style="display: flex;  position: absolute;  align-items: center;  justify-content: center;  top: 0;  right: 0;  left: 0;bottom: 0;">
+    <img src="assets/images/rings.svg" alt="loader" style="width: 80px;height: 80px">
+  </div>
 </app-root>
 </body>
 </html>

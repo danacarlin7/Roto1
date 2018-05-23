@@ -32,7 +32,7 @@ docker images | grep rotopros
 
 
 #Build
-time docker-compose build --no-cache | tee docker-build.log
+time docker-compose build | tee docker-build.log
 
 #Start
 docker-compose up
