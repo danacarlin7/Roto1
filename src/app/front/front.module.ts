@@ -26,7 +26,6 @@ import {FAQComponent} from "./components/faq/faq.component";
 import {AdvFilterComponent} from "./components/lineup-optimizer/adv-filter/adv-filter.component";
 import {LineupPlayerFilter} from "./ng-pipes/lineup-opp-filter.pipe";
 import {SortGridPipe} from "./ng-pipes/custom-filter.pipe";
-
 import {PlayerGetService} from './services/fetchPlayers';
 import {CompGetService} from './services/fetchCompositions';
 import {LineupPostService} from './services/postLineups';
@@ -54,6 +53,7 @@ import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/ge
 import {PodcastComponent} from "./components/podcast/podcast.component";
 import {PlanComponent} from "./components/plan/plan.component";
 import {VideoComponent} from "./components/video/video.component";
+import {FreeOfferComponent} from "./components/free-offer/free-offer.component";
 
 
 // import {VgCoreModule} from 'videogular2/core';
@@ -117,7 +117,8 @@ import {VideoComponent} from "./components/video/video.component";
     GeneratedNBALineupsComponent,
     PodcastComponent,
     PlanComponent,
-    VideoComponent
+    VideoComponent,
+    FreeOfferComponent,
   ],
   exports: [
     ProviderComponent,

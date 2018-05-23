@@ -103,7 +103,6 @@ export class FrontService {
       }
     ];
   }
-
   getDummyPlans2():any[]{
     return[
       {

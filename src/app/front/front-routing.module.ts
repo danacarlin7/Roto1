@@ -39,6 +39,7 @@ import {GeneratedNBALineupsComponent} from "./components/nba-lineup-optimizer/ge
 import { PodcastComponent } from './components/podcast/podcast.component';
 import {PlanComponent} from "./components/plan/plan.component";
 import {VideoComponent} from "./components/video/video.component";
+import {FreeOfferComponent} from "./components/free-offer/free-offer.component";
 
 
 /**
@@ -84,6 +85,7 @@ const routes: Routes = [
       { path: "videos", component: VideoComponent },
       { path: "contact-analyzer", component: ContactAnalyzerComponent },
       { path: "podcast", component: PodcastComponent },
+      {path: "FreeOffer", component: FreeOfferComponent},
     ]
   }
 ];
