@@ -25,4 +25,7 @@ export class PlanComponent {
   onBtnSubscribeClick() {
     this.router.navigate(["/signup"]);
   }
+  onBtnFreeOfferClick() {
+    this.router.navigate(["/FreeOffer"]);
+  }
 }
