@@ -12,7 +12,7 @@ lsof -i ":$bePort" | grep node | awk '{print $2}' | while read pid; do kill -9 $
 docker-compose down
 
 #Clear Old Images
-docker images | grep rotopros
+docker images | grep rotoprosweb
 #docker rmi rotopros-web
 # docker rmi rotopros-api
 
@@ -31,23 +31,18 @@ docker images | grep rotopros
 # fi
 
 
-#Build1
+#Build
 time docker-compose build | tee docker-build.log
 #time docker-compose build --no-cache | tee docker-build.log
 
 #Start
 docker-compose up
 
-#Open a mwebbrowser
-# python -mwebbrowser http://localhost:8080
-
 # Tag + Push Docker Images
 # ------------------
-# docker tag rotopros-api rotopros/rotopros-api:latest
-docker tag rotopros-web rotopros/rotopros-web:latest
-docker push rotopros/rotopros-web:latest
-# docker push rotopros/rotopros-api:latest
-docker images | grep rotopros
+docker tag rotopros-web registry.gitlab.com/anonymous-coder/rotoprosweb:latest
+docker push registry.gitlab.com/anonymous-coder/rotoprosweb:latest
+docker images | grep rotoprosweb
 #
 
 # clean out docker bad data

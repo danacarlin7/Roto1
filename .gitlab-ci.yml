@@ -1,42 +1,92 @@
-stages:
-  - build
-  - dev_build
-  - staging_build
-  - notify_failure
+# stages:
+#   - build
+#   - dev_build
+#   - staging_build
+#   - notify_failure
+#
+# production_build:
+#   stage: build
+#   only:
+#     - master
+#   tags:
+#     - ROTOPROS
+#   script:
+#     - npm install
+#     - ng build --prod -extract-css false
+#     - cd /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
+#     - rm -rf /var/www/html/RotoProsWeb/dist
+#     - cp -R /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+#   tags:
+#     - ROTOPROS
+#
+# production_dev_build:
+#   stage: dev_build
+#   only:
+#     - staging
+#   script:
+#     - npm install
+#     - ng build --prod --env=dev -extract-css false
+#     - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
+#     - rm -rf /var/www/html/RotoProsWeb/dist
+#     - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+#   tags:
+#     - RP
 
-production_build:
+
+image: docker:stable
+services:
+- docker:dind
+
+stages:
+- build
+- test
+- release
+- deploy
+
+variables:
+  CONTAINER_STAGING_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
+  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:latest
+
+before_script:
+  - docker login -u gitlab-ci-token -p kxrRs1wz4z1gs9ATNYcQ registry.gitlab.com
+
+build:
   stage: build
+  script:
+    - docker build --pull -t $CONTAINER_STAGING_IMAGE .
+    - docker push $CONTAINER_STAGING_IMAGE
+
+# test1:
+#   stage: test
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker run $CONTAINER_TEST_IMAGE /script/to/run/tests
+
+# test2:
+#   stage: test
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker run $CONTAINER_TEST_IMAGE /script/to/run/another/test
+
+release-image:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - master
-  tags:
-    - ROTOPROS
-  script:
-    - npm install
-    - ng build --prod -extract-css false
-    - cd /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
-    - rm -rf /var/www/html/RotoProsWeb/dist
-    - cp -R /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
-  tags:
-    - ROTOPROS
 
-production_dev_build:
-  stage: dev_build
+deploy:
+  stage: deploy
+  script:
+    - ./prod.sh
   only:
-    - staging
-  script:
-    - npm install
-    - ng build --prod --env=dev -extract-css false
-    - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
-    - rm -rf /var/www/html/RotoProsWeb/dist
-    - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
-  tags:
-    - RP
+    - master
 
-production_staging_build:
-  stage: staging_build
+deploy:
+  stage: deploy
+  script:
+    - ./deploy.sh
   only:
     - angular6
-  script:
-    - ./docker.sh
-  tags:
-    - rp-docker
