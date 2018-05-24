@@ -1,6 +1,7 @@
 stages:
   - build
   - dev_build
+  - staging_build
   - notify_failure
 
 production_build:
@@ -30,3 +31,12 @@ production_dev_build:
     - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
   tags:
     - RP
+
+production_staging_build:
+  stage: staging_build
+  only:
+    - angular6
+  script:
+    - ./docker.sh
+  tags:
+    - rp-docker

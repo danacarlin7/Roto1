@@ -77,6 +77,23 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ]
+            },
+            "staging": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
             }
           }
         },
@@ -88,6 +105,9 @@
           "configurations": {
             "production": {
               "browserTarget": "roto-pros-web:build:production"
+            },
+            "staging": {
+              "browserTarget": "roto-pros-web:build:staging"
             }
           }
         },
