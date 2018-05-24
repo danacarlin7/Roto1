@@ -1,7 +1,5 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
-import {FrontService} from "../../services/front.service";
-import {AuthService} from "../../../shared/services/auth.service";
 @Component({
   selector: 'app-free-offer',
   templateUrl: './free-offer.component.html',
@@ -9,7 +7,7 @@ import {AuthService} from "../../../shared/services/auth.service";
 })
 export class FreeOfferComponent {
 
-  constructor(private router: Router, private frontService: FrontService, private authService: AuthService) { }
+  constructor(private router: Router) { }
 
   onBtnSubscribeClick() {
     this.router.navigate(["/signup"]);
