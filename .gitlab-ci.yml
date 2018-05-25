@@ -97,7 +97,7 @@ image: docker:stable
 stages:
 - build
 # - release
-# - deploy
+- deploy
 
 # When using dind, it's wise to use the overlayfs driver for
 # improved performance.
@@ -114,8 +114,7 @@ before_script:
 - apk add --no-cache python py2-pip
 # - apk add --no-cache python py2-pip
 - pip install --no-cache-dir docker-compose
-- docker info && docker-compose -v
-- docker login -u gitlab-ci-token -p kxrRs1wz4z1gs9ATNYcQ registry.gitlab.com
+- docker info &&  docker-compose -v && docker login -u gitlab-ci-token -p kxrRs1wz4z1gs9ATNYcQ registry.gitlab.com
 
 build:
   stage: build
@@ -123,24 +122,5 @@ build:
     # - docker-compose down
     # - time docker-compose build | tee docker-build.log
     # - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
-    # - docker push $CONTAINER_STAGING_IMAGE
     - docker pull $CONTAINER_STAGING_IMAGE
     - docker container restart RotoPros_Web
-
-
-# release-image:
-#   stage: release
-#   script:
-#     - docker pull $CONTAINER_STAGING_IMAGE
-#     - docker tag $CONTAINER_STAGING_IMAGE $CONTAINER_RELEASE_IMAGE
-#     - docker push $CONTAINER_RELEASE_IMAGE
-#   only:
-#     - master
-
-deploy:
-  stage: deploy
-  script:
-    - ./deploy.sh
-  only:
-    - master
-    - angular6
