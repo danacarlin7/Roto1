@@ -14,21 +14,6 @@ docker-compose down
 #Clear Old Images
 docker images | grep rotopros
 #docker rmi rotopros-web
-# docker rmi rotopros-api
-
-# check if web/dist
-# if [ ! -d "web/dist" ]
-# then
-#   echo "web/dist not found."
-#   cd web
-#   echo "creating ... "
-#   npm run deploy
-#   echo "web/dist created."
-#   cd ..
-#
-# else
-#   echo "web/dist found."
-# fi
 
 
 #Build1
