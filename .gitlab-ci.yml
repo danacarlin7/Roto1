@@ -102,7 +102,7 @@ stages:
 # When using dind, it's wise to use the overlayfs driver for
 # improved performance.
 variables:
-  CONTAINER_STAGING_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  CONTAINER_STAGING_IMAGE: $CI_REGISTRY_IMAGE:beta
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
   CI_JOB_TOKEN: kxrRs1wz4z1gs9ATNYcQ
   DOCKER_DRIVER: overlay2
@@ -120,8 +120,27 @@ before_script:
 build:
   stage: build
   script:
-    - docker-compose down
-    - time docker-compose build | tee docker-build.log
-    - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
-    - docker push $CONTAINER_STAGING_IMAGE
-    - docker-compose up -d
+    # - docker-compose down
+    # - time docker-compose build | tee docker-build.log
+    # - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
+    # - docker push $CONTAINER_STAGING_IMAGE
+    - docker pull $CONTAINER_STAGING_IMAGE
+    - docker container restart RotoPros_Web
+
+
+# release-image:
+#   stage: release
+#   script:
+#     - docker pull $CONTAINER_STAGING_IMAGE
+#     - docker tag $CONTAINER_STAGING_IMAGE $CONTAINER_RELEASE_IMAGE
+#     - docker push $CONTAINER_RELEASE_IMAGE
+#   only:
+#     - master
+
+deploy:
+  stage: deploy
+  script:
+    - ./deploy.sh
+  only:
+    - master
+    - angular6
