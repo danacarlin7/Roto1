@@ -142,5 +142,4 @@ deploy:
   script:
     - ./deploy.sh
   only:
-    - master
     - angular6
