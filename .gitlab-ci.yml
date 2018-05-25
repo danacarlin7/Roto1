@@ -92,13 +92,10 @@
 #     - angular6
 
 
-
-
 image: docker:stable
 
 stages:
 - build
-#- test
 - release
 - deploy
 
@@ -125,17 +122,4 @@ build:
     - time docker-compose build | tee docker-build.log
     - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
     - docker push $CONTAINER_STAGING_IMAGE
-#
-# # build:
-# #   stage: build
-# #   script:
-# #   - docker-compose down
-# #   - time docker-compose build | tee docker-build.log
-# #   - ./deploy.sh
-#
-deploy:
-  stage: deploy
-  script:
-    - docker-compose up
-  only:
-    - angular6
+    - docker-compose up -d

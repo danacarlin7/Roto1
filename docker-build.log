@@ -1,31 +1,33 @@
 Step 1/10 : FROM node:8.11.2
- ---> 037acc6a00bc
+ ---> ff2509c12bff
 Step 2/10 : ADD package.json /tmp/package.json
  ---> Using cache
- ---> 411bf2cd9f77
+ ---> d9acea807db8
 Step 3/10 : RUN cd /tmp && npm install
  ---> Using cache
- ---> 136ccaf0e07c
+ ---> 092885d09db8
 Step 4/10 : RUN mkdir -p /opt/web && cp -a /tmp/node_modules /opt/web/
  ---> Using cache
- ---> 325b4ea8c19c
+ ---> be0b098d50e3
 Step 5/10 : WORKDIR /opt/web
  ---> Using cache
- ---> d2d826ea14c9
+ ---> d0af7b4a87df
 Step 6/10 : ADD . /opt/web
- ---> Using cache
- ---> 0d03be9b1658
+ ---> 330d4ff5c7f2
 Step 7/10 : COPY . .
- ---> Using cache
- ---> 027b42904109
+ ---> 4fbc368fc56d
 Step 8/10 : RUN npm run deploy:dev
- ---> Using cache
- ---> edd713315b46
-Step 9/10 : EXPOSE 4000
- ---> Using cache
- ---> 7297f38c231d
-Step 10/10 : CMD ["node", "dist/server.js"]
- ---> Using cache
- ---> 9363c8acf02e
-Successfully built 9363c8acf02e
-Successfully tagged rotopros-web:latest
+ ---> Running in e8754ff2bfeb
+
+> roto-pros-web@1.0.0 deploy:dev /opt/web
+> npm run build:ssr:dev
+
+
+> roto-pros-web@1.0.0 build:ssr:dev /opt/web
+> npm run build:client-and-server-bundles:dev && npm run webpack:server
+
+
+> roto-pros-web@1.0.0 build:client-and-server-bundles:dev /opt/web
+> ng build --prod --configuration=staging && ng run roto-pros-web:server
+
+[91m  0% compiling[0m[91m[0m[91m 10% building modules 0/1 modules 1 active multi /opt/web/src/main.ts[0m[91m                            10% building modules 1/1 modules 0 active[0m[91m 10% building modules 1/2 modules 1 active multi /opt/web/src/polyfills.ts[0m[91m                                [0m[91m 10% building modules 2/2 modules 0 active[0m[91m 10% building modules 2/3 modules 1 active ?-responsive.css /opt/web/src/styles.css[0m[91m                                          10% building modules 3/3 modules 0 active[0m
