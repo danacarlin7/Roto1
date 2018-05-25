@@ -120,13 +120,13 @@ before_script:
 - echo $CONTAINER_STAGING_IMAGE
 - echo $CI_REGISTRY
 
-# build:
-#   stage: build
-#   script:
-#     - docker-compose down
-#     - time docker-compose build | tee docker-build.log
-#     - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
-#     - docker push $CONTAINER_STAGING_IMAGE
+build:
+  stage: build
+  script:
+    - docker-compose down
+    # - time docker-compose build | tee docker-build.log
+    # - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
+    # - docker push $CONTAINER_STAGING_IMAGE
 #
 # # build:
 # #   stage: build
@@ -135,9 +135,9 @@ before_script:
 # #   - time docker-compose build | tee docker-build.log
 # #   - ./deploy.sh
 #
-# deploy:
-#   stage: deploy
-#   script:
-#     - docker-compose up
-#   only:
-#     - angular6
+deploy:
+  stage: deploy
+  script:
+    - docker-compose down
+  only:
+    - angular6
