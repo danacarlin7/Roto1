@@ -117,12 +117,14 @@ before_script:
 - pip install --no-cache-dir docker-compose
 - docker-compose -v
 - docker info && docker login -u gitlab-ci-token -p kxrRs1wz4z1gs9ATNYcQ registry.gitlab.com
+- echo $CONTAINER_STAGING_IMAGE
 
 build:
   stage: build
   script:
     - docker-compose down
-    - docker build --pull -t $CONTAINER_STAGING_IMAGE .
+    - time docker-compose build | tee docker-build.log
+    - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
     - docker push $CONTAINER_STAGING_IMAGE
 
 # build:
