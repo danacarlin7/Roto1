@@ -111,9 +111,9 @@ services:
 - docker:dind
 
 before_script:
-- apk add python py2-pip
+- apk add --no-cache python py2-pip
 # - apk add --no-cache python py2-pip
-- pip install docker-compose
+- pip install --no-cache-dir docker-compose
 - docker info &&  docker-compose -v && docker login -u gitlab-ci-token -p kxrRs1wz4z1gs9ATNYcQ registry.gitlab.com
 
 build:
