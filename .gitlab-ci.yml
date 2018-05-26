@@ -124,4 +124,4 @@ build:
     # - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
     - docker pull $CONTAINER_STAGING_IMAGE
     - docker container ls
-    - docker container restart RotoPros_Web
+    #- docker container restart RotoPros_Web
