@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  api_end_point: "http://165.227.108.61:3000/",
+  // api_end_point: "http://165.227.108.61:3000/",
+  api_end_point: "http://localhost:3000/",
   token: "",
   role: ""
 };

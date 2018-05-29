@@ -119,9 +119,15 @@ before_script:
 build:
   stage: build
   script:
-    # - docker-compose down
-    # - time docker-compose build | tee docker-build.log
-    # - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
-    - docker pull $CONTAINER_STAGING_IMAGE
-    - docker container ls
-    #- docker container restart RotoPros_Web
+    - docker-compose down
+    - time docker-compose build | tee docker-build.log
+    - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
+    - docker push $CONTAINER_STAGING_IMAGE
+    - docker-compose up
+
+# deploy:
+#   stage: deploy
+#   script:
+#     - ./deploy.sh
+#   only:
+#     - angular6

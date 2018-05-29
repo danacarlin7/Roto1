@@ -19,7 +19,7 @@
     "build:client-and-server-bundles": "ng build --prod && ng run roto-pros-web:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "deploy:dev": "bash gitlab_docker.sh",
-    "deploy": "npm run build:ssr && bash gitlab_docker.sh",
+    "deploy": "npm run build:ssr",
     "predocker:taillogs": "echo Web Server Logs:",
     "prod": "nodemon dist/server.js"
   },
