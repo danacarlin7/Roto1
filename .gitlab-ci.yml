@@ -119,11 +119,11 @@ before_script:
 build:
   stage: build
   script:
-    - docker-compose down
+    # - docker-compose down
     - time docker-compose build | tee docker-build.log
     - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
     - docker push $CONTAINER_STAGING_IMAGE
-    - docker-compose up
+    # - docker-compose up
 
 # deploy:
 #   stage: deploy
