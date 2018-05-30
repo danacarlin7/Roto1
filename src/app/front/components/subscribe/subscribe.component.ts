@@ -123,6 +123,8 @@ export class SubscribeComponent implements OnInit {
 
 
   couponClicked(plan) {
+    plan.userToken = this.userToken;
+    plan.email = this.email;
     let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       // width: '400px',
       // height: '250px',
@@ -372,13 +374,14 @@ export class DialogOverviewExampleDialog {
 
   onBtnSubscribeClick(coupon) {
     // this.selectedPlan = plan;
-    console.log(coupon);
+    console.log(coupon, this.data);
     this.checkCoupon(coupon, this.data.amount, (status, resp, finalAmount) => {
-      console.log(this.userToken.length, finalAmount);
+      console.log(this.userToken.length, finalAmount, status);
       if (status) {
         // couponDialog.close();
+        this.onNoClick();
         localStorage.setItem("selectedPlan", this.data.plan_id);
-        if (this.authService.isLoggedIn() || this.userToken.length) {
+        if (this.authService.isLoggedIn() || this.data.userToken.length) {
           let handler = (<any>window).StripeCheckout.configure({
             key: environment.production ? "pk_live_ot2q3JGgPLEfvia8StJWO0b7" : "pk_test_A5XmrDsft5PHHvkxOKISsUR7",
             locale: "auto",
@@ -415,7 +418,7 @@ export class DialogOverviewExampleDialog {
                   });
               } else {
                 console.log("i am here", this.coupon);
-                this.frontService.signUpStepTwo(token.id, this.data.plan_id, this.coupon)
+                this.frontService.signUpStepTwo(token.id, this.data.plan_id, this.coupon, this.data.userToken)
                   .subscribe(
                   response => {
                     if (response.statusCode == 200) {
@@ -443,17 +446,15 @@ export class DialogOverviewExampleDialog {
           });
 
           handler.open({
-            name: this.selectedPlan.name,
-            description: resp != "empty" && status ? "Your Coupon Code Has Been Applied" : this.selectedPlan.interval != "day" ? this.period_text[this.selectedPlan.interval] : "Every " + this.selectedPlan.interval_count + " days",
+            name: this.data.name,
+            description: resp != "empty" && status ? "Your Coupon Code Has Been Applied" : this.data.interval != "day" ? this.period_text[this.data.interval] : "Every " + this.data.interval_count + " days",
             amount: finalAmount,
-            email: this.email
+            email: this.data.email
             // panelLabel: status ? "Amount After Discount" : "Pay"
             // image: "http://13.57.84.196/assets/images/logo.png"
           });
 
-        }
-
-        else {
+        } else {
           setTimeout(
             () => {
               this.router.navigate(["/login"], {queryParams: {redirect: location.pathname}});
