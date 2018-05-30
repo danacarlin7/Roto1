@@ -124,8 +124,8 @@ export class SubscribeComponent implements OnInit {
 
   couponClicked(plan) {
     let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      // width: '400px',
-      // height: '250px',
+      width: '400px',
+      height: '250px',
       data: plan
     });
 

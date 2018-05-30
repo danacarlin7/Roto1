@@ -18,7 +18,7 @@ ADD . /opt/web
 COPY . .
 
 ## Build the angular app in production mode and store the artifacts in dist folder
-RUN npm run deploy
+RUN npm run deploy:dev
 
 ### STAGE 2: Setup ###
 
