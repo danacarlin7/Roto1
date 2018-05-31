@@ -84,10 +84,11 @@ export class SubscribeComponent implements OnInit {
         }
         );
     }
-    if (this.authService.partialUser) {
+    if (this.authService.partialUser || localStorage.getItem('partial')) {
       this.showPartialSignUpMsg = true;
-      this.userToken = this.authService.partialUser.token;
-      this.email = this.authService.partialUser.email;
+      let localUser = JSON.parse(localStorage.getItem('partial'));
+      this.userToken = this.authService.partialUser ? this.authService.partialUser.token : localUser.token;
+      this.email = this.authService.partialUser ?  this.authService.partialUser.email : localUser.email;
       console.log(this.userToken);
 
       // that.addPixelEvent('InitiateCheckout', that.selectedPlan);
@@ -103,7 +104,7 @@ export class SubscribeComponent implements OnInit {
         s.parentNode.insertBefore(t,s)}(window,document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
       fbq('track', 'Lead', {
-        content_name: '` + this.authService.partialUser.email + `',
+        content_name: '` + this.email + `',
         content_category: 'Lead',
       });`;
 
@@ -376,7 +377,7 @@ export class DialogOverviewExampleDialog {
     // this.selectedPlan = plan;
     console.log(coupon, this.data);
     this.checkCoupon(coupon, this.data.amount, (status, resp, finalAmount) => {
-      console.log(this.userToken.length, finalAmount, status);
+      // console.log(this.data.userToken.length, finalAmount, status);
       if (status) {
         // couponDialog.close();
         this.onNoClick();
@@ -397,15 +398,15 @@ export class DialogOverviewExampleDialog {
                     if (response.statusCode == 200) {
                       console.log("subscribePlan Success => ", response.data);
 
-                      this.authService.retrieveLoggedUserInfo()
-                        .subscribe(
-                        response => {
-                          if (response.statusCode == 200) this.authService.loggedUser = response.data;
-                        },
-                        error => {
-                          console.log("http error => ", error);
-                        }
-                        );
+                      // this.authService.retrieveLoggedUserInfo()
+                      //   .subscribe(
+                      //   response => {
+                      //     if (response.statusCode == 200) this.authService.loggedUser = response.data;
+                      //   },
+                      //   error => {
+                      //     console.log("http error => ", error);
+                      //   }
+                      //   );
 
                       this.router.navigate(["/homeRedirect",{ redirected: true, redirectMessage: "You Have been Successfully Subscribed!" }]);
                     }
@@ -423,16 +424,19 @@ export class DialogOverviewExampleDialog {
                   response => {
                     if (response.statusCode == 200) {
                       console.log("subscribePlan Success => ", response.data);
-
-                      this.authService.retrieveLoggedUserInfo()
-                        .subscribe(
-                        response => {
-                          if (response.statusCode == 200)
-                          this.authService.loggedUser = response.data;
-                        },
-                        error => {
-                          console.log("http error => ", error);
-                      });
+                      
+                      this.authService.partialUser = null;
+                      localStorage.removeItem('partial');
+                      localStorage.removeItem('selectedPlan');
+                      // this.authService.retrieveLoggedUserInfo()
+                      //   .subscribe(
+                      //   response => {
+                      //     if (response.statusCode == 200)
+                      //     this.authService.loggedUser = response.data;
+                      //   },
+                      //   error => {
+                      //     console.log("http error => ", error);
+                      // });
 
                       this.router.navigate(["/homeRedirect",
                         {

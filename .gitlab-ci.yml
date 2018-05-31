@@ -1,32 +1,142 @@
+# stages:
+#   - build
+#   - dev_build
+#   - staging_build
+#   - notify_failure
+#
+# production_build:
+#   stage: build
+#   only:
+#     - master
+#   tags:
+#     - ROTOPROS
+#   script:
+#     - npm install
+#     - ng build --prod -extract-css false
+#     - cd /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
+#     - rm -rf /var/www/html/RotoProsWeb/dist
+#     - cp -R /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+#   tags:
+#     - ROTOPROS
+#
+# production_dev_build:
+#   stage: dev_build
+#   only:
+#     - staging
+#   script:
+#     - npm install
+#     - ng build --prod --env=dev -extract-css false
+#     - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
+#     - rm -rf /var/www/html/RotoProsWeb/dist
+#     - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
+#   tags:
+#     - RP
+
+
+# image: docker:stable
+# services:
+# - docker:dind
+#
+# stages:
+# - build
+# - test
+# - release
+# - deploy
+#
+# variables:
+#   CONTAINER_STAGING_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME
+#   CONTAINER_RELEASE_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH:latest
+#
+# before_script:
+#   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+#
+# build:
+#   stage: build
+#   script:
+#     - docker build --pull -t $CONTAINER_STAGING_IMAGE .
+#     - docker push $CONTAINER_STAGING_IMAGE
+
+# test1:
+#   stage: test
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker run $CONTAINER_TEST_IMAGE /script/to/run/tests
+
+# test2:
+#   stage: test
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker run $CONTAINER_TEST_IMAGE /script/to/run/another/test
+
+# release-image:
+#   stage: release
+#   script:
+#     - docker pull $CONTAINER_TEST_IMAGE
+#     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+#     - docker push $CONTAINER_RELEASE_IMAGE
+#   only:
+#     - master
+#
+# deploy:
+#   stage: deploy
+#   script:
+#     - ./prod.sh
+#   only:
+#     - master
+#
+# deploy:
+#   stage: deploy
+#   script:
+#     - ./deploy.sh
+#   only:
+#     - angular6
+
+
+image: docker:stable
+
 stages:
-  - build
-  - dev_build
-  - notify_failure
+- build
+# - release
+- deploy
 
-production_build:
+# When using dind, it's wise to use the overlayfs driver for
+# improved performance.
+variables:
+  CONTAINER_STAGING_IMAGE: $CI_REGISTRY_IMAGE:beta
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:live
+  CONTAINER_IMAGE: $CI_REGISTRY_IMAGE:latest
+  CI_JOB_TOKEN: kxrRs1wz4z1gs9ATNYcQ
+  DOCKER_DRIVER: overlay2
+
+services:
+- docker:dind
+
+before_script:
+# - apk add --no-cache python py2-pip
+# - apk add --no-cache python py2-pip
+# - pip install --no-cache-dir docker-compose
+- docker info && docker login -u gitlab-ci-token -p kxrRs1wz4z1gs9ATNYcQ registry.gitlab.com
+# - docker-compose -v
+
+build:
   stage: build
-  only:
-    - master
-  tags:
-    - ROTOPROS
   script:
-    - npm install
-    - ng build --prod -extract-css false
-    - cd /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb
-    - rm -rf /var/www/html/RotoProsWeb/dist
-    - cp -R /home/ubuntu/builds/ffbe2209/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
-  tags:
-    - ROTOPROS
+    # - docker-compose down
+    # - docker pull $CONTAINER_STAGING_IMAGE || true
+    #- time docker-compose build | tee docker-build.log
+    # - docker build --cache-from rotopros-web:latest --tag rotopros-web:latest -f web.dockerfile .
+    # - docker tag rotopros-web $CONTAINER_STAGING_IMAGE
+    # - docker-compose up
 
-production_dev_build:
-  stage: dev_build
-  only:
-    - staging
-  script:
-    - npm install
-    - ng build --prod --env=dev -extract-css false
-    - cd /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb
-    - rm -rf /var/www/html/RotoProsWeb/dist
-    - cp -R /home/gitlab-runner/builds/03bf9824/0/anonymous-coder/RotoProsWeb/dist /var/www/html/RotoProsWeb/
-  tags:
-    - RP
+    - docker pull $CONTAINER_IMAGE || true
+    - docker build --cache-from $CONTAINER_IMAGE --tag $CONTAINER_STAGING_IMAGE --tag $CONTAINER_IMAGE .
+    - docker push $CONTAINER_STAGING_IMAGE
+    - docker push $CONTAINER_IMAGE
+
+
+# deploy:
+#   stage: deploy
+#   script:
+#     - ./deploy.sh
+#   only:
+#     - angular6

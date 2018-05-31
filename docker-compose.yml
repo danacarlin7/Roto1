@@ -1,0 +1,9 @@
+version: "2"
+services:
+  rotopros-web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    image: 'rotopros-web'
+    ports:
+      - '4000:4000'

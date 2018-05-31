@@ -9,7 +9,7 @@ import { Modal } from 'ngx-modialog/plugins/bootstrap';
 // import { MembershipPlanService } from "../services/membership-plan.service";
 import * as moment from "moment";
 // import { Subscription } from "rxjs";
-import "../../../assets/newAdmin/js/datetime-moment.js";
+import "../../../assets/js/admin/datetime-moment.js";
 
 declare var $: any;
 

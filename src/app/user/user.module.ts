@@ -26,7 +26,7 @@ import { DashboardTopWinsComponent } from "./components/dashboard/dashboard-top-
 import { UploadsComponent } from "./components/uploads/uploads.component";
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
-import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
+// import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { UpdatePasswordComponent } from "./components/settings/update-password/update-password.component";
 import { UserProfileComponent } from "./components/settings/user-profile/user-profile.component";
@@ -43,7 +43,7 @@ import { SavedCardsComponent } from "./components/settings/saved-cards/saved-car
     ModalModule.forRoot(),
     BootstrapModalModule,
     SharedModule,
-    DropzoneModule
+    // DropzoneModule
   ],
   declarations: [
     UserMainComponent,

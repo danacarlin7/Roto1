@@ -121,6 +121,7 @@ export class LoginComponent {
         if (this.loginResp.statusCode == 200) {
           if (this.loginResp.data.is_partial) {
             this.authService.partialUser = this.loginResp.data;
+            localStorage.setItem('partial', JSON.stringify(this.authService.partialUser));
             this.router.navigate(['/subscribe']);
             return;
           }

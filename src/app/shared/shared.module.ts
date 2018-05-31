@@ -20,7 +20,7 @@ import { SubscriptionGuard } from "./new-services/subscription.guard";
 
 
 /* libs */
-import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
+// import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 import { ModalModule } from 'ngx-modialog';
 import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
 import { NgxPaginationModule } from "ngx-pagination";
@@ -39,7 +39,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     SharedPrimeNGComponents,
     ModalModule.forRoot(),
     BootstrapModalModule,
-    DropzoneModule,
+    // DropzoneModule,
     NgxPaginationModule,
   ],
   exports: [
@@ -51,7 +51,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     SharedPrimeNGComponents,
     // DataTableModule,
     ModalModule,
-    DropzoneModule,
+    // DropzoneModule,
     TabViewComponent,
     NgxPaginationModule,
     MobileHiddenDirective

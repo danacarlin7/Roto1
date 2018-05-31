@@ -29,7 +29,7 @@ import { AuthService } from "./shared/new-services/auth.service";
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'roto-pros-web' }),
     BrowserAnimationsModule,
     FrontModule,
     UserModule,

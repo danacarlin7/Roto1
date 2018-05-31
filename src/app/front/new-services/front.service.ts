@@ -167,7 +167,8 @@ export class FrontService {
 
 
   signUpStepTwo(token, plan_id, coupon = "", authToken = ""): Observable<any> {
-    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + this.authService.partialUser.token.length ? this.authService.partialUser.token : authToken);
+    httpOptionsCustom.headers = httpOptionsCustom.headers.set('Authorization', 'Bearer ' + authToken);
+    console.log(httpOptionsCustom)
     return this.http.post<any>(this.apiUrl + "signupTwo", {token, plan_id, coupon}, httpOptionsCustom).pipe(
       tap((datas: any) => {}),
       catchError(this.handleError<any>('signUpStepTwo'))

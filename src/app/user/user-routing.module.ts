@@ -7,7 +7,7 @@ import {CohortComponent} from "./components/cohort/cohort.component";
 import {ContestComponent} from "./components/contest/contest.component";
 import {OpponentComponent} from "./components/opponent/opponent.component";
 import {AuthGuard} from "../shared/new-services/auth.guard";
-import {GraphComponent} from "./components/graph/graph.component";
+// import {GraphComponent} from "./components/graph/graph.component";
 import {UploadsComponent} from "./components/uploads/uploads.component";
 import {SettingsComponent} from "./components/settings/settings.component";
 import {UpdatePasswordComponent} from "./components/settings/update-password/update-password.component";
@@ -47,10 +47,10 @@ const routes:Routes = [
         path: 'opponent',
         component: OpponentComponent
       },
-      <Route>{
-        path: 'graphs',
-        component: GraphComponent
-      },
+      // <Route>{
+      //   path: 'graphs',
+      //   component: GraphComponent
+      // },
       <Route>{
         path: 'uploads',
         component: UploadsComponent

@@ -12,10 +12,16 @@
     "start:fr": "ng serve --aot --i18nFile=src/locale/messages.fr.xlf --i18nFormat=xlf --locale=fr",
     "build:fr": "ng build --prod --i18nFile=src/locale/messages.fr.xlf --i18nFormat=xlf --locale=fr",
     "extract": "ng xi18n --outputPath=src/locale",
+    "build:ssr:dev": "npm run build:client-and-server-bundles:dev && npm run webpack:server",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "serve:ssr": "node dist/server.js",
-    "build:client-and-server-bundles": "ng build --prod && ng run angular.io-example:server",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
+    "build:client-and-server-bundles:dev": "ng build --prod --configuration=staging && ng run roto-pros-web:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run roto-pros-web:server",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "deploy:dev": "npm run build:ssr:dev",
+    "deploy": "npm run build:ssr",
+    "predocker:taillogs": "echo Web Server Logs:",
+    "prod": "nodemon dist/server.js"
   },
   "private": true,
   "dependencies": {
