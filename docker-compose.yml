@@ -4,6 +4,7 @@ services:
     build:
       context: ./
       dockerfile: web.dockerfile
-    image: 'rotopros-web'
+    # image: 'rotopros-web'
+    image: 'registry.gitlab.com/anonymous-coder/rotoprosweb'
     ports:
       - '4000:4000'

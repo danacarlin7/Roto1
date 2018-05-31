@@ -129,7 +129,7 @@ build:
     # - docker-compose up
 
     - docker pull $CONTAINER_IMAGE || true
-    - docker build --cache-from $CONTAINER_IMAGE --tag $CONTAINER_STAGING_IMAGE --tag $CONTAINER_IMAGE .
+    - docker build --cache-from $CONTAINER_IMAGE --tag $CONTAINER_STAGING_IMAGE --tag $CONTAINER_IMAGE -f web.dockerfile .
     - docker push $CONTAINER_STAGING_IMAGE
     - docker push $CONTAINER_IMAGE
 
