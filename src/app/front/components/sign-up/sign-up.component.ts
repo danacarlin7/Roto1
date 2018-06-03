@@ -25,6 +25,8 @@ export class SignUpComponent {
   checkingUserName: boolean;
 
   plans: Array<any> = [];
+  plans2: Array<any>=[];
+
 
   @ViewChild("signUpError") signUpErrorRef: ElementRef;
 
@@ -47,6 +49,7 @@ export class SignUpComponent {
 
   ngOnInit() {
     this.plans = this.frontService.getDummyPlans();
+    this.plans2 = this.frontService.getDummyPlans2();
   }
 
 

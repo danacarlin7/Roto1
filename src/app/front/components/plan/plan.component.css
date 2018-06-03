@@ -153,3 +153,50 @@
   top: 2px;
 }
 
+.midButton {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  transition: 300ms;
+  color: #f8c534;
+}
+
+
+
+
+.btn-midButton {
+  background: #f8c534;
+  color: #000 !important;
+  border: 1px solid #ffffff !important;
+  margin-top: 20px;
+  font-weight: 600;
+  margin-bottom: 42px;
+
+}
+
+.btn-midButton :hover, .btn-midButton :active, .btn-midButton :focus {
+  background: transparent;
+  border: 1px solid #f8c534 !important;
+  color: #f8c534 !important;
+}
+
+#buttonPrice{
+  font-size: 30px;
+  margin: 10px 1px;
+}
+
+#buttonTitle{
+  font-size: 22px;
+  margin: 10px;
+}
+.midButtonContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+

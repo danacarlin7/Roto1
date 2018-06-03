@@ -82,6 +82,7 @@
 <!-- BoPrt1 Ends -->
 
 <!-- Match Details Starts -->
+
 <section class="indexNPrt2">
   <div class="container-fluid">
     <div class="row">
@@ -302,8 +303,8 @@
          </div>
           </div>
           </div>
-          <div id ="signup2" class="ylwTpBx clearfix" style="float:none; text-align: center; padding-top: 20px; padding-bottom: 20px;padding-right:0px">
-             <a routerLink="/signup" style="font-weight: 700; font-size: x-large; font-family:'Roboto Condensed', sans-serifm;  color: rgba(0,0,0,0.8);">Start Your Free Trial Today</a>
+          <div id ="signup2" class="blWhtpBx clearfix" style="float:none; text-align: center; padding-top: 20px; padding-bottom: 20px;padding-right:0px">
+             <a routerLink="/signup" style="font-weight: 700; font-size: x-large; font-family:'Roboto Condensed', sans-serifm;  color: #ffffff;">Start Your Free Trial Today</a>
 
           </div>
 
@@ -324,6 +325,98 @@
                 </div>
                 <div class="sport-content" id="mlbContent">
                   <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of baseballArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="sport-article1">
+                <div class="sport-name1">
+                  <div class="name">PGA Articles</div>
+                </div>
+                <div class="sport-content" id="pgaContent">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of golfArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article1">
+                <div class="sport-name1">
+                  <div class="name">Nascar Articles</div>
+                </div>
+                <div class="sport-content" id="nascarContent">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nascarArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="sport-article1">
+                <div class="sport-name1">
+                  <div class="name">MMA Articles</div>
+                </div>
+                <div class="sport-content" id="mmaContent">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of mmaArticles;let i = index;">
+                    <div class="article-with-thumb" *ngIf="i == 0">
+                      <div class="article-img">
+                        <img
+                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
+                      </div>
+                      <div class="article-details">
+                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
+                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
+                      </div>
+                    </div>
+                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="sport-article1">
+                <div class="sport-name1">
+                  <div class="name">Soccer Articles</div>
+                </div>
+                <div class="sport-content" id="soccerContent">
+                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of soccerArticles;let i = index;">
                     <div class="article-with-thumb" *ngIf="i == 0">
                       <div class="article-img">
                         <img
@@ -392,98 +485,6 @@
                 </div>
                 <div class="sport-content" id="nhlContent">
                   <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nhlArticles;let i = index;">
-                    <div class="article-with-thumb" *ngIf="i == 0">
-                      <div class="article-img">
-                        <img
-                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
-                      </div>
-                      <div class="article-details">
-                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
-                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
-                      </div>
-                    </div>
-                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="sport-article1">
-                <div class="sport-name1">
-                  <div class="name">MMA Articles</div>
-                </div>
-                <div class="sport-content" id="mmaContent">
-                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of mmaArticles;let i = index;">
-                    <div class="article-with-thumb" *ngIf="i == 0">
-                      <div class="article-img">
-                        <img
-                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
-                      </div>
-                      <div class="article-details">
-                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
-                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
-                      </div>
-                    </div>
-                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="sport-article1">
-                <div class="sport-name1">
-                  <div class="name">Nascar Articles</div>
-                </div>
-                <div class="sport-content" id="nascarContent">
-                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of nascarArticles;let i = index;">
-                    <div class="article-with-thumb" *ngIf="i == 0">
-                      <div class="article-img">
-                        <img
-                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
-                      </div>
-                      <div class="article-details">
-                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
-                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
-                      </div>
-                    </div>
-                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="sport-article1">
-                <div class="sport-name1">
-                  <div class="name">Soccer Articles</div>
-                </div>
-                <div class="sport-content" id="soccerContent">
-                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of soccerArticles;let i = index;">
-                    <div class="article-with-thumb" *ngIf="i == 0">
-                      <div class="article-img">
-                        <img
-                          [attr.src]="findMedia(article.featured_media) ? findMedia(article.featured_media) : '../../../../assets/images/base-ball.jpg'">
-                      </div>
-                      <div class="article-details">
-                        <div class="article-title" [innerHTML]="article.title.rendered"></div>
-                        <div class="article-decs">{{article.extract?.slice(0,120)}}...</div>
-                      </div>
-                    </div>
-                    <div class="article-link" *ngIf="i > 0" [innerHTML]="article.title.rendered.trim()"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="sport-article1">
-                <div class="sport-name1">
-                  <div class="name">PGA Articles</div>
-                </div>
-                <div class="sport-content" id="pgaContent">
-                  <div class="single-article" data-toggle="modal" data-target="#myModal2" (click)="switchToSingle(article , true)" *ngFor="let article of golfArticles;let i = index;">
                     <div class="article-with-thumb" *ngIf="i == 0">
                       <div class="article-img">
                         <img
