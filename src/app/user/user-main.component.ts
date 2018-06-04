@@ -1,12 +1,16 @@
+/* core */
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+
+/* variables */
+declare var jQuery: any;
+
+/* services */
 import { AuthService } from "../shared/new-services/auth.service";
-import { Router, NavigationEnd } from "@angular/router";
+
+/* models */
 import { User } from "../shared/models/user";
 
-
-/**
- * Created by Hiren on 04-06-2017.
- */
 
 @Component({
   selector: 'rp-user-main',
@@ -23,13 +27,8 @@ export class UserMainComponent {
       response => {
         this.userResp = response;
         console.log(this.userResp);
-        // if (response.statusCode == 200) {
-        //   this.authService.loggedUser = response.data;
-        // }
       }, error => {
         console.log("http error => ", error);
-      }
-      )
+      })
   }
-
 }

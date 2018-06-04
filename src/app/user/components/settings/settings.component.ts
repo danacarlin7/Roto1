@@ -13,8 +13,8 @@ import { NgForm } from "@angular/forms";
 // import {Overlay} from "angular2-modal";
 // import {overlayConfigFactory} from "angular2-modal";
 // import {Modal, BSModalContext} from "angular2-modal/plugins/bootstrap";
-import "rxjs/Rx";
-import { AuthService } from "../../../shared/new-services/auth.service";
+// import "rxjs/Rx";
+// import { AuthService } from "../../../shared/new-services/auth.service";
 import { LoggedUser } from "../../../shared/models/logged-user.model";
 // import {UserService} from "../../new-services/user.service";
 import { Router } from "@angular/router";
@@ -57,8 +57,9 @@ export class SettingsComponent implements OnInit {
 
 
 
-  constructor(private authService: AuthService,
-    private router: Router,
+  constructor(
+    // private authService: AuthService,
+    // private router: Router,
     // overlay: Overlay,
     // vcRef: ViewContainerRef,
     // public modal: Modal,

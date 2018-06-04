@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { AuthService } from "../../../shared/new-services/auth.service";
 import { LoggedUser } from "../../../shared/models/logged-user.model";
+import { environment } from "../../../../environments/environment";
+
 /**
  * Created by Hiren on 11-06-2017.
  */
@@ -16,14 +18,15 @@ export class UserHeaderComponent {
   loggedUser: LoggedUser;
   profileImagePath: string;
   role: string;
-
+  serverPath;
   constructor(private authService: AuthService) {
     console.log('user header rendered');
-
+    this.serverPath = environment.api_end_point;
     this.loggedUser = this.authService.loggedUser;
     if (this.loggedUser) {
       this.profileImagePath = this.loggedUser.profile_image;
     }
+    console.log(this.profileImagePath);
     this.role = this.authService.getUserRole();
     this.authService.loggedUserChangeEvent.subscribe(
       user => {
@@ -31,7 +34,7 @@ export class UserHeaderComponent {
         this.profileImagePath = this.loggedUser.profile_image;
         console.log("profileImagePath => ", this.profileImagePath);
         if (this.profileImagePath) {
-          jQuery(this.profilePic.nativeElement).attr("src", 'https://api.dfsportgod.com/images/' + this.profileImagePath);
+          jQuery(this.profilePic.nativeElement).attr("src", environment.api_end_point+'/images/' + this.profileImagePath);
         }
       }
     );

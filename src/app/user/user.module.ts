@@ -1,17 +1,27 @@
+/* core */
+import { NgModel } from "@angular/forms/forms";
 import { NgModule } from "@angular/core";
+
+/* libs */
+import { DropzoneModule, DROPZONE_CONFIG , DropzoneConfigInterface} from 'ngx-dropzone-wrapper';
+import { ModalModule } from 'ngx-modialog';
+import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
+
+/* modules */
 import { SharedModule } from "../shared/shared.module";
 import { UserMainComponent } from "./user-main.component";
+
+/* routing */
 import { UserRoutingModule } from "./user-routing.module";
+
+/* components */
 import { UserHeaderComponent } from "./components/header/user-header.component";
 import { UserFooterComponent } from "./components/footer/user-footer.component";
 import { UserDashboardComponent } from "./components/dashboard/user-dashboard.component";
 import { OverviewComponent } from "./components/overview/overview.component";
 import { FilterComponent } from "./components/filters/filter.component";
 import { AppliedFiltersComponent } from "./components/filters/applied-filters/applied-filter.component";
-// import {UserService} from "./new-services/user.service";
-// import {FilterService} from "./new-services/filter.service";
 import { OverviewlistComponent } from "./components/overview/overview-list/overview-list.component";
-// import {AuthService} from "../shared/services/auth.service";
 import { CohortComponent } from './components/cohort/cohort.component';
 import { GraphComponent } from './components/graph/graph.component';
 import { CohortListComponent } from './components/cohort/cohort-list/cohort-list.component';
@@ -22,20 +32,16 @@ import { OpponentListComponent } from "./components/opponent/opponents-list/oppo
 import { DashboardFilterComponent } from "./components/dashboard/filter/dashboard-filter.component";
 import { DashboardStaticsComponent } from "./components/dashboard/dashboard-statics/dashboard-statics.component";
 import { DashboardTopWinsComponent } from "./components/dashboard/dashboard-top-wins/dashboard-top-wins.component";
-// import {UploadsService} from "./services/uploads.service";
 import { UploadsComponent } from "./components/uploads/uploads.component";
-import { ModalModule } from 'ngx-modialog';
-import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
-// import { DropzoneModule } from "ngx-dropzone-wrapper/dist/index";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { UpdatePasswordComponent } from "./components/settings/update-password/update-password.component";
 import { UserProfileComponent } from "./components/settings/user-profile/user-profile.component";
 import { SubscriptionsComponent } from "./components/settings/subscriptions/subscriptions.component";
 import { ProfilePictureComponent } from "./components/settings/profile-picture/profile-picture.component";
 import { SavedCardsComponent } from "./components/settings/saved-cards/saved-cards.component";
-/**
- * Created by Hiren on 04-06-2017.
- */
+
+/* Not in USE */
+
 
 @NgModule({
   imports: [
@@ -43,7 +49,7 @@ import { SavedCardsComponent } from "./components/settings/saved-cards/saved-car
     ModalModule.forRoot(),
     BootstrapModalModule,
     SharedModule,
-    // DropzoneModule
+    DropzoneModule
   ],
   declarations: [
     UserMainComponent,
@@ -73,15 +79,11 @@ import { SavedCardsComponent } from "./components/settings/saved-cards/saved-car
     ProfilePictureComponent,
     SavedCardsComponent
   ],
+  // entryComponents: [DialogOverviewExampleDialog],
   exports: [
     UserMainComponent
   ],
-  providers: [
-    // UserDashboardServices,
-    // FilterService,
-    // UploadsService
-  ]
+  providers: []
 })
-export class UserModule {
 
-}
+export class UserModule {}

@@ -4,7 +4,7 @@ import { ErrorHandler } from '@angular/core';
 export class RPErrorHandler implements ErrorHandler {
   handleError(error) {
     console.log("********************");
-    console.error(error);
+    console.log(error);
     console.log("********************");
   }
 }

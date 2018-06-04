@@ -221,6 +221,8 @@ export class AuthService {
 
   retrieveLoggedUserInfo(): Observable<User> {
     httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + (this.getToken()));
+    console.log(httpOptions);
+
     return this.http.get<User>(this.apiUrl + 'memberinfo', httpOptions).pipe(
       tap((member: User) =>  console.log(`fetched member = ${member.message}`)),
       catchError(this.handleError<User>('retrieveLoggedUserInfo'))
@@ -389,7 +391,9 @@ export class AuthService {
 
   private handleError<T>(operation = 'operation', RootObject?: T) {
     return (error: HttpErrorResponse): Observable<T> => {
-      if (error.error instanceof ErrorEvent) {
+      if (error.error.statusCode == 401) {
+        this.logout();
+      }else if (error.error instanceof ErrorEvent) {
         // A client-side or network error occurred. Handle it accordingly.
         console.error('An error occurred:', error.error.message);
       } else {
@@ -403,6 +407,7 @@ export class AuthService {
       return throwError(error.error);
     };
   };
+
   /** Log a HeroService message with the MessageService */
   private log(message: any) {
     console.table(message);
